@@ -168,7 +168,7 @@ body {
 }
 .search-input-wrap input {
   width: 100%;
-  padding: 8px 11px 8px 30px;
+  padding: 8px 11px 8px 34px;
   border: 1px solid var(--line-strong);
   border-radius: 9px;
   background: var(--white);
@@ -176,19 +176,81 @@ body {
 }
 .search-clear-btn {
   position: absolute;
-  left: 7px;
+  left: 5px;
+  z-index: 3;
   border: none;
   background: var(--brand-tint);
-  color: var(--ink-500);
-  width: 20px;
-  height: 20px;
+  color: var(--ink-700);
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  font-size: 13px;
+  font-size: 15px;
+  font-weight: 800;
   line-height: 1;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  touch-action: manipulation;
+}
+.search-clear-btn:active { transform: scale(0.92); background: var(--line); }
+
+/* Persistent 45-Second Top OTA Update Card (v59) */
+@keyframes makinOtaCountdown {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+.makin-ota-card-v59 {
+  position: fixed !important;
+  top: 12px !important;
+  bottom: auto !important;
+  left: 12px !important;
+  right: 12px !important;
+  max-width: 460px;
+  margin: 0 auto !important;
+  z-index: 999999 !important;
+  background: linear-gradient(135deg, #0d2645 0%, #193b68 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #c8a14b !important;
+  border-radius: 16px !important;
+  padding: 12px 13px 14px !important;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.42) !important;
+  direction: rtl !important;
+  overflow: hidden !important;
+  display: block !important;
+}
+.makin-ota-card-v59 .ota-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.makin-ota-card-v59 .ota-close {
+  border: none;
+  background: rgba(255,255,255,0.16);
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.makin-ota-card-v59 .ota-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: rgba(255,255,255,0.16);
+}
+.makin-ota-card-v59 .ota-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #f4d98d, #c8a14b);
+  transform-origin: right center;
+  animation: makinOtaCountdown 45s linear forwards;
 }
 
 /* Student Profile Modal */
@@ -7603,6 +7665,10 @@ html { scroll-behavior: smooth; }
       <button type="button" class="drawer-item" onclick="closeRightDrawer(); exportBackupJSON();">
         <span class="drawer-item-l">💾 حفظ نسخة احتياطية JSON</span><span>↓</span>
       </button>
+      <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
+        <span class="drawer-item-l">🔄 فحص تحديثات التطبيق</span>
+        <span class="badge b-blue" id="drawerAppVerBadge">v59</span>
+      </button>
     </div>
   </aside>
 
@@ -7654,8 +7720,8 @@ html { scroll-behavior: smooth; }
         </div>
         <div class="phc-controls">
           <div class="search-input-wrap" style="min-width:140px;">
-            <input type="text" id="studentsSearchInput" placeholder="🔍 ابحث باسم الطالب..." oninput="studentsSearchQuery=this.value; renderStudentsListOnly();" style="padding:7px 10px 7px 28px; font-size:12.5px;">
-            <button type="button" id="studentsSearchClear" class="search-clear-btn" style="display:none;" onclick="clearStudentsSearch()">×</button>
+            <input type="search" id="studentsSearchInput" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="🔍 ابحث باسم الطالب..." oninput="onStudentsSearchInput(this.value)" style="padding:7px 10px 7px 34px; font-size:12.5px;">
+            <button type="button" id="studentsSearchClear" class="search-clear-btn" style="display:none;" onmousedown="event.preventDefault()" onclick="clearStudentsSearch()">×</button>
           </div>
         </div>
       </div>
@@ -12056,6 +12122,9 @@ function initApp() {
     if (document.getElementById("authTodayHijri")) document.getElementById("authTodayHijri").textContent = hjTxt;
 
     // 1) Instant zero-wait first paint from local cache
+    installMakinOtaBannerGuard();
+    const verBadge = document.getElementById("drawerAppVerBadge");
+    if (verBadge) verBadge.textContent = TIBYAN_APP_VERSION;
     routeAppByCurrentUser();
     updateNotifToggleUI();
     updateCentralCloudIndicatorUI();
@@ -12406,11 +12475,58 @@ function toggleStudentsReorderMode() {
   showToast(studentsReorderMode ? "وضع الترتيب مفعّل: استخدم الأسهم ↑↓ لترتيب الطلاب" : "تم حفظ الترتيب ✓");
 }
 
+function normalizeSearchArabic(str) {
+  return String(str || "")
+    .replace(/[\u064B-\u065F\u0670\u0640]/g, "")
+    .replace(/[أإآٱ]/g, "ا")
+    .replace(/ى/g, "ي")
+    .replace(/ة/g, "ه")
+    .replace(/ؤ/g, "و")
+    .replace(/ئ/g, "ي")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function matchesArabicQuery(normText, normQuery) {
+  if (!normQuery) return true;
+  if (normText.includes(normQuery)) return true;
+  const tokens = normQuery.split(" ");
+  for (let i = 0; i < tokens.length; i++) {
+    if (tokens[i] && !normText.includes(tokens[i])) return false;
+  }
+  return true;
+}
+
+function onStudentsSearchInput(val) {
+  studentsSearchQuery = val || "";
+  applyStudentsSearchFilterDOM();
+}
+
+function applyStudentsSearchFilterDOM() {
+  const clrBtn = document.getElementById("studentsSearchClear");
+  if (clrBtn) clrBtn.style.display = studentsSearchQuery ? "inline-flex" : "none";
+  const wrap = document.getElementById("studentsListWrap");
+  if (!wrap) return;
+  const cards = wrap.querySelectorAll(".st-mgmt-card");
+  if (!cards.length) return;
+  const nq = normalizeSearchArabic(studentsSearchQuery);
+  let visibleCount = 0;
+  for (let i = 0; i < cards.length; i++) {
+    const c = cards[i];
+    const match = matchesArabicQuery(c.dataset.stName || "", nq);
+    c.style.display = match ? "" : "none";
+    if (match) visibleCount++;
+  }
+  const emptyEl = document.getElementById("studentsSearchEmptyMsg");
+  if (emptyEl) emptyEl.style.display = visibleCount === 0 ? "block" : "none";
+}
+
 function clearStudentsSearch() {
   studentsSearchQuery = "";
   const inp = document.getElementById("studentsSearchInput");
-  if (inp) inp.value = "";
-  renderStudentsListOnly();
+  if (inp) { inp.value = ""; inp.focus(); }
+  applyStudentsSearchFilterDOM();
 }
 
 function renderStudentsTab() {
@@ -12435,18 +12551,8 @@ function renderStudentsListOnly() {
     return;
   }
 
-  const q = (studentsSearchQuery || "").trim();
-  const filtered = h.students
-    .map((st, idx) => ({ st, idx }))
-    .filter(x => !q || x.st.name.includes(q));
-
-  if (!filtered.length) {
-    wrap.innerHTML = `<div class="card empty-state" style="padding:20px;"><p>لا يوجد طالب مطابق للتصفية الحالية.</p></div>`;
-    return;
-  }
-
   let html = "";
-  filtered.forEach(({ st, idx }) => {
+  h.students.forEach((st, idx) => {
     const bounds = getStudentRevCycleBounds(st, h);
     const placeLbl = getStudentCurrentPlaceSummary(st, h);
     const revPg = parseArabicNum(st.revPage, 0) || bounds.startPage;
@@ -12458,7 +12564,7 @@ function renderStudentsListOnly() {
         <button class="ord-btn" onclick="moveStudentOrder(${idx}, 1)" ${idx===h.students.length-1?'disabled style="opacity:0.3;"':''} title="إنزال">↓</button>
       </div>` : (st.schoolGrade ? `<span class="badge b-slate" style="font-size:10.5px;">${escapeHtml(st.schoolGrade)}</span>` : "");
 
-    html += `<div class="st-mgmt-card">
+    html += `<div class="st-mgmt-card" data-st-name="${escapeHtml(normalizeSearchArabic(st.name))}">
       <div class="st-mgmt-top">
         <div style="display:flex; align-items:center; gap:8px; min-width:0; flex:1;">
           <span class="st-num">${idx + 1}</span>
@@ -12485,7 +12591,9 @@ function renderStudentsListOnly() {
     </div>`;
   });
 
+  html += `<div id="studentsSearchEmptyMsg" class="card empty-state" style="padding:20px; display:none;"><p>لا يوجد طالب مطابق للبحث الحالي.</p></div>`;
   wrap.innerHTML = html;
+  applyStudentsSearchFilterDOM();
 }
 
 function moveStudentOrder(idx, delta) {
@@ -14562,8 +14670,8 @@ function renderSessionView() {
 
     <div class="compact-filter-row no-print">
       <div class="search-input-wrap">
-        <input type="text" id="sessionSearchInput" placeholder="🔍 ابحث باسم الطالب..." value="${escapeHtml(currentSearch)}" oninput="currentSearch=this.value; renderStudentCardsOnly(); updateSearchClearVis();">
-        <button type="button" id="sessionSearchClear" class="search-clear-btn" style="display:${currentSearch ? 'inline-flex' : 'none'};" onclick="clearSessionSearch()">×</button>
+        <input type="search" id="sessionSearchInput" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="🔍 ابحث باسم الطالب..." value="${escapeHtml(currentSearch)}" oninput="onSessionSearchInput(this.value)">
+        <button type="button" id="sessionSearchClear" class="search-clear-btn" style="display:${currentSearch ? 'inline-flex' : 'none'};" onmousedown="event.preventDefault()" onclick="clearSessionSearch()">×</button>
       </div>
       <div class="pill-group" style="gap:3px; flex-wrap:nowrap;">
         <button class="pill pill-sm ${currentFilter==='all'?'on-slate':''}" onclick="currentFilter='all'; renderSessionView();">الكل</button>
@@ -14576,8 +14684,8 @@ function renderSessionView() {
   renderStudentCardsOnly();
 }
 
-function getStudentPrevSessionHint(h, cur, stId) {
-  const candidates = (h.sessions || [])
+function getStudentPrevSessionHint(h, cur, stId, precomputedCandidates = null) {
+  const candidates = precomputedCandidates || (h.sessions || [])
     .filter(s => s.id !== cur.id && s.type === cur.type && !s.noClass && s.date < cur.date)
     .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
   for (const ps of candidates) {
@@ -14605,9 +14713,16 @@ function renderStudentCardsOnly() {
   }
 
   const queue = Array.isArray(s.queue) ? s.queue : [];
+  const _prePrevCandidates = (h.sessions || [])
+    .filter(x => x.id !== s.id && x.type === s.type && !x.noClass && x.date < s.date)
+    .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  const _preRelevantAttn = (h.sessions || [])
+    .filter(x => !x.noClass && x.date <= s.date && isSessionHasRealActivity(x))
+    .sort((a, b) => (b.date || "").localeCompare(a.date || ""))
+    .slice(0, 5);
+
   const items = [];
   h.students.forEach((st, idx) => {
-    if (currentSearch && !st.name.includes(currentSearch.trim())) return;
     const r = getStudentRecord(s, st.id);
     const isAbs = r.attendance.includes("غياب");
     const isPend = isStudentPending(s, r, st);
@@ -14626,7 +14741,7 @@ function renderStudentCardsOnly() {
 
   // Order: Queued unfinished students first (1, 2, 3...), then remaining unfinished (including half-done Saturday cards!).
   // NEVER sink a card while it is currently OPEN or only half-evaluated on Saturday!
-  const useSink = autoSinkDone && currentFilter === "all" && !currentSearch.trim();
+  const useSink = autoSinkDone && currentFilter === "all";
   let ordered = [];
   let doneSplitIndex = -1;
 
@@ -14654,7 +14769,7 @@ function renderStudentCardsOnly() {
     const stClass = isAbs ? (r.attendance === "غياب مبرر" ? "st-excused" : "st-absent")
       : !isDone ? (isPend ? "st-pending" : "st-late")
       : r.attendance === "متأخر" ? "st-late" : "st-done";
-    const hint = getStudentPrevSessionHint(h, s, st.id);
+    const hint = getStudentPrevSessionHint(h, s, st.id, _prePrevCandidates);
 
     const nameLen = st.name.trim().length;
     const nameSizeCls = nameLen > 16 ? "name-long" : (nameLen > 12 ? "name-med" : "");
@@ -14667,7 +14782,7 @@ function renderStudentCardsOnly() {
         ? [formatSegmentsInline(getSegments(r, "rec")), dRevPg > 0 ? `مراجعة: ${formatNum(dRevPg)} ص` : ""].filter(Boolean).join(" • ")
         : [r.minText ? `صغرى: ${r.minText}` : "", r.majFrom ? `كبرى: ${formatMajStripDisplay(r.majFrom, r.majTo)}` : ""].filter(Boolean).join(" • "));
 
-    const attn = getStudentAttentionAlert(h, s, st.id);
+    const attn = getStudentAttentionAlert(h, s, st.id, _preRelevantAttn);
     let memTag = isRashidi ? `<span class="attn-tag rashidi">🔤 رشيدي</span>` : "";
     if (attn) {
       memTag += `<span class="attn-tag ${attn.type === 'absent' ? 'abs' : 'rep'}">${attn.shortBadge}</span>`;
@@ -14746,7 +14861,7 @@ function renderStudentCardsOnly() {
     }
 
     html += `
-      <div class="st-card ${stClass} ${qPos >= 0 ? 'in-queue' : ''} ${isOpen ? 'open' : ''}" id="card_${st.id}">
+      <div class="st-card ${stClass} ${qPos >= 0 ? 'in-queue' : ''} ${isOpen ? 'open' : ''}" id="card_${st.id}" data-st-name="${escapeHtml(normalizeSearchArabic(st.name))}">
         <div class="st-head" onclick="toggleCard('${st.id}')">
           <div class="st-title-wrap">
             <span class="st-num">${idx + 1}</span>
@@ -14767,8 +14882,10 @@ function renderStudentCardsOnly() {
     `;
   });
 
+  html += `<div id="sessionSearchEmptyMsg" class="card empty-state" style="padding:18px; display:none;"><p>لا يوجد طالب مطابق للبحث الحالي.</p></div>`;
   listEl.classList.toggle("has-open-card", Boolean(openCardId));
   listEl.innerHTML = html;
+  applySessionSearchFilterDOM();
 }
 
 function setAdvTab(studentId, tabKey) {
@@ -14831,12 +14948,37 @@ function updateSearchClearVis() {
   if (btn) btn.style.display = currentSearch ? "inline-flex" : "none";
 }
 
+function onSessionSearchInput(val) {
+  currentSearch = val || "";
+  updateSearchClearVis();
+  applySessionSearchFilterDOM();
+}
+
+function applySessionSearchFilterDOM() {
+  const listEl = document.getElementById("studentCardsList");
+  if (!listEl) return;
+  const cards = listEl.querySelectorAll(".st-card");
+  if (!cards.length) return;
+  const nq = normalizeSearchArabic(currentSearch);
+  let visibleCount = 0;
+  for (let i = 0; i < cards.length; i++) {
+    const c = cards[i];
+    const match = matchesArabicQuery(c.dataset.stName || "", nq);
+    c.style.display = match ? "" : "none";
+    if (match) visibleCount++;
+  }
+  const divider = listEl.querySelector(".done-section-divider");
+  if (divider) divider.style.display = nq ? "none" : "";
+  const emptyEl = document.getElementById("sessionSearchEmptyMsg");
+  if (emptyEl) emptyEl.style.display = visibleCount === 0 ? "block" : "none";
+}
+
 function clearSessionSearch() {
   currentSearch = "";
   const inp = document.getElementById("sessionSearchInput");
-  if (inp) inp.value = "";
+  if (inp) { inp.value = ""; inp.focus(); }
   updateSearchClearVis();
-  renderStudentCardsOnly();
+  applySessionSearchFilterDOM();
 }
 
 function renderExtraSurahRowsHtml(studentId, extras, kind, dir, isRev = false) {
@@ -16890,8 +17032,8 @@ function renderMonthlyBaselineList() {
   const h = getActiveHalaqa();
   const listEl = document.getElementById("mbStudentsList");
   if (!h || !listEl) return;
-  const q = (document.getElementById("mbStudentSearch")?.value || "").trim();
-  const filtered = h.students.map((st, idx) => ({ st, idx })).filter(x => !q || x.st.name.includes(q));
+  const nq = normalizeSearchArabic(document.getElementById("mbStudentSearch")?.value || "");
+  const filtered = h.students.map((st, idx) => ({ st, idx })).filter(x => !nq || matchesArabicQuery(normalizeSearchArabic(x.st.name), nq));
 
   if (!filtered.length) {
     listEl.innerHTML = `<div class="empty-state" style="padding:16px;"><p>لا يوجد طلاب مطابقون</p></div>`;
@@ -18886,7 +19028,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v56 -->
+<!-- Makin App v59 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -19158,10 +19300,10 @@ function renderSettingsStudentsList() {
   if (!h || !listEl) return;
   if (cntEl) cntEl.textContent = h.students.length;
 
-  const q = (document.getElementById("setStudentSearch")?.value || "").trim();
+  const nq = normalizeSearchArabic(document.getElementById("setStudentSearch")?.value || "");
   const filtered = h.students
     .map((st, idx) => ({ st, idx }))
-    .filter(x => !q || x.st.name.includes(q));
+    .filter(x => !nq || matchesArabicQuery(normalizeSearchArabic(x.st.name), nq));
 
   if (!filtered.length) {
     listEl.innerHTML = `<div style="text-align:center; padding:12px; font-size:12.5px; color:var(--ink-500);">${h.students.length ? "لا يوجد طالب مطابق للبحث" : "لا يوجد طلاب في الحلقة بعد — أضف طالباً بالأعلى"}</div>`;
@@ -21345,9 +21487,9 @@ function qaMarkAllRemainingPresent() {
 }
 
 // 4) SMART STRUGGLING / REPEATED-ABSENCE ALERT ENGINE
-function getStudentAttentionAlert(h, curSession, studentId) {
+function getStudentAttentionAlert(h, curSession, studentId, precomputedRelevant = null) {
   if (!h || !curSession) return null;
-  const relevant = (h.sessions || [])
+  const relevant = precomputedRelevant || (h.sessions || [])
     .filter(s => !s.noClass && s.date <= curSession.date && isSessionHasRealActivity(s))
     .sort((a, b) => (b.date || "").localeCompare(a.date || ""))
     .slice(0, 5);
@@ -21525,7 +21667,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v56";
+const TIBYAN_APP_VERSION = "v59";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -21546,9 +21688,81 @@ let _ownerDataCache = { users: {}, invites: {}, links: {}, announcement: null, m
 let _teacherBackupTimer = null;
 
 function registerTibyanServiceWorker() {
+  // Never register PWA Service Worker inside native Android Capacitor app (prevents cache/OTA conflicts)
+  if (window.MakinAndroid) return;
   if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")) {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   }
+}
+
+function triggerAppUpdateCheck() {
+  if (window.MakinAndroid && typeof window.MakinAndroid.checkForUpdateNow === "function") {
+    showToast("🔍 جاري فحص وجود تحديثات جديدة...");
+    try { window.MakinAndroid.checkForUpdateNow(); } catch {}
+  } else {
+    showToast(`تطبيق مكين على الإصدار ${TIBYAN_APP_VERSION}`);
+  }
+}
+
+function upgradeNativeOtaBanner(el) {
+  if (!el || el.dataset.v59Upgraded) return;
+  el.dataset.v59Upgraded = "1";
+  try {
+    const rawHtml = el.innerHTML || "";
+    const titleMatch = rawHtml.match(/✨[^<]+/);
+    const titleTxt = titleMatch ? titleMatch[0].trim() : "✨ يتوفر تحديث جديد لتطبيق مكين";
+    const subMatch = rawHtml.match(/margin-top:2px;">([^<]+)<\/div>/);
+    const subTxt = subMatch ? subMatch[1].trim() : "تم تنزيل التحديث وجاهز للتفعيل فوراً";
+
+    el.className = "makin-ota-card-v59";
+    el.removeAttribute("style");
+    el.innerHTML = `
+      <div class="ota-row">
+        <div style="min-width:0; flex:1;">
+          <div style="font-size:13.5px; font-weight:800; color:#f4d98d;">${escapeHtml(titleTxt)}</div>
+          <div style="font-size:11.5px; color:#e2edf8; margin-top:2px;">${escapeHtml(subTxt)}</div>
+        </div>
+        <button type="button" onclick="if(window.MakinAndroid)window.MakinAndroid.applyDownloadedUpdateNow();" style="border:none; background:#c8a14b; color:#0d2645; font-weight:800; font-size:12.5px; padding:8px 13px; border-radius:9px; cursor:pointer; white-space:nowrap;">تفعيل الآن</button>
+        <button type="button" class="ota-close" onclick="const b=document.getElementById('makinOtaBanner'); if(b) b.remove();" title="إغلاق">×</button>
+      </div>
+      <div class="ota-bar"><div class="ota-bar-fill"></div></div>
+    `;
+    clearTimeout(window._makinOtaAutoHideTimer);
+    window._makinOtaAutoHideTimer = setTimeout(() => {
+      const b = document.getElementById("makinOtaBanner");
+      if (b) b.remove();
+    }, 45000);
+  } catch {}
+}
+
+function installMakinOtaBannerGuard() {
+  if (window.__makinOtaGuardInstalled) return;
+  window.__makinOtaGuardInstalled = true;
+  const existing = document.getElementById("makinOtaBanner");
+  if (existing) upgradeNativeOtaBanner(existing);
+  try {
+    const obs = new MutationObserver(muts => {
+      for (const m of muts) {
+        for (const n of m.addedNodes) {
+          if (n && n.nodeType === 1 && n.id === "makinOtaBanner") {
+            upgradeNativeOtaBanner(n);
+          }
+        }
+      }
+    });
+    if (document.body) obs.observe(document.body, { childList: true });
+  } catch {}
+
+  // One-time visual confirmation toast upon first boot after upgrading to v59
+  try {
+    const lastSeenVer = localStorage.getItem("makin_last_boot_ver") || "";
+    if (lastSeenVer && lastSeenVer !== TIBYAN_APP_VERSION) {
+      setTimeout(() => {
+        showToast(`✅ تم التحديث بنجاح إلى ${TIBYAN_APP_VERSION} — تحسين البحث وإشعارات التحديث`);
+      }, 900);
+    }
+    localStorage.setItem("makin_last_boot_ver", TIBYAN_APP_VERSION);
+  } catch {}
 }
 
 function initCentralFirebaseSDK() {
