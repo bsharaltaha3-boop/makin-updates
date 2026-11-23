@@ -8003,6 +8003,10 @@ html { scroll-behavior: smooth; }
           <span class="drawer-item-l"><span class="drawer-ico-box">🗓️</span><span>أيام الدوام</span></span>
           <span class="badge b-slate" id="drawerDaysBadge" style="font-size:10.5px;">سبت•إث•أرب</span>
         </button>
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openClassDayWaModal();">
+          <span class="drawer-item-l"><span class="drawer-ico-box gold">💬</span><span>تذكير الطلاب بالدوام (واتساب)</span></span>
+          <span class="drawer-chev">‹</span>
+        </button>
       </div>
 
       <div class="drawer-group-lbl">البرامج المصاحبة</div>
@@ -8062,7 +8066,7 @@ html { scroll-behavior: smooth; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v63</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v64</span>
         </button>
       </div>
     </div>
@@ -8333,7 +8337,7 @@ html { scroll-behavior: smooth; }
   </nav>
 </div>
 
-<!-- ===== MODAL: NOTIFICATION CENTER & SOUND SETTINGS (v55) ===== -->
+<!-- ===== MODAL: NOTIFICATION CENTER & SOUND SETTINGS (v64) ===== -->
 <div class="modal-backdrop" id="notifCenterModal" style="z-index:145;">
   <div class="modal-box" style="max-width:480px;">
     <div class="modal-header">
@@ -8341,6 +8345,17 @@ html { scroll-behavior: smooth; }
       <button class="close-x" onclick="closeModal('notifCenterModal')">×</button>
     </div>
     <div id="notifCenterBody"></div>
+  </div>
+</div>
+
+<!-- ===== MODAL: CLASS-DAY WHATSAPP REMINDER FOR STUDENTS (v64) ===== -->
+<div class="modal-backdrop" id="classDayWaModal" style="z-index:146;">
+  <div class="modal-box" style="max-width:480px;">
+    <div class="modal-header">
+      <h3>💬 تذكير الطلاب بدوام اليوم</h3>
+      <button class="close-x" onclick="closeModal('classDayWaModal')">×</button>
+    </div>
+    <div id="classDayWaBody"></div>
   </div>
 </div>
 
@@ -10050,7 +10065,8 @@ function saveClassDaysModal() {
     renderSessionView();
   }
   renderMonthlyReport();
-  showToast(`تم اعتماد أيام الدوام (${h.classDays.map(d => ARABIC_DAYS[d]).join("، ")}) وإلغاء باقي الأيام ✓`);
+  if (typeof syncNativeClassDayAlarm === "function") syncNativeClassDayAlarm();
+  showToast(`تم اعتماد أيام الدوام (${h.classDays.map(d => ARABIC_DAYS[d]).join("، ")}) وتحديث منبّه الساعة ${formatReminderTimeArabic()} ✓`);
 }
 
 function getNextClassDateInfo() {
@@ -12473,13 +12489,12 @@ const IKHLAS_MESSAGES = [
 ];
 
 let _ikhlasShownThisLoad = false;
-function showIkhlasSplashOnce() {
-  if (_ikhlasShownThisLoad) return;
-  _ikhlasShownThisLoad = true;
-  const today = todayISO();
-  const lastDay = localStorage.getItem("tibyan_ikhlas_day_v55") || "";
-  if (lastDay === today) return;
-  localStorage.setItem("tibyan_ikhlas_day_v55", today);
+function showIkhlasSplashOnce(forceReplay = false) {
+  if (!forceReplay) {
+    if (_ikhlasShownThisLoad) return;
+    if (typeof tibyanNotifPrefs === "object" && tibyanNotifPrefs.ikhlasOnOpen === false) return;
+    _ikhlasShownThisLoad = true;
+  }
 
   const idxKey = "tibyan_ikhlas_idx_v1";
   let lastIdx = Number(localStorage.getItem(idxKey));
@@ -12496,13 +12511,15 @@ function showIkhlasSplashOnce() {
 
   qEl.textContent = item.q;
   sEl.textContent = item.sub;
-  bar.style.animation = "none";
-  void bar.offsetWidth;
-  bar.style.animation = "ikhlasShrink 2.4s linear forwards";
+  if (bar) {
+    bar.style.animation = "none";
+    void bar.offsetWidth;
+    bar.style.animation = "ikhlasShrink 3.6s linear forwards";
+  }
 
   overlay.classList.add("show");
   clearTimeout(window._ikhlasTimer);
-  window._ikhlasTimer = setTimeout(dismissIkhlasSplash, 2400);
+  window._ikhlasTimer = setTimeout(dismissIkhlasSplash, 3600);
 }
 
 function dismissIkhlasSplash() {
@@ -12543,7 +12560,14 @@ function initApp() {
         startLiveNotificationListeners();
         if (isCloudSyncDirty()) syncCentralCloudNow(false);
       }
-      setTimeout(checkTeacherClassDayReminder, 3500);
+      syncNativeClassDayAlarm();
+      startClassDayReminderWatcher();
+      setTimeout(checkTeacherClassDayReminder, 2600);
+      if (window.__makinPendingOpenAction === "class_day_wa" || location.hash === "#class-reminder-wa") {
+        window.__makinPendingOpenAction = "";
+        try { if (location.hash === "#class-reminder-wa") history.replaceState(null, "", location.pathname + location.search); } catch {}
+        setTimeout(() => openClassDayWaModal(), 500);
+      }
     }, 50);
   } catch (err) {
     console.error("initApp error:", err);
@@ -12578,6 +12602,7 @@ function routeAppByCurrentUser() {
     document.getElementById("ownerShell").style.display = "block";
     renderOwnerShell();
     refreshOwnerData(false);
+    setTimeout(() => showIkhlasSplashOnce(), 320);
     return;
   }
 
@@ -12597,6 +12622,7 @@ function routeAppByCurrentUser() {
     document.getElementById("supervisorShell").style.display = "block";
     renderSupervisorShell();
     refreshSupervisorData(false);
+    setTimeout(() => showIkhlasSplashOnce(), 320);
     return;
   }
 
@@ -12650,7 +12676,8 @@ function routeAppByCurrentUser() {
   else if (getCurrentSession()?.type === "daily") prefillDailyRecitation(false, false);
   renderSessionView();
   refreshTeacherSupervisorNotifications(false);
-  showIkhlasSplashOnce();
+  syncNativeClassDayAlarm();
+  setTimeout(() => showIkhlasSplashOnce(), 320);
 }
 
 // ==================== COMFORT DARK MODE (EYE-CARE TOGGLE) ====================
@@ -19683,7 +19710,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v63 -->
+<!-- Makin App v64 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -20057,6 +20084,7 @@ function saveHalaqaSettings() {
   h.roomCode = document.getElementById("setRoomCode").value.trim();
   saveState();
   refreshAllBrandingViews();
+  if (typeof syncNativeClassDayAlarm === "function") syncNativeClassDayAlarm();
   closeModal("settingsModal");
   showToast("تم التحديث الفوري للحلقة والصرح في جميع التقارير والملفات والصور ✅");
 }
@@ -22322,7 +22350,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v63";
+const TIBYAN_APP_VERSION = "v64";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -23372,7 +23400,15 @@ function ensureExportLib(key) {
 
 // ===== REAL-TIME IN-APP + ANDROID SYSTEM NOTIFICATIONS ENGINE =====
 const NOTIF_PREFS_KEY = "tibyan_notif_prefs_v54";
-let tibyanNotifPrefs = { enabled: true, sound: true, seen: {} };
+let tibyanNotifPrefs = {
+  enabled: true,
+  sound: true,
+  ikhlasOnOpen: true,
+  classReminderEnabled: true,
+  classReminderHour: 10,
+  classReminderMinute: 0,
+  seen: {}
+};
 let _activeFbListeners = [];
 let _liveNotifTimer = null;
 let _liveNotifAction = null;
@@ -23382,7 +23418,7 @@ function loadNotifPrefs() {
     const raw = localStorage.getItem(NOTIF_PREFS_KEY);
     if (raw) {
       const p = JSON.parse(raw);
-      if (p && typeof p === "object") tibyanNotifPrefs = Object.assign({ enabled: true, sound: true, seen: {} }, p);
+      if (p && typeof p === "object") tibyanNotifPrefs = Object.assign({ enabled: true, sound: true, ikhlasOnOpen: true, classReminderEnabled: true, classReminderHour: 10, classReminderMinute: 0, seen: {} }, p);
     }
   } catch {}
   if (!tibyanNotifPrefs.seen || typeof tibyanNotifPrefs.seen !== "object") tibyanNotifPrefs.seen = {};
@@ -23697,25 +23733,184 @@ function startLiveNotificationListeners() {
   }
 }
 
-// Smart Class-Day Gentle Reminder for Teachers (once per class day)
+// ==================== AUTOMATIC 10:00 AM CLASS-DAY REMINDER & WHATSAPP ENGINE (v64) ====================
+let _classDayReminderTimer = null;
+
+function formatReminderTimeArabic(hOverride = null, mOverride = null) {
+  const hr = Number(hOverride !== null ? hOverride : (tibyanNotifPrefs.classReminderHour ?? 10));
+  const mn = Number(mOverride !== null ? mOverride : (tibyanNotifPrefs.classReminderMinute ?? 0));
+  const period = hr < 12 ? "صباحاً" : "مساءً";
+  const hr12 = hr % 12 === 0 ? 12 : hr % 12;
+  const mnStr = String(mn).padStart(2, "0");
+  return `${hr12}:${mnStr} ${period}`;
+}
+
+function hasNativeClassDayAlarmSupport() {
+  try {
+    return Boolean(window.MakinAndroid && typeof window.MakinAndroid.scheduleClassDayReminders === "function");
+  } catch {
+    return false;
+  }
+}
+
+function syncNativeClassDayAlarm() {
+  try {
+    if (!hasNativeClassDayAlarmSupport()) return;
+    const h = getActiveHalaqa();
+    const activeDays = h ? getHalaqaClassDays(h) : [6, 1, 3];
+    const reviewDays = h ? getHalaqaReviewDays(h) : [6];
+    const enabled = Boolean(h && tibyanNotifPrefs.enabled && tibyanNotifPrefs.classReminderEnabled !== false && activeDays.length > 0);
+    const payload = {
+      enabled,
+      classDays: activeDays,
+      reviewDays,
+      hour: Number(tibyanNotifPrefs.classReminderHour ?? 10),
+      minute: Number(tibyanNotifPrefs.classReminderMinute ?? 0),
+      halaqaName: h?.name || "الحلقة",
+      gender: h?.gender || "male"
+    };
+    window.MakinAndroid.scheduleClassDayReminders(JSON.stringify(payload));
+  } catch {}
+}
+
+function startClassDayReminderWatcher() {
+  if (_classDayReminderTimer) clearInterval(_classDayReminderTimer);
+  _classDayReminderTimer = setInterval(() => {
+    checkTeacherClassDayReminder();
+  }, 60000);
+}
+
+function buildClassDayStudentWaMessage(h = null, targetIso = null) {
+  const hal = h || getActiveHalaqa();
+  if (!hal) return "";
+  const iso = targetIso || todayISO();
+  const hj = getExactHijriInfo(iso);
+  const gt = getGenderTerms(hal);
+  const bm = getBrandMeta(hal);
+  const isRev = getHalaqaReviewDays(hal).includes(hj.dow);
+  const isFem = hal.gender === "female";
+  const timeNote = String(hal.classTimeNote || "").trim();
+
+  const greeting = isFem
+    ? "السلام عليكم ورحمة الله وبركاته 🌿
+أهالينا الكرام وأخواتنا الطالبات الغاليات،"
+    : "السلام عليكم ورحمة الله وبركاته 🌿
+أهالينا الكرام وأبناءنا الطلاب الأبطال،";
+  const sessionTypeLine = isRev
+    ? "📘 *نوع الجلسة:* يوم المراجعة الأسبوعية (المراجعة الصغرى والكبرى)"
+    : "📖 *نوع الجلسة:* تسميع الحفظ الجديد والمتابعة";
+  const prepLine = isRev
+    ? (isFem ? "نرجو مراجعة المحفوظ جيداً والاستعداد قبل الحضور 🌟" : "نرجو مراجعة المحفوظ جيداً والاستعداد قبل الحضور 🌟")
+    : (isFem ? "نرجو إتقان الواجب المقرّر والحضور في الموعد المحدد 🌟" : "نرجو إتقان الواجب المقرّر والحضور في الموعد المحدد 🌟");
+
+  let msg = `${greeting}
+
+`;
+  msg += `نُذكّركم بأن اليوم *${hj.dayName}* (${hj.formatted}) هو *يوم دوام* في *حلقة ${bm.name}* 🕌
+`;
+  msg += `${sessionTypeLine}
+`;
+  if (timeNote) msg += `⏰ *موعد الحلقة:* ${timeNote}
+`;
+  msg += `
+${prepLine}
+`;
+  msg += `بارك الله في همتكم وجعلكم من أهل القرآن وخاصته 🤲
+`;
+  msg += `— *${gt.supervisorTitle}: ${bm.sheikh}*`;
+  return msg;
+}
+
+function openClassDayWaModal() {
+  const h = getActiveHalaqa();
+  const body = document.getElementById("classDayWaBody");
+  if (!body) return;
+  if (!h) {
+    showToast("افتح حلقة أولاً لتجهيز رسالة تذكير الطلاب");
+    return;
+  }
+  const iso = todayISO();
+  const hj = getExactHijriInfo(iso);
+  const isTodayClass = isAllowedClassISO(iso, h);
+  const targetIso = isTodayClass ? iso : findNearestClassISO(iso, h);
+  const targetHj = getExactHijriInfo(targetIso);
+  const isRev = getHalaqaReviewDays(h).includes(targetHj.dow);
+  const msg = buildClassDayStudentWaMessage(h, targetIso);
+
+  body.innerHTML = `
+    <div class="panel-block" style="margin-bottom:9px; border-right:4px solid ${isRev ? '#caa642' : 'var(--green)'};">
+      <div style="font-size:13px; font-weight:800; color:var(--ink-900); margin-bottom:3px;">
+        ${isTodayClass ? `📅 اليوم يوم دوام — ${targetHj.dayName}` : `📅 أقرب يوم دوام قادم — ${targetHj.dayName}`} (${escapeHtml(targetHj.formatted)})
+      </div>
+      <div style="font-size:11.5px; color:var(--ink-500);">
+        حلقة <b>${escapeHtml(h.name)}</b> • ${isRev ? '📘 يوم مراجعة (صغرى وكبرى)' : '📖 يوم تسميع وحفظ'}
+      </div>
+    </div>
+
+    <div class="field" style="margin-bottom:9px;">
+      <label style="font-size:12px;">⏰ موعد الحلقة المعتاد (اختياري — يُحفظ تلقائياً للرسائل القادمة)</label>
+      <input type="text" id="cdWaTimeInput" value="${escapeHtml(h.classTimeNote || '')}" placeholder="مثال: بعد صلاة العصر مباشرة / الساعة 4:00 عصراً" oninput="onClassDayWaTimeChange(this.value, '${targetIso}')">
+    </div>
+
+    <div class="field" style="margin-bottom:10px;">
+      <label style="font-size:12px;">💬 نص رسالة الواتساب للطلاب (يمكنك التعديل عليها قبل الإرسال):</label>
+      <textarea id="cdWaTextArea" rows="8" style="line-height:1.65; font-size:13px;">${escapeHtml(msg)}</textarea>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1.35fr 1fr; gap:7px;">
+      <button type="button" class="btn btn-success" onclick="sendClassDayWaNow()">📲 إرسال عبر واتساب</button>
+      <button type="button" class="btn btn-primary" onclick="copyClassDayWaNow()">📋 نسخ الرسالة</button>
+    </div>
+  `;
+  openModal("classDayWaModal");
+}
+
+function onClassDayWaTimeChange(val, targetIso) {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  h.classTimeNote = String(val || "").trim();
+  saveStateDebounced();
+  const ta = document.getElementById("cdWaTextArea");
+  if (ta) ta.value = buildClassDayStudentWaMessage(h, targetIso);
+}
+
+function sendClassDayWaNow() {
+  const txt = (document.getElementById("cdWaTextArea")?.value || "").trim();
+  if (!txt) return;
+  window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`, "_blank");
+}
+
+function copyClassDayWaNow() {
+  const txt = (document.getElementById("cdWaTextArea")?.value || "").trim();
+  if (!txt) return;
+  copyText(txt, "تم نسخ رسالة تذكير الطلاب للواتساب 💬");
+}
+
+// Smart 10:00 AM Class-Day Reminder for Teachers (reminds to message students on WhatsApp!)
 function checkTeacherClassDayReminder() {
-  if (!tibyanNotifPrefs.enabled) return;
+  if (!tibyanNotifPrefs.enabled || tibyanNotifPrefs.classReminderEnabled === false) return;
   const h = getActiveHalaqa();
   if (!h || document.getElementById("appShell")?.style.display === "none") return;
   const iso = todayISO();
   if (!isAllowedClassISO(iso, h)) return;
-  const s = (h.sessions || []).find(x => x.date === iso);
-  const pending = s ? (h.students || []).filter(st => isStudentPending(s, getStudentRecord(s, st.id), st)).length : (h.students || []).length;
-  if (pending > 0 && (h.students || []).length > 0) {
-    const gt = getGenderTerms(h);
-    fireTibyanNotification(
-      `classday_${h.id}_${iso}`,
-      `📅 تذكير يوم دوام — حلقة ${h.name}`,
-      `اليوم يوم حلقة! بقي ${pending} ${gt.studentUnit} بانتظار التقييم في جلسة اليوم.`,
-      "📖",
-      () => switchTab("session")
-    );
-  }
+
+  const now = new Date();
+  const targetH = Number(tibyanNotifPrefs.classReminderHour ?? 10);
+  const targetM = Number(tibyanNotifPrefs.classReminderMinute ?? 0);
+  const nowMins = now.getHours() * 60 + now.getMinutes();
+  const targetMins = targetH * 60 + targetM;
+  if (nowMins < targetMins) return;
+
+  const hj = getExactHijriInfo(iso);
+  const gt = getGenderTerms(h);
+  const isRev = getHalaqaReviewDays(h).includes(hj.dow);
+  fireTibyanNotification(
+    `classday_wa_${h.id}_${iso}`,
+    `📅 تذكير دوام اليوم (${hj.dayName}) — حلقة ${h.name}`,
+    `اليوم يوم ${isRev ? "مراجعة" : "تسميع"}! اضغط هنا لتجهيز وإرسال رسالة تذكير لـ${gt.students} على الواتساب 💬`,
+    "💬",
+    () => openClassDayWaModal()
+  );
 }
 
 
@@ -23817,6 +24012,14 @@ function openNotifCenterModal() {
   const perm = getSystemNotifPermission();
   const isOn = Boolean(tibyanNotifPrefs.enabled);
   const soundOn = Boolean(tibyanNotifPrefs.sound);
+  const ikhlasOn = tibyanNotifPrefs.ikhlasOnOpen !== false;
+  const remOn = tibyanNotifPrefs.classReminderEnabled !== false;
+  const remH = Number(tibyanNotifPrefs.classReminderHour ?? 10);
+  const remM = Number(tibyanNotifPrefs.classReminderMinute ?? 0);
+  const timeVal = `${String(remH).padStart(2, "0")}:${String(remM).padStart(2, "0")}`;
+  const h = getActiveHalaqa();
+  const activeDaysTxt = h ? getHalaqaClassDays(h).map(d => ARABIC_DAYS[d]).join(" • ") : "السبت • الاثنين • الأربعاء";
+  const hasNativeAlarm = hasNativeClassDayAlarmSupport();
   const hist = getNotifHistory();
 
   // Mark history read
@@ -23825,30 +24028,53 @@ function openNotifCenterModal() {
     try { localStorage.setItem(NOTIF_HISTORY_KEY, JSON.stringify(hist)); } catch {}
   }
 
-  const sysHint = perm === "granted"
-    ? `<span class="badge b-green">إشعارات الجهاز مفعّلة ✓</span>`
+  const sysHint = perm === "granted" || window.MakinAndroid
+    ? `<span class="badge b-green">إشعارات الهاتف مفعّلة ✓</span>`
     : (perm === "denied"
       ? `<span class="badge b-orange">مرفوضة في إعدادات الهاتف — فعّلها من إعدادات التطبيق</span>`
       : `<button type="button" class="btn btn-primary btn-sm" onclick="requestNativeNotifPermissionFromCenter()">🔔 تفعيل إشعارات الهاتف</button>`);
 
   body.innerHTML = `
-    <div class="panel-block" style="margin-bottom:10px;">
-      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:9px;">
+    <div class="panel-block" style="margin-bottom:9px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
         <span style="font-weight:800; font-size:13px;">حالة الإشعارات:</span>
         ${sysHint}
       </div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:8px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:7px;">
         <button type="button" class="btn ${isOn ? 'btn-success' : 'btn-outline'} btn-sm" onclick="toggleNotifEnabledOnly()">${isOn ? '🔔 الإشعارات: مفعّلة' : '🔕 الإشعارات: متوقفة'}</button>
         <button type="button" class="btn ${soundOn ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="toggleNotifSoundOnly()">${soundOn ? '🔊 الصوت: مفعّل' : '🔇 الصوت: صامت'}</button>
       </div>
-      <button type="button" class="btn btn-soft btn-sm" style="width:100%;" onclick="sendTestTibyanNotification()">✨ تجربة إشعار مع صوت الآن</button>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+        <button type="button" class="btn ${ikhlasOn ? 'btn-soft' : 'btn-outline'} btn-sm" onclick="toggleIkhlasOnOpen()">${ikhlasOn ? '🌿 ومضة الإخلاص: مفعّلة' : '🌿 ومضة الإخلاص: متوقفة'}</button>
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('notifCenterModal'); showIkhlasSplashOnce(true);">✨ عرض ومضة الآن</button>
+      </div>
     </div>
+
+    ${h ? `
+    <div class="panel-block" style="margin-bottom:9px; border-right:4px solid #caa642;">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:6px;">
+        <span style="font-weight:800; font-size:13px; color:var(--brand-slate);">⏰ تذكير أيام الدوام تلقائياً</span>
+        <span class="badge ${remOn ? 'b-green' : 'b-muted'}" style="font-size:10.5px;">${remOn ? (hasNativeAlarm ? 'منبّه بالخلفية ✓' : 'مفعّل ✓') : 'متوقف'}</span>
+      </div>
+      <div style="font-size:11.5px; color:var(--ink-700); margin-bottom:7px; line-height:1.55;">
+        يُرسل تذكيراً تلقائياً كل يوم دوام (<b>${escapeHtml(activeDaysTxt)}</b>) الساعة <b>${escapeHtml(formatReminderTimeArabic(remH, remM))}</b> لتبليغ الطلاب على الواتساب.
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; align-items:center; margin-bottom:7px;">
+        <button type="button" class="btn ${remOn ? 'btn-success' : 'btn-outline'} btn-sm" onclick="toggleClassDayReminderPref()">${remOn ? '⏰ التذكير: مفعّل' : '⏰ التذكير: متوقف'}</button>
+        <input type="time" value="${timeVal}" onchange="updateClassDayReminderTime(this.value)" style="padding:5px 8px; border:1px solid var(--line-strong); border-radius:8px; font-weight:800; text-align:center; background:var(--white); color:var(--ink-900);">
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+        <button type="button" class="btn btn-primary btn-sm" onclick="closeModal('notifCenterModal'); openClassDayWaModal();">💬 رسالة الواتساب الآن</button>
+        <button type="button" class="btn btn-soft btn-sm" onclick="sendTestTibyanNotification()">🔔 تجربة إشعار</button>
+      </div>
+    </div>
+    ` : `<button type="button" class="btn btn-soft btn-sm" style="width:100%; margin-bottom:9px;" onclick="sendTestTibyanNotification()">✨ تجربة إشعار مع صوت الآن</button>`}
 
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
       <span style="font-size:12.5px; font-weight:800; color:var(--brand-slate);">📋 آخر التنبيهات (${hist.length})</span>
       ${hist.length ? `<button type="button" class="auth-link-btn" onclick="clearNotifHistory()">مسح السجل</button>` : ''}
     </div>
-    <div style="max-height:42vh; overflow-y:auto;">
+    <div style="max-height:36vh; overflow-y:auto;">
       ${hist.length ? hist.map(n => `
         <div class="notif-hist-item">
           <span style="font-size:18px; line-height:1.2;">${escapeHtml(n.icon || '🔔')}</span>
@@ -23858,10 +24084,38 @@ function openNotifCenterModal() {
             <div style="font-size:10px; color:var(--ink-500); margin-top:3px;">${n.time ? new Date(n.time).toLocaleString("ar-SY") : ''}</div>
           </div>
         </div>
-      `).join("") : `<div class="empty-state" style="padding:18px;"><p>لا توجد إشعارات بعد — اضغط «تجربة إشعار مع صوت» بالأعلى.</p></div>`}
+      `).join("") : `<div class="empty-state" style="padding:16px;"><p>لا توجد إشعارات بعد — اضغط «تجربة إشعار» بالأعلى.</p></div>`}
     </div>
   `;
   openModal("notifCenterModal");
+}
+
+function toggleIkhlasOnOpen() {
+  tibyanNotifPrefs.ikhlasOnOpen = (tibyanNotifPrefs.ikhlasOnOpen === false);
+  saveNotifPrefs();
+  openNotifCenterModal();
+  showToast(tibyanNotifPrefs.ikhlasOnOpen ? "🌿 تم تفعيل ومضة الإخلاص عند فتح التطبيق" : "تم إيقاف ومضة الإخلاص عند فتح التطبيق");
+}
+
+function toggleClassDayReminderPref() {
+  tibyanNotifPrefs.classReminderEnabled = (tibyanNotifPrefs.classReminderEnabled === false);
+  saveNotifPrefs();
+  syncNativeClassDayAlarm();
+  openNotifCenterModal();
+  showToast(tibyanNotifPrefs.classReminderEnabled ? `⏰ تم تفعيل تذكير أيام الدوام الساعة ${formatReminderTimeArabic()}` : "تم إيقاف تذكير أيام الدوام التلقائي");
+}
+
+function updateClassDayReminderTime(hhmm) {
+  const parts = String(hhmm || "10:00").split(":");
+  const hNum = Math.max(0, Math.min(23, Number(parts[0]) || 10));
+  const mNum = Math.max(0, Math.min(59, Number(parts[1]) || 0));
+  tibyanNotifPrefs.classReminderHour = hNum;
+  tibyanNotifPrefs.classReminderMinute = mNum;
+  tibyanNotifPrefs.classReminderEnabled = true;
+  saveNotifPrefs();
+  syncNativeClassDayAlarm();
+  openNotifCenterModal();
+  showToast(`⏰ تم ضبط موعد تذكير الدوام إلى ${formatReminderTimeArabic(hNum, mNum)} ✓`);
 }
 
 async function requestNativeNotifPermissionFromCenter() {
@@ -23881,6 +24135,7 @@ function toggleNotifEnabledOnly() {
   tibyanNotifPrefs.enabled = !tibyanNotifPrefs.enabled;
   saveNotifPrefs();
   if (tibyanNotifPrefs.enabled) startLiveNotificationListeners();
+  syncNativeClassDayAlarm();
   updateNotifToggleUI();
   openNotifCenterModal();
 }
