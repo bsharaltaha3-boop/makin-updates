@@ -8062,7 +8062,7 @@ html { scroll-behavior: smooth; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v62</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v63</span>
         </button>
       </div>
     </div>
@@ -8117,9 +8117,9 @@ html { scroll-behavior: smooth; }
         <div class="phc-controls">
           <div class="search-input-wrap modern-search-box" style="width:100%;">
             <span class="search-lead-ico" aria-hidden="true">🔍</span>
-            <input type="text" inputmode="search" enterkeyhint="search" id="studentsSearchInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="ابحث باسم الطالب..." oninput="onStudentsSearchInput(this.value)" onchange="onStudentsSearchInput(this.value)" oncompositionend="onStudentsSearchInput(this.value)">
+            <input type="text" inputmode="text" enterkeyhint="done" id="studentsSearchInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="ابحث باسم الطالب..." onfocus="startSearchInputWatch(this, onStudentsSearchInput)" onblur="stopSearchInputWatch()" oninput="onStudentsSearchInput(this.value)" oncompositionupdate="onStudentsSearchKey(this, event)" oncompositionend="onStudentsSearchInput(this.value)" onkeyup="onStudentsSearchKey(this, event)" onkeydown="onStudentsSearchKey(this, event)" onchange="onStudentsSearchInput(this.value)">
             <span id="studentsSearchCount" class="search-count-pill" style="display:none;"></span>
-            <button type="button" id="studentsSearchClear" class="search-clear-btn" style="display:none;" onpointerdown="event.preventDefault()" onclick="clearStudentsSearch()" aria-label="مسح البحث">×</button>
+            <button type="button" id="studentsSearchClear" class="search-clear-btn" style="display:none;" onclick="clearStudentsSearch()" aria-label="مسح البحث">×</button>
           </div>
         </div>
       </div>
@@ -12910,9 +12910,56 @@ function matchesArabicQuery(normText, normQuery) {
   return true;
 }
 
+let _searchPollTimer = null;
+let _searchPollEl = null;
+let _searchPollLast = "";
+
+function startSearchInputWatch(el, handler) {
+  stopSearchInputWatch();
+  if (!el) return;
+  _searchPollEl = el;
+  _searchPollLast = el.value || "";
+  _searchPollTimer = setInterval(() => {
+    if (!_searchPollEl || document.activeElement !== _searchPollEl) {
+      stopSearchInputWatch();
+      return;
+    }
+    const v = _searchPollEl.value || "";
+    if (v !== _searchPollLast) {
+      _searchPollLast = v;
+      handler(v);
+    }
+  }, 85);
+}
+
+function stopSearchInputWatch() {
+  if (_searchPollTimer) { clearInterval(_searchPollTimer); _searchPollTimer = null; }
+  _searchPollEl = null;
+}
+
+function readLiveSearchValue(el, evt) {
+  const val = String(el?.value || "");
+  const comp = (evt && evt.type === "compositionupdate" && typeof evt.data === "string") ? evt.data : "";
+  if (comp && !val.endsWith(comp) && !val.includes(comp)) {
+    return val + comp;
+  }
+  return val;
+}
+
 function onStudentsSearchInput(val) {
-  studentsSearchQuery = val || "";
+  const nextVal = String(val || "");
+  if (nextVal === studentsSearchQuery && _searchPollLast === nextVal) return;
+  studentsSearchQuery = nextVal;
+  _searchPollLast = nextVal;
   applyStudentsSearchFilterDOM();
+}
+
+function onStudentsSearchKey(el, evt) {
+  const v = readLiveSearchValue(el, evt);
+  onStudentsSearchInput(v);
+  if (evt && (evt.key === "Backspace" || evt.key === "Delete" || evt.keyCode === 8 || evt.keyCode === 46)) {
+    setTimeout(() => onStudentsSearchInput(el.value || ""), 15);
+  }
 }
 
 function applyStudentsSearchFilterDOM() {
@@ -12941,8 +12988,13 @@ function applyStudentsSearchFilterDOM() {
 
 function clearStudentsSearch() {
   studentsSearchQuery = "";
+  _searchPollLast = "";
   const inp = document.getElementById("studentsSearchInput");
-  if (inp) { inp.value = ""; inp.focus(); }
+  if (inp) {
+    inp.blur();
+    inp.value = "";
+    setTimeout(() => { inp.value = ""; inp.focus(); }, 15);
+  }
   applyStudentsSearchFilterDOM();
 }
 
@@ -12992,11 +13044,17 @@ function renderStudentsListOnly() {
         </div>
         ${ordBtns}
       </div>
+      ${st.track === "rashidi" ? `
+      <div class="st-mgmt-stats-3">
+        <div class="st-mstat"><span class="sm-l">المسار</span><span class="sm-v" style="color:#6d28d9;">القاعدة الرشيدية</span></div>
+        <div class="st-mstat"><span class="sm-l">الصفحة الحالية</span><span class="sm-v">ص ${st.rashidiPage || 1} / 85</span></div>
+        <div class="st-mstat"><span class="sm-l">المقدار اليومي</span><span class="sm-v">${formatNum(st.rashidiPace || 1)} صفحة</span></div>
+      </div>` : `
       <div class="st-mgmt-stats-3">
         <div class="st-mstat"><span class="sm-l">الحفظ اليومي</span><span class="sm-v">${formatNum(st.pace || 0.5)} صفحة</span></div>
         <div class="st-mstat"><span class="sm-l">المراجعة (${Number(st.minorLookbackWeeks)===2 ? "صغرى 2 أسبوع" : "صغرى أسبوع"})</span><span class="sm-v">${escapeHtml(formatRevPaceLabel(st.revPace || 2))} • ${escapeHtml(revSurah.n)}</span></div>
         <div class="st-mstat"><span class="sm-l">المحفوظ</span><span class="sm-v">~${formatNum(bounds.juzCount)} جزء</span></div>
-      </div>
+      </div>`}
       <div class="st-mgmt-actions">
         <div style="display:flex; gap:6px; flex:1;">
           <button class="btn btn-primary btn-sm" style="flex:1;" onclick="openEditStudentModal('${st.id}')">✏️ تعديل الخطة</button>
@@ -13058,9 +13116,11 @@ function openStudentProfile(studentId) {
       const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null) ? ` (${r.sabrScore}%)` : "";
       const detail = isAbs
         ? `<span class="badge ${r.attendance==='غياب مبرر'?'b-slate':'b-red'}">${r.attendance}</span>`
-        : s.type === "daily"
-          ? `${escapeHtml(r.recIsSabr && r.sabrJuz ? `سبر ${r.sabrJuz}${scTag}` : (formatSegmentsInline(getSegments(r, "rec")) || "—"))} <span class="badge b-green">${escapeHtml(r.recEval || "لم يُسمّع")}</span>`
-          : `صغرى: ${escapeHtml(r.minEval || "—")} | كبرى: ${escapeHtml(r.majEval || "—")}${r.sabrJuz ? scTag : ''}`;
+        : st.track === "rashidi"
+          ? `الرشيدي ص ${r.rashidiFrom || st.rashidiPage || 1}${r.rashidiTo && Number(r.rashidiTo) !== Number(r.rashidiFrom || st.rashidiPage || 1) ? '–' + r.rashidiTo : ''} <span class="badge b-green">${escapeHtml(r.recEval || "لم يُسمّع")}</span>`
+          : s.type === "daily"
+            ? `${escapeHtml(r.recIsSabr && r.sabrJuz ? `سبر ${r.sabrJuz}${scTag}` : (formatSegmentsInline(getSegments(r, "rec")) || "—"))} <span class="badge b-green">${escapeHtml(r.recEval || "لم يُسمّع")}</span>`
+            : `صغرى: ${escapeHtml(r.minEval || "—")} | كبرى: ${escapeHtml(r.majEval || "—")}${r.sabrJuz ? scTag : ''}`;
       return `<div class="profile-log-item">
         <div><b>${escapeHtml(s.dayName)}</b> <span style="color:var(--ink-500); font-size:11.5px;">(${escapeHtml(s.hijriDate)})</span></div>
         <div style="display:flex; align-items:center; gap:5px;">${detail} ${ptsOn ? `<span class="badge b-slate">⭐ ${r.points || 0}</span>` : ''}</div>
@@ -13315,10 +13375,23 @@ function syncStModalButtons() {
   const minWks = Number(document.getElementById("stMinorWeeksInput")?.value) === 2 ? 2 : 1;
   const track = document.getElementById("stTrackInput")?.value || "quran";
 
-  document.getElementById("stmTrackQuran")?.classList.toggle("on", track !== "rashidi");
-  document.getElementById("stmTrackRashidi")?.classList.toggle("on-green", track === "rashidi");
-  if (document.getElementById("stmRashidiBox")) document.getElementById("stmRashidiBox").style.display = track === "rashidi" ? "block" : "none";
-  if (document.getElementById("stmQuranPathSec")) document.getElementById("stmQuranPathSec").style.display = track === "rashidi" ? "none" : "block";
+  const isRashidi = track === "rashidi";
+  document.getElementById("stmTrackQuran")?.classList.toggle("on", !isRashidi);
+  document.getElementById("stmTrackRashidi")?.classList.toggle("on-green", isRashidi);
+  if (document.getElementById("stmRashidiBox")) document.getElementById("stmRashidiBox").style.display = isRashidi ? "block" : "none";
+  if (document.getElementById("stmQuranPathSec")) document.getElementById("stmQuranPathSec").style.display = isRashidi ? "none" : "block";
+
+  // Hide Review tab completely for Al-Qa'idah Al-Rashidiyyah students (Rashidi has no Quran review!)
+  const revTabBtn = document.getElementById("stmTabBtn_rev");
+  const revPane = document.getElementById("stmPane_rev");
+  const tabsBar = document.querySelector("#studentModal .stm-tabs-bar");
+  const hifzTabLbl = document.querySelector("#stmTabBtn_hifz .stb-lbl");
+  if (revTabBtn) revTabBtn.style.display = isRashidi ? "none" : "flex";
+  if (tabsBar) tabsBar.style.gridTemplateColumns = isRashidi ? "repeat(2, minmax(0, 1fr))" : "repeat(3, minmax(0, 1fr))";
+  if (hifzTabLbl) hifzTabLbl.textContent = isRashidi ? "الرشيدي" : "مسار الحفظ";
+  if (isRashidi && revPane && revPane.classList.contains("active")) {
+    setStudentModalTab("hifz");
+  }
 
   document.getElementById("stmDirDesc")?.classList.toggle("on", dir === "desc");
   document.getElementById("stmDirAsc")?.classList.toggle("on", dir === "asc");
@@ -13463,9 +13536,11 @@ function updateStudentModalPreview() {
 }
 
 function setStudentModalTab(tab) {
+  const isRashidi = (document.getElementById("stTrackInput")?.value || "quran") === "rashidi";
+  const safeTab = (isRashidi && tab === "rev") ? "hifz" : tab;
   ["info", "hifz", "rev"].forEach(k => {
-    document.getElementById("stmTabBtn_" + k)?.classList.toggle("on", k === tab);
-    document.getElementById("stmPane_" + k)?.classList.toggle("active", k === tab);
+    document.getElementById("stmTabBtn_" + k)?.classList.toggle("on", k === safeTab);
+    document.getElementById("stmPane_" + k)?.classList.toggle("active", k === safeTab);
   });
 }
 
@@ -15079,7 +15154,6 @@ function renderSessionView() {
     <div class="ssb-info">
       <span class="ssb-chip ok">✅ <b>${doneCnt}/${totalSt}</b></span>
       <span class="ssb-chip">غياب <b>${absCnt}</b></span>
-      <span class="ssb-chip">${pgSummary}</span>
     </div>
     <div class="ssb-actions">${actionBtns}</div>
     <div class="ssb-prog-line"><div class="ssb-prog-fill" style="width:${donePct}%;"></div></div>
@@ -15093,9 +15167,9 @@ function renderSessionView() {
         <div class="session-search-panel">
           <div class="search-input-wrap modern-search-box">
             <span class="search-lead-ico" aria-hidden="true">🔍</span>
-            <input type="text" inputmode="search" enterkeyhint="search" id="sessionSearchInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="ابحث باسم الطالب..." value="${escapeHtml(currentSearch)}" oninput="onSessionSearchInput(this.value)" onchange="onSessionSearchInput(this.value)" oncompositionend="onSessionSearchInput(this.value)">
+            <input type="text" inputmode="text" enterkeyhint="done" id="sessionSearchInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="ابحث باسم الطالب..." value="${escapeHtml(currentSearch)}" onfocus="startSearchInputWatch(this, onSessionSearchInput)" onblur="stopSearchInputWatch()" oninput="onSessionSearchInput(this.value)" oncompositionupdate="onSessionSearchKey(this, event)" oncompositionend="onSessionSearchInput(this.value)" onkeyup="onSessionSearchKey(this, event)" onkeydown="onSessionSearchKey(this, event)" onchange="onSessionSearchInput(this.value)">
             <span id="sessionSearchCount" class="search-count-pill" style="display:none;"></span>
-            <button type="button" id="sessionSearchClear" class="search-clear-btn" style="display:${currentSearch ? 'inline-flex' : 'none'};" onpointerdown="event.preventDefault()" onclick="clearSessionSearch()" aria-label="مسح البحث">×</button>
+            <button type="button" id="sessionSearchClear" class="search-clear-btn" style="display:${currentSearch ? 'inline-flex' : 'none'};" onclick="clearSessionSearch()" aria-label="مسح البحث">×</button>
           </div>
           <div class="session-filter-seg" id="sessionFilterSeg">
             <button type="button" class="sfs-btn" data-sf="all" onclick="setSessionFilter('all')">الكل <span class="sfs-cnt" id="sfsCntAll">${totalSt}</span></button>
@@ -15291,7 +15365,7 @@ function renderStudentCardsOnly() {
         </div>
         <div style="display:flex; align-items:center; gap:5px; flex-wrap:wrap;">
           ${hwInline ? `<span style="font-size:11px; color:var(--ink-500);">الواجب: <b>${escapeHtml(hwInline)}</b></span>` : ''}
-          <button type="button" class="quick-step-btn" onclick="quickNextAyahStep('${st.id}')" title="تقديم المقطع">+½ ص</button>
+          <button type="button" class="quick-step-btn" onclick="quickNextAyahStep('${st.id}')" title="إضافة نصف صفحة على الواجب الحالي">+½ ص</button>
         </div>
       </div>`;
     } else if (!isOpen && !isAbs && s.type === "saturday") {
@@ -15404,9 +15478,20 @@ function updateSearchClearVis() {
 }
 
 function onSessionSearchInput(val) {
-  currentSearch = val || "";
+  const nextVal = String(val || "");
+  if (nextVal === currentSearch && _searchPollLast === nextVal) return;
+  currentSearch = nextVal;
+  _searchPollLast = nextVal;
   updateSearchClearVis();
   applySessionSearchFilterDOM();
+}
+
+function onSessionSearchKey(el, evt) {
+  const v = readLiveSearchValue(el, evt);
+  onSessionSearchInput(v);
+  if (evt && (evt.key === "Backspace" || evt.key === "Delete" || evt.keyCode === 8 || evt.keyCode === 46)) {
+    setTimeout(() => onSessionSearchInput(el.value || ""), 15);
+  }
 }
 
 function applySessionSearchFilterDOM() {
@@ -15452,8 +15537,13 @@ function applySessionSearchFilterDOM() {
 
 function clearSessionSearch() {
   currentSearch = "";
+  _searchPollLast = "";
   const inp = document.getElementById("sessionSearchInput");
-  if (inp) { inp.value = ""; inp.focus(); }
+  if (inp) {
+    inp.blur();
+    inp.value = "";
+    setTimeout(() => { inp.value = ""; inp.focus(); }, 15);
+  }
   updateSearchClearVis();
   applySessionSearchFilterDOM();
 }
@@ -15594,6 +15684,31 @@ function renderCardBody(s, st, r, idx) {
           <span>📝 <b>الواجب القادم (رشيدي):</b> ${escapeHtml(hwR)}</span>
         </div>
       </div>
+      <details class="adv-card-drawer" ontoggle="onAdvDrawerToggle('${st.id}', this.open)" ${openAdvCardId === st.id ? 'open' : ''}>
+        <summary>
+          <span>💬 ملاحظات${isPointsEnabled(h) ? ' ونقاط' : ''} الطالب (الرشيدي)</span>
+          <span style="color:var(--ink-500);">▾</span>
+        </summary>
+        <div style="margin-top:8px;">
+          ${isPointsEnabled(h) ? `
+            <div class="pts-breakdown-hint">${escapeHtml(formatPointsBreakdownText(s, r, st))}</div>
+            <div class="pts-row" style="margin-bottom:8px;">
+              <div class="pts-stepper-v29">
+                <span style="font-size:12px; font-weight:700; color:var(--brand-slate);">النقاط:</span>
+                <button type="button" onclick="stepPoints('${st.id}', -5)">−5</button>
+                <button type="button" onclick="stepPoints('${st.id}', -1)">−1</button>
+                <input type="number" min="0" max="200" value="${r.points || 0}" oninput="onManualPointsInput('${st.id}', this.value)">
+                <button type="button" onclick="stepPoints('${st.id}', 1)">+1</button>
+                <button type="button" onclick="stepPoints('${st.id}', 5)">+5</button>
+              </div>
+            </div>
+          ` : ''}
+          <div class="field" style="margin-bottom:0;">
+            <label>ملاحظة</label>
+            <textarea rows="2" oninput="updateRecSilent('${st.id}','notes',this.value)">${escapeHtml(r.notes || '')}</textarea>
+          </div>
+        </div>
+      </details>
     `;
   } else if (s.type === "daily") {
     const recExtras = Array.isArray(r.recExtras) ? r.recExtras : [];
@@ -16717,27 +16832,98 @@ function advanceAfterEval(studentId, ev) {
   return true;
 }
 
+function extendSegmentsByHalfPage(segs, direction = "desc", addPages = 0.5) {
+  if (!Array.isArray(segs) || !segs.length) return null;
+  const out = segs.map(x => ({
+    surahId: String(x.surahId),
+    from: parseArabicNum(x.from, 1),
+    to: parseArabicNum(x.to, SURAH_MAP[Number(x.surahId)]?.a || 1)
+  }));
+  const last = out[out.length - 1];
+  const sLast = SURAH_MAP[Number(last.surahId)];
+  if (!sLast) return null;
+
+  let remToAdd = Math.max(0.25, Number(addPages) || 0.5);
+
+  if (last.to < sLast.a) {
+    const ayahsPerPage = sLast.a / Math.max(0.2, sLast.l);
+    const targetAyahs = Math.max(3, Math.round(remToAdd * ayahsPerPage));
+    const remAyahs = sLast.a - last.to;
+    if (remAyahs <= targetAyahs * 1.25) {
+      const addedPg = calcRangePages(sLast.id, last.to + 1, sLast.a);
+      last.to = sLast.a;
+      remToAdd = Math.max(0, remToAdd - addedPg);
+      // If only a tiny sliver (< 0.25 page) remained in this surah, continue smoothly into the next surah
+      if (remToAdd >= 0.25) {
+        const spill = computeNextHomework(sLast.id, last.from, sLast.a, "", direction, remToAdd);
+        if (spill && spill.hwSurahId) {
+          out.push({ surahId: String(spill.hwSurahId), from: spill.hwFrom, to: spill.hwTo });
+          (spill.hwExtras || []).forEach(ex => out.push({ surahId: String(ex.surahId), from: ex.from, to: ex.to }));
+        }
+      }
+      return out;
+    } else {
+      last.to = Math.min(sLast.a, last.to + targetAyahs);
+      return out;
+    }
+  }
+
+  // Already at end of last surah: keep existing segments and append +0.5 page from next surah
+  const nxt = computeNextHomework(sLast.id, last.from, sLast.a, "", direction, remToAdd);
+  if (!nxt || !nxt.hwSurahId) return null;
+  if (String(nxt.hwSurahId) === String(last.surahId)) {
+    last.to = Math.max(last.to, parseArabicNum(nxt.hwTo, sLast.a));
+  } else {
+    out.push({ surahId: String(nxt.hwSurahId), from: nxt.hwFrom, to: nxt.hwTo });
+  }
+  (nxt.hwExtras || []).forEach(ex => {
+    if (ex && ex.surahId) out.push({ surahId: String(ex.surahId), from: ex.from, to: ex.to });
+  });
+  return out;
+}
+
 function quickNextAyahStep(studentId) {
+  captureUndoSnapshot(studentId);
   const h = getActiveHalaqa(), s = getCurrentSession();
   const st = h?.students.find(x => x.id === studentId);
   const r = s ? getStudentRecord(s, studentId) : null;
   if (!st || !r) return;
-  const segs = getSegments(r, "rec");
-  const last = segs[segs.length - 1];
-  if (!last) { showToast("اختر سورة للطالب أولاً"); return; }
-  const nxt = computeNextHomework(last.surahId, last.from, last.to, "", st.direction || h.defaultDir, st.pace || 0.5);
-  if (!nxt) { showToast("أتمّ الطالب هذه السورة"); return; }
-  r.recSurahId = nxt.hwSurahId;
-  r.recFrom = nxt.hwFrom;
-  r.recTo = nxt.hwTo;
+  const dir = st.direction || h.defaultDir || "desc";
+
+  // If student is already evaluated and has a Next Homework set, ADD +½ page directly onto that homework!
+  const hwSegs = getSegments(r, "hw");
+  if (r.recEval && !r.hwSabrJuz && hwSegs.length) {
+    const extendedHw = extendSegmentsByHalfPage(hwSegs, dir, 0.5);
+    if (!extendedHw) { showToast("بلغ الطالب نهاية المصحف في هذا الاتجاه"); return; }
+    r.hwSurahId = extendedHw[0].surahId;
+    r.hwFrom = extendedHw[0].from;
+    r.hwTo = extendedHw[0].to;
+    r.hwEndSurahId = "";
+    r.hwExtras = extendedHw.slice(1);
+    saveState();
+    renderSessionPreservingScroll();
+    showToast(`➕ أُضيفت ½ صفحة على واجب ${st.name}: ${formatSegmentsInline(extendedHw)}`, { undo: true });
+    return;
+  }
+
+  // Otherwise (before evaluation): ADD +½ page onto today's assigned recitation without changing its start!
+  const recSegs = getSegments(r, "rec");
+  if (!recSegs.length) { showToast("اختر سورة للطالب أولاً"); return; }
+  const extendedRec = extendSegmentsByHalfPage(recSegs, dir, 0.5);
+  if (!extendedRec) { showToast("بلغ الطالب نهاية المصحف في هذا الاتجاه"); return; }
+  r.recSurahId = extendedRec[0].surahId;
+  r.recFrom = extendedRec[0].from;
+  r.recTo = extendedRec[0].to;
   r.recEndSurahId = "";
-  r.recExtras = (nxt.hwExtras || []).map(x => ({ ...x }));
-  r.recPages = calcSegmentsPages(getSegments(r, "rec"));
-  r.recEval = "";
+  r.recExtras = extendedRec.slice(1);
+  r.recPages = calcSegmentsPages(extendedRec);
   r.manualRec = true;
+  if (r.recEval) {
+    r.points = computeRecordPoints(s, r, st);
+  }
   saveState();
-  renderSessionView();
-  showToast(`تم تقديم مقطع ${st.name} إلى: ${formatSegmentsInline(getSegments(r, "rec"))}`);
+  renderSessionPreservingScroll();
+  showToast(`➕ أُضيفت ½ صفحة على واجب ${st.name}: ${formatSegmentsInline(extendedRec)} (${formatNum(r.recPages)} ص)`, { undo: true });
 }
 
 function quickSatBothEval(studentId, ev) {
@@ -19497,7 +19683,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v62 -->
+<!-- Makin App v63 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -22136,7 +22322,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v62";
+const TIBYAN_APP_VERSION = "v63";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
