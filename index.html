@@ -9326,6 +9326,347 @@ html { scroll-behavior: smooth; }
 .pts-rule-tile b { display: block; font-size: 12px; font-weight: 800; color: var(--brand-slate); margin-bottom: 3px; }
 .pts-rule-tile span { display: block; font-size: 11px; color: var(--ink-700); line-height: 1.55; font-weight: 600; }
 
+
+/* ==================== MAKIN v75: UNIFIED SURAH+PAGES, 5-PAGE PACE, POINTS TABLE & PODIUM POSTER ==================== */
+/* 3-Tab Review Mode Switcher (سورة وصفحات | سرد جزء | سبر) */
+#surahPickerModal .sp-mode-tabs.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+}
+#surahPickerModal .sp-mode-tabs.cols-3 .sp-mode-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 4px;
+  line-height: 1.2;
+}
+.sp-unit-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 3.5px;
+  margin-bottom: 8px;
+}
+.sp-unit-btn {
+  border: none;
+  background: transparent;
+  color: var(--ink-700);
+  padding: 6px 6px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+.sp-unit-btn.on {
+  background: #15629a;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(21, 98, 154, 0.22);
+}
+
+/* 6-Button Compact Daily Pace Strip (up to 5 pages!) */
+.pace-seg.pace-6 {
+  gap: 1.5px;
+  padding: 2px;
+}
+.pace-seg.pace-6 button {
+  padding: 3px 6.5px;
+  font-size: 11px;
+  min-width: 24px;
+}
+
+/* Points All-Students & Podium Poster Studio */
+.pts-stats-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 8px;
+}
+@media (max-width: 440px) {
+  .pts-stats-actions { grid-template-columns: 1fr 1fr; }
+}
+.pts-stats-actions .btn { width: 100%; font-size: 11.5px; padding: 7px 6px; }
+
+.pts-rank-scroll {
+  max-height: 430px;
+  overflow-y: auto;
+  padding-left: 2px;
+}
+.rank-item.top2 .rank-pos { background: #64748b; color: #ffffff; }
+.rank-item.top3 .rank-pos { background: #b85610; color: #ffffff; }
+
+/* Printable All-Points Official A4 Sheet (840px wide, scaled cleanly on mobile & 1040px HD export) */
+.pts-table-paper, .pts-table-paper * {
+  letter-spacing: 0 !important;
+  font-kerning: none;
+  box-sizing: border-box;
+}
+.pts-table-paper {
+  width: 840px;
+  min-width: 840px;
+  background: #ffffff;
+  color: #102a49;
+  padding: 22px 24px;
+  font-family: 'Tajawal', Arial, sans-serif;
+  border: 4px solid #142a46;
+}
+.ptp-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 2.5px solid #c8a14b;
+}
+.ptp-hdr img { height: 54px; width: auto; max-width: 190px; object-fit: contain; display: block; }
+.ptp-hdr-mid { flex: 1; text-align: center; }
+.ptp-hdr-mid h2 { font-size: 22px; font-weight: 800; color: #102a49; margin-bottom: 3px; }
+.ptp-hdr-mid p { font-size: 13px; font-weight: 700; color: #475569; }
+.ptp-meta-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.ptp-meta-cell {
+  background: #f4f6f9;
+  border: 1.25px solid #cbd5e1;
+  border-right: 4px solid #142a46;
+  border-radius: 8px;
+  padding: 6px 10px;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #102a49;
+}
+table.t-points-all {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 12px;
+  table-layout: fixed;
+}
+table.t-points-all th, table.t-points-all td {
+  border: 1.2px solid #1e293b;
+  padding: 6px 7px;
+  text-align: center;
+  vertical-align: middle;
+  color: #000000;
+}
+table.t-points-all th {
+  background: #142a46;
+  color: #ffffff !important;
+  font-weight: 800;
+  font-size: 12.5px;
+}
+table.t-points-all th.gold-th {
+  background: #c8a14b;
+  color: #0f233c !important;
+}
+table.t-points-all tbody tr:nth-child(even) { background: #f8fafc; }
+table.t-points-all tbody tr.rank-gold td { background: #fef9e7 !important; font-weight: 800; }
+table.t-points-all tbody tr.rank-silver td { background: #f1f5f9 !important; font-weight: 800; }
+table.t-points-all tbody tr.rank-bronze td { background: #fdf3eb !important; font-weight: 800; }
+table.t-points-all td.txt-right { text-align: right; font-weight: 800; }
+table.t-points-all td.pts-col { font-size: 14.5px; font-weight: 800; color: #142a46; }
+table.t-points-all tfoot td {
+  background: #e8eef5;
+  font-weight: 800;
+  font-size: 13px;
+  color: #102a49;
+}
+
+/* Agency-Grade Podium Leaders Poster (900px wide, Navy & Matte Gold) */
+.pts-podium-poster, .pts-podium-poster * {
+  letter-spacing: 0 !important;
+  font-kerning: none;
+  box-sizing: border-box;
+}
+.pts-podium-poster {
+  width: 900px;
+  min-width: 900px;
+  background: linear-gradient(160deg, #0c223f 0%, #163963 55%, #0e2849 100%);
+  color: #ffffff;
+  font-family: 'Tajawal', Arial, sans-serif;
+  padding: 32px 40px 28px;
+  position: relative;
+  overflow: hidden;
+  border: 6px solid #c8a14b;
+}
+.ppp-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+  border-bottom: 1.5px solid rgba(200, 161, 75, 0.4);
+}
+.ppp-logo-pill {
+  background: #ffffff;
+  padding: 9px 16px;
+  border-radius: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.24);
+}
+.ppp-logo-pill img { height: 48px; width: auto; max-width: 170px; object-fit: contain; display: block; }
+.ppp-title-mid { flex: 1; text-align: center; }
+.ppp-kicker {
+  display: inline-block;
+  background: rgba(200, 161, 75, 0.2);
+  border: 1px solid rgba(244, 217, 141, 0.5);
+  color: #f4d98d;
+  padding: 3px 18px;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 7px;
+}
+.ppp-title-mid h2 {
+  font-family: 'Amiri', 'Tajawal', serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+.ppp-title-mid p {
+  font-size: 16px;
+  font-weight: 700;
+  color: #cfe0f2;
+}
+.ppp-branch-tag {
+  min-width: 155px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(200, 161, 75, 0.55);
+  border-radius: 13px;
+  padding: 10px 14px;
+  text-align: center;
+}
+.ppp-branch-tag small { display: block; font-size: 11.5px; color: #c9d8e8; font-weight: 700; }
+.ppp-branch-tag b { display: block; font-size: 17px; color: #f4d98d; font-weight: 800; margin-top: 2px; }
+
+/* 3-Column Honor Podium (2nd | 1st Center Elevated | 3rd) */
+.ppp-podium-3 {
+  display: grid;
+  grid-template-columns: 1fr 1.18fr 1fr;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 22px;
+}
+.ppp-pod-card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+  padding: 16px 12px 18px;
+  text-align: center;
+  position: relative;
+}
+.ppp-pod-card.first {
+  background: linear-gradient(180deg, rgba(200, 161, 75, 0.26) 0%, rgba(12, 34, 63, 0.72) 100%);
+  border: 2.5px solid #f4d98d;
+  padding: 22px 14px 24px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.34);
+}
+.ppp-pod-card.second {
+  border-color: #cbd5e1;
+  background: linear-gradient(180deg, rgba(203, 213, 225, 0.16) 0%, rgba(12, 34, 63, 0.65) 100%);
+}
+.ppp-pod-card.third {
+  border-color: #d99b66;
+  background: linear-gradient(180deg, rgba(217, 155, 102, 0.16) 0%, rgba(12, 34, 63, 0.65) 100%);
+}
+.ppp-medal { font-size: 40px; line-height: 1.1; margin-bottom: 6px; }
+.ppp-pod-card.first .ppp-medal { font-size: 50px; }
+.ppp-rank-lbl { font-size: 13px; font-weight: 800; color: #f4d98d; margin-bottom: 6px; }
+.ppp-stu-name { font-size: 20px; font-weight: 800; color: #ffffff; line-height: 1.35; margin-bottom: 10px; }
+.ppp-pod-card.first .ppp-stu-name { font-size: 24px; }
+.ppp-pts-badge {
+  display: inline-block;
+  background: #c8a14b;
+  color: #0c223f;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 5px 18px;
+  border-radius: 99px;
+}
+.ppp-pod-card.first .ppp-pts-badge {
+  background: #f4d98d;
+  font-size: 21px;
+  padding: 6px 22px;
+}
+.ppp-sub-meta { font-size: 12.5px; color: #d5e4f3; font-weight: 600; margin-top: 8px; }
+
+/* Ranks 4+ Honor List on Poster */
+.ppp-rest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.ppp-rest-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(200, 161, 75, 0.32);
+  border-right: 4px solid #c8a14b;
+  border-radius: 11px;
+  padding: 9px 14px;
+}
+.ppp-rest-l { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.ppp-rest-pos {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(244, 217, 141, 0.2);
+  color: #f4d98d;
+  font-size: 14px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ppp-rest-name { font-size: 16px; font-weight: 800; color: #ffffff; }
+.ppp-rest-pts {
+  background: #f4d98d;
+  color: #0c223f;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 3px 12px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.ppp-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1.5px solid rgba(200, 161, 75, 0.35);
+  font-size: 15px;
+  font-weight: 800;
+  color: #e2ecf6;
+}
+#hdExportStage.is-indiv-stage .pts-table-paper {
+  width: 100% !important;
+  min-width: 0 !important;
+  padding: 26px 28px !important;
+}
+#hdExportStage.is-poster-stage .pts-podium-poster {
+  width: 900px !important;
+  min-width: 900px !important;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -9768,7 +10109,7 @@ html { scroll-behavior: smooth; }
         </button>
       </div>
 
-      <div class="drawer-group-lbl">حسابي والإشراف</div>
+      <div class="drawer-group-lbl">الحساب والتواصل</div>
       <div class="drawer-card-group">
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openTeacherAccountModal();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔐</span><span>حسابي والربط</span></span>
@@ -9777,14 +10118,6 @@ html { scroll-behavior: smooth; }
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openTeacherMessagesModal();">
           <span class="drawer-item-l"><span class="drawer-ico-box">📩</span><span>رسائل المشرف</span></span>
           <span class="badge b-slate" id="drawerSupMsgBadge" style="font-size:10.5px;">0</span>
-        </button>
-      </div>
-
-      <div class="drawer-group-lbl">الدوام والتذكير</div>
-      <div class="drawer-card-group">
-        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openClassDaysModal();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">🗓️</span><span>أيام الدوام</span></span>
-          <span class="badge b-slate" id="drawerDaysBadge" style="font-size:10.5px;">سبت•إث•أرب</span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openClassDayWaModal();">
           <span class="drawer-item-l"><span class="drawer-ico-box gold">💬</span><span>تذكير الطلاب (واتساب)</span></span>
@@ -9833,25 +10166,13 @@ html { scroll-behavior: smooth; }
           <span class="drawer-item-l"><span class="drawer-ico-box">⬇️</span><span>إنزال المُنجَزين للأسفل</span></span>
           <span class="m-switch on" id="drawerSinkSwitch" aria-hidden="true"></span>
         </button>
-        <button type="button" class="drawer-item" onclick="toggleHalaqaGender(); updateDrawerQuickStates();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">👥</span><span>صيغة الحلقة</span></span>
-          <span class="badge b-slate" id="drawerGenderBadge">ذكور</span>
-        </button>
         <button type="button" class="drawer-item" onclick="toggleTheme(); updateDrawerQuickStates();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🌙</span><span>الوضع الليلي</span></span>
           <span class="m-switch" id="drawerThemeSwitch" aria-hidden="true"></span>
         </button>
-      </div>
-
-      <div class="drawer-group-lbl">النسخ الاحتياطي والتحديث</div>
-      <div class="drawer-card-group" style="margin-bottom:14px;">
-        <button type="button" class="drawer-item" onclick="closeRightDrawer(); exportBackupJSON();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">💾</span><span>حفظ نسخة على الجهاز</span></span>
-          <span class="drawer-chev">↓</span>
-        </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v74</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v75</span>
         </button>
       </div>
     </div>
@@ -9998,12 +10319,14 @@ html { scroll-behavior: smooth; }
     <!-- TAB 5: STATS -->
     <section id="view-stats" class="view">
       <div class="card no-print" style="padding:11px;">
-        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px;">
-          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-            <label style="font-weight:700; font-size:13px;">الفترة:</label>
-            <select id="statsMonthFilter" onchange="renderStats()" style="padding:7px 10px; border-radius:8px; border:1px solid var(--line-strong); font-weight:700;"></select>
-          </div>
-          <button class="btn btn-primary btn-sm" id="btnCopyPointsLeaderboard" onclick="copyPointsLeaderboardWA()">🏆 نسخ المتصدرين للواتساب</button>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <label style="font-weight:800; font-size:13px; white-space:nowrap;">الفترة:</label>
+          <select id="statsMonthFilter" onchange="renderStats()" style="flex:1; min-width:0; padding:8px 10px; border-radius:9px; border:1.5px solid var(--line-strong); font-weight:800; background:var(--bg); color:var(--ink-900);"></select>
+        </div>
+        <div class="pts-stats-actions" id="btnCopyPointsLeaderboard">
+          <button type="button" class="btn btn-primary btn-sm" onclick="openPointsReportModal('table')">📋 صورة/PDF لجميع النقاط</button>
+          <button type="button" class="btn btn-soft btn-sm" onclick="openPointsReportModal('podium')">🏆 لوحة المتصدرين</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="copyPointsLeaderboardWA()">💬 نسخ للواتساب</button>
         </div>
       </div>
       <div id="statsContent"></div>
@@ -10422,12 +10745,17 @@ html { scroll-behavior: smooth; }
 
           <div class="form-grid" style="grid-template-columns:1.6fr 1fr; margin-bottom:8px; align-items:end;">
             <div>
-              <label style="display:block; font-size:11.5px; font-weight:700; color:var(--ink-700); margin-bottom:4px;">مقدار الحفظ اليومي</label>
-              <div class="stm-choice-row cols-4" style="margin-bottom:0;">
+              <label style="display:block; font-size:11.5px; font-weight:700; color:var(--ink-700); margin-bottom:4px;">مقدار الحفظ اليومي (حتى 5 صفحات)</label>
+              <div class="stm-choice-row cols-4" style="margin-bottom:5px;">
                 <button type="button" class="stm-choice-btn on-green" id="stmPace_05" onclick="setStModalChoice('pace',0.5)">½ ص</button>
                 <button type="button" class="stm-choice-btn" id="stmPace_1" onclick="setStModalChoice('pace',1)">1 ص</button>
-                <button type="button" class="stm-choice-btn" id="stmPace_15" onclick="setStModalChoice('pace',1.5)">1.5</button>
+                <button type="button" class="stm-choice-btn" id="stmPace_15" onclick="setStModalChoice('pace',1.5)">1.5 ص</button>
                 <button type="button" class="stm-choice-btn" id="stmPace_2" onclick="setStModalChoice('pace',2)">2 ص</button>
+              </div>
+              <div class="stm-choice-row" style="grid-template-columns:repeat(3,minmax(0,1fr)); margin-bottom:0;">
+                <button type="button" class="stm-choice-btn" id="stmPace_3" onclick="setStModalChoice('pace',3)">3 صفحات</button>
+                <button type="button" class="stm-choice-btn" id="stmPace_4" onclick="setStModalChoice('pace',4)">4 صفحات</button>
+                <button type="button" class="stm-choice-btn" id="stmPace_5" onclick="setStModalChoice('pace',5)">5 صفحات</button>
               </div>
             </div>
             <div class="field">
@@ -10622,7 +10950,7 @@ html { scroll-behavior: smooth; }
       <div class="exec-modal-hdr-row">
         <div>
           <h3>⚙️ الإعدادات والمزامنة</h3>
-          <div class="exec-modal-sub">تحديث فوري للهوية والدوام والطلاب والسحابة</div>
+          <div class="exec-modal-sub">هوية الحلقة • التقييم والدوام • السحابة والنسخ الاحتياطي</div>
         </div>
         <button type="button" class="exec-modal-close" onclick="closeModal('settingsModal')" aria-label="إغلاق">×</button>
       </div>
@@ -10630,8 +10958,8 @@ html { scroll-behavior: smooth; }
 
     <div class="exec-modal-tabs">
       <button type="button" class="exec-tab-btn on" id="setTabBtn_halaqa" onclick="switchSettingsTab('halaqa')">🕌 الحلقة</button>
-      <button type="button" class="exec-tab-btn" id="setTabBtn_system" onclick="switchSettingsTab('system')">🗓️ الدوام والطلاب</button>
-      <button type="button" class="exec-tab-btn" id="setTabBtn_cloud" onclick="switchSettingsTab('cloud')">☁️ السحابة</button>
+      <button type="button" class="exec-tab-btn" id="setTabBtn_system" onclick="switchSettingsTab('system')">🎯 التقييم والدوام</button>
+      <button type="button" class="exec-tab-btn" id="setTabBtn_cloud" onclick="switchSettingsTab('cloud')">☁️ السحابة والنسخ</button>
     </div>
 
     <div class="exec-modal-body">
@@ -10663,12 +10991,12 @@ html { scroll-behavior: smooth; }
         </div>
 
         <div class="exec-card">
-          <div class="exec-card-ttl"><span>📅 التقويم والنقاط</span></div>
+          <div class="exec-card-ttl"><span>📅 التقويم والافتراضيات</span></div>
           <div class="exec-grid-2" style="margin-bottom:8px;">
             <div class="field"><label>أيام الدوام بالشهر</label><input type="number" id="setMonthDays" min="1" max="31"></div>
-            <div class="field"><label>المراجعة الكبرى</label><select id="setDefaultRevPace"><option value="1">صفحة واحدة</option><option value="2">صفحتان</option></select></div>
+            <div class="field"><label>المراجعة الكبرى الافتراضية</label><select id="setDefaultRevPace"><option value="1">صفحة واحدة</option><option value="2">صفحتان</option><option value="3">3 صفحات</option><option value="5">ربع جزء (5 ص)</option></select></div>
           </div>
-          <div class="field" style="margin-bottom:9px;">
+          <div class="field" style="margin-bottom:0;">
             <label>معايرة التاريخ الهجري</label>
             <select id="setHijriOffset">
               <option value="0">0 (قياسي)</option>
@@ -10677,10 +11005,6 @@ html { scroll-behavior: smooth; }
               <option value="-1">-1 يوم</option>
             </select>
           </div>
-          <label class="check-inline" style="width:100%; justify-content:space-between; background:var(--bg); padding:8px 10px; border-radius:10px; border:1px solid var(--line);">
-            <span>⭐ تفعيل وضع النقاط والتحفيز</span>
-            <input type="checkbox" id="setPointsEnabled" checked>
-          </label>
         </div>
       </div>
 
@@ -10805,21 +11129,7 @@ html { scroll-behavior: smooth; }
           </div>
         </div>
 
-        <div class="exec-card">
-          <div class="exec-card-ttl">
-            <span>👥 إدارة الطلاب (<span id="setStudentsCount">0</span>)</span>
-            <div style="display:flex; gap:5px;">
-              <button type="button" class="btn btn-soft btn-sm" onclick="closeModal('settingsModal'); openAddStudentModal();">+ بتفاصيل</button>
-              <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('settingsModal'); openBulkAddModal();">+ لصق</button>
-            </div>
-          </div>
-          <div style="display:flex; gap:6px; margin-bottom:8px;">
-            <input type="text" id="setQuickStudentName" placeholder="اكتب اسم الطالب الثلاثي لإضافته فوراً..." style="flex:1; padding:8px 10px; border:1px solid var(--line-strong); border-radius:9px;" onkeydown="if(event.key==='Enter'){event.preventDefault(); quickAddStudentFromSettings();}">
-            <button type="button" class="btn btn-primary btn-sm" onclick="quickAddStudentFromSettings()">+ إضافة</button>
-          </div>
-          <input type="text" id="setStudentSearch" placeholder="🔍 ابحث عن طالب لتعديله أو إزالته..." style="width:100%; padding:7px 10px; border:1px solid var(--line); border-radius:9px; margin-bottom:7px; font-size:12.5px;" oninput="renderSettingsStudentsList()">
-          <div id="settingsStudentsList" class="set-st-list"></div>
-        </div>
+
       </div>
 
       <!-- SETTINGS TAB 3: CLOUD SYNC, MULTI-HALAQA & BACKUP -->
@@ -11075,20 +11385,19 @@ html { scroll-behavior: smooth; }
     </div>
 
     <div class="sp-sheet-body">
-      <!-- Mode Switcher: 2-Tab for Memorization/HW, 4-Tab for Reviews (Surah | Pages | Sard Juz | Sabr) -->
+      <!-- Mode Switcher: 2-Tab for Memorization/HW, 3-Tab for Reviews (سورة وصفحات | سرد جزء | سبر) -->
       <div id="spModeTabs" class="sp-mode-tabs">
         <button type="button" class="sp-mode-tab on" id="spTabSurah" onclick="spSetMode('surah')"><span class="sp-mt-ico">📖</span><span class="sp-mt-lbl" id="spTabSurahLbl">سورة وآيات</span></button>
-        <button type="button" class="sp-mode-tab" id="spTabPages" style="display:none;" onclick="spSetMode('pages')"><span class="sp-mt-ico">📄</span><span class="sp-mt-lbl">صفحات</span></button>
         <button type="button" class="sp-mode-tab" id="spTabSard" style="display:none;" onclick="spSetMode('sard')"><span class="sp-mt-ico">📚</span><span class="sp-mt-lbl">سرد جزء</span></button>
         <button type="button" class="sp-mode-tab" id="spTabSabr" onclick="spSetMode('sabr')"><span class="sp-mt-ico">🎓</span><span class="sp-mt-lbl" id="spTabSabrLbl">سبر جزء</span></button>
       </div>
 
-      <!-- Panel A: Surah & Ayah Selection -->
+      <!-- Panel A: Unified Surah + Ayahs OR Surah + Mushaf Pages Range -->
       <div id="spSurahModePanel">
         <div id="spSegBar" class="sp-seg-bar"></div>
         <div id="spActiveSurahCard"></div>
 
-        <!-- Collapsible Surah Browser Drawer (Opens on Demand — Keeps Ayah Sliders Always Visible!) -->
+        <!-- Collapsible Surah Browser Drawer -->
         <div id="spBrowserDrawer" class="sp-browser-drawer" style="display:none;">
           <div class="sp-search-row">
             <div class="sp-browser-search-wrap">
@@ -11102,12 +11411,14 @@ html { scroll-behavior: smooth; }
           <div id="spSurahGrid" class="sp-surah-grid" style="margin-bottom:0;"></div>
         </div>
 
-        <div id="spAyahBox" class="sp-ayah-box"></div>
-      </div>
+        <!-- Review Sub-Unit Switcher (بالآيات vs من صفحة إلى صفحة) -->
+        <div id="spReviewUnitToggle" class="sp-unit-toggle" style="display:none;">
+          <button type="button" class="sp-unit-btn on" id="spUnitAyahBtn" onclick="spSetReviewUnit('ayah')">🔢 بالآيات</button>
+          <button type="button" class="sp-unit-btn" id="spUnitPageBtn" onclick="spSetReviewUnit('page')">📄 من صفحة إلى صفحة</button>
+        </div>
 
-      <!-- Panel B: Mushaf Pages Range Selection (من صفحة إلى صفحة) -->
-      <div id="spPagesModePanel" style="display:none;">
-        <div id="spPagesBox"></div>
+        <div id="spAyahBox" class="sp-ayah-box"></div>
+        <div id="spPagesBox" style="display:none;"></div>
       </div>
 
       <!-- Panel C: Full Juz Sard Selection (سرد جزء مراجعة — غير السبر) -->
@@ -11180,6 +11491,51 @@ html { scroll-behavior: smooth; }
     <div class="es-header" id="esHeader"></div>
     <div class="es-body" id="esBody"></div>
     <div class="es-footer" id="esFooter"></div>
+  </div>
+</div>
+
+<!-- ===== MODAL: PRINTABLE ALL-POINTS SHEET & TOP LEADERS POSTER (v75) ===== -->
+<div class="modal-backdrop" id="pointsReportModal" style="z-index:139;" onclick="if(event.target===this) closeModal('pointsReportModal')">
+  <div class="modal-box" style="max-width:660px; padding:15px;">
+    <div class="modal-header" style="margin-bottom:10px; padding-bottom:8px;">
+      <h3 style="font-size:15px;">🏆 طباعة وتصدير النقاط والمتصدرين</h3>
+      <button class="close-x" onclick="closeModal('pointsReportModal')">×</button>
+    </div>
+
+    <div class="sp-mode-tabs" style="margin-bottom:9px;">
+      <button type="button" class="sp-mode-tab on" id="prTabTableBtn" onclick="setPointsReportMode('table')">📋 لائحة جميع الطلاب</button>
+      <button type="button" class="sp-mode-tab" id="prTabPodiumBtn" onclick="setPointsReportMode('podium')">🏆 لوحة المتصدرين</button>
+    </div>
+
+    <div id="prTableOptsRow" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px; margin-bottom:9px;">
+      <span style="font-size:12px; font-weight:800; color:var(--ink-700);">نطاق العرض:</span>
+      <div class="pill-group" style="gap:5px;">
+        <button type="button" class="pill pill-sm on-slate" id="prScopeEarnedBtn" onclick="setPointsTableScope('earned')">الحاصلون على نقاط فقط</button>
+        <button type="button" class="pill pill-sm" id="prScopeAllBtn" onclick="setPointsTableScope('all')">جميع طلاب الحلقة</button>
+      </div>
+    </div>
+
+    <div id="prPodiumOptsRow" style="display:none; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px; margin-bottom:9px;">
+      <span style="font-size:12px; font-weight:800; color:var(--ink-700);">عدد الأوائل باللوحة:</span>
+      <div class="pill-group" style="gap:5px;">
+        <button type="button" class="pill pill-sm" id="prTop3Btn" onclick="setPointsPodiumLimit(3)">أوائل 3</button>
+        <button type="button" class="pill pill-sm" id="prTop5Btn" onclick="setPointsPodiumLimit(5)">أوائل 5</button>
+        <button type="button" class="pill pill-sm on-slate" id="prTop10Btn" onclick="setPointsPodiumLimit(10)">أوائل 10</button>
+      </div>
+    </div>
+
+    <div class="poster-preview-shell" id="prPreviewScroll" style="margin-bottom:10px;">
+      <div class="poster-scale-host" id="prScaleHost">
+        <div id="prPaperWrap"></div>
+      </div>
+    </div>
+
+    <div class="cert-actions-grid">
+      <button type="button" class="btn btn-primary" onclick="exportPointsReportPNG()">📸 حفظ صورة HD</button>
+      <button type="button" class="btn btn-soft" onclick="exportPointsReportPDF()">📑 حفظ ملف PDF</button>
+      <button type="button" class="btn btn-success" onclick="copyPointsLeaderboardWA()">💬 نسخ للواتساب</button>
+      <button type="button" class="btn btn-outline" onclick="closeModal('pointsReportModal')">إغلاق</button>
+    </div>
   </div>
 </div>
 
@@ -11597,7 +11953,7 @@ function getStudentPathLabel(st, h) {
 
 function computeFirstHwInJuz(juz, surahDir = "desc", pacePages = 0.5) {
   if (!juz) return null;
-  const pace = Math.max(0.25, Math.min(3, Number(pacePages) || 0.5));
+  const pace = Math.max(0.25, Math.min(5, Number(pacePages) || 0.5));
   if (surahDir === "asc") {
     const startS = SURAH_MAP[juz.startSurah];
     if (!startS) return null;
@@ -12563,36 +12919,44 @@ function computeNextHomework(surahId, fromAyah, toAyah, endSurahId, direction = 
   const lastSid = isTwo ? Number(endSurahId) : sStart.id;
   const lastS = SURAH_MAP[lastSid];
   const lastTo = Math.min(lastS.a, parseArabicNum(toAyah, lastS.a));
-  const pace = Math.max(0.25, Math.min(3, Number(pacePages) || 0.5));
+  const pace = Math.max(0.25, Math.min(5, Number(pacePages) || 0.5));
+  const getNextId = sid => direction === "asc"
+    ? (sid < 114 ? sid + 1 : null)
+    : (sid > 2 ? sid - 1 : (sid === 2 ? 1 : null));
 
-  if (lastTo < lastS.a) {
-    const remaining = lastS.a - lastTo;
-    const ayahsPerPage = lastS.a / Math.max(0.2, lastS.l);
-    const targetAyahs = Math.max(3, Math.round(pace * ayahsPerPage));
-    const nextFrom = lastTo + 1;
-    const nextTo = (remaining <= targetAyahs * 1.25) ? lastS.a : Math.min(lastS.a, lastTo + targetAyahs);
-    return { hwSurahId: String(lastSid), hwEndSurahId: "", hwFrom: nextFrom, hwTo: nextTo, hwExtras: [] };
-  }
+  const segs = [];
+  let remPages = pace;
+  let curSid = lastSid;
+  let curFrom = lastTo < lastS.a ? lastTo + 1 : 1;
+  if (lastTo >= lastS.a) curSid = getNextId(lastSid);
 
-  const nextSid = direction === "asc"
-    ? (lastSid < 114 ? lastSid + 1 : null)
-    : (lastSid > 2 ? lastSid - 1 : (lastSid === 2 ? 1 : null));
-  if (!nextSid || !SURAH_MAP[nextSid]) return null;
-
-  const nextS = SURAH_MAP[nextSid];
-  if (nextS.l <= pace * 0.65) {
-    const secondSid = direction === "asc" ? (nextSid < 114 ? nextSid + 1 : null) : (nextSid > 2 ? nextSid - 1 : null);
-    if (secondSid && SURAH_MAP[secondSid] && (nextS.l + SURAH_MAP[secondSid].l) <= pace * 1.45) {
-      return {
-        hwSurahId: String(nextSid), hwEndSurahId: "", hwFrom: 1, hwTo: nextS.a,
-        hwExtras: [{ surahId: String(secondSid), from: 1, to: SURAH_MAP[secondSid].a }]
-      };
+  while (curSid && SURAH_MAP[curSid] && remPages > 0.15 && segs.length < 15) {
+    const s = SURAH_MAP[curSid];
+    const remAyahs = s.a - curFrom + 1;
+    const ayahsPerPage = s.a / Math.max(0.2, s.l);
+    const remSurahPages = remAyahs / ayahsPerPage;
+    if (remSurahPages <= remPages * 1.25 || (segs.length === 0 && remSurahPages <= pace * 1.35)) {
+      segs.push({ surahId: String(s.id), from: curFrom, to: s.a });
+      remPages -= remSurahPages;
+      curSid = getNextId(curSid);
+      curFrom = 1;
+      // If remaining budget is small (< 35% of pace), stop cleanly at Surah boundary
+      if (remPages < Math.min(0.4, pace * 0.35)) break;
+    } else {
+      const targetAyahs = Math.max(3, Math.round(remPages * ayahsPerPage));
+      const nextTo = Math.min(s.a, curFrom + targetAyahs - 1);
+      segs.push({ surahId: String(s.id), from: curFrom, to: nextTo });
+      break;
     }
-    return { hwSurahId: String(nextSid), hwEndSurahId: "", hwFrom: 1, hwTo: nextS.a, hwExtras: [] };
   }
-  if (nextS.l <= pace * 1.35) return { hwSurahId: String(nextSid), hwEndSurahId: "", hwFrom: 1, hwTo: nextS.a, hwExtras: [] };
-  const chunk = Math.min(nextS.a, Math.max(3, Math.round(pace * (nextS.a / Math.max(0.2, nextS.l)))));
-  return { hwSurahId: String(nextSid), hwEndSurahId: "", hwFrom: 1, hwTo: chunk, hwExtras: [] };
+  if (!segs.length) return null;
+  return {
+    hwSurahId: segs[0].surahId,
+    hwEndSurahId: "",
+    hwFrom: segs[0].from,
+    hwTo: segs[0].to,
+    hwExtras: segs.slice(1)
+  };
 }
 
 // ==================== STRICT MEMORIZED-RANGE MAJOR REVIEW & SABR ENGINE (v20) ====================
@@ -13017,7 +13381,7 @@ function formatSatNextMajColumns(r, isHtml = true) {
     return { surah: esc("سرد"), from: esc(si.ids.length === 1 ? "جزء" : `${si.ids.length} أجزاء`), to: esc(si.shortNames), lines: 1 };
   }
   if (r.nextMajIsPages && r.nextMajFrom) {
-    return { surah: esc("صفحات"), from: esc(r.nextMajFrom), to: esc(r.nextMajTo || r.nextMajFrom), lines: 1 };
+    return { surah: esc(r.nextMajTitle || "صفحات"), from: esc(r.nextMajFrom), to: esc(r.nextMajTo || r.nextMajFrom), lines: 1 };
   }
 
   // If next Saturday is a repeated Full-Juz Sabr => display clearly as Sabr Juz!
@@ -13948,28 +14312,118 @@ function syncEvalSuggestedBtnInPlace(kind, nErr, nAlrt, curEval) {
   return true;
 }
 
+function applyAutoEvalSilentFromCounters(studentId, kind) {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s) return;
+  const st = h.students.find(x => x.id === studentId);
+  if (!st) return;
+  const r = getStudentRecord(s, studentId);
+  const eKey = kind === "min" ? "minErrors" : (kind === "maj" ? "majErrors" : "recErrors");
+  const aKey = kind === "min" ? "minAlerts" : (kind === "maj" ? "majAlerts" : "recAlerts");
+  const errs = Math.max(0, Number(r[eKey]) || 0);
+  const alrts = Math.max(0, Number(r[aKey]) || 0);
+  const ev = evalFromErrorCount(errs, alrts, h);
+
+  if (r.attendance === "لم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  ensureRecordBonuses(r);
+  const errTag = errs > 0 ? ` (${errorCountArabicText(errs)})` : "";
+
+  if (kind === "min") {
+    r.minEval = ev;
+    if (!(Number(r.minPages) > 0)) r.minPages = calcRecordMinPages(r);
+    r.notes = buildSaturdayAutoNote(st, r, errs || null, r.majErrors || null, false);
+  } else if (kind === "maj") {
+    r.majEval = ev;
+    const cyc = getStudentActiveMajorCycle(st, h, s);
+    const revPace = Number(st?.revPace || (cyc.sabrJuz ? 5 : (h.defaultRevPace || 2)));
+    if (!(Number(r.majPages) > 0)) {
+      const majSegs = getSegments(r, "maj");
+      r.majPages = majSegs.length ? calcSegmentsPages(majSegs) : (calcMajorPagesFallback(r, st, h) || revPace);
+    }
+    if (!r.majStartPage) r.majStartPage = st?.revPage || cyc.cycleStart;
+    applyNextMajorReview(st, r, ev !== "إعادة");
+    const curRng = buildMajorReviewRange(r.majStartPage, r.majPages || revPace, cyc.cycleStart, cyc.cycleEnd);
+    r.notes = buildSaturdayAutoNote(st, r, r.minErrors || null, errs || null, ev !== "إعادة" && curRng.wrapped && !cyc.sabrJuz);
+  } else if (st.track === "rashidi") {
+    r.recEval = ev;
+    const f = parseArabicNum(r.rashidiFrom, st.rashidiPage || 1);
+    const t = parseArabicNum(r.rashidiTo, f);
+    const pace = Math.max(0.5, Number(st.rashidiPace) || 1);
+    r.rashidiFrom = f; r.rashidiTo = t;
+    r.rashidiPages = Number(r.rashidiPages) || Math.max(0.5, t - f + 1);
+    if (ev === "إعادة") {
+      r.hwRashidiFrom = f; r.hwRashidiTo = t;
+      r.notes = `إعادة القاعدة الرشيدية (ص ${f}${t !== f ? "–" + t : ""})؛ يرجى التدريب الجيد بالمنزل.`;
+    } else {
+      const nf = Math.min(85, t + 1), nt = Math.min(85, nf + Math.max(0, Math.ceil(pace) - 1));
+      r.hwRashidiFrom = nf; r.hwRashidiTo = nt; st.rashidiPage = nf;
+      r.notes = ev === "ممتاز"
+        ? `قراءة متقنة في الرشيدي (ص ${f}${t !== f ? "–" + t : ""})، الواجب القادم ص ${nf}${nt !== nf ? "–" + nt : ""}.`
+        : `تقدّم طيّب في الرشيدي (ص ${f}${t !== f ? "–" + t : ""})، الواجب القادم ص ${nf}${nt !== nf ? "–" + nt : ""}.`;
+    }
+  } else {
+    r.recEval = ev;
+    if (ev !== "جيد" && (r.dRevEval === "تثبيت" || r.dRevEval === "تثبيت حفظ") && !(Number(r.dRevPages) > 0)) {
+      r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = "";
+    }
+    const segs = getSegments(r, "rec");
+    const dir = st?.direction || h.defaultDir || "desc";
+    let completedJuz = null;
+    if (segs.length) {
+      if (ev === "إعادة") {
+        r.hwSabrJuz = "";
+        r.hwSurahId = segs[0].surahId; r.hwEndSurahId = ""; r.hwFrom = segs[0].from; r.hwTo = segs[0].to;
+        r.hwExtras = segs.slice(1).map(x => ({ ...x }));
+      } else {
+        completedJuz = detectCompletedJuz(segs, dir);
+        if (completedJuz) {
+          r.hwSabrJuz = completedJuz.name;
+          r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
+        } else {
+          r.hwSabrJuz = "";
+          const last = segs[segs.length - 1];
+          const nxt = computeNextHomework(last.surahId, last.from, last.to, "", dir, st?.pace || 0.5);
+          if (nxt) Object.assign(r, nxt);
+        }
+        if (ev === "جيد" && !r.dRevEval) {
+          const s0 = SURAH_MAP[Number(segs[0].surahId)];
+          if (segs.length === 1 && s0 && isShortFullSurah(s0, segs[0].from, segs[0].to)) {
+            r.dRevFrom = s0.n; r.dRevTo = "";
+          } else {
+            r.dRevFrom = `${s0?.n || ""} ${segs[0].from || 1}`;
+            r.dRevTo = String(segs[segs.length - 1].to || "");
+          }
+          r.dRevEval = "تثبيت";
+        }
+      }
+    }
+    const label = formatSegmentsInline(segs) || "المقطع";
+    if (completedJuz && ev !== "إعادة") r.notes = `مبارك إتمام ${completedJuz.name} بتقييم ${ev}${errTag}؛ الواجب القادم مراجعة الجزء كاملاً استعداداً لاختبار السبر.`;
+    else if (ev === "ممتاز") r.notes = `تلاوة متقنة وحفظ ممتاز (${label})${errTag} بارك الله في همتك.`;
+    else if (ev === "جيد جداً") r.notes = `حفظ جيد جداً (${label})${errTag}؛ بمزيد من التكرار يرتقي للامتياز.`;
+    else if (ev === "جيد") r.notes = `مستوى جيد (${label})${errTag}؛ يرجى تثبيت المقطع في المراجعة لرفع الإتقان.`;
+    else r.notes = `يرجى تكرار (${label})${errTag} وضبط الآيات لإتقان الإعادة في الجلسة القادمة.`;
+  }
+
+  r.points = computeRecordPoints(s, r, st);
+  saveStateDebounced(220);
+
+  // Smooth live UI refresh without closing sheet or triggering premature auto-advance!
+  if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
+    syncStudentEvalSheet();
+  }
+  renderStudentCardsOnly();
+}
+
 function stepErrorCounter(studentId, kind, delta) {
   const s = getCurrentSession();
   if (!s) return;
   const r = getStudentRecord(s, studentId);
   const eKey = kind === "min" ? "minErrors" : (kind === "maj" ? "majErrors" : "recErrors");
-  const aKey = kind === "min" ? "minAlerts" : (kind === "maj" ? "majAlerts" : "recAlerts");
   const nextVal = Math.max(0, (Number(r[eKey]) || 0) + delta);
   if (nextVal === (Number(r[eKey]) || 0)) return;
   r[eKey] = nextVal;
-  saveStateDebounced(220);
-  const valEl = document.getElementById(`esErrVal_${kind}`);
-  if (valEl && openCardId === studentId) {
-    valEl.textContent = String(nextVal);
-    const curEv = kind === "min" ? r.minEval : (kind === "maj" ? r.majEval : r.recEval);
-    syncEvalSuggestedBtnInPlace(kind, nextVal, Number(r[aKey]) || 0, curEv || "");
-    return;
-  }
-  if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
-    syncStudentEvalSheet();
-  } else {
-    renderStudentCardsOnly();
-  }
+  applyAutoEvalSilentFromCounters(studentId, kind);
 }
 
 function applyErrorEval(studentId, kind) {
@@ -13991,26 +14445,28 @@ function applyErrorEval(studentId, kind) {
 }
 
 function stepAlertCounter(studentId, kind, delta) {
-  const s = getCurrentSession();
+  const h = getActiveHalaqa(), s = getCurrentSession();
   if (!s) return;
   const r = getStudentRecord(s, studentId);
-  const eKey = kind === "min" ? "minErrors" : (kind === "maj" ? "majErrors" : "recErrors");
   const aKey = kind === "min" ? "minAlerts" : (kind === "maj" ? "majAlerts" : "recAlerts");
   const nextVal = Math.max(0, (Number(r[aKey]) || 0) + delta);
   if (nextVal === (Number(r[aKey]) || 0)) return;
   r[aKey] = nextVal;
-  saveStateDebounced(220);
-  const valEl = document.getElementById(`esAlrtVal_${kind}`);
-  if (valEl && openCardId === studentId) {
-    valEl.textContent = String(nextVal);
-    const curEv = kind === "min" ? r.minEval : (kind === "maj" ? r.majEval : r.recEval);
-    syncEvalSuggestedBtnInPlace(kind, Number(r[eKey]) || 0, nextVal, curEv || "");
-    return;
-  }
-  if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
-    syncStudentEvalSheet();
+  const rules = getHalaqaGradingRules(h);
+  if (rules.useAlerts) {
+    applyAutoEvalSilentFromCounters(studentId, kind);
   } else {
-    renderStudentCardsOnly();
+    saveStateDebounced(220);
+    const valEl = document.getElementById(`esAlrtVal_${kind}`);
+    if (valEl && openCardId === studentId) {
+      valEl.textContent = String(nextVal);
+      return;
+    }
+    if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
+      syncStudentEvalSheet();
+    } else {
+      renderStudentCardsOnly();
+    }
   }
 }
 
@@ -14112,12 +14568,12 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
   const n = Math.max(0, Number(errs) || 0);
   const a = Math.max(0, Number(alerts) || 0);
   return `<div class="es-err-grid-2">
-    <div class="es-err-cap" title="تسجيل أخطاء الحفظ (يقترح التقييم تلقائياً)">
+    <div class="es-err-cap" title="تسجيل أخطاء الحفظ (يطبق التقييم تلقائياً حسب معيار الإعدادات)">
       <button type="button" class="es-cap-btn plus-err" onclick="stepErrorCounter('${studentId}','${kind}',1)" aria-label="تسجيل خطأ">+</button>
       <span class="es-cap-lbl" onclick="stepErrorCounter('${studentId}','${kind}',1)">أخطاء: <b id="esErrVal_${kind}">${n}</b></span>
       <button type="button" class="es-cap-btn" onclick="stepErrorCounter('${studentId}','${kind}',-1)" aria-label="إنقاص خطأ">−</button>
     </div>
-    <div class="es-err-cap is-alert" title="عداد التنبيهات (لا يؤثر على التقييم)">
+    <div class="es-err-cap is-alert" title="تسجيل التنبيهات (يطبق التقييم تلقائياً حسب معيار الإعدادات)">
       <button type="button" class="es-cap-btn plus-alrt" onclick="stepAlertCounter('${studentId}','${kind}',1)" aria-label="تسجيل تنبيه">+</button>
       <span class="es-cap-lbl" onclick="stepAlertCounter('${studentId}','${kind}',1)">تنبيه: <b id="esAlrtVal_${kind}">${a}</b></span>
       <button type="button" class="es-cap-btn" onclick="stepAlertCounter('${studentId}','${kind}',-1)" aria-label="إنقاص تنبيه">−</button>
@@ -14321,11 +14777,27 @@ function openSurahPicker(studentId, kind) {
     pageTo = parseArabicNum(r.majEndPage, Math.min(604, pageFrom + Math.max(0, (Number(r.majPages) || 2) - 1)));
   }
 
-  const hadRealExisting = Boolean(getSegments(r, kind).length || (kind === "maj") || (kind === "nextMaj" && (r.nextMajStartSurahId || r.nextMajStartPage)));
+  let reviewUnit = "ayah";
+  if (initMode === "pages") {
+    initMode = "surah";
+    reviewUnit = "page";
+    const startSurahFromPg = getPageStartInfo(pageFrom)?.surah;
+    if (startSurahFromPg) existing = [{ surahId: String(startSurahFromPg.id), from: 1, to: startSurahFromPg.a }];
+  } else if (spIsReviewKind(kind) && existing.length) {
+    const firstS = SURAH_MAP[Number(existing[0].surahId)];
+    if (firstS) {
+      pageFrom = getPageForSurahAyah(firstS.id, existing[0].from || 1);
+      const lastS = SURAH_MAP[Number(existing[existing.length - 1].surahId)] || firstS;
+      pageTo = Math.max(pageFrom, getPageForSurahAyah(lastS.id, existing[existing.length - 1].to || lastS.a));
+    }
+  }
+
+  const hadRealExisting = Boolean(getSegments(r, kind).length || reviewUnit === "page" || (kind === "maj") || (kind === "nextMaj" && (r.nextMajStartSurahId || r.nextMajStartPage)));
   spState = {
     studentId,
     kind,
     mode: initMode,
+    reviewUnit,
     dir: (kind === "maj" || kind === "nextMaj") ? "asc" : dir,
     segs: existing,
     activeIdx: 0,
@@ -14393,8 +14865,26 @@ function openSurahPickerForStudentModal() {
 
 function spSetMode(mode) {
   if (mode === "sabr" && !spCanUseSabr(spState.kind)) return;
-  if ((mode === "pages" || mode === "sard") && !spIsReviewKind(spState.kind)) return;
+  if (mode === "sard" && !spIsReviewKind(spState.kind)) return;
   spState.mode = mode;
+  renderSurahPickerUI();
+}
+
+function spSetReviewUnit(unit) {
+  if (!spIsReviewKind(spState.kind)) return;
+  spState.reviewUnit = unit === "page" ? "page" : "ayah";
+  if (spState.reviewUnit === "page") {
+    const seg = spState.segs[spState.activeIdx];
+    const info = SURAH_MAP[Number(seg?.surahId)];
+    if (info) {
+      const sStartP = Math.max(1, Math.min(604, Math.floor(info.fs)));
+      const sEndP = Math.max(sStartP, Math.min(604, Math.floor(info.fe - 0.01)));
+      if (spState.pageFrom < sStartP || spState.pageFrom > sEndP) {
+        spState.pageFrom = sStartP;
+        spState.pageTo = Math.min(sEndP, Math.max(sStartP, sEndP));
+      }
+    }
+  }
   renderSurahPickerUI();
 }
 
@@ -14424,48 +14914,53 @@ function renderSpDirBtn() {
 function renderSurahPickerUI() {
   const isRev = spIsReviewKind(spState.kind);
   const canSabr = spCanUseSabr(spState.kind);
+  const isPageUnit = isRev && spState.mode === "surah" && spState.reviewUnit === "page";
   const modeTabs = document.getElementById("spModeTabs");
   const surahPanel = document.getElementById("spSurahModePanel");
-  const pagesPanel = document.getElementById("spPagesModePanel");
   const sardPanel = document.getElementById("spSardModePanel");
   const sabrPanel = document.getElementById("spSabrModePanel");
   const tabSurah = document.getElementById("spTabSurah");
-  const tabPages = document.getElementById("spTabPages");
   const tabSard = document.getElementById("spTabSard");
   const tabSabr = document.getElementById("spTabSabr");
   const tabSurahLbl = document.getElementById("spTabSurahLbl");
   const tabSabrLbl = document.getElementById("spTabSabrLbl");
+  const unitToggle = document.getElementById("spReviewUnitToggle");
+  const ayahBox = document.getElementById("spAyahBox");
+  const pagesBox = document.getElementById("spPagesBox");
+  const segBar = document.getElementById("spSegBar");
   const qeWrap = document.getElementById("spQuickEvalWrap");
 
   if (modeTabs) {
     modeTabs.style.display = (isRev || canSabr) ? "grid" : "none";
-    modeTabs.classList.toggle("cols-4", isRev);
+    modeTabs.classList.toggle("cols-3", isRev && canSabr);
   }
-  if (tabPages) tabPages.style.display = isRev ? "flex" : "none";
   if (tabSard) tabSard.style.display = isRev ? "flex" : "none";
   if (tabSabr) tabSabr.style.display = canSabr ? (isRev ? "flex" : "inline-flex") : "none";
-  if (tabSurahLbl) tabSurahLbl.textContent = isRev ? "سورة" : "سورة وآيات";
+  if (tabSurahLbl) tabSurahLbl.textContent = isRev ? "سورة وصفحات" : "سورة وآيات";
   if (tabSabrLbl) tabSabrLbl.textContent = isRev ? "سبر" : "سبر جزء كامل";
 
   if (tabSurah) tabSurah.className = "sp-mode-tab" + (spState.mode === "surah" ? " on" : "");
-  if (tabPages) tabPages.className = "sp-mode-tab" + (spState.mode === "pages" ? " on-pages" : "");
   if (tabSard) tabSard.className = "sp-mode-tab" + (spState.mode === "sard" ? " on-sard" : "");
   if (tabSabr) tabSabr.className = "sp-mode-tab" + (spState.mode === "sabr" ? " on-sabr" : "");
 
   if (surahPanel) surahPanel.style.display = spState.mode === "surah" ? "block" : "none";
-  if (pagesPanel) pagesPanel.style.display = spState.mode === "pages" ? "block" : "none";
   if (sardPanel) sardPanel.style.display = spState.mode === "sard" ? "block" : "none";
   if (sabrPanel) sabrPanel.style.display = spState.mode === "sabr" ? "block" : "none";
   if (qeWrap) qeWrap.style.display = spCanQuickEval(spState.kind) ? "block" : "none";
+
+  if (unitToggle) unitToggle.style.display = (isRev && spState.mode === "surah") ? "grid" : "none";
+  document.getElementById("spUnitAyahBtn")?.classList.toggle("on", !isPageUnit);
+  document.getElementById("spUnitPageBtn")?.classList.toggle("on", isPageUnit);
+  if (ayahBox) ayahBox.style.display = isPageUnit ? "none" : "block";
+  if (pagesBox) pagesBox.style.display = isPageUnit ? "block" : "none";
+  if (segBar) segBar.style.display = isPageUnit ? "none" : "flex";
 
   if (spState.mode === "sabr") {
     renderSpSabrGrid();
   } else if (spState.mode === "sard") {
     renderSpSardGrid();
-  } else if (spState.mode === "pages") {
-    renderSpPagesBox();
   } else {
-    renderSpSegBar();
+    if (!isPageUnit) renderSpSegBar();
     renderSpActiveSurahCard();
     const drawer = document.getElementById("spBrowserDrawer");
     if (drawer) drawer.style.display = spState.browserOpen ? "block" : "none";
@@ -14474,7 +14969,8 @@ function renderSurahPickerUI() {
       renderSpJuzStrip();
       renderSpSurahGrid();
     }
-    renderSpAyahBox();
+    if (isPageUnit) renderSpPagesBox();
+    else renderSpAyahBox();
   }
   renderSpPreview();
 }
@@ -14651,7 +15147,7 @@ function renderSpActiveSurahCard() {
     <button type="button" class="sp-surah-hero-mid" onclick="toggleSpBrowser()">
       <div class="sp-sh-info">
         <div class="sp-sh-name">${info ? `📖 سورة ${escapeHtml(info.n)}` : "اختر سورة..."}</div>
-        <div class="sp-sh-meta">${info ? `${info.a} آية • ${juzObj ? `جزء ${escapeHtml(juzObj.shortName)} (${juzObj.id})` : ''}` : "اضغط لاختيار سورة من المصحف"}</div>
+        <div class="sp-sh-meta">${info ? `${info.a} آية • ص ${Math.floor(info.fs)}${Math.floor(info.fe - 0.01) > Math.floor(info.fs) ? "–" + Math.floor(info.fe - 0.01) : ""} • ${juzObj ? `جزء ${escapeHtml(juzObj.shortName)}` : ""}` : "اضغط لاختيار سورة من المصحف"}</div>
       </div>
       <span class="sp-sh-chg-pill">${spState.browserOpen ? "إغلاق ▲" : "تغيير السورة ▾"}</span>
     </button>
@@ -14863,6 +15359,10 @@ function spPickSurah(surahId, keepBrowser = false) {
   seg.surahId = String(info.id);
   seg.from = 1;
   seg.to = info.a;
+  const sStartP = Math.max(1, Math.min(604, Math.floor(info.fs)));
+  const sEndP = Math.max(sStartP, Math.min(604, Math.floor(info.fe - 0.01)));
+  spState.pageFrom = sStartP;
+  spState.pageTo = sEndP;
   if (!keepBrowser) spState.browserOpen = false;
   renderSurahPickerUI();
 }
@@ -14922,8 +15422,9 @@ function spApplyPreset(mode) {
   } else if (mode === "p05") {
     const chunk = Math.max(3, Math.round(0.5 * ayahsPerPage));
     seg.to = Math.min(info.a, seg.from + chunk - 1);
-  } else if (mode === "p1") {
-    const chunk = Math.max(5, Math.round(1.0 * ayahsPerPage));
+  } else if (mode === "p1" || mode === "p2" || mode === "p3" || mode === "p4" || mode === "p5") {
+    const mult = Number(mode.slice(1)) || 1;
+    const chunk = Math.max(5, Math.round(mult * ayahsPerPage));
     seg.to = Math.min(info.a, seg.from + chunk - 1);
   } else if (mode === "toEnd") {
     seg.to = info.a;
@@ -14973,14 +15474,19 @@ function renderSpAyahBox() {
   const presetsHtml = (!isShort && !isStartOnly) ? `
     <div class="sp-preset-grid-4">
       <button type="button" class="sp-preset-btn accent" onclick="spApplyPreset('full')">كامل السورة</button>
-      <button type="button" class="sp-preset-btn" onclick="spApplyPreset('p05')">+½ صفحة</button>
-      <button type="button" class="sp-preset-btn" onclick="spApplyPreset('p1')">+1 صفحة</button>
+      <button type="button" class="sp-preset-btn" onclick="spApplyPreset('p05')">+½ ص</button>
+      <button type="button" class="sp-preset-btn" onclick="spApplyPreset('p1')">+1 ص</button>
       <button type="button" class="sp-preset-btn" onclick="spApplyPreset('toEnd')">لآخرها (${info.a})</button>
     </div>
-    ${info.a >= 16 ? `<div class="sp-preset-grid-2">
+    ${info.l >= 2.2 ? `<div class="sp-preset-grid-4">
+      <button type="button" class="sp-preset-btn accent" onclick="spApplyPreset('p2')">+2 ص</button>
+      <button type="button" class="sp-preset-btn accent" onclick="spApplyPreset('p3')">+3 ص</button>
+      <button type="button" class="sp-preset-btn accent" onclick="spApplyPreset('p4')">+4 ص</button>
+      <button type="button" class="sp-preset-btn accent" onclick="spApplyPreset('p5')">+5 ص</button>
+    </div>` : (info.a >= 16 ? `<div class="sp-preset-grid-2">
       <button type="button" class="sp-preset-btn" onclick="spApplyPreset('half1')">النصف الأول (1–${halfA})</button>
       <button type="button" class="sp-preset-btn" onclick="spApplyPreset('half2')">النصف الثاني (${Math.min(info.a, halfA+1)}–${info.a})</button>
-    </div>` : ''}` : "";
+    </div>` : '')}` : "";
 
   const fromRow = `
     <div class="sp-slider-card">
@@ -15029,12 +15535,17 @@ function renderSpAyahBox() {
 function renderSpPreview() {
   const el = document.getElementById("spPreviewStrip");
   if (!el) return;
-  if (spState.mode === "pages") {
+  if (spState.mode === "surah" && spIsReviewKind(spState.kind) && spState.reviewUnit === "page") {
     const p1 = Math.max(1, Math.min(604, spState.pageFrom || 1));
     const p2 = Math.max(p1, Math.min(604, spState.pageTo || p1));
     const cnt = p2 - p1 + 1;
-    const rngTxt = p1 === p2 ? `صفحة ${p1}` : `من ص ${p1} ← إلى ص ${p2}`;
-    el.innerHTML = `<span>📄 <b>${rngTxt}</b></span><span class="badge b-blue">${cnt} صفحة</span>`;
+    const selSurah = SURAH_MAP[Number(spState.segs[spState.activeIdx]?.surahId)];
+    const s1 = (selSurah && p1 >= Math.floor(selSurah.fs) && p1 <= Math.floor(selSurah.fe)) ? selSurah : getPageStartInfo(p1)?.surah;
+    const s2 = (selSurah && p2 >= Math.floor(selSurah.fs) && p2 <= Math.floor(selSurah.fe)) ? selSurah : getPageEndInfo(p2)?.surah;
+    const rngTxt = (s1 && s2 && s1.id === s2.id)
+      ? `${s1.n} (${p1 === p2 ? `ص ${p1}` : `ص ${p1}–${p2}`})`
+      : `${s1 ? s1.n + " " : ""}ص ${p1}${p2 !== p1 ? ` ← ${s2 ? s2.n + " " : ""}ص ${p2}` : ""}`;
+    el.innerHTML = `<span>📄 <b>${escapeHtml(rngTxt)}</b></span><span class="badge b-blue">${cnt} صفحة</span>`;
     return;
   }
   if (spState.mode === "sard") {
@@ -15177,43 +15688,50 @@ function applySurahPicker(quickEval = null) {
     return;
   }
 
-  // MODE C: MUSHAF PAGES RANGE (من صفحة إلى صفحة)
-  if (spState.mode === "pages") {
+  // MODE C: SURAH + MUSHAF PAGES RANGE (سورة ومن صفحة إلى صفحة)
+  if (spState.mode === "surah" && spIsReviewKind(k) && spState.reviewUnit === "page") {
     const p1 = Math.max(1, Math.min(604, spState.pageFrom || 1));
     const p2 = Math.max(p1, Math.min(604, spState.pageTo || p1));
     const pCount = p2 - p1 + 1;
-    const lbl1 = `ص ${p1}`, lbl2 = `ص ${p2}`;
-    const s1 = getPageStartInfo(p1), s2 = getPageEndInfo(p2);
+    const selSurah = SURAH_MAP[Number(spState.segs[spState.activeIdx]?.surahId)];
+    const s1Info = getPageStartInfo(p1), s2Info = getPageEndInfo(p2);
+    const s1 = (selSurah && p1 >= Math.floor(selSurah.fs) && p1 <= Math.floor(selSurah.fe)) ? selSurah : s1Info?.surah;
+    const s2 = (selSurah && p2 >= Math.floor(selSurah.fs) && p2 <= Math.floor(selSurah.fe)) ? selSurah : s2Info?.surah;
+    const sameS = Boolean(s1 && s2 && s1.id === s2.id);
+    const fromCol = s1 ? `${s1.n} ص ${p1}` : `ص ${p1}`;
+    const toCol = sameS ? `ص ${p2}` : (s2 ? `${s2.n} ص ${p2}` : `ص ${p2}`);
+    const surahHeaderLbl = sameS ? s1.n : (s1 && s2 ? `${s1.n} ← ${s2.n}` : "صفحات");
+    const toastLbl = sameS ? `${s1.n} (${p1 === p2 ? `ص ${p1}` : `ص ${p1}–${p2}`})` : `${fromCol}${p2 !== p1 ? ` ← ${toCol}` : ""}`;
 
     if (k === "dRev") {
       r.dRevSurahId = ""; r.dRevFromAyah = ""; r.dRevToAyah = ""; r.dRevExtras = [];
       r.dRevSardJuzIds = []; r.dRevSardLabel = "";
       if (!r.recIsSabr) { r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = ""; }
       r.dRevIsPages = true; r.dRevPageFrom = p1; r.dRevPageTo = p2;
-      r.dRevFrom = lbl1; r.dRevTo = lbl2; r.dRevPages = pCount;
+      r.dRevFrom = fromCol; r.dRevTo = toCol; r.dRevPages = pCount;
       if (!r.dRevEval && !quickEval) r.dRevEval = "ممتاز";
       r.points = computeRecordPoints(s, r, st);
     } else if (k === "min") {
       r.minSurahId = ""; r.minEndSurahId = ""; r.minExtras = []; r.minSardJuzIds = [];
       r.minIsPages = true; r.minPageFrom = p1; r.minPageTo = p2;
-      r.minSurah = "صفحات"; r.minFrom = lbl1; r.minTo = lbl2;
-      r.minText = p1 === p2 ? lbl1 : `${lbl1} ← ${lbl2}`;
+      r.minSurah = surahHeaderLbl; r.minFrom = `ص ${p1}`; r.minTo = `ص ${p2}`;
+      r.minText = toastLbl;
       r.minPages = pCount; r.manualMin = true;
     } else if (k === "maj") {
       r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = "";
       r.majExtras = []; r.majSardJuzIds = []; r.majSardLabel = "";
       r.majIsPages = true;
       r.majStartPage = p1; r.majEndPage = p2;
-      r.majStartSurahId = s1?.surah ? String(s1.surah.id) : ""; r.majStartAyah = s1?.ayah || 1;
-      r.majEndSurahId = s2?.surah ? String(s2.surah.id) : ""; r.majEndAyah = s2?.ayah || 1;
-      r.majFrom = lbl1; r.majTo = lbl2; r.majPages = pCount;
+      r.majStartSurahId = s1 ? String(s1.id) : ""; r.majStartAyah = s1Info?.ayah || 1;
+      r.majEndSurahId = s2 ? String(s2.id) : ""; r.majEndAyah = s2Info?.ayah || 1;
+      r.majFrom = fromCol; r.majTo = toCol; r.majPages = pCount;
       if (r.majEval && !quickEval) applyNextMajorReview(st, r, r.majEval !== "إعادة");
     } else if (k === "nextMaj") {
       r.nextMajSabrJuz = ""; r.nextMajSardJuzIds = []; r.nextMajSardLabel = "";
       r.nextMajIsPages = true;
       r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
       r.nextMajStartPage = p1; r.nextMajEndPage = p2;
-      r.nextMajTitle = "صفحات"; r.nextMajFrom = lbl1; r.nextMajTo = lbl2;
+      r.nextMajTitle = surahHeaderLbl; r.nextMajFrom = `ص ${p1}`; r.nextMajTo = `ص ${p2}`;
     }
     closeModal("surahPickerModal");
     if (quickEval) {
@@ -15223,7 +15741,7 @@ function applySurahPicker(quickEval = null) {
     }
     openCardId = st.id;
     saveState(); renderSessionPreservingScroll();
-    showToast(`📄 تم اعتماد المراجعة: ${p1 === p2 ? lbl1 : `${lbl1} ← ${lbl2}`} (${pCount} ص)`);
+    showToast(`📄 تم اعتماد المراجعة: ${toastLbl} (${pCount} ص)`);
     return;
   }
 
@@ -16331,7 +16849,7 @@ function syncStModalButtons() {
     setStudentModalTab("hifz");
   }
 
-  [[0.5, "stmPace_05"], [1, "stmPace_1"], [1.5, "stmPace_15"], [2, "stmPace_2"]].forEach(([v, id]) => {
+  [[0.5, "stmPace_05"], [1, "stmPace_1"], [1.5, "stmPace_15"], [2, "stmPace_2"], [3, "stmPace_3"], [4, "stmPace_4"], [5, "stmPace_5"]].forEach(([v, id]) => {
     document.getElementById(id)?.classList.toggle("on-green", pace === v);
   });
   [1, 2, 3, 5, 10, 20, 40, 60, 80, 100].forEach(v => {
@@ -16693,7 +17211,6 @@ function deleteStudent(id) {
   renderHeader();
   renderStudentsTab();
   renderSessionView();
-  renderSettingsStudentsList();
   renderDailyReport();
   renderMonthlyReport();
   showToast(`تمت إزالة الطالب ${target.name} من الحلقة`);
@@ -19098,9 +19615,8 @@ function renderCardBody(s, st, r, idx) {
         <div class="es-eval-4" id="esEvalRow_rec">${makeSmartEvalBtns(r.recEval, "setRecEval", r.recErrors, r.recAlerts)}</div>
         <div class="hw-clean-head" style="padding-top:6px; border-top:1px dashed var(--line); font-size:12px;">
           <span class="lms-tap-area" onclick="openSurahPicker('${st.id}','hw')" title="اضغط لتغيير الواجب بسهولة">📝 <b>الواجب:</b> ${escapeHtml(hwPreview)} <span style="color:var(--blue); font-weight:800;">✏️</span></span>
-          <div class="pace-seg">
-            <button type="button" class="${(st.pace||0.5)===0.5?'on':''}" onclick="setStudentPace('${st.id}',0.5)">½ ص</button>
-            <button type="button" class="${(st.pace||0.5)===1?'on':''}" onclick="setStudentPace('${st.id}',1)">1 ص</button>
+          <div class="pace-seg pace-6" title="مقدار الحفظ اليومي (حتى 5 صفحات)">
+            ${[0.5, 1, 2, 3, 4, 5].map(p => `<button type="button" class="${Number(st.pace||0.5)===p?'on':''}" onclick="setStudentPace('${st.id}',${p})">${p===0.5?'½':p}</button>`).join("")}
           </div>
         </div>
       </div>
@@ -20612,7 +21128,9 @@ function renderDailyReport() {
       const isRashidiRow = st.track === "rashidi";
       const dRevCols = isRashidiRow
         ? { from: "", to: "", lines: 1 }
-        : formatReviewPairColumns(getSegments(r, "dRev"), r.dRevFrom, r.dRevTo, true);
+        : ((r.dRevIsPages || r.dRevSardLabel)
+          ? { from: escapeHtml(r.dRevFrom || ""), to: escapeHtml(r.dRevTo || ""), lines: 1 }
+          : formatReviewPairColumns(getSegments(r, "dRev"), r.dRevFrom, r.dRevTo, true));
       const evalRaw = isAbs ? _gtRep.absent : (r.recEval || "") + (_recSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : "");
       const evalSt = getEvalCellStyle(evalRaw, isAbs);
       const cleanDRevEval = (r.dRevEval === "بانتظار التقييم" && !r.sabrJuz) ? "" : (r.dRevEval || "");
@@ -20690,7 +21208,9 @@ function renderDailyReport() {
       const isRashidiRow = st.track === "rashidi";
       const majCols = isRashidiRow
         ? { from: "", to: "", lines: 1 }
-        : formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, true);
+        : ((r.majIsPages || r.majSardLabel)
+          ? { from: escapeHtml(r.majFrom || ""), to: escapeHtml(r.majTo || ""), lines: 1 }
+          : formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, true));
       const hwCols = isRashidiRow
         ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1 }
         : formatSatNextMajColumns(r, true);
@@ -21242,7 +21762,7 @@ function renderMonthlyReport() {
   html += `</tbody><tfoot>
       <tr><td colspan="7">مجموع إنجاز الحلقة</td><td style="background:#b4a28a; color:#000000 !important;">ملاحظات:</td></tr>
       <tr class="tm-summary-sub">
-        <td colspan="2">عدد الصفحات التي تم حفظها: ${formatNum(totals.memPages)}</td>
+        <td colspan="2">صفحات الحفظ: ${formatNum(totals.memPages)}${totals.rashidiPages > 0 ? ` | الرشيدي: ${formatNum(totals.rashidiPages)}` : ""}</td>
         <td colspan="2">عدد الصفحات التي تمت مراجعتها: ${formatNum(totals.revPages)}</td>
         <td colspan="3">عدد الأجزاء التي تم سبرها: ${totals.sabrCount}</td>
         <td>أيام الدوام: ${totals.sessionsCount} من ${h.monthDays || 12} | الطلاب: ${h.students.length}</td>
@@ -21256,7 +21776,7 @@ function renderStats() {
   const h = getActiveHalaqa();
   const ptsOn = isPointsEnabled(h);
   const copyBtn = document.getElementById("btnCopyPointsLeaderboard");
-  if (copyBtn) copyBtn.style.display = ptsOn ? "inline-flex" : "none";
+  if (copyBtn) copyBtn.style.display = ptsOn ? "grid" : "none";
 
   const filterVal = document.getElementById("statsMonthFilter").value || "ALL";
   const { rows, totals } = computeMonthlyData(filterVal);
@@ -21317,7 +21837,29 @@ function renderStats() {
       ${ptsOn ? `<div class="kpi-box"><div class="kpi-val">${totals.totalPoints}</div><div class="kpi-lbl">مجموع النقاط</div></div>` : ''}
     </div>
     <div class="stats-grid">
-      ${ptsOn ? card("🏆 متصدرو النقاط", [...rows].sort((a,b)=>b.totalPoints-a.totalPoints), r=>`${r.totalPoints} نقطة`, "لا توجد بيانات", "top") : ''}
+      ${ptsOn ? (() => {
+        const earned = [...rows].filter(x => x.totalPoints > 0).sort((a, b) => (b.totalPoints - a.totalPoints) || ((b.memPages + b.revPages) - (a.memPages + a.revPages)));
+        const listHtml = earned.length
+          ? `<ul class="rank-list pts-rank-scroll">${earned.map((r, i) => `
+              <li class="rank-item ${i===0?'top1':(i===1?'top2':(i===2?'top3':''))}">
+                <div style="display:flex; align-items:center; min-width:0; flex:1;"><span class="rank-pos">${i < 3 ? ["🥇","🥈","🥉"][i] : (i + 1)}</span><b style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(r.student.name)}</b></div>
+                <div style="display:inline-flex; align-items:center; gap:5px; flex-shrink:0;">
+                  ${i < 3 ? `<button type="button" class="pill pill-sm" style="padding:2px 6px;" onclick="openCertificateModal('${r.student.id}','${escapeHtml(filterVal)}','top',${i+1})" title="إصدار شهادة تكريم">🏅</button>` : ''}
+                  <span class="badge ${i===0?'b-green':'b-slate'}">${r.totalPoints} نقطة</span>
+                </div>
+              </li>`).join("")}</ul>`
+          : `<p style="color:var(--ink-500); font-size:13px;">لا يوجد طلاب حاصلون على نقاط في هذه الفترة بعد</p>`;
+        return `<div class="card" style="grid-column:1/-1;">
+          <div class="card-title">
+            <span>🏆 جميع الطلاب الحاصلين على نقاط (${earned.length} من ${rows.length})</span>
+            <div style="display:flex; gap:5px; flex-wrap:wrap;">
+              <button type="button" class="btn btn-primary btn-sm" onclick="openPointsReportModal('table')">📸 طباعة / صورة للكل</button>
+              <button type="button" class="btn btn-soft btn-sm" onclick="openPointsReportModal('podium')">🏆 لوحة الأوائل</button>
+            </div>
+          </div>
+          ${listHtml}
+        </div>`;
+      })() : ''}
       ${card("📖 الأكثر حفظاً", [...rows].filter(x=>x.memPages>0).sort((a,b)=>b.memPages-a.memPages), r=>`${formatNum(r.memPages)} صفحة`, "لا توجد بيانات", ptsOn ? "" : "excellence")}
       ${card("🔄 الأكثر مراجعة", [...rows].filter(x=>x.revPages>0).sort((a,b)=>b.revPages-a.revPages), r=>`${formatNum(r.revPages)} صفحة`)}
       ${card("✅ الأكثر حضوراً", [...rows].filter(x=>x.presentDays>0).sort((a,b)=>b.presentDays-a.presentDays), r=>`${r.presentDays} جلسة`)}
@@ -21337,8 +21879,8 @@ async function renderReportToHDCanvas(paperId) {
   const stage = document.getElementById("hdExportStage");
   const isCert = paperId === "certPaperCanvas";
   const isMonthly = paperId === "monthlyReportPaper";
-  const isIndiv = paperId === "indivReportCanvas" || paperId === "supTeacherCardCanvas";
-  const isPoster = paperId === "supBranchPosterCanvas";
+  const isIndiv = paperId === "indivReportCanvas" || paperId === "supTeacherCardCanvas" || paperId === "pointsTablePaper";
+  const isPoster = paperId === "supBranchPosterCanvas" || paperId === "pointsPodiumPaper";
 
   stage.classList.remove("is-cert-stage", "is-monthly-stage", "is-indiv-stage", "is-poster-stage");
   stage.style.width = "";
@@ -21405,7 +21947,7 @@ async function renderReportToHDCanvas(paperId) {
 
   stage.innerHTML = "";
   stage.style.width = "";
-  stage.classList.remove("is-cert-stage", "is-monthly-stage", "is-indiv-stage");
+  stage.classList.remove("is-cert-stage", "is-monthly-stage", "is-indiv-stage", "is-poster-stage");
   return canvas;
 }
 
@@ -21666,8 +22208,9 @@ function renderProgramsModalBody() {
 
       ${subBodyHtml}
 
-      <div style="display:flex; gap:6px; margin-top:10px; padding-top:9px; border-top:1px dashed var(--line);">
-        <button type="button" class="btn btn-soft btn-sm" style="flex:1;" onclick="closeModal('programsModal'); switchTab('stats');">🏆 عرض المتصدرين</button>
+      <div style="display:flex; gap:6px; margin-top:10px; padding-top:9px; border-top:1px dashed var(--line); flex-wrap:wrap;">
+        <button type="button" class="btn btn-primary btn-sm" style="flex:1;" onclick="closeModal('programsModal'); openPointsReportModal('table');">📋 طباعة النقاط</button>
+        <button type="button" class="btn btn-soft btn-sm" style="flex:1;" onclick="closeModal('programsModal'); openPointsReportModal('podium');">🏆 لوحة الأوائل</button>
         <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('programsModal')">إغلاق</button>
       </div>
     `;
@@ -22858,7 +23401,9 @@ async function exportDailyExcelStyled() {
           : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, false) : formatSegmentsColumns(getSegments(r, "hw"), false));
         const dRevCols = isRashidiRow
           ? { from: "", to: "", lines: 1 }
-          : formatReviewPairColumns(getSegments(r, "dRev"), r.dRevFrom, r.dRevTo, false);
+          : ((r.dRevIsPages || r.dRevSardLabel)
+            ? { from: String(r.dRevFrom || ""), to: String(r.dRevTo || ""), lines: 1 }
+            : formatReviewPairColumns(getSegments(r, "dRev"), r.dRevFrom, r.dRevTo, false));
 
         const evalSt = getEvalCellStyle(isAbs ? "غائب" : (r.recEval || "") + (_xlSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : ""), isAbs);
         const cleanXlRev = (r.dRevEval === "بانتظار التقييم" && !r.sabrJuz) ? "" : (r.dRevEval || "");
@@ -22946,7 +23491,9 @@ async function exportDailyExcelStyled() {
             : { surah: r.minSurah || r.minText || "", from: r.minFrom || "", to: r.minTo || "", lines: 1 });
         const majCols = isRashidiRow
           ? { from: "", to: "", lines: 1 }
-          : formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, false);
+          : ((r.majIsPages || r.majSardLabel)
+            ? { from: String(r.majFrom || ""), to: String(r.majTo || ""), lines: 1 }
+            : formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, false));
         const hwCols = isRashidiRow
           ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "", lines: 1 }
           : formatSatNextMajColumns(r, false);
@@ -23179,7 +23726,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v74 -->
+<!-- Makin App v75 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -23377,15 +23924,223 @@ function copyPointsCycleLeaderboardDirect() {
 }
 
 function copyPointsLeaderboardWA() {
-  const h = getActiveHalaqa(), m = document.getElementById("statsMonthFilter").value || "ALL";
+  const h = getActiveHalaqa(), m = document.getElementById("statsMonthFilter")?.value || "POINTS_CYCLE";
   const { rows } = computeMonthlyData(m);
-  const top = [...rows].sort((a,b)=>(b.totalPoints - a.totalPoints) || ((b.memPages + b.revPages) - (a.memPages + a.revPages))).slice(0, 10);
+  const earned = [...rows].filter(x => x.totalPoints > 0).sort((a, b) => (b.totalPoints - a.totalPoints) || ((b.memPages + b.revPages) - (a.memPages + a.revPages)));
+  if (!earned.length) { showToast("لا يوجد طلاب حاصلون على نقاط في هذه الفترة"); return; }
   const medals = ["🥇", "🥈", "🥉"];
   const bm = getBrandMeta(h);
   const mLbl = m === "POINTS_CYCLE" ? (ensurePointsConfig(h)?.cycleName || "دورة النقاط الحالية") : (m === "ALL" ? "جميع الجلسات" : `شهر ${m} هـ`);
-  let txt = `🏆 *متصدرو النقاط — حلقة ${bm.name} (${bm.branch})* 🏆\n📅 ${mLbl}\n━━━━━━━━━━━━\n`;
-  top.forEach((r, i) => { txt += `${medals[i] || (i+1)+'.'} *${r.student.name}* — *${r.totalPoints} نقطة*\n`; });
-  copyText(txt, "تم نسخ قائمة المتصدرين للواتساب");
+  let txt = `🏆 *نتائج النقاط والمتصدرين — حلقة ${bm.name} (${bm.branch})* 🏆\n📅 ${mLbl}\n━━━━━━━━━━━━\n`;
+  earned.forEach((r, i) => { txt += `${medals[i] || (i + 1) + "."} *${r.student.name}* — *${r.totalPoints} نقطة*\n`; });
+  copyText(txt, `تم نسخ قائمة النقاط (${earned.length} طالب) للواتساب 💬`);
+}
+
+// ==================== PRINTABLE ALL-POINTS SHEET & TOP LEADERS POSTER (v75) ====================
+let _prMode = "table"; // "table" | "podium"
+let _prScope = "earned"; // "earned" | "all"
+let _prPodiumLimit = 10;
+
+function openPointsReportModal(mode = "table") {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  _prMode = mode === "podium" ? "podium" : "table";
+  openModal("pointsReportModal");
+  renderPointsReportModal();
+}
+
+function setPointsReportMode(mode) {
+  _prMode = mode === "podium" ? "podium" : "table";
+  renderPointsReportModal();
+}
+
+function setPointsTableScope(scope) {
+  _prScope = scope === "all" ? "all" : "earned";
+  renderPointsReportModal();
+}
+
+function setPointsPodiumLimit(lim) {
+  _prPodiumLimit = [3, 5, 10].includes(Number(lim)) ? Number(lim) : 10;
+  renderPointsReportModal();
+}
+
+function getPointsPeriodLabel(h, m) {
+  if (m === "POINTS_CYCLE") {
+    const cyc = getPointsCycleStatus(h);
+    const name = cyc.pc.cycleName || "دورة النقاط الحالية";
+    if (cyc.startDate && cyc.endDate) return `${name} (${cyc.startDate} ← ${cyc.endDate})`;
+    return name;
+  }
+  return m === "ALL" ? "جميع الجلسات" : `شهر ${m} هـ`;
+}
+
+function renderPointsReportModal() {
+  const h = getActiveHalaqa();
+  const wrap = document.getElementById("prPaperWrap");
+  if (!h || !wrap) return;
+  const bm = getBrandMeta(h);
+  const gt = getGenderTerms(h);
+  const m = document.getElementById("statsMonthFilter")?.value || (isPointsEnabled(h) ? "POINTS_CYCLE" : "ALL");
+  const { rows, totals } = computeMonthlyData(m);
+  const sortedAll = [...rows].sort((a, b) => (b.totalPoints - a.totalPoints) || ((b.memPages + b.revPages) - (a.memPages + a.revPages)));
+  const earnedOnly = sortedAll.filter(x => x.totalPoints > 0);
+  const periodLbl = getPointsPeriodLabel(h, m);
+
+  document.getElementById("prTabTableBtn")?.classList.toggle("on", _prMode === "table");
+  document.getElementById("prTabPodiumBtn")?.classList.toggle("on", _prMode === "podium");
+  const tOpts = document.getElementById("prTableOptsRow");
+  const pOpts = document.getElementById("prPodiumOptsRow");
+  if (tOpts) tOpts.style.display = _prMode === "table" ? "flex" : "none";
+  if (pOpts) pOpts.style.display = _prMode === "podium" ? "flex" : "none";
+
+  document.getElementById("prScopeEarnedBtn")?.classList.toggle("on-slate", _prScope === "earned");
+  document.getElementById("prScopeAllBtn")?.classList.toggle("on-slate", _prScope === "all");
+  [3, 5, 10].forEach(n => document.getElementById("prTop" + n + "Btn")?.classList.toggle("on-slate", _prPodiumLimit === n));
+
+  if (_prMode === "table") {
+    const list = _prScope === "all" ? sortedAll : earnedOnly;
+    const sumPts = list.reduce((a, b) => a + (b.totalPoints || 0), 0);
+    const bodyRows = list.length ? list.map((r, i) => {
+      const trCls = i === 0 && r.totalPoints > 0 ? "rank-gold" : (i === 1 && r.totalPoints > 0 ? "rank-silver" : (i === 2 && r.totalPoints > 0 ? "rank-bronze" : ""));
+      const rankDisp = (i < 3 && r.totalPoints > 0) ? ["🥇 1", "🥈 2", "🥉 3"][i] : String(i + 1);
+      return `<tr class="${trCls}">
+        <td>${rankDisp}</td>
+        <td class="txt-right">${escapeHtml(r.student.name)}</td>
+        <td>${r.presentDays}</td>
+        <td>${r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} (رشيدي)` : formatNum(r.memPages)}</td>
+        <td>${formatNum(r.revPages)}</td>
+        <td class="pts-col">${r.totalPoints}</td>
+      </tr>`;
+    }).join("") : `<tr><td colspan="6" style="padding:18px; color:#64748b;">لا يوجد طلاب حاصلون على نقاط في هذه الفترة بعد</td></tr>`;
+
+    wrap.innerHTML = `<div class="pts-table-paper" id="pointsTablePaper">
+      <div class="ptp-hdr">
+        <div style="font-size:12.5px; font-weight:800; color:#102a49; line-height:1.55;">
+          ${escapeHtml(bm.org)}<br>${escapeHtml(bm.branch)} • ${escapeHtml(bm.program)}
+        </div>
+        <div class="ptp-hdr-mid">
+          <h2>🏆 كشف نقاط ${gt.students} حلقة ${escapeHtml(bm.name)}</h2>
+          <p>${escapeHtml(periodLbl)}</p>
+        </div>
+        <img src="${bm.logoSrc}" alt="الشعار">
+      </div>
+      <div class="ptp-meta-3">
+        <div class="ptp-meta-cell">${gt.supervisorTitle}: ${escapeHtml(bm.sheikh)}</div>
+        <div class="ptp-meta-cell">عدد ${gt.students}: ${list.length}</div>
+        <div class="ptp-meta-cell">مجموع النقاط: ${sumPts} نقطة</div>
+      </div>
+      <table class="t-points-all">
+        <colgroup>
+          <col style="width:10%"><col style="width:36%"><col style="width:12%"><col style="width:14%"><col style="width:14%"><col style="width:14%">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>المركز</th>
+            <th>اسم ${gt.student}</th>
+            <th>الحضور</th>
+            <th>الحفظ (ص)</th>
+            <th>المراجعة (ص)</th>
+            <th class="gold-th">النقاط ⭐</th>
+          </tr>
+        </thead>
+        <tbody>${bodyRows}</tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">المجموع العام (${list.length} ${gt.student})</td>
+            <td>${totals.sessionsCount} جلسة</td>
+            <td>${formatNum(totals.memPages)} ص</td>
+            <td>${formatNum(totals.revPages)} ص</td>
+            <td>${sumPts} نقطة</td>
+          </tr>
+        </tfoot>
+      </table>
+      <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700; color:#475569; padding-top:6px; border-top:1px solid #cbd5e1;">
+        <span>${escapeHtml(bm.org)} — ${escapeHtml(bm.branch)}</span>
+        <span>تاريخ الإصدار: ${escapeHtml(getExactHijriInfo(todayISO()).dateStr)}</span>
+      </div>
+    </div>`;
+  } else {
+    const topList = earnedOnly.slice(0, _prPodiumLimit);
+    const p1 = topList[0], p2 = topList[1], p3 = topList[2];
+    const rest = topList.slice(3);
+
+    const podCard = (r, cls, medal, lbl) => r ? `
+      <div class="ppp-pod-card ${cls}">
+        <div class="ppp-medal">${medal}</div>
+        <div class="ppp-rank-lbl">${lbl}</div>
+        <div class="ppp-stu-name">${escapeHtml(r.student.name)}</div>
+        <div class="ppp-pts-badge">⭐ ${r.totalPoints} نقطة</div>
+        <div class="ppp-sub-meta">${r.memPages > 0 ? `حفظ ${formatNum(r.memPages)} ص` : ''}${r.memPages > 0 && r.revPages > 0 ? ' • ' : ''}${r.revPages > 0 ? `مراجعة ${formatNum(r.revPages)} ص` : ''}</div>
+      </div>` : `<div></div>`;
+
+    wrap.innerHTML = `<div class="pts-podium-poster" id="pointsPodiumPaper">
+      <div class="ppp-hdr">
+        <div class="ppp-logo-pill"><img src="${bm.logoSrc}" alt="الشعار"></div>
+        <div class="ppp-title-mid">
+          <div class="ppp-kicker">✨ لوحة الشرف ومتصدرو النقاط ✨</div>
+          <h2>أوائل حلقة ${escapeHtml(bm.name)}</h2>
+          <p>${escapeHtml(periodLbl)}</p>
+        </div>
+        <div class="ppp-branch-tag">
+          <small>${escapeHtml(bm.program)}</small>
+          <b>${escapeHtml(bm.branch)}</b>
+        </div>
+      </div>
+
+      ${topList.length ? `
+        <div class="ppp-podium-3">
+          ${podCard(p2, "second", "🥈", "المركز الثاني")}
+          ${podCard(p1, "first", "🥇", "المركز الأول")}
+          ${podCard(p3, "third", "🥉", "المركز الثالث")}
+        </div>
+        ${rest.length ? `<div class="ppp-rest-grid">${rest.map((r, k) => `
+          <div class="ppp-rest-row">
+            <div class="ppp-rest-l">
+              <span class="ppp-rest-pos">${k + 4}</span>
+              <span class="ppp-rest-name">${escapeHtml(r.student.name)}</span>
+            </div>
+            <span class="ppp-rest-pts">${r.totalPoints} نقطة</span>
+          </div>`).join("")}</div>` : ''}
+      ` : `<div style="text-align:center; padding:42px 16px; font-size:20px; color:#cfe0f2; font-weight:700;">لا يوجد متصدرون مسجّلون في هذه الفترة بعد</div>`}
+
+      <div class="ppp-footer">
+        <span>${gt.supervisorTitle}: ${escapeHtml(bm.sheikh)}</span>
+        <span style="color:#f4d98d;">بارك الله في همم أهل القرآن وجعلهم من أهل الله وخاصته</span>
+        <span>${escapeHtml(bm.org)}</span>
+      </div>
+    </div>`;
+  }
+
+  requestAnimationFrame(scalePointsReportPreview);
+}
+
+function scalePointsReportPreview() {
+  const scroll = document.getElementById("prPreviewScroll");
+  const host = document.getElementById("prScaleHost");
+  const paper = document.getElementById(_prMode === "podium" ? "pointsPodiumPaper" : "pointsTablePaper");
+  if (!scroll || !host || !paper) return;
+  const baseW = _prMode === "podium" ? 900 : 840;
+  const availW = Math.max(240, scroll.clientWidth - 16);
+  const sc = Math.min(1, availW / baseW);
+  paper.style.transform = `scale(${sc})`;
+  paper.style.transformOrigin = "top right";
+  const natH = paper.offsetHeight || 720;
+  host.style.width = Math.round(baseW * sc) + "px";
+  host.style.height = Math.round(natH * sc) + "px";
+}
+
+async function exportPointsReportPNG() {
+  const h = getActiveHalaqa();
+  const paperId = _prMode === "podium" ? "pointsPodiumPaper" : "pointsTablePaper";
+  const fname = (_prMode === "podium" ? "لوحة_المتصدرين_" : "لائحة_النقاط_") + cleanFilePart(h?.name || "الحلقة");
+  await exportHighResPNG(paperId, fname);
+}
+
+async function exportPointsReportPDF() {
+  const h = getActiveHalaqa();
+  const paperId = _prMode === "podium" ? "pointsPodiumPaper" : "pointsTablePaper";
+  const fname = (_prMode === "podium" ? "لوحة_المتصدرين_" : "لائحة_النقاط_") + cleanFilePart(h?.name || "الحلقة");
+  await exportHighResPDF(paperId, fname);
 }
 
 function copyRepeatedAbsenceWA() {
@@ -23433,8 +24188,6 @@ function openSettingsModal() {
   document.getElementById("setHijriOffset").value = String(typeof h.hijriOffset === "number" ? h.hijriOffset : 1);
   document.getElementById("setMonthDays").value = h.monthDays || 12;
   document.getElementById("setDefaultRevPace").value = String(h.defaultRevPace || 2);
-  const ptsCb = document.getElementById("setPointsEnabled");
-  if (ptsCb) ptsCb.checked = isPointsEnabled(h);
   document.getElementById("setFbUrl").value = h.fbUrl || "";
   document.getElementById("setRoomCode").value = h.roomCode || "";
   const autoCb = document.getElementById("setCloudAutoSync");
@@ -23446,10 +24199,7 @@ function openSettingsModal() {
       <div><b>حلقة ${escapeHtml(item.name)}</b> <span style="font-size:12px; color:var(--ink-500);">(${escapeHtml(item.branch || 'صرح إدلب')} • ${escapeHtml(item.sheikh)})</span></div>
       ${item.id===h.id ? `<span class="badge b-green">نشطة</span>` : `<button class="btn btn-soft btn-sm" onclick="switchHalaqa('${item.id}')">فتح</button>`}
     </div>`).join("");
-  const qInp = document.getElementById("setQuickStudentName");
-  const sInp = document.getElementById("setStudentSearch");
-  if (qInp) qInp.value = "";
-  if (sInp) sInp.value = "";
+
   loadGradingRulesIntoSettings(h);
   const cdSum = document.getElementById("setClassDaysSummary");
   if (cdSum) cdSum.innerHTML = getClassDaysSummaryHtml(h);
@@ -23562,8 +24312,6 @@ function saveHalaqaSettings() {
   h.hijriOffset = Number(document.getElementById("setHijriOffset").value);
   h.monthDays = Number(document.getElementById("setMonthDays").value) || 12;
   h.defaultRevPace = Number(document.getElementById("setDefaultRevPace").value) || 2;
-  const ptsCb = document.getElementById("setPointsEnabled");
-  if (ptsCb) h.pointsEnabled = ptsCb.checked;
   h.gradingRules = readGradingRulesFromSettings();
   h.fbUrl = document.getElementById("setFbUrl").value.trim().replace(/\/+$/, "");
   h.roomCode = document.getElementById("setRoomCode").value.trim();
@@ -25928,7 +26676,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v74";
+const TIBYAN_APP_VERSION = "v75";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
