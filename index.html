@@ -8918,7 +8918,7 @@ html { scroll-behavior: smooth; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v69</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v70</span>
         </button>
       </div>
     </div>
@@ -9255,7 +9255,7 @@ html { scroll-behavior: smooth; }
 </div>
 
 <!-- ===== MODAL: FAST ROLL-CALL / QUICK ATTENDANCE (v50) ===== -->
-<div class="modal-backdrop" id="quickAttendanceModal" style="z-index:138;">
+<div class="modal-backdrop" id="quickAttendanceModal" style="z-index:138;" onclick="if(event.target===this) closeModal('quickAttendanceModal')">
   <div class="modal-box" style="max-width:560px;">
     <div class="modal-header">
       <h3 id="qaModalTitle">⚡ التفقد السريع للحضور والغياب</h3>
@@ -11001,22 +11001,35 @@ function getNextClassDateInfo() {
   return { iso, addDays: 0, hijri: getExactHijriInfo(iso) };
 }
 
+const _hijriInfoCache = Object.create(null);
+let _hijriCacheCount = 0;
+
 function getExactHijriInfo(dateStr, offsetOverride = null) {
   const iso = dateStr || todayISO();
-  const [y, m, d] = iso.split("-").map(Number);
   const h = getActiveHalaqa();
   const offset = offsetOverride !== null ? offsetOverride : (h && typeof h.hijriOffset === "number" ? h.hijriOffset : 1);
+  const cacheKey = `${iso}|${offset}`;
+  if (_hijriInfoCache[cacheKey]) return _hijriInfoCache[cacheKey];
+
+  const [y, m, d] = iso.split("-").map(Number);
   const jd = gregorianToJD(y, m, d) + offset;
   const hj = jdToHijri(jd);
   const dow = new Date(iso + "T12:00:00").getDay();
   const dayName = ARABIC_DAYS[dow] || "الاثنين";
   const monthName = HIJRI_MONTHS[hj.month] || `شهر ${hj.month}`;
-  return {
+  const res = {
     dayName, dow, day: hj.day, month: hj.month, year: hj.year,
     formatted: `${hj.day} / ${hj.month} / ${hj.year} هـ`,
     monthLabel: `${monthName} ${hj.year}`,
     fullText: `يوم ${dayName} — ${hj.day} / ${hj.month} / ${hj.year} هـ (${monthName})`
   };
+  if (_hijriCacheCount > 450) {
+    for (const k in _hijriInfoCache) delete _hijriInfoCache[k];
+    _hijriCacheCount = 0;
+  }
+  _hijriInfoCache[cacheKey] = res;
+  _hijriCacheCount++;
+  return res;
 }
 
 // ==================== MUSHAF ENGINE ====================
@@ -14434,9 +14447,6 @@ function syncStModalButtons() {
     setStudentModalTab("hifz");
   }
 
-  document.getElementById("stmDirDesc")?.classList.toggle("on", dir === "desc");
-  document.getElementById("stmDirAsc")?.classList.toggle("on", dir === "asc");
-
   [[0.5, "stmPace_05"], [1, "stmPace_1"], [1.5, "stmPace_15"], [2, "stmPace_2"]].forEach(([v, id]) => {
     document.getElementById(id)?.classList.toggle("on-green", pace === v);
   });
@@ -14843,7 +14853,13 @@ function populateSessionSelectors() {
       htmlOpts += `<optgroup label="الأرشيف">` + archivedList.map(s => `<option value="${s.id}" ${s.id === activeSessionId ? "selected" : ""}>🗂️ ${optLabel(s)}</option>`).join("") + `</optgroup>`;
     }
   }
-  sel2.innerHTML = htmlOpts;
+  if (sel2.dataset.lastHtml !== htmlOpts) {
+    sel2.innerHTML = htmlOpts;
+    sel2.dataset.lastHtml = htmlOpts;
+  }
+  if (activeSessionId && sel2.value !== activeSessionId) {
+    sel2.value = activeSessionId;
+  }
 }
 
 function selectSession(id) {
@@ -15636,10 +15652,43 @@ function prefillSaturdayReviews(notify = true, forceRefresh = false) {
 }
 
 // ==================== AUTO-ABSENCE MODAL ====================
+function applyAbsenceCarryOver(s, st, r, status) {
+  if (!s || !r) return;
+  r.attendance = status;
+  if (st?.id) removeStudentFromQueue(s, st.id);
+  r.points = 0;
+  r.ptsAdab = false; r.ptsParticip = false; r.ptsEarly = false;
+  const _prevSabr = r.sabrJuz || "";
+  r.recEval = ""; r.minEval = ""; r.majEval = ""; r.sabrJuz = ""; r.recIsSabr = false;
+  r.recErrors = 0; r.minErrors = 0; r.majErrors = 0;
+  if ((r.dRevEval === "تثبيت" || r.dRevEval === "تثبيت حفظ") && !(Number(r.dRevPages) > 0)) {
+    r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = "";
+  }
+  if (st?.track === "rashidi") {
+    const rf = parseArabicNum(r.rashidiFrom, st.rashidiPage || 1);
+    const rt = parseArabicNum(r.rashidiTo, rf);
+    r.rashidiFrom = rf;
+    r.rashidiTo = rt;
+    r.hwRashidiFrom = rf;
+    r.hwRashidiTo = rt;
+  } else if (s.type === "daily") {
+    const rs = getSegments(r, "rec");
+    if (rs.length) {
+      r.hwSurahId = rs[0].surahId; r.hwEndSurahId = ""; r.hwFrom = rs[0].from; r.hwTo = rs[0].to;
+      r.hwExtras = rs.slice(1).map(x => ({ ...x }));
+    }
+  } else if (s.type === "saturday" && (r.majStartPage || _prevSabr)) {
+    if (_prevSabr) r.sabrJuz = _prevSabr;
+    if (st) applyNextMajorReview(st, r, false);
+    if (_prevSabr) r.sabrJuz = "";
+  }
+  r.notes = status === "غياب مبرر" ? "غياب مبرر؛ يبقى الواجب كما هو للجلسة القادمة." : "غياب غير مبرر؛ يرجى الالتزام بالحضور وتحضير الواجب.";
+}
+
 function openAutoAbsentModal() {
   const h = getActiveHalaqa(), s = getCurrentSession();
   if (!s) return;
-  const pending = h.students.filter(st => isStudentPending(s, getStudentRecord(s, st.id)));
+  const pending = h.students.filter(st => isStudentPending(s, getStudentRecord(s, st.id), st));
   if (!pending.length) { showToast("جميع الطلاب مسجلون ومقيّمون ✅"); return; }
   pendingAbsChoices = {};
   pending.forEach(st => { pendingAbsChoices[st.id] = "غياب غير مبرر"; });
@@ -15649,7 +15698,7 @@ function openAutoAbsentModal() {
 
 function renderAutoAbsentList(pendingList) {
   const h = getActiveHalaqa(), s = getCurrentSession();
-  const list = pendingList || h.students.filter(st => isStudentPending(s, getStudentRecord(s, st.id)));
+  const list = pendingList || h.students.filter(st => isStudentPending(s, getStudentRecord(s, st.id), st));
   document.getElementById("autoAbsentList").innerHTML = list.map((st, i) => {
     const val = pendingAbsChoices[st.id] || "غياب غير مبرر";
     return `<div class="abs-row">
@@ -15666,19 +15715,17 @@ function setPendingAbsChoice(stId, val) { pendingAbsChoices[stId] = val; renderA
 function setAllPendingAbsType(val) { Object.keys(pendingAbsChoices).forEach(k => { pendingAbsChoices[k] = val; }); renderAutoAbsentList(); }
 
 function confirmAutoAbsences() {
-  const s = getCurrentSession();
-  if (!s) return;
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s) return;
   let count = 0;
   Object.entries(pendingAbsChoices).forEach(([stId, status]) => {
+    const st = h.students.find(x => x.id === stId);
     const r = getStudentRecord(s, stId);
-    removeStudentFromQueue(s, stId);
-    r.attendance = status; r.points = 0; r.recEval = ""; r.minEval = ""; r.majEval = ""; r.sabrJuz = "";
-    if (s.type === "daily") { const rs = getSegments(r, "rec"); if (rs.length) { r.hwSurahId = rs[0].surahId; r.hwEndSurahId = ""; r.hwFrom = rs[0].from; r.hwTo = rs[0].to; r.hwExtras = rs.slice(1).map(x => ({ ...x })); } }
-    if (s.type === "saturday" && r.majStartPage) { applyNextMajorReview(getActiveHalaqa().students.find(x => x.id === stId), r, false); }
-    r.notes = status === "غياب مبرر" ? "غياب مبرر؛ يبقى الواجب كما هو للجلسة القادمة." : "غياب غير مبرر؛ يرجى الالتزام بالحضور وتحضير الواجب.";
+    applyAbsenceCarryOver(s, st, r, status);
     count++;
   });
-  saveState(); closeModal("autoAbsentModal"); renderSessionView(); renderDailyReport();
+  saveState(); closeModal("autoAbsentModal"); renderSessionView();
+  if (document.getElementById("view-reports")?.classList.contains("active")) renderDailyReport();
   showToast(`تم اعتماد الغياب لـ ${count} طالب بنجاح`);
 }
 
@@ -16261,19 +16308,21 @@ function setSessionFilter(f) {
 }
 
 function getStudentPrevSessionHint(h, cur, stId, precomputedCandidates = null) {
-  const candidates = precomputedCandidates || (h.sessions || [])
-    .filter(s => s.id !== cur.id && s.type === cur.type && !s.noClass && s.date < cur.date)
-    .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  const st = (h.students || []).find(x => x.id === stId);
+  const isRash = st?.track === "rashidi";
+  const candidates = isRash
+    ? (h.sessions || []).filter(s => s.id !== cur.id && !s.noClass && s.date < cur.date).sort((a, b) => (b.date || "").localeCompare(a.date || ""))
+    : (precomputedCandidates || (h.sessions || []).filter(s => s.id !== cur.id && s.type === cur.type && !s.noClass && s.date < cur.date).sort((a, b) => (b.date || "").localeCompare(a.date || "")));
   for (const ps of candidates) {
     const pr = ps.records?.[stId];
     if (!pr) continue;
     const isAbs = Boolean(pr.attendance && pr.attendance.includes("غياب"));
-    const hasEval = cur.type === "daily" ? Boolean(pr.recEval) : Boolean(pr.minEval || pr.majEval);
+    const hasEval = (isRash || cur.type === "daily") ? Boolean(pr.recEval) : Boolean(pr.minEval || pr.majEval);
     if (!hasEval && !isAbs) continue;
-    const hadRepeat = cur.type === "daily"
+    const hadRepeat = (isRash || cur.type === "daily")
       ? pr.recEval === "إعادة"
       : (pr.minEval === "إعادة" || pr.majEval === "إعادة");
-    return { hadRepeat, hadHwSabr: pr.hwSabrJuz || "" };
+    return { hadRepeat, hadHwSabr: isRash ? "" : (pr.hwSabrJuz || "") };
   }
   return { hadRepeat: false, hadHwSabr: "" };
 }
@@ -16514,8 +16563,31 @@ function ensureEvalSheetObserver() {
   obs.observe(sheet, { attributes: true, attributeFilter: ["class"] });
 }
 
+function highlightActiveEvalCardInList() {
+  const listEl = document.getElementById("studentCardsList");
+  if (!listEl) return;
+  listEl.querySelectorAll(".st-card.eval-active").forEach(el => {
+    if (!openCardId || el.id !== "card_" + openCardId) el.classList.remove("eval-active");
+  });
+  if (openCardId) {
+    document.getElementById("card_" + openCardId)?.classList.add("eval-active");
+  }
+}
+
+function shouldReorderAfterLeavingStudent(prevStudentId) {
+  if (!prevStudentId || !autoSinkDone) return false;
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s) return false;
+  const st = h.students.find(x => x.id === prevStudentId);
+  if (!st) return false;
+  const cardEl = document.getElementById("card_" + prevStudentId);
+  const isDoneNow = isStudentFullyDone(s, st, getStudentRecord(s, prevStudentId));
+  return Boolean(isDoneNow && cardEl);
+}
+
 function closeStudentEvalSheet(rerenderCards = true) {
   cancelAutoAdvance(false);
+  const prevId = openCardId;
   openCardId = null;
   openAdvCardId = null;
   evalSheetTool = "";
@@ -16523,10 +16595,10 @@ function closeStudentEvalSheet(rerenderCards = true) {
   _lastEvalSheetStudentId = null;
   const sheet = document.getElementById("studentEvalSheet");
   if (sheet) sheet.classList.remove("show");
-  if (rerenderCards) {
+  if (rerenderCards && shouldReorderAfterLeavingStudent(prevId)) {
     renderStudentCardsOnly();
   } else {
-    document.querySelectorAll(".st-card.eval-active").forEach(el => el.classList.remove("eval-active"));
+    highlightActiveEvalCardInList();
   }
 }
 
@@ -16538,6 +16610,7 @@ function renderSessionPreservingScroll() {
 
 function toggleCard(studentId) {
   cancelAutoAdvance(false);
+  const prevId = openCardId;
   const opening = openCardId !== studentId;
   openCardId = opening ? studentId : null;
   if (!opening || _lastEvalSheetStudentId !== studentId) {
@@ -16545,19 +16618,30 @@ function toggleCard(studentId) {
     evalSheetTool = "";
     evalBonusOpen = false;
   }
-  renderStudentCardsOnly();
+  if (prevId && prevId !== openCardId && shouldReorderAfterLeavingStudent(prevId)) {
+    renderStudentCardsOnly();
+  } else {
+    highlightActiveEvalCardInList();
+    syncStudentEvalSheet();
+  }
 }
 
 function openNextStudent(currentIdx) {
   cancelAutoAdvance(false);
   const h = getActiveHalaqa();
   if (!h || !h.students.length) return;
+  const prevId = openCardId;
   const next = h.students[currentIdx + 1];
   openCardId = next ? next.id : null;
   openAdvCardId = null;
   evalSheetTool = "";
   evalBonusOpen = false;
-  renderStudentCardsOnly();
+  if (prevId && shouldReorderAfterLeavingStudent(prevId)) {
+    renderStudentCardsOnly();
+  } else {
+    highlightActiveEvalCardInList();
+    syncStudentEvalSheet();
+  }
   if (!next) showToast("وصلت لآخر طالب في الحلقة");
 }
 
@@ -16565,6 +16649,7 @@ function openNextPendingStudent(fromIdx = -1) {
   cancelAutoAdvance(false);
   const h = getActiveHalaqa(), s = getCurrentSession();
   if (!h || !s || !h.students.length) return;
+  const prevId = openCardId;
   const total = h.students.length;
   for (let step = 1; step <= total; step++) {
     const idx = (fromIdx + step) % total;
@@ -16574,7 +16659,12 @@ function openNextPendingStudent(fromIdx = -1) {
       openAdvCardId = null;
       evalSheetTool = "";
       evalBonusOpen = false;
-      renderStudentCardsOnly();
+      if (prevId && prevId !== st.id && shouldReorderAfterLeavingStudent(prevId)) {
+        renderStudentCardsOnly();
+      } else {
+        highlightActiveEvalCardInList();
+        syncStudentEvalSheet();
+      }
       return;
     }
   }
@@ -17794,6 +17884,9 @@ function setAttendance(studentId, status) {
     r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined;
     if (status.includes("غياب")) {
       r.notes = "";
+      if (st?.track === "rashidi" && !r.recEval) {
+        r.hwRashidiFrom = ""; r.hwRashidiTo = "";
+      }
       if (s.type === "daily" && !r.recEval) {
         r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = "";
       }
@@ -17802,34 +17895,14 @@ function setAttendance(studentId, status) {
       }
     }
     r.points = computeRecordPoints(s, r, st);
-    saveState(); renderSessionView();
+    saveState(); renderSessionPreservingScroll();
     showToast(`تم إلغاء حالة «${status}» ↩️`, { undo: true });
     return;
   }
-  r.attendance = status;
   if (status.includes("غياب")) {
-    removeStudentFromQueue(s, studentId);
-    r.points = 0; r.ptsAdab = false; r.ptsParticip = false; r.ptsEarly = false;
-    const _prevSabr = r.sabrJuz || "";
-    r.recEval = ""; r.minEval = ""; r.majEval = ""; r.sabrJuz = ""; r.recIsSabr = false;
-    r.recErrors = 0; r.minErrors = 0; r.majErrors = 0;
-    if ((r.dRevEval === "تثبيت" || r.dRevEval === "تثبيت حفظ") && !(Number(r.dRevPages) > 0)) {
-      r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = "";
-    }
-    if (s.type === "daily") {
-      const rs = getSegments(r, "rec");
-      if (rs.length) {
-        r.hwSurahId = rs[0].surahId; r.hwEndSurahId = ""; r.hwFrom = rs[0].from; r.hwTo = rs[0].to;
-        r.hwExtras = rs.slice(1).map(x => ({ ...x }));
-      }
-    }
-    if (s.type === "saturday" && (r.majStartPage || _prevSabr)) {
-      if (_prevSabr) r.sabrJuz = _prevSabr;
-      applyNextMajorReview(st, r, false);
-      if (_prevSabr) r.sabrJuz = "";
-    }
-    r.notes = status === "غياب مبرر" ? "غياب مبرر؛ يبقى الواجب كما هو للجلسة القادمة." : "غياب غير مبرر؛ يرجى الالتزام بالحضور وتحضير الواجب.";
+    applyAbsenceCarryOver(s, st, r, status);
   } else {
+    r.attendance = status;
     if (typeof r.ptsAdab !== "boolean") r.ptsAdab = true;
     if (typeof r.ptsParticip !== "boolean") r.ptsParticip = true;
     r.ptsEarly = (status === "حاضر");
@@ -17931,8 +18004,7 @@ function setRecEval(studentId, ev, errCount = null) {
     }
     r.points = computeRecordPoints(s, r, st);
     saveState();
-    const advanced = advanceAfterEval(studentId, ev);
-    if (!advanced) renderSessionView();
+    advanceAfterEval(studentId, ev);
     showToast(`🎓 ${st.name}: سبر ${r.sabrJuz} (${ev})${isPointsEnabled(h) ? ` • ${r.points} نقطة` : ""}`, { undo: true });
     return;
   }
@@ -17986,8 +18058,7 @@ function setRecEval(studentId, ev, errCount = null) {
   else if (ev === "إعادة") r.notes = `يرجى تكرار (${label})${errTag} وضبط الآيات لإتقان الإعادة في الجلسة القادمة.`;
 
   saveState();
-  const advanced = advanceAfterEval(studentId, ev);
-  if (!advanced) renderSessionView();
+  advanceAfterEval(studentId, ev);
   const ptsTag = isPointsEnabled(h) ? ` (${r.points} نقطة)` : "";
   if (completedJuz && ev !== "إعادة") {
     showToast(`🎓 أتمّ ${st.name} ${completedJuz.name} — الواجب: سبر الجزء${ptsTag}`, { undo: true });
@@ -18197,7 +18268,7 @@ function quickSatBothEval(studentId, ev) {
   applyNextMajorReview(st, r, ev !== "إعادة");
   r.notes = buildSaturdayAutoNote(st, r, null, null, false);
   saveState();
-  if (!advanceAfterEval(studentId, ev)) renderSessionView();
+  advanceAfterEval(studentId, ev);
   showToast(`✓ ${st.name}: ${ev}${isPointsEnabled(h) ? ` (${r.points} نقطة)` : ""}`, { undo: true });
 }
 
@@ -18382,11 +18453,12 @@ function setSatMinEval(studentId, ev, errCount = null) {
   saveState();
 
   // NEVER jump away if Major Review is still not evaluated! Stay right on the same student!
-  if (isComplete && advanceAfterEval(studentId, ev)) {
+  if (isComplete) {
+    advanceAfterEval(studentId, ev);
     showToast(`✓ أُتمّ تقييم ${st.name} (صغرى + كبرى${isPointsEnabled(h) ? ` • ${r.points} نقطة` : ""})`, { undo: true });
   } else {
     openCardId = studentId;
-    renderSessionView();
+    renderSessionPreservingScroll();
     showToast(`✓ الصغرى (${st.name}): ${ev}${errTag}${isPointsEnabled(h) ? ` (${r.points} نقطة)` : ""} — أكمل الكبرى`, { undo: true });
   }
 }
@@ -18439,13 +18511,13 @@ function setSatMajEval(studentId, ev, errCount = null) {
   saveState();
 
   // Only advance to next student if BOTH Minor & Major reviews are finished (or student has no Minor Review)!
-  if (isComplete && advanceAfterEval(studentId, ev)) {
+  if (isComplete) {
+    advanceAfterEval(studentId, ev);
     showToast(`✓ الكبرى (${st.name}): ${ev}${errTag}${isPointsEnabled(h) ? ` (${r.points} نقطة)` : ""}`, { undo: true });
   } else {
     openCardId = studentId;
-    renderSessionView();
-    const remHint = !isComplete ? " — بقي الصغرى" : "";
-    showToast(`✓ الكبرى (${st.name}): ${ev}${errTag}${isPointsEnabled(h) ? ` (${r.points} نقطة)` : ""}${remHint}`, { undo: true });
+    renderSessionPreservingScroll();
+    showToast(`✓ الكبرى (${st.name}): ${ev}${errTag}${isPointsEnabled(h) ? ` (${r.points} نقطة)` : ""} — بقي الصغرى`, { undo: true });
   }
 }
 function onHwSurahChange(studentId, surahId) {
@@ -20537,7 +20609,7 @@ async function exportDailyExcelStyled() {
       }
     });
 
-    let excused = 0, absent = 0, totalPts = 0, presentCnt = 0, xlMemPgs = 0, xlRevPgs = 0;
+    let excused = 0, absent = 0, totalPts = 0, presentCnt = 0, xlMemPgs = 0, xlRevPgs = 0, xlRashidiPgs = 0;
     h.students.forEach(st => {
       const r = getStudentRecord(s, st.id);
       if (r.attendance === "غياب مبرر") excused++;
@@ -20546,7 +20618,9 @@ async function exportDailyExcelStyled() {
       totalPts += Number(r.points) || 0;
       const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع";
       if (!isAbs) {
-        if (!isSat) {
+        if (st.track === "rashidi") {
+          if (r.recEval && r.recEval !== "إعادة") xlRashidiPgs += Number(r.rashidiPages) || 0;
+        } else if (!isSat) {
           if (r.recEval && r.recEval !== "إعادة") xlMemPgs += Number(r.recPages) || calcRecordRecPages(r);
           xlRevPgs += calcDailyReviewPages(r);
         } else {
@@ -20555,6 +20629,7 @@ async function exportDailyExcelStyled() {
         }
       }
     });
+    const xlRashTag = xlRashidiPgs > 0 ? `  |  صفحات الرشيدي: ${formatNum(xlRashidiPgs)}` : "";
 
     const logoId = wb.addImage({ base64: bm.logoB64, extension: bm.logoExt });
     const totalCols = ptsOn ? 14 : 13;
@@ -20683,10 +20758,10 @@ async function exportDailyExcelStyled() {
         ws.mergeCells(`A${footIdx}:F${footIdx}`); ws.getCell(`A${footIdx}`).value = "مجموع نقاط الحلقة اليوم";
         ws.getCell(`G${footIdx}`).value = { formula: `SUM(G8:G${footIdx - 1})`, result: totalPts };
         ws.mergeCells(`H${footIdx}:N${footIdx}`);
-        ws.getCell(`H${footIdx}`).value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}  |  ${bm.branch}  |  صفحات الحفظ: ${formatNum(xlMemPgs)}  |  صفحات المراجعة: ${formatNum(xlRevPgs)}  |  حضور: ${presentCnt}  |  غياب: ${excused + absent}`;
+        ws.getCell(`H${footIdx}`).value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}  |  ${bm.branch}  |  صفحات الحفظ: ${formatNum(xlMemPgs)}${xlRashTag}  |  صفحات المراجعة: ${formatNum(xlRevPgs)}  |  حضور: ${presentCnt}  |  غياب: ${excused + absent}`;
       } else {
         ws.mergeCells(`A${footIdx}:M${footIdx}`);
-        ws.getCell(`A${footIdx}`).value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}  |  ${bm.branch}  |  صفحات الحفظ: ${formatNum(xlMemPgs)}  |  صفحات المراجعة: ${formatNum(xlRevPgs)}  |  حضور: ${presentCnt}  |  غياب: ${excused + absent}`;
+        ws.getCell(`A${footIdx}`).value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}  |  ${bm.branch}  |  صفحات الحفظ: ${formatNum(xlMemPgs)}${xlRashTag}  |  صفحات المراجعة: ${formatNum(xlRevPgs)}  |  حضور: ${presentCnt}  |  غياب: ${excused + absent}`;
       }
       for (let c = 1; c <= totalCols; c++) styleCell(ws.getRow(footIdx).getCell(c), { fill: "FFE8EEF2", fontColor: "FF000000", bold: true, size: 10.5 });
       ws.getRow(footIdx).height = 24;
@@ -20773,10 +20848,10 @@ async function exportDailyExcelStyled() {
         ws.mergeCells(`A${footIdx}:I${footIdx}`); ws.getCell(`A${footIdx}`).value = "مجموع نقاط الحلقة اليوم";
         ws.getCell(`J${footIdx}`).value = { formula: `SUM(J8:J${footIdx - 1})`, result: totalPts };
         ws.mergeCells(`K${footIdx}:N${footIdx}`);
-        ws.getCell(`K${footIdx}`).value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}  |  ${bm.branch}  |  صفحات المراجعة: ${formatNum(xlRevPgs)}  |  حضور: ${presentCnt}  |  غياب: ${excused + absent}`;
+        ws.getCell(`K${footIdx}`).value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}  |  ${bm.branch}  |  صفحات المراجعة: ${formatNum(xlRevPgs)}${xlRashTag}  |  حضور: ${presentCnt}  |  غياب: ${excused + absent}`;
       } else {
         ws.mergeCells(`A${footIdx}:M${footIdx}`);
-        ws.getCell(`A${footIdx}`).value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}  |  ${bm.branch}  |  صفحات المراجعة: ${formatNum(xlRevPgs)}  |  حضور: ${presentCnt}  |  غياب: ${excused + absent}`;
+        ws.getCell(`A${footIdx}`).value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}  |  ${bm.branch}  |  صفحات المراجعة: ${formatNum(xlRevPgs)}${xlRashTag}  |  حضور: ${presentCnt}  |  غياب: ${excused + absent}`;
       }
       for (let c = 1; c <= totalCols; c++) styleCell(ws.getRow(footIdx).getCell(c), { fill: "FFE8EEF2", fontColor: "FF000000", bold: true, size: 10.5 });
       ws.getRow(footIdx).height = 24;
@@ -20972,7 +21047,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v69 -->
+<!-- Makin App v70 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -21516,8 +21591,15 @@ function downloadBlob(blob, filename) {
   return Promise.resolve(true);
 }
 
-function openModal(id) { document.getElementById(id).classList.add("show"); }
-function closeModal(id) { document.getElementById(id).classList.remove("show"); }
+function openModal(id) { document.getElementById(id)?.classList.add("show"); }
+function closeModal(id) {
+  document.getElementById(id)?.classList.remove("show");
+  if (id === "quickAttendanceModal" && _qaDirtySession) {
+    _qaDirtySession = false;
+    saveState();
+    renderSessionPreservingScroll();
+  }
+}
 
 window.addEventListener("resize", () => { if (document.getElementById("certModal")?.classList.contains("show")) fitCertPreviewToModal(); });
 
@@ -21535,8 +21617,18 @@ let tibyanAccounts = {
   users: {},
   links: {}, // supervisorId -> { teacherId: {...} }
   messages: {}, // supervisorId -> [ {...} ]
-  teacherMonthlyNotes: {} // supervisorId -> { "teacherId__month": "..." }
+  teacherMonthlyNotes: {}, // supervisorId -> { "teacherId__month": "..." }
+  deviceAccountIds: [] // UIDs that actually signed in on THIS device
 };
+
+function rememberDeviceAccount(uid) {
+  const id = String(uid || "").trim();
+  if (!id) return;
+  if (!Array.isArray(tibyanAccounts.deviceAccountIds)) tibyanAccounts.deviceAccountIds = [];
+  if (!tibyanAccounts.deviceAccountIds.includes(id)) {
+    tibyanAccounts.deviceAccountIds.push(id);
+  }
+}
 
 let _activeSupTab = "overview";
 let _supSelectedMonth = "";
@@ -21592,6 +21684,8 @@ function loadAccountsState() {
   if (!tibyanAccounts.links) tibyanAccounts.links = {};
   if (!tibyanAccounts.messages) tibyanAccounts.messages = {};
   if (!tibyanAccounts.teacherMonthlyNotes) tibyanAccounts.teacherMonthlyNotes = {};
+  if (!Array.isArray(tibyanAccounts.deviceAccountIds)) tibyanAccounts.deviceAccountIds = [];
+  if (tibyanAccounts.currentSession?.userId) rememberDeviceAccount(tibyanAccounts.currentSession.userId);
   // Inherit existing Firebase URL if user already set one on any halaqa
   if (!tibyanAccounts.cloudUrl) {
     const anyFb = Object.values(appState.halaqat || {}).find(h => h && h.fbUrl)?.fbUrl;
@@ -21687,7 +21781,8 @@ function setAuthTab(tab) {
 function renderAuthQuickAccounts() {
   const box = document.getElementById("authQuickAccountsBox");
   if (!box) return;
-  const users = Object.values(tibyanAccounts.users || {});
+  const devIds = Array.isArray(tibyanAccounts.deviceAccountIds) ? tibyanAccounts.deviceAccountIds : [];
+  const users = devIds.map(id => tibyanAccounts.users?.[id]).filter(u => u && u.email);
   if (!users.length) { box.innerHTML = ""; return; }
   box.innerHTML = `<div style="font-size:11px; font-weight:800; color:var(--ink-500); margin-bottom:5px;">⚡ الحسابات المحفوظة على هذا الجهاز:</div>
     <div style="display:flex; flex-direction:column; gap:5px;">
@@ -23235,20 +23330,7 @@ async function supDeleteCustomProgram(key) {
 
 // (supSaveProfile upgraded in v51 below)
 
-function updateFounderPasscode() {
-  const oldP = (document.getElementById("founderOldPass")?.value || "").trim();
-  const newP = (document.getElementById("founderNewPass")?.value || "").trim();
-  if (simpleHashStr(oldP) !== tibyanAccounts.founderCodeHash) {
-    showToast("كلمة سر المؤسس الحالية غير صحيحة");
-    return;
-  }
-  if (newP.length < 4) { showToast("الكلمة الجديدة يجب أن تكون 4 أحرف على الأقل"); return; }
-  tibyanAccounts.founderCodeHash = simpleHashStr(newP);
-  saveAccountsState();
-  document.getElementById("founderOldPass").value = "";
-  document.getElementById("founderNewPass").value = "";
-  showToast("🗝️ تم تحديث كلمة سر المؤسس بنجاح ✓");
-}
+// (Legacy local founder passcode updater removed — managed centrally via Owner Panel)
 
 
 // ==============================================================================
@@ -23413,15 +23495,34 @@ function setRashidiEval(studentId, ev, errCount = null) {
 
   r.points = computeRecordPoints(s, r, st);
   saveState();
-  renderSessionView();
-  showToast(`✓ ${st.name}: ${ev} (رشيدي)`, { undo: true });
+  advanceAfterEval(studentId, ev);
+  showToast(`✓ ${st.name}: ${ev} (رشيدي)${isPointsEnabled(h) ? ` • ${r.points} نقطة` : ""}`, { undo: true });
 }
 
-// 3) FAST ROLL-CALL / QUICK ATTENDANCE MODAL (التفقد السريع)
+// 3) FAST ROLL-CALL / QUICK ATTENDANCE MODAL (التفقد السريع — ZERO-LAG v70)
+let _qaDirtySession = false;
+let _qaObserverBound = false;
+
+function ensureQaModalObserver() {
+  if (_qaObserverBound) return;
+  const el = document.getElementById("quickAttendanceModal");
+  if (!el || typeof MutationObserver === "undefined") return;
+  _qaObserverBound = true;
+  const obs = new MutationObserver(() => {
+    if (!el.classList.contains("show") && _qaDirtySession) {
+      _qaDirtySession = false;
+      saveState();
+      renderSessionPreservingScroll();
+    }
+  });
+  obs.observe(el, { attributes: true, attributeFilter: ["class"] });
+}
+
 function openQuickAttendanceModal() {
   const h = getActiveHalaqa(), s = getCurrentSession();
   if (!h || !s) return;
-  const gt = getGenderTerms(h);
+  ensureQaModalObserver();
+  _qaDirtySession = false;
   document.getElementById("qaModalTitle").textContent = `⚡ التفقد السريع — ${s.dayName} (${s.hijriDate})`;
   renderQuickAttendanceList();
   openModal("quickAttendanceModal");
@@ -23469,19 +23570,23 @@ function qaSetStatus(studentId, status) {
   const st = h?.students.find(x => x.id === studentId);
   if (!s || !st) return;
   const r = getStudentRecord(s, studentId);
-  r.attendance = status;
   if (status.includes("غياب")) {
-    r.points = 0;
-    r.ptsAdab = false; r.ptsParticip = false; r.ptsEarly = false;
-    removeStudentFromQueue(s, studentId);
+    applyAbsenceCarryOver(s, st, r, status);
   } else {
+    if (r.attendance && r.attendance.includes("غياب")) {
+      r.notes = "";
+      if (st.track === "rashidi" && !r.recEval) { r.hwRashidiFrom = ""; r.hwRashidiTo = ""; }
+      if (s.type === "daily" && !r.recEval) { r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = ""; }
+      if (s.type === "saturday" && !r.majEval) { r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; }
+    }
+    r.attendance = status;
     ensureRecordBonuses(r);
     r.ptsEarly = (status === "حاضر");
     r.points = computeRecordPoints(s, r, st);
   }
-  saveState();
+  _qaDirtySession = true;
+  saveStateDebounced(350);
   renderQuickAttendanceList();
-  renderSessionPreservingScroll();
 }
 
 function qaMarkAllRemainingPresent() {
@@ -23498,9 +23603,11 @@ function qaMarkAllRemainingPresent() {
       cnt++;
     }
   });
-  saveState();
-  renderQuickAttendanceList();
-  renderSessionPreservingScroll();
+  if (cnt > 0) {
+    _qaDirtySession = true;
+    saveStateDebounced(350);
+    renderQuickAttendanceList();
+  }
   showToast(cnt > 0 ? `✓ تم تسجيل حضور ${cnt} ${getGenderTerms(h).studentUnit}` : "الجميع مُتفقد بالفعل ✓");
 }
 
@@ -23531,12 +23638,16 @@ function getStudentAttentionAlert(h, curSession, studentId, precomputedRelevant 
     };
   }
 
+  const _stObj = (h.students || []).find(x => x.id === studentId);
+  const _isRashSt = _stObj?.track === "rashidi";
   let consecRep = 0;
   for (const s of relevant) {
     const r = s.records?.[studentId];
     if (!r) continue;
-    const isRep = (s.type === "daily" && r.recEval === "إعادة") || (s.type === "saturday" && (r.minEval === "إعادة" || r.majEval === "إعادة"));
-    const hasEval = Boolean(r.recEval || r.minEval || r.majEval);
+    const isRep = (_isRashSt || s.type === "daily")
+      ? (r.recEval === "إعادة")
+      : (r.minEval === "إعادة" || r.majEval === "إعادة");
+    const hasEval = _isRashSt ? Boolean(r.recEval) : Boolean(r.recEval || r.minEval || r.majEval);
     if (!hasEval) {
       if (s.id === curSession.id) continue;
       break;
@@ -23685,7 +23796,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v69";
+const TIBYAN_APP_VERSION = "v70";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -23870,6 +23981,7 @@ async function hydrateSignedInFirebaseUser(fbUser) {
       if (ownerUid && ownerUid === fbUser.uid) profile.isOwner = true;
       tibyanAccounts.users[fbUser.uid] = profile;
       tibyanAccounts.currentSession = { userId: fbUser.uid, role: profile.role, email: fbUser.email };
+    rememberDeviceAccount(fbUser.uid);
       saveAccountsState();
 
       let merged = false;
@@ -24064,6 +24176,7 @@ async function handleAuthLogin() {
     if (ownerUid === fbUser.uid) profile.isOwner = true;
     tibyanAccounts.users[fbUser.uid] = profile;
     tibyanAccounts.currentSession = { userId: fbUser.uid, role: profile.role, email: fbUser.email };
+    rememberDeviceAccount(fbUser.uid);
     saveAccountsState();
     localStorage.removeItem(CLOUD_DIRTY_KEY);
     resetRuntimeWorkspaceState();
@@ -24188,6 +24301,7 @@ async function handleRegisterTeacher(preserveGuestLocal = false) {
 
     tibyanAccounts.users[fbUser.uid] = teacherUser;
     tibyanAccounts.currentSession = { userId: fbUser.uid, role: "teacher", email };
+    rememberDeviceAccount(fbUser.uid);
     saveAccountsState();
     clearAuthAndOnboardingInputs();
 
@@ -24308,6 +24422,7 @@ async function handleRegisterSupervisor() {
     if (!tibyanAccounts.links[fbUser.uid]) tibyanAccounts.links[fbUser.uid] = {};
     if (!tibyanAccounts.messages[fbUser.uid]) tibyanAccounts.messages[fbUser.uid] = [];
     tibyanAccounts.currentSession = { userId: fbUser.uid, role: supUser.role, email };
+    rememberDeviceAccount(fbUser.uid);
     saveAccountsState();
     localStorage.removeItem(CLOUD_DIRTY_KEY);
     resetRuntimeWorkspaceState();
