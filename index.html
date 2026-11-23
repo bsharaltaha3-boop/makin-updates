@@ -173,6 +173,14 @@ body {
   border-radius: 9px;
   background: var(--white);
   color: var(--ink-900);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.search-input-wrap input::-webkit-search-cancel-button,
+.search-input-wrap input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
 }
 .search-clear-btn {
   position: absolute;
@@ -195,62 +203,79 @@ body {
 }
 .search-clear-btn:active { transform: scale(0.92); background: var(--line); }
 
-/* Persistent 45-Second Top OTA Update Card (v59) */
-@keyframes makinOtaCountdown {
-  from { transform: scaleX(1); }
-  to { transform: scaleX(0); }
-}
-.makin-ota-card-v59 {
+/* Permanent Fixed OTA Update Modal (v60 — Never Auto-Hides!) */
+.makin-ota-modal-v60 {
   position: fixed !important;
-  top: 12px !important;
-  bottom: auto !important;
-  left: 12px !important;
-  right: 12px !important;
-  max-width: 460px;
-  margin: 0 auto !important;
-  z-index: 999999 !important;
-  background: linear-gradient(135deg, #0d2645 0%, #193b68 100%) !important;
-  color: #ffffff !important;
-  border: 1.5px solid #c8a14b !important;
-  border-radius: 16px !important;
-  padding: 12px 13px 14px !important;
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.42) !important;
+  inset: 0 !important;
+  z-index: 2147483647 !important;
+  background: rgba(10, 24, 42, 0.72) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 18px !important;
   direction: rtl !important;
-  overflow: hidden !important;
-  display: block !important;
 }
-.makin-ota-card-v59 .ota-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-.makin-ota-card-v59 .ota-close {
-  border: none;
-  background: rgba(255,255,255,0.16);
-  color: #fff;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 800;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-.makin-ota-card-v59 .ota-bar {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 4px;
-  background: rgba(255,255,255,0.16);
-}
-.makin-ota-card-v59 .ota-bar-fill {
-  height: 100%;
+.makin-ota-modal-v60 .ota-dialog {
   width: 100%;
-  background: linear-gradient(90deg, #f4d98d, #c8a14b);
-  transform-origin: right center;
-  animation: makinOtaCountdown 45s linear forwards;
+  max-width: 390px;
+  background: linear-gradient(155deg, #0d2645 0%, #173760 100%);
+  color: #ffffff;
+  border: 2px solid #c8a14b;
+  border-radius: 18px;
+  padding: 20px 18px 16px;
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+.makin-ota-modal-v60 .ota-badge {
+  display: inline-block;
+  background: rgba(200, 161, 75, 0.18);
+  border: 1px solid rgba(244, 217, 141, 0.55);
+  color: #f4d98d;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 10px;
+}
+.makin-ota-modal-v60 .ota-title {
+  font-size: 16.5px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 7px;
+}
+.makin-ota-modal-v60 .ota-desc {
+  font-size: 13px;
+  color: #dce9f7;
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+.makin-ota-modal-v60 .ota-btns {
+  display: flex;
+  gap: 8px;
+}
+.makin-ota-modal-v60 .ota-btn-primary {
+  flex: 1.4;
+  border: none;
+  background: #c8a14b;
+  color: #0d2645;
+  font-weight: 800;
+  font-size: 13.5px;
+  padding: 11px 14px;
+  border-radius: 11px;
+  cursor: pointer;
+}
+.makin-ota-modal-v60 .ota-btn-later {
+  flex: 0.7;
+  border: 1px solid rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.1);
+  color: #e2edf8;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 11px 10px;
+  border-radius: 11px;
+  cursor: pointer;
 }
 
 /* Student Profile Modal */
@@ -7148,6 +7173,368 @@ html { scroll-behavior: smooth; }
   padding: 10px 11px;
 }
 
+
+/* ==================== MAKIN v62: MODERN MATTE APP UI, ROCK-SOLID SEARCH & ON-LINE CERTIFICATES ==================== */
+
+/* 1) Modern Spacious Search Box & Segmented Session Filters */
+.session-search-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 9px;
+}
+.modern-search-box {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.modern-search-box .search-lead-ico {
+  position: absolute;
+  right: 12px;
+  font-size: 14px;
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: 2;
+}
+.modern-search-box input {
+  width: 100%;
+  height: 40px;
+  padding: 0 38px 0 38px !important;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 12px !important;
+  background: var(--white);
+  color: var(--ink-900);
+  font-size: 13.5px !important;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(16, 42, 73, 0.04);
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+.modern-search-box input:focus {
+  outline: none;
+  border-color: #192c56;
+  box-shadow: 0 0 0 3px rgba(25, 44, 86, 0.12);
+}
+[data-theme="dark"] .modern-search-box input:focus {
+  border-color: #c8a14b;
+  box-shadow: 0 0 0 3px rgba(200, 161, 75, 0.16);
+}
+.modern-search-box .search-count-pill {
+  position: absolute;
+  left: 36px;
+  z-index: 3;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #192c56;
+  background: #e8eef6;
+  padding: 2px 7px;
+  border-radius: 99px;
+  pointer-events: none;
+}
+[data-theme="dark"] .modern-search-box .search-count-pill {
+  color: #f4d98d;
+  background: #223447;
+}
+.modern-search-box .search-clear-btn {
+  left: 6px;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  background: var(--brand-tint);
+  color: var(--ink-700);
+}
+
+.session-filter-seg {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 4px;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(16, 42, 73, 0.04);
+}
+.sfs-btn {
+  border: none;
+  background: transparent;
+  color: var(--ink-700);
+  padding: 7px 4px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+}
+.sfs-cnt {
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 99px;
+  background: var(--brand-tint);
+  color: var(--ink-700);
+}
+.sfs-btn.on-slate { background: #192c56; color: #ffffff; box-shadow: 0 2px 6px rgba(25, 44, 86, 0.2); }
+.sfs-btn.on-slate .sfs-cnt { background: rgba(255,255,255,0.2); color: #ffffff; }
+.sfs-btn.on-orange { background: var(--orange); color: #ffffff; }
+.sfs-btn.on-orange .sfs-cnt { background: rgba(255,255,255,0.22); color: #ffffff; }
+.sfs-btn.on-red { background: var(--red); color: #ffffff; }
+.sfs-btn.on-red .sfs-cnt { background: rgba(255,255,255,0.22); color: #ffffff; }
+
+/* Clean Slim Status Bar (No Total Points Clutter!) */
+.slim-status-bar {
+  border-radius: 13px;
+  padding: 8px 10px 10px;
+  box-shadow: 0 2px 8px rgba(16, 42, 73, 0.05);
+}
+.ssb-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: var(--brand-tint);
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-700);
+}
+.ssb-chip.ok { background: var(--green-bg); color: var(--green); }
+
+/* 2) Precision On-The-Line Certificate Alignment (Preview + HD Export) */
+.smo-body {
+  padding: 4px 24px 8px 34px !important;
+  gap: 15px !important;
+}
+.smo-line {
+  align-items: flex-end !important;
+  line-height: 1.25 !important;
+}
+.smo-line-lbl {
+  line-height: 1.15 !important;
+  padding-bottom: 2px !important;
+}
+.smo-line-val {
+  position: relative !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+  border-bottom: none !important;
+  padding: 0 12px 0 !important;
+  min-height: 30px !important;
+  line-height: 1 !important;
+  font-size: 24px !important;
+}
+.smo-line-val.is-name {
+  font-size: 28px !important;
+  min-height: 34px !important;
+  color: #12345a !important;
+}
+.smo-line-val.is-reason {
+  font-size: 21px !important;
+}
+.smo-val-txt {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  line-height: 1.02;
+  top: 1px;
+}
+.smo-line-val.is-name .smo-val-txt {
+  top: 2px;
+}
+.smo-dot-rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 3px;
+  height: 0;
+  border-bottom: 2px dotted #7890a8;
+  pointer-events: none;
+  z-index: 1;
+}
+.smo-custom-reason-lined {
+  font-size: 20.5px;
+  font-weight: 700;
+  color: #183c66;
+  line-height: 2.05;
+  text-align: center;
+  padding: 0 6px;
+}
+.smo-custom-reason-lined span {
+  border-bottom: 2px dotted #7890a8;
+  padding-bottom: 1px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.smo-f-lbl { color: #203354; font-weight: 700; }
+.smo-f-val {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 118px;
+  padding: 0 8px;
+  color: #183c66;
+  font-weight: 800;
+  line-height: 1;
+}
+.smo-f-val .smo-val-txt { top: 1px; }
+.smo-f-val .smo-dot-rule { bottom: 2px; border-bottom-width: 1.6px; }
+
+/* HD 1400x990 Stage (Compensates html2canvas slight Arabic upward offset so text rests dead-flush ON the dotted line!) */
+#hdExportStage.is-cert-stage .smo-body { padding: 6px 34px 10px 48px !important; gap: 20px !important; }
+#hdExportStage.is-cert-stage .smo-line { font-size: 31px !important; gap: 14px !important; line-height: 1.25 !important; align-items: flex-end !important; }
+#hdExportStage.is-cert-stage .smo-line-lbl { padding-bottom: 3px !important; }
+#hdExportStage.is-cert-stage .smo-line-val { font-size: 33.5px !important; padding: 0 16px 0 !important; min-height: 42px !important; border-bottom: none !important; }
+#hdExportStage.is-cert-stage .smo-line-val.is-name { font-size: 39px !important; min-height: 48px !important; }
+#hdExportStage.is-cert-stage .smo-line-val.is-reason { font-size: 29.5px !important; }
+#hdExportStage.is-cert-stage .smo-val-txt { top: 4px !important; }
+#hdExportStage.is-cert-stage .smo-line-val.is-name .smo-val-txt { top: 5px !important; }
+#hdExportStage.is-cert-stage .smo-dot-rule { bottom: 4px !important; border-bottom-width: 2.6px !important; }
+#hdExportStage.is-cert-stage .smo-custom-reason-lined { font-size: 28.5px !important; line-height: 2.05 !important; }
+#hdExportStage.is-cert-stage .smo-f-val { min-width: 165px !important; padding: 0 10px !important; }
+#hdExportStage.is-cert-stage .smo-f-val .smo-val-txt { top: 3px !important; }
+#hdExportStage.is-cert-stage .smo-f-val .smo-dot-rule { bottom: 3px !important; border-bottom-width: 2.2px !important; }
+
+/* 3) Modern Flat Matte App Menus (Header, Grouped Drawer & Pill Bottom Navigation) */
+.app-header {
+  background: #142a46;
+  border-bottom: 2px solid #c8a14b;
+  box-shadow: 0 2px 14px rgba(16, 36, 62, 0.16);
+}
+[data-theme="dark"] .app-header {
+  background: #0f2036;
+  border-bottom-color: rgba(200, 161, 75, 0.55);
+}
+.right-drawer.modern-drawer {
+  width: 292px;
+  max-width: 86vw;
+  border-radius: 22px 0 0 22px;
+  background: var(--bg);
+  border-left: none;
+  box-shadow: -12px 0 38px rgba(10, 24, 42, 0.28);
+  overflow: hidden;
+}
+.modern-drawer .drawer-hero {
+  background: linear-gradient(155deg, #102540 0%, #1a375c 100%);
+  padding: 18px 16px 16px;
+  border-bottom: 2.5px solid #c8a14b;
+  flex-shrink: 0;
+}
+.modern-drawer .drawer-scroll-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 11px 18px;
+  -webkit-overflow-scrolling: touch;
+}
+.drawer-group-lbl {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink-500);
+  padding: 6px 8px 5px;
+}
+.drawer-card-group {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 5px rgba(16, 42, 73, 0.04);
+}
+.modern-drawer .drawer-item {
+  border-radius: 0;
+  padding: 10px 11px;
+  font-size: 13px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--line);
+}
+.modern-drawer .drawer-item:last-child { border-bottom: none; }
+.modern-drawer .drawer-item.active {
+  border-right: none;
+  background: rgba(25, 44, 86, 0.08);
+  color: #192c56;
+}
+[data-theme="dark"] .modern-drawer .drawer-item.active {
+  background: rgba(200, 161, 75, 0.14);
+  color: #f4d98d;
+}
+.drawer-ico-box {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--brand-tint);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.drawer-ico-box.gold {
+  background: rgba(200, 161, 75, 0.16);
+}
+.drawer-chev {
+  color: var(--ink-500);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+/* Modern Pill-Indicator Bottom Navigation (Material 3 / iOS Feel) */
+.mobile-nav {
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -6px 20px rgba(16, 42, 73, 0.08);
+  padding: 4px 6px calc(env(safe-area-inset-bottom, 4px) + 4px);
+}
+.mobile-nav-btn {
+  padding: 4px 2px 3px !important;
+  gap: 3px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  border-radius: 12px;
+}
+.mobile-nav-btn.active::before {
+  display: none !important;
+}
+.mobile-nav-btn .ico {
+  width: 48px;
+  height: 28px;
+  border-radius: 99px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16.5px !important;
+  transition: background 0.18s ease, transform 0.14s ease;
+}
+.mobile-nav-btn.active {
+  color: #192c56 !important;
+}
+.mobile-nav-btn.active .ico {
+  background: rgba(25, 44, 86, 0.12);
+  transform: translateY(-1px);
+}
+[data-theme="dark"] .mobile-nav-btn.active {
+  color: #f4d98d !important;
+}
+[data-theme="dark"] .mobile-nav-btn.active .ico {
+  background: rgba(200, 161, 75, 0.2);
+}
+
+/* Crisp Modern Desktop Nav Tabs */
+.desktop-nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+.nav-tab.active {
+  color: #192c56;
+  border-bottom-color: #c8a14b;
+}
+[data-theme="dark"] .nav-tab.active {
+  color: #f4d98d;
+  border-bottom-color: #c8a14b;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -7575,100 +7962,109 @@ html { scroll-behavior: smooth; }
 
   <!-- RIGHT SLIDE-OUT DRAWER MENU -->
   <div id="rightDrawerBackdrop" class="drawer-backdrop no-print" onclick="closeRightDrawer()"></div>
-  <aside id="rightDrawer" class="right-drawer no-print">
+  <aside id="rightDrawer" class="right-drawer modern-drawer no-print">
     <div class="drawer-hero">
-      <button type="button" class="drawer-close-btn" onclick="closeRightDrawer()">×</button>
-      <div class="brand-logo-pill" style="display:inline-flex; height:32px;"><img id="drawerLogoImg" alt="تبيان" style="height:20px;"></div>
+      <button type="button" class="drawer-close-btn" onclick="closeRightDrawer()" aria-label="إغلاق">×</button>
+      <div class="drawer-hero-top">
+        <div class="brand-logo-pill" style="display:inline-flex; height:34px; padding:4px 10px;"><img id="drawerLogoImg" alt="مكين" style="height:22px;"></div>
+      </div>
       <div class="drawer-hero-title" id="drawerHalaqaName">حلقة ...</div>
       <div class="drawer-hero-sub" id="drawerSheikhInfo">...</div>
     </div>
 
-    <div class="drawer-sec">
-      <div class="drawer-sec-lbl">حسابي والإشراف</div>
-      <button type="button" class="drawer-item" onclick="closeRightDrawer(); openTeacherAccountModal();">
-        <span class="drawer-item-l">🔐 حساب المعلم وربط المشرف</span>
-        <span class="badge b-slate" id="drawerAccountStatusBadge" style="font-size:10px;">محلي</span>
-      </button>
-      <button type="button" class="drawer-item" onclick="closeRightDrawer(); openTeacherMessagesModal();">
-        <span class="drawer-item-l">📩 رسائل المشرف</span>
-        <span class="badge b-slate" id="drawerSupMsgBadge" style="font-size:10.5px;">0</span>
-      </button>
-    </div>
+    <div class="drawer-scroll-body">
+      <div class="drawer-group-lbl">حسابي والإشراف</div>
+      <div class="drawer-card-group">
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openTeacherAccountModal();">
+          <span class="drawer-item-l"><span class="drawer-ico-box">🔐</span><span>حساب المعلم والربط</span></span>
+          <span class="badge b-slate" id="drawerAccountStatusBadge" style="font-size:10.5px;">محلي</span>
+        </button>
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openTeacherMessagesModal();">
+          <span class="drawer-item-l"><span class="drawer-ico-box">📩</span><span>رسائل المشرف</span></span>
+          <span class="badge b-slate" id="drawerSupMsgBadge" style="font-size:10.5px;">0</span>
+        </button>
+      </div>
 
-    <div class="drawer-sec">
-      <div class="drawer-sec-lbl">الوصول السريع</div>
-      <button type="button" class="drawer-item" data-dtab="stats" onclick="drawerNav('stats')">
-        <span class="drawer-item-l" id="drawerStatsLbl">🏆 الإحصائيات والنقاط</span><span>‹</span>
-      </button>
-      <button type="button" class="drawer-item" onclick="closeRightDrawer(); openQuickIndivReport();">
-        <span class="drawer-item-l">📋 كشف متابعة فردي (شهري/أسبوعي)</span><span>‹</span>
-      </button>
-      <button type="button" class="drawer-item" onclick="closeRightDrawer(); openQuickCertificatePicker();">
-        <span class="drawer-item-l">🏅 إصدار شهادة لطالب</span><span>‹</span>
-      </button>
-      <button type="button" class="drawer-item" onclick="closeRightDrawer(); openClassDaysModal();">
-        <span class="drawer-item-l">🗓️ أيام الدوام</span>
-        <span class="badge b-slate" id="drawerDaysBadge" style="font-size:10.5px;">سبت•إث•أرب</span>
-      </button>
-    </div>
+      <div class="drawer-group-lbl">أدوات الحلقة السريعة</div>
+      <div class="drawer-card-group">
+        <button type="button" class="drawer-item" data-dtab="stats" onclick="drawerNav('stats')">
+          <span class="drawer-item-l"><span class="drawer-ico-box gold">🏆</span><span id="drawerStatsLbl">الإحصائيات والنقاط</span></span>
+          <span class="drawer-chev">‹</span>
+        </button>
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openQuickIndivReport();">
+          <span class="drawer-item-l"><span class="drawer-ico-box">📋</span><span>كشف متابعة فردي</span></span>
+          <span class="drawer-chev">‹</span>
+        </button>
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openQuickCertificatePicker();">
+          <span class="drawer-item-l"><span class="drawer-ico-box gold">🏅</span><span>إصدار شهادة لطالب</span></span>
+          <span class="drawer-chev">‹</span>
+        </button>
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openClassDaysModal();">
+          <span class="drawer-item-l"><span class="drawer-ico-box">🗓️</span><span>أيام الدوام</span></span>
+          <span class="badge b-slate" id="drawerDaysBadge" style="font-size:10.5px;">سبت•إث•أرب</span>
+        </button>
+      </div>
 
-    <div class="drawer-sec">
-      <div class="drawer-sec-lbl">📚 البرامج</div>
-      <button type="button" class="drawer-item" onclick="togglePointsMode(); updateDrawerQuickStates();">
-        <span class="drawer-item-l">⭐ برنامج النقاط والتحفيز</span>
-        <span class="badge b-green" id="drawerPointsBadge">مفعّل</span>
-      </button>
-      <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('istihda');">
-        <span class="drawer-item-l">🌿 برنامج استهداء</span>
-        <span class="badge b-slate" id="drawerProgIstihdaBadge">0</span>
-      </button>
-      <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('hadith');">
-        <span class="drawer-item-l">📜 برنامج الحديث</span>
-        <span class="badge b-slate" id="drawerProgHadithBadge">0</span>
-      </button>
-      <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('activities');">
-        <span class="drawer-item-l">⚽ برنامج النشاطات</span>
-        <span class="badge b-slate" id="drawerProgActBadge">0</span>
-      </button>
-      <div id="drawerSupCustomProgsWrap"></div>
-    </div>
+      <div class="drawer-group-lbl">البرامج المصاحبة</div>
+      <div class="drawer-card-group">
+        <button type="button" class="drawer-item" onclick="togglePointsMode(); updateDrawerQuickStates();">
+          <span class="drawer-item-l"><span class="drawer-ico-box gold">⭐</span><span>برنامج النقاط والتحفيز</span></span>
+          <span class="badge b-green" id="drawerPointsBadge">مفعّل</span>
+        </button>
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('istihda');">
+          <span class="drawer-item-l"><span class="drawer-ico-box">🌿</span><span>برنامج استهداء</span></span>
+          <span class="badge b-slate" id="drawerProgIstihdaBadge">0</span>
+        </button>
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('hadith');">
+          <span class="drawer-item-l"><span class="drawer-ico-box">📜</span><span>برنامج الحديث</span></span>
+          <span class="badge b-slate" id="drawerProgHadithBadge">0</span>
+        </button>
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('activities');">
+          <span class="drawer-item-l"><span class="drawer-ico-box">⚽</span><span>برنامج النشاطات</span></span>
+          <span class="badge b-slate" id="drawerProgActBadge">0</span>
+        </button>
+        <div id="drawerSupCustomProgsWrap"></div>
+      </div>
 
-    <div class="drawer-sec">
-      <div class="drawer-sec-lbl">تفضيلات الجلسة والمظهر</div>
-      <button type="button" class="drawer-item" onclick="closeRightDrawer(); openNotifCenterModal();">
-        <span class="drawer-item-l">🔔 الإشعارات والصوت</span>
-        <span class="badge b-slate" id="drawerNotifBadge">إيقاف</span>
-      </button>
-      <button type="button" class="drawer-item" onclick="toggleHandsFreeFlow(); updateDrawerQuickStates();">
-        <span class="drawer-item-l">⚡ الانتقال التلقائي للتالي</span>
-        <span class="badge b-green" id="drawerFlowBadge">مفعّل</span>
-      </button>
-      <button type="button" class="drawer-item" onclick="toggleAutoSinkDone(); updateDrawerQuickStates();">
-        <span class="drawer-item-l">⬇️ إنزال المُنجَزين للأسفل</span>
-        <span class="badge b-green" id="drawerSinkBadge">مفعّل</span>
-      </button>
-      <button type="button" class="drawer-item" onclick="toggleHalaqaGender(); updateDrawerQuickStates();">
-        <span class="drawer-item-l">👥 صيغة الحلقة (ذكور / إناث)</span>
-        <span class="badge b-slate" id="drawerGenderBadge">ذكور</span>
-      </button>
-      <button type="button" class="drawer-item" onclick="toggleTheme(); updateDrawerQuickStates();">
-        <span class="drawer-item-l">🌙 الوضع الليلي المريح</span>
-        <span class="badge b-slate" id="drawerThemeBadge">نهاري</span>
-      </button>
-    </div>
+      <div class="drawer-group-lbl">التفضيلات والمظهر</div>
+      <div class="drawer-card-group">
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openNotifCenterModal();">
+          <span class="drawer-item-l"><span class="drawer-ico-box">🔔</span><span>الإشعارات والصوت</span></span>
+          <span class="badge b-slate" id="drawerNotifBadge">إيقاف</span>
+        </button>
+        <button type="button" class="drawer-item" onclick="toggleHandsFreeFlow(); updateDrawerQuickStates();">
+          <span class="drawer-item-l"><span class="drawer-ico-box">⚡</span><span>الانتقال التلقائي للتالي</span></span>
+          <span class="badge b-green" id="drawerFlowBadge">مفعّل</span>
+        </button>
+        <button type="button" class="drawer-item" onclick="toggleAutoSinkDone(); updateDrawerQuickStates();">
+          <span class="drawer-item-l"><span class="drawer-ico-box">⬇️</span><span>إنزال المُنجَزين للأسفل</span></span>
+          <span class="badge b-green" id="drawerSinkBadge">مفعّل</span>
+        </button>
+        <button type="button" class="drawer-item" onclick="toggleHalaqaGender(); updateDrawerQuickStates();">
+          <span class="drawer-item-l"><span class="drawer-ico-box">👥</span><span>صيغة الحلقة</span></span>
+          <span class="badge b-slate" id="drawerGenderBadge">ذكور</span>
+        </button>
+        <button type="button" class="drawer-item" onclick="toggleTheme(); updateDrawerQuickStates();">
+          <span class="drawer-item-l"><span class="drawer-ico-box">🌙</span><span>الوضع الليلي</span></span>
+          <span class="badge b-slate" id="drawerThemeBadge">نهاري</span>
+        </button>
+      </div>
 
-    <div class="drawer-sec" style="border-bottom:none;">
-      <div class="drawer-sec-lbl">الإعدادات والنسخ الاحتياطي</div>
-      <button type="button" class="drawer-item" onclick="closeRightDrawer(); openSettingsModal();">
-        <span class="drawer-item-l">⚙️ إعدادات الحلقة والمزامنة</span><span>‹</span>
-      </button>
-      <button type="button" class="drawer-item" onclick="closeRightDrawer(); exportBackupJSON();">
-        <span class="drawer-item-l">💾 حفظ نسخة احتياطية JSON</span><span>↓</span>
-      </button>
-      <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
-        <span class="drawer-item-l">🔄 فحص تحديثات التطبيق</span>
-        <span class="badge b-blue" id="drawerAppVerBadge">v59</span>
-      </button>
+      <div class="drawer-group-lbl">النظام والنسخ الاحتياطي</div>
+      <div class="drawer-card-group" style="margin-bottom:14px;">
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openSettingsModal();">
+          <span class="drawer-item-l"><span class="drawer-ico-box">⚙️</span><span>إعدادات الحلقة والمزامنة</span></span>
+          <span class="drawer-chev">‹</span>
+        </button>
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); exportBackupJSON();">
+          <span class="drawer-item-l"><span class="drawer-ico-box">💾</span><span>حفظ نسخة احتياطية JSON</span></span>
+          <span class="drawer-chev">↓</span>
+        </button>
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
+          <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v62</span>
+        </button>
+      </div>
     </div>
   </aside>
 
@@ -7719,9 +8115,11 @@ html { scroll-behavior: smooth; }
           </div>
         </div>
         <div class="phc-controls">
-          <div class="search-input-wrap" style="min-width:140px;">
-            <input type="search" id="studentsSearchInput" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="🔍 ابحث باسم الطالب..." oninput="onStudentsSearchInput(this.value)" style="padding:7px 10px 7px 34px; font-size:12.5px;">
-            <button type="button" id="studentsSearchClear" class="search-clear-btn" style="display:none;" onmousedown="event.preventDefault()" onclick="clearStudentsSearch()">×</button>
+          <div class="search-input-wrap modern-search-box" style="width:100%;">
+            <span class="search-lead-ico" aria-hidden="true">🔍</span>
+            <input type="text" inputmode="search" enterkeyhint="search" id="studentsSearchInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="ابحث باسم الطالب..." oninput="onStudentsSearchInput(this.value)" onchange="onStudentsSearchInput(this.value)" oncompositionend="onStudentsSearchInput(this.value)">
+            <span id="studentsSearchCount" class="search-count-pill" style="display:none;"></span>
+            <button type="button" id="studentsSearchClear" class="search-clear-btn" style="display:none;" onpointerdown="event.preventDefault()" onclick="clearStudentsSearch()" aria-label="مسح البحث">×</button>
           </div>
         </div>
       </div>
@@ -11025,10 +11423,12 @@ function loadState() {
   } catch (e) { console.error(e); }
 }
 
+let _debouncedSaveTimer = null;
 function saveState(skipCloud = false) {
+  if (_debouncedSaveTimer) { clearTimeout(_debouncedSaveTimer); _debouncedSaveTimer = null; }
   const h = appState.activeHalaqaId ? appState.halaqat[appState.activeHalaqaId] : null;
   if (h && !_supervisorInspectHalaqa) h.lastModifiedAt = new Date().toISOString();
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appState)); } catch {}
   if (typeof updateUnsyncedIndicators === "function") updateUnsyncedIndicators();
   if (!skipCloud) {
     if (typeof markCloudSyncDirty === "function") markCloudSyncDirty();
@@ -11036,6 +11436,12 @@ function saveState(skipCloud = false) {
     if (typeof scheduleTeacherPrivateCloudBackup === "function") scheduleTeacherPrivateCloudBackup(false);
   }
 }
+function saveStateDebounced(delayMs = 350) {
+  clearTimeout(_debouncedSaveTimer);
+  _debouncedSaveTimer = setTimeout(() => { _debouncedSaveTimer = null; saveState(); }, delayMs);
+}
+window.addEventListener("pagehide", () => { if (_debouncedSaveTimer) saveState(); });
+document.addEventListener("visibilitychange", () => { if (document.hidden && _debouncedSaveTimer) saveState(); });
 let _supervisorInspectHalaqa = null;
 function getActiveHalaqa() { if (_supervisorInspectHalaqa) return _supervisorInspectHalaqa; return appState.activeHalaqaId ? (appState.halaqat[appState.activeHalaqaId] || null) : null; }
 function uid(prefix = "id") { return prefix + "_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 7); }
@@ -12382,7 +12788,7 @@ function updateDrawerQuickStates() {
     pb.textContent = ptsOn ? "مفعّل" : "متوقف";
     pb.className = "badge " + (ptsOn ? "b-green" : "b-muted");
     const sl = document.getElementById("drawerStatsLbl");
-    if (sl) sl.textContent = ptsOn ? "🏆 الإحصائيات والنقاط" : "🏆 الإحصائيات";
+    if (sl) sl.textContent = ptsOn ? "الإحصائيات والنقاط" : "الإحصائيات";
   }
   const fb = document.getElementById("drawerFlowBadge");
   if (fb) {
@@ -12477,10 +12883,11 @@ function toggleStudentsReorderMode() {
 
 function normalizeSearchArabic(str) {
   return String(str || "")
-    .replace(/[\u064B-\u065F\u0670\u0640]/g, "")
+    .replace(/[\u064B-\u065F\u0670\u0640\u200B-\u200F\uFEFF]/g, "")
     .replace(/[أإآٱ]/g, "ا")
-    .replace(/ى/g, "ي")
-    .replace(/ة/g, "ه")
+    .replace(/[ىی]/g, "ي")
+    .replace(/[ةھ]/g, "ه")
+    .replace(/ک/g, "ك")
     .replace(/ؤ/g, "و")
     .replace(/ئ/g, "ي")
     .replace(/\s+/g, " ")
@@ -12490,10 +12897,15 @@ function normalizeSearchArabic(str) {
 
 function matchesArabicQuery(normText, normQuery) {
   if (!normQuery) return true;
+  if (!normText) return false;
   if (normText.includes(normQuery)) return true;
+  const compactText = normText.replace(/\s+/g, "");
+  const compactQuery = normQuery.replace(/\s+/g, "");
+  if (compactQuery && compactText.includes(compactQuery)) return true;
   const tokens = normQuery.split(" ");
   for (let i = 0; i < tokens.length; i++) {
-    if (tokens[i] && !normText.includes(tokens[i])) return false;
+    const tk = tokens[i];
+    if (tk && !normText.includes(tk) && !compactText.includes(tk)) return false;
   }
   return true;
 }
@@ -12517,6 +12929,11 @@ function applyStudentsSearchFilterDOM() {
     const match = matchesArabicQuery(c.dataset.stName || "", nq);
     c.style.display = match ? "" : "none";
     if (match) visibleCount++;
+  }
+  const cntEl = document.getElementById("studentsSearchCount");
+  if (cntEl) {
+    if (nq) { cntEl.textContent = `${visibleCount}`; cntEl.style.display = "inline-flex"; }
+    else cntEl.style.display = "none";
   }
   const emptyEl = document.getElementById("studentsSearchEmptyMsg");
   if (emptyEl) emptyEl.style.display = visibleCount === 0 ? "block" : "none";
@@ -14356,7 +14773,7 @@ function updateNoClassReason(val) {
   const s = getCurrentSession();
   if (!s) return;
   s.noClassReason = val;
-  saveState();
+  saveStateDebounced();
 }
 
 function toggleWeekCalendar() {
@@ -14648,40 +15065,80 @@ function renderSessionView() {
 
   const totalSt = h.students.length;
   const doneCnt = h.students.filter(st => isStudentFullyDone(s, st, getStudentRecord(s, st.id))).length;
+  const remCnt = Math.max(0, totalSt - doneCnt);
+  const absCnt = excused + absent;
   const donePct = totalSt > 0 ? Math.round((doneCnt / totalSt) * 100) : 0;
   const pgSummary = s.type === "daily" ? `${formatNum(totalMemPages)} ص` : `${formatNum(totalRevPages)} ص`;
 
-  const actionBtns = `<button class="btn btn-soft btn-sm" style="padding:5px 8px;" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">⚡ تفقد</button>` + (pendingCnt > 0
+  const actionBtns = `<button class="btn btn-soft btn-sm" style="padding:5px 9px;" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">⚡ تفقد</button>` + (pendingCnt > 0
     ? `<button class="btn btn-primary btn-sm" style="padding:5px 8px;" onclick="openNextPendingStudent()" title="فتح المتبقي التالي">⏭️</button>
        <button class="btn btn-warn btn-sm" style="padding:5px 9px;" onclick="openAutoAbsentModal()">غياب (${pendingCnt})</button>`
     : `<button class="btn btn-success btn-sm" style="padding:5px 10px;" onclick="currentReportSubtab='daily'; switchTab('reports')">📄 التقرير</button>`);
 
-  container.innerHTML = `
-    <div class="slim-status-bar no-print">
-      <div class="ssb-info">
-        <span>✅ <b>${doneCnt}/${totalSt}</b></span>
-        <span>• غياب <b>${excused + absent}</b></span>
-        <span>• ${pgSummary}</span>
-        ${isPointsEnabled(h) ? `<span>• ⭐ <b>${totalPts}</b></span>` : ""}
-      </div>
-      <div class="ssb-actions">${actionBtns}</div>
-      <div class="ssb-prog-line"><div class="ssb-prog-fill" style="width:${donePct}%;"></div></div>
+  const statusHtml = `
+    <div class="ssb-info">
+      <span class="ssb-chip ok">✅ <b>${doneCnt}/${totalSt}</b></span>
+      <span class="ssb-chip">غياب <b>${absCnt}</b></span>
+      <span class="ssb-chip">${pgSummary}</span>
     </div>
-
-    <div class="compact-filter-row no-print">
-      <div class="search-input-wrap">
-        <input type="search" id="sessionSearchInput" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="🔍 ابحث باسم الطالب..." value="${escapeHtml(currentSearch)}" oninput="onSessionSearchInput(this.value)">
-        <button type="button" id="sessionSearchClear" class="search-clear-btn" style="display:${currentSearch ? 'inline-flex' : 'none'};" onmousedown="event.preventDefault()" onclick="clearSessionSearch()">×</button>
-      </div>
-      <div class="pill-group" style="gap:3px; flex-wrap:nowrap;">
-        <button class="pill pill-sm ${currentFilter==='all'?'on-slate':''}" onclick="currentFilter='all'; renderSessionView();">الكل</button>
-        <button class="pill pill-sm ${currentFilter==='pending'?'on-orange':''}" onclick="currentFilter='pending'; renderSessionView();">متبقي</button>
-        <button class="pill pill-sm ${currentFilter==='absent'?'on-red':''}" onclick="currentFilter='absent'; renderSessionView();">غائب</button>
-      </div>
-    </div>
-    <div id="studentCardsList"></div>
+    <div class="ssb-actions">${actionBtns}</div>
+    <div class="ssb-prog-line"><div class="ssb-prog-fill" style="width:${donePct}%;"></div></div>
   `;
+
+  let shell = document.getElementById("sessionToolbarShell");
+  if (!shell || !container.contains(shell)) {
+    container.innerHTML = `
+      <div id="sessionToolbarShell" class="no-print">
+        <div id="sessionStatusBar" class="slim-status-bar">${statusHtml}</div>
+        <div class="session-search-panel">
+          <div class="search-input-wrap modern-search-box">
+            <span class="search-lead-ico" aria-hidden="true">🔍</span>
+            <input type="text" inputmode="search" enterkeyhint="search" id="sessionSearchInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="ابحث باسم الطالب..." value="${escapeHtml(currentSearch)}" oninput="onSessionSearchInput(this.value)" onchange="onSessionSearchInput(this.value)" oncompositionend="onSessionSearchInput(this.value)">
+            <span id="sessionSearchCount" class="search-count-pill" style="display:none;"></span>
+            <button type="button" id="sessionSearchClear" class="search-clear-btn" style="display:${currentSearch ? 'inline-flex' : 'none'};" onpointerdown="event.preventDefault()" onclick="clearSessionSearch()" aria-label="مسح البحث">×</button>
+          </div>
+          <div class="session-filter-seg" id="sessionFilterSeg">
+            <button type="button" class="sfs-btn" data-sf="all" onclick="setSessionFilter('all')">الكل <span class="sfs-cnt" id="sfsCntAll">${totalSt}</span></button>
+            <button type="button" class="sfs-btn" data-sf="pending" onclick="setSessionFilter('pending')">متبقي <span class="sfs-cnt" id="sfsCntPend">${remCnt}</span></button>
+            <button type="button" class="sfs-btn" data-sf="absent" onclick="setSessionFilter('absent')">غائب <span class="sfs-cnt" id="sfsCntAbs">${absCnt}</span></button>
+          </div>
+        </div>
+      </div>
+      <div id="studentCardsList"></div>
+    `;
+  } else {
+    const sb = document.getElementById("sessionStatusBar");
+    if (sb) sb.innerHTML = statusHtml;
+    const cAll = document.getElementById("sfsCntAll");
+    const cPend = document.getElementById("sfsCntPend");
+    const cAbs = document.getElementById("sfsCntAbs");
+    if (cAll) cAll.textContent = String(totalSt);
+    if (cPend) cPend.textContent = String(remCnt);
+    if (cAbs) cAbs.textContent = String(absCnt);
+    const inp = document.getElementById("sessionSearchInput");
+    if (inp && document.activeElement !== inp && inp.value !== currentSearch) {
+      inp.value = currentSearch;
+    }
+  }
+  syncSessionFilterButtons();
+  updateSearchClearVis();
   renderStudentCardsOnly();
+}
+
+function syncSessionFilterButtons() {
+  document.querySelectorAll("#sessionFilterSeg .sfs-btn").forEach(btn => {
+    const k = btn.dataset.sf;
+    btn.classList.remove("on-slate", "on-orange", "on-red");
+    if (k === currentFilter) {
+      btn.classList.add(k === "pending" ? "on-orange" : (k === "absent" ? "on-red" : "on-slate"));
+    }
+  });
+}
+
+function setSessionFilter(f) {
+  currentFilter = f || "all";
+  syncSessionFilterButtons();
+  applySessionSearchFilterDOM();
 }
 
 function getStudentPrevSessionHint(h, cur, stId, precomputedCandidates = null) {
@@ -14728,8 +15185,6 @@ function renderStudentCardsOnly() {
     const isPend = isStudentPending(s, r, st);
     const isDone = isStudentFullyDone(s, st, r);
     const isOpen = openCardId === st.id;
-    if (currentFilter === "pending" && isDone) return;
-    if (currentFilter === "absent" && !isAbs) return;
     const qPos = !isDone ? queue.indexOf(st.id) : -1;
     items.push({ st, idx, r, isAbs, isPend, isDone, isOpen, qPos });
   });
@@ -14741,7 +15196,7 @@ function renderStudentCardsOnly() {
 
   // Order: Queued unfinished students first (1, 2, 3...), then remaining unfinished (including half-done Saturday cards!).
   // NEVER sink a card while it is currently OPEN or only half-evaluated on Saturday!
-  const useSink = autoSinkDone && currentFilter === "all";
+  const useSink = autoSinkDone;
   let ordered = [];
   let doneSplitIndex = -1;
 
@@ -14861,7 +15316,7 @@ function renderStudentCardsOnly() {
     }
 
     html += `
-      <div class="st-card ${stClass} ${qPos >= 0 ? 'in-queue' : ''} ${isOpen ? 'open' : ''}" id="card_${st.id}" data-st-name="${escapeHtml(normalizeSearchArabic(st.name))}">
+      <div class="st-card ${stClass} ${qPos >= 0 ? 'in-queue' : ''} ${isOpen ? 'open' : ''}" id="card_${st.id}" data-st-name="${escapeHtml(normalizeSearchArabic(st.name))}" data-is-done="${isDone ? '1' : '0'}" data-is-abs="${isAbs ? '1' : '0'}">
         <div class="st-head" onclick="toggleCard('${st.id}')">
           <div class="st-title-wrap">
             <span class="st-num">${idx + 1}</span>
@@ -14872,7 +15327,7 @@ function renderStudentCardsOnly() {
           </div>
           <div class="badges-wrap">
             ${queueBtn}${lateTag}${statusBadge}
-            ${isPointsEnabled(h) ? `<span class="badge b-slate">⭐ ${r.points || 0}</span>` : ''}
+            ${isPointsEnabled(h) ? `<span class="badge b-slate st-pts-badge">⭐ ${r.points || 0}</span>` : ''}
             <span style="color:var(--ink-500); font-size:11px;">${isOpen ? '▲' : '▼'}</span>
           </div>
         </div>
@@ -14958,19 +15413,41 @@ function applySessionSearchFilterDOM() {
   const listEl = document.getElementById("studentCardsList");
   if (!listEl) return;
   const cards = listEl.querySelectorAll(".st-card");
-  if (!cards.length) return;
   const nq = normalizeSearchArabic(currentSearch);
   let visibleCount = 0;
   for (let i = 0; i < cards.length; i++) {
     const c = cards[i];
-    const match = matchesArabicQuery(c.dataset.stName || "", nq);
-    c.style.display = match ? "" : "none";
-    if (match) visibleCount++;
+    const isDone = c.dataset.isDone === "1";
+    const isAbs = c.dataset.isAbs === "1";
+    let show = true;
+    if (nq) {
+      // Searching searches ALL students immediately regardless of active filter!
+      show = matchesArabicQuery(c.dataset.stName || "", nq);
+    } else {
+      if (currentFilter === "pending" && isDone) show = false;
+      else if (currentFilter === "absent" && !isAbs) show = false;
+    }
+    c.style.display = show ? "" : "none";
+    if (show) visibleCount++;
   }
   const divider = listEl.querySelector(".done-section-divider");
-  if (divider) divider.style.display = nq ? "none" : "";
+  if (divider) divider.style.display = (nq || currentFilter !== "all") ? "none" : "";
+  const cntEl = document.getElementById("sessionSearchCount");
+  if (cntEl) {
+    if (nq) { cntEl.textContent = `${visibleCount} نتيجة`; cntEl.style.display = "inline-flex"; }
+    else cntEl.style.display = "none";
+  }
   const emptyEl = document.getElementById("sessionSearchEmptyMsg");
-  if (emptyEl) emptyEl.style.display = visibleCount === 0 ? "block" : "none";
+  if (emptyEl) {
+    emptyEl.style.display = visibleCount === 0 ? "block" : "none";
+    const p = emptyEl.querySelector("p");
+    if (p) {
+      p.textContent = nq
+        ? `لا يوجد طالب باسم «${currentSearch.trim()}» في الحلقة.`
+        : (currentFilter === "absent" ? "لا يوجد طلاب غائبون في هذه الجلسة 🎉"
+          : (currentFilter === "pending" ? "أحسنت! لا يوجد طلاب متبقون في هذه الجلسة 🎉" : "لا يوجد طلاب بعد."));
+    }
+  }
 }
 
 function clearSessionSearch() {
@@ -15436,7 +15913,7 @@ function renderCardBody(s, st, r, idx) {
 }
 
 // ==================== RECORD MUTATIONS ====================
-function updateRecSilent(studentId, field, value) { const s = getCurrentSession(); if (!s) return; getStudentRecord(s, studentId)[field] = value; saveState(); }
+function updateRecSilent(studentId, field, value) { const s = getCurrentSession(); if (!s) return; getStudentRecord(s, studentId)[field] = value; saveStateDebounced(); }
 function updateRecField(studentId, field, value, rerender = false) {
   updateRecSilent(studentId, field, value);
   if (rerender) {
@@ -15452,7 +15929,7 @@ function onManualPointsInput(studentId, val) {
   saveState();
   const card = document.getElementById("card_" + studentId);
   if (!isPointsEnabled()) return;
-  const badge = card?.querySelector(".st-head .badges-wrap .b-slate");
+  const badge = card?.querySelector(".st-head .badges-wrap .st-pts-badge");
   if (badge) badge.textContent = `⭐ ${r.points}`;
 }
 function stepPoints(studentId, delta) {
@@ -18396,6 +18873,12 @@ function renderCertificatePaper() {
       ? (isFem ? "سائلين الله تعالى أن يبارك في أخلاقها وسمتها، وأن يثبّتها على طاعته ويزيدها أدباً وعلماً،<br>وينفع بها أهلها ومجتمعها، إنه سميع مجيب، والحمد لله رب العالمين" : "سائلين الله تعالى أن يبارك في أخلاقه وسمته، وأن يثبّته على طاعته ويزيده أدباً وعلماً،<br>وينفع به أهله ومجتمعه، إنه سميع مجيب، والحمد لله رب العالمين")
       : (isFem ? "سائلين الله تعالى أن يبارك في همّتها واجتهادها، وأن يديم عليها التوفيق والتميّز،<br>ويجعل القرآن العظيم ربيع قلبها، إنه سميع مجيب، والحمد لله رب العالمين" : "سائلين الله تعالى أن يبارك في همّته واجتهاده، وأن يديم عليه التوفيق والتميّز،<br>ويجعل القرآن العظيم ربيع قلبه، إنه سميع مجيب، والحمد لله رب العالمين"));
 
+  const mkLine = (lbl, val, extraCls = "") => `
+      <div class="smo-line">
+        <span class="smo-line-lbl">${lbl}</span>
+        <span class="smo-line-val ${extraCls}"><span class="smo-val-txt">${escapeHtml(val)}</span><span class="smo-dot-rule"></span></span>
+      </div>`;
+
   let bodyLinesHtml = "";
   if (isHifz) {
     const jName = document.getElementById("certJuzSelect")?.value || JUZ_NAMES[29];
@@ -18405,34 +18888,20 @@ function renderCertificatePaper() {
     const evVal = document.getElementById("certEvalSelect")?.value || "ممتاز";
     const gradeDisplay = evVal + (scRaw !== "" && !isNaN(Number(scRaw)) ? ` (${Math.round(Number(scRaw))}%)` : "");
 
-    bodyLinesHtml = `
-      <div class="smo-line">
-        <span class="smo-line-lbl">تشهد إدارة ${escapeHtml(bm.org)}، صرح:</span>
-        <span class="smo-line-val">${escapeHtml(branchClean)}</span>
-      </div>
-      <div class="smo-line">
-        <span class="smo-line-lbl">أنّ ${_gtC.student}:</span>
-        <span class="smo-line-val is-name">${escapeHtml(st.name)}</span>
-      </div>
-      <div class="smo-line">
-        <span class="smo-line-lbl">قد ${_gtC.heShe} بحمد الله تعالى حفظ:</span>
-        <span class="smo-line-val">${escapeHtml(hifzPart)}</span>
-      </div>
-      <div class="smo-line">
-        <span class="smo-line-lbl">من القرآن الكريم، بتقدير:</span>
-        <span class="smo-line-val">${escapeHtml(gradeDisplay)}</span>
-      </div>`;
+    bodyLinesHtml =
+      mkLine(`تشهد إدارة ${escapeHtml(bm.org)}، صرح:`, branchClean) +
+      mkLine(`أنّ ${_gtC.student}:`, st.name, "is-name") +
+      mkLine(`قد ${_gtC.heShe} بحمد الله تعالى حفظ:`, hifzPart) +
+      mkLine(`من القرآن الكريم، بتقدير:`, gradeDisplay);
   } else {
-    bodyLinesHtml = `
-      <div class="smo-line">
-        <span class="smo-line-lbl">تشهد إدارة ${escapeHtml(bm.org)}، صرح:</span>
-        <span class="smo-line-val">${escapeHtml(branchClean)} — حلقة ${escapeHtml(bm.name)}</span>
-      </div>
-      <div class="smo-line">
-        <span class="smo-line-lbl">أنّ ${_gtC.student}:</span>
-        <span class="smo-line-val is-name">${escapeHtml(st.name)}</span>
-      </div>
-      <div class="smo-custom-reason">${escapeHtml(reason)}</div>`;
+    const rTxt = reason || "";
+    const isLongReason = rTxt.length > 54;
+    bodyLinesHtml =
+      mkLine(`تشهد إدارة ${escapeHtml(bm.org)}، صرح:`, `${branchClean} — حلقة ${bm.name}`) +
+      mkLine(`أنّ ${_gtC.student}:`, st.name, "is-name") +
+      (isLongReason
+        ? `<div class="smo-custom-reason-lined"><span>${escapeHtml(rTxt)}</span></div>`
+        : mkLine(`وذلك لقاء:`, rTxt, "is-reason"));
   }
 
   document.getElementById("certPaperWrap").innerHTML = `
@@ -18457,8 +18926,8 @@ function renderCertificatePaper() {
         </div>
 
         <div class="smo-footer">
-          <div class="smo-foot-r">${_gtC.supervisorTitle}: ${escapeHtml(bm.sheikh)}</div>
-          <div class="smo-foot-c">التاريخ: ${escapeHtml(hjDate)}</div>
+          <div class="smo-foot-r"><span class="smo-f-lbl">${_gtC.supervisorTitle}:</span> <span class="smo-f-val"><span class="smo-val-txt">${escapeHtml(bm.sheikh)}</span><span class="smo-dot-rule"></span></span></div>
+          <div class="smo-foot-c"><span class="smo-f-lbl">التاريخ:</span> <span class="smo-f-val"><span class="smo-val-txt">${escapeHtml(hjDate)}</span><span class="smo-dot-rule"></span></span></div>
           <div class="smo-foot-l">الإدارة</div>
         </div>
       </div>
@@ -19028,7 +19497,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v59 -->
+<!-- Makin App v62 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -21667,7 +22136,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v59";
+const TIBYAN_APP_VERSION = "v62";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -21705,8 +22174,8 @@ function triggerAppUpdateCheck() {
 }
 
 function upgradeNativeOtaBanner(el) {
-  if (!el || el.dataset.v59Upgraded) return;
-  el.dataset.v59Upgraded = "1";
+  if (!el || el.dataset.v60Upgraded) return;
+  el.dataset.v60Upgraded = "1";
   try {
     const rawHtml = el.innerHTML || "";
     const titleMatch = rawHtml.match(/✨[^<]+/);
@@ -21714,28 +22183,29 @@ function upgradeNativeOtaBanner(el) {
     const subMatch = rawHtml.match(/margin-top:2px;">([^<]+)<\/div>/);
     const subTxt = subMatch ? subMatch[1].trim() : "تم تنزيل التحديث وجاهز للتفعيل فوراً";
 
-    el.className = "makin-ota-card-v59";
+    el.className = "makin-ota-modal-v60";
     el.removeAttribute("style");
     el.innerHTML = `
-      <div class="ota-row">
-        <div style="min-width:0; flex:1;">
-          <div style="font-size:13.5px; font-weight:800; color:#f4d98d;">${escapeHtml(titleTxt)}</div>
-          <div style="font-size:11.5px; color:#e2edf8; margin-top:2px;">${escapeHtml(subTxt)}</div>
+      <div class="ota-dialog">
+        <div class="ota-badge">🔄 تحديث جاهز لتطبيق مكين</div>
+        <div class="ota-title">${escapeHtml(titleTxt)}</div>
+        <div class="ota-desc">${escapeHtml(subTxt)}</div>
+        <div class="ota-btns">
+          <button type="button" class="ota-btn-primary" onclick="if(window.MakinAndroid)window.MakinAndroid.applyDownloadedUpdateNow();">🚀 تفعيل التحديث الآن</button>
+          <button type="button" class="ota-btn-later" onclick="const b=document.getElementById('makinOtaBanner'); if(b) b.remove();">لاحقاً</button>
         </div>
-        <button type="button" onclick="if(window.MakinAndroid)window.MakinAndroid.applyDownloadedUpdateNow();" style="border:none; background:#c8a14b; color:#0d2645; font-weight:800; font-size:12.5px; padding:8px 13px; border-radius:9px; cursor:pointer; white-space:nowrap;">تفعيل الآن</button>
-        <button type="button" class="ota-close" onclick="const b=document.getElementById('makinOtaBanner'); if(b) b.remove();" title="إغلاق">×</button>
       </div>
-      <div class="ota-bar"><div class="ota-bar-fill"></div></div>
     `;
     clearTimeout(window._makinOtaAutoHideTimer);
-    window._makinOtaAutoHideTimer = setTimeout(() => {
-      const b = document.getElementById("makinOtaBanner");
-      if (b) b.remove();
-    }, 45000);
   } catch {}
 }
 
 function installMakinOtaBannerGuard() {
+  try {
+    if (window.MakinAndroid && typeof window.MakinAndroid.notifyAppReady === "function") {
+      window.MakinAndroid.notifyAppReady();
+    }
+  } catch {}
   if (window.__makinOtaGuardInstalled) return;
   window.__makinOtaGuardInstalled = true;
   const existing = document.getElementById("makinOtaBanner");
@@ -21758,7 +22228,7 @@ function installMakinOtaBannerGuard() {
     const lastSeenVer = localStorage.getItem("makin_last_boot_ver") || "";
     if (lastSeenVer && lastSeenVer !== TIBYAN_APP_VERSION) {
       setTimeout(() => {
-        showToast(`✅ تم التحديث بنجاح إلى ${TIBYAN_APP_VERSION} — تحسين البحث وإشعارات التحديث`);
+        showToast(`✅ تم تحديث تطبيق مكين بنجاح إلى الإصدار ${TIBYAN_APP_VERSION}`);
       }, 900);
     }
     localStorage.setItem("makin_last_boot_ver", TIBYAN_APP_VERSION);
@@ -21893,14 +22363,22 @@ async function hydrateSignedInFirebaseUser(fbUser) {
         saveAccountsState();
       }
 
-      renderGlobalAnnouncement(ann, latestVer);
+      // If Founder opens app on a newer build than Firebase config/latestVersion, silently keep server version aligned
+      if (profile.isOwner && parseAppVersionNum(TIBYAN_APP_VERSION) > parseAppVersionNum(latestVer)) {
+        fbDbSet("config/latestVersion", TIBYAN_APP_VERSION).catch(() => {});
+        renderGlobalAnnouncement(ann, TIBYAN_APP_VERSION);
+      } else {
+        renderGlobalAnnouncement(ann, latestVer);
+      }
       startLiveNotificationListeners();
 
       const anyModalOpen = Boolean(document.querySelector(".modal-backdrop.show"));
+      const activeTag = document.activeElement?.tagName || "";
+      const isUserTyping = activeTag === "INPUT" || activeTag === "TEXTAREA" || activeTag === "SELECT";
       const authVisible = document.getElementById("authScreen")?.style.display !== "none";
       const changedUserOrData = merged || authVisible || prevUid !== fbUser.uid || prevRole !== profile.role || _lastHydratedUid !== fbUser.uid;
       _lastHydratedUid = fbUser.uid;
-      if (!anyModalOpen && changedUserOrData) {
+      if (!anyModalOpen && !isUserTyping && changedUserOrData) {
         routeAppByCurrentUser();
       } else {
         updateTeacherAccountDrawerUI();
@@ -21913,25 +22391,52 @@ async function hydrateSignedInFirebaseUser(fbUser) {
   }
 }
 
+function parseAppVersionNum(verStr) {
+  const s = String(verStr || "").trim().toLowerCase();
+  if (!s) return 0;
+  const m = s.match(/v?(\d+)(?:\.(\d+))?/);
+  if (!m) return 0;
+  const major = parseInt(m[1], 10) || 0;
+  const minor = m[2] !== undefined ? (parseInt(m[2], 10) || 0) : null;
+  if (major < 15 && minor !== null) return major * 10 + minor;
+  return major;
+}
+
+let _cachedRemoteLatestVer = null;
 function renderGlobalAnnouncement(ann, latestVer) {
+  if (latestVer) _cachedRemoteLatestVer = latestVer;
+  const effLatestVer = latestVer || _cachedRemoteLatestVer;
   const bar = document.getElementById("globalAnnouncementBar");
   if (!bar) return;
   const dismissedKey = "tibyan_ann_dismissed_v1";
+  const dismissedVerKey = "tibyan_ver_dismissed_v1";
   const parts = [];
+  let shownAnnTs = "";
+  let shownVer = "";
+
   if (ann && ann.active && ann.body && localStorage.getItem(dismissedKey) !== ann.updatedAt) {
     parts.push(`📢 <b>${escapeHtml(ann.title || 'تنبيه من الإدارة')}:</b> ${escapeHtml(ann.body)}`);
+    shownAnnTs = ann.updatedAt || "";
   }
-  if (latestVer && latestVer !== TIBYAN_APP_VERSION) {
-    parts.push(`✨ يتوفر إصدار جديد (${escapeHtml(latestVer)}) — أعد تحميل التطبيق للحصول على أحدث الميزات`);
+
+  const curNum = parseAppVersionNum(TIBYAN_APP_VERSION);
+  const remNum = parseAppVersionNum(effLatestVer);
+  const isStrictlyNewer = remNum > curNum;
+  if (effLatestVer && isStrictlyNewer && localStorage.getItem(dismissedVerKey) !== String(effLatestVer)) {
+    const chkBtn = window.MakinAndroid ? ` <button type="button" onclick="triggerAppUpdateCheck()" style="border:none; background:#c8a14b; color:#0d2645; font-weight:800; font-size:11.5px; padding:3px 9px; border-radius:7px; margin-right:6px; cursor:pointer;">تحديث الآن</button>` : "";
+    parts.push(`✨ يتوفر إصدار جديد (${escapeHtml(effLatestVer)})${chkBtn}`);
+    shownVer = String(effLatestVer);
   }
+
   if (!parts.length) { bar.style.display = "none"; return; }
   bar.innerHTML = `<div style="flex:1;">${parts.join(" &nbsp;|&nbsp; ")}</div>
-    <button type="button" class="global-ann-close" onclick="dismissGlobalAnnouncement('${escapeHtml(ann?.updatedAt || '')}')">×</button>`;
+    <button type="button" class="global-ann-close" onclick="dismissGlobalAnnouncement('${escapeHtml(shownAnnTs)}','${escapeHtml(shownVer)}')">×</button>`;
   bar.style.display = "flex";
 }
 
-function dismissGlobalAnnouncement(ts) {
+function dismissGlobalAnnouncement(ts, verStr = "") {
   if (ts) localStorage.setItem("tibyan_ann_dismissed_v1", ts);
+  if (verStr) localStorage.setItem("tibyan_ver_dismissed_v1", verStr);
   const bar = document.getElementById("globalAnnouncementBar");
   if (bar) bar.style.display = "none";
 }
