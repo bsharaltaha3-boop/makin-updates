@@ -8380,6 +8380,336 @@ html { scroll-behavior: smooth; }
   color: #ffffff;
 }
 
+
+/* ==================== MAKIN v72: EXECUTIVE HOMEWORK/SURAH PICKER & EVAL SHEET POLISH ==================== */
+.es-abs-notice {
+  background: var(--red-bg);
+  border: 1px solid rgba(185, 34, 34, 0.25);
+  border-right: 3.5px solid var(--red);
+  color: var(--red);
+  border-radius: 10px;
+  padding: 6px 10px;
+  margin-bottom: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.lms-btn.ltr-num, .sp-step-grid button, .pts-stepper-v29 button, .sabr-score-grid button {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Executive Redesign of surahPickerModal (v72 — Zero Clutter, Zero Scroll Ayah Tuning) */
+#surahPickerModal {
+  background: rgba(11, 24, 40, 0.62) !important;
+}
+#surahPickerModal .sp-sheet-box {
+  background: var(--bg);
+  border: 1px solid rgba(200, 161, 75, 0.35);
+  box-shadow: 0 22px 58px rgba(8, 20, 36, 0.44);
+}
+#surahPickerModal .sp-exec-hdr {
+  background: linear-gradient(145deg, #102540 0%, #1a375c 100%);
+  color: #ffffff;
+  padding: 7px 14px 11px;
+  border-bottom: 2.5px solid #c8a14b;
+  flex-shrink: 0;
+}
+#surahPickerModal .sp-exec-hdr .sp-sheet-handle {
+  background: rgba(255, 255, 255, 0.3);
+  margin: 0 auto 7px;
+}
+.sp-exec-hdr-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.sp-exec-hdr-titles {
+  min-width: 0;
+  flex: 1;
+}
+.sp-exec-hdr-titles h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+.sp-exec-hdr-sub {
+  font-size: 11px;
+  color: #cde0f2;
+  font-weight: 600;
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sp-exec-close {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  width: 31px;
+  height: 31px;
+  border-radius: 9px;
+  font-size: 18px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+#surahPickerModal .sp-sheet-body {
+  padding: 10px 12px 10px;
+}
+#surahPickerModal .sp-mode-tabs {
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 9px;
+  box-shadow: 0 1px 4px rgba(16, 42, 73, 0.04);
+}
+#surahPickerModal .sp-mode-tab.on {
+  background: #142a46;
+  color: #ffffff;
+}
+[data-theme="dark"] #surahPickerModal .sp-mode-tab.on {
+  background: #c8a14b;
+  color: #0f233c;
+}
+
+/* Active Surah Selector Hero Card */
+.sp-active-surah-card {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--white);
+  border: 1.5px solid var(--line-strong);
+  border-right: 4px solid #142a46;
+  border-radius: 13px;
+  padding: 6px 7px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(16, 42, 73, 0.05);
+}
+[data-theme="dark"] .sp-active-surah-card {
+  border-right-color: #c8a14b;
+}
+.sp-active-surah-card.browser-open {
+  border-color: #142a46;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  margin-bottom: 0;
+}
+.sp-surah-step-btn {
+  width: 34px;
+  height: 36px;
+  border-radius: 9px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--brand-slate);
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sp-surah-step-btn:active { transform: scale(0.93); background: var(--brand-tint); }
+.sp-surah-hero-mid {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  padding: 2px 4px;
+  text-align: right;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.sp-sh-info { min-width: 0; flex: 1; }
+.sp-sh-name {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--ink-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+.sp-sh-meta {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-500);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sp-sh-chg-pill {
+  background: var(--blue-bg);
+  color: var(--blue);
+  border: 1px solid rgba(21, 98, 154, 0.22);
+  border-radius: 99px;
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Collapsible Surah Browser Drawer */
+.sp-browser-drawer {
+  background: var(--white);
+  border: 1.5px solid #142a46;
+  border-top: none;
+  border-radius: 0 0 13px 13px;
+  padding: 9px;
+  margin-bottom: 9px;
+  box-shadow: 0 6px 18px rgba(16, 42, 73, 0.08);
+  animation: obStepIn 0.15s ease;
+}
+[data-theme="dark"] .sp-browser-drawer {
+  border-color: #c8a14b;
+}
+.sp-browser-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+.sp-browser-search-wrap input {
+  width: 100%;
+  height: 35px;
+  padding: 0 32px 0 28px !important;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink-900);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.sp-browser-search-wrap .sp-s-ico {
+  position: absolute;
+  right: 9px;
+  font-size: 13px;
+  opacity: 0.65;
+  pointer-events: none;
+}
+.sp-browser-search-wrap .sp-s-clr {
+  position: absolute;
+  left: 5px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: var(--line);
+  color: var(--ink-700);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Balanced Non-Clipped Presets Grid */
+.sp-preset-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 6px;
+}
+.sp-preset-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 8px;
+}
+.sp-preset-grid-4 .sp-preset-btn,
+.sp-preset-grid-2 .sp-preset-btn {
+  width: 100%;
+  text-align: center;
+  padding: 6px 3px;
+  font-size: 11.5px;
+  font-weight: 800;
+  border-radius: 9px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Compact Clean Ayah Cards (BOTH visible together without scrolling!) */
+#surahPickerModal .sp-ayah-box {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+#surahPickerModal .sp-slider-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 8px 10px 7px;
+  margin-bottom: 7px;
+  box-shadow: 0 1px 5px rgba(16, 42, 73, 0.04);
+}
+#surahPickerModal .sp-slider-hdr {
+  margin-bottom: 5px;
+}
+#surahPickerModal .sp-step-grid {
+  grid-template-columns: 38px 38px minmax(60px, 1fr) 38px 38px;
+  gap: 5px;
+  margin-bottom: 6px;
+}
+#surahPickerModal .sp-step-grid button {
+  height: 31px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+#surahPickerModal .sp-step-grid input[type="number"] {
+  height: 31px;
+  font-size: 15px;
+  direction: ltr;
+  border-color: #142a46;
+}
+#surahPickerModal .sp-range-input {
+  margin: 4px 0 2px;
+}
+#surahPickerModal .sp-sheet-footer {
+  padding: 9px 12px calc(env(safe-area-inset-bottom, 4px) + 10px);
+}
+#surahPickerModal .sp-preview-strip {
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-right: 4px solid #16794c;
+  border-radius: 11px;
+  padding: 7px 10px;
+  margin-bottom: 8px;
+}
+#surahPickerModal .sp-footer-actions {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: center;
+}
+#surahPickerModal .sp-apply-btn {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 800;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #142a46 0%, #1e426c 100%);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+#surahPickerModal .sp-apply-btn:active { transform: scale(0.98); }
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -8576,7 +8906,7 @@ html { scroll-behavior: smooth; }
         <button type="button" class="ob-util-btn" onclick="toggleTheme()" title="تبديل المظهر">🌙 المظهر</button>
       </div>
       <div class="welcome-logo-box"><img id="obLogoImg" alt="شعار تبيان"></div>
-      <h1>برنامج تبيان لإدارة الحلقات</h1>
+      <h1>منصّة مكين لإدارة الحلقات</h1>
       <p>التسميع التلقائي • الأرشيف • تقارير PDF وصور وإكسل مطابقة 100%</p>
       <div class="welcome-hijri-pill" id="obTodayHijri">...</div>
     </div>
@@ -8750,33 +9080,18 @@ html { scroll-behavior: smooth; }
         </div>
       </div>
 
-      <!-- ===== MODE B: RESTORE EXISTING HALAQA (JSON / FIREBASE) ===== -->
+      <!-- ===== MODE B: RESTORE EXISTING HALAQA FROM DEVICE FILE ===== -->
       <div id="obRestorePanel" style="display:none;">
-        <button type="button" class="ob-restore-drop" onclick="document.getElementById('obImportFile').click()">
+        <div class="cloud-status-card" style="margin-bottom:11px;">
+          <div style="font-size:12.5px; font-weight:800; color:var(--ink-900); margin-bottom:3px;">☁️ الاستعادة السحابية تلقائية</div>
+          <div style="font-size:11.5px; color:var(--ink-700); line-height:1.55;">بمجرد تسجيل الدخول بحسابك تُستعاد حلقاتك وطلابك وتقاريرك تلقائياً دون أي روابط أو أكواد.</div>
+        </div>
+        <button type="button" class="ob-restore-drop" style="margin-bottom:0;" onclick="document.getElementById('obImportFile').click()">
           <div style="font-size:26px; margin-bottom:4px;">📂</div>
-          <div style="font-size:13.5px; font-weight:800; color:var(--brand-slate);">استعادة من ملف نسخة احتياطية (JSON)</div>
-          <div style="font-size:11.5px; color:var(--ink-500); margin-top:2px;">يستعيد الطلاب والأرشيف والتقارير كاملة فوراً</div>
+          <div style="font-size:13.5px; font-weight:800; color:var(--brand-slate);">استعادة نسخة احتياطية من الجهاز</div>
+          <div style="font-size:11.5px; color:var(--ink-500); margin-top:2px;">اختر ملف النسخة الاحتياطية المحفوظ لديك لاستعادة الحلقة فوراً</div>
         </button>
         <input type="file" id="obImportFile" accept=".json" style="display:none;" onchange="importBackupFile(event)">
-
-        <div class="ob-restore-card">
-          <div style="font-size:13px; font-weight:800; color:var(--brand-slate); margin-bottom:8px;">☁️ استيراد حلقة محفوظة من السحابة (Firebase)</div>
-          <div class="ob-field">
-            <label>رابط Firebase RTDB</label>
-            <div class="ob-input-wrap">
-              <span class="ob-input-ico">🔗</span>
-              <input type="url" id="obFbUrl" placeholder="https://your-app-default-rtdb.firebaseio.com" dir="ltr" style="text-align:right;">
-            </div>
-          </div>
-          <div class="ob-field" style="margin-bottom:11px;">
-            <label>رمز الحلقة</label>
-            <div class="ob-input-wrap">
-              <span class="ob-input-ico">🔑</span>
-              <input type="text" id="obRoomCode" placeholder="مثال: moaz1448">
-            </div>
-          </div>
-          <button type="button" class="ob-btn-next" style="width:100%;" onclick="pullCloudFromOnboarding()">⬇️ سحب الحلقة من السحابة الآن</button>
-        </div>
       </div>
     </div>
   </div>
@@ -8913,12 +9228,12 @@ html { scroll-behavior: smooth; }
       <div class="drawer-group-lbl">النسخ الاحتياطي والتحديث</div>
       <div class="drawer-card-group" style="margin-bottom:14px;">
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); exportBackupJSON();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">💾</span><span>حفظ نسخة احتياطية JSON</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box">💾</span><span>حفظ نسخة على الجهاز</span></span>
           <span class="drawer-chev">↓</span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v70</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v72</span>
         </button>
       </div>
     </div>
@@ -9698,7 +10013,7 @@ html { scroll-behavior: smooth; }
     <div class="exec-modal-tabs">
       <button type="button" class="exec-tab-btn on" id="setTabBtn_halaqa" onclick="switchSettingsTab('halaqa')">🕌 الحلقة</button>
       <button type="button" class="exec-tab-btn" id="setTabBtn_system" onclick="switchSettingsTab('system')">🗓️ الدوام والطلاب</button>
-      <button type="button" class="exec-tab-btn" id="setTabBtn_cloud" onclick="switchSettingsTab('cloud')">☁️ السحابة والنسخ</button>
+      <button type="button" class="exec-tab-btn" id="setTabBtn_cloud" onclick="switchSettingsTab('cloud')">☁️ السحابة</button>
     </div>
 
     <div class="exec-modal-body">
@@ -9785,10 +10100,7 @@ html { scroll-behavior: smooth; }
           <div class="cloud-status-card" id="setAutoCloudStatusBox">
             <div style="font-size:12.5px; font-weight:800; color:var(--ink-900); margin-bottom:4px;" id="setAutoCloudTitle">☁️ الحفظ السحابي التلقائي نشط</div>
             <div style="font-size:11.5px; color:var(--ink-700); margin-bottom:9px;" id="setAutoCloudSub">تُحفظ بيانات الطلاب والجلسات والتقارير تلقائياً على حسابك بمجرد توفر الإنترنت.</div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-              <button type="button" class="btn btn-primary btn-sm" onclick="syncCentralCloudNow(true)">☁️ مزامنة فورية</button>
-              <button type="button" class="btn btn-soft btn-sm" onclick="closeModal('settingsModal'); openNotifCenterModal();">🔔 الإشعارات والمنبّه</button>
-            </div>
+            <button type="button" class="btn btn-primary btn-sm" style="width:100%;" onclick="syncCentralCloudNow(true)">☁️ مزامنة فورية الآن</button>
           </div>
           <input type="hidden" id="setFbUrl">
           <input type="hidden" id="setRoomCode">
@@ -9804,9 +10116,9 @@ html { scroll-behavior: smooth; }
         </div>
 
         <div class="exec-card">
-          <div class="exec-card-ttl"><span>💾 النسخ الاحتياطي (JSON)</span></div>
+          <div class="exec-card-ttl"><span>💾 نسخة احتياطية على الجهاز</span></div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:7px;">
-            <button type="button" class="btn btn-soft btn-sm" onclick="exportBackupJSON()">💾 حفظ نسخة JSON</button>
+            <button type="button" class="btn btn-soft btn-sm" onclick="exportBackupJSON()">💾 حفظ نسخة</button>
             <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('settingsImportFile').click()">📂 استعادة نسخة</button>
             <input type="file" id="settingsImportFile" accept=".json" style="display:none;" onchange="importBackupFile(event)">
           </div>
@@ -10022,10 +10334,15 @@ html { scroll-behavior: smooth; }
 <!-- ===== MODAL: MODERN PRO SURAH, AYAH & SABR JUZ SHEET (v35) ===== -->
 <div class="modal-backdrop" id="surahPickerModal" style="z-index:130;" onclick="if(event.target===this) closeModal('surahPickerModal')">
   <div class="sp-sheet-box">
-    <div class="sp-sheet-handle"></div>
-    <div class="sp-sheet-header">
-      <h3 id="spModalTitle">📖 اختيار السورة والآيات</h3>
-      <button type="button" class="close-x" onclick="closeModal('surahPickerModal')">×</button>
+    <div class="sp-exec-hdr">
+      <div class="sp-sheet-handle"></div>
+      <div class="sp-exec-hdr-row">
+        <div class="sp-exec-hdr-titles">
+          <h3 id="spModalTitle">📖 اختيار السورة والآيات</h3>
+          <div class="sp-exec-hdr-sub" id="spModalSub">اضبط الآيات أو غيّر السورة بسهولة</div>
+        </div>
+        <button type="button" class="sp-exec-close" onclick="closeModal('surahPickerModal')" aria-label="إغلاق">×</button>
+      </div>
     </div>
 
     <div class="sp-sheet-body">
@@ -10038,16 +10355,22 @@ html { scroll-behavior: smooth; }
       <!-- Panel A: Surah & Ayah Selection -->
       <div id="spSurahModePanel">
         <div id="spSegBar" class="sp-seg-bar"></div>
+        <div id="spActiveSurahCard"></div>
 
-        <div class="sp-search-row">
-          <input type="text" id="spSearchInput" placeholder="🔍 ابحث باسم السورة (الرحمن، الملك، قريش)..." oninput="spSearch=this.value; renderSpSurahGrid();">
-          <button type="button" class="sp-tool-btn" id="spDirToggleBtn" onclick="spToggleDirection()" title="تبديل اتجاه ترتيب السور">⇅</button>
-          <button type="button" class="sp-tool-btn" onclick="spJumpSurah(-1)" title="السورة السابقة">›</button>
-          <button type="button" class="sp-tool-btn" onclick="spJumpSurah(1)" title="السورة التالية">‹</button>
+        <!-- Collapsible Surah Browser Drawer (Opens on Demand — Keeps Ayah Sliders Always Visible!) -->
+        <div id="spBrowserDrawer" class="sp-browser-drawer" style="display:none;">
+          <div class="sp-search-row">
+            <div class="sp-browser-search-wrap">
+              <span class="sp-s-ico">🔍</span>
+              <input type="text" id="spSearchInput" autocomplete="off" placeholder="ابحث باسم السورة..." oninput="onSpSearchInput(this.value)">
+              <button type="button" id="spSearchClearBtn" class="sp-s-clr" style="display:none;" onclick="clearSpSearch()" aria-label="مسح البحث">×</button>
+            </div>
+            <button type="button" class="sp-tool-btn" id="spDirToggleBtn" onclick="spToggleDirection()" title="تبديل ترتيب السور">⬆️ عمّ</button>
+          </div>
+          <div id="spJuzStrip" class="sp-juz-strip"></div>
+          <div id="spSurahGrid" class="sp-surah-grid" style="margin-bottom:0;"></div>
         </div>
 
-        <div id="spJuzStrip" class="sp-juz-strip"></div>
-        <div id="spSurahGrid" class="sp-surah-grid"></div>
         <div id="spAyahBox" class="sp-ayah-box"></div>
       </div>
 
@@ -10062,7 +10385,7 @@ html { scroll-behavior: smooth; }
     <div class="sp-sheet-footer">
       <div id="spPreviewStrip" class="sp-preview-strip"></div>
       <div id="spQuickEvalWrap" class="sp-quick-eval-wrap" style="display:none;">
-        <div class="sp-quick-eval-lbl">⚡ حفظ وتقييم فوري بضغطة واحدة (يغنيك عن التعديل بالأسفل):</div>
+        <div class="sp-quick-eval-lbl">⚡ حفظ وتقييم فوري بضغطة واحدة:</div>
         <div class="sp-quick-eval-4">
           <button type="button" class="sp-qe-btn qe-ex" onclick="applySurahPicker('ممتاز')">ممتاز</button>
           <button type="button" class="sp-qe-btn qe-vg" onclick="applySurahPicker('جيد جداً')">جيد جداً</button>
@@ -10071,11 +10394,8 @@ html { scroll-behavior: smooth; }
         </div>
       </div>
       <div class="sp-footer-actions">
-        <button type="button" class="btn btn-danger btn-sm" id="spClearBtn" onclick="clearSurahPickerSelection()">مسح</button>
-        <div style="display:flex; gap:7px; flex:1; justify-content:flex-end;">
-          <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('surahPickerModal')">إلغاء</button>
-          <button type="button" class="btn btn-primary" style="min-width:138px;" onclick="applySurahPicker()">✓ اعتماد وتطبيق</button>
-        </div>
+        <button type="button" class="btn btn-danger btn-sm" id="spClearBtn" style="height:40px; padding:0 13px; border-radius:11px;" onclick="clearSurahPickerSelection()">🗑️ مسح</button>
+        <button type="button" class="sp-apply-btn" onclick="applySurahPicker()">✓ اعتماد وتطبيق</button>
       </div>
     </div>
   </div>
@@ -12592,13 +12912,49 @@ function errorCountArabicText(errs) {
   return `بـ ${n} أخطاء`;
 }
 
+function syncEvalSuggestedBtnInPlace(kind, nErr, curEval) {
+  const row = document.getElementById("esEvalRow_" + kind);
+  if (!row) return false;
+  const sugEv = nErr > 0 ? evalFromErrorCount(nErr) : "";
+  row.querySelectorAll(".es-eval-btn").forEach(btn => {
+    const ev = btn.dataset.ev || "";
+    const isCur = curEval === ev;
+    const isSug = Boolean(sugEv && sugEv === ev && !isCur);
+    btn.classList.toggle("es-suggested", isSug);
+    let dot = btn.querySelector(".es-sug-dot");
+    if (isSug && !dot) {
+      dot = document.createElement("span");
+      dot.className = "es-sug-dot";
+      dot.textContent = "مقترح";
+      btn.prepend(dot);
+    } else if (!isSug && dot) {
+      dot.remove();
+    }
+    const fn = btn.dataset.fn, sid = btn.dataset.sid;
+    if (fn && sid) {
+      const errArg = (isCur || nErr === 0) ? "null" : String(nErr);
+      btn.setAttribute("onclick", `${fn}('${sid}','${ev}',${errArg})`);
+    }
+  });
+  return true;
+}
+
 function stepErrorCounter(studentId, kind, delta) {
   const s = getCurrentSession();
   if (!s) return;
   const r = getStudentRecord(s, studentId);
   const key = kind === "min" ? "minErrors" : (kind === "maj" ? "majErrors" : "recErrors");
-  r[key] = Math.max(0, (Number(r[key]) || 0) + delta);
+  const nextVal = Math.max(0, (Number(r[key]) || 0) + delta);
+  if (nextVal === (Number(r[key]) || 0)) return;
+  r[key] = nextVal;
   saveStateDebounced(220);
+  const valEl = document.getElementById(`esErrVal_${kind}`);
+  if (valEl && openCardId === studentId) {
+    valEl.textContent = String(nextVal);
+    const curEv = kind === "min" ? r.minEval : (kind === "maj" ? r.majEval : r.recEval);
+    syncEvalSuggestedBtnInPlace(kind, nextVal, curEv || "");
+    return;
+  }
   if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
     syncStudentEvalSheet();
   } else {
@@ -12627,8 +12983,15 @@ function stepAlertCounter(studentId, kind, delta) {
   if (!s) return;
   const r = getStudentRecord(s, studentId);
   const key = kind === "min" ? "minAlerts" : (kind === "maj" ? "majAlerts" : "recAlerts");
-  r[key] = Math.max(0, (Number(r[key]) || 0) + delta);
+  const nextVal = Math.max(0, (Number(r[key]) || 0) + delta);
+  if (nextVal === (Number(r[key]) || 0)) return;
+  r[key] = nextVal;
   saveStateDebounced(220);
+  const valEl = document.getElementById(`esAlrtVal_${kind}`);
+  if (valEl && openCardId === studentId) {
+    valEl.textContent = String(nextVal);
+    return;
+  }
   if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
     syncStudentEvalSheet();
   } else {
@@ -12641,14 +13004,14 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
   const a = Math.max(0, Number(alerts) || 0);
   return `<div class="es-err-grid-2">
     <div class="es-err-cap" title="تسجيل أخطاء الحفظ (يقترح التقييم تلقائياً)">
-      <button type="button" class="es-cap-btn" onclick="stepErrorCounter('${studentId}','${kind}',-1)" aria-label="إنقاص خطأ">−</button>
-      <span class="es-cap-lbl" onclick="stepErrorCounter('${studentId}','${kind}',1)">أخطاء: <b>${n}</b></span>
       <button type="button" class="es-cap-btn plus-err" onclick="stepErrorCounter('${studentId}','${kind}',1)" aria-label="تسجيل خطأ">+</button>
+      <span class="es-cap-lbl" onclick="stepErrorCounter('${studentId}','${kind}',1)">أخطاء: <b id="esErrVal_${kind}">${n}</b></span>
+      <button type="button" class="es-cap-btn" onclick="stepErrorCounter('${studentId}','${kind}',-1)" aria-label="إنقاص خطأ">−</button>
     </div>
     <div class="es-err-cap is-alert" title="عداد التنبيهات (لا يؤثر على التقييم)">
-      <button type="button" class="es-cap-btn" onclick="stepAlertCounter('${studentId}','${kind}',-1)" aria-label="إنقاص تنبيه">−</button>
-      <span class="es-cap-lbl" onclick="stepAlertCounter('${studentId}','${kind}',1)">تنبيه: <b>${a}</b></span>
       <button type="button" class="es-cap-btn plus-alrt" onclick="stepAlertCounter('${studentId}','${kind}',1)" aria-label="تسجيل تنبيه">+</button>
+      <span class="es-cap-lbl" onclick="stepAlertCounter('${studentId}','${kind}',1)">تنبيه: <b id="esAlrtVal_${kind}">${a}</b></span>
+      <button type="button" class="es-cap-btn" onclick="stepAlertCounter('${studentId}','${kind}',-1)" aria-label="إنقاص تنبيه">−</button>
     </div>
   </div>`;
 }
@@ -12784,6 +13147,7 @@ function openSurahPicker(studentId, kind) {
     initMode = "sabr";
   }
 
+  const hadRealExisting = Boolean(getSegments(r, kind).length || (kind === "maj") || (kind === "nextMaj" && (r.nextMajStartSurahId || r.nextMajStartPage)));
   spState = {
     studentId,
     kind,
@@ -12792,22 +13156,27 @@ function openSurahPicker(studentId, kind) {
     segs: existing,
     activeIdx: 0,
     juzFilter: 0,
+    browserOpen: !hadRealExisting,
     sabrJuzName: activeSabr,
     sabrScore: (r.sabrScore !== undefined && r.sabrScore !== null) ? r.sabrScore : ""
   };
   spSearch = "";
   const sInp = document.getElementById("spSearchInput");
   if (sInp) sInp.value = "";
+  const sClr = document.getElementById("spSearchClearBtn");
+  if (sClr) sClr.style.display = "none";
 
   const titles = {
-    rec: `📖 التسميع الجديد — ${st.name}`,
-    hw: `📝 الواجب المنزلي — ${st.name}`,
-    min: `📗 المراجعة الصغرى — ${st.name}`,
-    maj: `📘 المراجعة الكبرى — ${st.name}`,
-    nextMaj: `📝 واجب الكبرى القادم — ${st.name}`,
-    dRev: `🔄 مراجعة اليوم — ${st.name}`
+    rec: "📖 التسميع الجديد",
+    hw: "📝 الواجب المنزلي",
+    min: "📗 المراجعة الصغرى",
+    maj: "📘 المراجعة الكبرى",
+    nextMaj: "📝 واجب الكبرى القادم",
+    dRev: "🔄 مراجعة اليوم"
   };
-  document.getElementById("spModalTitle").textContent = titles[kind] || `اختيار السورة — ${st.name}`;
+  document.getElementById("spModalTitle").textContent = titles[kind] || "📖 اختيار السورة والآيات";
+  const subEl = document.getElementById("spModalSub");
+  if (subEl) subEl.textContent = `${st.name} • اضبط الآيات أو غيّر السورة`;
   document.getElementById("spClearBtn").style.display = "inline-flex";
 
   renderSurahPickerUI();
@@ -12828,12 +13197,17 @@ function openSurahPickerForStudentModal() {
     segs: [{ surahId: String(info.id), from: curFrom, to: info.a }],
     activeIdx: 0,
     juzFilter: 0,
+    browserOpen: true,
     sabrJuzName: ""
   };
   spSearch = "";
   const sInp = document.getElementById("spSearchInput");
   if (sInp) sInp.value = "";
-  document.getElementById("spModalTitle").textContent = "🎯 اختيار سورة وآية البداية للطالب";
+  const sClr = document.getElementById("spSearchClearBtn");
+  if (sClr) sClr.style.display = "none";
+  document.getElementById("spModalTitle").textContent = "🎯 سورة وآية البداية";
+  const subEl = document.getElementById("spModalSub");
+  if (subEl) subEl.textContent = "اختر السورة التي يبدأ الطالب الحفظ منها";
   document.getElementById("spClearBtn").style.display = "none";
 
   renderSurahPickerUI();
@@ -12888,13 +13262,65 @@ function renderSurahPickerUI() {
   if (spState.mode === "sabr") {
     renderSpSabrGrid();
   } else {
-    renderSpDirBtn();
     renderSpSegBar();
-    renderSpJuzStrip();
-    renderSpSurahGrid();
+    renderSpActiveSurahCard();
+    const drawer = document.getElementById("spBrowserDrawer");
+    if (drawer) drawer.style.display = spState.browserOpen ? "block" : "none";
+    if (spState.browserOpen) {
+      renderSpDirBtn();
+      renderSpJuzStrip();
+      renderSpSurahGrid();
+    }
     renderSpAyahBox();
   }
   renderSpPreview();
+}
+
+function toggleSpBrowser(forceState = null) {
+  spState.browserOpen = (forceState !== null) ? Boolean(forceState) : !spState.browserOpen;
+  renderSurahPickerUI();
+  if (spState.browserOpen) {
+    requestAnimationFrame(() => {
+      document.querySelector("#spSurahGrid .sp-surah-btn.on")?.scrollIntoView({ block: "center", behavior: "instant" });
+      document.querySelector("#spJuzStrip .sp-juz-pill.on")?.scrollIntoView({ inline: "center", block: "nearest", behavior: "instant" });
+    });
+  }
+}
+
+function onSpSearchInput(val) {
+  spSearch = val;
+  const clr = document.getElementById("spSearchClearBtn");
+  if (clr) clr.style.display = val ? "inline-flex" : "none";
+  renderSpSurahGrid();
+}
+
+function clearSpSearch() {
+  spSearch = "";
+  const inp = document.getElementById("spSearchInput");
+  if (inp) { inp.value = ""; inp.focus(); }
+  const clr = document.getElementById("spSearchClearBtn");
+  if (clr) clr.style.display = "none";
+  renderSpSurahGrid();
+}
+
+function renderSpActiveSurahCard() {
+  const host = document.getElementById("spActiveSurahCard");
+  if (!host) return;
+  const seg = spState.segs[spState.activeIdx];
+  const info = SURAH_MAP[Number(seg?.surahId)];
+  const juzObj = info ? getJuzAtPage(info.p) : null;
+  const openCls = spState.browserOpen ? "browser-open" : "";
+  host.innerHTML = `<div class="sp-active-surah-card ${openCls}">
+    <button type="button" class="sp-surah-step-btn" onclick="spJumpSurah(-1)" title="السورة السابقة">›</button>
+    <button type="button" class="sp-surah-hero-mid" onclick="toggleSpBrowser()">
+      <div class="sp-sh-info">
+        <div class="sp-sh-name">${info ? `📖 سورة ${escapeHtml(info.n)}` : "اختر سورة..."}</div>
+        <div class="sp-sh-meta">${info ? `${info.a} آية • ${juzObj ? `جزء ${escapeHtml(juzObj.shortName)} (${juzObj.id})` : ''}` : "اضغط لاختيار سورة من المصحف"}</div>
+      </div>
+      <span class="sp-sh-chg-pill">${spState.browserOpen ? "إغلاق ▲" : "تغيير السورة ▾"}</span>
+    </button>
+    <button type="button" class="sp-surah-step-btn" onclick="spJumpSurah(1)" title="السورة التالية">‹</button>
+  </div>`;
 }
 
 function renderSpSabrGrid() {
@@ -13029,7 +13455,11 @@ function spAddSeg() {
   const info = SURAH_MAP[Number(nxtId)] || SURAH_MAP[114];
   spState.segs.push({ surahId: String(info.id), from: 1, to: info.a });
   spState.activeIdx = spState.segs.length - 1;
+  spState.browserOpen = true;
   renderSurahPickerUI();
+  requestAnimationFrame(() => {
+    document.querySelector("#spSurahGrid .sp-surah-btn.on")?.scrollIntoView({ block: "center", behavior: "instant" });
+  });
 }
 
 function spRemoveSeg(idx) {
@@ -13089,7 +13519,7 @@ function renderSpSurahGrid() {
   `).join("");
 }
 
-function spPickSurah(surahId) {
+function spPickSurah(surahId, keepBrowser = false) {
   const info = SURAH_MAP[Number(surahId)];
   if (!info) return;
   const seg = spState.segs[spState.activeIdx];
@@ -13097,6 +13527,7 @@ function spPickSurah(surahId) {
   seg.surahId = String(info.id);
   seg.from = 1;
   seg.to = info.a;
+  if (!keepBrowser) spState.browserOpen = false;
   renderSurahPickerUI();
 }
 
@@ -13106,7 +13537,7 @@ function spJumpSurah(delta) {
   const curId = Number(seg.surahId) || (spState.dir === "asc" ? 2 : 114);
   const step = spState.dir === "asc" ? delta : -delta;
   const nxtId = Math.max(1, Math.min(114, curId + step));
-  spPickSurah(nxtId);
+  spPickSurah(nxtId, spState.browserOpen);
 }
 
 function spUpdateSliderFill(el, val, maxVal) {
@@ -13204,20 +13635,22 @@ function renderSpAyahBox() {
     : "";
 
   const presetsHtml = (!isShort && !isStartOnly) ? `
-    <div class="sp-preset-row">
-      <button type="button" class="sp-preset-btn accent" onclick="spApplyPreset('full')">كامل السورة (1–${info.a})</button>
+    <div class="sp-preset-grid-4">
+      <button type="button" class="sp-preset-btn accent" onclick="spApplyPreset('full')">كامل السورة</button>
       <button type="button" class="sp-preset-btn" onclick="spApplyPreset('p05')">+½ صفحة</button>
       <button type="button" class="sp-preset-btn" onclick="spApplyPreset('p1')">+1 صفحة</button>
+      <button type="button" class="sp-preset-btn" onclick="spApplyPreset('toEnd')">لآخرها (${info.a})</button>
+    </div>
+    ${info.a >= 16 ? `<div class="sp-preset-grid-2">
       <button type="button" class="sp-preset-btn" onclick="spApplyPreset('half1')">النصف الأول (1–${halfA})</button>
       <button type="button" class="sp-preset-btn" onclick="spApplyPreset('half2')">النصف الثاني (${Math.min(info.a, halfA+1)}–${info.a})</button>
-      <button type="button" class="sp-preset-btn" onclick="spApplyPreset('toEnd')">لآخرها (${info.a})</button>
-    </div>` : "";
+    </div>` : ''}` : "";
 
   const fromRow = `
     <div class="sp-slider-card">
       <div class="sp-slider-hdr">
-        <label>${isStartOnly ? 'يبدأ من الآية' : 'من الآية'}</label>
-        <span class="sp-slider-max">سورة ${escapeHtml(info.n)} • ${info.a} آية</span>
+        <label>${isStartOnly ? '🎯 يبدأ من الآية' : '▶️ من الآية'}</label>
+        <span class="sp-slider-max">البداية (1 – ${info.a})</span>
       </div>
       <div class="sp-step-grid">
         <button type="button" onclick="spStepAyah('from',-5)">−5</button>
@@ -13232,7 +13665,7 @@ function renderSpAyahBox() {
   const toRow = !isStartOnly ? `
     <div class="sp-slider-card">
       <div class="sp-slider-hdr">
-        <label>إلى الآية</label>
+        <label>⏹️ إلى الآية</label>
         <span class="sp-slider-max">الحد الأقصى: ${info.a}</span>
       </div>
       <div class="sp-step-grid">
@@ -15661,9 +16094,10 @@ function applyAbsenceCarryOver(s, st, r, status) {
   const _prevSabr = r.sabrJuz || "";
   r.recEval = ""; r.minEval = ""; r.majEval = ""; r.sabrJuz = ""; r.recIsSabr = false;
   r.recErrors = 0; r.minErrors = 0; r.majErrors = 0;
-  if ((r.dRevEval === "تثبيت" || r.dRevEval === "تثبيت حفظ") && !(Number(r.dRevPages) > 0)) {
-    r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = "";
-  }
+  r.recAlerts = 0; r.minAlerts = 0; r.majAlerts = 0;
+  r.rabt = false;
+  r.dRevSurahId = ""; r.dRevFromAyah = ""; r.dRevToAyah = ""; r.dRevExtras = [];
+  r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevPages = 0;
   if (st?.track === "rashidi") {
     const rf = parseArabicNum(r.rashidiFrom, st.rashidiPage || 1);
     const rt = parseArabicNum(r.rashidiTo, rf);
@@ -15883,8 +16317,8 @@ function renderMonthEndAlert() {
     return;
   }
 
-  // Gentle weekly JSON backup reminder when Firebase cloud sync is NOT configured
-  if (!h.fbUrl || !h.roomCode) {
+  // Gentle weekly local backup reminder ONLY for offline guest users (not logged into a cloud account)
+  if (!getCurrentAccountUser() && (!h.fbUrl || !h.roomCode)) {
     const realSessions = (h.sessions || []).filter(x => isSessionHasRealActivity(x)).length;
     if (realSessions >= 2) {
       const tod = todayISO();
@@ -15897,7 +16331,7 @@ function renderMonthEndAlert() {
       const diffDays = Math.floor((new Date(tod + "T12:00:00") - new Date(lastBk + "T12:00:00")) / 86400000);
       if (diffDays >= 7 && (!snoozeUntil || tod >= snoozeUntil)) {
         box.innerHTML = `<div class="backup-nudge-bar">
-          <span>💾 <b>تذكير حفظ البيانات:</b> مرّ ${diffDays} أيام منذ آخر نسخة احتياطية — احفظ ملف JSON لحماية بيانات حلقتك.</span>
+          <span>💾 <b>تذكير حفظ البيانات:</b> مرّ ${diffDays} أيام منذ آخر نسخة احتياطية — احفظ نسخة على جهازك لحماية بيانات حلقتك.</span>
           <div style="display:flex; gap:5px;">
             <button type="button" class="btn btn-primary btn-sm" onclick="exportBackupJSON()">💾 حفظ الآن</button>
             <button type="button" class="btn btn-outline btn-sm" onclick="snoozeBackupReminder()">لاحقاً</button>
@@ -16767,41 +17201,75 @@ function renderExtraSurahRowsHtml(studentId, extras, kind, dir, isRev = false) {
 }
 
 function nudgeRecEndAyah(studentId, delta) {
-  const s = getCurrentSession(), r = getStudentRecord(s, studentId);
-  const info = SURAH_MAP[Number(r.recSurahId)];
-  if (!info) { showToast("اختر سورة أولاً"); return; }
-  const f = parseArabicNum(r.recFrom, 1);
-  const cur = parseArabicNum(r.recTo, info.a);
-  const nxt = Math.max(f, Math.min(info.a, cur + delta));
-  r.recTo = nxt;
+  const h = getActiveHalaqa(), s = getCurrentSession(), r = getStudentRecord(s, studentId);
+  const extras = Array.isArray(r.recExtras) ? r.recExtras : [];
+  if (extras.length) {
+    const lastSeg = extras[extras.length - 1];
+    const info = SURAH_MAP[Number(lastSeg?.surahId)];
+    if (!info) { showToast("اختر سورة أولاً"); return; }
+    const f = parseArabicNum(lastSeg.from, 1);
+    const cur = parseArabicNum(lastSeg.to, info.a);
+    lastSeg.to = Math.max(f, Math.min(info.a, cur + delta));
+  } else {
+    const info = SURAH_MAP[Number(r.recSurahId)];
+    if (!info) { showToast("اختر سورة أولاً"); return; }
+    const f = parseArabicNum(r.recFrom, 1);
+    const cur = parseArabicNum(r.recTo, info.a);
+    r.recTo = Math.max(f, Math.min(info.a, cur + delta));
+  }
   r.manualRec = true;
   r.recPages = calcSegmentsPages(getSegments(r, "rec"));
-  if (r.recEval) r.points = computeRecordPoints(s, r, getActiveHalaqa().students.find(x => x.id === studentId));
-  saveState(); renderSessionView();
+  if (r.recEval) r.points = computeRecordPoints(s, r, h?.students.find(x => x.id === studentId));
+  saveStateDebounced(260);
+  syncStudentEvalSheet();
+  const cardSub = document.querySelector(`#card_${studentId} .st-sub-range`);
+  if (cardSub) cardSub.textContent = formatSegmentsInline(getSegments(r, "rec"));
 }
 
 function finishRecSurahQuick(studentId) {
-  const s = getCurrentSession(), r = getStudentRecord(s, studentId);
-  const info = SURAH_MAP[Number(r.recSurahId)];
-  if (!info) { showToast("اختر سورة أولاً"); return; }
-  r.recTo = info.a;
+  const h = getActiveHalaqa(), s = getCurrentSession(), r = getStudentRecord(s, studentId);
+  const extras = Array.isArray(r.recExtras) ? r.recExtras : [];
+  let targetInfo = null;
+  if (extras.length) {
+    const lastSeg = extras[extras.length - 1];
+    targetInfo = SURAH_MAP[Number(lastSeg?.surahId)];
+    if (targetInfo) lastSeg.to = targetInfo.a;
+  } else {
+    targetInfo = SURAH_MAP[Number(r.recSurahId)];
+    if (targetInfo) r.recTo = targetInfo.a;
+  }
+  if (!targetInfo) { showToast("اختر سورة أولاً"); return; }
   r.manualRec = true;
   r.recPages = calcSegmentsPages(getSegments(r, "rec"));
-  if (r.recEval) r.points = computeRecordPoints(s, r, getActiveHalaqa().students.find(x => x.id === studentId));
-  saveState(); renderSessionView();
-  showToast(`تم ضبط النهاية إلى آخر سورة ${info.n} (آية ${info.a}) ✓`);
+  if (r.recEval) r.points = computeRecordPoints(s, r, h?.students.find(x => x.id === studentId));
+  saveState();
+  syncStudentEvalSheet();
+  const cardSub = document.querySelector(`#card_${studentId} .st-sub-range`);
+  if (cardSub) cardSub.textContent = formatSegmentsInline(getSegments(r, "rec"));
+  showToast(`تم ضبط النهاية إلى آخر سورة ${targetInfo.n} (آية ${targetInfo.a}) ✓`);
 }
 
 function nudgeMinEndAyah(studentId, delta) {
   const s = getCurrentSession(), r = getStudentRecord(s, studentId);
-  const info = SURAH_MAP[Number(r.minSurahId)];
-  if (!info) { showToast("اختر سورة الصغرى أولاً"); return; }
-  const f = parseArabicNum(r.minFrom, 1);
-  const cur = parseArabicNum(r.minTo, info.a);
-  r.minTo = Math.max(f, Math.min(info.a, cur + delta));
+  const extras = Array.isArray(r.minExtras) ? r.minExtras : [];
+  if (extras.length) {
+    const lastSeg = extras[extras.length - 1];
+    const info = SURAH_MAP[Number(lastSeg?.surahId)];
+    if (!info) { showToast("اختر سورة الصغرى أولاً"); return; }
+    const f = parseArabicNum(lastSeg.from, 1);
+    const cur = parseArabicNum(lastSeg.to, info.a);
+    lastSeg.to = Math.max(f, Math.min(info.a, cur + delta));
+  } else {
+    const info = SURAH_MAP[Number(r.minSurahId)];
+    if (!info) { showToast("اختر سورة الصغرى أولاً"); return; }
+    const f = parseArabicNum(r.minFrom, 1);
+    const cur = parseArabicNum(r.minTo, info.a);
+    r.minTo = Math.max(f, Math.min(info.a, cur + delta));
+  }
   r.manualMin = true;
   syncMinorSummaryStrings(r);
-  saveState(); renderSessionView();
+  saveStateDebounced(260);
+  syncStudentEvalSheet();
 }
 
 function nudgeMajStartPage(studentId, delta) {
@@ -16970,7 +17438,7 @@ function renderCardBody(s, st, r, idx) {
       const activeCls = curVal === ev ? (ev === "ممتاز" ? "on-green" : ev === "إعادة" ? "on-red" : "on-blue") : "";
       const isSug = Boolean(suggestedEv && suggestedEv === ev && curVal !== ev);
       const errArg = (curVal === ev || nErr === 0) ? "null" : String(nErr);
-      return `<button type="button" class="es-eval-btn ${activeCls} ${isSug ? 'es-suggested' : ''}" onclick="${fn}('${st.id}','${ev}',${errArg})">${isSug ? '<span class="es-sug-dot">مقترح</span>' : ''}${ev}</button>`;
+      return `<button type="button" class="es-eval-btn ${activeCls} ${isSug ? 'es-suggested' : ''}" data-ev="${ev}" data-fn="${fn}" data-sid="${st.id}" onclick="${fn}('${st.id}','${ev}',${errArg})">${isSug ? '<span class="es-sug-dot">مقترح</span>' : ''}${ev}</button>`;
     }).join("");
   };
 
@@ -17003,7 +17471,7 @@ function renderCardBody(s, st, r, idx) {
           </div>
         </div>
         ${renderErrorCounterBar(st.id, "rec", r.recErrors, r.recAlerts)}
-        <div class="es-eval-4">${makeSmartEvalBtns(r.recEval, "setRashidiEval", r.recErrors)}</div>
+        <div class="es-eval-4" id="esEvalRow_rec">${makeSmartEvalBtns(r.recEval, "setRashidiEval", r.recErrors)}</div>
         <div class="hw-clean-head" style="padding-top:6px; border-top:1px dashed var(--line); font-size:12px;">
           <span>📝 <b>الواجب القادم:</b> ${escapeHtml(hwR)}</span>
           <button type="button" class="lms-btn ${evalSheetTool==='notes'?'accent':''}" onclick="toggleEvalSheetTool('${st.id}','notes')">💬 ملاحظة${hasNotes ? ' •' : ''}</button>
@@ -17145,15 +17613,15 @@ function renderCardBody(s, st, r, idx) {
           <div class="lms-btns">
             <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','rec')">✏️ تغيير</button>
             ${!(r.recIsSabr && r.sabrJuz) ? `
-              <button type="button" class="lms-btn" onclick="nudgeRecEndAyah('${st.id}', -1)" title="إنقاص آية">−1</button>
-              <button type="button" class="lms-btn" onclick="nudgeRecEndAyah('${st.id}', 1)" title="زيادة آية">+1</button>
+              <button type="button" class="lms-btn ltr-num" onclick="nudgeRecEndAyah('${st.id}', -1)" title="إنقاص آية">−1</button>
+              <button type="button" class="lms-btn ltr-num" onclick="nudgeRecEndAyah('${st.id}', 1)" title="زيادة آية">+1</button>
               <button type="button" class="lms-btn" onclick="finishRecSurahQuick('${st.id}')">آخرها</button>
             ` : ''}
           </div>
         </div>
         ${r.sabrJuz ? renderSabrScoreBox(st.id, r, false) : ''}
         ${!(r.recIsSabr && r.sabrJuz) ? renderErrorCounterBar(st.id, "rec", r.recErrors, r.recAlerts) : ''}
-        <div class="es-eval-4">${makeSmartEvalBtns(r.recEval, "setRecEval", r.recErrors)}</div>
+        <div class="es-eval-4" id="esEvalRow_rec">${makeSmartEvalBtns(r.recEval, "setRecEval", r.recErrors)}</div>
         <div class="hw-clean-head" style="padding-top:6px; border-top:1px dashed var(--line); font-size:12px;">
           <span class="lms-tap-area" onclick="openSurahPicker('${st.id}','hw')" title="اضغط لتغيير الواجب بسهولة">📝 <b>الواجب:</b> ${escapeHtml(hwPreview)} <span style="color:var(--blue); font-weight:800;">✏️</span></span>
           <div class="pace-seg">
@@ -17288,13 +17756,13 @@ function renderCardBody(s, st, r, idx) {
           </div>
           <div class="lms-btns">
             <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','min')">✏️</button>
-            <button type="button" class="lms-btn" onclick="nudgeMinEndAyah('${st.id}', -1)" title="إنقاص آية">−1</button>
-            <button type="button" class="lms-btn" onclick="nudgeMinEndAyah('${st.id}', 1)" title="زيادة آية">+1</button>
+            <button type="button" class="lms-btn ltr-num" onclick="nudgeMinEndAyah('${st.id}', -1)" title="إنقاص آية">−1</button>
+            <button type="button" class="lms-btn ltr-num" onclick="nudgeMinEndAyah('${st.id}', 1)" title="زيادة آية">+1</button>
             <button type="button" class="lms-btn" onclick="refreshStudentSatMinor('${st.id}')" title="سحب محفوظ الأسبوع">🔄</button>
           </div>
         </div>
         ${renderErrorCounterBar(st.id, "min", r.minErrors, r.minAlerts)}
-        <div class="es-eval-4" style="margin-bottom:0;">${makeSmartEvalBtns(r.minEval, "setSatMinEval", r.minErrors)}</div>
+        <div class="es-eval-4" id="esEvalRow_min" style="margin-bottom:0;">${makeSmartEvalBtns(r.minEval, "setSatMinEval", r.minErrors)}</div>
       </div>
 
       <div class="es-card">
@@ -17313,8 +17781,8 @@ function renderCardBody(s, st, r, idx) {
           <div class="lms-btns">
             <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','maj')">✏️</button>
             ${!r.sabrJuz ? `
-              <button type="button" class="lms-btn" onclick="nudgeMajStartPage('${st.id}', -1)">−1</button>
-              <button type="button" class="lms-btn" onclick="nudgeMajStartPage('${st.id}', 1)">+1</button>
+              <button type="button" class="lms-btn ltr-num" onclick="nudgeMajStartPage('${st.id}', -1)">−1</button>
+              <button type="button" class="lms-btn ltr-num" onclick="nudgeMajStartPage('${st.id}', 1)">+1</button>
               <div class="pace-seg">
                 <button type="button" class="${revPace===1?'on':''}" onclick="setStudentRevPace('${st.id}',1)">1</button>
                 <button type="button" class="${revPace===2?'on':''}" onclick="setStudentRevPace('${st.id}',2)">2</button>
@@ -17325,7 +17793,7 @@ function renderCardBody(s, st, r, idx) {
           </div>
         </div>
         ${r.sabrJuz ? renderSabrScoreBox(st.id, r, true) : renderErrorCounterBar(st.id, "maj", r.majErrors, r.majAlerts)}
-        <div class="es-eval-4" style="margin-bottom:0;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors)}</div>
+        <div class="es-eval-4" id="esEvalRow_maj" style="margin-bottom:0;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors)}</div>
       </div>
 
       <div class="es-tools-4">
@@ -17349,7 +17817,10 @@ function renderCardBody(s, st, r, idx) {
     `;
   }
 
-  return `${_attnBannerHtml}<div class="es-att-4">${attBtns}</div>${bonusSectionHtml}${bodyCore}`;
+  const absNoticeHtml = isAbsCard
+    ? `<div class="es-abs-notice">🚫 مسجّل ${escapeHtml(r.attendance)} — الواجب مُرحّل للجلسة القادمة (اضغط على التقييم لإلغاء الغياب تلقائياً)</div>`
+    : "";
+  return `${_attnBannerHtml}<div class="es-att-4">${attBtns}</div>${absNoticeHtml}${bonusSectionHtml}${bodyCore}`;
 }
 
 // ==================== RECORD MUTATIONS ====================
@@ -17380,10 +17851,14 @@ function stepPoints(studentId, delta) {
   const r = getStudentRecord(s, studentId);
   r.points = Math.max(0, (Number(r.points) || 0) + delta);
   openCardId = studentId;
-  openAdvCardId = studentId;
   evalBonusOpen = true;
-  saveState();
-  renderSessionPreservingScroll();
+  saveStateDebounced(220);
+  const inp = document.querySelector("#studentEvalSheet .pts-stepper-v29 input");
+  if (inp) inp.value = String(r.points);
+  const hdrPts = document.getElementById("esHeaderPtsBadge");
+  if (hdrPts) hdrPts.textContent = `⭐ ${r.points}`;
+  const cardBadge = document.querySelector(`#card_${studentId} .st-head .badges-wrap .st-pts-badge`);
+  if (cardBadge) cardBadge.textContent = `⭐ ${r.points}`;
 }
 
 function togglePointBonus(studentId, key) {
@@ -17949,7 +18424,7 @@ function setRecEval(studentId, ev, errCount = null) {
     r.recEval = "";
     r.points = 0;
     r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined;
-    r.recErrors = 0;
+    r.recErrors = 0; r.recAlerts = 0;
     r.rabt = false;
     r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = "";
     if ((r.dRevEval === "تثبيت" || r.dRevEval === "تثبيت حفظ") && !(Number(r.dRevPages) > 0)) {
@@ -18425,7 +18900,7 @@ function setSatMinEval(studentId, ev, errCount = null) {
   // 2nd tap on the same Minor Review grade => cancel & reset!
   if (errCount === null && r.minEval === ev) {
     r.minEval = "";
-    r.minErrors = 0;
+    r.minErrors = 0; r.minAlerts = 0;
     if (!r.majEval) {
       if (r.attendance === "حاضر") r.attendance = "لم يُسمّع";
       r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined;
@@ -18470,7 +18945,7 @@ function setSatMajEval(studentId, ev, errCount = null) {
   // 2nd tap on the same Major Review grade => cancel & reset!
   if (errCount === null && r.majEval === ev) {
     r.majEval = "";
-    r.majErrors = 0;
+    r.majErrors = 0; r.majAlerts = 0;
     r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
     if (!r.minEval) {
       if (r.attendance === "حاضر") r.attendance = "لم يُسمّع";
@@ -21047,7 +21522,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v70 -->
+<!-- Makin App v72 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -21466,12 +21941,7 @@ async function pullFromCloud() {
   if (!fbUrl || !roomCode) { showToast("أدخل الرابط والرمز أولاً"); return; }
   await fetchCloudHalaqa(fbUrl, roomCode); closeModal("settingsModal");
 }
-async function pullCloudFromOnboarding() {
-  const fbUrl = document.getElementById("obFbUrl").value.trim().replace(/\/+$/, "");
-  const roomCode = document.getElementById("obRoomCode").value.trim();
-  if (!fbUrl || !roomCode) { showToast("أدخل الرابط والرمز أولاً"); return; }
-  await fetchCloudHalaqa(fbUrl, roomCode);
-}
+// (Legacy manual Firebase onboarding pull removed — cloud restore is automatic on sign-in)
 async function fetchCloudHalaqa(fbUrl, roomCode) {
   try {
     const safeRoom = encodeURIComponent(roomCode.replace(/[.#$\[\]\/]/g, "_"));
@@ -22085,12 +22555,9 @@ function openTeacherAccountModal() {
 
     ${multiHalHtml}
 
-    <div class="panel-block">
-      <div class="panel-label">☁️ رابط السيرفر السحابي المشترك (Firebase)</div>
-      <div style="display:flex; gap:6px;">
-        <input type="url" id="teacherCloudUrlInp" value="${escapeHtml(getPlatformCloudUrl())}" placeholder="https://your-app-default-rtdb.firebaseio.com" dir="ltr" style="flex:1; padding:7px 9px; border:1px solid var(--line-strong); border-radius:8px; text-align:right;">
-        <button type="button" class="btn btn-soft btn-sm" onclick="savePlatformCloudUrl('teacherCloudUrlInp')">حفظ</button>
-      </div>
+    <div class="panel-block" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+      <span class="auth-cloud-pill">☁️ الحفظ السحابي التلقائي نشط ✓</span>
+      <button type="button" class="btn btn-soft btn-sm" onclick="syncCentralCloudNow(true)">🔄 مزامنة الآن</button>
     </div>
 
     <div style="display:flex; gap:7px; flex-wrap:wrap; justify-content:space-between;">
@@ -23796,7 +24263,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v70";
+const TIBYAN_APP_VERSION = "v72";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
