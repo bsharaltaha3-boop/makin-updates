@@ -8985,6 +8985,347 @@ html { scroll-behavior: smooth; }
   border-right-color: var(--orange);
 }
 
+
+/* ==================== MAKIN v74: PRO PER-GRADE RULE MATRIX & ULTRA-CLEAR POINTS STUDIO ==================== */
+.gr-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 8px 10px;
+  margin-bottom: 9px;
+  cursor: pointer;
+}
+.gr-toggle-row b { font-size: 12px; font-weight: 800; color: var(--ink-900); display: block; }
+.gr-toggle-row small { font-size: 10.5px; color: var(--ink-500); font-weight: 600; }
+
+.gr-matrix-wrap {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--white);
+  margin-bottom: 9px;
+}
+.gr-matrix-hdr {
+  display: grid;
+  grid-template-columns: 0.9fr 1fr 1fr;
+  gap: 6px;
+  background: var(--brand-tint);
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink-700);
+  text-align: center;
+}
+.gr-matrix-hdr span:first-child { text-align: right; padding-right: 4px; }
+.gr-matrix-row {
+  display: grid;
+  grid-template-columns: 0.9fr 1fr 1fr;
+  gap: 6px;
+  align-items: center;
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--line);
+}
+.gr-matrix-row:last-child { border-bottom: none; }
+.gr-grade-tag {
+  font-size: 12px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.gr-grade-tag.ex { color: var(--green); }
+.gr-grade-tag.vg { color: var(--blue); }
+.gr-grade-tag.gd { color: #a16207; }
+[data-theme="dark"] .gr-grade-tag.gd { color: #facc15; }
+
+.gr-stepper {
+  display: grid;
+  grid-template-columns: 27px 1fr 27px;
+  gap: 3px;
+  align-items: center;
+  direction: ltr;
+}
+.gr-stepper button {
+  height: 29px;
+  border-radius: 7px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--brand-slate);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.gr-stepper button:active { background: var(--brand-slate); color: #ffffff; }
+.gr-stepper input {
+  width: 100%;
+  min-width: 0;
+  height: 29px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 13.5px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 7px;
+  background: var(--white);
+  color: var(--ink-900);
+  padding: 0 2px;
+  direction: ltr;
+}
+.gr-stepper.is-off {
+  opacity: 0.42;
+  pointer-events: none;
+}
+.gr-repeat-auto-bar {
+  background: var(--red-bg);
+  color: var(--red);
+  border-top: 1px solid rgba(185, 34, 34, 0.2);
+  padding: 7px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* Interactive Live Rule Tester */
+.gr-tester-box {
+  background: var(--brand-tint);
+  border: 1px dashed var(--line-strong);
+  border-right: 4px solid #c8a14b;
+  border-radius: 11px;
+  padding: 8px 10px;
+}
+.gr-tester-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 7px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--brand-slate);
+}
+.gr-tester-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+.gr-tester-cell {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 5px 6px;
+}
+.gr-tester-cell label {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--ink-500);
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+/* Ultra-Clear Points Studio (Zero Overflow!) */
+.pts-kpi-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.pts-kpi-tile {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-top: 3px solid #142a46;
+  border-radius: 11px;
+  padding: 8px 5px;
+  text-align: center;
+}
+.pts-kpi-tile.gold { border-top-color: #c8a14b; }
+.pts-kpi-tile.green { border-top-color: var(--green); }
+.pts-kpi-tile .pk-v { font-size: 15px; font-weight: 800; color: var(--ink-900); line-height: 1.2; }
+.pts-kpi-tile .pk-l { font-size: 10.5px; font-weight: 700; color: var(--ink-500); margin-top: 2px; }
+
+.pts-subtabs-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 3.5px;
+  margin-bottom: 10px;
+}
+.pts-subtab-btn {
+  border: none;
+  background: transparent;
+  color: var(--ink-700);
+  padding: 7px 3px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.14s ease;
+}
+.pts-subtab-btn.on {
+  background: #142a46;
+  color: #ffffff;
+  box-shadow: 0 2px 7px rgba(20, 42, 70, 0.2);
+}
+[data-theme="dark"] .pts-subtab-btn.on {
+  background: #c8a14b;
+  color: #0f233c;
+}
+
+.pts-guide-hint {
+  background: var(--brand-tint);
+  border-right: 3.5px solid #142a46;
+  border-radius: 9px;
+  padding: 7px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink-700);
+  line-height: 1.55;
+  margin-bottom: 9px;
+}
+[data-theme="dark"] .pts-guide-hint { border-right-color: #c8a14b; }
+
+.pts-dur-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 9px;
+}
+.pts-dur-btn {
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-700);
+  border-radius: 9px;
+  padding: 7px 4px;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+}
+.pts-dur-btn.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #ffffff;
+}
+[data-theme="dark"] .pts-dur-btn.on { background: #c8a14b; border-color: #c8a14b; color: #0f233c; }
+
+.pts-reset-card {
+  background: var(--orange-bg);
+  border: 1px solid rgba(184, 86, 16, 0.28);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+}
+.pts-reset-btn {
+  width: 100%;
+  white-space: normal !important;
+  line-height: 1.4;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: none;
+  background: var(--orange);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+.pts-reset-btn:active { transform: scale(0.98); }
+.pts-reset-sub {
+  font-size: 11px;
+  color: var(--ink-700);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+/* 2-Line Student Past Points Card (ZERO Name Truncation!) */
+.pts-past-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 9px;
+  margin-bottom: 6px;
+}
+.pts-past-card:last-child { margin-bottom: 0; }
+.pts-pc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.pts-pc-name {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink-900);
+  min-width: 0;
+  flex: 1;
+}
+.pts-pc-ctrl {
+  display: grid;
+  grid-template-columns: 42px 42px 46px 1fr 48px;
+  gap: 5px;
+  align-items: center;
+}
+.pts-pc-ctrl button {
+  height: 31px;
+  border-radius: 8px;
+  border: 1px solid var(--line-strong);
+  background: var(--brand-tint);
+  color: var(--brand-slate);
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  direction: ltr;
+}
+.pts-pc-ctrl button.clr-btn {
+  background: var(--red-bg);
+  color: var(--red);
+  border-color: rgba(185, 34, 34, 0.22);
+  direction: rtl;
+  font-size: 11px;
+}
+.pts-pc-ctrl input {
+  width: 100%;
+  min-width: 0;
+  height: 31px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 14px;
+  border: 1.5px solid #142a46;
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--ink-900);
+  direction: ltr;
+}
+
+.pts-rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin-bottom: 10px;
+}
+.pts-rule-tile {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-right: 3.5px solid #c8a14b;
+  border-radius: 10px;
+  padding: 8px 9px;
+}
+.pts-rule-tile b { display: block; font-size: 12px; font-weight: 800; color: var(--brand-slate); margin-bottom: 3px; }
+.pts-rule-tile span { display: block; font-size: 11px; color: var(--ink-700); line-height: 1.55; font-weight: 600; }
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -9453,10 +9794,12 @@ html { scroll-behavior: smooth; }
 
       <div class="drawer-group-lbl">البرامج المصاحبة</div>
       <div class="drawer-card-group">
-        <button type="button" class="drawer-item" onclick="togglePointsMode(); updateDrawerQuickStates();">
+        <div class="drawer-item" style="cursor:pointer;" onclick="closeRightDrawer(); openProgramsModal('points');">
           <span class="drawer-item-l"><span class="drawer-ico-box gold">⭐</span><span>برنامج النقاط والتحفيز</span></span>
-          <span class="m-switch on" id="drawerPointsSwitch" aria-hidden="true"></span>
-        </button>
+          <button type="button" style="border:none; background:transparent; padding:4px; cursor:pointer; display:inline-flex; align-items:center;" onclick="event.stopPropagation(); togglePointsMode(); updateDrawerQuickStates();" aria-label="تفعيل أو إيقاف النقاط">
+            <span class="m-switch on" id="drawerPointsSwitch" aria-hidden="true"></span>
+          </button>
+        </div>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('istihda');">
           <span class="drawer-item-l"><span class="drawer-ico-box">🌿</span><span>برنامج استهداء</span></span>
           <span class="badge b-slate" id="drawerProgIstihdaBadge">0</span>
@@ -9508,7 +9851,7 @@ html { scroll-behavior: smooth; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v73</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v74</span>
         </button>
       </div>
     </div>
@@ -10354,51 +10697,112 @@ html { scroll-behavior: smooth; }
         <div class="exec-card">
           <div class="exec-card-ttl">
             <span>🎯 معيار التقييم التلقائي (الأخطاء والتنبيهات)</span>
-            <span class="badge b-blue" style="font-size:10px;">حسب نظام الشيخ</span>
+            <span class="badge b-blue" style="font-size:10px;">تحكم كامل للشيخ</span>
           </div>
+
           <div class="grade-preset-grid" id="setGradePresets">
             <button type="button" class="grade-preset-btn" data-gp="strict" onclick="applyGradingPresetInSettings('strict')">
               <b>🔴 متشدد (خطأ + تنبيه = إعادة)</b>
-              <span>ممتاز: 0 • جيد جداً: تنبيه • جيد: خطأ</span>
+              <span>ممتاز: 0 • جيد جداً: 1 تنبيه • جيد: 1 خطأ</span>
             </button>
             <button type="button" class="grade-preset-btn" data-gp="moderate" onclick="applyGradingPresetInSettings('moderate')">
-              <b>🟠 معتدل (خطآن = إعادة)</b>
-              <span>ممتاز: ≤½ • جيد جداً: 1 • جيد: 1½</span>
+              <b>🟠 معتدل (خطآن أو 5 تنبيه = إعادة)</b>
+              <span>ممتاز: 0 خطأ و2 تنبيه • جيد: 1 خطأ و4 تنبيه</span>
             </button>
             <button type="button" class="grade-preset-btn" data-gp="balanced" onclick="applyGradingPresetInSettings('balanced')">
-              <b>🔵 قياسي (3 أخطاء = إعادة)</b>
-              <span>ممتاز: ≤½ • جيد جداً: ≤1½ • جيد: ≤2½</span>
+              <b>🔵 متوازن (4 أخطاء أو 10 تنبيه = إعادة)</b>
+              <span>ممتاز: 1 خطأ و5 تنبيه • جيد: 3 أخطاء و9 تنبيه</span>
             </button>
             <button type="button" class="grade-preset-btn" data-gp="flexible" onclick="applyGradingPresetInSettings('flexible')">
-              <b>🟢 مرن (4 أخطاء = إعادة)</b>
-              <span>التنبيه لا يُحسب • 0–1 ممتاز • 2–3</span>
+              <b>🟢 أخطاء فقط (التنبيه لا يُحسب)</b>
+              <span>ممتاز: 1 • جيد جداً: 2 • جيد: 3 • إعادة: 4+</span>
             </button>
           </div>
 
-          <div style="font-size:11.5px; font-weight:800; color:var(--ink-700); margin-bottom:5px;">قيمة التنبيه الواحد مقابل الخطأ:</div>
-          <input type="hidden" id="setGradeAlertWeight" value="0">
-          <div class="grade-weight-3">
-            <button type="button" id="setGwBtn_0" onclick="setGradeAlertWeightUI(0)">لا يُحسب (0)</button>
-            <button type="button" id="setGwBtn_05" onclick="setGradeAlertWeightUI(0.5)">نصف خطأ (½)</button>
-            <button type="button" id="setGwBtn_1" onclick="setGradeAlertWeightUI(1)">مثل الخطأ (1)</button>
+          <label class="gr-toggle-row" for="setGradeUseAlerts">
+            <div>
+              <b>احتساب التنبيهات ضمن التقييم التلقائي</b>
+              <small>عند التفعيل تحدد الحد الأقصى للتنبيهات لكل تقدير بحرية كاملة</small>
+            </div>
+            <input type="checkbox" id="setGradeUseAlerts" onchange="onGradeUseAlertsToggle()" style="width:18px; height:18px; accent-color:var(--green); flex-shrink:0;">
+          </label>
+
+          <div class="gr-matrix-wrap">
+            <div class="gr-matrix-hdr">
+              <span>التقدير</span>
+              <span>أقصى أخطاء</span>
+              <span id="setGradeAlertsColHdr">أقصى تنبيهات</span>
+            </div>
+
+            <div class="gr-matrix-row">
+              <span class="gr-grade-tag ex">🟢 ممتاز</span>
+              <div class="gr-stepper">
+                <button type="button" onclick="stepGradeRuleInput('setGradeExE',-1)">−</button>
+                <input type="number" id="setGradeExE" min="0" max="50" value="1" oninput="updateGradingRulesPreview()">
+                <button type="button" onclick="stepGradeRuleInput('setGradeExE',1)">+</button>
+              </div>
+              <div class="gr-stepper" id="setGradeExAWrap">
+                <button type="button" onclick="stepGradeRuleInput('setGradeExA',-1)">−</button>
+                <input type="number" id="setGradeExA" min="0" max="99" value="5" oninput="updateGradingRulesPreview()">
+                <button type="button" onclick="stepGradeRuleInput('setGradeExA',1)">+</button>
+              </div>
+            </div>
+
+            <div class="gr-matrix-row">
+              <span class="gr-grade-tag vg">🔵 جيد جداً</span>
+              <div class="gr-stepper">
+                <button type="button" onclick="stepGradeRuleInput('setGradeVgE',-1)">−</button>
+                <input type="number" id="setGradeVgE" min="0" max="50" value="2" oninput="updateGradingRulesPreview()">
+                <button type="button" onclick="stepGradeRuleInput('setGradeVgE',1)">+</button>
+              </div>
+              <div class="gr-stepper" id="setGradeVgAWrap">
+                <button type="button" onclick="stepGradeRuleInput('setGradeVgA',-1)">−</button>
+                <input type="number" id="setGradeVgA" min="0" max="99" value="7" oninput="updateGradingRulesPreview()">
+                <button type="button" onclick="stepGradeRuleInput('setGradeVgA',1)">+</button>
+              </div>
+            </div>
+
+            <div class="gr-matrix-row">
+              <span class="gr-grade-tag gd">🟡 جيد</span>
+              <div class="gr-stepper">
+                <button type="button" onclick="stepGradeRuleInput('setGradeGdE',-1)">−</button>
+                <input type="number" id="setGradeGdE" min="0" max="50" value="3" oninput="updateGradingRulesPreview()">
+                <button type="button" onclick="stepGradeRuleInput('setGradeGdE',1)">+</button>
+              </div>
+              <div class="gr-stepper" id="setGradeGdAWrap">
+                <button type="button" onclick="stepGradeRuleInput('setGradeGdA',-1)">−</button>
+                <input type="number" id="setGradeGdA" min="0" max="99" value="9" oninput="updateGradingRulesPreview()">
+                <button type="button" onclick="stepGradeRuleInput('setGradeGdA',1)">+</button>
+              </div>
+            </div>
+
+            <div id="setGradeRepeatRuleBar" class="gr-repeat-auto-bar"></div>
           </div>
 
-          <div class="grade-limits-3">
-            <div class="field">
-              <label>حد ممتاز ≤</label>
-              <input type="number" id="setGradeExMax" min="0" max="20" step="0.5" value="1" oninput="updateGradingRulesPreview()">
+          <div class="gr-tester-box">
+            <div class="gr-tester-top">
+              <span>🧪 جرّب معيارك مباشرة قبل الحفظ:</span>
+              <span id="setGradeTestResult" class="badge b-green">النتيجة: ممتاز</span>
             </div>
-            <div class="field">
-              <label>حد جيد جداً ≤</label>
-              <input type="number" id="setGradeVgMax" min="0" max="25" step="0.5" value="2" oninput="updateGradingRulesPreview()">
-            </div>
-            <div class="field">
-              <label>حد جيد ≤</label>
-              <input type="number" id="setGradeGdMax" min="0" max="30" step="0.5" value="3" oninput="updateGradingRulesPreview()">
+            <div class="gr-tester-grid">
+              <div class="gr-tester-cell">
+                <label>عدد الأخطاء</label>
+                <div class="gr-stepper">
+                  <button type="button" onclick="stepGradeTester('e',-1)">−</button>
+                  <input type="number" id="setGradeTestE" min="0" max="50" value="1" oninput="updateGradeTesterResult()">
+                  <button type="button" onclick="stepGradeTester('e',1)">+</button>
+                </div>
+              </div>
+              <div class="gr-tester-cell">
+                <label>عدد التنبيهات</label>
+                <div class="gr-stepper">
+                  <button type="button" onclick="stepGradeTester('a',-1)">−</button>
+                  <input type="number" id="setGradeTestA" min="0" max="99" value="5" oninput="updateGradeTesterResult()">
+                  <button type="button" onclick="stepGradeTester('a',1)">+</button>
+                </div>
+              </div>
             </div>
           </div>
-          <div style="font-size:11px; color:var(--ink-500); margin-bottom:6px;">أي مجموع أخطاء وتنبيهات يتجاوز «حد جيد» يُقترح تلقائياً <b>إعادة</b>.</div>
-          <div id="setGradingLivePreview" class="grade-live-preview"></div>
         </div>
 
         <div class="exec-card">
@@ -12817,6 +13221,11 @@ function onPointsCycleDateChange(field, val) {
   renderStats();
 }
 
+function setPointsModalSubTab(tabKey) {
+  window._ptsSubTab = tabKey || "cycle";
+  renderProgramsModalBody();
+}
+
 function setStudentPastPointsInput(studentId, rawVal) {
   const h = getActiveHalaqa();
   const pc = ensurePointsConfig(h);
@@ -12825,10 +13234,17 @@ function setStudentPastPointsInput(studentId, rawVal) {
   if (v > 0) pc.pastPoints[studentId] = v;
   else delete pc.pastPoints[studentId];
   saveStateDebounced(260);
+  const stPill = document.getElementById("ptsPastSum_" + studentId);
+  if (stPill) {
+    const livePts = Number(stPill.dataset.live || 0);
+    const tot = livePts + v;
+    stPill.textContent = `الإجمالي: ${tot}`;
+    stPill.className = "badge " + (tot > 0 ? "b-green" : "b-slate");
+  }
   const sumEl = document.getElementById("ptsPastTotalBadge");
   if (sumEl) {
     const sum = Object.values(pc.pastPoints).reduce((a, b) => a + (Number(b) || 0), 0);
-    sumEl.textContent = `+${sum} نقطة سابقة`;
+    sumEl.textContent = `+${sum}`;
   }
 }
 
@@ -13439,47 +13855,62 @@ function showToast(msg, opts = null) {
   window._toastTimer = setTimeout(() => el.classList.remove("show"), canUndo ? 5000 : 2500);
 }
 
-// CUSTOMIZABLE SHEIKH GRADING RULES (v73: Errors + Weighted Alerts -> Auto Suggested Evaluation)
+// CUSTOMIZABLE SHEIKH GRADING RULES (v74: Direct Per-Grade Errors & Alerts Matrix)
 const GRADING_PRESETS = {
-  strict:   { alertWeight: 0.5, excellentMax: 0,   vgoodMax: 0.5, goodMax: 1   }, // خطأ + تنبيه = إعادة
-  moderate: { alertWeight: 0.5, excellentMax: 0.5, vgoodMax: 1,   goodMax: 1.5 }, // خطآن = إعادة
-  balanced: { alertWeight: 0.5, excellentMax: 0.5, vgoodMax: 1.5, goodMax: 2.5 }, // 3 أخطاء = إعادة
-  flexible: { alertWeight: 0,   excellentMax: 1,   vgoodMax: 2,   goodMax: 3   }  // 4 أخطاء = إعادة (التنبيه لا يُحسب)
+  strict:   { version: 2, useAlerts: true,  exE: 0, exA: 0, vgE: 0, vgA: 1, gdE: 1, gdA: 0 }, // خطأ + تنبيه = إعادة
+  moderate: { version: 2, useAlerts: true,  exE: 0, exA: 2, vgE: 1, vgA: 3, gdE: 1, gdA: 4 }, // خطآن أو 5 تنبيه = إعادة
+  balanced: { version: 2, useAlerts: true,  exE: 1, exA: 5, vgE: 2, vgA: 7, gdE: 3, gdA: 9 }, // 1 خطأ + 5 تنبيه = ممتاز | 10 تنبيه = إعادة
+  flexible: { version: 2, useAlerts: false, exE: 1, exA: 5, vgE: 2, vgA: 7, gdE: 3, gdA: 9 }  // التنبيه لا يُحسب | 4 أخطاء = إعادة
 };
 
 function getHalaqaGradingRules(h) {
   const hal = h || getActiveHalaqa();
   const g = hal?.gradingRules;
   if (!g || typeof g !== "object") return { ...GRADING_PRESETS.flexible };
-  const w = Number(g.alertWeight);
-  const alertWeight = [0, 0.5, 1].includes(w) ? w : 0;
-  const ex = Math.max(0, Math.min(20, Number(g.excellentMax)));
-  const vg = Math.max(isNaN(ex) ? 1 : ex, Math.min(25, Number(g.vgoodMax)));
-  const gd = Math.max(isNaN(vg) ? 2 : vg, Math.min(30, Number(g.goodMax)));
+  // Seamless migration from v73 weighted format if present
+  if (g.version !== 2 && g.exE === undefined) {
+    const w = Number(g.alertWeight) || 0;
+    const useAlerts = w > 0;
+    const exE = Math.max(0, Math.floor(Number(g.excellentMax) || 0));
+    const vgE = Math.max(exE, Math.floor(Number(g.vgoodMax) || 1));
+    const gdE = Math.max(vgE, Math.floor(Number(g.goodMax) || 2));
+    const toA = v => useAlerts ? Math.max(0, Math.floor((Number(v) || 0) / w)) : 5;
+    return {
+      version: 2,
+      useAlerts,
+      exE, exA: toA(g.excellentMax),
+      vgE, vgA: toA(g.vgoodMax),
+      gdE, gdA: toA(g.goodMax)
+    };
+  }
+  const clamp = (v, fb, mx) => {
+    const n = Math.round(Number(v));
+    return isNaN(n) ? fb : Math.max(0, Math.min(mx, n));
+  };
   return {
-    alertWeight,
-    excellentMax: isNaN(ex) ? 1 : ex,
-    vgoodMax: isNaN(vg) ? 2 : vg,
-    goodMax: isNaN(gd) ? 3 : gd
+    version: 2,
+    useAlerts: Boolean(g.useAlerts),
+    exE: clamp(g.exE, 1, 50), exA: clamp(g.exA, 5, 99),
+    vgE: clamp(g.vgE, 2, 50), vgA: clamp(g.vgA, 7, 99),
+    gdE: clamp(g.gdE, 3, 50), gdA: clamp(g.gdA, 9, 99)
   };
 }
 
 function evalFromErrorCount(errs, alerts = 0, h = null) {
-  const rules = getHalaqaGradingRules(h);
+  const r = getHalaqaGradingRules(h);
   const e = Math.max(0, Number(errs) || 0);
   const a = Math.max(0, Number(alerts) || 0);
-  const score = Math.round((e + a * rules.alertWeight) * 100) / 100;
-  if (score <= rules.excellentMax) return "ممتاز";
-  if (score <= rules.vgoodMax) return "جيد جداً";
-  if (score <= rules.goodMax) return "جيد";
+  if (e <= r.exE && (!r.useAlerts || a <= r.exA)) return "ممتاز";
+  if (e <= r.vgE && (!r.useAlerts || a <= r.vgA)) return "جيد جداً";
+  if (e <= r.gdE && (!r.useAlerts || a <= r.gdA)) return "جيد";
   return "إعادة";
 }
 
 function shouldSuggestEvalFromCounters(errs, alerts = 0, h = null) {
-  const rules = getHalaqaGradingRules(h);
+  const r = getHalaqaGradingRules(h);
   const e = Math.max(0, Number(errs) || 0);
   const a = Math.max(0, Number(alerts) || 0);
-  return e > 0 || (a > 0 && rules.alertWeight > 0);
+  return e > 0 || (a > 0 && r.useAlerts);
 }
 
 function errorCountArabicText(errs) {
@@ -13583,70 +14014,98 @@ function stepAlertCounter(studentId, kind, delta) {
   }
 }
 
-// Settings Grading Rules UI Controllers
+// Settings Grading Rules UI Controllers (v74)
 function loadGradingRulesIntoSettings(h) {
-  const rules = getHalaqaGradingRules(h);
-  const wInp = document.getElementById("setGradeAlertWeight");
-  const exInp = document.getElementById("setGradeExMax");
-  const vgInp = document.getElementById("setGradeVgMax");
-  const gdInp = document.getElementById("setGradeGdMax");
-  if (wInp) wInp.value = String(rules.alertWeight);
-  if (exInp) exInp.value = String(rules.excellentMax);
-  if (vgInp) vgInp.value = String(rules.vgoodMax);
-  if (gdInp) gdInp.value = String(rules.goodMax);
-  setGradeAlertWeightUI(rules.alertWeight);
+  const r = getHalaqaGradingRules(h);
+  const cb = document.getElementById("setGradeUseAlerts");
+  if (cb) cb.checked = Boolean(r.useAlerts);
+  const setV = (id, v) => { const el = document.getElementById(id); if (el) el.value = String(v); };
+  setV("setGradeExE", r.exE); setV("setGradeExA", r.exA);
+  setV("setGradeVgE", r.vgE); setV("setGradeVgA", r.vgA);
+  setV("setGradeGdE", r.gdE); setV("setGradeGdA", r.gdA);
+  setV("setGradeTestE", r.exE); setV("setGradeTestA", r.useAlerts ? r.exA : 0);
+  onGradeUseAlertsToggle();
 }
 
-function setGradeAlertWeightUI(w) {
-  const val = [0, 0.5, 1].includes(Number(w)) ? Number(w) : 0;
-  const inp = document.getElementById("setGradeAlertWeight");
-  if (inp) inp.value = String(val);
-  document.getElementById("setGwBtn_0")?.classList.toggle("on", val === 0);
-  document.getElementById("setGwBtn_05")?.classList.toggle("on", val === 0.5);
-  document.getElementById("setGwBtn_1")?.classList.toggle("on", val === 1);
+function onGradeUseAlertsToggle() {
+  const on = Boolean(document.getElementById("setGradeUseAlerts")?.checked);
+  ["setGradeExAWrap", "setGradeVgAWrap", "setGradeGdAWrap"].forEach(id => {
+    document.getElementById(id)?.classList.toggle("is-off", !on);
+  });
+  const hdr = document.getElementById("setGradeAlertsColHdr");
+  if (hdr) hdr.textContent = on ? "أقصى تنبيهات" : "التنبيهات (مُعطّلة)";
+  updateGradingRulesPreview();
+}
+
+function stepGradeRuleInput(id, delta) {
+  const inp = document.getElementById(id);
+  if (!inp) return;
+  const max = Number(inp.max) || 50;
+  const cur = Math.round(parseArabicNum(inp.value, 0));
+  inp.value = String(Math.max(0, Math.min(max, cur + delta)));
   updateGradingRulesPreview();
 }
 
 function applyGradingPresetInSettings(key) {
   const p = GRADING_PRESETS[key];
   if (!p) return;
-  document.getElementById("setGradeExMax").value = String(p.excellentMax);
-  document.getElementById("setGradeVgMax").value = String(p.vgoodMax);
-  document.getElementById("setGradeGdMax").value = String(p.goodMax);
-  setGradeAlertWeightUI(p.alertWeight);
+  const cb = document.getElementById("setGradeUseAlerts");
+  if (cb) cb.checked = Boolean(p.useAlerts);
+  const setV = (id, v) => { const el = document.getElementById(id); if (el) el.value = String(v); };
+  setV("setGradeExE", p.exE); setV("setGradeExA", p.exA);
+  setV("setGradeVgE", p.vgE); setV("setGradeVgA", p.vgA);
+  setV("setGradeGdE", p.gdE); setV("setGradeGdA", p.gdA);
+  onGradeUseAlertsToggle();
 }
 
 function readGradingRulesFromSettings() {
-  const w = Number(document.getElementById("setGradeAlertWeight")?.value ?? 0);
-  const ex = Math.max(0, Math.min(20, parseArabicNum(document.getElementById("setGradeExMax")?.value, 1)));
-  const vg = Math.max(ex, Math.min(25, parseArabicNum(document.getElementById("setGradeVgMax")?.value, 2)));
-  const gd = Math.max(vg, Math.min(30, parseArabicNum(document.getElementById("setGradeGdMax")?.value, 3)));
-  return { alertWeight: [0, 0.5, 1].includes(w) ? w : 0, excellentMax: ex, vgoodMax: vg, goodMax: gd };
+  const gVal = (id, fb, mx) => Math.max(0, Math.min(mx, Math.round(parseArabicNum(document.getElementById(id)?.value, fb))));
+  return {
+    version: 2,
+    useAlerts: Boolean(document.getElementById("setGradeUseAlerts")?.checked),
+    exE: gVal("setGradeExE", 1, 50), exA: gVal("setGradeExA", 5, 99),
+    vgE: gVal("setGradeVgE", 2, 50), vgA: gVal("setGradeVgA", 7, 99),
+    gdE: gVal("setGradeGdE", 3, 50), gdA: gVal("setGradeGdA", 9, 99)
+  };
 }
 
 function updateGradingRulesPreview() {
-  const rules = readGradingRulesFromSettings();
+  const r = readGradingRulesFromSettings();
   document.querySelectorAll("#setGradePresets .grade-preset-btn").forEach(btn => {
     const p = GRADING_PRESETS[btn.dataset.gp];
-    const match = Boolean(p && p.alertWeight === rules.alertWeight && p.excellentMax === rules.excellentMax && p.vgoodMax === rules.vgoodMax && p.goodMax === rules.goodMax);
+    const match = Boolean(p && p.useAlerts === r.useAlerts && p.exE === r.exE && p.vgE === r.vgE && p.gdE === r.gdE && (!r.useAlerts || (p.exA === r.exA && p.vgA === r.vgA && p.gdA === r.gdA)));
     btn.classList.toggle("on", match);
   });
-  const pv = document.getElementById("setGradingLivePreview");
-  if (!pv) return;
-  const fakeH = { gradingRules: rules };
-  const samples = [
-    ["0", 0, 0],
-    ["1 تنبيه", 0, 1],
-    ["1 خطأ", 1, 0],
-    ["خطأ + تنبيه", 1, 1],
-    ["خطآن", 2, 0],
-    ["3 أخطاء", 3, 0]
-  ];
-  pv.innerHTML = samples.map(([lbl, e, a]) => {
-    const ev = evalFromErrorCount(e, a, fakeH);
-    const clr = ev === "ممتاز" ? "var(--green)" : (ev === "إعادة" ? "var(--red)" : "var(--blue)");
-    return `<span class="glp-chip">${lbl}: <b style="color:${clr};">${ev}</b></span>`;
-  }).join("");
+  const repBar = document.getElementById("setGradeRepeatRuleBar");
+  if (repBar) {
+    const maxPassE = Math.max(r.exE, r.vgE, r.gdE);
+    const maxPassA = Math.max(r.exA, r.vgA, r.gdA);
+    repBar.innerHTML = r.useAlerts
+      ? `🔴 <b>إعادة تلقائياً:</b> عند <b>${maxPassE + 1} أخطاء</b> فأكثر أو <b>${maxPassA + 1} تنبيه</b> فأكثر (أو عند تجاوز حدود «جيد» أعلاه).`
+      : `🔴 <b>إعادة تلقائياً:</b> عند <b>${maxPassE + 1} أخطاء</b> فأكثر (التنبيهات تُسجّل كعدّاد فقط ولا تؤثر على التقييم).`;
+  }
+  updateGradeTesterResult();
+}
+
+function stepGradeTester(which, delta) {
+  const id = which === "a" ? "setGradeTestA" : "setGradeTestE";
+  const inp = document.getElementById(id);
+  if (!inp) return;
+  const max = which === "a" ? 99 : 50;
+  inp.value = String(Math.max(0, Math.min(max, Math.round(parseArabicNum(inp.value, 0)) + delta)));
+  updateGradeTesterResult();
+}
+
+function updateGradeTesterResult() {
+  const rules = readGradingRulesFromSettings();
+  const e = Math.max(0, Math.round(parseArabicNum(document.getElementById("setGradeTestE")?.value, 0)));
+  const a = Math.max(0, Math.round(parseArabicNum(document.getElementById("setGradeTestA")?.value, 0)));
+  const ev = evalFromErrorCount(e, a, { gradingRules: rules });
+  const badge = document.getElementById("setGradeTestResult");
+  if (badge) {
+    badge.className = "badge " + (ev === "ممتاز" ? "b-green" : (ev === "إعادة" ? "b-red" : "b-blue"));
+    badge.textContent = `النتيجة: ${ev}`;
+  }
 }
 
 function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
@@ -21041,105 +21500,174 @@ function renderProgramsModalBody() {
     const ptsOn = isPointsEnabled(h);
     const cyc = getPointsCycleStatus(h);
     const pc = cyc.pc;
-    const { rows: cycRows } = computeMonthlyData("POINTS_CYCLE");
+    const { rows: cycRows, totals: cycTotals } = computeMonthlyData("POINTS_CYCLE");
     const cycMap = {};
     cycRows.forEach(r => { cycMap[r.student.id] = r.totalPoints; });
 
-    const durChips = [
-      [14, "أسبوعان"],
-      [30, "شهر (30 ي)"],
-      [60, "شهران"],
-      [90, "فصل (3 أشهر)"],
-      [0, "مفتوحة"]
-    ].map(([d, lbl]) => `<button type="button" class="pill pill-sm ${Number(pc.durationDays || 0) === d ? 'on-slate' : ''}" onclick="setPointsCycleDurationPreset(${d})">${lbl}</button>`).join("");
+    if (!window._ptsSubTab) window._ptsSubTab = "cycle";
+    const subTab = window._ptsSubTab;
 
-    const statusLine = cyc.expired
-      ? `<span class="badge b-orange">⏰ انتهت المدة (${cyc.endDate})</span>`
-      : (cyc.hasDuration
-        ? `<span class="badge b-green">⏳ متبقٍ ${Math.max(0, cyc.daysLeft)} يوماً</span>`
-        : `<span class="badge b-blue">♾️ مدة مفتوحة</span>`);
+    const durShortVal = cyc.expired
+      ? "انتهت!"
+      : (cyc.hasDuration ? `${Math.max(0, cyc.daysLeft)} يوم` : "مفتوحة");
 
-    const pastRowsHtml = h.students.length
-      ? h.students.map((st, i) => {
-          const pv = getStudentPastPoints(h, st.id);
-          const curTot = cycMap[st.id] || 0;
-          return `<div class="pts-past-row">
-            <div class="pts-past-name">${i + 1}. ${escapeHtml(st.name)} <span style="font-size:10.5px; color:var(--ink-500); font-weight:600;">(المجموع: ${curTot})</span></div>
-            <div class="pts-past-ctrl">
-              <button type="button" onclick="stepStudentPastPoints('${st.id}', 5)">+5</button>
-              <button type="button" onclick="stepStudentPastPoints('${st.id}', 10)">+10</button>
-              <input type="number" id="ptsPastInp_${st.id}" min="0" max="9999" value="${pv > 0 ? pv : ''}" placeholder="0" oninput="setStudentPastPointsInput('${st.id}', this.value)">
-              <button type="button" onclick="stepStudentPastPoints('${st.id}', 0)" title="تصفير السابق">0</button>
-            </div>
-          </div>`;
-        }).join("")
-      : `<div style="text-align:center; padding:12px; font-size:12px; color:var(--ink-500);">أضف طلاباً للحلقة أولاً</div>`;
+    let subBodyHtml = "";
 
-    const histHtml = pc.history.length ? `
-      <details class="extra-box" style="margin-bottom:9px;">
-        <summary>📜 سجل دورات النقاط المنتهية (${pc.history.length})</summary>
-        <div style="margin-top:8px;">
-          ${pc.history.map(item => `
-            <div style="padding:7px 8px; border:1px solid var(--line); border-radius:8px; margin-bottom:6px; background:var(--bg); font-size:12px;">
-              <div style="display:flex; justify-content:space-between; font-weight:800; color:var(--brand-slate);">
-                <span>🏆 ${escapeHtml(item.name)}</span>
-                <span>${item.totalPoints} نقطة</span>
+    if (subTab === "cycle") {
+      const durBtns = [
+        [14, "أسبوعان (14 ي)"],
+        [30, "شهر (30 ي)"],
+        [60, "شهران (60 ي)"],
+        [90, "فصل (3 أشهر)"],
+        [0, "♾️ مدة مفتوحة"]
+      ].map(([d, lbl]) => `<button type="button" class="pts-dur-btn ${Number(pc.durationDays || 0) === d ? 'on' : ''}" onclick="setPointsCycleDurationPreset(${d})">${lbl}</button>`).join("");
+
+      const statusBadge = cyc.expired
+        ? `<span class="badge b-orange">⏰ انتهت (${cyc.endDate})</span>`
+        : (cyc.hasDuration
+          ? `<span class="badge b-green">⏳ متبقٍ ${Math.max(0, cyc.daysLeft)} يوم</span>`
+          : `<span class="badge b-blue">♾️ مفتوحة</span>`);
+
+      const histHtml = pc.history.length ? `
+        <details class="extra-box" style="margin-top:9px; margin-bottom:0;">
+          <summary>📜 أرشيف الدورات السابقة (${pc.history.length})</summary>
+          <div style="margin-top:8px;">
+            ${pc.history.map(item => `
+              <div style="padding:8px 9px; border:1px solid var(--line); border-radius:9px; margin-bottom:6px; background:var(--bg); font-size:12px;">
+                <div style="display:flex; justify-content:space-between; font-weight:800; color:var(--brand-slate);">
+                  <span>🏆 ${escapeHtml(item.name)}</span>
+                  <span>${item.totalPoints} نقطة</span>
+                </div>
+                <div style="font-size:11px; color:var(--ink-500); margin:2px 0;">من ${escapeHtml(item.startDate)} إلى ${escapeHtml(item.endDate)}</div>
+                ${item.top3?.length ? `<div style="font-size:11.5px; color:var(--ink-700);">${item.top3.map((t, k) => `${["🥇","🥈","🥉"][k] || ""} ${escapeHtml(t.name)} (${t.points})`).join(" • ")}</div>` : ''}
+              </div>`).join("")}
+          </div>
+        </details>` : "";
+
+      subBodyHtml = `
+        <div class="pts-guide-hint">
+          💡 حدّد مدة دورة النقاط (أو اتركها مفتوحة)، وعند انتهاء الدورة اضغط <b>«بدء دورة جديدة»</b> ليبدأ كل طالب من <b>0</b> دون حذف أي تقرير.
+        </div>
+
+        <div class="panel-block" style="margin-bottom:9px;">
+          <div class="panel-label">
+            <span>⏳ اختر مدة الدورة</span>
+            ${statusBadge}
+          </div>
+          <div class="pts-dur-grid">${durBtns}</div>
+          <div class="exec-grid-2">
+            <div class="field"><label>تاريخ البداية</label><input type="date" value="${escapeHtml(pc.startDate || '')}" onchange="onPointsCycleDateChange('startDate', this.value)"></div>
+            <div class="field"><label>تاريخ النهاية (اختياري)</label><input type="date" value="${escapeHtml(pc.endDate || '')}" onchange="onPointsCycleDateChange('endDate', this.value)"></div>
+          </div>
+        </div>
+
+        <div class="pts-reset-card">
+          <button type="button" class="pts-reset-btn" onclick="resetPointsCycleFromZero(true)">🔄 تصفير وبدء دورة جديدة من الصفر</button>
+          <div class="pts-reset-sub">يحفظ أوائل الدورة الحالية في الأرشيف ويعيد عدّاد نقاط كل طالب إلى 0 دون حذف تقارير الجلسات.</div>
+        </div>
+        ${histHtml}
+      `;
+    } else if (subTab === "past") {
+      const searchQ = normalizeSearchArabic(window._ptsPastSearch || "");
+      const filteredSt = h.students
+        .map((st, idx) => ({ st, idx }))
+        .filter(x => !searchQ || matchesArabicQuery(normalizeSearchArabic(x.st.name), searchQ));
+
+      const pastCardsHtml = filteredSt.length
+        ? filteredSt.map(({ st, idx }) => {
+            const pv = getStudentPastPoints(h, st.id);
+            const curTot = cycMap[st.id] || 0;
+            const liveSessionsPts = Math.max(0, curTot - pv);
+            return `<div class="pts-past-card">
+              <div class="pts-pc-top">
+                <div class="pts-pc-name">${idx + 1}. ${escapeHtml(st.name)}</div>
+                <span class="badge ${curTot > 0 ? 'b-green' : 'b-slate'}" id="ptsPastSum_${st.id}" data-live="${liveSessionsPts}">الإجمالي: ${curTot}</span>
               </div>
-              <div style="font-size:11px; color:var(--ink-500); margin:2px 0;">${escapeHtml(item.startDate)} ← ${escapeHtml(item.endDate)}</div>
-              ${item.top3?.length ? `<div style="font-size:11.5px; color:var(--ink-700);">${item.top3.map((t, k) => `${["🥇","🥈","🥉"][k] || ""} ${escapeHtml(t.name)} (${t.points})`).join(" • ")}</div>` : ''}
-            </div>`).join("")}
-        </div>
-      </details>` : "";
+              <div class="pts-pc-ctrl">
+                <button type="button" onclick="stepStudentPastPoints('${st.id}', -5)">−5</button>
+                <button type="button" onclick="stepStudentPastPoints('${st.id}', 5)">+5</button>
+                <button type="button" onclick="stepStudentPastPoints('${st.id}', 10)">+10</button>
+                <input type="number" id="ptsPastInp_${st.id}" min="0" max="9999" value="${pv > 0 ? pv : ''}" placeholder="0" oninput="setStudentPastPointsInput('${st.id}', this.value)">
+                <button type="button" class="clr-btn" onclick="stepStudentPastPoints('${st.id}', 0)">تصفير</button>
+              </div>
+            </div>`;
+          }).join("")
+        : `<div style="text-align:center; padding:14px; font-size:12px; color:var(--ink-500);">${h.students.length ? "لا يوجد طالب مطابق للبحث" : "أضف طلاباً للحلقة أولاً"}</div>`;
 
-    body.innerHTML = `
-      <div class="prog-hero">
-        <div>
-          <h4>⭐ برنامج النقاط والتحفيز</h4>
-          <p>${escapeHtml(pc.cycleName || 'الدورة الحالية')} • تحكّم بالمدة والرصيد السابق والتصفير.</p>
-        </div>
-        <button type="button" class="btn ${ptsOn ? 'btn-success' : 'btn-outline'} btn-sm" onclick="togglePointsMode(); renderProgramsModalBody();">${ptsOn ? '✓ مفعّل' : 'متوقف'}</button>
-      </div>
-
-      <div class="panel-block" style="margin-bottom:9px;">
-        <div class="panel-label">
-          <span>⏳ مدة دورة النقاط والتصفير</span>
-          ${statusLine}
-        </div>
-        <div class="pts-dur-chips">${durChips}</div>
-        <div class="exec-grid-2" style="margin-bottom:9px;">
-          <div class="field"><label>بداية الدورة</label><input type="date" value="${escapeHtml(pc.startDate || '')}" onchange="onPointsCycleDateChange('startDate', this.value)"></div>
-          <div class="field"><label>نهاية الدورة (اختياري)</label><input type="date" value="${escapeHtml(pc.endDate || '')}" onchange="onPointsCycleDateChange('endDate', this.value)"></div>
-        </div>
-        <button type="button" class="btn btn-warn btn-sm" style="width:100%;" onclick="resetPointsCycleFromZero(true)">🔄 بدء دورة جديدة من الصفر (أرشفة الحالية وتصفير عداد الطلاب)</button>
-      </div>
-
-      <div class="panel-block" style="margin-bottom:9px;">
-        <div class="panel-label">
-          <span>➕ نقاط جلسات ماضية غير مسجلة</span>
-          <span class="badge b-green" id="ptsPastTotalBadge">+${cyc.totalPastPoints} نقطة سابقة</span>
+      subBodyHtml = `
+        <div class="pts-guide-hint">
+          ➕ أدخل هنا نقاط الجلسات الماضية التي لم تُسجّل بالتطبيق لكل طالب — تُجمع تلقائياً مع نقاطه في الدورة الحالية والمتصدرين.
         </div>
         <div class="field" style="margin-bottom:7px;">
-          <input type="text" id="ptsPastNoteInput" value="${escapeHtml(pc.pastNote || '')}" placeholder="وصف اختياري (مثال: نقاط أول 4 جلسات قبل التطبيق)..." style="padding:7px 9px; font-size:12px;">
+          <input type="text" id="ptsPastNoteInput" value="${escapeHtml(pc.pastNote || '')}" placeholder="ملاحظة اختيارية (مثال: نقاط أول 4 جلسات قبل التطبيق)..." style="padding:7px 10px; font-size:12px;">
         </div>
-        <div class="pts-past-list">${pastRowsHtml}</div>
-        <button type="button" class="btn btn-primary btn-sm" style="width:100%;" onclick="savePointsPastAdjustmentsUI()">✓ حفظ نقاط الجلسات الماضية</button>
+        ${h.students.length > 5 ? `<div class="field" style="margin-bottom:7px;">
+          <input type="text" value="${escapeHtml(window._ptsPastSearch || '')}" placeholder="🔍 بحث سريع باسم الطالب..." style="padding:7px 10px; font-size:12px;" oninput="window._ptsPastSearch=this.value; renderProgramsModalBody();">
+        </div>` : ''}
+        <div class="pts-past-list" style="max-height:255px; padding:6px;">${pastCardsHtml}</div>
+        <button type="button" class="btn btn-primary" style="width:100%; padding:10px;" onclick="savePointsPastAdjustmentsUI()">✓ حفظ نقاط الجلسات الماضية</button>
+      `;
+    } else {
+      subBodyHtml = `
+        <div class="pts-rules-grid">
+          <div class="pts-rule-tile">
+            <b>📖 الحفظ (صفحة كاملة)</b>
+            <span>ممتاز: 10 • جيد جداً: 6<br>جيد: 4 • إعادة: 0</span>
+          </div>
+          <div class="pts-rule-tile">
+            <b>📄 الحفظ (نصف صفحة)</b>
+            <span>ممتاز: 5 • جيد جداً: 3<br>جيد: 2 • إعادة: 0</span>
+          </div>
+          <div class="pts-rule-tile">
+            <b>📘 المراجعة / السرد / السبر</b>
+            <span>ممتاز: 7 • جيد جداً: 5<br>جيد: 3 • إعادة: 0</span>
+          </div>
+          <div class="pts-rule-tile">
+            <b>✨ السلوك والحضور</b>
+            <span>أدب: +5 • مشاركة: +5<br>حضور مبكر: +5</span>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:7px;">
+          <button type="button" class="btn btn-primary btn-sm" style="padding:9px 6px;" onclick="closeModal('programsModal'); switchTab('stats');">🏆 لوحة المتصدرين</button>
+          <button type="button" class="btn btn-soft btn-sm" style="padding:9px 6px;" onclick="copyPointsCycleLeaderboardDirect()">💬 نسخ المتصدرين</button>
+        </div>
+      `;
+    }
+
+    body.innerHTML = `
+      <div class="prog-hero" style="margin-bottom:9px;">
+        <div>
+          <h4>⭐ برنامج النقاط والتحفيز</h4>
+          <p>${escapeHtml(pc.cycleName || 'الدورة الحالية')} • ${ptsOn ? 'نشط في البطاقات والتقارير' : 'متوقف حالياً (يمكنك تفعيله متى شئت)'}</p>
+        </div>
+        <button type="button" class="btn ${ptsOn ? 'btn-success' : 'btn-accent'} btn-sm" onclick="togglePointsMode(); renderProgramsModalBody();">${ptsOn ? '✓ مفعّل' : '▶ تفعيل'}</button>
       </div>
 
-      ${histHtml}
-
-      <details class="extra-box" style="margin-bottom:9px;">
-        <summary>📋 لائحة توزيع النقاط المعتمدة</summary>
-        <div style="font-size:12px; color:var(--ink-700); line-height:1.8; margin-top:6px;">
-          • <b>الحفظ (صفحة كاملة):</b> ممتاز 10 • جيد جداً 6 • جيد 4 • إعادة 0<br>
-          • <b>الحفظ (نصف صفحة):</b> ممتاز 5 • جيد جداً 3 • جيد 2 • إعادة 0<br>
-          • <b>المراجعة أو السرد أو السبر:</b> ممتاز 7 • جيد جداً 5 • جيد 3 • إعادة 0<br>
-          • <b>السلوك والحضور:</b> أدب +5 • مشاركة +5 • حضور مبكر +5
+      <div class="pts-kpi-3">
+        <div class="pts-kpi-tile gold">
+          <div class="pk-v">${cycTotals.totalPoints}</div>
+          <div class="pk-l">🏆 نقاط الدورة</div>
         </div>
-      </details>
+        <div class="pts-kpi-tile">
+          <div class="pk-v">${durShortVal}</div>
+          <div class="pk-l">⏳ المدة</div>
+        </div>
+        <div class="pts-kpi-tile green">
+          <div class="pk-v" id="ptsPastTotalBadge">+${cyc.totalPastPoints}</div>
+          <div class="pk-l">➕ رصيد سابق</div>
+        </div>
+      </div>
 
-      <div style="display:flex; gap:6px; flex-wrap:wrap;">
-        <button type="button" class="btn btn-primary btn-sm" style="flex:1;" onclick="closeModal('programsModal'); switchTab('stats');">🏆 لوحة المتصدرين</button>
-        <button type="button" class="btn btn-soft btn-sm" onclick="copyPointsCycleLeaderboardDirect()">💬 نسخ المتصدرين</button>
+      <div class="pts-subtabs-3">
+        <button type="button" class="pts-subtab-btn ${subTab === 'cycle' ? 'on' : ''}" onclick="setPointsModalSubTab('cycle')">⏳ الدورة والمدة</button>
+        <button type="button" class="pts-subtab-btn ${subTab === 'past' ? 'on' : ''}" onclick="setPointsModalSubTab('past')">➕ نقاط سابقة</button>
+        <button type="button" class="pts-subtab-btn ${subTab === 'guide' ? 'on' : ''}" onclick="setPointsModalSubTab('guide')">📋 اللائحة</button>
+      </div>
+
+      ${subBodyHtml}
+
+      <div style="display:flex; gap:6px; margin-top:10px; padding-top:9px; border-top:1px dashed var(--line);">
+        <button type="button" class="btn btn-soft btn-sm" style="flex:1;" onclick="closeModal('programsModal'); switchTab('stats');">🏆 عرض المتصدرين</button>
         <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('programsModal')">إغلاق</button>
       </div>
     `;
@@ -22651,7 +23179,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v73 -->
+<!-- Makin App v74 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -25400,7 +25928,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v73";
+const TIBYAN_APP_VERSION = "v74";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
