@@ -8918,7 +8918,7 @@ html { scroll-behavior: smooth; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v68</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v69</span>
         </button>
       </div>
     </div>
@@ -12219,6 +12219,53 @@ function cancelAutoAdvance(notify = false) {
 
 // ==================== STATE ====================
 const STORAGE_KEY = "tibyan_app_state_v1";
+const LEGACY_OWNER_KEY = "tibyan_legacy_state_owner_v1";
+let _activeStorageUid = "";
+let _isAuthFlowBusy = false;
+
+function getEffectiveAccountUid(uidOverride = null) {
+  if (uidOverride !== null && uidOverride !== undefined) return String(uidOverride || "").trim();
+  const sessUid = (typeof tibyanAccounts !== "undefined" && tibyanAccounts?.currentSession?.userId) ? String(tibyanAccounts.currentSession.userId).trim() : "";
+  if (sessUid) return sessUid;
+  return _activeStorageUid || "";
+}
+
+function getStorageKeyForUid(uidOverride = null) {
+  const uid = getEffectiveAccountUid(uidOverride);
+  return uid ? `${STORAGE_KEY}__${uid}` : STORAGE_KEY;
+}
+
+function clearAuthAndOnboardingInputs() {
+  ["authTName", "authTEmail", "authTPass", "authTSupCode", "authSName", "authSBranch", "authSEmail", "authSPass", "authFounderCode", "authLoginPass", "obSheikh", "obHalaqa", "obStudents"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "";
+  });
+  const obBr = document.getElementById("obBranch");
+  if (obBr) obBr.value = "صرح إدلب";
+}
+
+function resetRuntimeWorkspaceState() {
+  if (typeof cancelAutoAdvance === "function") cancelAutoAdvance(false);
+  if (typeof closeStudentEvalSheet === "function") closeStudentEvalSheet(false);
+  appState = { activeHalaqaId: null, halaqat: {} };
+  activeSessionId = null;
+  openCardId = null;
+  openAdvCardId = null;
+  evalSheetTool = "";
+  evalBonusOpen = false;
+  _lastEvalSheetStudentId = null;
+  lastUndoSnapshot = null;
+  currentSearch = "";
+  currentFilter = "all";
+  studentsSearchQuery = "";
+  _supervisorInspectHalaqa = null;
+  _certStudentId = null;
+  pendingAbsChoices = {};
+  if (typeof _debouncedSaveTimer !== "undefined" && _debouncedSaveTimer) {
+    clearTimeout(_debouncedSaveTimer);
+    _debouncedSaveTimer = null;
+  }
+}
 let appState = { activeHalaqaId: null, halaqat: {} };
 let activeSessionId = null;
 let openCardId = null;
@@ -12252,9 +12299,38 @@ let _certStudentId = null;
 let _certMonthLabel = "";
 let pendingAbsChoices = {};
 
-function loadState() {
+function loadState(uidOverride = null, opts = {}) {
+  appState = { activeHalaqaId: null, halaqat: {} };
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const uid = getEffectiveAccountUid(uidOverride);
+    _activeStorageUid = uid;
+    const scopedKey = getStorageKeyForUid(uid);
+    let raw = localStorage.getItem(scopedKey);
+
+    // Safe one-time migration of legacy single-key data ONLY for the original existing account (never for new accounts!)
+    if (!raw && uid && opts.allowLegacyMigration) {
+      const legacyOwner = localStorage.getItem(LEGACY_OWNER_KEY) || "";
+      const legacyRaw = localStorage.getItem(STORAGE_KEY);
+      if (legacyRaw && (!legacyOwner || legacyOwner === uid)) {
+        try {
+          const lp = JSON.parse(legacyRaw);
+          const uProfile = (typeof tibyanAccounts !== "undefined") ? tibyanAccounts.users?.[uid] : null;
+          const matchesUserHal = Boolean(uProfile?.halaqaId && lp?.halaqat?.[uProfile.halaqaId]);
+          if (lp && lp.halaqat && Object.keys(lp.halaqat).length && (opts.isBootSession || matchesUserHal || !legacyOwner)) {
+            raw = legacyRaw;
+            localStorage.setItem(scopedKey, legacyRaw);
+            localStorage.setItem(LEGACY_OWNER_KEY, uid);
+            localStorage.removeItem(STORAGE_KEY);
+          }
+        } catch {}
+      }
+    }
+
+    // If logged out (no uid) and legacy was already claimed by an account, stay clean!
+    if (!uid && localStorage.getItem(LEGACY_OWNER_KEY)) {
+      raw = null;
+    }
+
     if (raw) {
       const parsed = JSON.parse(raw);
       if (parsed && parsed.halaqat) {
@@ -12353,7 +12429,7 @@ function loadState() {
           });
           h.sessions = cleaned;
         });
-        if (repaired) localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+        if (repaired) localStorage.setItem(getStorageKeyForUid(uid), JSON.stringify(appState));
       }
     }
   } catch (e) { console.error(e); }
@@ -12364,7 +12440,7 @@ function saveState(skipCloud = false) {
   if (_debouncedSaveTimer) { clearTimeout(_debouncedSaveTimer); _debouncedSaveTimer = null; }
   const h = appState.activeHalaqaId ? appState.halaqat[appState.activeHalaqaId] : null;
   if (h && !_supervisorInspectHalaqa) h.lastModifiedAt = new Date().toISOString();
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appState)); } catch {}
+  try { localStorage.setItem(getStorageKeyForUid(), JSON.stringify(appState)); } catch {}
   if (typeof updateUnsyncedIndicators === "function") updateUnsyncedIndicators();
   if (!skipCloud) {
     if (typeof markCloudSyncDirty === "function") markCloudSyncDirty();
@@ -13452,8 +13528,9 @@ function dismissIkhlasSplash() {
 
 function initApp() {
   try {
-    loadState();
     loadAccountsState();
+    const _bootUid = tibyanAccounts?.currentSession?.userId || "";
+    loadState(_bootUid, { allowLegacyMigration: Boolean(_bootUid), isBootSession: Boolean(_bootUid) });
     loadNotifPrefs();
     applySavedTheme();
     installAudioUnlockOnce();
@@ -13573,12 +13650,12 @@ function routeAppByCurrentUser() {
       document.getElementById("authScreen").style.display = "none";
       document.getElementById("onboardingScreen").style.display = "flex";
       document.getElementById("appShell").style.display = "none";
-      if (document.getElementById("obSheikh") && !document.getElementById("obSheikh").value) {
-        document.getElementById("obSheikh").value = curUser.name || "";
-      }
+      if (document.getElementById("obSheikh")) document.getElementById("obSheikh").value = curUser.name || "";
+      if (document.getElementById("obHalaqa")) document.getElementById("obHalaqa").value = "";
+      if (document.getElementById("obStudents")) document.getElementById("obStudents").value = "";
       if (curUser.gender && typeof setObGender === "function") setObGender(curUser.gender);
-      if (curUser.supervisorBranchName && document.getElementById("obBranch")) {
-        document.getElementById("obBranch").value = curUser.supervisorBranchName;
+      if (document.getElementById("obBranch")) {
+        document.getElementById("obBranch").value = curUser.supervisorBranchName || "صرح إدلب";
       }
       prepareOnboardingScreen(false);
       return;
@@ -20895,7 +20972,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v68 -->
+<!-- Makin App v69 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -21973,7 +22050,7 @@ async function quickCreateTeacherAccountFromModal() {
   document.getElementById("authTPass").value = pass;
   document.getElementById("authTSupCode").value = supCode;
   closeModal("teacherAccountModal");
-  await handleRegisterTeacher();
+  await handleRegisterTeacher(true);
 }
 
 async function teacherRequestSupervisorLink() {
@@ -23608,7 +23685,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v68";
+const TIBYAN_APP_VERSION = "v69";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -23721,7 +23798,7 @@ function initCentralFirebaseSDK() {
     if (!_fbAuthListenerAttached) {
       _fbAuthListenerAttached = true;
       _fbAuth.onAuthStateChanged(async fbUser => {
-        if (!fbUser) return;
+        if (!fbUser || _isAuthFlowBusy) return;
         await hydrateSignedInFirebaseUser(fbUser);
       });
     }
@@ -23796,6 +23873,13 @@ async function hydrateSignedInFirebaseUser(fbUser) {
       saveAccountsState();
 
       let merged = false;
+      // Ensure runtime workspace is strictly bound to THIS account's isolated storage!
+      if (_activeStorageUid !== fbUser.uid) {
+        resetRuntimeWorkspaceState();
+        loadState(fbUser.uid, { allowLegacyMigration: false });
+        merged = true;
+      }
+
       // 1) Auto-Restore ALL Teacher Halaqat, Students, Sessions & Reports on ANY device!
       if (isUserTeacherCapable(profile)) {
         const remoteHals = await fbDbGet(`teacher_halaqat/${fbUser.uid}`);
@@ -23813,11 +23897,11 @@ async function hydrateSignedInFirebaseUser(fbUser) {
             merged = true;
           }
           if (merged) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+            localStorage.setItem(getStorageKeyForUid(fbUser.uid), JSON.stringify(appState));
           }
         }
-        // Flush any local offline edits that are newer than cloud immediately!
-        if (isCloudSyncDirty() || (!remoteHals && Object.keys(appState.halaqat || {}).length)) {
+        // Flush ONLY this account's own local offline edits!
+        if (_activeStorageUid === fbUser.uid && (isCloudSyncDirty() || (!remoteHals && Object.keys(appState.halaqat || {}).length))) {
           syncCentralCloudNow(false);
         }
       }
@@ -23951,7 +24035,12 @@ async function handleAuthLogin() {
 
   if (!await ensureFirebaseReady(6000)) { showToast("تعذّر الاتصال بسيرفر مكين — تحقق من الإنترنت وحاول مجدداً"); return; }
   setAuthBusy("btnAuthLoginSubmit", true, "🚀 دخول إلى حسابي");
+  _isAuthFlowBusy = true;
   try {
+    // Save previous account's local workspace cleanly before switching
+    if (_activeStorageUid && Object.keys(appState.halaqat || {}).length) {
+      saveState(true);
+    }
     const cred = await _fbAuth.signInWithEmailAndPassword(email, pass);
     const fbUser = cred.user;
     let profile = await fbDbGet(`users/${fbUser.uid}`);
@@ -23976,12 +24065,16 @@ async function handleAuthLogin() {
     tibyanAccounts.users[fbUser.uid] = profile;
     tibyanAccounts.currentSession = { userId: fbUser.uid, role: profile.role, email: fbUser.email };
     saveAccountsState();
+    localStorage.removeItem(CLOUD_DIRTY_KEY);
+    resetRuntimeWorkspaceState();
+    loadState(fbUser.uid, { allowLegacyMigration: true });
     document.getElementById("authLoginPass").value = "";
     await hydrateSignedInFirebaseUser(fbUser);
     showToast(`أهلاً بك يا ${profile.name} ✓`);
   } catch (e) {
     showToast(translateFirebaseAuthError(e));
   } finally {
+    _isAuthFlowBusy = false;
     setAuthBusy("btnAuthLoginSubmit", false, "🚀 دخول إلى حسابي");
   }
 }
@@ -24026,7 +24119,7 @@ async function findSupervisorByCode(codeRaw) {
   return Object.values(tibyanAccounts.users).find(u => u.role === "supervisor" && String(u.supervisorCode || "").toUpperCase() === code) || null;
 }
 
-async function handleRegisterTeacher() {
+async function handleRegisterTeacher(preserveGuestLocal = false) {
   const name = (document.getElementById("authTName")?.value || "").trim();
   const email = normalizeEmail(document.getElementById("authTEmail")?.value);
   const pass = document.getElementById("authTPass")?.value || "";
@@ -24037,8 +24130,17 @@ async function handleRegisterTeacher() {
   if (pass.length < 6) { showToast("كلمة السر يجب أن تكون 6 أحرف أو أرقام على الأقل"); return; }
   if (!await ensureFirebaseReady(6000)) { showToast("تأكد من الاتصال بالإنترنت وحاول مجدداً"); return; }
 
+  const canCarryGuestHal = Boolean(preserveGuestLocal && !tibyanAccounts.currentSession && !_activeStorageUid && !localStorage.getItem(LEGACY_OWNER_KEY));
+  const guestStateSnapshot = canCarryGuestHal ? JSON.parse(JSON.stringify(appState)) : null;
+
   setAuthBusy("btnAuthTeacherSubmit", true, "✨ إنشاء الحساب والبدء فوراً");
+  _isAuthFlowBusy = true;
   try {
+    // Preserve previous account's local state before creating a brand-new account
+    if (_activeStorageUid && Object.keys(appState.halaqat || {}).length) {
+      saveState(true);
+    }
+
     const cred = await _fbAuth.createUserWithEmailAndPassword(email, pass);
     const fbUser = cred.user;
 
@@ -24048,6 +24150,20 @@ async function handleRegisterTeacher() {
       if (!matchedSup) {
         showToast("تم إنشاء حسابك، لكن رمز المشرف لم يُعثر عليه — يمكنك إدخاله لاحقاً من القائمة الجانبية");
       }
+    }
+
+    // Start brand-new account with a 100% CLEAN isolated workspace (never inherits previous account!)
+    localStorage.removeItem(CLOUD_DIRTY_KEY);
+    resetRuntimeWorkspaceState();
+    _activeStorageUid = fbUser.uid;
+    if (guestStateSnapshot && guestStateSnapshot.halaqat && Object.keys(guestStateSnapshot.halaqat).length) {
+      appState = guestStateSnapshot;
+      localStorage.setItem(getStorageKeyForUid(fbUser.uid), JSON.stringify(appState));
+      localStorage.setItem(LEGACY_OWNER_KEY, fbUser.uid);
+      localStorage.removeItem(STORAGE_KEY);
+    } else {
+      appState = { activeHalaqaId: null, halaqat: {} };
+      localStorage.setItem(getStorageKeyForUid(fbUser.uid), JSON.stringify(appState));
     }
 
     const existingHal = getActiveHalaqa();
@@ -24073,6 +24189,7 @@ async function handleRegisterTeacher() {
     tibyanAccounts.users[fbUser.uid] = teacherUser;
     tibyanAccounts.currentSession = { userId: fbUser.uid, role: "teacher", email };
     saveAccountsState();
+    clearAuthAndOnboardingInputs();
 
     // Pre-fill onboarding gender automatically
     if (typeof setObGender === "function") setObGender(gender);
@@ -24083,12 +24200,17 @@ async function handleRegisterTeacher() {
     } else {
       showToast(`✓ أهلاً بك! تم إنشاء حساب ${gender === 'female' ? 'المعلمة' : 'المعلم'} وحفظه سحابياً`);
     }
-    markCloudSyncDirty();
-    scheduleTeacherPrivateCloudBackup(true);
+    if (existingHal) {
+      markCloudSyncDirty();
+      scheduleTeacherPrivateCloudBackup(true);
+    }
+    _lastHydratedUid = fbUser.uid;
+    startLiveNotificationListeners();
     routeAppByCurrentUser();
   } catch (e) {
     showToast(translateFirebaseAuthError(e));
   } finally {
+    _isAuthFlowBusy = false;
     setAuthBusy("btnAuthTeacherSubmit", false, "✨ إنشاء الحساب والبدء فوراً");
   }
 }
@@ -24109,7 +24231,11 @@ async function handleRegisterSupervisor() {
   if (!await ensureFirebaseReady(6000)) { showToast("تأكد من الاتصال بالإنترنت وحاول مجدداً"); return; }
 
   setAuthBusy("btnAuthSupSubmit", true, "🏛️ إنشاء حساب المشرف وتوليد الكود");
+  _isAuthFlowBusy = true;
   try {
+    if (_activeStorageUid && Object.keys(appState.halaqat || {}).length) {
+      saveState(true);
+    }
     const cred = await _fbAuth.createUserWithEmailAndPassword(email, pass);
     const fbUser = cred.user;
 
@@ -24183,6 +24309,10 @@ async function handleRegisterSupervisor() {
     if (!tibyanAccounts.messages[fbUser.uid]) tibyanAccounts.messages[fbUser.uid] = [];
     tibyanAccounts.currentSession = { userId: fbUser.uid, role: supUser.role, email };
     saveAccountsState();
+    localStorage.removeItem(CLOUD_DIRTY_KEY);
+    resetRuntimeWorkspaceState();
+    _activeStorageUid = fbUser.uid;
+    clearAuthAndOnboardingInputs();
 
     if (isClaimingOwner) {
       _ownerWorkspaceMode = "owner";
@@ -24190,22 +24320,36 @@ async function handleRegisterSupervisor() {
     } else {
       showToast(`🏛️ أهلاً بك ${gender === 'female' ? 'مشرفة' : 'مشرف'} ${finalBranch}! كودك: ${supCode}`);
     }
+    _lastHydratedUid = fbUser.uid;
+    startLiveNotificationListeners();
     routeAppByCurrentUser();
   } catch (e) {
     showToast(translateFirebaseAuthError(e));
   } finally {
+    _isAuthFlowBusy = false;
     setAuthBusy("btnAuthSupSubmit", false, "🏛️ إنشاء حساب المشرف وتوليد الكود");
   }
 }
 
 async function logoutCurrentAccount(silent = false) {
   if (!silent && !confirm("هل تريد تسجيل الخروج؟ (جميع بياناتك محفوظة بأمان على السحابة)")) return;
+  const exitingUid = getEffectiveAccountUid();
+  if (exitingUid && Object.keys(appState.halaqat || {}).length) {
+    try { localStorage.setItem(getStorageKeyForUid(exitingUid), JSON.stringify(appState)); } catch {}
+    if (navigator.onLine && _fbAuth?.currentUser && isCloudSyncDirty()) {
+      try { await syncCentralCloudNow(false); } catch {}
+    }
+  }
   _supervisorInspectHalaqa = null;
   _ownerWorkspaceMode = "owner";
   tibyanAccounts.currentSession = null;
   saveAccountsState();
   stopLiveNotificationListeners();
   _lastHydratedUid = "";
+  _activeStorageUid = "";
+  localStorage.removeItem(CLOUD_DIRTY_KEY);
+  resetRuntimeWorkspaceState();
+  clearAuthAndOnboardingInputs();
   try { if (_fbAuth) await _fbAuth.signOut(); } catch {}
   document.getElementById("appShell").style.display = "none";
   document.getElementById("supervisorShell").style.display = "none";
