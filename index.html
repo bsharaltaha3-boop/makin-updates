@@ -7535,6 +7535,457 @@ html { scroll-behavior: smooth; }
   border-bottom-color: #c8a14b;
 }
 
+
+/* ==================== MAKIN v67: QUICK EVALUATION BOTTOM SHEET STUDIO ==================== */
+.st-card.eval-active {
+  border-color: #192c56 !important;
+  border-right: 4.5px solid #c8a14b !important;
+  box-shadow: 0 4px 14px rgba(25, 44, 86, 0.14) !important;
+}
+[data-theme="dark"] .st-card.eval-active {
+  border-color: #c8a14b !important;
+}
+
+.eval-sheet-backdrop {
+  z-index: 92 !important;
+  padding: 12px !important;
+  background: rgba(11, 24, 40, 0.56) !important;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 680px) {
+  .eval-sheet-backdrop {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+}
+
+.es-box {
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  background: var(--bg);
+  border-radius: 22px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 56px rgba(8, 20, 36, 0.42);
+  border: 1px solid rgba(200, 161, 75, 0.35);
+  animation: esSlideUp 0.22s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+@media (max-width: 680px) {
+  .es-box {
+    max-width: 100%;
+    max-height: 91vh;
+    border-radius: 22px 22px 0 0;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+  }
+}
+@keyframes esSlideUp {
+  from { opacity: 0.4; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sticky Executive Navy Header */
+.es-header {
+  background: linear-gradient(145deg, #102540 0%, #1a375c 100%);
+  color: #ffffff;
+  padding: 7px 13px 11px;
+  border-bottom: 2.5px solid #c8a14b;
+  flex-shrink: 0;
+}
+.es-handle {
+  width: 40px;
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.28);
+  margin: 0 auto 8px;
+}
+.es-hdr-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.es-hdr-id {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+.es-num-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: #c8a14b;
+  color: #0f233c;
+  font-size: 12.5px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.es-title-wrap {
+  min-width: 0;
+  flex: 1;
+}
+.es-st-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+.es-st-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 11px;
+  color: #cde0f2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.es-pts-pill {
+  background: rgba(200, 161, 75, 0.22);
+  border: 1px solid rgba(244, 217, 141, 0.45);
+  color: #f6dc93;
+  padding: 1px 8px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 800;
+}
+.es-hdr-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.es-ico-btn {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.11);
+  color: #ffffff;
+  height: 31px;
+  padding: 0 8px;
+  border-radius: 9px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+.es-ico-btn:active { transform: scale(0.95); background: rgba(255, 255, 255, 0.22); }
+.es-ico-btn.close {
+  width: 31px;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Scrollable Clean Body */
+.es-body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px 12px 12px;
+}
+.es-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px;
+  margin-bottom: 9px;
+  box-shadow: 0 1px 6px rgba(16, 42, 73, 0.04);
+}
+.es-card:last-child { margin-bottom: 0; }
+
+/* Attendance 4-Segment Bar */
+.es-att-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 8px;
+}
+.es-att-4 .pill {
+  padding: 7px 2px;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+  border-radius: 10px;
+}
+
+/* Collapsible Compact Behavior & Points Strip */
+.es-bonus-toggle {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink-900);
+  border-radius: 11px;
+  padding: 7px 10px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: right;
+}
+.es-bonus-toggle.is-open {
+  border-color: #c8a14b;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-bottom: 0;
+  background: var(--brand-tint);
+}
+.es-bonus-sum {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+.es-bonus-pill-val {
+  background: var(--green-bg);
+  color: var(--green);
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.es-bonus-sub-txt {
+  font-size: 11px;
+  color: var(--ink-500);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.es-bonus-drawer {
+  background: var(--white);
+  border: 1px solid #c8a14b;
+  border-top: none;
+  border-radius: 0 0 11px 11px;
+  padding: 9px 10px;
+  margin-bottom: 8px;
+}
+
+/* 1-Row Sleek Error & Alert Counter Capsules */
+.es-err-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.es-err-cap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 4px 5px;
+  border-radius: 10px;
+  border: 1px solid rgba(185, 34, 34, 0.22);
+  background: var(--red-bg);
+}
+.es-err-cap.is-alert {
+  border-color: rgba(184, 86, 16, 0.24);
+  background: var(--orange-bg);
+}
+.es-cap-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid var(--line-strong);
+  background: var(--white);
+  color: var(--ink-900);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.es-cap-btn.plus-err {
+  background: var(--red);
+  border-color: var(--red);
+  color: #ffffff;
+}
+.es-cap-btn.plus-alrt {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #ffffff;
+}
+.es-cap-btn:active { transform: scale(0.93); }
+.es-cap-lbl {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--red);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.es-err-cap.is-alert .es-cap-lbl {
+  color: var(--orange);
+}
+
+/* Smart 4-Column Grade Grid with Live Suggested Cue */
+.es-eval-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.es-eval-btn {
+  position: relative;
+  border: 1.5px solid var(--line-strong);
+  background: var(--white);
+  color: var(--ink-900);
+  padding: 9px 2px;
+  border-radius: 11px;
+  font-size: 12.5px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  transition: transform 0.08s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+}
+.es-eval-btn:active { transform: scale(0.96); }
+.es-eval-btn.on-green { background: var(--green); color: #ffffff; border-color: var(--green); box-shadow: 0 3px 10px rgba(22, 121, 76, 0.28); }
+.es-eval-btn.on-blue  { background: var(--blue); color: #ffffff; border-color: var(--blue); box-shadow: 0 3px 10px rgba(21, 98, 154, 0.25); }
+.es-eval-btn.on-red   { background: var(--red); color: #ffffff; border-color: var(--red); box-shadow: 0 3px 10px rgba(185, 34, 34, 0.26); }
+.es-eval-btn.es-suggested {
+  border: 2px solid #c8a14b;
+  box-shadow: 0 0 0 3px rgba(200, 161, 75, 0.22);
+}
+.es-sug-dot {
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #c8a14b;
+  color: #0f233c;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 0 6px;
+  border-radius: 99px;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+
+/* 4-Button Clean Tool Dock (Zero Clipped Text Ever!) */
+.es-tools-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.es-tool-btn {
+  position: relative;
+  border: 1px solid var(--line-strong);
+  background: var(--white);
+  color: var(--ink-700);
+  border-radius: 12px;
+  padding: 8px 3px 7px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  transition: all 0.14s ease;
+}
+.es-tool-btn .et-ico { font-size: 16px; line-height: 1; }
+.es-tool-btn .et-lbl { font-size: 11px; font-weight: 800; white-space: nowrap; }
+.es-tool-btn.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(20, 42, 70, 0.22);
+}
+[data-theme="dark"] .es-tool-btn.on {
+  background: #c8a14b;
+  border-color: #c8a14b;
+  color: #0f233c;
+}
+.es-tool-dot {
+  position: absolute;
+  top: 5px;
+  left: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+.es-tool-btn.on .es-tool-dot {
+  background: #f6dc93;
+}
+.es-tool-panel {
+  background: var(--white);
+  border: 1.5px solid #142a46;
+  border-radius: 13px;
+  padding: 10px;
+  margin-bottom: 8px;
+  animation: obStepIn 0.16s ease;
+}
+[data-theme="dark"] .es-tool-panel {
+  border-color: #c8a14b;
+}
+.es-tool-panel-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--brand-slate);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--line);
+}
+
+/* Sticky 1-Row Thumb Footer */
+.es-footer {
+  flex-shrink: 0;
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  padding: 9px 12px calc(env(safe-area-inset-bottom, 4px) + 9px);
+  box-shadow: 0 -4px 16px rgba(16, 42, 73, 0.08);
+}
+.es-footer-row {
+  display: grid;
+  grid-template-columns: 0.75fr 1fr 1.35fr;
+  gap: 7px;
+  align-items: center;
+}
+.es-footer-row .btn {
+  width: 100%;
+  padding: 10px 6px;
+  font-size: 13px;
+  border-radius: 11px;
+}
+.es-footer-row .es-btn-next {
+  background: linear-gradient(135deg, #142a46 0%, #1e426c 100%);
+  color: #ffffff;
+  font-weight: 800;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -8070,7 +8521,7 @@ html { scroll-behavior: smooth; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v66</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v67</span>
         </button>
       </div>
     </div>
@@ -9206,6 +9657,15 @@ html { scroll-behavior: smooth; }
       <button type="button" class="btn btn-outline" onclick="closeModal('classDaysModal')">إلغاء</button>
       <button type="button" class="btn btn-primary" onclick="saveClassDaysModal()">✓ اعتماد أيام الدوام</button>
     </div>
+  </div>
+</div>
+
+<!-- ===== BOTTOM SHEET: QUICK EVALUATION STUDIO (v67) ===== -->
+<div class="modal-backdrop eval-sheet-backdrop no-print" id="studentEvalSheet" style="z-index:92;" onclick="if(event.target===this) closeStudentEvalSheet()">
+  <div class="es-box" onpointerdown="cancelAutoAdvance(false)">
+    <div class="es-header" id="esHeader"></div>
+    <div class="es-body" id="esBody"></div>
+    <div class="es-footer" id="esFooter"></div>
   </div>
 </div>
 
@@ -11319,6 +11779,10 @@ let navWeekOffset = 0;
 let weekCalendarExpanded = false;
 let calendarMonthShift = 0;
 let advActiveTab = "hw";
+let evalSheetTool = "";
+let evalBonusOpen = false;
+let _lastEvalSheetStudentId = null;
+let _evalSheetObserverBound = false;
 let calendarDrawerMode = "week"; // "week" | "month"
 let _obClassDays = [6, 1, 3];
 let _obReviewDays = [6];
@@ -11626,22 +12090,17 @@ function stepAlertCounter(studentId, kind, delta) {
 function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
   const n = Math.max(0, Number(errs) || 0);
   const a = Math.max(0, Number(alerts) || 0);
-  const ev = evalFromErrorCount(n);
-  const evCls = n === 0 ? "is-idle" : (ev === "ممتاز" ? "" : (ev === "إعادة" ? "ev-repeat" : (ev === "جيد جداً" ? "ev-vgood" : "ev-good")));
-  return `<div class="err-counter-row">
-    <div class="err-counters-pair">
-      <div class="err-ctrl-group">
-        <button type="button" class="err-btn" onclick="stepErrorCounter('${studentId}','${kind}',-1)" title="إنقاص خطأ">−</button>
-        <span class="err-count-lbl">أخطاء: <b>${n}</b></span>
-        <button type="button" class="err-btn plus" onclick="stepErrorCounter('${studentId}','${kind}',1)" title="تسجيل خطأ">+ خطأ</button>
-      </div>
-      <div class="alert-ctrl-group" title="عداد التنبيهات لا يؤثر على التقييم">
-        <button type="button" class="err-btn" onclick="stepAlertCounter('${studentId}','${kind}',-1)" title="إنقاص تنبيه">−</button>
-        <span class="alert-count-lbl">تنبيه: <b>${a}</b></span>
-        <button type="button" class="err-btn alert-plus" onclick="stepAlertCounter('${studentId}','${kind}',1)" title="تسجيل تنبيه (لا يؤثر على التقييم)">+ تنبيه</button>
-      </div>
+  return `<div class="es-err-grid-2">
+    <div class="es-err-cap" title="تسجيل أخطاء الحفظ (يقترح التقييم تلقائياً)">
+      <button type="button" class="es-cap-btn" onclick="stepErrorCounter('${studentId}','${kind}',-1)" aria-label="إنقاص خطأ">−</button>
+      <span class="es-cap-lbl" onclick="stepErrorCounter('${studentId}','${kind}',1)">أخطاء: <b>${n}</b></span>
+      <button type="button" class="es-cap-btn plus-err" onclick="stepErrorCounter('${studentId}','${kind}',1)" aria-label="تسجيل خطأ">+</button>
     </div>
-    <button type="button" class="err-apply-btn ${evCls}" onclick="applyErrorEval('${studentId}','${kind}')">${n > 0 ? '✓ ' : ''}اعتماد: ${ev}</button>
+    <div class="es-err-cap is-alert" title="عداد التنبيهات (لا يؤثر على التقييم)">
+      <button type="button" class="es-cap-btn" onclick="stepAlertCounter('${studentId}','${kind}',-1)" aria-label="إنقاص تنبيه">−</button>
+      <span class="es-cap-lbl" onclick="stepAlertCounter('${studentId}','${kind}',1)">تنبيه: <b>${a}</b></span>
+      <button type="button" class="es-cap-btn plus-alrt" onclick="stepAlertCounter('${studentId}','${kind}',1)" aria-label="تسجيل تنبيه">+</button>
+    </div>
   </div>`;
 }
 
@@ -12717,7 +13176,7 @@ function appendQuickNote(studentId, phrase) {
   const cur = String(r.notes || "").trim();
   if (cur.includes(phrase)) { showToast("الملاحظة مضافة مسبقاً"); return; }
   r.notes = cur ? `${cur} — ${phrase}.` : `${phrase}.`;
-  openCardId = studentId; openAdvCardId = studentId;
+  openCardId = studentId; openAdvCardId = studentId; evalSheetTool = "notes";
   saveState();
   renderSessionPreservingScroll();
 }
@@ -12860,6 +13319,10 @@ function updateDrawerQuickStates() {
 }
 
 function switchTab(tab) {
+  if (tab !== "session" && openCardId) {
+    openCardId = null;
+    closeStudentEvalSheet(false);
+  }
   document.querySelectorAll("#appShell .view").forEach(v => v.classList.remove("active"));
   document.querySelectorAll("#appShell .nav-tab, #appShell .mobile-nav-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === tab));
   document.getElementById("view-" + tab)?.classList.add("active");
@@ -15137,6 +15600,7 @@ function renderSessionView() {
       <p style="margin-bottom:13px;">اضغط أدناه لفتح أقرب يوم دوام:</p>
       <button class="btn btn-primary" onclick="openOrCreateByISO('${nxt.iso}')">⚡ فتح يوم ${nxt.hijri.dayName} (${nxt.hijri.day}/${nxt.hijri.month})</button>
     </div>`;
+    closeStudentEvalSheet(false);
     return;
   }
 
@@ -15153,6 +15617,7 @@ function renderSessionView() {
         <button type="button" class="btn btn-outline btn-sm" onclick="toggleSessionNoClass(false)">↩️ إعادة تفعيل الحلقة</button>
       </div>
     </div>`;
+    closeStudentEvalSheet(false);
     return;
   }
 
@@ -15380,7 +15845,7 @@ function renderStudentCardsOnly() {
       : "";
 
     let quickStrip = "";
-    if (!isOpen && !isAbs && isRashidi) {
+    if (!isAbs && isRashidi) {
       const hwR = r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}${r.hwRashidiTo && Number(r.hwRashidiTo) !== Number(r.hwRashidiFrom) ? '–' + r.hwRashidiTo : ''}` : "";
       quickStrip = `<div class="quick-strip" onclick="event.stopPropagation()">
         <div class="pill-group">
@@ -15391,7 +15856,7 @@ function renderStudentCardsOnly() {
         </div>
         ${hwR ? `<span style="font-size:11px; color:var(--ink-500);">الواجب: <b>${escapeHtml(hwR)}</b></span>` : ''}
       </div>`;
-    } else if (!isOpen && !isAbs && s.type === "daily" && (r.recSurahId || (r.recIsSabr && r.sabrJuz))) {
+    } else if (!isAbs && s.type === "daily" && (r.recSurahId || (r.recIsSabr && r.sabrJuz))) {
       const hwInline = r.hwSabrJuz ? `🎓 سبر ${r.hwSabrJuz}` : formatSegmentsInline(getSegments(r, "hw"));
       quickStrip = `<div class="quick-strip" onclick="event.stopPropagation()">
         <div class="pill-group">
@@ -15405,7 +15870,7 @@ function renderStudentCardsOnly() {
           <button type="button" class="quick-step-btn" onclick="quickNextAyahStep('${st.id}')" title="إضافة نصف صفحة على الواجب الحالي">+½ ص</button>
         </div>
       </div>`;
-    } else if (!isOpen && !isAbs && s.type === "saturday") {
+    } else if (!isAbs && s.type === "saturday") {
       // Rely on Major Review (الكبرى) as the main grade highlighted on the collapsed card, with a neat minor hint if they differ!
       const isDiffSat = Boolean(r.minEval && r.majEval && r.minEval !== r.majEval);
       const satMainEv = r.majEval || r.minEval || "";
@@ -15427,7 +15892,7 @@ function renderStudentCardsOnly() {
     }
 
     html += `
-      <div class="st-card ${stClass} ${qPos >= 0 ? 'in-queue' : ''} ${isOpen ? 'open' : ''}" id="card_${st.id}" data-st-name="${escapeHtml(normalizeSearchArabic(st.name))}" data-is-done="${isDone ? '1' : '0'}" data-is-abs="${isAbs ? '1' : '0'}">
+      <div class="st-card ${stClass} ${qPos >= 0 ? 'in-queue' : ''} ${isOpen ? 'eval-active' : ''}" id="card_${st.id}" data-st-name="${escapeHtml(normalizeSearchArabic(st.name))}" data-is-done="${isDone ? '1' : '0'}" data-is-abs="${isAbs ? '1' : '0'}">
         <div class="st-head" onclick="toggleCard('${st.id}')">
           <div class="st-title-wrap">
             <span class="st-num">${idx + 1}</span>
@@ -15439,31 +15904,87 @@ function renderStudentCardsOnly() {
           <div class="badges-wrap">
             ${queueBtn}${lateTag}${statusBadge}
             ${isPointsEnabled(h) ? `<span class="badge b-slate st-pts-badge">⭐ ${r.points || 0}</span>` : ''}
-            <span style="color:var(--ink-500); font-size:11px;">${isOpen ? '▲' : '▼'}</span>
+            <span style="color:var(--ink-500); font-size:11px;">‹</span>
           </div>
         </div>
         ${quickStrip}
-        <div class="st-body" onpointerdown="cancelAutoAdvance(false)">${isOpen ? renderCardBody(s, st, r, idx) : ''}</div>
       </div>
     `;
   });
 
   html += `<div id="sessionSearchEmptyMsg" class="card empty-state" style="padding:18px; display:none;"><p>لا يوجد طالب مطابق للبحث الحالي.</p></div>`;
-  listEl.classList.toggle("has-open-card", Boolean(openCardId));
+  listEl.classList.remove("has-open-card");
   listEl.innerHTML = html;
   applySessionSearchFilterDOM();
+  syncStudentEvalSheet();
 }
 
 function setAdvTab(studentId, tabKey) {
   advActiveTab = tabKey;
   openCardId = studentId;
   openAdvCardId = studentId;
+  evalSheetTool = tabKey === "notes" ? "notes" : (tabKey === "manual" ? "hw" : "hw");
   renderSessionPreservingScroll();
+}
+
+function toggleEvalSheetTool(studentId, toolKey) {
+  cancelAutoAdvance(false);
+  openCardId = studentId;
+  evalSheetTool = (evalSheetTool === toolKey) ? "" : toolKey;
+  syncStudentEvalSheet();
+  if (evalSheetTool) {
+    requestAnimationFrame(() => {
+      const panel = document.querySelector("#esBody .es-tool-panel");
+      if (panel) panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+  }
+}
+
+function toggleEvalBonusDrawer(studentId) {
+  cancelAutoAdvance(false);
+  openCardId = studentId;
+  evalBonusOpen = !evalBonusOpen;
+  syncStudentEvalSheet();
 }
 
 function onAdvDrawerToggle(studentId, isOpen) {
   if (isOpen) openAdvCardId = studentId;
   else if (openAdvCardId === studentId) openAdvCardId = null;
+}
+
+function ensureEvalSheetObserver() {
+  if (_evalSheetObserverBound) return;
+  const sheet = document.getElementById("studentEvalSheet");
+  if (!sheet || typeof MutationObserver === "undefined") return;
+  _evalSheetObserverBound = true;
+  const obs = new MutationObserver(() => {
+    if (!sheet.classList.contains("show") && openCardId) {
+      cancelAutoAdvance(false);
+      openCardId = null;
+      openAdvCardId = null;
+      evalSheetTool = "";
+      evalBonusOpen = false;
+      _lastEvalSheetStudentId = null;
+      document.querySelectorAll(".st-card.eval-active").forEach(el => el.classList.remove("eval-active"));
+    }
+  });
+  obs.observe(sheet, { attributes: true, attributeFilter: ["class"] });
+}
+
+function closeStudentEvalSheet(rerenderCards = true) {
+  cancelAutoAdvance(false);
+  openCardId = null;
+  openAdvCardId = null;
+  evalSheetTool = "";
+  evalBonusOpen = false;
+  _lastEvalSheetStudentId = null;
+  const sheet = document.getElementById("studentEvalSheet");
+  if (sheet) sheet.classList.remove("show");
+  if (rerenderCards) {
+    renderStudentCardsOnly();
+  } else {
+    document.querySelectorAll(".st-card.eval-active").forEach(el => el.classList.remove("eval-active"));
+  }
 }
 
 function renderSessionPreservingScroll() {
@@ -15476,23 +15997,29 @@ function toggleCard(studentId) {
   cancelAutoAdvance(false);
   const opening = openCardId !== studentId;
   openCardId = opening ? studentId : null;
-  if (!opening || openAdvCardId !== studentId) openAdvCardId = null;
-  renderStudentCardsOnly();
-  if (opening) {
-    setTimeout(() => document.getElementById("card_" + studentId)?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 40);
+  if (!opening || _lastEvalSheetStudentId !== studentId) {
+    openAdvCardId = null;
+    evalSheetTool = "";
+    evalBonusOpen = false;
   }
+  renderStudentCardsOnly();
 }
+
 function openNextStudent(currentIdx) {
+  cancelAutoAdvance(false);
   const h = getActiveHalaqa();
+  if (!h || !h.students.length) return;
   const next = h.students[currentIdx + 1];
   openCardId = next ? next.id : null;
   openAdvCardId = null;
+  evalSheetTool = "";
+  evalBonusOpen = false;
   renderStudentCardsOnly();
-  if (next) setTimeout(() => document.getElementById("card_" + next.id)?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 60);
-  else showToast("وصلت لآخر طالب في الحلقة");
+  if (!next) showToast("وصلت لآخر طالب في الحلقة");
 }
 
 function openNextPendingStudent(fromIdx = -1) {
+  cancelAutoAdvance(false);
   const h = getActiveHalaqa(), s = getCurrentSession();
   if (!h || !s || !h.students.length) return;
   const total = h.students.length;
@@ -15501,11 +16028,14 @@ function openNextPendingStudent(fromIdx = -1) {
     const st = h.students[idx];
     if (!isStudentFullyDone(s, st, getStudentRecord(s, st.id))) {
       openCardId = st.id;
+      openAdvCardId = null;
+      evalSheetTool = "";
+      evalBonusOpen = false;
       renderStudentCardsOnly();
-      setTimeout(() => document.getElementById("card_" + st.id)?.scrollIntoView({ behavior: "smooth", block: "center" }), 60);
       return;
     }
   }
+  closeStudentEvalSheet(true);
   showToast("أحسنت! جميع الطلاب مُنجزون في هذه الجلسة 🎉");
 }
 
@@ -15667,6 +16197,82 @@ function toggleHwSabrManual(studentId) {
   showToast(`تم تعيين الواجب القادم: سبر ${juz.name} 🎓`);
 }
 
+function syncStudentEvalSheet() {
+  ensureEvalSheetObserver();
+  const sheet = document.getElementById("studentEvalSheet");
+  const hdrEl = document.getElementById("esHeader");
+  const bodyEl = document.getElementById("esBody");
+  const footEl = document.getElementById("esFooter");
+  if (!sheet || !hdrEl || !bodyEl || !footEl) return;
+
+  const sessionViewActive = document.getElementById("view-session")?.classList.contains("active");
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!openCardId || !h || !s || s.noClass || !sessionViewActive) {
+    sheet.classList.remove("show");
+    _lastEvalSheetStudentId = null;
+    return;
+  }
+
+  const idx = h.students.findIndex(x => x.id === openCardId);
+  if (idx === -1) {
+    openCardId = null;
+    sheet.classList.remove("show");
+    _lastEvalSheetStudentId = null;
+    return;
+  }
+
+  const st = h.students[idx];
+  const r = getStudentRecord(s, st.id);
+  const sameStudent = _lastEvalSheetStudentId === st.id;
+  const prevBodyScroll = sameStudent ? bodyEl.scrollTop : 0;
+  if (!sameStudent) {
+    evalSheetTool = "";
+    evalBonusOpen = false;
+    _lastEvalSheetStudentId = st.id;
+  }
+
+  const isRashidi = st.track === "rashidi";
+  const trackTag = isRashidi ? "🔤 الرشيدي" : (s.type === "saturday" ? "📘 يوم المراجعة" : "📖 تسميع يومي");
+  const ptsPill = isPointsEnabled(h)
+    ? `<span class="es-pts-pill" id="esHeaderPtsBadge">⭐ ${r.points || 0}</span>`
+    : "";
+
+  hdrEl.innerHTML = `
+    <div class="es-handle"></div>
+    <div class="es-hdr-row">
+      <div class="es-hdr-id">
+        <span class="es-num-badge">${idx + 1}</span>
+        <div class="es-title-wrap">
+          <div class="es-st-name">${escapeHtml(st.name)}</div>
+          <div class="es-st-meta"><span>${trackTag}</span>${ptsPill}</div>
+        </div>
+      </div>
+      <div class="es-hdr-actions">
+        <button type="button" class="es-ico-btn" onclick="openStudentProfile('${st.id}')" title="ملف الطالب وكشفه">📊 ملفه</button>
+        <button type="button" class="es-ico-btn" onclick="openEditStudentModal('${st.id}')" title="تعديل خطة الحفظ والمراجعة">✏️ خطته</button>
+        <button type="button" class="es-ico-btn close" onclick="closeStudentEvalSheet()" aria-label="إغلاق">×</button>
+      </div>
+    </div>
+  `;
+
+  bodyEl.innerHTML = renderCardBody(s, st, r, idx);
+
+  const hasNext = idx + 1 < h.students.length;
+  footEl.innerHTML = `
+    <div id="esAutoAdvSlot"></div>
+    <div class="es-footer-row">
+      <button type="button" class="btn btn-outline" onclick="closeStudentEvalSheet()">إغلاق</button>
+      <button type="button" class="btn btn-soft" onclick="openNextPendingStudent(${idx})">⏭️ المتبقي</button>
+      <button type="button" class="btn es-btn-next" onclick="openNextStudent(${idx})">${hasNext ? 'التالي ←' : 'إنهاء ✓'}</button>
+    </div>
+  `;
+
+  sheet.classList.add("show");
+  requestAnimationFrame(() => {
+    bodyEl.scrollTop = sameStudent ? prevBodyScroll : 0;
+  });
+}
+
 function renderCardBody(s, st, r, idx) {
   const h = getActiveHalaqa();
   const dir = st.direction || h.defaultDir || "desc";
@@ -15677,27 +16283,75 @@ function renderCardBody(s, st, r, idx) {
     { val: "غياب مبرر", lbl: "مبرر", cls: "on-slate" },
     { val: "غياب غير مبرر", lbl: _gt.absent, cls: "on-red" }
   ].map(b => `<button type="button" class="pill ${r.attendance===b.val?b.cls:''}" onclick="setAttendance('${st.id}','${b.val}')">${b.lbl}</button>`).join("");
+
   const _cardAttn = getStudentAttentionAlert(h, s, st.id);
   const _attnBannerHtml = _cardAttn ? `<div class="card-attn-banner ${_cardAttn.type === 'absent' ? 'is-abs' : 'is-rep'}">
     <span>${escapeHtml(_cardAttn.fullMsg)}</span>
-    <button type="button" class="btn btn-success btn-sm" style="padding:3px 9px; font-size:11px;" onclick="sendParentFollowupAlertWA('${st.id}','${_cardAttn.type}',${_cardAttn.count})">📲 متابعة واتساب ولي الأمر</button>
+    <button type="button" class="btn btn-success btn-sm" style="padding:3px 9px; font-size:11px;" onclick="sendParentFollowupAlertWA('${st.id}','${_cardAttn.type}',${_cardAttn.count})">📲 واتساب ولي الأمر</button>
   </div>` : "";
+
+  const isAbsCard = r.attendance.includes("غياب");
+  const isPresCard = r.attendance === "حاضر" || r.attendance === "متأخر";
+  const adabOn = isPresCard ? (r.ptsAdab !== false) : true;
+  const partOn = isPresCard ? (r.ptsParticip !== false) : true;
+  const earlyOn = isPresCard ? (typeof r.ptsEarly === "boolean" ? r.ptsEarly : r.attendance === "حاضر") : (r.attendance !== "متأخر");
+  const bonusSum = (adabOn ? BONUS_ADAB : 0) + (partOn ? BONUS_PARTICIP : 0) + (earlyOn ? BONUS_EARLY : 0);
+  const bonusActiveWords = [adabOn ? "أدب" : "", partOn ? "مشاركة" : "", earlyOn ? "مبكر" : ""].filter(Boolean).join(" • ") || "بدون إضافي";
+
+  const bonusSectionHtml = (!isAbsCard && isPointsEnabled(h)) ? `
+    <button type="button" class="es-bonus-toggle ${evalBonusOpen ? 'is-open' : ''}" onclick="toggleEvalBonusDrawer('${st.id}')">
+      <span class="es-bonus-sum">
+        <span class="es-bonus-pill-val">⭐ السلوك +${bonusSum}</span>
+        <span class="es-bonus-sub-txt">${escapeHtml(bonusActiveWords)}</span>
+      </span>
+      <span style="font-size:11px; color:var(--ink-500); white-space:nowrap;">${evalBonusOpen ? 'إخفاء ▲' : 'تعديل ▾'}</span>
+    </button>
+    ${evalBonusOpen ? `
+      <div class="es-bonus-drawer">
+        <div class="pts-bonus-row" style="margin-bottom:8px;">
+          <button type="button" class="bonus-pill ${adabOn ? 'on' : ''}" onclick="togglePointBonus('${st.id}','ptsAdab')">${adabOn ? '✓ ' : ''}أدب +5</button>
+          <button type="button" class="bonus-pill ${partOn ? 'on' : ''}" onclick="togglePointBonus('${st.id}','ptsParticip')">${partOn ? '✓ ' : ''}مشاركة +5</button>
+          <button type="button" class="bonus-pill ${earlyOn ? 'on' : ''}" onclick="togglePointBonus('${st.id}','ptsEarly')">${earlyOn ? '✓ ' : ''}مبكر +5</button>
+        </div>
+        <div class="pts-breakdown-hint">${escapeHtml(formatPointsBreakdownText(s, r, st))}</div>
+        <div class="pts-row" style="margin-bottom:0;">
+          <div class="pts-stepper-v29">
+            <span style="font-size:12px; font-weight:700; color:var(--brand-slate);">النقاط:</span>
+            <button type="button" onclick="stepPoints('${st.id}', -5)">−5</button>
+            <button type="button" onclick="stepPoints('${st.id}', -1)">−1</button>
+            <input type="number" min="0" max="200" value="${r.points || 0}" oninput="onManualPointsInput('${st.id}', this.value)">
+            <button type="button" onclick="stepPoints('${st.id}', 1)">+1</button>
+            <button type="button" onclick="stepPoints('${st.id}', 5)">+5</button>
+          </div>
+        </div>
+      </div>
+    ` : ''}
+  ` : "";
 
   const dirToggleBtn = `<button type="button" class="pill pill-sm" onclick="setStudentDirection('${st.id}','${dir==='desc'?'asc':'desc'}')">${dir==='desc'?'⇅ الناس←البقرة':'⇅ البقرة←الناس'}</button>`;
 
-  const makeEvalBtns = (curVal, fn) => ["ممتاز", "جيد جداً", "جيد", "إعادة"].map(ev => {
-    const cls = ev === "ممتاز" ? "on-green" : ev === "إعادة" ? "on-red" : "on-blue";
-    return `<button type="button" class="pill ${curVal===ev?cls:''}" onclick="${fn}('${st.id}','${ev}')">${ev}</button>`;
-  }).join("");
+  const makeSmartEvalBtns = (curVal, fn, errVal = 0) => {
+    const nErr = Math.max(0, Number(errVal) || 0);
+    const suggestedEv = nErr > 0 ? evalFromErrorCount(nErr) : "";
+    return ["ممتاز", "جيد جداً", "جيد", "إعادة"].map(ev => {
+      const activeCls = curVal === ev ? (ev === "ممتاز" ? "on-green" : ev === "إعادة" ? "on-red" : "on-blue") : "";
+      const isSug = Boolean(suggestedEv && suggestedEv === ev && curVal !== ev);
+      const errArg = (curVal === ev || nErr === 0) ? "null" : String(nErr);
+      return `<button type="button" class="es-eval-btn ${activeCls} ${isSug ? 'es-suggested' : ''}" onclick="${fn}('${st.id}','${ev}',${errArg})">${isSug ? '<span class="es-sug-dot">مقترح</span>' : ''}${ev}</button>`;
+    }).join("");
+  };
 
   let bodyCore = "";
+
   if (st.track === "rashidi") {
     const rf = parseArabicNum(r.rashidiFrom, st.rashidiPage || 1);
     const rt = parseArabicNum(r.rashidiTo, rf);
     const rpg = Number(r.rashidiPages) || Math.max(0.5, rt - rf + 1);
     const hwR = r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}${r.hwRashidiTo && Number(r.hwRashidiTo) !== Number(r.hwRashidiFrom) ? '–' + r.hwRashidiTo : ''}` : "يُضبط تلقائياً بعد التقييم";
+    const hasNotes = Boolean(String(r.notes || "").trim());
+
     bodyCore = `
-      <div class="panel-block" style="margin-bottom:7px;">
+      <div class="es-card">
         <div class="rashidi-strip">
           <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px;">
             <div>
@@ -15716,109 +16370,81 @@ function renderCardBody(s, st, r, idx) {
           </div>
         </div>
         ${renderErrorCounterBar(st.id, "rec", r.recErrors, r.recAlerts)}
-        <div class="eval-grid-4" style="margin-bottom:7px;">${makeEvalBtns(r.recEval, "setRashidiEval")}</div>
-        <div class="hw-clean-head" style="padding-top:5px; border-top:1px dashed var(--line); font-size:12px;">
-          <span>📝 <b>الواجب القادم (رشيدي):</b> ${escapeHtml(hwR)}</span>
+        <div class="es-eval-4">${makeSmartEvalBtns(r.recEval, "setRashidiEval", r.recErrors)}</div>
+        <div class="hw-clean-head" style="padding-top:6px; border-top:1px dashed var(--line); font-size:12px;">
+          <span>📝 <b>الواجب القادم:</b> ${escapeHtml(hwR)}</span>
+          <button type="button" class="lms-btn ${evalSheetTool==='notes'?'accent':''}" onclick="toggleEvalSheetTool('${st.id}','notes')">💬 ملاحظة${hasNotes ? ' •' : ''}</button>
         </div>
       </div>
-      <details class="adv-card-drawer" ontoggle="onAdvDrawerToggle('${st.id}', this.open)" ${openAdvCardId === st.id ? 'open' : ''}>
-        <summary>
-          <span>💬 ملاحظات${isPointsEnabled(h) ? ' ونقاط' : ''} الطالب (الرشيدي)</span>
-          <span style="color:var(--ink-500);">▾</span>
-        </summary>
-        <div style="margin-top:8px;">
-          ${isPointsEnabled(h) ? `
-            <div class="pts-breakdown-hint">${escapeHtml(formatPointsBreakdownText(s, r, st))}</div>
-            <div class="pts-row" style="margin-bottom:8px;">
-              <div class="pts-stepper-v29">
-                <span style="font-size:12px; font-weight:700; color:var(--brand-slate);">النقاط:</span>
-                <button type="button" onclick="stepPoints('${st.id}', -5)">−5</button>
-                <button type="button" onclick="stepPoints('${st.id}', -1)">−1</button>
-                <input type="number" min="0" max="200" value="${r.points || 0}" oninput="onManualPointsInput('${st.id}', this.value)">
-                <button type="button" onclick="stepPoints('${st.id}', 1)">+1</button>
-                <button type="button" onclick="stepPoints('${st.id}', 5)">+5</button>
-              </div>
-            </div>
-          ` : ''}
+      ${evalSheetTool === "notes" ? `
+        <div class="es-tool-panel">
+          <div class="es-tool-panel-hdr">
+            <span>💬 ملاحظات الطالب (الرشيدي)</span>
+            <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','notes')">إخفاء</button>
+          </div>
           <div class="field" style="margin-bottom:0;">
-            <label>ملاحظة</label>
-            <textarea rows="2" oninput="updateRecSilent('${st.id}','notes',this.value)">${escapeHtml(r.notes || '')}</textarea>
+            <textarea rows="2" placeholder="اكتب ملاحظة..." oninput="updateRecSilent('${st.id}','notes',this.value)">${escapeHtml(r.notes || '')}</textarea>
+            <div class="quick-note-chips">${QUICK_NOTE_CHIPS.map(p => `<button type="button" class="qn-chip" onclick="appendQuickNote('${st.id}','${escapeHtml(p)}')">+ ${escapeHtml(p)}</button>`).join("")}</div>
           </div>
         </div>
-      </details>
+      ` : ''}
     `;
   } else if (s.type === "daily") {
     const recExtras = Array.isArray(r.recExtras) ? r.recExtras : [];
-    const hwExtras = Array.isArray(r.hwExtras) ? r.hwExtras : [];
     const dRevExtras = Array.isArray(r.dRevExtras) ? r.dRevExtras : [];
     const sInfo1 = SURAH_MAP[Number(r.recSurahId)];
     const maxA1 = sInfo1?.a || 286;
     const hwPreview = r.hwSabrJuz ? `🎓 سبر ${r.hwSabrJuz}` : (formatSegmentsInline(getSegments(r, "hw")) || "يُضبط تلقائياً بعد التقييم");
-    const recSummary = formatSegmentsInline(getSegments(r, "rec")) || "اختر سورة التسميع من التعديل الإضافي";
-    const mushafPg = sInfo1 ? sInfo1.p : "";
+    const recSummary = formatSegmentsInline(getSegments(r, "rec")) || "اضغط لاختيار السورة والآيات";
 
-    bodyCore = `
-      <div class="panel-block" style="margin-bottom:7px;">
-        ${r.sabrJuz ? `<div class="sabr-active-strip">
-          <span>🎓 سبر كامل: ${escapeHtml(r.sabrJuz)} (${formatNum(r.dRevPages || getJuzByName(r.sabrJuz)?.pages || 20)} ص)${r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null ? ` • ${r.sabrScore}%` : ''}</span>
-          <div style="display:flex; gap:4px;">
-            ${r.recEval !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="padding:2px 8px; font-size:11px;" onclick="openSabrHifzCertificate('${st.id}')">🎓 شهادة حفظ</button>` : ''}
-            <button type="button" class="btn btn-outline btn-sm" style="padding:2px 7px; font-size:11px;" onclick="onSabrJuzChange('${st.id}','')">إلغاء</button>
-          </div>
-        </div>` : ''}
-        <div class="live-mushaf-strip">
-          <div class="lms-info lms-tap-area" onclick="openSurahPicker('${st.id}','rec')" title="اضغط لتغيير السورة والآيات أو السبر">
-            <div class="lms-main">📖 ${escapeHtml(r.recIsSabr && r.sabrJuz ? `سبر ${r.sabrJuz} كاملاً` : recSummary)}</div>
-            <div class="lms-sub">${r.recIsSabr && r.sabrJuz ? `${formatNum(r.dRevPages || getJuzByName(r.sabrJuz)?.pages || 20)} ص • اضغط للتغيير` : `${formatNum(r.recPages || 0)} صفحة • اضغط للتغيير`}</div>
-          </div>
-          <div class="lms-btns">
-            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','rec')" title="اختيار السورة والآيات أو السبر">✏️ تغيير</button>
-            ${!(r.recIsSabr && r.sabrJuz) ? `
-              <button type="button" class="lms-btn" onclick="nudgeRecEndAyah('${st.id}', -1)" title="إنقاص آية">−1</button>
-              <button type="button" class="lms-btn" onclick="nudgeRecEndAyah('${st.id}', 1)" title="زيادة آية">+1</button>
-              <button type="button" class="lms-btn" onclick="finishRecSurahQuick('${st.id}')">آخرها</button>
-            ` : ''}
-          </div>
-        </div>
-        ${r.sabrJuz ? renderSabrScoreBox(st.id, r, false) : ''}
-        ${!(r.recIsSabr && r.sabrJuz) ? renderErrorCounterBar(st.id, "rec", r.recErrors, r.recAlerts) : ''}
-        <div class="eval-grid-4" style="margin-bottom:7px;">${makeEvalBtns(r.recEval, "setRecEval")}</div>
-        <div class="hw-clean-head" style="padding-top:5px; border-top:1px dashed var(--line); font-size:12px;">
-          <span class="lms-tap-area" onclick="openSurahPicker('${st.id}','hw')" title="اضغط لتغيير الواجب بسهولة">📝 <b>الواجب:</b> ${escapeHtml(hwPreview)} <span style="color:var(--blue); font-weight:800;">✏️</span></span>
-          <div class="pace-seg">
-            <button type="button" class="${(st.pace||0.5)===0.5?'on':''}" onclick="setStudentPace('${st.id}',0.5)">½ ص</button>
-            <button type="button" class="${(st.pace||0.5)===1?'on':''}" onclick="setStudentPace('${st.id}',1)">1 ص</button>
-          </div>
-        </div>
-      </div>
+    const hasHwDot = Boolean(r.hwSurahId || r.hwSabrJuz);
+    const hasRevDot = Boolean(r.dRevFrom || r.dRevSurahId || dRevExtras.length || Number(r.dRevPages) > 0 || r.dRevEval || r.rabt);
+    const hasSabrDot = Boolean(r.sabrJuz);
+    const hasNotesDot = Boolean(String(r.notes || "").trim());
 
-      <details class="adv-card-drawer" ontoggle="onAdvDrawerToggle('${st.id}', this.open)" ${(openAdvCardId === st.id || (!r.recSurahId && !r.recIsSabr)) ? 'open' : ''}>
-        <summary>
-          <span>⚙️ تعديل إضافي (واجب • مراجعة${isPointsEnabled(h) ? " • نقاط" : ""} • ملاحظات)</span>
-          <span style="color:var(--ink-500);">▾</span>
-        </summary>
-
-        <div class="adv-tabs-bar">
-          <button type="button" class="adv-tab-btn ${advActiveTab==='hw'?'on':''}" onclick="setAdvTab('${st.id}','hw')">📝 الواجب والمراجعة</button>
-          <button type="button" class="adv-tab-btn ${advActiveTab==='notes'?'on':''}" onclick="setAdvTab('${st.id}','notes')">💬 الملاحظات${isPointsEnabled(h) ? ' والنقاط' : ''}</button>
-          <button type="button" class="adv-tab-btn ${advActiveTab==='manual'?'on':''}" onclick="setAdvTab('${st.id}','manual')">📖 تعديل السور</button>
-        </div>
-
-        ${advActiveTab === 'hw' ? `
+    let toolPanelHtml = "";
+    if (evalSheetTool === "hw") {
+      toolPanelHtml = `
+        <div class="es-tool-panel">
+          <div class="es-tool-panel-hdr">
+            <span>📝 الواجب القادم وتعديل السور</span>
+            <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','hw')">إخفاء</button>
+          </div>
           <div class="adv-row-card">
             <div class="arc-l">
               <div class="arc-t">الواجب القادم</div>
-              <div class="arc-v">${escapeHtml(r.hwSabrJuz ? `🎓 سبر ${r.hwSabrJuz}` : (formatSegmentsInline(getSegments(r, "hw")) || "يُحسب تلقائياً بعد التقييم"))}</div>
+              <div class="arc-v">${escapeHtml(hwPreview)}</div>
             </div>
             <div style="display:flex; gap:4px;">
               <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','hw')">✏️ تغيير</button>
               <button type="button" class="lms-btn" onclick="toggleHwSabrManual('${st.id}')">${r.hwSabrJuz ? 'إلغاء' : '🎓 سبر'}</button>
             </div>
           </div>
-
+          <div class="adv-sec-ttl" style="margin-top:6px;">
+            <span>تعديل مقطع التسميع يدوياً</span>
+            <div style="display:flex; gap:4px;">
+              <button type="button" class="pill pill-sm on-blue" onclick="addExtraSurah('${st.id}','rec')">+ سورة</button>
+              ${dirToggleBtn}
+            </div>
+          </div>
+          <div class="surah-clean-grid" style="margin-bottom:4px;">
+            <div class="field surah-main-cell"><label>السورة</label><select onchange="onRecSurahChange('${st.id}', this.value)">${surahOptionsHtml(r.recSurahId, "-- اختر السورة --", dir)}</select></div>
+            <div class="field num-cell"><label>من</label><input type="text" inputmode="numeric" value="${r.recFrom || ''}" placeholder="1" onchange="onRecRangeChange('${st.id}','recFrom',this.value)"></div>
+            <div class="field num-cell"><label>إلى</label><input type="text" inputmode="numeric" value="${r.recTo || ''}" placeholder="${maxA1}" onchange="onRecRangeChange('${st.id}','recTo',this.value)"></div>
+            <div class="field num-cell"><label>صفحات</label><input type="text" inputmode="decimal" value="${formatNum(r.recPages || 0)}" onchange="updateRecField('${st.id}','recPages',parseArabicNum(this.value,0),true)"></div>
+          </div>
+          ${renderExtraSurahRowsHtml(st.id, recExtras, "rec", dir, false)}
+        </div>`;
+    } else if (evalSheetTool === "rev") {
+      toolPanelHtml = `
+        <div class="es-tool-panel">
+          <div class="es-tool-panel-hdr">
+            <span>📘 مراجعة اليوم والربط</span>
+            <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','rev')">إخفاء</button>
+          </div>
           <div class="adv-row-card">
             <div class="arc-l">
-              <div class="arc-t">مراجعة اليوم (${formatNum(calcDailyReviewPages(r))} صفحة)</div>
+              <div class="arc-t">مقطع المراجعة (${formatNum(calcDailyReviewPages(r))} صفحة)</div>
               <div class="arc-v">${escapeHtml(formatSegmentsInline(getSegments(r, "dRev")) || (r.dRevFrom ? `${r.dRevFrom}${r.dRevTo ? ' ← ' + r.dRevTo : ''}` : "لا توجد مراجعة"))}</div>
             </div>
             <div style="display:flex; gap:4px;">
@@ -15833,72 +16459,111 @@ function renderCardBody(s, st, r, idx) {
               return `<button type="button" class="pill pill-sm ${isOn?cls:''}" onclick="setDailyRevEval('${st.id}','${ev}')">${ev}</button>`;
             }).join("")}
           </div>
-
-          <div style="display:flex; gap:7px; align-items:center; flex-wrap:wrap;">
-            <div class="field" style="flex:1; min-width:160px;">
-              <label style="font-size:11px;">🎓 سبر جزء جديد (يدخل الشهري بعد النجاح)</label>
-              <select style="padding:6px 8px; font-size:12.5px;" onchange="onSabrJuzChange('${st.id}',this.value)">${juzOptionsHtml(r.sabrJuz)}</select>
-            </div>
-            <label class="check-inline" style="margin-top:16px;">
-              <input type="checkbox" ${r.rabt ? "checked" : ""} onchange="updateRecField('${st.id}','rabt',this.checked,true)">
-              <span>تم الربط ✓</span>
-            </label>
+          <label class="check-inline">
+            <input type="checkbox" ${r.rabt ? "checked" : ""} onchange="updateRecField('${st.id}','rabt',this.checked,true)">
+            <span>تم الربط مع المحفوظ السابق ✓</span>
+          </label>
+        </div>`;
+    } else if (evalSheetTool === "sabr") {
+      toolPanelHtml = `
+        <div class="es-tool-panel">
+          <div class="es-tool-panel-hdr">
+            <span>🎓 سبر جزء جديد (يدخل الشهري بعد النجاح)</span>
+            <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','sabr')">إخفاء</button>
           </div>
-        ` : advActiveTab === 'notes' ? `
-          ${isPointsEnabled(h) ? `
-            <div class="pts-breakdown-hint">${escapeHtml(formatPointsBreakdownText(s, r, st))}</div>
-            <div class="pts-row" style="margin-bottom:9px;">
-              <div class="pts-stepper-v29">
-                <span style="font-size:12px; font-weight:700; color:var(--brand-slate);">النقاط:</span>
-                <button type="button" onclick="stepPoints('${st.id}', -5)">−5</button>
-                <button type="button" onclick="stepPoints('${st.id}', -1)">−1</button>
-                <input type="number" min="0" max="200" value="${r.points || 0}" oninput="onManualPointsInput('${st.id}', this.value)">
-                <button type="button" onclick="stepPoints('${st.id}', 1)">+1</button>
-                <button type="button" onclick="stepPoints('${st.id}', 5)">+5</button>
-              </div>
+          <div class="field" style="margin-bottom:${r.sabrJuz ? '8px' : '0'};">
+            <select style="padding:8px 10px; font-size:13px;" onchange="onSabrJuzChange('${st.id}',this.value)">${juzOptionsHtml(r.sabrJuz)}</select>
+          </div>
+          ${r.sabrJuz ? `
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              ${r.recEval !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="flex:1;" onclick="openSabrHifzCertificate('${st.id}')">🎓 إصدار شهادة حفظ الجزء</button>` : ''}
+              <button type="button" class="btn btn-outline btn-sm" onclick="onSabrJuzChange('${st.id}','')">↩️ إلغاء السبر</button>
             </div>
           ` : ''}
-          <div class="field">
-            <label>تنبيهات الحفظ والأداء</label>
-            <textarea rows="2" oninput="updateRecSilent('${st.id}','notes',this.value)">${escapeHtml(r.notes || '')}</textarea>
+        </div>`;
+    } else if (evalSheetTool === "notes") {
+      toolPanelHtml = `
+        <div class="es-tool-panel">
+          <div class="es-tool-panel-hdr">
+            <span>💬 ملاحظات وتنبيهات الحفظ</span>
+            <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','notes')">إخفاء</button>
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <textarea rows="2" placeholder="اكتب ملاحظة للتقرير وولي الأمر..." oninput="updateRecSilent('${st.id}','notes',this.value)">${escapeHtml(r.notes || '')}</textarea>
             <div class="quick-note-chips">${QUICK_NOTE_CHIPS.map(p => `<button type="button" class="qn-chip" onclick="appendQuickNote('${st.id}','${escapeHtml(p)}')">+ ${escapeHtml(p)}</button>`).join("")}</div>
           </div>
-        ` : `
-          <div class="adv-sec-ttl">
-            <span>تعديل سورة التسميع والصفحات</span>
-            <div style="display:flex; gap:4px;">
-              <button type="button" class="pill pill-sm on-blue" onclick="addExtraSurah('${st.id}','rec')">+ سورة</button>
-              ${dirToggleBtn}
-            </div>
+        </div>`;
+    }
+
+    bodyCore = `
+      <div class="es-card">
+        ${r.sabrJuz ? `<div class="sabr-active-strip">
+          <span>🎓 سبر كامل: ${escapeHtml(r.sabrJuz)} (${formatNum(r.dRevPages || getJuzByName(r.sabrJuz)?.pages || 20)} ص)${r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null ? ` • ${r.sabrScore}%` : ''}</span>
+          <div style="display:flex; gap:4px;">
+            ${r.recEval !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="padding:2px 8px; font-size:11px;" onclick="openSabrHifzCertificate('${st.id}')">🎓 شهادة</button>` : ''}
+            <button type="button" class="btn btn-outline btn-sm" style="padding:2px 7px; font-size:11px;" onclick="onSabrJuzChange('${st.id}','')">إلغاء</button>
           </div>
-          <div class="surah-clean-grid">
-            <div class="field surah-main-cell"><label>السورة</label><select onchange="onRecSurahChange('${st.id}', this.value)">${surahOptionsHtml(r.recSurahId, "-- اختر السورة --", dir)}</select></div>
-            <div class="field num-cell"><label>من</label><input type="text" inputmode="numeric" value="${r.recFrom || ''}" placeholder="1" onchange="onRecRangeChange('${st.id}','recFrom',this.value)"></div>
-            <div class="field num-cell"><label>إلى</label><input type="text" inputmode="numeric" value="${r.recTo || ''}" placeholder="${maxA1}" onchange="onRecRangeChange('${st.id}','recTo',this.value)"></div>
-            <div class="field num-cell"><label>صفحات</label><input type="text" inputmode="decimal" value="${formatNum(r.recPages || 0)}" onchange="updateRecField('${st.id}','recPages',parseArabicNum(this.value,0),true)"></div>
+        </div>` : ''}
+        <div class="live-mushaf-strip">
+          <div class="lms-info lms-tap-area" onclick="openSurahPicker('${st.id}','rec')" title="اضغط لتغيير السورة والآيات أو السبر">
+            <div class="lms-main">📖 ${escapeHtml(r.recIsSabr && r.sabrJuz ? `سبر ${r.sabrJuz} كاملاً` : recSummary)}</div>
+            <div class="lms-sub">${r.recIsSabr && r.sabrJuz ? `${formatNum(r.dRevPages || getJuzByName(r.sabrJuz)?.pages || 20)} ص • اضغط للتغيير` : `${formatNum(r.recPages || 0)} صفحة • اضغط للتغيير`}</div>
           </div>
-          ${renderExtraSurahRowsHtml(st.id, recExtras, "rec", dir, false)}
-        `}
-      </details>
+          <div class="lms-btns">
+            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','rec')">✏️ تغيير</button>
+            ${!(r.recIsSabr && r.sabrJuz) ? `
+              <button type="button" class="lms-btn" onclick="nudgeRecEndAyah('${st.id}', -1)" title="إنقاص آية">−1</button>
+              <button type="button" class="lms-btn" onclick="nudgeRecEndAyah('${st.id}', 1)" title="زيادة آية">+1</button>
+              <button type="button" class="lms-btn" onclick="finishRecSurahQuick('${st.id}')">آخرها</button>
+            ` : ''}
+          </div>
+        </div>
+        ${r.sabrJuz ? renderSabrScoreBox(st.id, r, false) : ''}
+        ${!(r.recIsSabr && r.sabrJuz) ? renderErrorCounterBar(st.id, "rec", r.recErrors, r.recAlerts) : ''}
+        <div class="es-eval-4">${makeSmartEvalBtns(r.recEval, "setRecEval", r.recErrors)}</div>
+        <div class="hw-clean-head" style="padding-top:6px; border-top:1px dashed var(--line); font-size:12px;">
+          <span class="lms-tap-area" onclick="openSurahPicker('${st.id}','hw')" title="اضغط لتغيير الواجب بسهولة">📝 <b>الواجب:</b> ${escapeHtml(hwPreview)} <span style="color:var(--blue); font-weight:800;">✏️</span></span>
+          <div class="pace-seg">
+            <button type="button" class="${(st.pace||0.5)===0.5?'on':''}" onclick="setStudentPace('${st.id}',0.5)">½ ص</button>
+            <button type="button" class="${(st.pace||0.5)===1?'on':''}" onclick="setStudentPace('${st.id}',1)">1 ص</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="es-tools-4">
+        <button type="button" class="es-tool-btn ${evalSheetTool==='hw'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','hw')">
+          ${hasHwDot ? '<span class="es-tool-dot"></span>' : ''}
+          <span class="et-ico">📝</span><span class="et-lbl">الواجب</span>
+        </button>
+        <button type="button" class="es-tool-btn ${evalSheetTool==='rev'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','rev')">
+          ${hasRevDot ? '<span class="es-tool-dot"></span>' : ''}
+          <span class="et-ico">📘</span><span class="et-lbl">مراجعة</span>
+        </button>
+        <button type="button" class="es-tool-btn ${evalSheetTool==='sabr'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','sabr')">
+          ${hasSabrDot ? '<span class="es-tool-dot"></span>' : ''}
+          <span class="et-ico">🎓</span><span class="et-lbl">سبر</span>
+        </button>
+        <button type="button" class="es-tool-btn ${evalSheetTool==='notes'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','notes')">
+          ${hasNotesDot ? '<span class="es-tool-dot"></span>' : ''}
+          <span class="et-ico">💬</span><span class="et-lbl">ملاحظة</span>
+        </button>
+      </div>
+      ${toolPanelHtml}
     `;
   } else {
-    // ULTRA-CLEAN SATURDAY CARD: ONLY 2 STRIPS (الصغرى + الكبرى) ON SCREEN — ALL EXTRAS INSIDE 1 DRAWER!
+    // CLEAN SATURDAY / REVIEW SESSION INSIDE BOTTOM SHEET STUDIO
     const curMonth = getSessionReportMonth(s);
     const bounds = getStudentRevCycleBounds(st, h);
     const completedJuzIds = getStudentCompletedJuzIds(st, h);
-    const overTwoJuz = isStudentOverTwoJuz(st, h);
     const sabrJuzId = getStudentMonthlySabrJuzId(st, h, curMonth);
     const sabrProg = sabrJuzId ? getStudentMonthlySabrProgress(st, h, curMonth, sabrJuzId) : null;
     const revPace = Number(st.revPace || (sabrJuzId ? 5 : (h.defaultRevPace || 2)));
-    const nextMajPreview = r.nextMajFrom ? formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) : "يُضبط تلقائياً بعد تقييم الكبرى";
+    const nextMajPreview = r.nextMajSabrJuz ? `🎓 سبر ${r.nextMajSabrJuz}` : (r.nextMajFrom ? formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) : "يُضبط تلقائياً بعد تقييم الكبرى");
 
     if (!r.minSurahId && (r.minSurah || r.minText)) {
       const mS = findSurahByName(r.minSurah || r.minText);
       if (mS && !(r.minSurah || r.minText).includes("+")) r.minSurahId = String(mS.id);
     }
-    const minExtras = Array.isArray(r.minExtras) ? r.minExtras : [];
-    const majExtras = Array.isArray(r.majExtras) ? r.majExtras : [];
-    const minMaxA1 = SURAH_MAP[Number(r.minSurahId)]?.a || 286;
     const minSummary = formatSegmentsInline(getSegments(r, "min")) || r.minText || "لا يوجد مقطع للصغرى";
     const memStartSurah = getSurahAtPage(bounds.startPage);
 
@@ -15919,45 +16584,104 @@ function renderCardBody(s, st, r, idx) {
     const sabrInlineChip = sabrProg ? `
       <div class="sabr-inline-bar">
         <span>🎓 سبر ${escapeHtml(sabrProg.juz.shortName)}: ${sabrProg.alreadySabr ? 'تم السبر ✓' : `${formatNum(sabrProg.donePages)}/${sabrProg.juz.pages} ص`}</span>
-        <button type="button" class="btn ${sabrProg.alreadySabr ? 'btn-outline' : 'btn-success'} btn-sm" style="padding:2px 8px; font-size:11px;" onclick="markStudentSabrDone('${st.id}', ${sabrProg.juz.id})">${sabrProg.alreadySabr ? '↩️ إلغاء السبر' : '✓ اعتماد السبر'}</button>
+        <button type="button" class="btn ${sabrProg.alreadySabr ? 'btn-outline' : 'btn-success'} btn-sm" style="padding:2px 8px; font-size:11px;" onclick="markStudentSabrDone('${st.id}', ${sabrProg.juz.id})">${sabrProg.alreadySabr ? '↩️ إلغاء' : '✓ اعتماد'}</button>
       </div>` : "";
 
+    const hasNextDot = Boolean(r.nextMajFrom || r.nextMajSabrJuz);
+    const hasSabrDot = Boolean(r.sabrJuz || sabrJuzId);
+    const hasNotesDot = Boolean(String(r.notes || "").trim());
+
+    let satToolPanel = "";
+    if (evalSheetTool === "hw") {
+      satToolPanel = `
+        <div class="es-tool-panel">
+          <div class="es-tool-panel-hdr">
+            <span>📝 واجب الكبرى للسبت القادم</span>
+            <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','hw')">إخفاء</button>
+          </div>
+          <div class="adv-row-card" style="margin-bottom:0;">
+            <div class="arc-l">
+              <div class="arc-t">الواجب القادم</div>
+              <div class="arc-v">${escapeHtml(nextMajPreview)}</div>
+            </div>
+            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','nextMaj')">✏️ تعديل</button>
+          </div>
+        </div>`;
+    } else if (evalSheetTool === "sabr") {
+      satToolPanel = `
+        <div class="es-tool-panel">
+          <div class="es-tool-panel-hdr">
+            <span>🎓 سبر المراجعة وخطة السبر الشهري</span>
+            <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','sabr')">إخفاء</button>
+          </div>
+          <div class="field" style="margin-bottom:7px;">
+            <label style="font-size:11.5px;">سبر مراجعة (جزء كامل — لا يدخل أجزاء الحفظ الشهري)</label>
+            <select style="padding:7px 9px; font-size:12.5px;" onchange="onSabrJuzChange('${st.id}',this.value)">${juzOptionsHtml(r.sabrJuz)}</select>
+          </div>
+          ${completedJuzIds.length ? `<div class="field" style="margin-bottom:0;"><label style="font-size:11.5px;">خطة السبر الشهري (اختياري)</label><select style="padding:7px 9px; font-size:12.5px;" onchange="onStudentMonthlySabrJuzChange('${st.id}', this.value)">${sabrJuzOpts}</select></div>` : ''}
+        </div>`;
+    } else if (evalSheetTool === "manual") {
+      satToolPanel = `
+        <div class="es-tool-panel">
+          <div class="es-tool-panel-hdr">
+            <span>📖 ضبط صفحات الصغرى والكبرى</span>
+            <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','manual')">إخفاء</button>
+          </div>
+          <div class="maj-compact-inputs" style="margin-bottom:0;">
+            <div class="field"><label>صفحات الصغرى</label><input type="text" inputmode="decimal" value="${formatNum(r.minPages || 0)}" onchange="updateRecField('${st.id}','minPages',parseArabicNum(this.value,0),true)"></div>
+            <div class="field"><label>صفحات الكبرى</label><input type="text" inputmode="decimal" value="${formatNum(effMajPages)}" onchange="onMajPagesChange('${st.id}', this.value)"></div>
+          </div>
+        </div>`;
+    } else if (evalSheetTool === "notes") {
+      satToolPanel = `
+        <div class="es-tool-panel">
+          <div class="es-tool-panel-hdr">
+            <span>💬 ملاحظات المراجعة</span>
+            <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','notes')">إخفاء</button>
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <textarea rows="2" placeholder="اكتب ملاحظة..." oninput="updateRecSilent('${st.id}','notes',this.value)">${escapeHtml(r.notes || '')}</textarea>
+            <div class="quick-note-chips">${QUICK_NOTE_CHIPS.map(p => `<button type="button" class="qn-chip" onclick="appendQuickNote('${st.id}','${escapeHtml(p)}')">+ ${escapeHtml(p)}</button>`).join("")}</div>
+          </div>
+        </div>`;
+    }
+
     bodyCore = `
-      <div class="panel-block" style="margin-bottom:7px;">
+      <div class="es-card">
         <div class="live-mushaf-strip">
-          <div class="lms-info lms-tap-area" onclick="openSurahPicker('${st.id}','min')" title="اضغط لتغيير سورة وآيات الصغرى بسهولة">
+          <div class="lms-info lms-tap-area" onclick="openSurahPicker('${st.id}','min')" title="اضغط لتغيير مقطع الصغرى">
             <div class="lms-main">📗 الصغرى: ${escapeHtml(minSummary)}</div>
             <div class="lms-sub">${formatNum(r.minPages || 0)} ص ${r.minSourceLabel ? `• ${escapeHtml(r.minSourceLabel)}` : ''}</div>
           </div>
           <div class="lms-btns">
-            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','min')" title="اختيار السورة والآيات بسهولة">✏️ تغيير</button>
+            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','min')">✏️</button>
             <button type="button" class="lms-btn" onclick="nudgeMinEndAyah('${st.id}', -1)" title="إنقاص آية">−1</button>
             <button type="button" class="lms-btn" onclick="nudgeMinEndAyah('${st.id}', 1)" title="زيادة آية">+1</button>
-            <button type="button" class="lms-btn" onclick="refreshStudentSatMinor('${st.id}')" title="سحب محفوظ يومي التسميع">🔄</button>
+            <button type="button" class="lms-btn" onclick="refreshStudentSatMinor('${st.id}')" title="سحب محفوظ الأسبوع">🔄</button>
           </div>
         </div>
         ${renderErrorCounterBar(st.id, "min", r.minErrors, r.minAlerts)}
-        <div class="eval-grid-4">${makeEvalBtns(r.minEval, "setSatMinEval")}</div>
+        <div class="es-eval-4" style="margin-bottom:0;">${makeSmartEvalBtns(r.minEval, "setSatMinEval", r.minErrors)}</div>
       </div>
 
-      <div class="panel-block" style="margin-bottom:7px;">
+      <div class="es-card">
         ${sabrInlineChip || (r.sabrJuz ? `<div class="sabr-active-strip">
           <span>🎓 سبر كامل: ${escapeHtml(r.sabrJuz)} (${formatNum(r.majPages || 20)} ص)${r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null ? ` • ${r.sabrScore}%` : ''}</span>
           <div style="display:flex; gap:4px;">
-            ${r.majEval !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="padding:2px 8px; font-size:11px;" onclick="openSabrHifzCertificate('${st.id}')">🎓 شهادة حفظ</button>` : ''}
-            <button type="button" class="btn btn-outline btn-sm" style="padding:2px 7px; font-size:11px;" onclick="onSabrJuzChange('${st.id}','')">↩️ إلغاء</button>
+            ${r.majEval !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="padding:2px 8px; font-size:11px;" onclick="openSabrHifzCertificate('${st.id}')">🎓 شهادة</button>` : ''}
+            <button type="button" class="btn btn-outline btn-sm" style="padding:2px 7px; font-size:11px;" onclick="onSabrJuzChange('${st.id}','')">إلغاء</button>
           </div>
         </div>` : '')}
         <div class="live-mushaf-strip rev-gold">
-          <div class="lms-info lms-tap-area" onclick="openSurahPicker('${st.id}','maj')" title="اضغط لتحديد السورة والآيات أو السبر">
+          <div class="lms-info lms-tap-area" onclick="openSurahPicker('${st.id}','maj')" title="اضغط لتحديد الكبرى أو السبر">
             <div class="lms-main">📘 الكبرى: ${escapeHtml(formatMajStripDisplay(displayMajFrom, displayMajTo))}</div>
-            <div class="lms-sub">المقدار: ${formatNum(effMajPages)} صفحة • المحفوظ: ${escapeHtml(SURAH_MAP[bounds.startSurahId]?.n || memStartSurah.n)} ← ${escapeHtml(SURAH_MAP[bounds.endSurahId]?.n || "الناس")}</div>
+            <div class="lms-sub">${formatNum(effMajPages)} ص • المحفوظ: ${escapeHtml(SURAH_MAP[bounds.startSurahId]?.n || memStartSurah.n)} ← ${escapeHtml(SURAH_MAP[bounds.endSurahId]?.n || "الناس")}</div>
           </div>
           <div class="lms-btns">
-            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','maj')" title="اختيار السورة والآيات أو السبر">✏️ تغيير</button>
+            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','maj')">✏️</button>
             ${!r.sabrJuz ? `
-              <button type="button" class="lms-btn" onclick="nudgeMajStartPage('${st.id}', -1)">−1 ص</button>
-              <button type="button" class="lms-btn" onclick="nudgeMajStartPage('${st.id}', 1)">+1 ص</button>
+              <button type="button" class="lms-btn" onclick="nudgeMajStartPage('${st.id}', -1)">−1</button>
+              <button type="button" class="lms-btn" onclick="nudgeMajStartPage('${st.id}', 1)">+1</button>
               <div class="pace-seg">
                 <button type="button" class="${revPace===1?'on':''}" onclick="setStudentRevPace('${st.id}',1)">1</button>
                 <button type="button" class="${revPace===2?'on':''}" onclick="setStudentRevPace('${st.id}',2)">2</button>
@@ -15968,100 +16692,31 @@ function renderCardBody(s, st, r, idx) {
           </div>
         </div>
         ${r.sabrJuz ? renderSabrScoreBox(st.id, r, true) : renderErrorCounterBar(st.id, "maj", r.majErrors, r.majAlerts)}
-        <div class="eval-grid-4">${makeEvalBtns(r.majEval, "setSatMajEval")}</div>
+        <div class="es-eval-4" style="margin-bottom:0;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors)}</div>
       </div>
 
-      <details class="adv-card-drawer" ontoggle="onAdvDrawerToggle('${st.id}', this.open)" ${openAdvCardId === st.id ? 'open' : ''}>
-        <summary>
-          <span>⚙️ تعديل إضافي (الواجب القادم • سبر${isPointsEnabled(h) ? " • نقاط" : ""} • ملاحظات)</span>
-          <span style="color:var(--ink-500);">▾</span>
-        </summary>
-
-        <div class="adv-tabs-bar">
-          <button type="button" class="adv-tab-btn ${advActiveTab==='hw'?'on':''}" onclick="setAdvTab('${st.id}','hw')">📝 الواجب والسبر</button>
-          <button type="button" class="adv-tab-btn ${advActiveTab==='notes'?'on':''}" onclick="setAdvTab('${st.id}','notes')">💬 الملاحظات${isPointsEnabled(h) ? ' والنقاط' : ''}</button>
-          <button type="button" class="adv-tab-btn ${advActiveTab==='manual'?'on':''}" onclick="setAdvTab('${st.id}','manual')">📖 الصغرى والكبرى</button>
-        </div>
-
-        ${advActiveTab === 'hw' ? `
-          <div class="adv-row-card">
-            <div class="arc-l">
-              <div class="arc-t">واجب الكبرى للسبت القادم</div>
-              <div class="arc-v">${escapeHtml(r.nextMajSabrJuz ? `🎓 سبر ${r.nextMajSabrJuz}` : nextMajPreview)}</div>
-            </div>
-            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','nextMaj')">✏️ تعديل</button>
-          </div>
-          <div class="field" style="margin-bottom:7px;">
-            <label style="font-size:11.5px;">🎓 سبر مراجعة (جزء كامل — لا يدخل أجزاء الحفظ الشهري)</label>
-            <select style="padding:6px 8px; font-size:12.5px;" onchange="onSabrJuzChange('${st.id}',this.value)">${juzOptionsHtml(r.sabrJuz)}</select>
-          </div>
-          ${completedJuzIds.length ? `<div class="field" style="margin-bottom:0;"><label style="font-size:11.5px;">خطة السبر الشهري (اختياري)</label><select style="padding:6px 8px; font-size:12.5px;" onchange="onStudentMonthlySabrJuzChange('${st.id}', this.value)">${sabrJuzOpts}</select></div>` : ''}
-        ` : advActiveTab === 'notes' ? `
-          ${isPointsEnabled(h) ? `
-            <div class="pts-breakdown-hint">${escapeHtml(formatPointsBreakdownText(s, r, st))}</div>
-            <div class="pts-row" style="margin-bottom:9px;">
-              <div class="pts-stepper-v29">
-                <span style="font-size:12px; font-weight:700; color:var(--brand-slate);">النقاط:</span>
-                <button type="button" onclick="stepPoints('${st.id}', -5)">−5</button>
-                <button type="button" onclick="stepPoints('${st.id}', -1)">−1</button>
-                <input type="number" min="0" max="200" value="${r.points || 0}" oninput="onManualPointsInput('${st.id}', this.value)">
-                <button type="button" onclick="stepPoints('${st.id}', 1)">+1</button>
-                <button type="button" onclick="stepPoints('${st.id}', 5)">+5</button>
-              </div>
-            </div>
-          ` : ''}
-          <div class="field">
-            <label>تنبيهات الحفظ والأداء</label>
-            <textarea rows="2" oninput="updateRecSilent('${st.id}','notes',this.value)">${escapeHtml(r.notes || '')}</textarea>
-            <div class="quick-note-chips">${QUICK_NOTE_CHIPS.map(p => `<button type="button" class="qn-chip" onclick="appendQuickNote('${st.id}','${escapeHtml(p)}')">+ ${escapeHtml(p)}</button>`).join("")}</div>
-          </div>
-        ` : `
-          <div class="adv-row-card">
-            <div class="arc-l">
-              <div class="arc-t">المراجعة الصغرى (${formatNum(r.minPages || 0)} صفحة)</div>
-              <div class="arc-v">${escapeHtml(minSummary)}</div>
-            </div>
-            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','min')">✏️ تغيير</button>
-          </div>
-          <div class="adv-row-card">
-            <div class="arc-l">
-              <div class="arc-t">المراجعة الكبرى (${formatNum(effMajPages)} صفحة)</div>
-              <div class="arc-v">${escapeHtml(formatMajStripDisplay(displayMajFrom, displayMajTo))}</div>
-            </div>
-            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','maj')">✏️ تغيير</button>
-          </div>
-          <div class="maj-compact-inputs" style="margin-bottom:0;">
-            <div class="field"><label>صفحات الصغرى</label><input type="text" inputmode="decimal" value="${formatNum(r.minPages || 0)}" onchange="updateRecField('${st.id}','minPages',parseArabicNum(this.value,0),true)"></div>
-            <div class="field"><label>صفحات الكبرى</label><input type="text" inputmode="decimal" value="${formatNum(effMajPages)}" onchange="onMajPagesChange('${st.id}', this.value)"></div>
-          </div>
-        `}
-      </details>
+      <div class="es-tools-4">
+        <button type="button" class="es-tool-btn ${evalSheetTool==='hw'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','hw')">
+          ${hasNextDot ? '<span class="es-tool-dot"></span>' : ''}
+          <span class="et-ico">📝</span><span class="et-lbl">القادم</span>
+        </button>
+        <button type="button" class="es-tool-btn ${evalSheetTool==='sabr'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','sabr')">
+          ${hasSabrDot ? '<span class="es-tool-dot"></span>' : ''}
+          <span class="et-ico">🎓</span><span class="et-lbl">سبر</span>
+        </button>
+        <button type="button" class="es-tool-btn ${evalSheetTool==='manual'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','manual')">
+          <span class="et-ico">📖</span><span class="et-lbl">الصفحات</span>
+        </button>
+        <button type="button" class="es-tool-btn ${evalSheetTool==='notes'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','notes')">
+          ${hasNotesDot ? '<span class="es-tool-dot"></span>' : ''}
+          <span class="et-ico">💬</span><span class="et-lbl">ملاحظة</span>
+        </button>
+      </div>
+      ${satToolPanel}
     `;
   }
 
-  const isAbsCard = r.attendance.includes("غياب");
-  const isPresCard = r.attendance === "حاضر" || r.attendance === "متأخر";
-  const adabOn = isPresCard ? (r.ptsAdab !== false) : false;
-  const partOn = isPresCard ? (r.ptsParticip !== false) : false;
-  const earlyOn = isPresCard ? (typeof r.ptsEarly === "boolean" ? r.ptsEarly : r.attendance === "حاضر") : false;
-  const bonusRowHtml = (!isAbsCard && isPointsEnabled(h)) ? `<div class="pts-bonus-row">
-    <button type="button" class="bonus-pill ${adabOn ? 'on' : ''}" onclick="togglePointBonus('${st.id}','ptsAdab')">${adabOn ? '✓ ' : ''}أدب +5</button>
-    <button type="button" class="bonus-pill ${partOn ? 'on' : ''}" onclick="togglePointBonus('${st.id}','ptsParticip')">${partOn ? '✓ ' : ''}مشاركة +5</button>
-    <button type="button" class="bonus-pill ${earlyOn ? 'on' : ''}" onclick="togglePointBonus('${st.id}','ptsEarly')">${earlyOn ? '✓ ' : ''}مبكر +5</button>
-  </div>` : "";
-
-  return `<div class="att-grid-4">${attBtns}</div>${bonusRowHtml}${bodyCore}
-    <div class="card-footer-nav">
-      <div style="display:flex; gap:4px; flex-wrap:wrap;">
-        <button type="button" class="btn btn-outline btn-sm" onclick="toggleCard('${st.id}')">إغلاق</button>
-        <button type="button" class="btn btn-soft btn-sm" onclick="openStudentProfile('${st.id}')">📊 ملفه</button>
-        <button type="button" class="btn btn-soft btn-sm" onclick="openEditStudentModal('${st.id}')" title="تعديل خطة وبداية حفظ الطالب">✏️ خطته</button>
-      </div>
-      <div style="display:flex; gap:5px;">
-        <button type="button" class="btn btn-soft btn-sm" onclick="openNextPendingStudent(${idx})">متبقي ⏭️</button>
-        <button type="button" class="btn btn-primary btn-sm" onclick="openNextStudent(${idx})">التالي ⬅</button>
-      </div>
-    </div>`;
+  return `${_attnBannerHtml}<div class="es-att-4">${attBtns}</div>${bonusSectionHtml}${bodyCore}`;
 }
 
 // ==================== RECORD MUTATIONS ====================
@@ -16079,10 +16734,12 @@ function onManualPointsInput(studentId, val) {
   const r = getStudentRecord(s, studentId);
   r.points = Math.max(0, parseArabicNum(val, 0));
   saveState();
-  const card = document.getElementById("card_" + studentId);
   if (!isPointsEnabled()) return;
+  const card = document.getElementById("card_" + studentId);
   const badge = card?.querySelector(".st-head .badges-wrap .st-pts-badge");
   if (badge) badge.textContent = `⭐ ${r.points}`;
+  const hdrPts = document.getElementById("esHeaderPtsBadge");
+  if (hdrPts && openCardId === studentId) hdrPts.textContent = `⭐ ${r.points}`;
 }
 function stepPoints(studentId, delta) {
   const s = getCurrentSession();
@@ -16091,6 +16748,7 @@ function stepPoints(studentId, delta) {
   r.points = Math.max(0, (Number(r.points) || 0) + delta);
   openCardId = studentId;
   openAdvCardId = studentId;
+  evalBonusOpen = true;
   saveState();
   renderSessionPreservingScroll();
 }
@@ -16843,14 +17501,17 @@ function advanceAfterEval(studentId, ev) {
   }
 
   _autoAdvStudentId = studentId;
-  const cardBody = document.querySelector(`#card_${studentId} .st-body`);
-  if (cardBody) {
+  const advSlot = document.getElementById("esAutoAdvSlot");
+  if (advSlot) {
+    advSlot.innerHTML = "";
     const bar = document.createElement("div");
     bar.className = "auto-adv-bar";
+    bar.style.marginTop = "0";
+    bar.style.marginBottom = "8px";
     const nextName = nextId ? (h.students.find(x => x.id === nextId)?.name || "الطالب التالي") : "";
-    bar.innerHTML = `<span>⏳ ${nextId ? `الانتقال إلى <b>${escapeHtml(nextName)}</b> بعد قليل...` : 'إغلاق البطاقة بعد قليل...'}</span>
+    bar.innerHTML = `<span>⏳ ${nextId ? `الانتقال إلى <b>${escapeHtml(nextName)}</b> بعد قليل...` : 'إغلاق اللوحة بعد قليل...'}</span>
       <button type="button" class="btn btn-outline btn-sm" style="padding:3px 9px; font-size:11px;" onclick="event.stopPropagation(); cancelAutoAdvance(true);">بقاء هنا</button>`;
-    cardBody.appendChild(bar);
+    advSlot.appendChild(bar);
   }
 
   _autoAdvTimer = setTimeout(() => {
@@ -16860,10 +17521,9 @@ function advanceAfterEval(studentId, ev) {
     if (!stillOpen) return;
     openCardId = nextId;
     openAdvCardId = null;
+    evalSheetTool = "";
+    evalBonusOpen = false;
     renderSessionView();
-    if (nextId) {
-      setTimeout(() => document.getElementById("card_" + nextId)?.scrollIntoView({ behavior: "smooth", block: "center" }), 60);
-    }
   }, 2200);
 
   return true;
@@ -19743,7 +20403,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v66 -->
+<!-- Makin App v67 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -22448,7 +23108,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v66";
+const TIBYAN_APP_VERSION = "v67";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
