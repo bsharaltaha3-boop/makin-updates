@@ -209,8 +209,6 @@ body {
   inset: 0 !important;
   z-index: 2147483647 !important;
   background: rgba(10, 24, 42, 0.72) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -1237,7 +1235,6 @@ details.ob-brand-drawer > summary::-webkit-details-marker { display: none; }
 /* ===== IKHLAS EPHEMERAL SPLASH FLASH (3.5s) ===== */
 .ikhlas-overlay {
   position: fixed; inset: 0; background: rgba(24, 37, 46, 0.56);
-  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
   z-index: 999; display: flex; align-items: center; justify-content: center;
   padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.35s ease;
 }
@@ -1903,7 +1900,6 @@ table.t-monthly tfoot tr.tm-summary-sub td { background: #e7e4d9; color: #000000
   position: fixed;
   inset: 0;
   background: rgba(15, 24, 32, 0.5);
-  backdrop-filter: blur(2px);
   z-index: 140;
   opacity: 0;
   pointer-events: none;
@@ -5753,16 +5749,19 @@ table.t-indiv td.txt-right { text-align: right; }
 
 /* ==================== TIBYAN v47: ZERO-OVERFLOW TABS & 100% FAITHFUL OFFICIAL SOROUH CERTIFICATE ==================== */
 .stm-tab-btn, .prog-tab-btn {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 2px !important;
-  min-width: 0 !important;
-  overflow: hidden !important;
-  padding: 7px 3px !important;
-  white-space: normal !important;
-  line-height: 1.2 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  overflow: hidden;
+  padding: 8px 4px;
+  white-space: normal;
+  line-height: 1.2;
+}
+.stm-tab-btn.is-hidden {
+  display: none !important;
 }
 .stb-ico {
   font-size: 16px;
@@ -7049,8 +7048,6 @@ html { scroll-behavior: smooth; }
   transform: translateX(-50%) translateY(-140%);
   width: min(94vw, 430px);
   background: rgba(16, 42, 73, 0.97);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   color: #ffffff;
   border: 1px solid rgba(200, 161, 75, 0.65);
   border-radius: 18px;
@@ -7153,8 +7150,6 @@ html { scroll-behavior: smooth; }
 }
 .mobile-nav {
   background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   padding-bottom: env(safe-area-inset-bottom, 2px);
 }
 [data-theme="dark"] .mobile-nav {
@@ -7550,8 +7545,6 @@ html { scroll-behavior: smooth; }
   z-index: 92 !important;
   padding: 12px !important;
   background: rgba(11, 24, 40, 0.56) !important;
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
   align-items: center;
   justify-content: center;
 }
@@ -7986,6 +7979,407 @@ html { scroll-behavior: smooth; }
   font-weight: 800;
 }
 
+
+/* ==================== MAKIN v68: MODERN EXECUTIVE UI (SETTINGS, DRAWER, REPORTS, STUDENT PLAN) & 60FPS ==================== */
+.right-drawer { will-change: transform; contain: layout style; }
+.es-box { will-change: transform; contain: layout style; }
+.drawer-backdrop { background: rgba(11, 24, 40, 0.56); }
+.eval-sheet-backdrop { background: rgba(11, 24, 40, 0.62) !important; }
+.ikhlas-overlay { background: rgba(14, 26, 40, 0.62); }
+.mobile-nav { background: var(--white); }
+[data-theme="dark"] .mobile-nav { background: #14202b; }
+
+/* Unified Modern Executive Sheet Modal (Settings & Student Plan) */
+.exec-modal-backdrop {
+  padding: 12px !important;
+  background: rgba(11, 24, 40, 0.6) !important;
+}
+@media (max-width: 680px) {
+  .exec-modal-backdrop {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+}
+.exec-modal-box {
+  background: var(--bg) !important;
+  border-radius: 22px !important;
+  width: 100%;
+  max-width: 560px !important;
+  max-height: 91vh !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: 0 22px 56px rgba(8, 20, 36, 0.42) !important;
+  border: 1px solid rgba(200, 161, 75, 0.35);
+}
+@media (max-width: 680px) {
+  .exec-modal-box {
+    max-width: 100% !important;
+    max-height: 92vh !important;
+    border-radius: 22px 22px 0 0 !important;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+  }
+}
+.exec-modal-hdr {
+  background: linear-gradient(145deg, #102540 0%, #1a375c 100%);
+  color: #ffffff;
+  padding: 8px 15px 12px;
+  border-bottom: 2.5px solid #c8a14b;
+  flex-shrink: 0;
+}
+.exec-modal-hdr-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.exec-modal-hdr h3 {
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.exec-modal-sub {
+  font-size: 11px;
+  color: #c8dced;
+  margin-top: 2px;
+}
+.exec-modal-close {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  width: 31px;
+  height: 31px;
+  border-radius: 9px;
+  font-size: 18px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.exec-modal-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  background: var(--white);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.exec-tab-btn {
+  border: 1px solid transparent;
+  background: var(--bg);
+  color: var(--ink-700);
+  border-radius: 11px;
+  padding: 8px 4px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  white-space: nowrap;
+  transition: background 0.14s ease, color 0.14s ease;
+}
+.exec-tab-btn.on {
+  background: #142a46;
+  color: #ffffff;
+  box-shadow: 0 3px 9px rgba(20, 42, 70, 0.22);
+}
+[data-theme="dark"] .exec-tab-btn.on {
+  background: #c8a14b;
+  color: #0f233c;
+}
+.exec-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 11px 13px 13px;
+}
+.exec-modal-footer {
+  flex-shrink: 0;
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  padding: 10px 13px calc(env(safe-area-inset-bottom, 4px) + 10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.exec-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 11px 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 5px rgba(16, 42, 73, 0.04);
+}
+.exec-card:last-child { margin-bottom: 0; }
+.exec-card-ttl {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--brand-slate);
+  margin-bottom: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.exec-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  align-items: end;
+}
+.exec-grid-2 .field label {
+  font-size: 11.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.set-pane { display: none; }
+.set-pane.active { display: block; }
+
+/* Modern Toggle Switch (iOS/Android App Native Look) */
+.m-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+  border-radius: 99px;
+  background: var(--line-strong);
+  flex-shrink: 0;
+  transition: background 0.16s ease;
+}
+.m-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
+  transition: transform 0.16s ease;
+}
+.m-switch.on {
+  background: var(--green);
+}
+.m-switch.on::after {
+  transform: translateX(-18px);
+}
+
+/* Modern Right Drawer Quick Action 4-Tile Grid + Single-Line Rows */
+.drawer-quick-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.drawer-qtile {
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink-900);
+  border-radius: 13px;
+  padding: 9px 3px 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  box-shadow: 0 1px 4px rgba(16, 42, 73, 0.04);
+  transition: transform 0.08s ease, background 0.12s ease;
+}
+.drawer-qtile:active { transform: scale(0.95); background: var(--brand-tint); }
+.drawer-qtile .dqt-ico {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--brand-tint);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+.drawer-qtile .dqt-ico.gold { background: rgba(200, 161, 75, 0.18); }
+.drawer-qtile .dqt-lbl {
+  font-size: 10.5px;
+  font-weight: 800;
+  white-space: nowrap;
+  color: var(--ink-700);
+}
+.modern-drawer .drawer-item-l {
+  min-width: 0;
+  flex: 1;
+}
+.modern-drawer .drawer-item-l > span:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Modern Executive Reports Studio */
+.rep-subtab-pill {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 4px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 5px rgba(16, 42, 73, 0.04);
+}
+.rep-subtab-pill .subtab-btn {
+  border-radius: 10px;
+  padding: 9px 6px;
+  font-size: 13px;
+  font-weight: 800;
+}
+.rep-subtab-pill .subtab-btn.active {
+  background: #142a46;
+  color: #ffffff;
+  box-shadow: 0 3px 9px rgba(20, 42, 70, 0.22);
+}
+[data-theme="dark"] .rep-subtab-pill .subtab-btn.active {
+  background: #c8a14b;
+  color: #0f233c;
+}
+.rep-studio-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 10px rgba(16, 42, 73, 0.05);
+}
+.rep-select-full {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 9px;
+}
+.rep-select-full select {
+  width: 100%;
+  flex: 1;
+  min-width: 0;
+  padding: 9px 11px;
+  border-radius: 11px;
+  border: 1.5px solid var(--line-strong);
+  font-weight: 800;
+  font-size: 13px;
+  background: var(--bg);
+  color: var(--ink-900);
+}
+.rep-dock-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 9px;
+}
+.rep-dock-btn {
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  color: var(--ink-900);
+  border-radius: 12px;
+  padding: 9px 4px 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: transform 0.08s ease;
+}
+.rep-dock-btn:active { transform: scale(0.95); }
+.rep-dock-btn .rd-ico { font-size: 18px; line-height: 1; }
+.rep-dock-btn .rd-lbl { font-size: 11px; font-weight: 800; white-space: nowrap; }
+.rep-dock-btn.pdf { background: #142a46; border-color: #142a46; color: #ffffff; }
+.rep-dock-btn.png { background: #eef4fa; border-color: #c5d7eb; color: #142a46; }
+.rep-dock-btn.xls { background: #16794c; border-color: #16794c; color: #ffffff; }
+.rep-dock-btn.wa  { background: #fef5e7; border-color: #f1cf96; color: #9a520c; }
+[data-theme="dark"] .rep-dock-btn.png { background: #1c2f44; border-color: #2e4b6b; color: #dbeafe; }
+[data-theme="dark"] .rep-dock-btn.wa  { background: #362512; border-color: #6b4519; color: #fdba74; }
+
+.rep-sup-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 9px;
+  border-top: 1px dashed var(--line);
+}
+.rep-sup-btn {
+  border: none;
+  background: linear-gradient(135deg, #10375c 0%, #1c5488 100%);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 8px 13px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.rep-sup-btn:active { transform: scale(0.97); }
+
+/* Rashidi Stepper inside Student Plan Modal */
+.rashidi-step-wrap {
+  display: grid;
+  grid-template-columns: 34px 1fr 34px;
+  gap: 5px;
+  align-items: center;
+}
+.rashidi-step-wrap button {
+  height: 36px;
+  border-radius: 9px;
+  border: 1px solid var(--line-strong);
+  background: var(--white);
+  color: var(--brand-slate);
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.rashidi-step-wrap input {
+  height: 36px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 14.5px;
+}
+.rashidi-pace-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+}
+.rashidi-pace-3 button {
+  height: 36px;
+  border-radius: 9px;
+  border: 1.5px solid var(--line-strong);
+  background: var(--white);
+  color: var(--ink-700);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.rashidi-pace-3 button.on {
+  background: #6d28d9;
+  border-color: #6d28d9;
+  color: #ffffff;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -8411,7 +8805,7 @@ html { scroll-behavior: smooth; }
     </div>
   </header>
 
-  <!-- RIGHT SLIDE-OUT DRAWER MENU -->
+  <!-- RIGHT SLIDE-OUT DRAWER MENU (v68 EXECUTIVE) -->
   <div id="rightDrawerBackdrop" class="drawer-backdrop no-print" onclick="closeRightDrawer()"></div>
   <aside id="rightDrawer" class="right-drawer modern-drawer no-print">
     <div class="drawer-hero">
@@ -8424,10 +8818,29 @@ html { scroll-behavior: smooth; }
     </div>
 
     <div class="drawer-scroll-body">
+      <div class="drawer-quick-4">
+        <button type="button" class="drawer-qtile" onclick="drawerNav('stats')">
+          <span class="dqt-ico gold">🏆</span>
+          <span class="dqt-lbl" id="drawerStatsLbl">الإحصائيات</span>
+        </button>
+        <button type="button" class="drawer-qtile" onclick="closeRightDrawer(); openQuickIndivReport();">
+          <span class="dqt-ico">📋</span>
+          <span class="dqt-lbl">كشف فردي</span>
+        </button>
+        <button type="button" class="drawer-qtile" onclick="closeRightDrawer(); openQuickCertificatePicker();">
+          <span class="dqt-ico gold">🏅</span>
+          <span class="dqt-lbl">شهادة</span>
+        </button>
+        <button type="button" class="drawer-qtile" onclick="closeRightDrawer(); openSettingsModal();">
+          <span class="dqt-ico">⚙️</span>
+          <span class="dqt-lbl">الإعدادات</span>
+        </button>
+      </div>
+
       <div class="drawer-group-lbl">حسابي والإشراف</div>
       <div class="drawer-card-group">
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openTeacherAccountModal();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">🔐</span><span>حساب المعلم والربط</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box">🔐</span><span>حسابي والربط</span></span>
           <span class="badge b-slate" id="drawerAccountStatusBadge" style="font-size:10.5px;">محلي</span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openTeacherMessagesModal();">
@@ -8436,26 +8849,14 @@ html { scroll-behavior: smooth; }
         </button>
       </div>
 
-      <div class="drawer-group-lbl">أدوات الحلقة السريعة</div>
+      <div class="drawer-group-lbl">الدوام والتذكير</div>
       <div class="drawer-card-group">
-        <button type="button" class="drawer-item" data-dtab="stats" onclick="drawerNav('stats')">
-          <span class="drawer-item-l"><span class="drawer-ico-box gold">🏆</span><span id="drawerStatsLbl">الإحصائيات والنقاط</span></span>
-          <span class="drawer-chev">‹</span>
-        </button>
-        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openQuickIndivReport();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">📋</span><span>كشف متابعة فردي</span></span>
-          <span class="drawer-chev">‹</span>
-        </button>
-        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openQuickCertificatePicker();">
-          <span class="drawer-item-l"><span class="drawer-ico-box gold">🏅</span><span>إصدار شهادة لطالب</span></span>
-          <span class="drawer-chev">‹</span>
-        </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openClassDaysModal();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🗓️</span><span>أيام الدوام</span></span>
           <span class="badge b-slate" id="drawerDaysBadge" style="font-size:10.5px;">سبت•إث•أرب</span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openClassDayWaModal();">
-          <span class="drawer-item-l"><span class="drawer-ico-box gold">💬</span><span>تذكير الطلاب بالدوام (واتساب)</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box gold">💬</span><span>تذكير الطلاب (واتساب)</span></span>
           <span class="drawer-chev">‹</span>
         </button>
       </div>
@@ -8464,7 +8865,7 @@ html { scroll-behavior: smooth; }
       <div class="drawer-card-group">
         <button type="button" class="drawer-item" onclick="togglePointsMode(); updateDrawerQuickStates();">
           <span class="drawer-item-l"><span class="drawer-ico-box gold">⭐</span><span>برنامج النقاط والتحفيز</span></span>
-          <span class="badge b-green" id="drawerPointsBadge">مفعّل</span>
+          <span class="m-switch on" id="drawerPointsSwitch" aria-hidden="true"></span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('istihda');">
           <span class="drawer-item-l"><span class="drawer-ico-box">🌿</span><span>برنامج استهداء</span></span>
@@ -8484,20 +8885,20 @@ html { scroll-behavior: smooth; }
       <div class="drawer-group-lbl">التفضيلات والمظهر</div>
       <div class="drawer-card-group">
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openNotifCenterModal();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">🔔</span><span>الإشعارات والصوت</span></span>
-          <span class="badge b-slate" id="drawerNotifBadge">إيقاف</span>
+          <span class="drawer-item-l"><span class="drawer-ico-box">🔔</span><span>مركز الإشعارات والمنبّه</span></span>
+          <span class="badge b-slate" id="drawerNotifBadge">مفعّلة ✓</span>
         </button>
         <button type="button" class="drawer-item" onclick="toggleTapSoundPref(); updateDrawerQuickStates();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔊</span><span>صوت النقرة الخفيفة</span></span>
-          <span class="badge b-green" id="drawerTapSoundBadge">مفعّل</span>
+          <span class="m-switch on" id="drawerTapSoundSwitch" aria-hidden="true"></span>
         </button>
         <button type="button" class="drawer-item" onclick="toggleHandsFreeFlow(); updateDrawerQuickStates();">
           <span class="drawer-item-l"><span class="drawer-ico-box">⚡</span><span>الانتقال التلقائي للتالي</span></span>
-          <span class="badge b-green" id="drawerFlowBadge">مفعّل</span>
+          <span class="m-switch on" id="drawerFlowSwitch" aria-hidden="true"></span>
         </button>
         <button type="button" class="drawer-item" onclick="toggleAutoSinkDone(); updateDrawerQuickStates();">
           <span class="drawer-item-l"><span class="drawer-ico-box">⬇️</span><span>إنزال المُنجَزين للأسفل</span></span>
-          <span class="badge b-green" id="drawerSinkBadge">مفعّل</span>
+          <span class="m-switch on" id="drawerSinkSwitch" aria-hidden="true"></span>
         </button>
         <button type="button" class="drawer-item" onclick="toggleHalaqaGender(); updateDrawerQuickStates();">
           <span class="drawer-item-l"><span class="drawer-ico-box">👥</span><span>صيغة الحلقة</span></span>
@@ -8505,23 +8906,19 @@ html { scroll-behavior: smooth; }
         </button>
         <button type="button" class="drawer-item" onclick="toggleTheme(); updateDrawerQuickStates();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🌙</span><span>الوضع الليلي</span></span>
-          <span class="badge b-slate" id="drawerThemeBadge">نهاري</span>
+          <span class="m-switch" id="drawerThemeSwitch" aria-hidden="true"></span>
         </button>
       </div>
 
-      <div class="drawer-group-lbl">النظام والنسخ الاحتياطي</div>
+      <div class="drawer-group-lbl">النسخ الاحتياطي والتحديث</div>
       <div class="drawer-card-group" style="margin-bottom:14px;">
-        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openSettingsModal();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">⚙️</span><span>إعدادات الحلقة والمزامنة</span></span>
-          <span class="drawer-chev">‹</span>
-        </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); exportBackupJSON();">
           <span class="drawer-item-l"><span class="drawer-ico-box">💾</span><span>حفظ نسخة احتياطية JSON</span></span>
           <span class="drawer-chev">↓</span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v67</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v68</span>
         </button>
       </div>
     </div>
@@ -8585,30 +8982,29 @@ html { scroll-behavior: smooth; }
       <div id="studentsListWrap"></div>
     </section>
 
-    <!-- TAB 4: REPORTS (SLEEK UNCLUTTERED DAILY + MONTHLY) -->
+    <!-- TAB 4: REPORTS (v68 EXECUTIVE STUDIO) -->
     <section id="view-reports" class="view">
-      <div class="subtab-bar no-print">
+      <div class="rep-subtab-pill no-print">
         <button class="subtab-btn active" id="subtabDailyBtn" onclick="switchReportSubtab('daily')">📄 التقرير اليومي</button>
         <button class="subtab-btn" id="subtabMonthlyBtn" onclick="switchReportSubtab('monthly')">📊 التقرير الشهري</button>
       </div>
 
       <!-- Daily Report Panel -->
       <div id="panelDailyReport">
-        <div class="rep-toolbar-card no-print">
-          <div class="rep-select-row">
+        <div class="rep-studio-card no-print">
+          <div class="rep-select-full">
             <select id="dailyReportSessionSelect" onchange="selectSession(this.value); renderDailyReport();"></select>
-            <span id="reportTypeBadge" class="badge b-slate" style="padding:5px 9px; font-size:11.5px;"></span>
           </div>
           <div id="reportPendingWarning" class="rep-status-line"></div>
-          <div class="rep-export-grid">
-            <button class="rep-exp-btn pdf" onclick="exportHighResPDF('dailyReportPaper', getDailyFileName())">📑 PDF رسمي</button>
-            <button class="rep-exp-btn png" onclick="exportHighResPNG('dailyReportPaper', getDailyFileName())">📸 صورة HD</button>
-            <button class="rep-exp-btn xls" onclick="exportDailyExcelStyled()">📥 ملف Excel</button>
-            <button class="rep-exp-btn wa" onclick="copyDailyWhatsApp()">💬 ملخص واتساب</button>
+          <div class="rep-dock-4">
+            <button type="button" class="rep-dock-btn pdf" onclick="exportHighResPDF('dailyReportPaper', getDailyFileName())"><span class="rd-ico">📑</span><span class="rd-lbl">PDF رسمي</span></button>
+            <button type="button" class="rep-dock-btn png" onclick="exportHighResPNG('dailyReportPaper', getDailyFileName())"><span class="rd-ico">📸</span><span class="rd-lbl">صورة HD</span></button>
+            <button type="button" class="rep-dock-btn xls" onclick="exportDailyExcelStyled()"><span class="rd-ico">📥</span><span class="rd-lbl">Excel</span></button>
+            <button type="button" class="rep-dock-btn wa" onclick="copyDailyWhatsApp()"><span class="rd-ico">💬</span><span class="rd-lbl">واتساب</span></button>
           </div>
-          <div class="sup-upload-strip" id="dailySupUploadWrap">
-            <div id="dailyUnsyncStatus" style="width:100%; display:flex; justify-content:space-between; align-items:center; gap:6px;"></div>
-            <button type="button" class="rep-exp-btn sup-up" onclick="uploadTeacherReportsToSupervisor('daily')">☁️ رفع التقرير للمشرف</button>
+          <div class="rep-sup-bar" id="dailySupUploadWrap">
+            <div id="dailyUnsyncStatus" style="flex:1; min-width:0; display:flex; align-items:center; gap:5px; flex-wrap:wrap;"></div>
+            <button type="button" class="rep-sup-btn" onclick="uploadTeacherReportsToSupervisor('daily')">☁️ رفع للمشرف</button>
           </div>
         </div>
         <div class="rep-preview-bar no-print">
@@ -8622,30 +9018,30 @@ html { scroll-behavior: smooth; }
 
       <!-- Monthly Report Panel -->
       <div id="panelMonthlyReport" style="display:none;">
-        <div class="rep-toolbar-card no-print">
-          <div class="rep-select-row" style="margin-bottom:9px;">
+        <div class="rep-studio-card no-print">
+          <div class="rep-select-full">
             <select id="monthlyHijriFilter" onchange="renderMonthlyReport()"></select>
             <span id="mcIncludedCountBadge" class="badge b-blue" style="display:none; padding:5px 8px;">+0</span>
           </div>
-          <div class="rep-export-grid">
-            <button class="rep-exp-btn pdf" onclick="exportHighResPDF('monthlyReportPaper', getMonthlyFileName())">📑 PDF رسمي</button>
-            <button class="rep-exp-btn png" onclick="exportHighResPNG('monthlyReportPaper', getMonthlyFileName())">📸 صورة HD</button>
-            <button class="rep-exp-btn xls" onclick="exportMonthlyExcelStyled()">📥 Excel تبيان</button>
-            <button class="rep-exp-btn wa" onclick="copyMonthlyWhatsApp()">💬 ملخص واتساب</button>
+          <div class="rep-dock-4">
+            <button type="button" class="rep-dock-btn pdf" onclick="exportHighResPDF('monthlyReportPaper', getMonthlyFileName())"><span class="rd-ico">📑</span><span class="rd-lbl">PDF رسمي</span></button>
+            <button type="button" class="rep-dock-btn png" onclick="exportHighResPNG('monthlyReportPaper', getMonthlyFileName())"><span class="rd-ico">📸</span><span class="rd-lbl">صورة HD</span></button>
+            <button type="button" class="rep-dock-btn xls" onclick="exportMonthlyExcelStyled()"><span class="rd-ico">📥</span><span class="rd-lbl">Excel</span></button>
+            <button type="button" class="rep-dock-btn wa" onclick="copyMonthlyWhatsApp()"><span class="rd-ico">💬</span><span class="rd-lbl">واتساب</span></button>
           </div>
-          <div class="sup-upload-strip" id="monthlySupUploadWrap">
-            <div id="monthlyUnsyncStatus" style="width:100%; display:flex; justify-content:space-between; align-items:center; gap:6px;"></div>
-            <button type="button" class="rep-exp-btn sup-up" onclick="uploadTeacherReportsToSupervisor('monthly')">☁️ رفع التقرير الشهري والدروس للمشرف</button>
+          <div class="rep-sup-bar" id="monthlySupUploadWrap">
+            <div id="monthlyUnsyncStatus" style="flex:1; min-width:0; display:flex; align-items:center; gap:5px; flex-wrap:wrap;"></div>
+            <button type="button" class="rep-sup-btn" onclick="uploadTeacherReportsToSupervisor('monthly')">☁️ رفع الشهري للمشرف</button>
           </div>
           <details class="rep-month-extra-drawer">
             <summary>
-              <span>⚙️ إعدادات إضافية للشهر (ضمّ يوم • رصيد سابق • أيام الدوام)</span>
+              <span>⚙️ أدوات الشهر (ضمّ يوم سابق • رصيد سابق • أيام الدوام)</span>
               <span>▾</span>
             </summary>
             <div style="margin-top:8px;">
               <div class="field" style="margin-bottom:7px;">
                 <label style="font-size:11.5px;">أيام الدوام المقررة للشهر</label>
-                <input type="number" id="monthlyTargetDays" min="1" max="31" onchange="updateMonthDaysTarget(this.value)" style="padding:6px 9px;">
+                <input type="number" id="monthlyTargetDays" min="1" max="31" onchange="updateMonthDaysTarget(this.value)" style="padding:7px 9px;">
               </div>
               <div class="rep-month-extra-body" style="margin-top:0;">
                 <button class="btn btn-soft btn-sm" onclick="openMonthCarryModal()">➕ ضمّ يوم سابق</button>
@@ -8957,13 +9353,19 @@ html { scroll-behavior: smooth; }
   </div>
 </div>
 
-<!-- ===== MODAL: ADD / EDIT STUDENT (v44 EXECUTIVE TABBED PLANNER) ===== -->
-<div class="modal-backdrop" id="studentModal">
-  <div class="modal-box" style="max-width:560px;">
-    <div class="modal-header">
-      <h3 id="stModalTitle">إضافة / تعديل خطة الطالب</h3>
-      <button class="close-x" onclick="closeModal('studentModal')">×</button>
+<!-- ===== MODAL: ADD / EDIT STUDENT (v68 EXECUTIVE PLANNER + FIXED RASHIDI) ===== -->
+<div class="modal-backdrop exec-modal-backdrop" id="studentModal" onclick="if(event.target===this) closeModal('studentModal')">
+  <div class="modal-box exec-modal-box">
+    <div class="exec-modal-hdr">
+      <div class="es-handle"></div>
+      <div class="exec-modal-hdr-row">
+        <div style="min-width:0; flex:1;">
+          <h3 id="stModalTitle">✏️ خطة الطالب</h3>
+        </div>
+        <button type="button" class="exec-modal-close" onclick="closeModal('studentModal')" aria-label="إغلاق">×</button>
+      </div>
     </div>
+
     <input type="hidden" id="stEditId">
     <input type="hidden" id="stDirectionInput" value="desc">
     <input type="hidden" id="stJuzOrderInput" value="juz_desc">
@@ -8973,215 +9375,222 @@ html { scroll-behavior: smooth; }
     <input type="hidden" id="stTrackInput" value="quran">
     <input type="hidden" id="stExtraMemJuzInput" value="">
 
-    <div class="stm-tabs-bar">
+    <div class="stm-tabs-bar" style="margin:8px 12px 0; flex-shrink:0;">
       <button type="button" class="stm-tab-btn on" id="stmTabBtn_info" onclick="setStudentModalTab('info')"><span class="stb-ico">👤</span><span class="stb-lbl">البيانات</span></button>
-      <button type="button" class="stm-tab-btn" id="stmTabBtn_hifz" onclick="setStudentModalTab('hifz')"><span class="stb-ico">📖</span><span class="stb-lbl">مسار الحفظ</span></button>
+      <button type="button" class="stm-tab-btn" id="stmTabBtn_hifz" onclick="setStudentModalTab('hifz')"><span class="stb-ico" id="stmTabIco_hifz">📖</span><span class="stb-lbl">مسار الحفظ</span></button>
       <button type="button" class="stm-tab-btn" id="stmTabBtn_rev" onclick="setStudentModalTab('rev')"><span class="stb-ico">📘</span><span class="stb-lbl">المراجعة</span></button>
     </div>
 
-    <!-- TAB 1: PERSONAL & PARENT INFO -->
-    <div class="stm-pane active" id="stmPane_info">
-      <div class="stm-sec">
-        <div class="stm-sec-hdr"><span>👤 البطاقة التعريفية للطالب</span></div>
-        <div class="field" style="margin-bottom:8px;">
-          <label>الاسم الثلاثي للطالب *</label>
-          <input type="text" id="stNameInput" placeholder="اكتب الاسم الثلاثي كاملاً...">
-        </div>
-        <div class="form-grid" style="grid-template-columns:1fr 1fr; margin-bottom:8px;">
-          <div class="field">
-            <label>العمر (بالسنوات)</label>
-            <input type="number" id="stAgeInput" min="4" max="80" placeholder="مثال: 13">
+    <div class="exec-modal-body">
+      <!-- TAB 1: PERSONAL & PARENT INFO -->
+      <div class="stm-pane active" id="stmPane_info">
+        <div class="exec-card">
+          <div class="exec-card-ttl"><span>👤 البطاقة التعريفية للطالب</span></div>
+          <div class="field" style="margin-bottom:8px;">
+            <label>الاسم الثلاثي للطالب *</label>
+            <input type="text" id="stNameInput" placeholder="اكتب الاسم الثلاثي كاملاً...">
           </div>
-          <div class="field">
-            <label>الصف / المرحلة الدراسية</label>
-            <input type="text" id="stGradeInput" placeholder="مثال: السابع / الأول ثانوي">
+          <div class="exec-grid-2" style="margin-bottom:8px;">
+            <div class="field">
+              <label>العمر (بالسنوات)</label>
+              <input type="number" id="stAgeInput" min="4" max="80" placeholder="مثال: 13">
+            </div>
+            <div class="field">
+              <label>الصف الدراسي</label>
+              <input type="text" id="stGradeInput" placeholder="مثال: السابع">
+            </div>
           </div>
-        </div>
-        <div class="form-grid" style="grid-template-columns:1fr 1fr; margin-bottom:8px;">
-          <div class="field">
-            <label>اسم ولي الأمر (اختياري)</label>
-            <input type="text" id="stParentNameInput" placeholder="مثال: أبو خالد">
+          <div class="exec-grid-2" style="margin-bottom:8px;">
+            <div class="field">
+              <label>ولي الأمر (اختياري)</label>
+              <input type="text" id="stParentNameInput" placeholder="مثال: أبو خالد">
+            </div>
+            <div class="field">
+              <label>واتساب ولي الأمر</label>
+              <input type="tel" id="stPhoneInput" placeholder="9639XXXXXXXX" dir="ltr" style="text-align:right;">
+            </div>
           </div>
-          <div class="field">
-            <label>رقم واتساب ولي الأمر</label>
-            <input type="tel" id="stPhoneInput" placeholder="9639XXXXXXXX" dir="ltr" style="text-align:right;">
+          <div class="field" style="margin-bottom:0;">
+            <label>ملاحظات تربوية أو خاصة (اختياري)</label>
+            <textarea id="stBioNotesInput" rows="2" placeholder="مثال: متقن للتجويد، يحتاج تشجيعاً مستمراً..."></textarea>
           </div>
-        </div>
-        <div class="field" style="margin-bottom:0;">
-          <label>ملاحظات تربوية أو خاصة عن الطالب (اختياري)</label>
-          <textarea id="stBioNotesInput" rows="2" placeholder="مثال: متقن للتجويد، يحتاج تشجيعاً مستمراً، ظروف سفر..."></textarea>
         </div>
       </div>
+
+      <!-- TAB 2: MEMORIZATION PATH OR RASHIDI TRACK -->
+      <div class="stm-pane" id="stmPane_hifz">
+        <div class="exec-card" style="margin-bottom:9px;">
+          <div class="exec-card-ttl"><span>🎯 مسار الطالب في الحلقة</span></div>
+          <div class="stm-choice-row" style="margin-bottom:0;">
+            <button type="button" class="stm-choice-btn on" id="stmTrackQuran" onclick="setStModalChoice('track','quran')">📖 القرآن الكريم</button>
+            <button type="button" class="stm-choice-btn" id="stmTrackRashidi" onclick="setStModalChoice('track','rashidi')">🔤 القاعدة الرشيدية</button>
+          </div>
+        </div>
+
+        <div id="stmRashidiBox" class="exec-card" style="display:none; border-right:4px solid #6d28d9;">
+          <div class="exec-card-ttl"><span>🔤 خطة القاعدة الرشيدية (تأسيس القراءة)</span><span class="badge b-slate">بدون مراجعة</span></div>
+          <div class="exec-grid-2" style="margin-bottom:8px;">
+            <div class="field">
+              <label>صفحة البداية (1–85)</label>
+              <div class="rashidi-step-wrap">
+                <button type="button" onclick="stepStModalRashidiPage(-1)" aria-label="إنقاص صفحة">−</button>
+                <input type="number" id="stRashidiPageInput" min="1" max="85" value="1" oninput="updateStudentModalPreview()">
+                <button type="button" onclick="stepStModalRashidiPage(1)" aria-label="زيادة صفحة">+</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>المقدار اليومي</label>
+              <input type="hidden" id="stRashidiPaceInput" value="1">
+              <div class="rashidi-pace-3">
+                <button type="button" id="stmRPace_05" onclick="setStModalRashidiPace(0.5)">½ ص</button>
+                <button type="button" id="stmRPace_1" class="on" onclick="setStModalRashidiPace(1)">1 ص</button>
+                <button type="button" id="stmRPace_2" onclick="setStModalRashidiPace(2)">2 ص</button>
+              </div>
+            </div>
+          </div>
+          <div style="font-size:11.5px; color:var(--ink-500); line-height:1.55;">
+            ✓ تُحتسب صفحات الرشيدي تلقائياً في التقارير اليومية والشهرية والتقرير العام للصرح دون أي مراجعة قرآنية.
+          </div>
+        </div>
+
+        <div id="stmQuranPathSec" class="exec-card">
+          <div class="exec-card-ttl">
+            <span>🧭 مسار الحفظ المعتمد</span>
+            <button type="button" class="btn btn-soft btn-sm" style="padding:3px 8px; font-size:11px;" onclick="openSurahPickerForStudentModal()">🔍 اختيار سورة مريح</button>
+          </div>
+          <div class="path-preset-grid-3">
+            <button type="button" class="path-preset-card row-style on" id="stmPath_desc_desc" onclick="selectStPathPreset('desc','juz_desc')">
+              <span class="ppc-ico">⬆️</span>
+              <div class="ppc-txt">
+                <b>من الناس ← البقرة (صعوداً)</b>
+                <span>سورة بسورة من آخر المصحف (الناس ← النبأ ← الملك)</span>
+              </div>
+            </button>
+            <button type="button" class="path-preset-card row-style" id="stmPath_asc_juz_desc" onclick="selectStPathPreset('asc','juz_desc')">
+              <span class="ppc-ico">🔁</span>
+              <div class="ppc-txt">
+                <b>أجزاء من الآخر (كل جزء من أوله)</b>
+                <span>مثلاً: أنهى عمّ وبدأ تبارك من الملك ← المرسلات</span>
+              </div>
+            </button>
+            <button type="button" class="path-preset-card row-style" id="stmPath_asc_asc" onclick="selectStPathPreset('asc','juz_asc')">
+              <span class="ppc-ico">⬇️</span>
+              <div class="ppc-txt">
+                <b>من البقرة ← الناس (من الأول)</b>
+                <span>من بداية المصحف (مع احتساب أجزائه السابقة من الآخر)</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="surah-clean-grid" style="grid-template-columns:2.3fr 1fr; margin-bottom:8px;">
+            <div class="field"><label>السورة التي نبدأ بها الآن</label><select id="stStartSurahInput" onchange="onStModalSurahChange()"></select></div>
+            <div class="field num-cell"><label>من آية</label><input type="text" inputmode="numeric" id="stStartAyahInput" value="1" placeholder="1" oninput="updateStudentModalPreview()"></div>
+          </div>
+
+          <div class="form-grid" style="grid-template-columns:1.6fr 1fr; margin-bottom:8px; align-items:end;">
+            <div>
+              <label style="display:block; font-size:11.5px; font-weight:700; color:var(--ink-700); margin-bottom:4px;">مقدار الحفظ اليومي</label>
+              <div class="stm-choice-row cols-4" style="margin-bottom:0;">
+                <button type="button" class="stm-choice-btn on-green" id="stmPace_05" onclick="setStModalChoice('pace',0.5)">½ ص</button>
+                <button type="button" class="stm-choice-btn" id="stmPace_1" onclick="setStModalChoice('pace',1)">1 ص</button>
+                <button type="button" class="stm-choice-btn" id="stmPace_15" onclick="setStModalChoice('pace',1.5)">1.5</button>
+                <button type="button" class="stm-choice-btn" id="stmPace_2" onclick="setStModalChoice('pace',2)">2 ص</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>المحفوظ (أجزاء)</label>
+              <input type="number" id="stMemJuzInput" min="0" max="30" step="0.5" placeholder="تلقائي" oninput="updateStudentModalPreview()">
+            </div>
+          </div>
+
+          <div style="background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:8px 9px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:5px; margin-bottom:5px;">
+              <span style="font-size:11.5px; font-weight:800; color:var(--brand-slate);">🗺️ الأجزاء المحفوظة مسبقاً (<span id="stSavedJuzCount">0</span> جزء)</span>
+              <div style="display:flex; gap:4px; flex-wrap:wrap;">
+                <button type="button" id="btnSwitchToBeginning" class="btn btn-soft btn-sm" style="padding:3px 7px; font-size:10.5px;" onclick="switchStudentToBeginningWithSavedJuz()">🔄 نقله للبقرة</button>
+                <button type="button" class="btn btn-outline btn-sm" style="padding:3px 7px; font-size:10.5px;" onclick="setStExtraEndJuzCount(0)">مسح</button>
+              </div>
+            </div>
+            <div class="extra-mem-chips" id="stExtraMemChips" style="margin-bottom:5px;">
+              <button type="button" class="em-chip" data-preset="1" onclick="setStExtraEndJuzCount(1)">عمّ (30)</button>
+              <button type="button" class="em-chip" data-preset="2" onclick="setStExtraEndJuzCount(2)">عمّ + تبارك</button>
+              <button type="button" class="em-chip" data-preset="3" onclick="setStExtraEndJuzCount(3)">28–30</button>
+              <button type="button" class="em-chip" data-preset="5" onclick="setStExtraEndJuzCount(5)">26–30</button>
+            </div>
+            <details class="mini-more" style="margin-top:2px; padding-top:4px;">
+              <summary><span>🎯 تحديد أي جزء من الـ 30 جزءاً بالضغط عليه</span><span>▾</span></summary>
+              <div id="stJuz30PickerGrid" class="juz30-picker-grid"></div>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: REVIEW PLAN (QURAN TRACK ONLY) -->
+      <div class="stm-pane" id="stmPane_rev">
+        <div class="exec-card" style="margin-bottom:9px;">
+          <div class="exec-card-ttl"><span>📗 خطة المراجعة الصغرى (الربط الأسبوعي)</span></div>
+          <div style="font-size:11.5px; color:var(--ink-700); margin-bottom:6px; font-weight:700;">على ماذا تعتمد المراجعة الصغرى في يوم المراجعة؟</div>
+          <div class="stm-choice-row" style="margin-bottom:0;">
+            <button type="button" class="stm-choice-btn on-green" id="stmMinWk_1" onclick="setStModalChoice('minorWeeks',1)">
+              <b>📅 الأسبوع الأخير</b>
+              <small style="display:block; font-size:10px; opacity:0.85;">ما حُفظ في الأسبوع قبل المراجعة</small>
+            </button>
+            <button type="button" class="stm-choice-btn" id="stmMinWk_2" onclick="setStModalChoice('minorWeeks',2)">
+              <b>📆 آخر أسبوعين</b>
+              <small style="display:block; font-size:10px; opacity:0.85;">ما حُفظ خلال الأسبوعين</small>
+            </button>
+          </div>
+        </div>
+
+        <div class="exec-card">
+          <div class="exec-card-ttl">
+            <span>📘 خطة المراجعة الكبرى (حتى 5 أجزاء)</span>
+            <button type="button" class="btn btn-soft btn-sm" style="padding:3px 8px; font-size:11px;" onclick="autoMatchRevPageToMem()">⚡ ضبط تلقائي</button>
+          </div>
+          <label style="display:block; font-size:11.5px; font-weight:700; color:var(--ink-700); margin-bottom:4px;">مقدار المراجعة الكبرى الأسبوعية:</label>
+          <div class="stm-choice-row cols-5">
+            <button type="button" class="stm-choice-btn" id="stmRevPace_1" onclick="setStModalChoice('revPace',1)">1 ص</button>
+            <button type="button" class="stm-choice-btn on" id="stmRevPace_2" onclick="setStModalChoice('revPace',2)">2 ص</button>
+            <button type="button" class="stm-choice-btn" id="stmRevPace_3" onclick="setStModalChoice('revPace',3)">3 ص</button>
+            <button type="button" class="stm-choice-btn" id="stmRevPace_5" onclick="setStModalChoice('revPace',5)">ربع<small>5 ص</small></button>
+            <button type="button" class="stm-choice-btn" id="stmRevPace_10" onclick="setStModalChoice('revPace',10)">نصف<small>10 ص</small></button>
+          </div>
+          <div class="stm-choice-row cols-5">
+            <button type="button" class="stm-choice-btn" id="stmRevPace_20" onclick="setStModalChoice('revPace',20)">جزء<small>20 ص</small></button>
+            <button type="button" class="stm-choice-btn" id="stmRevPace_40" onclick="setStModalChoice('revPace',40)">جزآن<small>40 ص</small></button>
+            <button type="button" class="stm-choice-btn" id="stmRevPace_60" onclick="setStModalChoice('revPace',60)">3 أجزاء<small>60 ص</small></button>
+            <button type="button" class="stm-choice-btn" id="stmRevPace_80" onclick="setStModalChoice('revPace',80)">4 أجزاء<small>80 ص</small></button>
+            <button type="button" class="stm-choice-btn" id="stmRevPace_100" onclick="setStModalChoice('revPace',100)">5 أجزاء<small>100 ص</small></button>
+          </div>
+          <div class="surah-clean-grid" style="grid-template-columns:1.8fr 0.9fr 0.9fr; margin-bottom:4px;">
+            <div class="field">
+              <label>سورة بداية الكبرى</label>
+              <select id="stRevSurahPick" onchange="onStModalRevSurahPick(this.value)"></select>
+            </div>
+            <div class="field num-cell">
+              <label>بداية (ص)</label>
+              <input type="number" id="stRevPageInput" min="1" max="604" placeholder="582" oninput="onStModalRevPageTyped(this.value)">
+            </div>
+            <div class="field num-cell">
+              <label>مقدار (1–100)</label>
+              <input type="number" id="stRevPaceCustomInput" min="1" max="100" value="2" oninput="onStModalCustomRevPaceTyped(this.value)">
+            </div>
+          </div>
+          <div id="stRevPageLiveHint" style="font-size:11.5px; color:var(--ink-500); font-weight:600;"></div>
+        </div>
+      </div>
+
+      <div id="stModalLivePreview" class="stm-live-box" style="margin-top:0; margin-bottom:9px;"></div>
+
+      <label class="check-inline" id="stApplyToSessionWrap" style="margin-bottom:2px;">
+        <input type="checkbox" id="stApplyToSessionCheck" checked>
+        <span>تطبيق نقطة البداية والمقدار على الجلسة الحالية (إن لم يُقيّم بعد)</span>
+      </label>
     </div>
 
-    <!-- TAB 2: MEMORIZATION PATH & 30-JUZ MAP (WITH RASHIDI TRACK!) -->
-    <div class="stm-pane" id="stmPane_hifz">
-      <div class="stm-sec" style="margin-bottom:8px;">
-        <div class="stm-sec-hdr"><span>🎯 مسار الطالب في الحلقة</span></div>
-        <div class="stm-choice-row" style="margin-bottom:0;">
-          <button type="button" class="stm-choice-btn on" id="stmTrackQuran" onclick="setStModalChoice('track','quran')">📖 القرآن الكريم (حفظ ومراجعة)</button>
-          <button type="button" class="stm-choice-btn" id="stmTrackRashidi" onclick="setStModalChoice('track','rashidi')">🔤 القاعدة الرشيدية (مبتدئ)</button>
-        </div>
-      </div>
-
-      <div id="stmRashidiBox" class="stm-sec" style="display:none; border-right:4px solid #6d28d9;">
-        <div class="stm-sec-hdr"><span>🔤 خطة القاعدة الرشيدية</span></div>
-        <div class="form-grid" style="grid-template-columns:1fr 1fr; margin-bottom:4px;">
-          <div class="field">
-            <label>صفحة البداية الحالية (1–85)</label>
-            <input type="number" id="stRashidiPageInput" min="1" max="85" value="1" oninput="updateStudentModalPreview()">
-          </div>
-          <div class="field">
-            <label>المقدار اليومي (صفحات)</label>
-            <select id="stRashidiPaceInput" onchange="updateStudentModalPreview()">
-              <option value="0.5">نصف صفحة</option>
-              <option value="1" selected>صفحة واحدة</option>
-              <option value="2">صفحتان</option>
-            </select>
-          </div>
-        </div>
-        <div style="font-size:11px; color:var(--ink-500);">* تُحتسب صفحات الرشيدي في بند مستقل بالتقارير الشهرية وفي التقرير العام للصرح.</div>
-      </div>
-
-      <div id="stmQuranPathSec" class="stm-sec">
-        <div class="stm-sec-hdr">
-          <span>🧭 مسار الحفظ المعتمد</span>
-          <button type="button" class="btn btn-soft btn-sm" style="padding:3px 8px; font-size:11px;" onclick="openSurahPickerForStudentModal()">🔍 اختيار سورة مريح</button>
-        </div>
-        <div class="path-preset-grid-3">
-          <button type="button" class="path-preset-card row-style on" id="stmPath_desc_desc" onclick="selectStPathPreset('desc','juz_desc')">
-            <span class="ppc-ico">⬆️</span>
-            <div class="ppc-txt">
-              <b>من الناس ← البقرة (صعوداً)</b>
-              <span>سورة بسورة من آخر المصحف (الناس ← النبأ ← المرسلات ← الملك)</span>
-            </div>
-          </button>
-          <button type="button" class="path-preset-card row-style" id="stmPath_asc_juz_desc" onclick="selectStPathPreset('asc','juz_desc')">
-            <span class="ppc-ico">🔁</span>
-            <div class="ppc-txt">
-              <b>أجزاء من الآخر (كل جزء من أوله)</b>
-              <span>مثلاً: أنهى عمّ وبدأ تبارك من الملك ← المرسلات، ثم قد سمع</span>
-            </div>
-          </button>
-          <button type="button" class="path-preset-card row-style" id="stmPath_asc_asc" onclick="selectStPathPreset('asc','juz_asc')">
-            <span class="ppc-ico">⬇️</span>
-            <div class="ppc-txt">
-              <b>من البقرة ← الناس (من الأول)</b>
-              <span>من بداية المصحف (مع احتساب أجزائه السابقة من الآخر)</span>
-            </div>
-          </button>
-        </div>
-
-        <div class="surah-clean-grid" style="grid-template-columns:2.3fr 1fr; margin-bottom:8px;">
-          <div class="field"><label>السورة التي نبدأ بها الآن (محل ما وصل)</label><select id="stStartSurahInput" onchange="onStModalSurahChange()"></select></div>
-          <div class="field num-cell"><label>من آية</label><input type="text" inputmode="numeric" id="stStartAyahInput" value="1" placeholder="1" oninput="updateStudentModalPreview()"></div>
-        </div>
-
-        <div class="form-grid" style="grid-template-columns:1.6fr 1fr; margin-bottom:8px; align-items:end;">
-          <div>
-            <label style="display:block; font-size:11.5px; font-weight:700; color:var(--ink-700); margin-bottom:4px;">مقدار الحفظ اليومي</label>
-            <div class="stm-choice-row cols-4" style="margin-bottom:0;">
-              <button type="button" class="stm-choice-btn on-green" id="stmPace_05" onclick="setStModalChoice('pace',0.5)">½ ص</button>
-              <button type="button" class="stm-choice-btn" id="stmPace_1" onclick="setStModalChoice('pace',1)">1 ص</button>
-              <button type="button" class="stm-choice-btn" id="stmPace_15" onclick="setStModalChoice('pace',1.5)">1.5</button>
-              <button type="button" class="stm-choice-btn" id="stmPace_2" onclick="setStModalChoice('pace',2)">2 ص</button>
-            </div>
-          </div>
-          <div class="field">
-            <label>إجمالي المحفوظ (أجزاء)</label>
-            <input type="number" id="stMemJuzInput" min="0" max="30" step="0.5" placeholder="تلقائي" oninput="updateStudentModalPreview()">
-          </div>
-        </div>
-
-        <div style="background:var(--white); border:1px solid var(--line); border-radius:10px; padding:8px 9px;">
-          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:5px; margin-bottom:5px;">
-            <span style="font-size:11.5px; font-weight:800; color:var(--brand-slate);">🗺️ الأجزاء المحفوظة مسبقاً (<span id="stSavedJuzCount">0</span> جزء)</span>
-            <div style="display:flex; gap:4px; flex-wrap:wrap;">
-              <button type="button" id="btnSwitchToBeginning" class="btn btn-soft btn-sm" style="padding:3px 7px; font-size:10.5px;" onclick="switchStudentToBeginningWithSavedJuz()">🔄 نقله للبقرة</button>
-              <button type="button" class="btn btn-outline btn-sm" style="padding:3px 7px; font-size:10.5px;" onclick="setStExtraEndJuzCount(0)">مسح</button>
-            </div>
-          </div>
-          <div class="extra-mem-chips" id="stExtraMemChips" style="margin-bottom:5px;">
-            <button type="button" class="em-chip" data-preset="1" onclick="setStExtraEndJuzCount(1)">عمّ (30)</button>
-            <button type="button" class="em-chip" data-preset="2" onclick="setStExtraEndJuzCount(2)">عمّ + تبارك</button>
-            <button type="button" class="em-chip" data-preset="3" onclick="setStExtraEndJuzCount(3)">28–30</button>
-            <button type="button" class="em-chip" data-preset="5" onclick="setStExtraEndJuzCount(5)">26–30</button>
-          </div>
-          <details class="mini-more" style="margin-top:2px; padding-top:4px;">
-            <summary><span>🎯 تحديد أي جزء من الـ 30 جزءاً بالضغط عليه</span><span>▾</span></summary>
-            <div id="stJuz30PickerGrid" class="juz30-picker-grid"></div>
-          </details>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 3: REVIEW PLAN (MINOR LOOKBACK + MAJOR UP TO 5 JUZ) -->
-    <div class="stm-pane" id="stmPane_rev">
-      <div class="stm-sec" style="margin-bottom:8px;">
-        <div class="stm-sec-hdr">
-          <span>📗 خطة المراجعة الصغرى (الربط الأسبوعي)</span>
-        </div>
-        <div style="font-size:11.5px; color:var(--ink-700); margin-bottom:6px; font-weight:700;">على ماذا تعتمد المراجعة الصغرى في يوم المراجعة؟</div>
-        <div class="stm-choice-row" style="margin-bottom:4px;">
-          <button type="button" class="stm-choice-btn on-green" id="stmMinWk_1" onclick="setStModalChoice('minorWeeks',1)">
-            <b>📅 الأسبوع الأخير</b>
-            <small style="display:block; font-size:10px; opacity:0.85;">ما حُفظ في الأسبوع قبل يوم المراجعة</small>
-          </button>
-          <button type="button" class="stm-choice-btn" id="stmMinWk_2" onclick="setStModalChoice('minorWeeks',2)">
-            <b>📆 آخر أسبوعين</b>
-            <small style="display:block; font-size:10px; opacity:0.85;">ما حُفظ خلال الأسبوعين قبل المراجعة</small>
-          </button>
-        </div>
-      </div>
-
-      <div class="stm-sec" style="margin-bottom:8px;">
-        <div class="stm-sec-hdr">
-          <span>📘 خطة المراجعة الكبرى (حتى 5 أجزاء)</span>
-          <button type="button" class="btn btn-soft btn-sm" style="padding:3px 8px; font-size:11px;" onclick="autoMatchRevPageToMem()">⚡ ضبط تلقائي</button>
-        </div>
-        <label style="display:block; font-size:11.5px; font-weight:700; color:var(--ink-700); margin-bottom:4px;">مقدار المراجعة الكبرى الأسبوعية (صفحات أو أجزاء حتى 5 أجزاء):</label>
-        <div class="stm-choice-row cols-5">
-          <button type="button" class="stm-choice-btn" id="stmRevPace_1" onclick="setStModalChoice('revPace',1)">1 ص</button>
-          <button type="button" class="stm-choice-btn on" id="stmRevPace_2" onclick="setStModalChoice('revPace',2)">2 ص</button>
-          <button type="button" class="stm-choice-btn" id="stmRevPace_3" onclick="setStModalChoice('revPace',3)">3 ص</button>
-          <button type="button" class="stm-choice-btn" id="stmRevPace_5" onclick="setStModalChoice('revPace',5)">ربع<small>5 ص</small></button>
-          <button type="button" class="stm-choice-btn" id="stmRevPace_10" onclick="setStModalChoice('revPace',10)">نصف<small>10 ص</small></button>
-        </div>
-        <div class="stm-choice-row cols-5">
-          <button type="button" class="stm-choice-btn" id="stmRevPace_20" onclick="setStModalChoice('revPace',20)">جزء<small>20 ص</small></button>
-          <button type="button" class="stm-choice-btn" id="stmRevPace_40" onclick="setStModalChoice('revPace',40)">جزآن<small>40 ص</small></button>
-          <button type="button" class="stm-choice-btn" id="stmRevPace_60" onclick="setStModalChoice('revPace',60)">3 أجزاء<small>60 ص</small></button>
-          <button type="button" class="stm-choice-btn" id="stmRevPace_80" onclick="setStModalChoice('revPace',80)">4 أجزاء<small>80 ص</small></button>
-          <button type="button" class="stm-choice-btn" id="stmRevPace_100" onclick="setStModalChoice('revPace',100)">5 أجزاء<small>100 ص</small></button>
-        </div>
-        <div class="surah-clean-grid" style="grid-template-columns:1.8fr 0.9fr 0.9fr; margin-bottom:4px;">
-          <div class="field">
-            <label>سورة بداية الكبرى</label>
-            <select id="stRevSurahPick" onchange="onStModalRevSurahPick(this.value)"></select>
-          </div>
-          <div class="field num-cell">
-            <label>بداية (ص)</label>
-            <input type="number" id="stRevPageInput" min="1" max="604" placeholder="582" oninput="onStModalRevPageTyped(this.value)">
-          </div>
-          <div class="field num-cell">
-            <label>مقدار (1–100 ص)</label>
-            <input type="number" id="stRevPaceCustomInput" min="1" max="100" value="2" oninput="onStModalCustomRevPaceTyped(this.value)">
-          </div>
-        </div>
-        <div id="stRevPageLiveHint" style="font-size:11.5px; color:var(--ink-500); font-weight:600;"></div>
-      </div>
-    </div>
-
-    <div id="stModalLivePreview" class="stm-live-box" style="margin-top:0; margin-bottom:10px;"></div>
-
-    <label class="check-inline" id="stApplyToSessionWrap" style="margin-bottom:12px;">
-      <input type="checkbox" id="stApplyToSessionCheck" checked>
-      <span>تطبيق نقطة البداية والمقدار على الجلسة المفتوحة حالياً (إن لم يُقيّم الطالب بعد)</span>
-    </label>
-
-    <div style="display:flex; gap:8px; justify-content:flex-end;">
-      <button class="btn btn-outline" onclick="closeModal('studentModal')">إلغاء</button>
-      <button class="btn btn-primary" onclick="saveStudentModal()">✓ حفظ خطة الطالب</button>
+    <div class="exec-modal-footer">
+      <button type="button" class="btn btn-outline" style="min-width:92px;" onclick="closeModal('studentModal')">إلغاء</button>
+      <button type="button" class="btn es-btn-next" style="flex:1; padding:10px;" onclick="saveStudentModal()">✓ حفظ خطة الطالب</button>
     </div>
   </div>
 </div>
@@ -9272,99 +9681,142 @@ html { scroll-behavior: smooth; }
   </div>
 </div>
 
-<!-- ===== MODAL: SETTINGS ===== -->
-<div class="modal-backdrop" id="settingsModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h3>الإعدادات والمزامنة</h3>
-      <button class="close-x" onclick="closeModal('settingsModal')">×</button>
-    </div>
-    <div class="panel-block">
-      <div class="panel-label">بيانات الحلقة والصرح (تتحدّث تلقائياً في جميع الملفات والصور والتقارير)</div>
-      <div class="form-grid">
-        <div class="field"><label>اسم الشيخ / المشرف</label><input type="text" id="setSheikh"></div>
-        <div class="field"><label>اسم الحلقة</label><input type="text" id="setHalaqa"></div>
-        <div class="field"><label>الصرح / المحافظة (أي منطقة)</label><input type="text" id="setBranch" list="branchesList" placeholder="مثال: صرح حلب، صرح إدلب..."></div>
-        <div class="field"><label>المؤسسة التعليمية</label><input type="text" id="setOrg"></div>
-        <div class="field"><label>اسم البرنامج</label><input type="text" id="setProgram" placeholder="مثال: برنامج تبيان"></div>
-        <div class="field"><label>نوع الحلقة (ذكور / إناث)</label><select id="setHalaqaGender"><option value="male">حلقة ذكور (الشيخ / الطالب)</option><option value="female">حلقة إناث (المعلمة / الطالبة)</option></select></div>
-        <div class="field"><label>الاتجاه الافتراضي</label><select id="setDefaultDir"><option value="desc">من الناس إلى البقرة</option><option value="asc">من البقرة إلى الناس</option></select></div>
-        <div class="field">
-          <label>معايرة التاريخ الهجري</label>
-          <select id="setHijriOffset">
-            <option value="0">0 (قياسي)</option>
-            <option value="1" selected>+1 يوم (مضبوط لسوريا 1448)</option>
-            <option value="2">+2 يوم</option>
-            <option value="-1">-1 يوم</option>
-          </select>
+<!-- ===== MODAL: SETTINGS (v68 3-TAB EXECUTIVE SHEET) ===== -->
+<div class="modal-backdrop exec-modal-backdrop" id="settingsModal" onclick="if(event.target===this) closeModal('settingsModal')">
+  <div class="modal-box exec-modal-box">
+    <div class="exec-modal-hdr">
+      <div class="es-handle"></div>
+      <div class="exec-modal-hdr-row">
+        <div>
+          <h3>⚙️ الإعدادات والمزامنة</h3>
+          <div class="exec-modal-sub">تحديث فوري للهوية والدوام والطلاب والسحابة</div>
         </div>
-        <div class="field"><label>أيام الدوام بالشهر</label><input type="number" id="setMonthDays" min="1" max="31"></div>
-        <div class="field"><label>المراجعة الكبرى الافتراضية</label><select id="setDefaultRevPace"><option value="1">صفحة واحدة</option><option value="2">صفحتان</option></select></div>
-      </div>
-      <label class="check-inline" style="margin-top:9px;">
-        <input type="checkbox" id="setPointsEnabled" checked>
-        <span>⭐ تفعيل وضع النقاط (إظهار النقاط في البطاقات والتقارير والإحصائيات)</span>
-      </label>
-      <div style="display:flex; gap:7px; flex-wrap:wrap; align-items:center; margin-top:10px;">
-        <button class="btn btn-primary btn-sm" onclick="saveHalaqaSettings()">✓ حفظ وتحديث جميع التقارير</button>
-        <button type="button" class="btn btn-soft btn-sm" onclick="document.getElementById('setLogoFile').click()">🖼️ تغيير الشعار (اختياري)</button>
-        <button type="button" class="btn btn-outline btn-sm" id="btnResetLogo" onclick="resetCustomLogo()" style="display:none;">استعادة الشعار الرسمي</button>
-        <input type="file" id="setLogoFile" accept="image/png,image/jpeg,image/webp" style="display:none;" onchange="handleCustomLogoUpload(event)">
+        <button type="button" class="exec-modal-close" onclick="closeModal('settingsModal')" aria-label="إغلاق">×</button>
       </div>
     </div>
 
-    <div class="panel-block">
-      <div class="panel-label">
-        <span>🗓️ أيام الدوام المعتمدة (وباقي الأيام ملغاة تلقائياً)</span>
-        <button type="button" class="btn btn-primary btn-sm" onclick="closeModal('settingsModal'); openClassDaysModal();">✏️ تعديل أيام الدوام</button>
-      </div>
-      <div id="setClassDaysSummary" style="font-size:12.5px; color:var(--ink-700); line-height:1.6;"></div>
+    <div class="exec-modal-tabs">
+      <button type="button" class="exec-tab-btn on" id="setTabBtn_halaqa" onclick="switchSettingsTab('halaqa')">🕌 الحلقة</button>
+      <button type="button" class="exec-tab-btn" id="setTabBtn_system" onclick="switchSettingsTab('system')">🗓️ الدوام والطلاب</button>
+      <button type="button" class="exec-tab-btn" id="setTabBtn_cloud" onclick="switchSettingsTab('cloud')">☁️ السحابة والنسخ</button>
     </div>
 
-    <div class="panel-block">
-      <div class="panel-label">
-        <span>👥 إدارة طلاب الحلقة (<span id="setStudentsCount">0</span> طالب)</span>
-        <div style="display:flex; gap:5px; flex-wrap:wrap;">
-          <button type="button" class="btn btn-soft btn-sm" onclick="closeModal('settingsModal'); openAddStudentModal();">إضافة بتفاصيل</button>
-          <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('settingsModal'); openBulkAddModal();">لصق جماعي</button>
+    <div class="exec-modal-body">
+      <!-- SETTINGS TAB 1: HALAQA IDENTITY & BRANDING -->
+      <div class="set-pane active" id="setPane_halaqa">
+        <div class="exec-card">
+          <div class="exec-card-ttl"><span>🕌 بيانات الحلقة والصرح</span><span class="badge b-green" style="font-size:10px;">تحديث فوري للتقارير</span></div>
+          <div class="exec-grid-2" style="margin-bottom:8px;">
+            <div class="field"><label>اسم الشيخ / المشرف</label><input type="text" id="setSheikh"></div>
+            <div class="field"><label>اسم الحلقة</label><input type="text" id="setHalaqa"></div>
+          </div>
+          <div class="exec-grid-2" style="margin-bottom:8px;">
+            <div class="field"><label>الصرح / المحافظة</label><input type="text" id="setBranch" list="branchesList" placeholder="مثال: صرح إدلب"></div>
+            <div class="field"><label>اسم البرنامج</label><input type="text" id="setProgram" placeholder="مثال: برنامج تبيان"></div>
+          </div>
+          <div class="field" style="margin-bottom:8px;">
+            <label>المؤسسة التعليمية</label>
+            <input type="text" id="setOrg">
+          </div>
+          <div class="exec-grid-2" style="margin-bottom:10px;">
+            <div class="field"><label>نوع الحلقة</label><select id="setHalaqaGender"><option value="male">ذكور (الشيخ / الطالب)</option><option value="female">إناث (المعلمة / الطالبة)</option></select></div>
+            <div class="field"><label>اتجاه الحفظ</label><select id="setDefaultDir"><option value="desc">من الناس ← البقرة</option><option value="asc">من البقرة ← الناس</option></select></div>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
+            <button type="button" class="btn btn-soft btn-sm" onclick="document.getElementById('setLogoFile').click()">🖼️ تغيير الشعار</button>
+            <button type="button" class="btn btn-outline btn-sm" id="btnResetLogo" onclick="resetCustomLogo()" style="display:none;">استعادة الشعار الرسمي</button>
+            <input type="file" id="setLogoFile" accept="image/png,image/jpeg,image/webp" style="display:none;" onchange="handleCustomLogoUpload(event)">
+          </div>
         </div>
-      </div>
-      <div style="display:flex; gap:6px; margin-bottom:8px;">
-        <input type="text" id="setQuickStudentName" placeholder="اكتب اسم الطالب الثلاثي لإضافته فوراً..." style="flex:1; padding:7px 10px; border:1px solid var(--line-strong); border-radius:8px;" onkeydown="if(event.key==='Enter'){event.preventDefault(); quickAddStudentFromSettings();}">
-        <button type="button" class="btn btn-primary btn-sm" onclick="quickAddStudentFromSettings()">+ إضافة طالب</button>
-      </div>
-      <input type="text" id="setStudentSearch" placeholder="🔍 ابحث عن طالب لتعديله أو إزالته..." style="width:100%; padding:6px 9px; border:1px solid var(--line); border-radius:8px; margin-bottom:7px; font-size:12.5px;" oninput="renderSettingsStudentsList()">
-      <div id="settingsStudentsList" class="set-st-list"></div>
-    </div>
 
-    <div class="panel-block">
-      <div class="panel-label">☁️ المزامنة السحابية التلقائية بحسابك</div>
-      <div class="cloud-status-card" id="setAutoCloudStatusBox">
-        <div style="font-size:12.5px; font-weight:800; color:var(--ink-900); margin-bottom:4px;" id="setAutoCloudTitle">☁️ الحفظ السحابي التلقائي نشط</div>
-        <div style="font-size:11.5px; color:var(--ink-700); margin-bottom:8px;" id="setAutoCloudSub">تُحفظ بيانات الطلاب والجلسات والتقارير تلقائياً على حسابك بمجرد توفر الإنترنت.</div>
-        <div style="display:flex; gap:7px; flex-wrap:wrap;">
-          <button type="button" class="btn btn-primary btn-sm" onclick="syncCentralCloudNow(true)">☁️ حفظ ومزامنة فورية الآن</button>
-          <button type="button" class="btn btn-soft btn-sm" onclick="closeModal('settingsModal'); openNotifCenterModal();">🔔 إعدادات الإشعارات</button>
+        <div class="exec-card">
+          <div class="exec-card-ttl"><span>📅 التقويم والنقاط</span></div>
+          <div class="exec-grid-2" style="margin-bottom:8px;">
+            <div class="field"><label>أيام الدوام بالشهر</label><input type="number" id="setMonthDays" min="1" max="31"></div>
+            <div class="field"><label>المراجعة الكبرى</label><select id="setDefaultRevPace"><option value="1">صفحة واحدة</option><option value="2">صفحتان</option></select></div>
+          </div>
+          <div class="field" style="margin-bottom:9px;">
+            <label>معايرة التاريخ الهجري</label>
+            <select id="setHijriOffset">
+              <option value="0">0 (قياسي)</option>
+              <option value="1" selected>+1 يوم (مضبوط لسوريا 1448)</option>
+              <option value="2">+2 يوم</option>
+              <option value="-1">-1 يوم</option>
+            </select>
+          </div>
+          <label class="check-inline" style="width:100%; justify-content:space-between; background:var(--bg); padding:8px 10px; border-radius:10px; border:1px solid var(--line);">
+            <span>⭐ تفعيل وضع النقاط والتحفيز</span>
+            <input type="checkbox" id="setPointsEnabled" checked>
+          </label>
         </div>
       </div>
-      <input type="hidden" id="setFbUrl">
-      <input type="hidden" id="setRoomCode">
-      <input type="checkbox" id="setCloudAutoSync" checked style="display:none;">
-    </div>
 
-    <div class="panel-block">
-      <div class="panel-label">الحلقات المسجلة</div>
-      <div id="halaqatSwitcherList" style="margin-bottom:8px;"></div>
-      <button class="btn btn-outline btn-sm" onclick="startNewHalaqaFlow()">+ حلقة / شيخ جديد</button>
-    </div>
+      <!-- SETTINGS TAB 2: CLASS DAYS & STUDENTS QUICK MANAGER -->
+      <div class="set-pane" id="setPane_system">
+        <div class="exec-card">
+          <div class="exec-card-ttl">
+            <span>🗓️ أيام الدوام المعتمدة</span>
+            <button type="button" class="btn btn-primary btn-sm" onclick="closeModal('settingsModal'); openClassDaysModal();">✏️ تعديل الأيام</button>
+          </div>
+          <div id="setClassDaysSummary" style="font-size:12.5px; color:var(--ink-700); line-height:1.6;"></div>
+        </div>
 
-    <div class="panel-block" style="margin-bottom:0;">
-      <div class="panel-label">نسخ احتياطي</div>
-      <div style="display:flex; gap:7px; flex-wrap:wrap;">
-        <button class="btn btn-soft btn-sm" onclick="exportBackupJSON()">💾 حفظ نسخة JSON</button>
-        <button class="btn btn-outline btn-sm" onclick="document.getElementById('settingsImportFile').click()">📂 استعادة نسخة</button>
-        <input type="file" id="settingsImportFile" accept=".json" style="display:none;" onchange="importBackupFile(event)">
+        <div class="exec-card">
+          <div class="exec-card-ttl">
+            <span>👥 إدارة الطلاب (<span id="setStudentsCount">0</span>)</span>
+            <div style="display:flex; gap:5px;">
+              <button type="button" class="btn btn-soft btn-sm" onclick="closeModal('settingsModal'); openAddStudentModal();">+ بتفاصيل</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('settingsModal'); openBulkAddModal();">+ لصق</button>
+            </div>
+          </div>
+          <div style="display:flex; gap:6px; margin-bottom:8px;">
+            <input type="text" id="setQuickStudentName" placeholder="اكتب اسم الطالب الثلاثي لإضافته فوراً..." style="flex:1; padding:8px 10px; border:1px solid var(--line-strong); border-radius:9px;" onkeydown="if(event.key==='Enter'){event.preventDefault(); quickAddStudentFromSettings();}">
+            <button type="button" class="btn btn-primary btn-sm" onclick="quickAddStudentFromSettings()">+ إضافة</button>
+          </div>
+          <input type="text" id="setStudentSearch" placeholder="🔍 ابحث عن طالب لتعديله أو إزالته..." style="width:100%; padding:7px 10px; border:1px solid var(--line); border-radius:9px; margin-bottom:7px; font-size:12.5px;" oninput="renderSettingsStudentsList()">
+          <div id="settingsStudentsList" class="set-st-list"></div>
+        </div>
       </div>
+
+      <!-- SETTINGS TAB 3: CLOUD SYNC, MULTI-HALAQA & BACKUP -->
+      <div class="set-pane" id="setPane_cloud">
+        <div class="exec-card">
+          <div class="exec-card-ttl"><span>☁️ المزامنة السحابية التلقائية</span></div>
+          <div class="cloud-status-card" id="setAutoCloudStatusBox">
+            <div style="font-size:12.5px; font-weight:800; color:var(--ink-900); margin-bottom:4px;" id="setAutoCloudTitle">☁️ الحفظ السحابي التلقائي نشط</div>
+            <div style="font-size:11.5px; color:var(--ink-700); margin-bottom:9px;" id="setAutoCloudSub">تُحفظ بيانات الطلاب والجلسات والتقارير تلقائياً على حسابك بمجرد توفر الإنترنت.</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+              <button type="button" class="btn btn-primary btn-sm" onclick="syncCentralCloudNow(true)">☁️ مزامنة فورية</button>
+              <button type="button" class="btn btn-soft btn-sm" onclick="closeModal('settingsModal'); openNotifCenterModal();">🔔 الإشعارات والمنبّه</button>
+            </div>
+          </div>
+          <input type="hidden" id="setFbUrl">
+          <input type="hidden" id="setRoomCode">
+          <input type="checkbox" id="setCloudAutoSync" checked style="display:none;">
+        </div>
+
+        <div class="exec-card">
+          <div class="exec-card-ttl">
+            <span>🕌 الحلقات المسجلة</span>
+            <button type="button" class="btn btn-outline btn-sm" onclick="startNewHalaqaFlow()">+ حلقة جديدة</button>
+          </div>
+          <div id="halaqatSwitcherList"></div>
+        </div>
+
+        <div class="exec-card">
+          <div class="exec-card-ttl"><span>💾 النسخ الاحتياطي (JSON)</span></div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:7px;">
+            <button type="button" class="btn btn-soft btn-sm" onclick="exportBackupJSON()">💾 حفظ نسخة JSON</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('settingsImportFile').click()">📂 استعادة نسخة</button>
+            <input type="file" id="settingsImportFile" accept=".json" style="display:none;" onchange="importBackupFile(event)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exec-modal-footer">
+      <button type="button" class="btn btn-outline" style="min-width:86px;" onclick="closeModal('settingsModal')">إغلاق</button>
+      <button type="button" class="btn es-btn-next" style="flex:1; padding:10px;" onclick="saveHalaqaSettings()">✓ حفظ وتحديث جميع التقارير</button>
     </div>
   </div>
 </div>
@@ -12057,8 +12509,12 @@ function stepErrorCounter(studentId, kind, delta) {
   const r = getStudentRecord(s, studentId);
   const key = kind === "min" ? "minErrors" : (kind === "maj" ? "majErrors" : "recErrors");
   r[key] = Math.max(0, (Number(r[key]) || 0) + delta);
-  saveState(true);
-  renderStudentCardsOnly();
+  saveStateDebounced(220);
+  if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
+    syncStudentEvalSheet();
+  } else {
+    renderStudentCardsOnly();
+  }
 }
 
 function applyErrorEval(studentId, kind) {
@@ -12083,8 +12539,12 @@ function stepAlertCounter(studentId, kind, delta) {
   const r = getStudentRecord(s, studentId);
   const key = kind === "min" ? "minAlerts" : (kind === "maj" ? "majAlerts" : "recAlerts");
   r[key] = Math.max(0, (Number(r[key]) || 0) + delta);
-  saveState(true);
-  renderStudentCardsOnly();
+  saveStateDebounced(220);
+  if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
+    syncStudentEvalSheet();
+  } else {
+    renderStudentCardsOnly();
+  }
 }
 
 function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
@@ -13271,37 +13731,20 @@ function updateDrawerQuickStates() {
   document.querySelectorAll(".drawer-item[data-dtab]").forEach(el => {
     el.classList.toggle("active", el.dataset.dtab === activeTab);
   });
-  const pb = document.getElementById("drawerPointsBadge");
   updateTeacherAccountDrawerUI();
-  if (pb) {
-    const ptsOn = isPointsEnabled();
-    pb.textContent = ptsOn ? "مفعّل" : "متوقف";
-    pb.className = "badge " + (ptsOn ? "b-green" : "b-muted");
-    const sl = document.getElementById("drawerStatsLbl");
-    if (sl) sl.textContent = ptsOn ? "الإحصائيات والنقاط" : "الإحصائيات";
-  }
-  const fb = document.getElementById("drawerFlowBadge");
-  if (fb) {
-    fb.textContent = handsFreeFlow ? "مفعّل" : "متوقف";
-    fb.className = "badge " + (handsFreeFlow ? "b-green" : "b-muted");
-  }
-  const sb = document.getElementById("drawerSinkBadge");
-  if (sb) {
-    sb.textContent = autoSinkDone ? "مفعّل" : "متوقف";
-    sb.className = "badge " + (autoSinkDone ? "b-green" : "b-muted");
-  }
-  const tsb = document.getElementById("drawerTapSoundBadge");
-  if (tsb) {
-    const tapOn = tibyanNotifPrefs.tapSound !== false;
-    tsb.textContent = tapOn ? "مفعّل" : "صامت";
-    tsb.className = "badge " + (tapOn ? "b-green" : "b-muted");
-  }
-  const tb = document.getElementById("drawerThemeBadge");
+  const ptsOn = isPointsEnabled();
+  const psw = document.getElementById("drawerPointsSwitch");
+  if (psw) psw.classList.toggle("on", ptsOn);
+  const fsw = document.getElementById("drawerFlowSwitch");
+  if (fsw) fsw.classList.toggle("on", Boolean(handsFreeFlow));
+  const ssw = document.getElementById("drawerSinkSwitch");
+  if (ssw) ssw.classList.toggle("on", Boolean(autoSinkDone));
+  const tssw = document.getElementById("drawerTapSoundSwitch");
+  if (tssw) tssw.classList.toggle("on", tibyanNotifPrefs.tapSound !== false);
   const isDark = (document.documentElement.getAttribute("data-theme") || "light") === "dark";
-  if (tb) {
-    tb.textContent = isDark ? "ليلي 🌙" : "نهاري ☀️";
-    tb.className = "badge " + (isDark ? "b-blue" : "b-slate");
-  }
+  const thsw = document.getElementById("drawerThemeSwitch");
+  if (thsw) thsw.classList.toggle("on", isDark);
+  if (typeof updateNotifToggleUI === "function") updateNotifToggleUI();
   const db = document.getElementById("drawerDaysBadge");
   if (db) {
     const dows = getHalaqaClassDays();
@@ -13868,6 +14311,21 @@ function onStModalCustomRevPaceTyped(val) {
   updateStudentModalPreview();
 }
 
+function stepStModalRashidiPage(delta) {
+  const inp = document.getElementById("stRashidiPageInput");
+  if (!inp) return;
+  const cur = Math.max(1, Math.min(85, Math.round(parseArabicNum(inp.value, 1))));
+  inp.value = String(Math.max(1, Math.min(85, cur + delta)));
+  updateStudentModalPreview();
+}
+
+function setStModalRashidiPace(val) {
+  const inp = document.getElementById("stRashidiPaceInput");
+  if (inp) inp.value = String(val);
+  syncStModalButtons();
+  updateStudentModalPreview();
+}
+
 function syncStModalButtons() {
   const dir = document.getElementById("stDirectionInput").value || "desc";
   const pace = Number(document.getElementById("stPaceInput").value) || 0.5;
@@ -13881,14 +14339,20 @@ function syncStModalButtons() {
   if (document.getElementById("stmRashidiBox")) document.getElementById("stmRashidiBox").style.display = isRashidi ? "block" : "none";
   if (document.getElementById("stmQuranPathSec")) document.getElementById("stmQuranPathSec").style.display = isRashidi ? "none" : "block";
 
-  // Hide Review tab completely for Al-Qa'idah Al-Rashidiyyah students (Rashidi has no Quran review!)
+  // Hide Review tab COMPLETELY for Al-Qa'idah Al-Rashidiyyah students (Rashidi has no Quran review!)
   const revTabBtn = document.getElementById("stmTabBtn_rev");
   const revPane = document.getElementById("stmPane_rev");
   const tabsBar = document.querySelector("#studentModal .stm-tabs-bar");
   const hifzTabLbl = document.querySelector("#stmTabBtn_hifz .stb-lbl");
-  if (revTabBtn) revTabBtn.style.display = isRashidi ? "none" : "flex";
+  const hifzTabIco = document.getElementById("stmTabIco_hifz");
+  if (revTabBtn) revTabBtn.classList.toggle("is-hidden", isRashidi);
   if (tabsBar) tabsBar.style.gridTemplateColumns = isRashidi ? "repeat(2, minmax(0, 1fr))" : "repeat(3, minmax(0, 1fr))";
   if (hifzTabLbl) hifzTabLbl.textContent = isRashidi ? "الرشيدي" : "مسار الحفظ";
+  if (hifzTabIco) hifzTabIco.textContent = isRashidi ? "🔤" : "📖";
+  const rPaceVal = parseArabicNum(document.getElementById("stRashidiPaceInput")?.value, 1) || 1;
+  [[0.5, "stmRPace_05"], [1, "stmRPace_1"], [2, "stmRPace_2"]].forEach(([v, id]) => {
+    document.getElementById(id)?.classList.toggle("on", rPaceVal === v);
+  });
   if (isRashidi && revPane && revPane.classList.contains("active")) {
     setStudentModalTab("hifz");
   }
@@ -14188,6 +14652,8 @@ function saveStudentModal() {
         r.rashidiFrom = rashidiPage;
         r.rashidiTo = Math.min(85, rashidiPage + Math.max(0, Math.ceil(rashidiPace) - 1));
         r.rashidiPages = rashidiPace;
+        r.dRevSurahId = ""; r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevPages = 0; r.dRevExtras = [];
+        r.sabrJuz = ""; r.recIsSabr = false; r.minText = ""; r.minEval = ""; r.majFrom = ""; r.majTo = ""; r.majEval = "";
       } else if (curS.type === "daily" && !r.recEval && !(r.attendance && r.attendance.includes("غياب"))) {
         if (startSurahId && SURAH_MAP[Number(startSurahId)]) {
           const s0 = SURAH_MAP[Number(startSurahId)];
@@ -18040,10 +18506,16 @@ function renderDailyReport() {
       const hwCols = st.track === "rashidi"
         ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1 }
         : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, true) : formatSegmentsColumns(getSegments(r, "hw"), true));
-      const dRevCols = formatReviewPairColumns(getSegments(r, "dRev"), r.dRevFrom, r.dRevTo, true);
-      const evalRaw = isAbs ? _gtRep.absent : (r.recEval || "") + (_recSabrObj ? scTag : "") + (r.rabt ? " ✓" : "");
+      const isRashidiRow = st.track === "rashidi";
+      const dRevCols = isRashidiRow
+        ? { from: "", to: "", lines: 1 }
+        : formatReviewPairColumns(getSegments(r, "dRev"), r.dRevFrom, r.dRevTo, true);
+      const evalRaw = isAbs ? _gtRep.absent : (r.recEval || "") + (_recSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : "");
       const evalSt = getEvalCellStyle(evalRaw, isAbs);
-      const revRaw = r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.recEval === "إعادة" || String(r.dRevEval || "").includes("إعادة")) : (r.dRevEval || "");
+      const cleanDRevEval = (r.dRevEval === "بانتظار التقييم" && !r.sabrJuz) ? "" : (r.dRevEval || "");
+      const revRaw = isRashidiRow
+        ? ""
+        : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.recEval === "إعادة" || String(r.dRevEval || "").includes("إعادة")) : cleanDRevEval);
       const revSt = getEvalCellStyle(revRaw, false);
 
       tbl += `<tr>
@@ -18112,11 +18584,16 @@ function renderDailyReport() {
       const minCols = st.track === "rashidi"
         ? { surah: "الرشيدي", from: escapeHtml(r.rashidiFrom ? `ص ${r.rashidiFrom}` : ""), to: escapeHtml(r.rashidiTo ? `ص ${r.rashidiTo}` : ""), lines: 1 }
         : (minSegs.length ? formatSegmentsColumns(minSegs, true) : { surah: escapeHtml(r.minSurah || r.minText || ""), from: escapeHtml(r.minFrom || ""), to: escapeHtml(r.minTo || ""), lines: 1 });
-      const majCols = formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, true);
-      const hwCols = formatSatNextMajColumns(r, true);
-      const minSt = getEvalCellStyle(isAbs ? _gtRep.absent : (st.track === "rashidi" ? (r.recEval || "") : (r.minEval || "")), isAbs);
-      const majRaw = isAbs ? "غائب" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || ""));
-      const majSt = getEvalCellStyle(majRaw, isAbs);
+      const isRashidiRow = st.track === "rashidi";
+      const majCols = isRashidiRow
+        ? { from: "", to: "", lines: 1 }
+        : formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, true);
+      const hwCols = isRashidiRow
+        ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1 }
+        : formatSatNextMajColumns(r, true);
+      const minSt = getEvalCellStyle(isAbs ? _gtRep.absent : (isRashidiRow ? (r.recEval || "") : (r.minEval || "")), isAbs);
+      const majRaw = isRashidiRow ? "" : (isAbs ? "غائب" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || "")));
+      const majSt = getEvalCellStyle(majRaw, !isRashidiRow && isAbs);
 
       tbl += `<tr>
         <td>${idx + 1}</td>
@@ -20085,15 +20562,23 @@ async function exportDailyExcelStyled() {
         const hasSabr = Boolean(r.sabrJuz);
         const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
           ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
-        const _xlSabrObj = (r.recIsSabr && r.sabrJuz) ? getJuzByName(r.sabrJuz) : null;
-        const recCols = _xlSabrObj
-          ? { surah: `جزء ${_xlSabrObj.shortName}`, from: SURAH_MAP[_xlSabrObj.startSurah]?.n || "", to: SURAH_MAP[_xlSabrObj.endSurah]?.n || "", lines: 1 }
-          : formatSegmentsColumns(getSegments(r, "rec"), false);
-        const hwCols = r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, false) : formatSegmentsColumns(getSegments(r, "hw"), false);
-        const dRevCols = formatReviewPairColumns(getSegments(r, "dRev"), r.dRevFrom, r.dRevTo, false);
+        const isRashidiRow = st.track === "rashidi";
+        const _xlSabrObj = (!isRashidiRow && r.recIsSabr && r.sabrJuz) ? getJuzByName(r.sabrJuz) : null;
+        const recCols = isRashidiRow
+          ? { surah: "الرشيدي", from: r.rashidiFrom ? `ص ${r.rashidiFrom}` : "", to: r.rashidiTo ? `ص ${r.rashidiTo}` : "", lines: 1 }
+          : (_xlSabrObj
+            ? { surah: `جزء ${_xlSabrObj.shortName}`, from: SURAH_MAP[_xlSabrObj.startSurah]?.n || "", to: SURAH_MAP[_xlSabrObj.endSurah]?.n || "", lines: 1 }
+            : formatSegmentsColumns(getSegments(r, "rec"), false));
+        const hwCols = isRashidiRow
+          ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "", lines: 1 }
+          : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, false) : formatSegmentsColumns(getSegments(r, "hw"), false));
+        const dRevCols = isRashidiRow
+          ? { from: "", to: "", lines: 1 }
+          : formatReviewPairColumns(getSegments(r, "dRev"), r.dRevFrom, r.dRevTo, false);
 
-        const evalSt = getEvalCellStyle(isAbs ? "غائب" : (r.recEval || "") + (_xlSabrObj ? scTag : "") + (r.rabt ? " ✓" : ""), isAbs);
-        const revSt = getEvalCellStyle(r.sabrJuz ? `سبر ${r.sabrJuz}${scTag}` : (r.dRevEval || ""), false);
+        const evalSt = getEvalCellStyle(isAbs ? "غائب" : (r.recEval || "") + (_xlSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : ""), isAbs);
+        const cleanXlRev = (r.dRevEval === "بانتظار التقييم" && !r.sabrJuz) ? "" : (r.dRevEval || "");
+        const revSt = getEvalCellStyle(isRashidiRow ? "" : (r.sabrJuz ? `سبر ${r.sabrJuz}${scTag}` : cleanXlRev), false);
 
         const row = ws.getRow(8 + idx);
         row.values = ptsOn
@@ -20168,15 +20653,22 @@ async function exportDailyExcelStyled() {
         const hasSabr = Boolean(r.sabrJuz);
         const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
           ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
+        const isRashidiRow = st.track === "rashidi";
         const minSegs = getSegments(r, "min");
-        const minCols = minSegs.length
-          ? formatSegmentsColumns(minSegs, false)
-          : { surah: r.minSurah || r.minText || "", from: r.minFrom || "", to: r.minTo || "", lines: 1 };
-        const majCols = formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, false);
-        const hwCols = formatSatNextMajColumns(r, false);
+        const minCols = isRashidiRow
+          ? { surah: "الرشيدي", from: r.rashidiFrom ? `ص ${r.rashidiFrom}` : "", to: r.rashidiTo ? `ص ${r.rashidiTo}` : "", lines: 1 }
+          : (minSegs.length
+            ? formatSegmentsColumns(minSegs, false)
+            : { surah: r.minSurah || r.minText || "", from: r.minFrom || "", to: r.minTo || "", lines: 1 });
+        const majCols = isRashidiRow
+          ? { from: "", to: "", lines: 1 }
+          : formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, false);
+        const hwCols = isRashidiRow
+          ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "", lines: 1 }
+          : formatSatNextMajColumns(r, false);
 
-        const minSt = getEvalCellStyle(isAbs ? "غائب" : (r.minEval || ""), isAbs);
-        const majSt = getEvalCellStyle(isAbs ? "غائب" : (r.sabrJuz ? (r.majEval === "إعادة" ? `إعادة سبر${scTag}` : `سبر ${r.sabrJuz}${scTag}`) : (r.majEval || "")), isAbs);
+        const minSt = getEvalCellStyle(isAbs ? "غائب" : (isRashidiRow ? (r.recEval || "") : (r.minEval || "")), isAbs);
+        const majSt = getEvalCellStyle(isRashidiRow ? "" : (isAbs ? "غائب" : (r.sabrJuz ? (r.majEval === "إعادة" ? `إعادة سبر${scTag}` : `سبر ${r.sabrJuz}${scTag}`) : (r.majEval || ""))), !isRashidiRow && isAbs);
 
         const row = ws.getRow(8 + idx);
         row.values = ptsOn
@@ -20403,7 +20895,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v67 -->
+<!-- Makin App v68 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -20630,6 +21122,13 @@ function copyText(text, msg) {
 }
 
 // ==================== SETTINGS & CLOUD SYNC ====================
+function switchSettingsTab(tabKey) {
+  ["halaqa", "system", "cloud"].forEach(k => {
+    document.getElementById("setTabBtn_" + k)?.classList.toggle("on", k === tabKey);
+    document.getElementById("setPane_" + k)?.classList.toggle("active", k === tabKey);
+  });
+}
+
 function openSettingsModal() {
   const h = getActiveHalaqa();
   if (!h) return;
@@ -20664,6 +21163,7 @@ function openSettingsModal() {
   const cdSum = document.getElementById("setClassDaysSummary");
   if (cdSum) cdSum.innerHTML = getClassDaysSummaryHtml(h);
   renderSettingsStudentsList();
+  switchSettingsTab("halaqa");
   if (typeof updateCentralCloudIndicatorUI === "function") updateCentralCloudIndicatorUI();
   openModal("settingsModal");
 }
@@ -23108,7 +23608,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v67";
+const TIBYAN_APP_VERSION = "v68";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -24228,7 +24728,7 @@ function getSystemNotifPermission() {
 function updateNotifToggleUI() {
   const perm = getSystemNotifPermission();
   const isOn = Boolean(tibyanNotifPrefs.enabled);
-  const fullSys = isOn && perm === "granted";
+  const fullSys = isOn && (perm === "granted" || Boolean(window.MakinAndroid));
   const badgeTxt = fullSys ? "مفعّلة ✓" : (isOn ? "داخل التطبيق" : "متوقفة");
   const badgeCls = fullSys ? "badge b-green" : (isOn ? "badge b-blue" : "badge b-muted");
 
