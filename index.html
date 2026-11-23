@@ -8710,6 +8710,281 @@ html { scroll-behavior: smooth; }
 }
 #surahPickerModal .sp-apply-btn:active { transform: scale(0.98); }
 
+
+/* ==================== MAKIN v73: EVAL FOOTER NAV, 4-TAB REVIEW PICKER, GRADING & POINTS CYCLE ==================== */
+.es-footer-row.v73-nav {
+  grid-template-columns: 1fr 1.15fr 1fr;
+  gap: 6px;
+}
+.es-footer-row.v73-nav .es-btn-prev:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  transform: none;
+}
+.es-pend-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 99px;
+  background: #142a46;
+  color: #f6dc93;
+  font-size: 10.5px;
+  font-weight: 800;
+  line-height: 1;
+}
+[data-theme="dark"] .es-pend-badge {
+  background: #c8a14b;
+  color: #0f233c;
+}
+
+/* 4-Tab Modern Review Mode Switcher (سورة | صفحات | سرد جزء | سبر) */
+#surahPickerModal .sp-mode-tabs.cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+}
+#surahPickerModal .sp-mode-tabs.cols-4 .sp-mode-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 2px;
+  font-size: 11px;
+  line-height: 1.2;
+}
+#surahPickerModal .sp-mode-tab .sp-mt-ico { font-size: 15px; line-height: 1; }
+#surahPickerModal .sp-mode-tab .sp-mt-lbl { font-size: 11px; font-weight: 800; white-space: nowrap; }
+#surahPickerModal .sp-mode-tab.on-pages {
+  background: #15629a;
+  color: #ffffff;
+  box-shadow: 0 2px 7px rgba(21, 98, 154, 0.25);
+}
+#surahPickerModal .sp-mode-tab.on-sard {
+  background: #5b21b6;
+  color: #ffffff;
+  box-shadow: 0 2px 7px rgba(91, 33, 182, 0.25);
+}
+
+/* Sard Juz Panel (Distinct Purple-Indigo Identity — Strictly Review, NOT Sabr!) */
+.sp-sard-hint {
+  background: #f5f3ff;
+  color: #5b21b6;
+  border: 1px solid rgba(91, 33, 182, 0.25);
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+[data-theme="dark"] .sp-sard-hint {
+  background: #1f1738;
+  color: #c4b5fd;
+  border-color: rgba(167, 139, 250, 0.35);
+}
+.sp-sabr-card.on-sard {
+  background: #5b21b6;
+  border-color: #5b21b6;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(91, 33, 182, 0.28);
+}
+.sp-sabr-card.on-sard .sj-sub { color: #ede9fe; }
+.sp-sabr-card.on-sard .sj-tag { background: rgba(255, 255, 255, 0.22); color: #ffffff; }
+
+/* Pages Range Picker Panel inside Surah Picker */
+.sp-pages-info-bar {
+  background: var(--blue-bg);
+  color: var(--blue);
+  border: 1px solid rgba(21, 98, 154, 0.24);
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Settings Grading Rules Card */
+.grade-preset-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 9px;
+}
+.grade-preset-btn {
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-900);
+  border-radius: 10px;
+  padding: 7px 6px;
+  text-align: right;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: all 0.13s ease;
+}
+.grade-preset-btn b { font-size: 11.5px; font-weight: 800; color: var(--brand-slate); }
+.grade-preset-btn span { font-size: 10px; color: var(--ink-500); font-weight: 600; }
+.grade-preset-btn.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #ffffff;
+}
+.grade-preset-btn.on b { color: #f6dc93; }
+.grade-preset-btn.on span { color: #d5e4f2; }
+[data-theme="dark"] .grade-preset-btn.on { background: #c8a14b; border-color: #c8a14b; }
+[data-theme="dark"] .grade-preset-btn.on b,
+[data-theme="dark"] .grade-preset-btn.on span { color: #0f233c; }
+
+.grade-weight-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 9px;
+}
+.grade-weight-3 button {
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-700);
+  border-radius: 9px;
+  padding: 7px 4px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+}
+.grade-weight-3 button.on {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #ffffff;
+}
+.grade-limits-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.grade-limits-3 .field label { font-size: 11px; text-align: center; }
+.grade-limits-3 .field input { text-align: center; font-weight: 800; font-size: 14px; padding: 6px 4px; direction: ltr; }
+.grade-live-preview {
+  background: var(--brand-tint);
+  border: 1px dashed var(--line-strong);
+  border-right: 3.5px solid #c8a14b;
+  border-radius: 9px;
+  padding: 7px 9px;
+  font-size: 11px;
+  color: var(--ink-700);
+  line-height: 1.75;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.glp-chip {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 2px 7px;
+  font-weight: 700;
+  font-size: 10.5px;
+}
+
+/* Points Cycle Studio inside Programs Modal */
+.pts-dur-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 9px;
+}
+.pts-past-list {
+  max-height: 215px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  padding: 4px;
+  margin-bottom: 8px;
+}
+.pts-past-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 6px 7px;
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+  border-radius: 7px;
+  margin-bottom: 4px;
+}
+.pts-past-row:last-child { margin-bottom: 0; border-bottom: none; }
+.pts-past-name {
+  min-width: 0;
+  flex: 1;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pts-past-ctrl {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.pts-past-ctrl input {
+  width: 56px;
+  height: 29px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 13px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 7px;
+  background: var(--white);
+  color: var(--ink-900);
+  direction: ltr;
+}
+.pts-past-ctrl button {
+  height: 29px;
+  padding: 0 7px;
+  border-radius: 7px;
+  border: 1px solid var(--line-strong);
+  background: var(--brand-tint);
+  color: var(--brand-slate);
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  direction: ltr;
+}
+.pts-cycle-banner {
+  background: var(--green-bg);
+  border: 1px solid rgba(22, 121, 76, 0.28);
+  border-right: 4px solid var(--green);
+  color: var(--ink-900);
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-bottom: 9px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.pts-cycle-banner.expired {
+  background: var(--orange-bg);
+  border-color: rgba(184, 86, 16, 0.34);
+  border-right-color: var(--orange);
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -9233,7 +9508,7 @@ html { scroll-behavior: smooth; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v72</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v73</span>
         </button>
       </div>
     </div>
@@ -10078,6 +10353,56 @@ html { scroll-behavior: smooth; }
 
         <div class="exec-card">
           <div class="exec-card-ttl">
+            <span>🎯 معيار التقييم التلقائي (الأخطاء والتنبيهات)</span>
+            <span class="badge b-blue" style="font-size:10px;">حسب نظام الشيخ</span>
+          </div>
+          <div class="grade-preset-grid" id="setGradePresets">
+            <button type="button" class="grade-preset-btn" data-gp="strict" onclick="applyGradingPresetInSettings('strict')">
+              <b>🔴 متشدد (خطأ + تنبيه = إعادة)</b>
+              <span>ممتاز: 0 • جيد جداً: تنبيه • جيد: خطأ</span>
+            </button>
+            <button type="button" class="grade-preset-btn" data-gp="moderate" onclick="applyGradingPresetInSettings('moderate')">
+              <b>🟠 معتدل (خطآن = إعادة)</b>
+              <span>ممتاز: ≤½ • جيد جداً: 1 • جيد: 1½</span>
+            </button>
+            <button type="button" class="grade-preset-btn" data-gp="balanced" onclick="applyGradingPresetInSettings('balanced')">
+              <b>🔵 قياسي (3 أخطاء = إعادة)</b>
+              <span>ممتاز: ≤½ • جيد جداً: ≤1½ • جيد: ≤2½</span>
+            </button>
+            <button type="button" class="grade-preset-btn" data-gp="flexible" onclick="applyGradingPresetInSettings('flexible')">
+              <b>🟢 مرن (4 أخطاء = إعادة)</b>
+              <span>التنبيه لا يُحسب • 0–1 ممتاز • 2–3</span>
+            </button>
+          </div>
+
+          <div style="font-size:11.5px; font-weight:800; color:var(--ink-700); margin-bottom:5px;">قيمة التنبيه الواحد مقابل الخطأ:</div>
+          <input type="hidden" id="setGradeAlertWeight" value="0">
+          <div class="grade-weight-3">
+            <button type="button" id="setGwBtn_0" onclick="setGradeAlertWeightUI(0)">لا يُحسب (0)</button>
+            <button type="button" id="setGwBtn_05" onclick="setGradeAlertWeightUI(0.5)">نصف خطأ (½)</button>
+            <button type="button" id="setGwBtn_1" onclick="setGradeAlertWeightUI(1)">مثل الخطأ (1)</button>
+          </div>
+
+          <div class="grade-limits-3">
+            <div class="field">
+              <label>حد ممتاز ≤</label>
+              <input type="number" id="setGradeExMax" min="0" max="20" step="0.5" value="1" oninput="updateGradingRulesPreview()">
+            </div>
+            <div class="field">
+              <label>حد جيد جداً ≤</label>
+              <input type="number" id="setGradeVgMax" min="0" max="25" step="0.5" value="2" oninput="updateGradingRulesPreview()">
+            </div>
+            <div class="field">
+              <label>حد جيد ≤</label>
+              <input type="number" id="setGradeGdMax" min="0" max="30" step="0.5" value="3" oninput="updateGradingRulesPreview()">
+            </div>
+          </div>
+          <div style="font-size:11px; color:var(--ink-500); margin-bottom:6px;">أي مجموع أخطاء وتنبيهات يتجاوز «حد جيد» يُقترح تلقائياً <b>إعادة</b>.</div>
+          <div id="setGradingLivePreview" class="grade-live-preview"></div>
+        </div>
+
+        <div class="exec-card">
+          <div class="exec-card-ttl">
             <span>👥 إدارة الطلاب (<span id="setStudentsCount">0</span>)</span>
             <div style="display:flex; gap:5px;">
               <button type="button" class="btn btn-soft btn-sm" onclick="closeModal('settingsModal'); openAddStudentModal();">+ بتفاصيل</button>
@@ -10346,10 +10671,12 @@ html { scroll-behavior: smooth; }
     </div>
 
     <div class="sp-sheet-body">
-      <!-- Mode Switcher: Surah/Ayahs vs Full Juz Sabr -->
+      <!-- Mode Switcher: 2-Tab for Memorization/HW, 4-Tab for Reviews (Surah | Pages | Sard Juz | Sabr) -->
       <div id="spModeTabs" class="sp-mode-tabs">
-        <button type="button" class="sp-mode-tab on" id="spTabSurah" onclick="spSetMode('surah')">📖 سورة وآيات</button>
-        <button type="button" class="sp-mode-tab" id="spTabSabr" onclick="spSetMode('sabr')">🎓 سبر جزء كامل</button>
+        <button type="button" class="sp-mode-tab on" id="spTabSurah" onclick="spSetMode('surah')"><span class="sp-mt-ico">📖</span><span class="sp-mt-lbl" id="spTabSurahLbl">سورة وآيات</span></button>
+        <button type="button" class="sp-mode-tab" id="spTabPages" style="display:none;" onclick="spSetMode('pages')"><span class="sp-mt-ico">📄</span><span class="sp-mt-lbl">صفحات</span></button>
+        <button type="button" class="sp-mode-tab" id="spTabSard" style="display:none;" onclick="spSetMode('sard')"><span class="sp-mt-ico">📚</span><span class="sp-mt-lbl">سرد جزء</span></button>
+        <button type="button" class="sp-mode-tab" id="spTabSabr" onclick="spSetMode('sabr')"><span class="sp-mt-ico">🎓</span><span class="sp-mt-lbl" id="spTabSabrLbl">سبر جزء</span></button>
       </div>
 
       <!-- Panel A: Surah & Ayah Selection -->
@@ -10374,7 +10701,18 @@ html { scroll-behavior: smooth; }
         <div id="spAyahBox" class="sp-ayah-box"></div>
       </div>
 
-      <!-- Panel B: Full Juz Sabr Selection -->
+      <!-- Panel B: Mushaf Pages Range Selection (من صفحة إلى صفحة) -->
+      <div id="spPagesModePanel" style="display:none;">
+        <div id="spPagesBox"></div>
+      </div>
+
+      <!-- Panel C: Full Juz Sard Selection (سرد جزء مراجعة — غير السبر) -->
+      <div id="spSardModePanel" style="display:none;">
+        <div class="sp-sard-hint">📚 <b>سرد مراجعة (غير السبر):</b> اختر جزءاً كاملاً أو أكثر — تُحتسب صفحاته في المراجعة فقط ولا يُسجّل سبر اختبار رسمي ولا يدخل الأجزاء المسبورة بالشهري.</div>
+        <div id="spSardGrid" class="sp-sabr-grid"></div>
+      </div>
+
+      <!-- Panel D: Full Juz Sabr Selection -->
       <div id="spSabrModePanel" style="display:none;">
         <div id="spSabrHint" class="sp-sabr-hint"></div>
         <div id="spSabrScoreWrap" style="display:none; margin-bottom:8px;"></div>
@@ -11452,6 +11790,9 @@ function calcSmartPagesFromInputs(surahId, fromAyah, toAyah, endSurahId, fallbac
 function calcMajorPagesFallback(r, st, h) {
   const explicit = parseArabicNum(r.majPages, 0);
   if (explicit > 0) return explicit;
+  if (Array.isArray(r.majSardJuzIds) && r.majSardJuzIds.length) {
+    return formatSardJuzInfo(r.majSardJuzIds).totalPages;
+  }
   const m1 = toAsciiDigits(r.majFrom || "").match(/ص\s*(\d+)/);
   const m2 = toAsciiDigits(r.majTo || "").match(/ص\s*(\d+)/);
   if (m1 && m2) return Math.max(1, Math.abs(Number(m2[1]) - Number(m1[1])) + 1);
@@ -11468,6 +11809,9 @@ function calcDailyReviewPages(r) {
   if (explicit > 0) return Math.round(explicit * 100) / 100;
   // Auto-generated "تثبيت حفظ" reminder with 0 pages is a reminder note, NOT completed review pages
   if (r.dRevEval === "تثبيت حفظ" || r.dRevEval === "تثبيت") return 0;
+  if (Array.isArray(r.dRevSardJuzIds) && r.dRevSardJuzIds.length) {
+    return formatSardJuzInfo(r.dRevSardJuzIds).totalPages;
+  }
   // If user selected 1 or more review Surahs
   const dSegs = getSegments(r, "dRev");
   if (dSegs.length) return calcSegmentsPages(dSegs);
@@ -12264,6 +12608,14 @@ function formatSatNextMajColumns(r, isHtml = true) {
   if (!r) return { surah: "", from: "", to: "", lines: 1 };
   const esc = v => isHtml ? escapeHtml(String(v || "")) : String(v || "");
 
+  if (Array.isArray(r.nextMajSardJuzIds) && r.nextMajSardJuzIds.length) {
+    const si = formatSardJuzInfo(r.nextMajSardJuzIds);
+    return { surah: esc("سرد"), from: esc(si.ids.length === 1 ? "جزء" : `${si.ids.length} أجزاء`), to: esc(si.shortNames), lines: 1 };
+  }
+  if (r.nextMajIsPages && r.nextMajFrom) {
+    return { surah: esc("صفحات"), from: esc(r.nextMajFrom), to: esc(r.nextMajTo || r.nextMajFrom), lines: 1 };
+  }
+
   // If next Saturday is a repeated Full-Juz Sabr => display clearly as Sabr Juz!
   const repeatSabrName = r.nextMajSabrJuz || (r.sabrJuz && (r.majEval === "إعادة" || (r.attendance && r.attendance.includes("غياب"))) ? r.sabrJuz : "");
   if (repeatSabrName) {
@@ -12325,12 +12677,204 @@ function isPointsEnabled(h = null) {
   return hal ? hal.pointsEnabled !== false : true;
 }
 
+function ensurePointsConfig(h) {
+  const hal = h || getActiveHalaqa();
+  if (!hal) return null;
+  if (!hal.pointsConfig || typeof hal.pointsConfig !== "object") {
+    hal.pointsConfig = {
+      cycleName: "الدورة الحالية",
+      startDate: "",
+      endDate: "",
+      durationDays: 0,
+      excludedSessionIds: [],
+      pastNote: "",
+      pastPoints: {},
+      history: []
+    };
+  }
+  const pc = hal.pointsConfig;
+  if (!pc.pastPoints || typeof pc.pastPoints !== "object") pc.pastPoints = {};
+  if (!Array.isArray(pc.excludedSessionIds)) pc.excludedSessionIds = [];
+  if (!Array.isArray(pc.history)) pc.history = [];
+  return pc;
+}
+
+function addDaysToISO(iso, deltaDays) {
+  const d = new Date((iso || todayISO()) + "T12:00:00");
+  d.setDate(d.getDate() + Number(deltaDays || 0));
+  return dateToISO(d);
+}
+
+function getPointsCycleStatus(h) {
+  const pc = ensurePointsConfig(h);
+  if (!pc) return { expired: false, hasDuration: false, daysLeft: null, totalPastPoints: 0 };
+  const tod = todayISO();
+  const hasDuration = Boolean(pc.endDate);
+  const expired = Boolean(pc.endDate && tod > pc.endDate);
+  const daysLeft = pc.endDate ? Math.round((new Date(pc.endDate + "T12:00:00") - new Date(tod + "T12:00:00")) / 86400000) : null;
+  const totalPastPoints = Object.values(pc.pastPoints || {}).reduce((acc, v) => acc + (Math.max(0, Number(v) || 0)), 0);
+  return { pc, expired, hasDuration, daysLeft, totalPastPoints, startDate: pc.startDate || "", endDate: pc.endDate || "" };
+}
+
+function isSessionInActivePointsCycle(s, h) {
+  if (!s || s.noClass || !isSessionHasRealActivity(s)) return false;
+  const pc = ensurePointsConfig(h);
+  if (!pc) return true;
+  if (pc.excludedSessionIds.includes(s.id)) return false;
+  if (pc.startDate && (s.date || "") < pc.startDate) return false;
+  if (pc.endDate && (s.date || "") > pc.endDate) return false;
+  return true;
+}
+
+function getStudentPastPoints(h, studentId) {
+  const pc = ensurePointsConfig(h);
+  return Math.max(0, Math.round(Number(pc?.pastPoints?.[studentId]) || 0));
+}
+
+function resetPointsCycleFromZero(askConfirm = true) {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const pc = ensurePointsConfig(h);
+  if (askConfirm && !confirm("هل تريد إنهاء دورة النقاط الحالية والبدء بدورة جديدة من الصفر لكل طالب؟\n\n(تبقى جميع تقارير وأرشيف الجلسات السابقة محفوظة بالكامل دون حذف).")) {
+    return;
+  }
+  const { rows, totals } = computeMonthlyData("POINTS_CYCLE");
+  if (totals.totalPoints > 0) {
+    const top3 = [...rows]
+      .sort((a, b) => b.totalPoints - a.totalPoints)
+      .slice(0, 3)
+      .filter(x => x.totalPoints > 0)
+      .map(x => ({ name: x.student.name, points: x.totalPoints }));
+    pc.history.unshift({
+      id: uid("cyc"),
+      name: pc.cycleName || `الدورة ${pc.history.length + 1}`,
+      startDate: pc.startDate || (h.sessions[0]?.date || todayISO()),
+      endDate: pc.endDate || todayISO(),
+      endedAt: todayISO(),
+      totalPoints: totals.totalPoints,
+      top3
+    });
+    if (pc.history.length > 20) pc.history.length = 20;
+  }
+  const tod = todayISO();
+  pc.excludedSessionIds = (h.sessions || []).map(s => s.id);
+  pc.pastPoints = {};
+  pc.pastNote = "";
+  pc.startDate = tod;
+  pc.endDate = pc.durationDays > 0 ? addDaysToISO(tod, pc.durationDays - 1) : "";
+  pc.cycleName = `الدورة رقم ${pc.history.length + 1}`;
+  h.pointsEnabled = true;
+  saveState();
+  updateDrawerQuickStates();
+  populateMonthFilters();
+  renderSessionView();
+  renderStats();
+  if (document.getElementById("programsModal")?.classList.contains("show") && _activeProgTab === "points") {
+    renderProgramsModalBody();
+  }
+  showToast("🔄 بدأت دورة نقاط جديدة من الصفر لكل طالب (الأرشيف محفوظ) ⭐");
+}
+
+function setPointsCycleDurationPreset(days) {
+  const h = getActiveHalaqa();
+  const pc = ensurePointsConfig(h);
+  if (!pc) return;
+  pc.durationDays = Number(days) || 0;
+  if (pc.durationDays > 0) {
+    if (!pc.startDate) pc.startDate = todayISO();
+    pc.endDate = addDaysToISO(pc.startDate, pc.durationDays - 1);
+  } else {
+    pc.endDate = "";
+  }
+  saveState();
+  populateMonthFilters();
+  renderProgramsModalBody();
+  renderStats();
+  showToast(pc.durationDays > 0 ? `✓ تم ضبط مدة البرنامج: ${pc.durationDays} يوماً (حتى ${pc.endDate})` : "✓ تم ضبط مدة البرنامج: مفتوحة");
+}
+
+function onPointsCycleDateChange(field, val) {
+  const h = getActiveHalaqa();
+  const pc = ensurePointsConfig(h);
+  if (!pc) return;
+  pc[field] = String(val || "").trim();
+  if (field === "startDate") {
+    // User chose an explicit start date -> clear excluded snapshot so sessions from that date count naturally
+    pc.excludedSessionIds = [];
+    if (pc.durationDays > 0 && pc.startDate) {
+      pc.endDate = addDaysToISO(pc.startDate, pc.durationDays - 1);
+    }
+  } else if (field === "endDate") {
+    if (pc.startDate && pc.endDate && pc.endDate >= pc.startDate) {
+      pc.durationDays = Math.round((new Date(pc.endDate + "T12:00:00") - new Date(pc.startDate + "T12:00:00")) / 86400000) + 1;
+    } else if (!pc.endDate) {
+      pc.durationDays = 0;
+    }
+  }
+  saveState();
+  populateMonthFilters();
+  renderProgramsModalBody();
+  renderStats();
+}
+
+function setStudentPastPointsInput(studentId, rawVal) {
+  const h = getActiveHalaqa();
+  const pc = ensurePointsConfig(h);
+  if (!pc) return;
+  const v = Math.max(0, Math.round(parseArabicNum(rawVal, 0)));
+  if (v > 0) pc.pastPoints[studentId] = v;
+  else delete pc.pastPoints[studentId];
+  saveStateDebounced(260);
+  const sumEl = document.getElementById("ptsPastTotalBadge");
+  if (sumEl) {
+    const sum = Object.values(pc.pastPoints).reduce((a, b) => a + (Number(b) || 0), 0);
+    sumEl.textContent = `+${sum} نقطة سابقة`;
+  }
+}
+
+function stepStudentPastPoints(studentId, delta) {
+  const h = getActiveHalaqa();
+  const pc = ensurePointsConfig(h);
+  if (!pc) return;
+  const cur = getStudentPastPoints(h, studentId);
+  const nxt = delta === 0 ? 0 : Math.max(0, cur + delta);
+  if (nxt > 0) pc.pastPoints[studentId] = nxt;
+  else delete pc.pastPoints[studentId];
+  const inp = document.getElementById("ptsPastInp_" + studentId);
+  if (inp) inp.value = nxt > 0 ? String(nxt) : "";
+  setStudentPastPointsInput(studentId, nxt);
+}
+
+function savePointsPastAdjustmentsUI() {
+  const h = getActiveHalaqa();
+  const pc = ensurePointsConfig(h);
+  if (!pc) return;
+  const noteInp = document.getElementById("ptsPastNoteInput");
+  if (noteInp) pc.pastNote = noteInp.value.trim();
+  saveState();
+  populateMonthFilters();
+  renderStats();
+  renderProgramsModalBody();
+  showToast("✓ تم حفظ نقاط الجلسات الماضية ودمجها في الدورة الحالية ⭐");
+}
+
 function togglePointsMode() {
   const h = getActiveHalaqa();
   if (!h) return;
-  h.pointsEnabled = !isPointsEnabled(h);
+  const turningOn = !isPointsEnabled(h);
+  if (turningOn) {
+    const st = getPointsCycleStatus(h);
+    if (st.expired) {
+      if (confirm(`انتهت مدة دورة النقاط السابقة بتاريخ (${st.endDate}).\nهل تريد تفعيل البرنامج والبدء بدورة جديدة من الصفر لكل طالب؟`)) {
+        resetPointsCycleFromZero(false);
+        return;
+      }
+    }
+  }
+  h.pointsEnabled = turningOn;
   saveState();
   updateDrawerQuickStates();
+  populateMonthFilters();
   renderSessionView();
   renderDailyReport();
   renderMonthlyReport();
@@ -12895,13 +13439,47 @@ function showToast(msg, opts = null) {
   window._toastTimer = setTimeout(() => el.classList.remove("show"), canUndo ? 5000 : 2500);
 }
 
-// EXACT USER GRADING SCALE: 0-1 = ممتاز | 2 = جيد جداً | 3 = جيد | 4+ = إعادة
-function evalFromErrorCount(errs) {
-  const n = Math.max(0, Number(errs) || 0);
-  if (n <= 1) return "ممتاز";
-  if (n === 2) return "جيد جداً";
-  if (n === 3) return "جيد";
+// CUSTOMIZABLE SHEIKH GRADING RULES (v73: Errors + Weighted Alerts -> Auto Suggested Evaluation)
+const GRADING_PRESETS = {
+  strict:   { alertWeight: 0.5, excellentMax: 0,   vgoodMax: 0.5, goodMax: 1   }, // خطأ + تنبيه = إعادة
+  moderate: { alertWeight: 0.5, excellentMax: 0.5, vgoodMax: 1,   goodMax: 1.5 }, // خطآن = إعادة
+  balanced: { alertWeight: 0.5, excellentMax: 0.5, vgoodMax: 1.5, goodMax: 2.5 }, // 3 أخطاء = إعادة
+  flexible: { alertWeight: 0,   excellentMax: 1,   vgoodMax: 2,   goodMax: 3   }  // 4 أخطاء = إعادة (التنبيه لا يُحسب)
+};
+
+function getHalaqaGradingRules(h) {
+  const hal = h || getActiveHalaqa();
+  const g = hal?.gradingRules;
+  if (!g || typeof g !== "object") return { ...GRADING_PRESETS.flexible };
+  const w = Number(g.alertWeight);
+  const alertWeight = [0, 0.5, 1].includes(w) ? w : 0;
+  const ex = Math.max(0, Math.min(20, Number(g.excellentMax)));
+  const vg = Math.max(isNaN(ex) ? 1 : ex, Math.min(25, Number(g.vgoodMax)));
+  const gd = Math.max(isNaN(vg) ? 2 : vg, Math.min(30, Number(g.goodMax)));
+  return {
+    alertWeight,
+    excellentMax: isNaN(ex) ? 1 : ex,
+    vgoodMax: isNaN(vg) ? 2 : vg,
+    goodMax: isNaN(gd) ? 3 : gd
+  };
+}
+
+function evalFromErrorCount(errs, alerts = 0, h = null) {
+  const rules = getHalaqaGradingRules(h);
+  const e = Math.max(0, Number(errs) || 0);
+  const a = Math.max(0, Number(alerts) || 0);
+  const score = Math.round((e + a * rules.alertWeight) * 100) / 100;
+  if (score <= rules.excellentMax) return "ممتاز";
+  if (score <= rules.vgoodMax) return "جيد جداً";
+  if (score <= rules.goodMax) return "جيد";
   return "إعادة";
+}
+
+function shouldSuggestEvalFromCounters(errs, alerts = 0, h = null) {
+  const rules = getHalaqaGradingRules(h);
+  const e = Math.max(0, Number(errs) || 0);
+  const a = Math.max(0, Number(alerts) || 0);
+  return e > 0 || (a > 0 && rules.alertWeight > 0);
 }
 
 function errorCountArabicText(errs) {
@@ -12912,10 +13490,10 @@ function errorCountArabicText(errs) {
   return `بـ ${n} أخطاء`;
 }
 
-function syncEvalSuggestedBtnInPlace(kind, nErr, curEval) {
+function syncEvalSuggestedBtnInPlace(kind, nErr, nAlrt, curEval) {
   const row = document.getElementById("esEvalRow_" + kind);
   if (!row) return false;
-  const sugEv = nErr > 0 ? evalFromErrorCount(nErr) : "";
+  const sugEv = shouldSuggestEvalFromCounters(nErr, nAlrt) ? evalFromErrorCount(nErr, nAlrt) : "";
   row.querySelectorAll(".es-eval-btn").forEach(btn => {
     const ev = btn.dataset.ev || "";
     const isCur = curEval === ev;
@@ -12943,16 +13521,17 @@ function stepErrorCounter(studentId, kind, delta) {
   const s = getCurrentSession();
   if (!s) return;
   const r = getStudentRecord(s, studentId);
-  const key = kind === "min" ? "minErrors" : (kind === "maj" ? "majErrors" : "recErrors");
-  const nextVal = Math.max(0, (Number(r[key]) || 0) + delta);
-  if (nextVal === (Number(r[key]) || 0)) return;
-  r[key] = nextVal;
+  const eKey = kind === "min" ? "minErrors" : (kind === "maj" ? "majErrors" : "recErrors");
+  const aKey = kind === "min" ? "minAlerts" : (kind === "maj" ? "majAlerts" : "recAlerts");
+  const nextVal = Math.max(0, (Number(r[eKey]) || 0) + delta);
+  if (nextVal === (Number(r[eKey]) || 0)) return;
+  r[eKey] = nextVal;
   saveStateDebounced(220);
   const valEl = document.getElementById(`esErrVal_${kind}`);
   if (valEl && openCardId === studentId) {
     valEl.textContent = String(nextVal);
     const curEv = kind === "min" ? r.minEval : (kind === "maj" ? r.majEval : r.recEval);
-    syncEvalSuggestedBtnInPlace(kind, nextVal, curEv || "");
+    syncEvalSuggestedBtnInPlace(kind, nextVal, Number(r[aKey]) || 0, curEv || "");
     return;
   }
   if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
@@ -12966,9 +13545,11 @@ function applyErrorEval(studentId, kind) {
   const s = getCurrentSession();
   if (!s) return;
   const r = getStudentRecord(s, studentId);
-  const key = kind === "min" ? "minErrors" : (kind === "maj" ? "majErrors" : "recErrors");
-  const n = Math.max(0, Number(r[key]) || 0);
-  const ev = evalFromErrorCount(n);
+  const eKey = kind === "min" ? "minErrors" : (kind === "maj" ? "majErrors" : "recErrors");
+  const aKey = kind === "min" ? "minAlerts" : (kind === "maj" ? "majAlerts" : "recAlerts");
+  const n = Math.max(0, Number(r[eKey]) || 0);
+  const a = Math.max(0, Number(r[aKey]) || 0);
+  const ev = evalFromErrorCount(n, a);
   if (kind === "min") setSatMinEval(studentId, ev, n);
   else if (kind === "maj") setSatMajEval(studentId, ev, n);
   else {
@@ -12982,14 +13563,17 @@ function stepAlertCounter(studentId, kind, delta) {
   const s = getCurrentSession();
   if (!s) return;
   const r = getStudentRecord(s, studentId);
-  const key = kind === "min" ? "minAlerts" : (kind === "maj" ? "majAlerts" : "recAlerts");
-  const nextVal = Math.max(0, (Number(r[key]) || 0) + delta);
-  if (nextVal === (Number(r[key]) || 0)) return;
-  r[key] = nextVal;
+  const eKey = kind === "min" ? "minErrors" : (kind === "maj" ? "majErrors" : "recErrors");
+  const aKey = kind === "min" ? "minAlerts" : (kind === "maj" ? "majAlerts" : "recAlerts");
+  const nextVal = Math.max(0, (Number(r[aKey]) || 0) + delta);
+  if (nextVal === (Number(r[aKey]) || 0)) return;
+  r[aKey] = nextVal;
   saveStateDebounced(220);
   const valEl = document.getElementById(`esAlrtVal_${kind}`);
   if (valEl && openCardId === studentId) {
     valEl.textContent = String(nextVal);
+    const curEv = kind === "min" ? r.minEval : (kind === "maj" ? r.majEval : r.recEval);
+    syncEvalSuggestedBtnInPlace(kind, Number(r[eKey]) || 0, nextVal, curEv || "");
     return;
   }
   if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
@@ -12997,6 +13581,72 @@ function stepAlertCounter(studentId, kind, delta) {
   } else {
     renderStudentCardsOnly();
   }
+}
+
+// Settings Grading Rules UI Controllers
+function loadGradingRulesIntoSettings(h) {
+  const rules = getHalaqaGradingRules(h);
+  const wInp = document.getElementById("setGradeAlertWeight");
+  const exInp = document.getElementById("setGradeExMax");
+  const vgInp = document.getElementById("setGradeVgMax");
+  const gdInp = document.getElementById("setGradeGdMax");
+  if (wInp) wInp.value = String(rules.alertWeight);
+  if (exInp) exInp.value = String(rules.excellentMax);
+  if (vgInp) vgInp.value = String(rules.vgoodMax);
+  if (gdInp) gdInp.value = String(rules.goodMax);
+  setGradeAlertWeightUI(rules.alertWeight);
+}
+
+function setGradeAlertWeightUI(w) {
+  const val = [0, 0.5, 1].includes(Number(w)) ? Number(w) : 0;
+  const inp = document.getElementById("setGradeAlertWeight");
+  if (inp) inp.value = String(val);
+  document.getElementById("setGwBtn_0")?.classList.toggle("on", val === 0);
+  document.getElementById("setGwBtn_05")?.classList.toggle("on", val === 0.5);
+  document.getElementById("setGwBtn_1")?.classList.toggle("on", val === 1);
+  updateGradingRulesPreview();
+}
+
+function applyGradingPresetInSettings(key) {
+  const p = GRADING_PRESETS[key];
+  if (!p) return;
+  document.getElementById("setGradeExMax").value = String(p.excellentMax);
+  document.getElementById("setGradeVgMax").value = String(p.vgoodMax);
+  document.getElementById("setGradeGdMax").value = String(p.goodMax);
+  setGradeAlertWeightUI(p.alertWeight);
+}
+
+function readGradingRulesFromSettings() {
+  const w = Number(document.getElementById("setGradeAlertWeight")?.value ?? 0);
+  const ex = Math.max(0, Math.min(20, parseArabicNum(document.getElementById("setGradeExMax")?.value, 1)));
+  const vg = Math.max(ex, Math.min(25, parseArabicNum(document.getElementById("setGradeVgMax")?.value, 2)));
+  const gd = Math.max(vg, Math.min(30, parseArabicNum(document.getElementById("setGradeGdMax")?.value, 3)));
+  return { alertWeight: [0, 0.5, 1].includes(w) ? w : 0, excellentMax: ex, vgoodMax: vg, goodMax: gd };
+}
+
+function updateGradingRulesPreview() {
+  const rules = readGradingRulesFromSettings();
+  document.querySelectorAll("#setGradePresets .grade-preset-btn").forEach(btn => {
+    const p = GRADING_PRESETS[btn.dataset.gp];
+    const match = Boolean(p && p.alertWeight === rules.alertWeight && p.excellentMax === rules.excellentMax && p.vgoodMax === rules.vgoodMax && p.goodMax === rules.goodMax);
+    btn.classList.toggle("on", match);
+  });
+  const pv = document.getElementById("setGradingLivePreview");
+  if (!pv) return;
+  const fakeH = { gradingRules: rules };
+  const samples = [
+    ["0", 0, 0],
+    ["1 تنبيه", 0, 1],
+    ["1 خطأ", 1, 0],
+    ["خطأ + تنبيه", 1, 1],
+    ["خطآن", 2, 0],
+    ["3 أخطاء", 3, 0]
+  ];
+  pv.innerHTML = samples.map(([lbl, e, a]) => {
+    const ev = evalFromErrorCount(e, a, fakeH);
+    const clr = ev === "ممتاز" ? "var(--green)" : (ev === "إعادة" ? "var(--red)" : "var(--blue)");
+    return `<span class="glp-chip">${lbl}: <b style="color:${clr};">${ev}</b></span>`;
+  }).join("");
 }
 
 function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
@@ -13094,12 +13744,42 @@ let spState = {
 };
 let spSearch = "";
 
+function spIsReviewKind(kind) {
+  return kind === "dRev" || kind === "min" || kind === "maj" || kind === "nextMaj";
+}
+
 function spCanUseSabr(kind) {
   return kind === "rec" || kind === "hw" || kind === "maj" || kind === "dRev" || kind === "nextMaj";
 }
 
 function spCanQuickEval(kind) {
   return kind === "rec" || kind === "min" || kind === "maj" || kind === "dRev";
+}
+
+function formatSardJuzInfo(juzIds) {
+  const ids = [...new Set((juzIds || []).map(Number).filter(id => JUZ_PAGE_MAP[id]))].sort((a, b) => a - b);
+  if (!ids.length) return { ids: [], label: "", shortNames: "", fromCol: "", toCol: "", totalPages: 0 };
+  const objs = ids.map(id => JUZ_PAGE_MAP[id]);
+  const totalPages = objs.reduce((acc, j) => acc + (j.pages || 20), 0);
+  const shortNames = objs.map(j => j.shortName).join(" + ");
+  if (objs.length === 1) {
+    return {
+      ids,
+      label: `سرد جزء ${objs[0].shortName}`,
+      shortNames: objs[0].shortName,
+      fromCol: `سرد جزء ${objs[0].shortName}`,
+      toCol: "كاملاً",
+      totalPages
+    };
+  }
+  return {
+    ids,
+    label: `سرد ${objs.length} أجزاء (${shortNames})`,
+    shortNames,
+    fromCol: `سرد ${objs.length} أجزاء`,
+    toCol: shortNames,
+    totalPages
+  };
 }
 
 function openSurahPicker(studentId, kind) {
@@ -13133,30 +13813,68 @@ function openSurahPicker(studentId, kind) {
     existing = [{ surahId: String(defInfo.id), from: 1, to: defInfo.a }];
   }
 
-  // Detect active Sabr Juz if already set on this student's record
+  // Detect active Mode: Sabr | Sard | Pages | Surah
   let activeSabr = "";
+  let activeSardIds = [];
+  let pageFrom = parseArabicNum(st.revPage, 0) || (dir === "desc" ? 582 : 2);
+  let pageTo = Math.min(604, pageFrom + Math.max(0, (Number(st.revPace) || 2) - 1));
   let initMode = "surah";
+
   if (kind === "hw" && r.hwSabrJuz) {
     activeSabr = r.hwSabrJuz;
     initMode = "sabr";
   } else if (kind === "nextMaj" && r.nextMajSabrJuz) {
     activeSabr = r.nextMajSabrJuz;
     initMode = "sabr";
-  } else if ((kind === "rec" && r.recIsSabr && r.sabrJuz) || (kind === "maj" && r.sabrJuz) || (kind === "dRev" && r.sabrJuz)) {
+  } else if ((kind === "rec" && r.recIsSabr && r.sabrJuz) || (kind === "maj" && r.sabrJuz) || (kind === "dRev" && !r.recIsSabr && r.sabrJuz)) {
     activeSabr = r.sabrJuz;
     initMode = "sabr";
+  } else if (kind === "dRev" && Array.isArray(r.dRevSardJuzIds) && r.dRevSardJuzIds.length) {
+    activeSardIds = [...r.dRevSardJuzIds];
+    initMode = "sard";
+  } else if (kind === "min" && Array.isArray(r.minSardJuzIds) && r.minSardJuzIds.length) {
+    activeSardIds = [...r.minSardJuzIds];
+    initMode = "sard";
+  } else if (kind === "maj" && Array.isArray(r.majSardJuzIds) && r.majSardJuzIds.length) {
+    activeSardIds = [...r.majSardJuzIds];
+    initMode = "sard";
+  } else if (kind === "nextMaj" && Array.isArray(r.nextMajSardJuzIds) && r.nextMajSardJuzIds.length) {
+    activeSardIds = [...r.nextMajSardJuzIds];
+    initMode = "sard";
+  } else if (kind === "dRev" && r.dRevIsPages && r.dRevPageFrom) {
+    pageFrom = parseArabicNum(r.dRevPageFrom, pageFrom);
+    pageTo = parseArabicNum(r.dRevPageTo, pageFrom);
+    initMode = "pages";
+  } else if (kind === "min" && r.minIsPages && r.minPageFrom) {
+    pageFrom = parseArabicNum(r.minPageFrom, pageFrom);
+    pageTo = parseArabicNum(r.minPageTo, pageFrom);
+    initMode = "pages";
+  } else if (kind === "maj" && r.majIsPages && r.majStartPage) {
+    pageFrom = parseArabicNum(r.majStartPage, pageFrom);
+    pageTo = parseArabicNum(r.majEndPage, pageFrom);
+    initMode = "pages";
+  } else if (kind === "nextMaj" && r.nextMajIsPages && r.nextMajStartPage) {
+    pageFrom = parseArabicNum(r.nextMajStartPage, pageFrom);
+    pageTo = parseArabicNum(r.nextMajEndPage, pageFrom);
+    initMode = "pages";
+  } else if (kind === "maj" && r.majStartPage) {
+    pageFrom = parseArabicNum(r.majStartPage, pageFrom);
+    pageTo = parseArabicNum(r.majEndPage, Math.min(604, pageFrom + Math.max(0, (Number(r.majPages) || 2) - 1)));
   }
 
   const hadRealExisting = Boolean(getSegments(r, kind).length || (kind === "maj") || (kind === "nextMaj" && (r.nextMajStartSurahId || r.nextMajStartPage)));
   spState = {
     studentId,
     kind,
-    mode: spCanUseSabr(kind) ? initMode : "surah",
+    mode: initMode,
     dir: (kind === "maj" || kind === "nextMaj") ? "asc" : dir,
     segs: existing,
     activeIdx: 0,
     juzFilter: 0,
     browserOpen: !hadRealExisting,
+    pageFrom: Math.max(1, Math.min(604, pageFrom)),
+    pageTo: Math.max(1, Math.min(604, Math.max(pageFrom, pageTo))),
+    sardJuzIds: activeSardIds,
     sabrJuzName: activeSabr,
     sabrScore: (r.sabrScore !== undefined && r.sabrScore !== null) ? r.sabrScore : ""
   };
@@ -13216,6 +13934,7 @@ function openSurahPickerForStudentModal() {
 
 function spSetMode(mode) {
   if (mode === "sabr" && !spCanUseSabr(spState.kind)) return;
+  if ((mode === "pages" || mode === "sard") && !spIsReviewKind(spState.kind)) return;
   spState.mode = mode;
   renderSurahPickerUI();
 }
@@ -13244,23 +13963,48 @@ function renderSpDirBtn() {
 }
 
 function renderSurahPickerUI() {
+  const isRev = spIsReviewKind(spState.kind);
   const canSabr = spCanUseSabr(spState.kind);
   const modeTabs = document.getElementById("spModeTabs");
   const surahPanel = document.getElementById("spSurahModePanel");
+  const pagesPanel = document.getElementById("spPagesModePanel");
+  const sardPanel = document.getElementById("spSardModePanel");
   const sabrPanel = document.getElementById("spSabrModePanel");
   const tabSurah = document.getElementById("spTabSurah");
+  const tabPages = document.getElementById("spTabPages");
+  const tabSard = document.getElementById("spTabSard");
   const tabSabr = document.getElementById("spTabSabr");
+  const tabSurahLbl = document.getElementById("spTabSurahLbl");
+  const tabSabrLbl = document.getElementById("spTabSabrLbl");
   const qeWrap = document.getElementById("spQuickEvalWrap");
 
-  if (modeTabs) modeTabs.style.display = canSabr ? "grid" : "none";
+  if (modeTabs) {
+    modeTabs.style.display = (isRev || canSabr) ? "grid" : "none";
+    modeTabs.classList.toggle("cols-4", isRev);
+  }
+  if (tabPages) tabPages.style.display = isRev ? "flex" : "none";
+  if (tabSard) tabSard.style.display = isRev ? "flex" : "none";
+  if (tabSabr) tabSabr.style.display = canSabr ? (isRev ? "flex" : "inline-flex") : "none";
+  if (tabSurahLbl) tabSurahLbl.textContent = isRev ? "سورة" : "سورة وآيات";
+  if (tabSabrLbl) tabSabrLbl.textContent = isRev ? "سبر" : "سبر جزء كامل";
+
   if (tabSurah) tabSurah.className = "sp-mode-tab" + (spState.mode === "surah" ? " on" : "");
+  if (tabPages) tabPages.className = "sp-mode-tab" + (spState.mode === "pages" ? " on-pages" : "");
+  if (tabSard) tabSard.className = "sp-mode-tab" + (spState.mode === "sard" ? " on-sard" : "");
   if (tabSabr) tabSabr.className = "sp-mode-tab" + (spState.mode === "sabr" ? " on-sabr" : "");
+
   if (surahPanel) surahPanel.style.display = spState.mode === "surah" ? "block" : "none";
+  if (pagesPanel) pagesPanel.style.display = spState.mode === "pages" ? "block" : "none";
+  if (sardPanel) sardPanel.style.display = spState.mode === "sard" ? "block" : "none";
   if (sabrPanel) sabrPanel.style.display = spState.mode === "sabr" ? "block" : "none";
   if (qeWrap) qeWrap.style.display = spCanQuickEval(spState.kind) ? "block" : "none";
 
   if (spState.mode === "sabr") {
     renderSpSabrGrid();
+  } else if (spState.mode === "sard") {
+    renderSpSardGrid();
+  } else if (spState.mode === "pages") {
+    renderSpPagesBox();
   } else {
     renderSpSegBar();
     renderSpActiveSurahCard();
@@ -13274,6 +14018,139 @@ function renderSurahPickerUI() {
     renderSpAyahBox();
   }
   renderSpPreview();
+}
+
+function renderSpSardGrid() {
+  const h = getActiveHalaqa();
+  const st = spState.studentId ? h?.students.find(x => x.id === spState.studentId) : null;
+  const completedIds = st ? getStudentCompletedJuzIds(st, h) : [];
+  const grid = document.getElementById("spSardGrid");
+  if (!grid) return;
+  const selIds = Array.isArray(spState.sardJuzIds) ? spState.sardJuzIds : [];
+  const orderedJuz = spState.dir === "desc" ? [...JUZ_PAGES].reverse() : JUZ_PAGES;
+  grid.innerHTML = orderedJuz.map(j => {
+    const isSel = selIds.includes(j.id);
+    const isMem = completedIds.includes(j.id);
+    const s1 = SURAH_MAP[j.startSurah]?.n || "";
+    const s2 = SURAH_MAP[j.endSurah]?.n || "";
+    return `<button type="button" class="sp-sabr-card ${isMem ? 'in-mem' : ''} ${isSel ? 'on-sard' : ''}" onclick="spToggleSardJuz(${j.id})">
+      <div class="sj-top">
+        <span>${j.id}. جزء ${escapeHtml(j.shortName)}</span>
+        ${isSel ? '<span class="sj-tag">✓ محدد</span>' : (isMem ? '<span class="sj-tag">محفوظ</span>' : `<span class="sj-sub">${j.pages} ص</span>`)}
+      </div>
+      <div class="sj-sub">${escapeHtml(s1)} ← ${escapeHtml(s2)} (${j.pages} ص)</div>
+    </button>`;
+  }).join("");
+}
+
+function spToggleSardJuz(juzId) {
+  const id = Number(juzId);
+  if (!JUZ_PAGE_MAP[id]) return;
+  if (!Array.isArray(spState.sardJuzIds)) spState.sardJuzIds = [];
+  const pos = spState.sardJuzIds.indexOf(id);
+  if (pos >= 0) spState.sardJuzIds.splice(pos, 1);
+  else spState.sardJuzIds.push(id);
+  renderSpSardGrid();
+  renderSpPreview();
+}
+
+function spSetPageVal(field, val) {
+  const num = Math.max(1, Math.min(604, Math.round(parseArabicNum(val, 1))));
+  if (field === "from") {
+    spState.pageFrom = num;
+    if (spState.pageTo < spState.pageFrom) spState.pageTo = spState.pageFrom;
+  } else {
+    spState.pageTo = num;
+    if (spState.pageFrom > spState.pageTo) spState.pageFrom = spState.pageTo;
+  }
+  syncSpPageInputsOnly();
+}
+
+function spStepPageVal(field, delta) {
+  const cur = field === "from" ? (spState.pageFrom || 1) : (spState.pageTo || 1);
+  spSetPageVal(field, cur + delta);
+}
+
+function spApplyPageSpanPreset(spanPages) {
+  const p1 = Math.max(1, Math.min(604, spState.pageFrom || 1));
+  spState.pageTo = Math.min(604, p1 + Math.max(1, spanPages) - 1);
+  syncSpPageInputsOnly();
+}
+
+function syncSpPageInputsOnly() {
+  const p1 = Math.max(1, Math.min(604, spState.pageFrom || 1));
+  const p2 = Math.max(p1, Math.min(604, spState.pageTo || p1));
+  spState.pageFrom = p1; spState.pageTo = p2;
+  const fR = document.getElementById("spPageFromRange");
+  const fN = document.getElementById("spPageFromNum");
+  const tR = document.getElementById("spPageToRange");
+  const tN = document.getElementById("spPageToNum");
+  if (fR && Number(fR.value) !== p1) fR.value = p1;
+  if (fN && document.activeElement !== fN) fN.value = p1;
+  if (tR && Number(tR.value) !== p2) tR.value = p2;
+  if (tN && document.activeElement !== tN) tN.value = p2;
+  spUpdateSliderFill(fR, p1, 604);
+  spUpdateSliderFill(tR, p2, 604);
+
+  const s1 = getPageStartInfo(p1), s2 = getPageEndInfo(p2);
+  const fHint = document.getElementById("spPageFromSurahHint");
+  const tHint = document.getElementById("spPageToSurahHint");
+  const bar = document.getElementById("spPagesInfoBar");
+  if (fHint && s1?.surah) fHint.textContent = `سورة ${s1.surah.n} • جزء ${getJuzAtPage(p1).shortName}`;
+  if (tHint && s2?.surah) tHint.textContent = `سورة ${s2.surah.n} • جزء ${getJuzAtPage(p2).shortName}`;
+  if (bar && s1?.surah && s2?.surah) {
+    const cnt = p2 - p1 + 1;
+    bar.innerHTML = `<span>📖 ${escapeHtml(s1.surah.n)}${s2.surah.id !== s1.surah.id ? ' ← ' + escapeHtml(s2.surah.n) : ''}</span><span class="badge b-blue">${cnt} ${cnt === 1 ? 'صفحة' : (cnt === 2 ? 'صفحتان' : 'صفحات')}</span>`;
+  }
+  renderSpPreview();
+}
+
+function renderSpPagesBox() {
+  const box = document.getElementById("spPagesBox");
+  if (!box) return;
+  const p1 = Math.max(1, Math.min(604, spState.pageFrom || 582));
+  const p2 = Math.max(p1, Math.min(604, spState.pageTo || p1));
+  box.innerHTML = `
+    <div id="spPagesInfoBar" class="sp-pages-info-bar"></div>
+    <div class="sp-preset-grid-4">
+      <button type="button" class="sp-preset-btn" onclick="spApplyPageSpanPreset(1)">1 صفحة</button>
+      <button type="button" class="sp-preset-btn" onclick="spApplyPageSpanPreset(2)">صفحتان</button>
+      <button type="button" class="sp-preset-btn accent" onclick="spApplyPageSpanPreset(5)">5 ص (ربع)</button>
+      <button type="button" class="sp-preset-btn accent" onclick="spApplyPageSpanPreset(10)">10 ص (نصف)</button>
+    </div>
+    <div class="sp-preset-grid-2">
+      <button type="button" class="sp-preset-btn" onclick="spApplyPageSpanPreset(3)">3 صفحات</button>
+      <button type="button" class="sp-preset-btn accent" onclick="spApplyPageSpanPreset(20)">20 صفحة (مقدار جزء)</button>
+    </div>
+    <div class="sp-slider-card">
+      <div class="sp-slider-hdr">
+        <label>▶️ من الصفحة</label>
+        <span class="sp-slider-max" id="spPageFromSurahHint"></span>
+      </div>
+      <div class="sp-step-grid">
+        <button type="button" onclick="spStepPageVal('from',-5)">−5</button>
+        <button type="button" onclick="spStepPageVal('from',-1)">−1</button>
+        <input type="number" id="spPageFromNum" inputmode="numeric" min="1" max="604" value="${p1}" oninput="spSetPageVal('from',this.value)">
+        <button type="button" onclick="spStepPageVal('from',1)">+1</button>
+        <button type="button" onclick="spStepPageVal('from',5)">+5</button>
+      </div>
+      <input type="range" id="spPageFromRange" class="sp-range-input" min="1" max="604" value="${p1}" oninput="spSetPageVal('from',this.value)">
+    </div>
+    <div class="sp-slider-card">
+      <div class="sp-slider-hdr">
+        <label>⏹️ إلى الصفحة</label>
+        <span class="sp-slider-max" id="spPageToSurahHint"></span>
+      </div>
+      <div class="sp-step-grid">
+        <button type="button" onclick="spStepPageVal('to',-5)">−5</button>
+        <button type="button" onclick="spStepPageVal('to',-1)">−1</button>
+        <input type="number" id="spPageToNum" inputmode="numeric" min="1" max="604" value="${p2}" oninput="spSetPageVal('to',this.value)">
+        <button type="button" onclick="spStepPageVal('to',1)">+1</button>
+        <button type="button" onclick="spStepPageVal('to',5)">+5</button>
+      </div>
+      <input type="range" id="spPageToRange" class="sp-range-input" min="1" max="604" value="${p2}" oninput="spSetPageVal('to',this.value)">
+    </div>`;
+  syncSpPageInputsOnly();
 }
 
 function toggleSpBrowser(forceState = null) {
@@ -13693,6 +14570,21 @@ function renderSpAyahBox() {
 function renderSpPreview() {
   const el = document.getElementById("spPreviewStrip");
   if (!el) return;
+  if (spState.mode === "pages") {
+    const p1 = Math.max(1, Math.min(604, spState.pageFrom || 1));
+    const p2 = Math.max(p1, Math.min(604, spState.pageTo || p1));
+    const cnt = p2 - p1 + 1;
+    const rngTxt = p1 === p2 ? `صفحة ${p1}` : `من ص ${p1} ← إلى ص ${p2}`;
+    el.innerHTML = `<span>📄 <b>${rngTxt}</b></span><span class="badge b-blue">${cnt} صفحة</span>`;
+    return;
+  }
+  if (spState.mode === "sard") {
+    const info = formatSardJuzInfo(spState.sardJuzIds);
+    el.innerHTML = info.ids.length
+      ? `<span>📚 <b>${escapeHtml(info.label)}</b> (مراجعة)</span><span class="badge b-blue">${info.totalPages} صفحة</span>`
+      : `<span style="color:var(--ink-500);">اختر جزءاً أو أكثر لاعتماد السرد</span><span class="badge b-muted">لم يُختر</span>`;
+    return;
+  }
   if (spState.mode === "sabr") {
     const j = getJuzByName(spState.sabrJuzName);
     el.innerHTML = j
@@ -13740,9 +14632,9 @@ function clearSurahPickerSelection() {
   }
   if (k === "rec") { r.recSurahId = ""; r.recFrom = ""; r.recTo = ""; r.recExtras = []; r.recPages = 0; r.recEndSurahId = ""; r.recIsSabr = false; r.manualRec = true; }
   else if (k === "hw") { r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwEndSurahId = ""; r.hwSabrJuz = ""; }
-  else if (k === "min") { r.minSurahId = ""; r.minFrom = ""; r.minTo = ""; r.minExtras = []; r.minSurah = ""; r.minText = ""; r.minPages = 0; r.manualMin = true; }
-  else if (k === "maj") { r.majExtras = []; r.majFrom = ""; r.majTo = ""; r.majPages = 0; r.majStartSurahId = ""; r.majEndSurahId = ""; }
-  else if (k === "nextMaj") { r.nextMajSabrJuz = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajTitle = ""; }
+  else if (k === "min") { r.minSurahId = ""; r.minFrom = ""; r.minTo = ""; r.minExtras = []; r.minSurah = ""; r.minText = ""; r.minPages = 0; r.minIsPages = false; r.minSardJuzIds = []; r.manualMin = true; }
+  else if (k === "maj") { r.majExtras = []; r.majFrom = ""; r.majTo = ""; r.majPages = 0; r.majStartSurahId = ""; r.majEndSurahId = ""; r.majIsPages = false; r.majSardJuzIds = []; r.majSardLabel = ""; }
+  else if (k === "nextMaj") { r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajTitle = ""; }
   else if (k === "dRev") { clearDailyRev(spState.studentId); closeModal("surahPickerModal"); return; }
   if (r.recEval || r.minEval || r.majEval) r.points = computeRecordPoints(s, r, st);
   openCardId = spState.studentId;
@@ -13826,6 +14718,103 @@ function applySurahPicker(quickEval = null) {
     return;
   }
 
+  // MODE C: MUSHAF PAGES RANGE (من صفحة إلى صفحة)
+  if (spState.mode === "pages") {
+    const p1 = Math.max(1, Math.min(604, spState.pageFrom || 1));
+    const p2 = Math.max(p1, Math.min(604, spState.pageTo || p1));
+    const pCount = p2 - p1 + 1;
+    const lbl1 = `ص ${p1}`, lbl2 = `ص ${p2}`;
+    const s1 = getPageStartInfo(p1), s2 = getPageEndInfo(p2);
+
+    if (k === "dRev") {
+      r.dRevSurahId = ""; r.dRevFromAyah = ""; r.dRevToAyah = ""; r.dRevExtras = [];
+      r.dRevSardJuzIds = []; r.dRevSardLabel = "";
+      if (!r.recIsSabr) { r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = ""; }
+      r.dRevIsPages = true; r.dRevPageFrom = p1; r.dRevPageTo = p2;
+      r.dRevFrom = lbl1; r.dRevTo = lbl2; r.dRevPages = pCount;
+      if (!r.dRevEval && !quickEval) r.dRevEval = "ممتاز";
+      r.points = computeRecordPoints(s, r, st);
+    } else if (k === "min") {
+      r.minSurahId = ""; r.minEndSurahId = ""; r.minExtras = []; r.minSardJuzIds = [];
+      r.minIsPages = true; r.minPageFrom = p1; r.minPageTo = p2;
+      r.minSurah = "صفحات"; r.minFrom = lbl1; r.minTo = lbl2;
+      r.minText = p1 === p2 ? lbl1 : `${lbl1} ← ${lbl2}`;
+      r.minPages = pCount; r.manualMin = true;
+    } else if (k === "maj") {
+      r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = "";
+      r.majExtras = []; r.majSardJuzIds = []; r.majSardLabel = "";
+      r.majIsPages = true;
+      r.majStartPage = p1; r.majEndPage = p2;
+      r.majStartSurahId = s1?.surah ? String(s1.surah.id) : ""; r.majStartAyah = s1?.ayah || 1;
+      r.majEndSurahId = s2?.surah ? String(s2.surah.id) : ""; r.majEndAyah = s2?.ayah || 1;
+      r.majFrom = lbl1; r.majTo = lbl2; r.majPages = pCount;
+      if (r.majEval && !quickEval) applyNextMajorReview(st, r, r.majEval !== "إعادة");
+    } else if (k === "nextMaj") {
+      r.nextMajSabrJuz = ""; r.nextMajSardJuzIds = []; r.nextMajSardLabel = "";
+      r.nextMajIsPages = true;
+      r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
+      r.nextMajStartPage = p1; r.nextMajEndPage = p2;
+      r.nextMajTitle = "صفحات"; r.nextMajFrom = lbl1; r.nextMajTo = lbl2;
+    }
+    closeModal("surahPickerModal");
+    if (quickEval) {
+      if (k === "min") { if (r.minEval === quickEval) r.minEval = ""; setSatMinEval(st.id, quickEval); return; }
+      if (k === "maj") { if (r.majEval === quickEval) r.majEval = ""; setSatMajEval(st.id, quickEval); return; }
+      if (k === "dRev") { if (r.dRevEval === quickEval) r.dRevEval = ""; setDailyRevEval(st.id, quickEval); return; }
+    }
+    openCardId = st.id;
+    saveState(); renderSessionPreservingScroll();
+    showToast(`📄 تم اعتماد المراجعة: ${p1 === p2 ? lbl1 : `${lbl1} ← ${lbl2}`} (${pCount} ص)`);
+    return;
+  }
+
+  // MODE D: FULL-JUZ SARD REVIEW (سرد مراجعة — غير السبر)
+  if (spState.mode === "sard") {
+    const info = formatSardJuzInfo(spState.sardJuzIds);
+    if (!info.ids.length) { showToast("اختر جزءاً واحداً على الأقل للسرد"); return; }
+    const firstJ = JUZ_PAGE_MAP[info.ids[0]];
+    const lastJ = JUZ_PAGE_MAP[info.ids[info.ids.length - 1]];
+
+    if (k === "dRev") {
+      r.dRevSurahId = ""; r.dRevFromAyah = ""; r.dRevToAyah = ""; r.dRevExtras = []; r.dRevIsPages = false;
+      if (!r.recIsSabr) { r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = ""; }
+      r.dRevSardJuzIds = [...info.ids]; r.dRevSardLabel = info.label;
+      r.dRevFrom = info.fromCol; r.dRevTo = info.toCol; r.dRevPages = info.totalPages;
+      if (!r.dRevEval && !quickEval) r.dRevEval = "ممتاز";
+      r.points = computeRecordPoints(s, r, st);
+    } else if (k === "min") {
+      r.minSurahId = ""; r.minEndSurahId = ""; r.minExtras = []; r.minIsPages = false;
+      r.minSardJuzIds = [...info.ids];
+      r.minSurah = "سرد"; r.minFrom = info.ids.length === 1 ? "جزء" : `${info.ids.length} أجزاء`; r.minTo = info.shortNames;
+      r.minText = info.label; r.minPages = info.totalPages; r.manualMin = true;
+    } else if (k === "maj") {
+      r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = "";
+      r.majExtras = []; r.majIsPages = false;
+      r.majSardJuzIds = [...info.ids]; r.majSardLabel = info.label;
+      r.majStartPage = firstJ.startPage; r.majEndPage = lastJ.endPage;
+      r.majStartSurahId = String(firstJ.startSurah); r.majStartAyah = firstJ.startAyah;
+      r.majEndSurahId = String(lastJ.endSurah); r.majEndAyah = lastJ.endAyah;
+      r.majFrom = info.fromCol; r.majTo = info.toCol; r.majPages = info.totalPages;
+      if (r.majEval && !quickEval) applyNextMajorReview(st, r, r.majEval !== "إعادة");
+    } else if (k === "nextMaj") {
+      r.nextMajSabrJuz = ""; r.nextMajIsPages = false;
+      r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
+      r.nextMajSardJuzIds = [...info.ids]; r.nextMajSardLabel = info.label;
+      r.nextMajStartPage = firstJ.startPage; r.nextMajEndPage = lastJ.endPage;
+      r.nextMajTitle = "سرد"; r.nextMajFrom = info.fromCol; r.nextMajTo = info.toCol;
+    }
+    closeModal("surahPickerModal");
+    if (quickEval) {
+      if (k === "min") { if (r.minEval === quickEval) r.minEval = ""; setSatMinEval(st.id, quickEval); return; }
+      if (k === "maj") { if (r.majEval === quickEval) r.majEval = ""; setSatMajEval(st.id, quickEval); return; }
+      if (k === "dRev") { if (r.dRevEval === quickEval) r.dRevEval = ""; setDailyRevEval(st.id, quickEval); return; }
+    }
+    openCardId = st.id;
+    saveState(); renderSessionPreservingScroll();
+    showToast(`📚 تم اعتماد السرد: ${info.label} (${info.totalPages} ص مراجعة)`);
+    return;
+  }
+
   // MODE A: SURAH & AYAHS
   const validSegs = spState.segs.filter(x => x.surahId && SURAH_MAP[Number(x.surahId)]);
   if (!validSegs.length) { clearSurahPickerSelection(); return; }
@@ -13853,13 +14842,14 @@ function applySurahPicker(quickEval = null) {
     r.hwEndSurahId = "";
     r.hwExtras = rest;
   } else if (k === "min") {
+    r.minIsPages = false; r.minSardJuzIds = [];
     r.minSurahId = first.surahId; r.minFrom = first.from; r.minTo = first.to;
     r.minEndSurahId = ""; r.minTwoSurahs = false;
     r.minExtras = rest;
     r.manualMin = true;
     syncMinorSummaryStrings(r);
   } else if (k === "maj") {
-    r.sabrJuz = "";
+    r.sabrJuz = ""; r.majIsPages = false; r.majSardJuzIds = []; r.majSardLabel = "";
     r.majExtras = validSegs.map(x => ({ surahId: String(x.surahId), from: x.from, to: x.to }));
     syncMajorSurahsToRecord(r);
     if (r.majEval && !quickEval) applyNextMajorReview(st, r, r.majEval !== "إعادة");
@@ -13869,12 +14859,14 @@ function applySurahPicker(quickEval = null) {
     const a1 = parseArabicNum(first.from, 1), a2 = parseArabicNum(lastSeg.to, s2.a);
     const p1 = getPageForSurahAyah(s1.id, a1), p2 = getPageForSurahAyah(s2.id, a2);
     const rng = formatMajorRangeObject(s1, a1, s2, a2, p1, p2, calcSegmentsPages(validSegs), p1, false, 1, 604);
-    r.nextMajSabrJuz = "";
+    r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = "";
     r.nextMajStartSurahId = rng.startSurahId; r.nextMajStartAyah = rng.startAyah;
     r.nextMajEndSurahId = rng.endSurahId; r.nextMajEndAyah = rng.endAyah;
     r.nextMajStartPage = rng.startPage; r.nextMajEndPage = rng.endPage;
     r.nextMajTitle = rng.surahLabel; r.nextMajFrom = rng.fromLabel; r.nextMajTo = rng.toLabel;
   } else if (k === "dRev") {
+    r.dRevIsPages = false; r.dRevSardJuzIds = []; r.dRevSardLabel = "";
+    if (!r.recIsSabr) { r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = ""; }
     r.dRevSurahId = first.surahId; r.dRevFromAyah = first.from; r.dRevToAyah = first.to;
     r.dRevExtras = rest;
     if (!r.dRevEval && !quickEval) r.dRevEval = "ممتاز";
@@ -16097,6 +17089,7 @@ function applyAbsenceCarryOver(s, st, r, status) {
   r.recAlerts = 0; r.minAlerts = 0; r.majAlerts = 0;
   r.rabt = false;
   r.dRevSurahId = ""; r.dRevFromAyah = ""; r.dRevToAyah = ""; r.dRevExtras = [];
+  r.dRevIsPages = false; r.dRevPageFrom = ""; r.dRevPageTo = ""; r.dRevSardJuzIds = []; r.dRevSardLabel = "";
   r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevPages = 0;
   if (st?.track === "rashidi") {
     const rf = parseArabicNum(r.rashidiFrom, st.rashidiPage || 1);
@@ -17060,6 +18053,25 @@ function toggleCard(studentId) {
   }
 }
 
+function openPrevStudent(currentIdx) {
+  cancelAutoAdvance(false);
+  const h = getActiveHalaqa();
+  if (!h || !h.students.length || currentIdx <= 0) return;
+  const prevId = openCardId;
+  const prevSt = h.students[currentIdx - 1];
+  if (!prevSt) return;
+  openCardId = prevSt.id;
+  openAdvCardId = null;
+  evalSheetTool = "";
+  evalBonusOpen = false;
+  if (prevId && shouldReorderAfterLeavingStudent(prevId)) {
+    renderStudentCardsOnly();
+  } else {
+    highlightActiveEvalCardInList();
+    syncStudentEvalSheet();
+  }
+}
+
 function openNextStudent(currentIdx) {
   cancelAutoAdvance(false);
   const h = getActiveHalaqa();
@@ -17358,12 +18370,14 @@ function syncStudentEvalSheet() {
 
   bodyEl.innerHTML = renderCardBody(s, st, r, idx);
 
+  const hasPrev = idx > 0;
   const hasNext = idx + 1 < h.students.length;
+  const pendingRemCnt = h.students.filter(x => !isStudentFullyDone(s, x, getStudentRecord(s, x.id))).length;
   footEl.innerHTML = `
     <div id="esAutoAdvSlot"></div>
-    <div class="es-footer-row">
-      <button type="button" class="btn btn-outline" onclick="closeStudentEvalSheet()">إغلاق</button>
-      <button type="button" class="btn btn-soft" onclick="openNextPendingStudent(${idx})">⏭️ المتبقي</button>
+    <div class="es-footer-row v73-nav">
+      <button type="button" class="btn btn-outline es-btn-prev" onclick="openPrevStudent(${idx})" ${hasPrev ? '' : 'disabled'}>→ السابق</button>
+      <button type="button" class="btn btn-soft" onclick="openNextPendingStudent(${idx})">⏭️ المتبقي${pendingRemCnt > 0 ? ` <span class="es-pend-badge">${pendingRemCnt}</span>` : ''}</button>
       <button type="button" class="btn es-btn-next" onclick="openNextStudent(${idx})">${hasNext ? 'التالي ←' : 'إنهاء ✓'}</button>
     </div>
   `;
@@ -17431,9 +18445,10 @@ function renderCardBody(s, st, r, idx) {
 
   const dirToggleBtn = `<button type="button" class="pill pill-sm" onclick="setStudentDirection('${st.id}','${dir==='desc'?'asc':'desc'}')">${dir==='desc'?'⇅ الناس←البقرة':'⇅ البقرة←الناس'}</button>`;
 
-  const makeSmartEvalBtns = (curVal, fn, errVal = 0) => {
+  const makeSmartEvalBtns = (curVal, fn, errVal = 0, alertVal = 0) => {
     const nErr = Math.max(0, Number(errVal) || 0);
-    const suggestedEv = nErr > 0 ? evalFromErrorCount(nErr) : "";
+    const nAlrt = Math.max(0, Number(alertVal) || 0);
+    const suggestedEv = shouldSuggestEvalFromCounters(nErr, nAlrt, h) ? evalFromErrorCount(nErr, nAlrt, h) : "";
     return ["ممتاز", "جيد جداً", "جيد", "إعادة"].map(ev => {
       const activeCls = curVal === ev ? (ev === "ممتاز" ? "on-green" : ev === "إعادة" ? "on-red" : "on-blue") : "";
       const isSug = Boolean(suggestedEv && suggestedEv === ev && curVal !== ev);
@@ -17471,7 +18486,7 @@ function renderCardBody(s, st, r, idx) {
           </div>
         </div>
         ${renderErrorCounterBar(st.id, "rec", r.recErrors, r.recAlerts)}
-        <div class="es-eval-4" id="esEvalRow_rec">${makeSmartEvalBtns(r.recEval, "setRashidiEval", r.recErrors)}</div>
+        <div class="es-eval-4" id="esEvalRow_rec">${makeSmartEvalBtns(r.recEval, "setRashidiEval", r.recErrors, r.recAlerts)}</div>
         <div class="hw-clean-head" style="padding-top:6px; border-top:1px dashed var(--line); font-size:12px;">
           <span>📝 <b>الواجب القادم:</b> ${escapeHtml(hwR)}</span>
           <button type="button" class="lms-btn ${evalSheetTool==='notes'?'accent':''}" onclick="toggleEvalSheetTool('${st.id}','notes')">💬 ملاحظة${hasNotes ? ' •' : ''}</button>
@@ -17546,7 +18561,7 @@ function renderCardBody(s, st, r, idx) {
           <div class="adv-row-card">
             <div class="arc-l">
               <div class="arc-t">مقطع المراجعة (${formatNum(calcDailyReviewPages(r))} صفحة)</div>
-              <div class="arc-v">${escapeHtml(formatSegmentsInline(getSegments(r, "dRev")) || (r.dRevFrom ? `${r.dRevFrom}${r.dRevTo ? ' ← ' + r.dRevTo : ''}` : "لا توجد مراجعة"))}</div>
+              <div class="arc-v">${escapeHtml(r.dRevSardLabel ? `📚 ${r.dRevSardLabel}` : (r.dRevIsPages && r.dRevFrom ? `📄 ${r.dRevFrom === r.dRevTo ? r.dRevFrom : r.dRevFrom + " ← " + r.dRevTo}` : (formatSegmentsInline(getSegments(r, "dRev")) || (r.dRevFrom ? `${r.dRevFrom}${r.dRevTo ? " ← " + r.dRevTo : ""}` : "لا توجد مراجعة"))))}</div>
             </div>
             <div style="display:flex; gap:4px;">
               <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','dRev')">📖 اختيار</button>
@@ -17621,7 +18636,7 @@ function renderCardBody(s, st, r, idx) {
         </div>
         ${r.sabrJuz ? renderSabrScoreBox(st.id, r, false) : ''}
         ${!(r.recIsSabr && r.sabrJuz) ? renderErrorCounterBar(st.id, "rec", r.recErrors, r.recAlerts) : ''}
-        <div class="es-eval-4" id="esEvalRow_rec">${makeSmartEvalBtns(r.recEval, "setRecEval", r.recErrors)}</div>
+        <div class="es-eval-4" id="esEvalRow_rec">${makeSmartEvalBtns(r.recEval, "setRecEval", r.recErrors, r.recAlerts)}</div>
         <div class="hw-clean-head" style="padding-top:6px; border-top:1px dashed var(--line); font-size:12px;">
           <span class="lms-tap-area" onclick="openSurahPicker('${st.id}','hw')" title="اضغط لتغيير الواجب بسهولة">📝 <b>الواجب:</b> ${escapeHtml(hwPreview)} <span style="color:var(--blue); font-weight:800;">✏️</span></span>
           <div class="pace-seg">
@@ -17659,7 +18674,7 @@ function renderCardBody(s, st, r, idx) {
     const sabrJuzId = getStudentMonthlySabrJuzId(st, h, curMonth);
     const sabrProg = sabrJuzId ? getStudentMonthlySabrProgress(st, h, curMonth, sabrJuzId) : null;
     const revPace = Number(st.revPace || (sabrJuzId ? 5 : (h.defaultRevPace || 2)));
-    const nextMajPreview = r.nextMajSabrJuz ? `🎓 سبر ${r.nextMajSabrJuz}` : (r.nextMajFrom ? formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) : "يُضبط تلقائياً بعد تقييم الكبرى");
+    const nextMajPreview = r.nextMajSabrJuz ? `🎓 سبر ${r.nextMajSabrJuz}` : (r.nextMajSardLabel ? `📚 ${r.nextMajSardLabel}` : (r.nextMajIsPages && r.nextMajFrom ? `📄 ${r.nextMajFrom === r.nextMajTo ? r.nextMajFrom : r.nextMajFrom + ' ← ' + r.nextMajTo}` : (r.nextMajFrom ? formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) : "يُضبط تلقائياً بعد تقييم الكبرى")));
 
     if (!r.minSurahId && (r.minSurah || r.minText)) {
       const mS = findSurahByName(r.minSurah || r.minText);
@@ -17674,8 +18689,12 @@ function renderCardBody(s, st, r, idx) {
     if (effStartPg < cycStart || effStartPg > cycEnd) effStartPg = cycStart;
     const effMajPages = parseArabicNum(r.majPages, 0) || revPace;
     const autoMajRng = buildMajorReviewRange(effStartPg, effMajPages, cycStart, cycEnd);
-    const displayMajFrom = (r.majFrom && !(parseArabicNum(r.majStartPage, 0) < cycStart)) ? r.majFrom.replace(/\n/g, " + ") : autoMajRng.fromLabel;
-    const displayMajTo = (r.majTo && !(parseArabicNum(r.majStartPage, 0) < cycStart)) ? r.majTo.replace(/\n/g, " + ") : autoMajRng.toLabel;
+    const displayMajFrom = (r.majSardLabel || r.majIsPages)
+      ? (r.majFrom || "")
+      : ((r.majFrom && !(parseArabicNum(r.majStartPage, 0) < cycStart)) ? r.majFrom.replace(/\n/g, " + ") : autoMajRng.fromLabel);
+    const displayMajTo = (r.majSardLabel || r.majIsPages)
+      ? (r.majTo || "")
+      : ((r.majTo && !(parseArabicNum(r.majStartPage, 0) < cycStart)) ? r.majTo.replace(/\n/g, " + ") : autoMajRng.toLabel);
 
     const eligibleJuzList = completedJuzIds.length ? JUZ_PAGES.filter(j => completedJuzIds.includes(j.id)) : JUZ_PAGES;
     const sabrJuzOpts = `<option value="">-- بدون خطة سبر --</option>` + eligibleJuzList.map(j =>
@@ -17762,7 +18781,7 @@ function renderCardBody(s, st, r, idx) {
           </div>
         </div>
         ${renderErrorCounterBar(st.id, "min", r.minErrors, r.minAlerts)}
-        <div class="es-eval-4" id="esEvalRow_min" style="margin-bottom:0;">${makeSmartEvalBtns(r.minEval, "setSatMinEval", r.minErrors)}</div>
+        <div class="es-eval-4" id="esEvalRow_min" style="margin-bottom:0;">${makeSmartEvalBtns(r.minEval, "setSatMinEval", r.minErrors, r.minAlerts)}</div>
       </div>
 
       <div class="es-card">
@@ -17775,7 +18794,7 @@ function renderCardBody(s, st, r, idx) {
         </div>` : '')}
         <div class="live-mushaf-strip rev-gold">
           <div class="lms-info lms-tap-area" onclick="openSurahPicker('${st.id}','maj')" title="اضغط لتحديد الكبرى أو السبر">
-            <div class="lms-main">📘 الكبرى: ${escapeHtml(formatMajStripDisplay(displayMajFrom, displayMajTo))}</div>
+            <div class="lms-main">📘 الكبرى: ${escapeHtml(r.majSardLabel ? `📚 ${r.majSardLabel}` : (r.majIsPages ? `📄 ${displayMajFrom === displayMajTo ? displayMajFrom : displayMajFrom + " ← " + displayMajTo}` : formatMajStripDisplay(displayMajFrom, displayMajTo)))}</div>
             <div class="lms-sub">${formatNum(effMajPages)} ص • المحفوظ: ${escapeHtml(SURAH_MAP[bounds.startSurahId]?.n || memStartSurah.n)} ← ${escapeHtml(SURAH_MAP[bounds.endSurahId]?.n || "الناس")}</div>
           </div>
           <div class="lms-btns">
@@ -17793,7 +18812,7 @@ function renderCardBody(s, st, r, idx) {
           </div>
         </div>
         ${r.sabrJuz ? renderSabrScoreBox(st.id, r, true) : renderErrorCounterBar(st.id, "maj", r.majErrors, r.majAlerts)}
-        <div class="es-eval-4" id="esEvalRow_maj" style="margin-bottom:0;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors)}</div>
+        <div class="es-eval-4" id="esEvalRow_maj" style="margin-bottom:0;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors, r.majAlerts)}</div>
       </div>
 
       <div class="es-tools-4">
@@ -18808,6 +19827,7 @@ function setDailyRevEval(studentId, ev) {
 function clearDailyRev(studentId) {
   const s = getCurrentSession(), r = getStudentRecord(s, studentId);
   r.dRevSurahId = ""; r.dRevFromAyah = ""; r.dRevToAyah = ""; r.dRevExtras = [];
+  r.dRevIsPages = false; r.dRevPageFrom = ""; r.dRevPageTo = ""; r.dRevSardJuzIds = []; r.dRevSardLabel = "";
   r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevPages = 0;
   openCardId = studentId; openAdvCardId = studentId;
   saveState(); renderSessionPreservingScroll();
@@ -19331,9 +20351,10 @@ function populateMonthFilters() {
   if (!mSel || !sSel) return;
   const prevM = mSel.value, prevS = sSel.value;
   mSel.innerHTML = buildMonthlyOpts();
-  sSel.innerHTML = buildMonthlyOpts();
+  const cycleOpt = isPointsEnabled(h) ? `<option value="POINTS_CYCLE">⭐ دورة النقاط الحالية</option>` : "";
+  sSel.innerHTML = cycleOpt + buildMonthlyOpts();
   mSel.value = (prevM && Array.from(mSel.options).some(o => o.value === prevM)) ? prevM : (sortedMonths[0]?.label || "ALL");
-  sSel.value = (prevS && Array.from(sSel.options).some(o => o.value === prevS)) ? prevS : (sortedMonths[0]?.label || "ALL");
+  sSel.value = (prevS && Array.from(sSel.options).some(o => o.value === prevS)) ? prevS : (isPointsEnabled(h) ? "POINTS_CYCLE" : (sortedMonths[0]?.label || "ALL"));
   const tdEl = document.getElementById("monthlyTargetDays");
   if (tdEl) tdEl.value = h.monthDays || 12;
 }
@@ -19375,16 +20396,23 @@ function getBaselineExtraDays(h, monthFilter) {
 
 function computeMonthlyData(monthFilter) {
   const h = getActiveHalaqa();
-  const sessions = h.sessions.filter(s => !s.noClass && isSessionHasRealActivity(s) && (monthFilter === "ALL" || getSessionReportMonth(s) === monthFilter)).sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+  const isPointsCycle = monthFilter === "POINTS_CYCLE";
+  const sessions = h.sessions.filter(s =>
+    isPointsCycle
+      ? isSessionInActivePointsCycle(s, h)
+      : (!s.noClass && isSessionHasRealActivity(s) && (monthFilter === "ALL" || getSessionReportMonth(s) === monthFilter))
+  ).sort((a, b) => (a.date || "").localeCompare(b.date || ""));
 
   const rows = h.students.map(st => {
-    const base = getStudentBaselineTotals(h, monthFilter, st.id);
+    const base = isPointsCycle
+      ? { fromMem: "", toMem: "", memPages: 0, revPages: 0, points: getStudentPastPoints(h, st.id), sabrList: [] }
+      : getStudentBaselineTotals(h, monthFilter, st.id);
     let firstMem = base.fromMem || null;
     let lastMem = base.toMem || null;
     let memPages = base.memPages;
     let revPages = base.revPages;
     let rashidiPages = 0;
-    let totalPoints = base.points;
+    let totalPoints = base.points + (!isPointsCycle && monthFilter === "ALL" ? getStudentPastPoints(h, st.id) : 0);
     let presentDays = 0, lateDays = 0, excusedDays = 0, absentDays = 0;
     const sabrList = [...base.sabrList];
 
@@ -19801,7 +20829,26 @@ function renderStats() {
       </div>
     </div>` : "";
 
+  const cycSt = getPointsCycleStatus(h);
+  const cycleBannerHtml = (ptsOn && (filterVal === "POINTS_CYCLE" || cycSt.expired)) ? `
+    <div class="pts-cycle-banner ${cycSt.expired ? 'expired' : ''}">
+      <div>
+        <b>⭐ ${escapeHtml(cycSt.pc.cycleName || 'دورة النقاط الحالية')}</b>
+        <div style="font-size:11px; color:var(--ink-700); margin-top:2px;">
+          ${cycSt.expired
+            ? `⏰ انتهت مدة الدورة بتاريخ ${cycSt.endDate} — يمكنك بدء دورة جديدة من الصفر`
+            : (cycSt.hasDuration ? `⏳ متبقٍ ${Math.max(0, cycSt.daysLeft)} يوماً (حتى ${cycSt.endDate})` : `مدة مفتوحة${cycSt.startDate ? ' • بدأت في ' + cycSt.startDate : ''}`)}
+          ${cycSt.totalPastPoints > 0 ? ` • تشمل +${cycSt.totalPastPoints} نقطة سابقة` : ''}
+        </div>
+      </div>
+      <div style="display:flex; gap:5px; flex-wrap:wrap;">
+        <button type="button" class="btn btn-soft btn-sm" onclick="openProgramsModal('points')">⚙️ إدارة الدورة</button>
+        ${cycSt.expired ? `<button type="button" class="btn btn-primary btn-sm" onclick="resetPointsCycleFromZero(true)">🔄 بدء من الصفر</button>` : ''}
+      </div>
+    </div>` : "";
+
   el.innerHTML = `
+    ${cycleBannerHtml}
     ${repeatAbsAlert}
     <div class="kpi-grid">
       <div class="kpi-box"><div class="kpi-val">${totals.sessionsCount}</div><div class="kpi-lbl">الجلسات</div></div>
@@ -19992,25 +21039,107 @@ function renderProgramsModalBody() {
 
   if (_activeProgTab === "points") {
     const ptsOn = isPointsEnabled(h);
+    const cyc = getPointsCycleStatus(h);
+    const pc = cyc.pc;
+    const { rows: cycRows } = computeMonthlyData("POINTS_CYCLE");
+    const cycMap = {};
+    cycRows.forEach(r => { cycMap[r.student.id] = r.totalPoints; });
+
+    const durChips = [
+      [14, "أسبوعان"],
+      [30, "شهر (30 ي)"],
+      [60, "شهران"],
+      [90, "فصل (3 أشهر)"],
+      [0, "مفتوحة"]
+    ].map(([d, lbl]) => `<button type="button" class="pill pill-sm ${Number(pc.durationDays || 0) === d ? 'on-slate' : ''}" onclick="setPointsCycleDurationPreset(${d})">${lbl}</button>`).join("");
+
+    const statusLine = cyc.expired
+      ? `<span class="badge b-orange">⏰ انتهت المدة (${cyc.endDate})</span>`
+      : (cyc.hasDuration
+        ? `<span class="badge b-green">⏳ متبقٍ ${Math.max(0, cyc.daysLeft)} يوماً</span>`
+        : `<span class="badge b-blue">♾️ مدة مفتوحة</span>`);
+
+    const pastRowsHtml = h.students.length
+      ? h.students.map((st, i) => {
+          const pv = getStudentPastPoints(h, st.id);
+          const curTot = cycMap[st.id] || 0;
+          return `<div class="pts-past-row">
+            <div class="pts-past-name">${i + 1}. ${escapeHtml(st.name)} <span style="font-size:10.5px; color:var(--ink-500); font-weight:600;">(المجموع: ${curTot})</span></div>
+            <div class="pts-past-ctrl">
+              <button type="button" onclick="stepStudentPastPoints('${st.id}', 5)">+5</button>
+              <button type="button" onclick="stepStudentPastPoints('${st.id}', 10)">+10</button>
+              <input type="number" id="ptsPastInp_${st.id}" min="0" max="9999" value="${pv > 0 ? pv : ''}" placeholder="0" oninput="setStudentPastPointsInput('${st.id}', this.value)">
+              <button type="button" onclick="stepStudentPastPoints('${st.id}', 0)" title="تصفير السابق">0</button>
+            </div>
+          </div>`;
+        }).join("")
+      : `<div style="text-align:center; padding:12px; font-size:12px; color:var(--ink-500);">أضف طلاباً للحلقة أولاً</div>`;
+
+    const histHtml = pc.history.length ? `
+      <details class="extra-box" style="margin-bottom:9px;">
+        <summary>📜 سجل دورات النقاط المنتهية (${pc.history.length})</summary>
+        <div style="margin-top:8px;">
+          ${pc.history.map(item => `
+            <div style="padding:7px 8px; border:1px solid var(--line); border-radius:8px; margin-bottom:6px; background:var(--bg); font-size:12px;">
+              <div style="display:flex; justify-content:space-between; font-weight:800; color:var(--brand-slate);">
+                <span>🏆 ${escapeHtml(item.name)}</span>
+                <span>${item.totalPoints} نقطة</span>
+              </div>
+              <div style="font-size:11px; color:var(--ink-500); margin:2px 0;">${escapeHtml(item.startDate)} ← ${escapeHtml(item.endDate)}</div>
+              ${item.top3?.length ? `<div style="font-size:11.5px; color:var(--ink-700);">${item.top3.map((t, k) => `${["🥇","🥈","🥉"][k] || ""} ${escapeHtml(t.name)} (${t.points})`).join(" • ")}</div>` : ''}
+            </div>`).join("")}
+        </div>
+      </details>` : "";
+
     body.innerHTML = `
       <div class="prog-hero">
         <div>
           <h4>⭐ برنامج النقاط والتحفيز</h4>
-          <p>تحكّم بتفعيل أو إخفاء نظام النقاط في جميع شاشات وتقارير الحلقة.</p>
+          <p>${escapeHtml(pc.cycleName || 'الدورة الحالية')} • تحكّم بالمدة والرصيد السابق والتصفير.</p>
         </div>
         <button type="button" class="btn ${ptsOn ? 'btn-success' : 'btn-outline'} btn-sm" onclick="togglePointsMode(); renderProgramsModalBody();">${ptsOn ? '✓ مفعّل' : 'متوقف'}</button>
       </div>
-      <div class="panel-block" style="margin-bottom:10px;">
-        <div class="panel-label">لائحة توزيع النقاط المعتمدة</div>
-        <div style="font-size:12.5px; color:var(--ink-700); line-height:1.8;">
+
+      <div class="panel-block" style="margin-bottom:9px;">
+        <div class="panel-label">
+          <span>⏳ مدة دورة النقاط والتصفير</span>
+          ${statusLine}
+        </div>
+        <div class="pts-dur-chips">${durChips}</div>
+        <div class="exec-grid-2" style="margin-bottom:9px;">
+          <div class="field"><label>بداية الدورة</label><input type="date" value="${escapeHtml(pc.startDate || '')}" onchange="onPointsCycleDateChange('startDate', this.value)"></div>
+          <div class="field"><label>نهاية الدورة (اختياري)</label><input type="date" value="${escapeHtml(pc.endDate || '')}" onchange="onPointsCycleDateChange('endDate', this.value)"></div>
+        </div>
+        <button type="button" class="btn btn-warn btn-sm" style="width:100%;" onclick="resetPointsCycleFromZero(true)">🔄 بدء دورة جديدة من الصفر (أرشفة الحالية وتصفير عداد الطلاب)</button>
+      </div>
+
+      <div class="panel-block" style="margin-bottom:9px;">
+        <div class="panel-label">
+          <span>➕ نقاط جلسات ماضية غير مسجلة</span>
+          <span class="badge b-green" id="ptsPastTotalBadge">+${cyc.totalPastPoints} نقطة سابقة</span>
+        </div>
+        <div class="field" style="margin-bottom:7px;">
+          <input type="text" id="ptsPastNoteInput" value="${escapeHtml(pc.pastNote || '')}" placeholder="وصف اختياري (مثال: نقاط أول 4 جلسات قبل التطبيق)..." style="padding:7px 9px; font-size:12px;">
+        </div>
+        <div class="pts-past-list">${pastRowsHtml}</div>
+        <button type="button" class="btn btn-primary btn-sm" style="width:100%;" onclick="savePointsPastAdjustmentsUI()">✓ حفظ نقاط الجلسات الماضية</button>
+      </div>
+
+      ${histHtml}
+
+      <details class="extra-box" style="margin-bottom:9px;">
+        <summary>📋 لائحة توزيع النقاط المعتمدة</summary>
+        <div style="font-size:12px; color:var(--ink-700); line-height:1.8; margin-top:6px;">
           • <b>الحفظ (صفحة كاملة):</b> ممتاز 10 • جيد جداً 6 • جيد 4 • إعادة 0<br>
           • <b>الحفظ (نصف صفحة):</b> ممتاز 5 • جيد جداً 3 • جيد 2 • إعادة 0<br>
-          • <b>المراجعة أو السبر:</b> ممتاز 7 • جيد جداً 5 • جيد 3 • إعادة 0<br>
+          • <b>المراجعة أو السرد أو السبر:</b> ممتاز 7 • جيد جداً 5 • جيد 3 • إعادة 0<br>
           • <b>السلوك والحضور:</b> أدب +5 • مشاركة +5 • حضور مبكر +5
         </div>
-      </div>
-      <div style="display:flex; gap:7px; flex-wrap:wrap;">
-        <button type="button" class="btn btn-primary btn-sm" style="flex:1;" onclick="closeModal('programsModal'); switchTab('stats');">🏆 فتح لوحة المتصدرين والإحصائيات</button>
+      </details>
+
+      <div style="display:flex; gap:6px; flex-wrap:wrap;">
+        <button type="button" class="btn btn-primary btn-sm" style="flex:1;" onclick="closeModal('programsModal'); switchTab('stats');">🏆 لوحة المتصدرين</button>
+        <button type="button" class="btn btn-soft btn-sm" onclick="copyPointsCycleLeaderboardDirect()">💬 نسخ المتصدرين</button>
         <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('programsModal')">إغلاق</button>
       </div>
     `;
@@ -21522,7 +22651,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v72 -->
+<!-- Makin App v73 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -21713,13 +22842,19 @@ function copyMonthlyWhatsApp() {
   copyText(txt, "تم نسخ التقرير الشهري للواتساب");
 }
 
+function copyPointsCycleLeaderboardDirect() {
+  const sSel = document.getElementById("statsMonthFilter");
+  if (sSel && Array.from(sSel.options).some(o => o.value === "POINTS_CYCLE")) sSel.value = "POINTS_CYCLE";
+  copyPointsLeaderboardWA();
+}
+
 function copyPointsLeaderboardWA() {
   const h = getActiveHalaqa(), m = document.getElementById("statsMonthFilter").value || "ALL";
   const { rows } = computeMonthlyData(m);
   const top = [...rows].sort((a,b)=>(b.totalPoints - a.totalPoints) || ((b.memPages + b.revPages) - (a.memPages + a.revPages))).slice(0, 10);
   const medals = ["🥇", "🥈", "🥉"];
   const bm = getBrandMeta(h);
-  const mLbl = m === "ALL" ? "جميع الجلسات" : `شهر ${m} هـ`;
+  const mLbl = m === "POINTS_CYCLE" ? (ensurePointsConfig(h)?.cycleName || "دورة النقاط الحالية") : (m === "ALL" ? "جميع الجلسات" : `شهر ${m} هـ`);
   let txt = `🏆 *متصدرو النقاط — حلقة ${bm.name} (${bm.branch})* 🏆\n📅 ${mLbl}\n━━━━━━━━━━━━\n`;
   top.forEach((r, i) => { txt += `${medals[i] || (i+1)+'.'} *${r.student.name}* — *${r.totalPoints} نقطة*\n`; });
   copyText(txt, "تم نسخ قائمة المتصدرين للواتساب");
@@ -21787,6 +22922,7 @@ function openSettingsModal() {
   const sInp = document.getElementById("setStudentSearch");
   if (qInp) qInp.value = "";
   if (sInp) sInp.value = "";
+  loadGradingRulesIntoSettings(h);
   const cdSum = document.getElementById("setClassDaysSummary");
   if (cdSum) cdSum.innerHTML = getClassDaysSummaryHtml(h);
   renderSettingsStudentsList();
@@ -21900,6 +23036,7 @@ function saveHalaqaSettings() {
   h.defaultRevPace = Number(document.getElementById("setDefaultRevPace").value) || 2;
   const ptsCb = document.getElementById("setPointsEnabled");
   if (ptsCb) h.pointsEnabled = ptsCb.checked;
+  h.gradingRules = readGradingRulesFromSettings();
   h.fbUrl = document.getElementById("setFbUrl").value.trim().replace(/\/+$/, "");
   h.roomCode = document.getElementById("setRoomCode").value.trim();
   saveState();
@@ -24263,7 +25400,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v72";
+const TIBYAN_APP_VERSION = "v73";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
