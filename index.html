@@ -10741,6 +10741,357 @@ table.t-daily td.td-rev-slim {
 .cmp-stu-name { font-size: 13px; font-weight: 800; color: var(--ink-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cmp-stu-deltas { font-size: 11px; color: var(--ink-700); font-weight: 700; margin-top: 2px; display: flex; flex-wrap: wrap; gap: 6px; }
 
+
+/* ==================== MAKIN v82: CLEAN REVIEW PICKER + STANDALONE HD COMPARISON CARD ==================== */
+/* 1) Streamlined Compact Review Page Cards (Both "من" and "إلى" fit cleanly on 1 screen!) */
+.sp-rev-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-right: 4px solid #142a46;
+  border-radius: 12px;
+  padding: 8px 10px;
+  margin-bottom: 7px;
+  box-shadow: 0 1px 5px rgba(16, 42, 73, 0.04);
+}
+.sp-rev-card.is-end { border-right-color: #16794c; }
+[data-theme="dark"] .sp-rev-card { border-right-color: #c8a14b; }
+[data-theme="dark"] .sp-rev-card.is-end { border-right-color: #34d399; }
+.sp-rev-row1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.sp-rev-lbl {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--brand-slate);
+  white-space: nowrap;
+}
+.sp-rev-sel {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 9px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 9px;
+  background: var(--bg);
+  color: var(--ink-900);
+  font-size: 13px;
+  font-weight: 800;
+}
+.sp-rev-sel:focus { outline: none; border-color: #142a46; background: var(--white); }
+.sp-rev-pg-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.sp-pg-pills-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.sp-pg-pill {
+  min-width: 31px;
+  height: 29px;
+  padding: 0 8px;
+  border-radius: 8px;
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-900);
+  font-size: 12.5px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.sp-pg-pill.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #ffffff;
+}
+[data-theme="dark"] .sp-pg-pill.on { background: #c8a14b; border-color: #c8a14b; color: #0f233c; }
+.sp-mini-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  direction: ltr;
+}
+.sp-mini-step button {
+  width: 30px;
+  height: 29px;
+  border-radius: 8px;
+  border: 1px solid var(--line-strong);
+  background: var(--brand-tint);
+  color: var(--brand-slate);
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.sp-mini-step input {
+  width: 52px;
+  height: 29px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 14px;
+  border: 1.5px solid #142a46;
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--ink-900);
+  direction: ltr;
+}
+.sp-mushaf-muted {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-500);
+  white-space: nowrap;
+}
+.sp-quick-span-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 2px;
+}
+.sp-quick-span-row button {
+  border: 1px solid var(--line-strong);
+  background: var(--white);
+  color: var(--brand-slate);
+  border-radius: 8px;
+  padding: 6px 2px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: center;
+}
+.sp-quick-span-row button.hl {
+  background: var(--blue-bg);
+  color: var(--blue);
+  border-color: rgba(21, 98, 154, 0.28);
+}
+.sp-quick-span-row button:active { transform: scale(0.95); }
+
+/* 2) Individual Report Modal 3-Tab Switcher (شهري | أسبوعي | بطاقة المقارنة) */
+.ir-tabs-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 3.5px;
+  border-radius: 12px;
+  margin-bottom: 9px;
+}
+.ir-tabs-3 .sp-mode-tab {
+  padding: 7px 3px;
+  font-size: 11.8px;
+}
+.ir-tabs-3 .sp-mode-tab.on-cmp {
+  background: linear-gradient(135deg, #142a46 0%, #16794c 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(22, 121, 76, 0.24);
+}
+.ir-cmp-subbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  background: var(--brand-tint);
+  border: 1px solid var(--line);
+  padding: 3.5px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.ir-cmp-subbar button {
+  border: none;
+  background: transparent;
+  color: var(--ink-700);
+  padding: 6px 4px;
+  border-radius: 7px;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.ir-cmp-subbar button.on {
+  background: #142a46;
+  color: #ffffff;
+}
+[data-theme="dark"] .ir-cmp-subbar button.on { background: #c8a14b; color: #0f233c; }
+
+/* 3) Standalone Executive HD Progress Comparison Card (820px crisp canvas, large readable fonts!) */
+.cmp-card-paper, .cmp-card-paper * {
+  letter-spacing: 0 !important;
+  font-kerning: none;
+  box-sizing: border-box;
+}
+.cmp-card-paper {
+  width: 820px;
+  min-width: 820px;
+  background: #ffffff;
+  color: #102a49;
+  font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
+  border: 4px solid #142a46;
+  padding: 0;
+  overflow: hidden;
+}
+.ccp-header {
+  background: linear-gradient(145deg, #0f2542 0%, #193c66 100%);
+  color: #ffffff;
+  padding: 20px 26px;
+  border-bottom: 4px solid #c8a14b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.ccp-hdr-org {
+  font-size: 13.5px;
+  font-weight: 800;
+  line-height: 1.55;
+  color: #e2edf8;
+}
+.ccp-hdr-mid {
+  flex: 1;
+  text-align: center;
+}
+.ccp-hdr-mid h2 {
+  font-size: 26px;
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+.ccp-hdr-mid p {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f4d98d;
+}
+.ccp-logo-box {
+  background: #ffffff;
+  padding: 7px 14px;
+  border-radius: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.ccp-logo-box img { height: 46px; width: auto; max-width: 155px; object-fit: contain; display: block; }
+.ccp-body {
+  padding: 20px 26px 22px;
+}
+.ccp-student-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  border: 2px solid #cbd5e1;
+  background: #f8fafc;
+}
+.ccp-student-banner.is-up { border-color: #16a34a; background: #effbf4; }
+.ccp-student-banner.is-down { border-color: #dc2626; background: #fef3f3; }
+.ccp-student-banner.is-flat { border-color: #33464f; background: #f3f6f9; }
+.ccp-st-name { font-size: 25px; font-weight: 900; color: #0f2542; line-height: 1.25; }
+.ccp-st-periods { font-size: 13.5px; font-weight: 700; color: #475569; margin-top: 3px; }
+.ccp-big-verdict {
+  padding: 9px 22px;
+  border-radius: 99px;
+  font-size: 19px;
+  font-weight: 900;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ccp-big-verdict.up { background: #16794c; color: #ffffff; }
+.ccp-big-verdict.down { background: #b92222; color: #ffffff; }
+.ccp-big-verdict.flat { background: #33464f; color: #ffffff; }
+
+.ccp-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.ccp-metric-tile {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-top: 4px solid #142a46;
+  border-radius: 13px;
+  padding: 13px 16px;
+}
+.ccp-metric-tile.up { border-top-color: #16794c; background: #f6fcf8; }
+.ccp-metric-tile.down { border-top-color: #b92222; background: #fef8f8; }
+.ccp-mt-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.ccp-mt-title { font-size: 16px; font-weight: 800; color: #1e293b; }
+.ccp-mt-delta {
+  font-size: 15px;
+  font-weight: 900;
+  padding: 3px 12px;
+  border-radius: 99px;
+}
+.ccp-mt-delta.up { background: #dcfce7; color: #16794c; }
+.ccp-mt-delta.down { background: #fee2e2; color: #b92222; }
+.ccp-mt-delta.flat { background: #e2e8f0; color: #334155; }
+.ccp-mt-vs {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+.ccp-vs-box {
+  background: #f1f5f9;
+  border-radius: 9px;
+  padding: 8px 6px;
+}
+.ccp-vs-box.cur {
+  background: #142a46;
+  color: #ffffff;
+}
+.ccp-vs-box small { display: block; font-size: 11.5px; font-weight: 700; opacity: 0.8; }
+.ccp-vs-box b { display: block; font-size: 22px; font-weight: 900; margin-top: 2px; }
+.ccp-vs-box.cur b { color: #f4d98d; }
+.ccp-vs-arrow { font-size: 22px; font-weight: 900; color: #64748b; }
+
+.ccp-msg-banner {
+  background: #fdf9ef;
+  border: 1.5px solid #e0c888;
+  border-right: 5px solid #c8a14b;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.ccp-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 2px solid #cbd5e1;
+  text-align: center;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #142a46;
+}
+.ccp-footer span { display: block; font-size: 11.5px; font-weight: 700; color: #64748b; }
+#hdExportStage.is-indiv-stage .cmp-card-paper {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -11193,6 +11544,10 @@ table.t-daily td.td-rev-slim {
           <span class="drawer-item-l"><span class="drawer-ico-box">📩</span><span>رسائل المشرف</span></span>
           <span class="badge b-slate" id="drawerSupMsgBadge" style="font-size:10.5px;">0</span>
         </button>
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openQuickCompareCard();">
+          <span class="drawer-item-l"><span class="drawer-ico-box gold">📈</span><span>بطاقة المقارنة (أسبوعي / شهري)</span></span>
+          <span class="drawer-chev">‹</span>
+        </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openClassDayWaModal();">
           <span class="drawer-item-l"><span class="drawer-ico-box gold">💬</span><span>تذكير الطلاب (واتساب)</span></span>
           <span class="drawer-chev">‹</span>
@@ -11246,7 +11601,7 @@ table.t-daily td.td-rev-slim {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v80</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v82</span>
         </button>
       </div>
     </div>
@@ -12308,9 +12663,15 @@ table.t-daily td.td-rev-slim {
       <button class="close-x" onclick="closeModal('indivReportModal')">×</button>
     </div>
 
-    <div class="sp-mode-tabs" style="margin-bottom:9px;">
+    <div class="ir-tabs-3">
       <button type="button" class="sp-mode-tab on" id="irPeriodMonthlyBtn" onclick="setIndivReportPeriod('monthly')">📅 كشف شهري</button>
       <button type="button" class="sp-mode-tab" id="irPeriodWeeklyBtn" onclick="setIndivReportPeriod('weekly')">📆 كشف أسبوعي</button>
+      <button type="button" class="sp-mode-tab" id="irPeriodCompareBtn" onclick="setIndivReportPeriod('compare')">📈 بطاقة المقارنة</button>
+    </div>
+
+    <div id="irCompareSubBar" class="ir-cmp-subbar" style="display:none;">
+      <button type="button" class="on" id="irCmpSubWeekly" onclick="setIrCompareBasis('weekly')">📆 أسبوع مقابل السابق</button>
+      <button type="button" id="irCmpSubMonthly" onclick="setIrCompareBasis('monthly')">📅 شهر مقابل السابق</button>
     </div>
 
     <div class="form-grid" style="grid-template-columns:1.25fr 1fr; margin-bottom:8px;">
@@ -12499,7 +12860,7 @@ table.t-daily td.td-rev-slim {
 
         <!-- Review Sub-Unit Switcher (بالآيات vs من صفحة إلى صفحة) -->
         <div id="spReviewUnitToggle" class="sp-unit-toggle" style="display:none;">
-          <button type="button" class="sp-unit-btn on" id="spUnitPageBtn" onclick="spSetReviewUnit('page')">📄 من سورة إلى سورة (صفحات)</button>
+          <button type="button" class="sp-unit-btn on" id="spUnitPageBtn" onclick="spSetReviewUnit('page')">📄 بالصفحات</button>
           <button type="button" class="sp-unit-btn" id="spUnitAyahBtn" onclick="spSetReviewUnit('ayah')">🔢 بالآيات</button>
         </div>
 
@@ -16649,13 +17010,13 @@ function getSurahPageSpan(surahId) {
 function spPageSurahOptsHtml(selectedId) {
   return SURAHS.map(s => {
     const sp = getSurahPageSpan(s.id);
-    const pgLbl = sp.count === 1 ? `1 صفحة • ص ${sp.start}` : `${sp.count} ص • المصحف ${sp.start}–${sp.end}`;
-    return `<option value="${s.id}" ${String(selectedId) === String(s.id) ? "selected" : ""}>${s.id}. سورة ${s.n} (${pgLbl})</option>`;
+    const pgLbl = sp.count === 1 ? "صفحة واحدة" : `${sp.count} ص`;
+    return `<option value="${s.id}" ${String(selectedId) === String(s.id) ? "selected" : ""}>${s.n} (${pgLbl})</option>`;
   }).join("");
 }
 
 function spSetPageNumMode(mode) {
-  spState.pageNumMode = mode === "mushaf" ? "mushaf" : "surah";
+  spState.pageNumMode = "surah";
   renderSpPagesBox();
 }
 
@@ -16666,13 +17027,14 @@ function spOnPageSurahPick(which, surahId) {
   if (which === "from") {
     spState.pageFromSurahId = String(s.id);
     spState.pageFrom = sp.start;
-    if (!spState.pageToSurahId || spState.pageToSurahId === spState.pageFromSurahId) {
+    // Smartly keep end >= start (default to same surah full if end is before start or same surah)
+    if (!spState.pageToSurahId || Number(spState.pageTo || 0) < sp.start) {
       spState.pageToSurahId = String(s.id);
       spState.pageTo = sp.end;
     }
   } else {
     spState.pageToSurahId = String(s.id);
-    spState.pageTo = (String(spState.pageFromSurahId) === String(s.id) || sp.count <= 2) ? sp.end : sp.start;
+    spState.pageTo = sp.end;
   }
   renderSpPagesBox();
 }
@@ -16683,51 +17045,40 @@ function spJumpSurahPageBound(which, edge) {
   const pg = edge === "end" ? sp.end : sp.start;
   if (which === "from") spState.pageFrom = pg;
   else spState.pageTo = pg;
-  syncSpPageInputsOnly();
+  renderSpPagesBox();
+}
+
+function spSelectFullStartSurah() {
+  const sid = spState.pageFromSurahId || "78";
+  const sp = getSurahPageSpan(sid);
+  spState.pageFrom = sp.start;
+  spState.pageToSurahId = String(sid);
+  spState.pageTo = sp.end;
+  renderSpPagesBox();
 }
 
 function spSetPageVal(field, val) {
-  const isRel = (spState.pageNumMode || "surah") === "surah";
-  if (isRel) {
-    const sid = field === "from" ? spState.pageFromSurahId : spState.pageToSurahId;
-    const sp = getSurahPageSpan(sid);
-    const rel = Math.max(1, Math.min(sp.count, Math.round(parseArabicNum(val, 1))));
-    const mushafPg = Math.max(1, Math.min(604, sp.start + rel - 1));
-    if (field === "from") spState.pageFrom = mushafPg;
-    else spState.pageTo = mushafPg;
-  } else {
-    const num = Math.max(1, Math.min(604, Math.round(parseArabicNum(val, 1))));
-    if (field === "from") {
-      spState.pageFrom = num;
-      const curSp = getSurahPageSpan(spState.pageFromSurahId);
-      if (num < curSp.start || num > curSp.end) {
-        const autoS = getPageStartInfo(num)?.surah;
-        if (autoS) spState.pageFromSurahId = String(autoS.id);
-      }
-    } else {
-      spState.pageTo = num;
-      const curSp = getSurahPageSpan(spState.pageToSurahId);
-      if (num < curSp.start || num > curSp.end) {
-        const autoS = getPageEndInfo(num)?.surah;
-        if (autoS) spState.pageToSurahId = String(autoS.id);
-      }
+  const sid = field === "from" ? spState.pageFromSurahId : spState.pageToSurahId;
+  const sp = getSurahPageSpan(sid);
+  const rel = Math.max(1, Math.min(sp.count, Math.round(parseArabicNum(val, 1))));
+  const mushafPg = Math.max(1, Math.min(604, sp.start + rel - 1));
+  if (field === "from") {
+    spState.pageFrom = mushafPg;
+    if (String(spState.pageToSurahId) === String(sid) && spState.pageTo < mushafPg) {
+      spState.pageTo = mushafPg;
     }
+  } else {
+    spState.pageTo = mushafPg;
   }
   syncSpPageInputsOnly();
 }
 
 function spStepPageVal(field, delta) {
-  const isRel = (spState.pageNumMode || "surah") === "surah";
-  if (isRel) {
-    const sid = field === "from" ? spState.pageFromSurahId : spState.pageToSurahId;
-    const sp = getSurahPageSpan(sid);
-    const curMushaf = field === "from" ? (spState.pageFrom || sp.start) : (spState.pageTo || sp.start);
-    const curRel = Math.max(1, Math.min(sp.count, curMushaf - sp.start + 1));
-    spSetPageVal(field, curRel + delta);
-  } else {
-    const cur = field === "from" ? (spState.pageFrom || 1) : (spState.pageTo || 1);
-    spSetPageVal(field, cur + delta);
-  }
+  const sid = field === "from" ? spState.pageFromSurahId : spState.pageToSurahId;
+  const sp = getSurahPageSpan(sid);
+  const curMushaf = field === "from" ? (spState.pageFrom || sp.start) : (spState.pageTo || sp.start);
+  const curRel = Math.max(1, Math.min(sp.count, curMushaf - sp.start + 1));
+  spSetPageVal(field, curRel + delta);
 }
 
 function spApplyPageSpanPreset(spanPages) {
@@ -16751,18 +17102,14 @@ function getSpSurahPageSummary() {
   const rel2 = Math.max(1, Math.min(sp2.count, p2 - sp2.start + 1));
   const pCount = Math.abs(p2 - p1) + 1;
   const sameS = Boolean(s1 && s2 && s1.id === s2.id);
-  const isRel = (spState.pageNumMode || "surah") === "surah";
-  const fromCol = s1
-    ? (isRel ? (sp1.count === 1 ? s1.n : `${s1.n} ص ${rel1}`) : `${s1.n} ص ${p1}`)
-    : `ص ${p1}`;
-  const toCol = sameS
-    ? (isRel ? `ص ${rel2}` : `ص ${p2}`)
-    : (s2 ? (isRel ? (sp2.count === 1 ? s2.n : `${s2.n} ص ${rel2}`) : `${s2.n} ص ${p2}`) : `ص ${p2}`);
+  const isFullSame = sameS && rel1 === 1 && rel2 === sp1.count;
+  const fromCol = s1 ? (sp1.count === 1 ? s1.n : `${s1.n} ص ${rel1}`) : `ص ${p1}`;
+  const toCol = sameS ? `ص ${rel2}` : (s2 ? (sp2.count === 1 ? s2.n : `${s2.n} ص ${rel2}`) : `ص ${p2}`);
   const headerLbl = sameS ? s1.n : (s1 && s2 ? `${s1.n} ← ${s2.n}` : "صفحات");
   const fullLabel = sameS
-    ? `${s1.n} (${isRel ? (rel1 === rel2 ? `صفحة ${rel1}` : `صفحة ${rel1} ← ${rel2}`) : (p1 === p2 ? `ص ${p1}` : `ص ${p1} ← ${p2}`)})`
+    ? (isFullSame ? `سورة ${s1.n} كاملة` : `${s1.n} (${rel1 === rel2 ? `صفحة ${rel1}` : `ص ${rel1} ← ص ${rel2}`})`)
     : `${fromCol} ← ${toCol}`;
-  return { p1, p2, rel1, rel2, sp1, sp2, pCount, s1, s2, sameS, isRel, fromCol, toCol, headerLbl, fullLabel };
+  return { p1, p2, rel1, rel2, sp1, sp2, pCount, s1, s2, sameS, isRel: true, fromCol, toCol, headerLbl, fullLabel };
 }
 
 function syncSpPageInputsOnly() {
@@ -16772,116 +17119,92 @@ function syncSpPageInputsOnly() {
   if (sum.s1) spState.pageFromSurahId = String(sum.s1.id);
   if (sum.s2) spState.pageToSurahId = String(sum.s2.id);
 
-  const fSel = document.getElementById("spPageFromSurahSel");
-  const tSel = document.getElementById("spPageToSurahSel");
-  if (fSel && sum.s1 && fSel.value !== String(sum.s1.id)) fSel.value = String(sum.s1.id);
-  if (tSel && sum.s2 && tSel.value !== String(sum.s2.id)) tSel.value = String(sum.s2.id);
-
-  const fVal = sum.isRel ? sum.rel1 : sum.p1;
-  const tVal = sum.isRel ? sum.rel2 : sum.p2;
-  const fMin = sum.isRel ? 1 : sum.sp1.start;
-  const fMax = sum.isRel ? sum.sp1.count : sum.sp1.end;
-  const tMin = sum.isRel ? 1 : sum.sp2.start;
-  const tMax = sum.isRel ? sum.sp2.count : sum.sp2.end;
-
   const fR = document.getElementById("spPageFromRange");
   const fN = document.getElementById("spPageFromNum");
   const tR = document.getElementById("spPageToRange");
   const tN = document.getElementById("spPageToNum");
-  if (fR) { fR.min = fMin; fR.max = fMax; if (Number(fR.value) !== fVal) fR.value = fVal; }
-  if (fN) { fN.min = fMin; fN.max = fMax; if (document.activeElement !== fN) fN.value = fVal; }
-  if (tR) { tR.min = tMin; tR.max = tMax; if (Number(tR.value) !== tVal) tR.value = tVal; }
-  if (tN) { tN.min = tMin; tN.max = tMax; if (document.activeElement !== tN) tN.value = tVal; }
+  if (fR) { fR.min = 1; fR.max = sum.sp1.count; if (Number(fR.value) !== sum.rel1) fR.value = sum.rel1; }
+  if (fN) { fN.min = 1; fN.max = sum.sp1.count; if (document.activeElement !== fN) fN.value = sum.rel1; }
+  if (tR) { tR.min = 1; tR.max = sum.sp2.count; if (Number(tR.value) !== sum.rel2) tR.value = sum.rel2; }
+  if (tN) { tN.min = 1; tN.max = sum.sp2.count; if (document.activeElement !== tN) tN.value = sum.rel2; }
+
+  document.querySelectorAll("#spFromPills .sp-pg-pill").forEach(btn => {
+    btn.classList.toggle("on", Number(btn.dataset.pg) === sum.rel1);
+  });
+  document.querySelectorAll("#spToPills .sp-pg-pill").forEach(btn => {
+    btn.classList.toggle("on", Number(btn.dataset.pg) === sum.rel2);
+  });
 
   const fHint = document.getElementById("spPageFromSurahHint");
   const tHint = document.getElementById("spPageToSurahHint");
-  const bar = document.getElementById("spPagesInfoBar");
-  if (fHint && sum.s1) {
-    fHint.textContent = sum.isRel
-      ? `صفحة ${sum.rel1} من ${sum.sp1.count} • المصحف ص ${sum.p1}`
-      : `المصحف ص ${sum.p1} (الصفحة ${sum.rel1} من السورة)`;
-  }
-  if (tHint && sum.s2) {
-    tHint.textContent = sum.isRel
-      ? `صفحة ${sum.rel2} من ${sum.sp2.count} • المصحف ص ${sum.p2}`
-      : `المصحف ص ${sum.p2} (الصفحة ${sum.rel2} من السورة)`;
-  }
-  if (bar) {
-    const mushafSpan = sum.p1 === sum.p2 ? `المصحف ص ${sum.p1}` : `المصحف ص ${sum.p1}–${sum.p2}`;
-    bar.innerHTML = `<span>📖 <b>${escapeHtml(sum.fullLabel)}</b> <small style="opacity:0.8;">(${mushafSpan})</small></span><span class="badge b-blue">${sum.pCount} ${sum.pCount === 1 ? "صفحة" : (sum.pCount === 2 ? "صفحتان" : "صفحات")}</span>`;
-  }
+  if (fHint) fHint.textContent = sum.sp1.count === 1 ? `صفحة واحدة • المصحف ص ${sum.p1}` : `المصحف ص ${sum.p1}`;
+  if (tHint) tHint.textContent = sum.sp2.count === 1 ? `صفحة واحدة • المصحف ص ${sum.p2}` : `المصحف ص ${sum.p2}`;
   renderSpPreview();
+}
+
+function renderSpPageControlRow(which, relVal, sp, mushafPg) {
+  if (sp.count <= 1) {
+    return `<div class="sp-rev-pg-bar">
+      <span class="sp-mushaf-muted" id="spPage${which === "from" ? "From" : "To"}SurahHint">صفحة واحدة • المصحف ص ${mushafPg}</span>
+    </div>`;
+  }
+  if (sp.count <= 6) {
+    const pills = [];
+    for (let p = 1; p <= sp.count; p++) {
+      pills.push(`<button type="button" class="sp-pg-pill ${p === relVal ? "on" : ""}" data-pg="${p}" onclick="spSetPageVal('${which}', ${p})">${p}</button>`);
+    }
+    return `<div class="sp-rev-pg-bar">
+      <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+        <span style="font-size:11.5px; font-weight:800; color:var(--ink-700);">صفحة:</span>
+        <div class="sp-pg-pills-row" id="sp${which === "from" ? "From" : "To"}Pills">${pills.join("")}</div>
+      </div>
+      <span class="sp-mushaf-muted" id="spPage${which === "from" ? "From" : "To"}SurahHint">المصحف ص ${mushafPg}</span>
+    </div>`;
+  }
+  const idPrefix = which === "from" ? "spPageFrom" : "spPageTo";
+  return `<div class="sp-rev-pg-bar" style="margin-bottom:5px;">
+    <div style="display:flex; align-items:center; gap:6px;">
+      <span style="font-size:11.5px; font-weight:800; color:var(--ink-700);">صفحة (1–${sp.count}):</span>
+      <div class="sp-mini-step">
+        <button type="button" onclick="spStepPageVal('${which}',-1)">−</button>
+        <input type="number" id="${idPrefix}Num" inputmode="numeric" min="1" max="${sp.count}" value="${relVal}" oninput="spSetPageVal('${which}',this.value)">
+        <button type="button" onclick="spStepPageVal('${which}',1)">+</button>
+      </div>
+    </div>
+    <span class="sp-mushaf-muted" id="${idPrefix}SurahHint">المصحف ص ${mushafPg}</span>
+  </div>
+  <input type="range" id="${idPrefix}Range" class="sp-range-input" min="1" max="${sp.count}" value="${relVal}" oninput="spSetPageVal('${which}',this.value)">`;
 }
 
 function renderSpPagesBox() {
   const box = document.getElementById("spPagesBox");
   if (!box) return;
+  spState.pageNumMode = "surah";
   const sum = getSpSurahPageSummary();
-  const fVal = sum.isRel ? sum.rel1 : sum.p1;
-  const tVal = sum.isRel ? sum.rel2 : sum.p2;
-  const fMin = sum.isRel ? 1 : sum.sp1.start;
-  const fMax = sum.isRel ? sum.sp1.count : sum.sp1.end;
-  const tMin = sum.isRel ? 1 : sum.sp2.start;
-  const tMax = sum.isRel ? sum.sp2.count : sum.sp2.end;
-  const numLbl = sum.isRel ? "رقم الصفحة داخل السورة" : "رقم الصفحة في المصحف";
 
   box.innerHTML = `
-    <div class="sp-pnum-mode">
-      <button type="button" class="sp-pnum-btn ${sum.isRel ? "on" : ""}" onclick="spSetPageNumMode('surah')">📖 صفحة داخل السورة (1، 2، 3...)</button>
-      <button type="button" class="sp-pnum-btn ${!sum.isRel ? "on" : ""}" onclick="spSetPageNumMode('mushaf')">📕 صفحة المصحف (1–604)</button>
-    </div>
-    <div id="spPagesInfoBar" class="sp-pages-info-bar"></div>
-    <div class="sp-spg-card">
-      <div class="sp-spg-top">
-        <label>▶️ من السورة</label>
-        <div class="sp-spg-quick">
-          <button type="button" class="sp-spg-qbtn" onclick="spJumpSurahPageBound('from','start')">أولها</button>
-          <button type="button" class="sp-spg-qbtn" onclick="spJumpSurahPageBound('from','end')">آخرها</button>
-        </div>
+    <div class="sp-rev-card">
+      <div class="sp-rev-row1">
+        <span class="sp-rev-lbl">▶️ من:</span>
+        <select id="spPageFromSurahSel" class="sp-rev-sel" onchange="spOnPageSurahPick('from', this.value)">${spPageSurahOptsHtml(spState.pageFromSurahId)}</select>
       </div>
-      <select id="spPageFromSurahSel" class="sp-spg-sel" onchange="spOnPageSurahPick('from', this.value)">${spPageSurahOptsHtml(spState.pageFromSurahId)}</select>
-      <div class="sp-slider-hdr" style="margin-bottom:4px;">
-        <label style="font-size:11.5px;">${numLbl}</label>
-        <span class="sp-slider-max" id="spPageFromSurahHint"></span>
-      </div>
-      <div class="sp-step-grid">
-        <button type="button" onclick="spStepPageVal('from',-5)">−5</button>
-        <button type="button" onclick="spStepPageVal('from',-1)">−1</button>
-        <input type="number" id="spPageFromNum" inputmode="numeric" min="${fMin}" max="${fMax}" value="${fVal}" oninput="spSetPageVal('from',this.value)">
-        <button type="button" onclick="spStepPageVal('from',1)">+1</button>
-        <button type="button" onclick="spStepPageVal('from',5)">+5</button>
-      </div>
-      ${fMax > fMin ? `<input type="range" id="spPageFromRange" class="sp-range-input" min="${fMin}" max="${fMax}" value="${fVal}" oninput="spSetPageVal('from',this.value)">` : ''}
+      ${renderSpPageControlRow("from", sum.rel1, sum.sp1, sum.p1)}
     </div>
 
-    <div class="sp-spg-card is-end">
-      <div class="sp-spg-top">
-        <label>⏹️ إلى السورة</label>
-        <div class="sp-spg-quick">
-          <button type="button" class="sp-spg-qbtn" onclick="spJumpSurahPageBound('to','start')">أولها</button>
-          <button type="button" class="sp-spg-qbtn" onclick="spJumpSurahPageBound('to','end')">آخرها</button>
-        </div>
+    <div class="sp-rev-card is-end">
+      <div class="sp-rev-row1">
+        <span class="sp-rev-lbl">⏹️ إلى:</span>
+        <select id="spPageToSurahSel" class="sp-rev-sel" onchange="spOnPageSurahPick('to', this.value)">${spPageSurahOptsHtml(spState.pageToSurahId)}</select>
       </div>
-      <select id="spPageToSurahSel" class="sp-spg-sel" onchange="spOnPageSurahPick('to', this.value)">${spPageSurahOptsHtml(spState.pageToSurahId)}</select>
-      <div class="sp-slider-hdr" style="margin-bottom:4px;">
-        <label style="font-size:11.5px;">${numLbl}</label>
-        <span class="sp-slider-max" id="spPageToSurahHint"></span>
-      </div>
-      <div class="sp-step-grid">
-        <button type="button" onclick="spStepPageVal('to',-5)">−5</button>
-        <button type="button" onclick="spStepPageVal('to',-1)">−1</button>
-        <input type="number" id="spPageToNum" inputmode="numeric" min="${tMin}" max="${tMax}" value="${tVal}" oninput="spSetPageVal('to',this.value)">
-        <button type="button" onclick="spStepPageVal('to',1)">+1</button>
-        <button type="button" onclick="spStepPageVal('to',5)">+5</button>
-      </div>
-      ${tMax > tMin ? `<input type="range" id="spPageToRange" class="sp-range-input" min="${tMin}" max="${tMax}" value="${tVal}" oninput="spSetPageVal('to',this.value)">` : ''}
+      ${renderSpPageControlRow("to", sum.rel2, sum.sp2, sum.p2)}
     </div>
 
-    <div class="sp-preset-grid-4" style="margin-bottom:0;">
-      <button type="button" class="sp-preset-btn" onclick="spApplyPageSpanPreset(2)">+صفحتان</button>
-      <button type="button" class="sp-preset-btn accent" onclick="spApplyPageSpanPreset(5)">+5 ص (ربع)</button>
-      <button type="button" class="sp-preset-btn accent" onclick="spApplyPageSpanPreset(10)">+10 ص (نصف)</button>
-      <button type="button" class="sp-preset-btn accent" onclick="spApplyPageSpanPreset(20)">+20 ص (جزء)</button>
+    <div class="sp-quick-span-row">
+      <button type="button" class="hl" onclick="spSelectFullStartSurah()">السورة كاملة</button>
+      <button type="button" onclick="spApplyPageSpanPreset(2)">+2 ص</button>
+      <button type="button" onclick="spApplyPageSpanPreset(5)">+5 (ربع)</button>
+      <button type="button" onclick="spApplyPageSpanPreset(10)">+10 (نصف)</button>
+      <button type="button" onclick="spApplyPageSpanPreset(20)">+20 (جزء)</button>
     </div>`;
   syncSpPageInputsOnly();
 }
@@ -17715,6 +18038,7 @@ function initApp() {
     applySavedTheme();
     installAudioUnlockOnce();
     installAutoOnlineCloudSync();
+    installRealTimeDateSyncWatcher();
 
     ["obLogoImg", "hdrLogoImg", "authLogoImg", "supHdrLogoImg", "ownerHdrLogoImg", "lnbLogoImg"].forEach(id => {
       const el = document.getElementById(id);
@@ -18370,7 +18694,8 @@ function openStudentProfile(studentId) {
     </div>
     <div style="display:flex; gap:7px; flex-wrap:wrap; margin-bottom:12px;">
       <button class="btn btn-success btn-sm" style="flex:1;" onclick="shareStudentParentWA('${st.id}', '${escapeHtml(monthFilter)}', true)">📲 إرسال لولي الأمر (واتساب)</button>
-      <button class="btn btn-primary btn-sm" onclick="openIndivReportModal('${st.id}', '${escapeHtml(monthFilter)}')">📋 كشف المتابعة الفردي</button>
+      <button class="btn btn-primary btn-sm" onclick="openIndivReportModal('${st.id}', '${escapeHtml(monthFilter)}', 'monthly')">📋 كشف فردي</button>
+      <button class="btn btn-soft btn-sm" onclick="openIndivReportModal('${st.id}', '${escapeHtml(monthFilter)}', 'compare')">📈 بطاقة المقارنة</button>
       <button class="btn btn-soft btn-sm" onclick="openCertificateModal('${st.id}', '${escapeHtml(monthFilter)}')">🏅 شهادة</button>
       <button class="btn btn-soft btn-sm" onclick="shareStudentParentWA('${st.id}', '${escapeHtml(monthFilter)}', false)">📋 نسخ</button>
       <button class="btn btn-outline btn-sm" onclick="closeModal('studentProfileModal'); openEditStudentModal('${st.id}');">✏️</button>
@@ -18983,14 +19308,48 @@ function deleteStudent(id) {
 }
 
 // ==================== SESSIONS & ARCHIVE MANAGEMENT ====================
-function ensureActiveSession() {
+function ensureActiveSession(forceRealToday = false) {
   const h = getActiveHalaqa();
   if (!h) return;
   h.sessions.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-  if (activeSessionId && h.sessions.find(s => s.id === activeSessionId)) return;
-  // Prefer active (non-archived) session first, else newest
+
+  // If user already explicitly picked a valid unlocked session and we aren't forcing real-today rollover, keep it!
+  if (!forceRealToday && activeSessionId) {
+    const cur = h.sessions.find(s => s.id === activeSessionId);
+    if (cur && !isDateSequentiallyLocked(cur.date, h)) return;
+  }
+
+  // Always anchor automatically to the REAL live calendar date (todayISO) — NEVER jump to stray future test dates!
+  const targetIso = getRealTimeTargetClassISO(h);
+  if (targetIso) {
+    let targetSess = h.sessions.find(s => s.date === targetIso);
+    if (!targetSess) {
+      const hj = getExactHijriInfo(targetIso);
+      const defaultType = getDefaultSessionTypeForDow(hj.dow, h);
+      targetSess = {
+        id: uid("ses"),
+        type: defaultType,
+        dayName: hj.dayName,
+        date: targetIso,
+        hijriDate: hj.formatted,
+        hijriMonth: hj.monthLabel,
+        archived: false,
+        v6Checked: true,
+        records: {}
+      };
+      h.students.forEach(st => { targetSess.records[st.id] = createEmptyRecord(); });
+      h.sessions.unshift(targetSess);
+      h.sessions.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+    }
+    activeSessionId = targetSess.id;
+    navWeekOffset = 0;
+    return;
+  }
+
+  const tod = todayISO();
+  const nonFuture = h.sessions.filter(s => !isSessionArchived(s) && s.date && s.date <= tod);
   const activeOnly = h.sessions.filter(s => !isSessionArchived(s));
-  activeSessionId = activeOnly[0]?.id || h.sessions[0]?.id || null;
+  activeSessionId = nonFuture[0]?.id || activeOnly[0]?.id || h.sessions[0]?.id || null;
 }
 
 function getCurrentSession() {
@@ -19209,18 +19568,23 @@ function jumpToTodayWeek() {
   navWeekOffset = 0;
   const h = getActiveHalaqa();
   const tod = todayISO();
-  if (isAllowedClassISO(tod, h)) {
-    openOrCreateByISO(tod);
+  const targetIso = getRealTimeTargetClassISO(h);
+  const hj = getExactHijriInfo(targetIso);
+  openOrCreateByISO(targetIso);
+  if (targetIso === tod) {
+    showToast(`✓ اليوم: ${hj.dayName} (${hj.day} ${HIJRI_MONTHS[hj.month] || ""})`);
+  } else if (targetIso < tod) {
+    showToast(`تم فتح جلسة ${hj.dayName} (${hj.day}/${hj.month}) لاستكمالها أولاً`);
   } else {
-    const nearest = findNearestClassISO(tod, h);
-    const hj = getExactHijriInfo(nearest);
-    openOrCreateByISO(nearest);
-    showToast(`اليوم عطلة — تم فتح أقرب يوم دوام: ${hj.dayName} (${hj.day}/${hj.month})`);
+    const todHj = getExactHijriInfo(tod);
+    showToast(`اليوم ${todHj.dayName} (${todHj.day}/${todHj.month}) — أقرب دوام: ${hj.dayName} (${hj.day}/${hj.month})`);
   }
 }
 
 
-// ==================== SEQUENTIAL FUTURE DAY LOCK ENGINE (v80) ====================
+// ==================== REAL-TIME DATE SYNC & SEQUENTIAL FUTURE DAY LOCK ENGINE (v81) ====================
+let _lastRealCalendarISO = "";
+
 function isSessionFinishedForUnlock(s, h) {
   if (!s || !h) return false;
   if (s.noClass || s.finalized) return true;
@@ -19229,30 +19593,59 @@ function isSessionFinishedForUnlock(s, h) {
   return h.students.every(st => !isStudentPending(s, getStudentRecord(s, st.id), st));
 }
 
+function getRealTimeTargetClassISO(h = null) {
+  const hal = h || getActiveHalaqa();
+  if (!hal) return todayISO();
+  const tod = todayISO();
+  const isTodClass = isAllowedClassISO(tod, hal);
+  const nextRealCls = isTodClass ? tod : findAdjacentClassISO(tod, 1, hal);
+
+  // Check if there is an unfinished real session on or before today that still needs completion
+  const pastOrToday = (hal.sessions || [])
+    .filter(s => s && s.date && s.date <= tod && (s.noClass || s.finalized || isSessionHasRealActivity(s)))
+    .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+
+  if (pastOrToday.length) {
+    const lastPast = pastOrToday[pastOrToday.length - 1];
+    if (!isSessionFinishedForUnlock(lastPast, hal)) {
+      return lastPast.date;
+    }
+  }
+  return nextRealCls;
+}
+
 function getSequentialUnlockState(h = null) {
   const hal = h || getActiveHalaqa();
   if (!hal || hal.sequentialDayLock === false || !hal.students || !hal.students.length) {
-    return { enabled: false, unlockedIso: null, blockingSession: null, pendingCnt: 0 };
+    return { enabled: false, unlockedIso: null, blockingSession: null, pendingCnt: 0, realToday: todayISO(), nextRealCls: null };
   }
-  const meaningful = (hal.sessions || [])
-    .filter(s => s && s.date && (s.noClass || s.finalized || isSessionHasRealActivity(s)))
+
+  const tod = todayISO();
+  const isTodClass = isAllowedClassISO(tod, hal);
+  const nextRealCls = isTodClass ? tod : findAdjacentClassISO(tod, 1, hal);
+
+  // Step 1: Look ONLY at real sessions on or before today (ignore stray future test sessions!)
+  const pastOrToday = (hal.sessions || [])
+    .filter(s => s && s.date && s.date <= tod && (s.noClass || s.finalized || isSessionHasRealActivity(s)))
     .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
 
-  if (!meaningful.length) {
-    // New halaqa with no recorded sessions yet: allow up to today's active class day (or next upcoming class day)
-    const tod = todayISO();
-    const firstAllowed = isAllowedClassISO(tod, hal) ? tod : getNextClassDateInfo(hal).iso;
-    return { enabled: true, unlockedIso: firstAllowed, blockingSession: null, pendingCnt: hal.students.length };
+  if (pastOrToday.length) {
+    const lastPast = pastOrToday[pastOrToday.length - 1];
+    if (!isSessionFinishedForUnlock(lastPast, hal)) {
+      const pCnt = hal.students.filter(st => isStudentPending(lastPast, getStudentRecord(lastPast, st.id), st)).length;
+      return { enabled: true, unlockedIso: lastPast.date, blockingSession: lastPast, pendingCnt: pCnt, realToday: tod, nextRealCls };
+    }
   }
 
-  const lastS = meaningful[meaningful.length - 1];
-  if (!isSessionFinishedForUnlock(lastS, hal)) {
-    const pCnt = hal.students.filter(st => isStudentPending(lastS, getStudentRecord(lastS, st.id), st)).length;
-    return { enabled: true, unlockedIso: lastS.date, blockingSession: lastS, pendingCnt: pCnt };
+  // Step 2: Today / immediate next real class day is open.
+  // Allow 1 class day beyond nextRealCls ONLY if nextRealCls itself is finished/noClass/finalized!
+  const nextSess = (hal.sessions || []).find(s => s && s.date === nextRealCls);
+  if (nextSess && isSessionFinishedForUnlock(nextSess, hal)) {
+    const oneAheadIso = findAdjacentClassISO(nextRealCls, 1, hal);
+    return { enabled: true, unlockedIso: oneAheadIso, blockingSession: null, pendingCnt: 0, realToday: tod, nextRealCls };
   }
 
-  const nextUnlockedIso = findAdjacentClassISO(lastS.date, 1, hal);
-  return { enabled: true, unlockedIso: nextUnlockedIso, blockingSession: null, pendingCnt: 0 };
+  return { enabled: true, unlockedIso: nextRealCls, blockingSession: null, pendingCnt: 0, realToday: tod, nextRealCls };
 }
 
 function isDateSequentiallyLocked(iso, h = null) {
@@ -19262,6 +19655,36 @@ function isDateSequentiallyLocked(iso, h = null) {
   return iso > st.unlockedIso;
 }
 
+function getStrayFutureSessions(h = null) {
+  const hal = h || getActiveHalaqa();
+  if (!hal) return [];
+  const st = getSequentialUnlockState(hal);
+  const capIso = st.unlockedIso || findAdjacentClassISO(todayISO(), 1, hal);
+  return (hal.sessions || [])
+    .filter(s => s && s.date && s.date > capIso)
+    .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+}
+
+function cleanupStrayFutureSessions() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const stray = getStrayFutureSessions(h);
+  if (!stray.length) { showToast("لا توجد جلسات مستقبلية للمسح ✓"); return; }
+  const labels = stray.map(s => `${s.dayName} (${s.hijriDate})`).join("، ");
+  if (!confirm(`هل تريد حذف ${stray.length} جلسة تجريبية بتواريخ مستقبلية لم يحن موعدها بعد؟
+
+${labels}`)) return;
+  const dropIds = new Set(stray.map(s => s.id));
+  h.sessions = h.sessions.filter(s => !dropIds.has(s.id));
+  activeSessionId = null;
+  ensureActiveSession(true);
+  saveState();
+  populateSessionSelectors();
+  populateMonthFilters();
+  renderSessionView();
+  showToast(`✓ تم مسح ${stray.length} جلسة مستقبلية وضبط التقويم على التاريخ الفعلي`);
+}
+
 function toggleSessionFinalized(val) {
   const h = getActiveHalaqa(), s = getCurrentSession();
   if (!h || !s) return;
@@ -19269,9 +19692,13 @@ function toggleSessionFinalized(val) {
   saveState();
   renderSessionView();
   if (s.finalized) {
-    const nextIso = findAdjacentClassISO(s.date, 1, h);
-    const hj = getExactHijriInfo(nextIso);
-    showToast(`✓ تم إنهاء جلسة ${s.dayName} — فُتح يوم ${hj.dayName} (${hj.day}/${hj.month}) تلقائياً 🔓`);
+    const lSt = getSequentialUnlockState(h);
+    if (lSt.unlockedIso && lSt.unlockedIso > s.date) {
+      const hj = getExactHijriInfo(lSt.unlockedIso);
+      showToast(`✓ تم إنهاء جلسة ${s.dayName} — فُتح يوم ${hj.dayName} (${hj.day}/${hj.month}) تلقائياً 🔓`);
+    } else {
+      showToast(`✓ تم إنهاء جلسة ${s.dayName}`);
+    }
   } else {
     showToast("تم إعادة فتح الجلسة للتعديل");
   }
@@ -19285,8 +19712,47 @@ function showSequentialLockToast(targetIso) {
   if (st.blockingSession) {
     showToast(`🔒 مقفول! أنهِ جلسة ${hjOpen.dayName} (${hjOpen.day}/${hjOpen.month}) أو اعتمد الغياب (${st.pendingCnt}) أو سجّلها عطلة أولاً`);
   } else {
-    showToast(`🔒 مقفول! مسموح بيوم قادم واحد فقط: ${hjOpen.dayName} (${hjOpen.day}/${hjOpen.month}) — أعطه أو سجّله عطلة ليفتح التالي`);
+    showToast(`🔒 مقفول! لم يحن موعده بعد — المتاح الآن: ${hjOpen.dayName} (${hjOpen.day}/${hjOpen.month}) فقط`);
   }
+}
+
+function checkRealTimeDateRollover(showNotify = false) {
+  const curReal = todayISO();
+  if (!_lastRealCalendarISO) {
+    _lastRealCalendarISO = curReal;
+    return false;
+  }
+  if (curReal === _lastRealCalendarISO) return false;
+  _lastRealCalendarISO = curReal;
+  for (const k in _hijriInfoCache) delete _hijriInfoCache[k];
+  _hijriCacheCount = 0;
+
+  const hjTxt = "📅 " + getExactHijriInfo(curReal).fullText;
+  if (document.getElementById("obTodayHijri")) document.getElementById("obTodayHijri").textContent = hjTxt;
+  if (document.getElementById("authTodayHijri")) document.getElementById("authTodayHijri").textContent = hjTxt;
+
+  const h = getActiveHalaqa();
+  if (h && document.getElementById("appShell")?.style.display !== "none") {
+    navWeekOffset = 0;
+    ensureActiveSession(true);
+    populateSessionSelectors();
+    populateMonthFilters();
+    const curS = getCurrentSession();
+    if (curS?.type === "saturday") prefillSaturdayReviews(false, false);
+    else if (curS?.type === "daily") prefillDailyRecitation(false, false);
+    renderSessionView();
+    if (showNotify) showToast(`📅 تم التحديث التلقائي لتاريخ اليوم: ${getExactHijriInfo(curReal).fullText}`);
+  }
+  return true;
+}
+
+function installRealTimeDateSyncWatcher() {
+  _lastRealCalendarISO = todayISO();
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") checkRealTimeDateRollover(true);
+  });
+  window.addEventListener("focus", () => checkRealTimeDateRollover(true));
+  setInterval(() => checkRealTimeDateRollover(true), 60000);
 }
 
 function openOrCreateByISO(iso) {
@@ -20336,9 +20802,13 @@ function renderTodayBanner() {
   if (cur) {
     const mName = HIJRI_MONTHS[curHj.month] || "";
     const archTag = isSessionArchived(cur) ? "🗂️ " : "";
-    dateMain = `${archTag}${cur.dayName}، ${curHj.day} ${mName} ${curHj.year} هـ`;
+    dateMain = `${archTag}${cur.dayName}، ${curHj.day} ${mName}`;
     const isTodaySess = cur.date === tod;
-    dateSub = isTodaySess ? "اليوم • اضغط لعرض جدول الشهر" : `شهر ${curHj.monthLabel} هـ • اضغط لعرض جدول الشهر`;
+    const todHj = getExactHijriInfo(tod);
+    const todShort = `${todHj.dayName} ${todHj.day} ${HIJRI_MONTHS[todHj.month] || ""}`;
+    dateSub = isTodaySess
+      ? `اليوم الفعلي (${curHj.year} هـ) • اضغط للتقويم`
+      : `اليوم: ${todShort} • اضغط للتقويم`;
     if (cur.noClass) { modeLbl = "🚫 عطلة"; modeCls = "is-nc"; }
     else if (cur.type === "saturday") { modeLbl = "📘 مراجعة"; modeCls = "is-sat"; }
     else { modeLbl = "📖 تسميع"; modeCls = ""; }
@@ -20449,7 +20919,16 @@ function renderSessionView() {
 
   const container = document.getElementById("sessionContent");
   const archBanner = document.getElementById("archiveEditBanner");
-  archBanner.innerHTML = "";
+  const _strayFuture = getStrayFutureSessions(h);
+  if (_strayFuture.length) {
+    const _todHjB = getExactHijriInfo(todayISO());
+    archBanner.innerHTML = `<div class="archive-edit-banner" style="background:var(--orange-bg); border-color:rgba(184,86,16,0.35); color:var(--ink-900);">
+      <span style="font-size:12px;">🗓️ <b>تاريخ اليوم:</b> ${_todHjB.dayName} ${_todHjB.day} ${HIJRI_MONTHS[_todHjB.month] || ""} — توجد <b>${_strayFuture.length}</b> جلسات مستقبلية مسجّلة مسبقاً (مقفولة تلقائياً).</span>
+      <button type="button" class="btn btn-danger btn-sm" onclick="cleanupStrayFutureSessions()">🗑️ مسح المستقبلية</button>
+    </div>`;
+  } else {
+    archBanner.innerHTML = "";
+  }
 
   if (!s) {
     const nxt = getNextClassDateInfo();
@@ -24539,9 +25018,14 @@ function renderStatsComparisonCard() {
     const curWk = getWeekSatKeyForISO(todayISO());
     const prevWk = getPrevWeekSatKey(curWk);
     const wkSet = new Set([curWk, prevWk]);
-    allActive.forEach(s => { if (s.date) wkSet.add(getWeekSatKeyForISO(s.date)); });
+    allActive.forEach(s => {
+      if (s.date) {
+        const wk = getWeekSatKeyForISO(s.date);
+        if (wk <= curWk) wkSet.add(wk);
+      }
+    });
     const weeks = Array.from(wkSet).sort((a, b) => b.localeCompare(a));
-    activeRef = (_statsCmpPeriod && weeks.includes(_statsCmpPeriod)) ? _statsCmpPeriod : weeks[0];
+    activeRef = (_statsCmpPeriod && weeks.includes(_statsCmpPeriod)) ? _statsCmpPeriod : curWk;
     _statsCmpPeriod = activeRef;
     optsHtml = weeks.map(wk => {
       const info = getWeekDisplayRange(wk);
@@ -24578,8 +25062,8 @@ function renderStatsComparisonCard() {
         const pD = formatCmpDeltaBadge(cmp.dPres, "حضور");
         const bCls = cmp.verdict === "up" ? "b-green" : (cmp.verdict === "down" ? "b-red" : "b-slate");
         const openCall = _statsCmpMode === "weekly"
-          ? `openIndivReportModal('${st.id}','','weekly','${activeRef}')`
-          : `openIndivReportModal('${st.id}','${escapeHtml(activeRef)}','monthly')`;
+          ? `openIndivReportModal('${st.id}','','compare','${activeRef}','weekly')`
+          : `openIndivReportModal('${st.id}','${escapeHtml(activeRef)}','compare','','monthly')`;
         return `<div class="cmp-stu-row ${cmp.verdict}">
           <div class="cmp-stu-info">
             <div class="cmp-stu-name">${escapeHtml(st.name)}</div>
@@ -24591,7 +25075,7 @@ function renderStatsComparisonCard() {
           </div>
           <div style="display:inline-flex; align-items:center; gap:5px; flex-shrink:0;">
             <span class="badge ${bCls}">${cmp.verdict === "up" ? "📈 تقدّم" : (cmp.verdict === "down" ? "📉 تراجع" : "➖ ثابت")}</span>
-            <button type="button" class="btn btn-soft btn-sm" style="padding:4px 8px; font-size:11px;" onclick="${openCall}">📋 الكشف</button>
+            <button type="button" class="btn btn-soft btn-sm" style="padding:4px 8px; font-size:11px;" onclick="${openCall}">📈 البطاقة</button>
           </div>
         </div>`;
       }).join("")}</div>`;
@@ -24620,10 +25104,17 @@ function renderStatsComparisonCard() {
 function openQuickIndivReport() {
   const h = getActiveHalaqa();
   if (!h || !h.students.length) { showToast("أضف طلاباً للحلقة أولاً"); return; }
-  openIndivReportModal(h.students[0].id);
+  openIndivReportModal(h.students[0].id, "", "monthly");
 }
 
-let _irPeriodMode = "monthly"; // "monthly" | "weekly"
+function openQuickCompareCard() {
+  const h = getActiveHalaqa();
+  if (!h || !h.students.length) { showToast("أضف طلاباً للحلقة أولاً"); return; }
+  openIndivReportModal(h.students[0].id, "", "compare", "", "weekly");
+}
+
+let _irPeriodMode = "monthly"; // "monthly" | "weekly" | "compare"
+let _irCmpBasis = "weekly"; // "weekly" | "monthly" (when _irPeriodMode === "compare")
 let _irWeekKey = ""; // Saturday ISO date representing week start (Sat..Fri)
 let _irSelectedWeekDates = new Set(); // Exact ISO dates chosen by teacher for weekly report!
 
@@ -24681,7 +25172,8 @@ function selectAllIrWeekDays() {
 function renderIrWeekDaysPicker() {
   const box = document.getElementById("irWeekDaysPickerWrap");
   if (!box) return;
-  if (_irPeriodMode !== "weekly") { box.style.display = "none"; return; }
+  const showDays = _irPeriodMode === "weekly" || (_irPeriodMode === "compare" && _irCmpBasis === "weekly");
+  if (!showDays) { box.style.display = "none"; return; }
   const h = getActiveHalaqa();
   const cands = getWeekCandidateSessions(h, _irWeekKey);
   box.style.display = "block";
@@ -24692,7 +25184,7 @@ function renderIrWeekDaysPicker() {
   const allOn = cands.every(s => _irSelectedWeekDates.has(s.date));
   box.innerHTML = `
     <div class="ir-wk-days-hdr">
-      <span>📅 حدد أيام الكشف في هذا الأسبوع (${_irSelectedWeekDates.size} من ${cands.length}):</span>
+      <span>📅 حدد أيام الأسبوع المشمولة (${_irSelectedWeekDates.size} من ${cands.length}):</span>
       ${!allOn ? `<button type="button" class="pp-mode-link" onclick="selectAllIrWeekDays()">تحديد الكل</button>` : `<span style="color:var(--green); font-size:10.5px;">✓ كل أيام الأسبوع</span>`}
     </div>
     <div class="ir-wk-days-chips">
@@ -24708,29 +25200,62 @@ function renderIrWeekDaysPicker() {
     </div>`;
 }
 
-function setIndivReportPeriod(mode) {
-  _irPeriodMode = mode === "weekly" ? "weekly" : "monthly";
-  document.getElementById("irPeriodMonthlyBtn")?.classList.toggle("on", _irPeriodMode === "monthly");
-  document.getElementById("irPeriodWeeklyBtn")?.classList.toggle("on", _irPeriodMode === "weekly");
+function setIrCompareBasis(basis) {
+  _irCmpBasis = basis === "monthly" ? "monthly" : "weekly";
+  document.getElementById("irCmpSubWeekly")?.classList.toggle("on", _irCmpBasis === "weekly");
+  document.getElementById("irCmpSubMonthly")?.classList.toggle("on", _irCmpBasis === "monthly");
   const mw = document.getElementById("irMonthSelectWrap");
   const ww = document.getElementById("irWeekSelectWrap");
-  if (mw) mw.style.display = _irPeriodMode === "monthly" ? "block" : "none";
-  if (ww) ww.style.display = _irPeriodMode === "weekly" ? "block" : "none";
-  const hd = document.getElementById("irModalHeading");
-  if (hd) hd.textContent = _irPeriodMode === "weekly" ? "📆 كشف المتابعة الأسبوعي للطالب" : "📅 كشف المتابعة الشهري للطالب";
-  if (_irPeriodMode === "weekly") syncDefaultSelectedWeekDates();
+  if (mw) mw.style.display = _irCmpBasis === "monthly" ? "block" : "none";
+  if (ww) ww.style.display = _irCmpBasis === "weekly" ? "block" : "none";
+  if (_irCmpBasis === "weekly") syncDefaultSelectedWeekDates();
   else renderIrWeekDaysPicker();
   loadIndivReportNoteInput();
   renderIndivReportPaper();
 }
 
-function openIndivReportModal(studentId, monthFilter = "", periodMode = "monthly", weekKeyOverride = "") {
+function setIndivReportPeriod(mode) {
+  _irPeriodMode = (mode === "weekly" || mode === "compare") ? mode : "monthly";
+  document.getElementById("irPeriodMonthlyBtn")?.classList.toggle("on", _irPeriodMode === "monthly");
+  document.getElementById("irPeriodWeeklyBtn")?.classList.toggle("on", _irPeriodMode === "weekly");
+  const cmpBtn = document.getElementById("irPeriodCompareBtn");
+  if (cmpBtn) {
+    cmpBtn.classList.toggle("on", _irPeriodMode === "compare");
+    cmpBtn.classList.toggle("on-cmp", _irPeriodMode === "compare");
+  }
+  const subBar = document.getElementById("irCompareSubBar");
+  if (subBar) subBar.style.display = _irPeriodMode === "compare" ? "grid" : "none";
+
+  const useWeek = _irPeriodMode === "weekly" || (_irPeriodMode === "compare" && _irCmpBasis === "weekly");
+  const mw = document.getElementById("irMonthSelectWrap");
+  const ww = document.getElementById("irWeekSelectWrap");
+  if (mw) mw.style.display = useWeek ? "none" : "block";
+  if (ww) ww.style.display = useWeek ? "block" : "none";
+
+  const hd = document.getElementById("irModalHeading");
+  if (hd) {
+    hd.textContent = _irPeriodMode === "compare"
+      ? "📈 بطاقة مقارنة تقدّم الطالب"
+      : (_irPeriodMode === "weekly" ? "📆 كشف المتابعة الأسبوعي للطالب" : "📅 كشف المتابعة الشهري للطالب");
+  }
+  if (_irPeriodMode === "compare") {
+    document.getElementById("irCmpSubWeekly")?.classList.toggle("on", _irCmpBasis === "weekly");
+    document.getElementById("irCmpSubMonthly")?.classList.toggle("on", _irCmpBasis === "monthly");
+  }
+  if (useWeek) syncDefaultSelectedWeekDates();
+  else renderIrWeekDaysPicker();
+  loadIndivReportNoteInput();
+  renderIndivReportPaper();
+}
+
+function openIndivReportModal(studentId, monthFilter = "", periodMode = "monthly", weekKeyOverride = "", cmpBasisOverride = "") {
   const h = getActiveHalaqa();
   if (!h) return;
   const st = h.students.find(x => x.id === studentId) || h.students[0];
   if (!st) return;
   closeModal("studentProfileModal");
   _irStudentId = st.id;
+  if (cmpBasisOverride) _irCmpBasis = cmpBasisOverride === "monthly" ? "monthly" : "weekly";
 
   const stSel = document.getElementById("irStudentSelect");
   if (stSel) {
@@ -24739,7 +25264,7 @@ function openIndivReportModal(studentId, monthFilter = "", periodMode = "monthly
     ).join("");
   }
 
-  // Populate Hijri Months
+  // Populate Hijri Months (never default to future months)
   const todayHj = getExactHijriInfo(todayISO());
   const monthsSet = new Set([todayHj.monthLabel]);
   (h.sessions || []).forEach(s => { const m = getSessionReportMonth(s); if (m) monthsSet.add(m); });
@@ -24748,27 +25273,30 @@ function openIndivReportModal(studentId, monthFilter = "", periodMode = "monthly
   if (mSel) {
     mSel.innerHTML = months.map(m => `<option value="${escapeHtml(m)}">شهر ${escapeHtml(m)} هـ</option>`).join("")
       + `<option value="ALL">جميع الجلسات</option>`;
-    const targetM = monthFilter || document.getElementById("monthlyHijriFilter")?.value || todayHj.monthLabel;
+    const targetM = (monthFilter && monthFilter !== "ALL") ? monthFilter : todayHj.monthLabel;
     mSel.value = Array.from(mSel.options).some(o => o.value === targetM) ? targetM : months[0];
     _irMonthFilter = mSel.value;
   }
 
-  // Populate Available Weeks (Sat -> Fri)
+  // Populate Available Weeks (Sat -> Fri) — STRICTLY up to REAL current week (never jump to future stray weeks!)
   const curWk = getWeekSatKeyForISO(todayISO());
   const prevWk = getPrevWeekSatKey(curWk);
   const weeksSet = new Set([curWk, prevWk]);
   (h.sessions || []).forEach(s => {
-    if (!s.noClass && s.date && isSessionHasRealActivity(s)) weeksSet.add(getWeekSatKeyForISO(s.date));
+    if (!s.noClass && s.date && isSessionHasRealActivity(s)) {
+      const wk = getWeekSatKeyForISO(s.date);
+      if (wk <= curWk) weeksSet.add(wk);
+    }
   });
   const sortedWeeks = Array.from(weeksSet).sort((a, b) => b.localeCompare(a));
   const wSel = document.getElementById("irWeekSelect");
   if (wSel) {
     wSel.innerHTML = sortedWeeks.map(wk => {
       const info = getWeekDisplayRange(wk);
-      const tag = wk === curWk ? " (الأسبوع الحالي)" : "";
+      const tag = wk === curWk ? " (الأسبوع الحالي)" : (wk === prevWk ? " (الأسبوع الماضي)" : "");
       return `<option value="${wk}">${escapeHtml(info.label)}${tag}</option>`;
     }).join("");
-    _irWeekKey = (weekKeyOverride && sortedWeeks.includes(weekKeyOverride)) ? weekKeyOverride : (sortedWeeks[0] || curWk);
+    _irWeekKey = (weekKeyOverride && sortedWeeks.includes(weekKeyOverride)) ? weekKeyOverride : curWk;
     wSel.value = _irWeekKey;
   }
 
@@ -24778,7 +25306,8 @@ function openIndivReportModal(studentId, monthFilter = "", periodMode = "monthly
 }
 
 function getIndivNoteKey(studentId, monthVal) {
-  if (_irPeriodMode === "weekly") return `WEEK_${_irWeekKey}__${studentId}`;
+  const useWeek = _irPeriodMode === "weekly" || (_irPeriodMode === "compare" && _irCmpBasis === "weekly");
+  if (useWeek) return `WEEK_${_irWeekKey}__${studentId}`;
   return `${monthVal || "ALL"}__${studentId}`;
 }
 
@@ -24795,7 +25324,8 @@ function onIndivReportFilterChange() {
   _irStudentId = document.getElementById("irStudentSelect")?.value || _irStudentId;
   _irMonthFilter = document.getElementById("irMonthSelect")?.value || _irMonthFilter;
   _irWeekKey = document.getElementById("irWeekSelect")?.value || _irWeekKey;
-  if (_irPeriodMode === "weekly" && _irWeekKey !== prevWk) {
+  const useWeek = _irPeriodMode === "weekly" || (_irPeriodMode === "compare" && _irCmpBasis === "weekly");
+  if (useWeek && _irWeekKey !== prevWk) {
     syncDefaultSelectedWeekDates();
   }
   loadIndivReportNoteInput();
@@ -24836,13 +25366,92 @@ function fitIndivReportPreview() {
   if (!scroll || !host || !paper) return;
   paper.style.transform = "none";
   const natW = 820;
-  const natH = Math.max(400, paper.scrollHeight);
+  const natH = Math.max(360, paper.scrollHeight);
   const availW = Math.max(240, scroll.clientWidth - 14);
   const scale = Math.min(1, availW / natW);
   paper.style.transform = `scale(${scale})`;
   paper.style.transformOrigin = "top right";
   host.style.width = `${Math.round(natW * scale)}px`;
   host.style.height = `${Math.round(natH * scale)}px`;
+}
+
+function renderStandaloneCompareCardPaper(st, h, bm, ptsOn) {
+  const basis = _irCmpBasis === "monthly" ? "monthly" : "weekly";
+  const wkInfo = getWeekDisplayRange(_irWeekKey || getWeekSatKeyForISO(todayISO()));
+  const monthVal = (_irMonthFilter && _irMonthFilter !== "ALL") ? _irMonthFilter : getExactHijriInfo(todayISO()).monthLabel;
+  const cmp = computeStudentProgressComparison(
+    st, h, basis,
+    basis === "weekly" ? wkInfo.satIso : monthVal,
+    basis === "weekly" ? _irSelectedWeekDates : null
+  );
+  const hjToday = getExactHijriInfo(todayISO());
+  const gt = getGenderTerms(h);
+  const sheikhNote = (document.getElementById("irSheikhNoteInput")?.value || "").trim();
+
+  const bCls = cmp?.verdict === "up" ? "is-up" : (cmp?.verdict === "down" ? "is-down" : "is-flat");
+  const vCls = cmp?.verdict === "up" ? "up" : (cmp?.verdict === "down" ? "down" : "flat");
+  const prevTitle = basis === "weekly" ? "الأسبوع السابق" : "الشهر السابق";
+  const curTitle = basis === "weekly" ? "هذا الأسبوع" : "هذا الشهر";
+
+  const makeTile = (title, ico, prevVal, curVal, unit, deltaVal) => {
+    const dObj = formatCmpDeltaBadge(deltaVal, unit);
+    const tileCls = deltaVal > 0 ? "up" : (deltaVal < 0 ? "down" : "");
+    return `<div class="ccp-metric-tile ${tileCls}">
+      <div class="ccp-mt-hdr">
+        <span class="ccp-mt-title">${ico} ${title}</span>
+        <span class="ccp-mt-delta ${dObj.cls}">${dObj.txt}</span>
+      </div>
+      <div class="ccp-mt-vs">
+        <div class="ccp-vs-box"><small>${prevTitle}</small><b>${prevVal}${unit ? " " + unit : ""}</b></div>
+        <div class="ccp-vs-arrow">←</div>
+        <div class="ccp-vs-box cur"><small>${curTitle}</small><b>${curVal}${unit ? " " + unit : ""}</b></div>
+      </div>
+    </div>`;
+  };
+
+  let tilesHtml = "";
+  if (cmp) {
+    tilesHtml += makeTile(cmp.isRashidi ? "القاعدة الرشيدية" : "الحفظ الجديد", "📖", formatNum(cmp.prevMem), formatNum(cmp.curMem), "ص", cmp.dMem);
+    if (!cmp.isRashidi) {
+      tilesHtml += makeTile("المراجعة", "🔄", formatNum(cmp.prev.revPages), formatNum(cmp.cur.revPages), "ص", cmp.dRev);
+    }
+    tilesHtml += makeTile("أيام الحضور", "✅", cmp.prev.presentDays, cmp.cur.presentDays, "يوم", cmp.dPres);
+    if (ptsOn) {
+      tilesHtml += makeTile("مجموع النقاط", "⭐", cmp.prev.totalPoints, cmp.cur.totalPoints, "نقطة", cmp.dPts);
+    }
+  }
+
+  return `<div class="cmp-card-paper" id="indivReportCanvas">
+    <div class="ccp-header">
+      <div class="ccp-hdr-org">${escapeHtml(bm.org)}<br>${escapeHtml(bm.branch)} • ${escapeHtml(bm.program)}</div>
+      <div class="ccp-hdr-mid">
+        <h2>📈 بطاقة مقارنة الأداء والتقدّم</h2>
+        <p>${basis === "weekly" ? "مقارنة أسبوعية" : "مقارنة شهرية"} — حلقة ${escapeHtml(bm.name)}</p>
+      </div>
+      <div class="ccp-logo-box"><img src="${bm.logoSrc}" alt="الشعار"></div>
+    </div>
+    <div class="ccp-body">
+      <div class="ccp-student-banner ${bCls}">
+        <div>
+          <div class="ccp-st-name">${escapeHtml(st.name)}</div>
+          <div class="ccp-st-periods">📌 ${escapeHtml(cmp?.curLabel || "")} &nbsp;مقابل&nbsp; ${escapeHtml(cmp?.prevLabel || "")}</div>
+        </div>
+        <div class="ccp-big-verdict ${vCls}">${cmp?.verdictLabel || "➖ مستوى ثابت"}</div>
+      </div>
+
+      <div class="ccp-metrics-grid">${tilesHtml}</div>
+
+      <div class="ccp-msg-banner">💬 <b>تقييم التقدّم:</b> ${escapeHtml(cmp?.verdictMsg || "")}</div>
+
+      <div id="irCanvasNoteBox" class="ir-note-box" style="${sheikhNote ? "" : "display:none;"}"><b>📝 توصية ${gt.supervisorTitle} لولي الأمر:</b> ${escapeHtml(sheikhNote)}</div>
+
+      <div class="ccp-footer">
+        <div><span>${gt.supervisorTitle}</span>${escapeHtml(bm.sheikh)}</div>
+        <div><span>الصرح والحلقة</span>${escapeHtml(bm.branch)} — ${escapeHtml(bm.name)}</div>
+        <div><span>تاريخ الإصدار</span>${escapeHtml(hjToday.formatted)}</div>
+      </div>
+    </div>
+  </div>`;
 }
 
 function renderIndivReportPaper() {
@@ -24852,6 +25461,12 @@ function renderIndivReportPaper() {
   if (!st || !wrap) return;
 
   const ptsOn = isPointsEnabled(h);
+  if (_irPeriodMode === "compare") {
+    wrap.innerHTML = renderStandaloneCompareCardPaper(st, h, bm, ptsOn);
+    requestAnimationFrame(fitIndivReportPreview);
+    return;
+  }
+
   const isWeekly = _irPeriodMode === "weekly";
   const monthVal = _irMonthFilter || "ALL";
   const wkInfo = getWeekDisplayRange(_irWeekKey || getWeekSatKeyForISO(todayISO()));
@@ -25037,8 +25652,11 @@ function renderIndivReportPaper() {
 function getIndivReportFileName() {
   const h = getActiveHalaqa();
   const st = h?.students.find(x => x.id === _irStudentId);
-  const kind = _irPeriodMode === "weekly" ? "كشف_أسبوعي" : "كشف_شهري";
-  const period = _irPeriodMode === "weekly" ? (_irWeekKey || todayISO()) : cleanFilePart(_irMonthFilter || "شامل");
+  const useWeek = _irPeriodMode === "weekly" || (_irPeriodMode === "compare" && _irCmpBasis === "weekly");
+  const kind = _irPeriodMode === "compare"
+    ? (useWeek ? "مقارنة_أسبوعية" : "مقارنة_شهرية")
+    : (_irPeriodMode === "weekly" ? "كشف_أسبوعي" : "كشف_شهري");
+  const period = useWeek ? (_irWeekKey || todayISO()) : cleanFilePart(_irMonthFilter || "شامل");
   return `${kind}_${cleanFilePart(st?.name || "طالب")}_${period}`;
 }
 
@@ -25057,13 +25675,13 @@ function shareIndivReportParentWA() {
   const bm = getBrandMeta(h);
   const gt = getGenderTerms(h);
   const ptsOn = isPointsEnabled(h);
-  const isWeekly = _irPeriodMode === "weekly";
+  const useWeek = _irPeriodMode === "weekly" || (_irPeriodMode === "compare" && _irCmpBasis === "weekly");
   const wkInfo = getWeekDisplayRange(_irWeekKey || getWeekSatKeyForISO(todayISO()));
-  const monthVal = _irMonthFilter || getExactHijriInfo(todayISO()).monthLabel;
+  const monthVal = (_irMonthFilter && _irMonthFilter !== "ALL") ? _irMonthFilter : getExactHijriInfo(todayISO()).monthLabel;
 
-  let periodTxt = isWeekly ? `الأسبوع (${wkInfo.label})` : (monthVal === "ALL" ? "شامل" : `شهر ${monthVal} هـ`);
+  let periodTxt = useWeek ? `الأسبوع (${wkInfo.label})` : `شهر ${monthVal} هـ`;
   let row = null;
-  if (isWeekly) {
+  if (useWeek) {
     const allWeekSess = getWeekCandidateSessions(h, wkInfo.satIso);
     const chosen = (_irSelectedWeekDates && _irSelectedWeekDates.size > 0)
       ? allWeekSess.filter(s => _irSelectedWeekDates.has(s.date))
@@ -25078,21 +25696,25 @@ function shareIndivReportParentWA() {
 
   const cmp = computeStudentProgressComparison(
     st, h,
-    isWeekly ? "weekly" : "monthly",
-    isWeekly ? wkInfo.satIso : monthVal,
-    isWeekly ? _irSelectedWeekDates : null
+    useWeek ? "weekly" : "monthly",
+    useWeek ? wkInfo.satIso : monthVal,
+    useWeek ? _irSelectedWeekDates : null
   );
   const sheikhNote = (document.getElementById("irSheikhNoteInput")?.value || "").trim();
 
+  const headerTitle = _irPeriodMode === "compare"
+    ? (useWeek ? "بطاقة المقارنة الأسبوعية" : "بطاقة المقارنة الشهرية")
+    : (useWeek ? "كشف المتابعة الأسبوعي" : "كشف المتابعة الشهري");
+
   let txt = `السلام عليكم ورحمة الله وبركاته 🌿
 `;
-  txt += `*${isWeekly ? "كشف المتابعة الأسبوعي" : "كشف المتابعة الشهري"} للـ${gt.student}: ${st.name}*
+  txt += `*${headerTitle} للـ${gt.student}: ${st.name}*
 `;
   txt += `🕌 *حلقة ${bm.name}* | 📅 *${periodTxt}*
 `;
   txt += `━━━━━━━━━━━━━
 `;
-  if (row) {
+  if (_irPeriodMode !== "compare" && row) {
     const memVal = st.track === "rashidi" ? row.rashidiPages : row.memPages;
     txt += `📖 *${st.track === "rashidi" ? "الرشيدي" : "صفحات الحفظ"}:* ${formatNum(memVal)} صفحة (${row.fromMem} ← ${row.toMem})
 `;
@@ -25105,18 +25727,21 @@ function shareIndivReportParentWA() {
     if (row.sabrList.length) txt += `🎓 *الأجزاء المسبورة:* ${row.sabrList.join("، ")}
 `;
   }
-  if (cmp && cmp.prevHasData) {
+  if (cmp) {
     const mD = formatCmpDeltaBadge(cmp.dMem, "ص");
     const rD = formatCmpDeltaBadge(cmp.dRev, "ص");
-    txt += `━━━━━━━━━━━━━
+    const pD = formatCmpDeltaBadge(cmp.dPres, "يوم");
+    if (_irPeriodMode !== "compare") txt += `━━━━━━━━━━━━━
 `;
     txt += `📊 *مقارنة الأداء مع ${cmp.prevLabel}:* ${cmp.verdictLabel}
 `;
-    txt += `• ${cmp.isRashidi ? "الرشيدي" : "الحفظ"}: ${formatNum(cmp.curMem)} ص مقابل ${formatNum(cmp.prevMem)} ص (${mD.txt})
+    txt += `• ${cmp.isRashidi ? "الرشيدي" : "الحفظ"}: ${formatNum(cmp.prevMem)} ص ← ${formatNum(cmp.curMem)} ص (${mD.txt})
 `;
-    if (!cmp.isRashidi) txt += `• المراجعة: ${formatNum(cmp.cur.revPages)} ص مقابل ${formatNum(cmp.prev.revPages)} ص (${rD.txt})
+    if (!cmp.isRashidi) txt += `• المراجعة: ${formatNum(cmp.prev.revPages)} ص ← ${formatNum(cmp.cur.revPages)} ص (${rD.txt})
 `;
-    txt += `• الحضور: ${cmp.cur.presentDays} مقابل ${cmp.prev.presentDays}
+    txt += `• الحضور: ${cmp.prev.presentDays} ← ${cmp.cur.presentDays} (${pD.txt})
+`;
+    if (ptsOn) txt += `• النقاط: ${cmp.prev.totalPoints} ← ${cmp.cur.totalPoints}
 `;
   }
   if (sheikhNote) txt += `📝 *ملاحظة ${gt.supervisorTitle}:* ${sheikhNote}
@@ -25132,7 +25757,7 @@ function shareIndivReportParentWA() {
     ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(txt)}`
     : `https://wa.me/?text=${encodeURIComponent(txt)}`;
   window.open(url, "_blank");
-  showToast(`تم فتح واتساب مع ${isWeekly ? "الكشف الأسبوعي" : "الكشف الشهري"} والمقارنة 📲`);
+  showToast(`تم فتح واتساب مع ${headerTitle} جاهزاً 📲`);
 }
 
 // ==================== CLEAN MINIMALIST APPRECIATION & HIFZ/SABR CERTIFICATE ENGINE (v37) ====================
@@ -26098,7 +26723,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v80 -->
+<!-- Makin App v82 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -29374,7 +29999,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v80";
+const TIBYAN_APP_VERSION = "v82";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
