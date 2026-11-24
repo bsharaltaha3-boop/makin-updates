@@ -12885,6 +12885,278 @@ table.t-daily td.td-rev-slim,
   line-height: 1.24 !important;
 }
 
+/* ==================== MAKIN v96: EXECUTIVE BOTTOM-SHEET PICKERS (ZERO UGLY NATIVE ANDROID SELECTS!) ==================== */
+.exec-picker-trigger {
+  width: 100%;
+  flex: 1;
+  min-width: 0;
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-900);
+  border-radius: 12px;
+  padding: 8px 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  text-align: right;
+  transition: border-color 0.14s ease, background 0.14s ease, transform 0.08s ease;
+}
+.exec-picker-trigger:active { transform: scale(0.99); background: var(--brand-tint); }
+.exec-picker-trigger.compact {
+  width: auto;
+  flex: 0 1 auto;
+  max-width: 60%;
+  padding: 6px 10px;
+  border-radius: 9px;
+}
+.ept-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+.ept-ico {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: #142a46;
+  color: #f6dc93;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ept-ico.gold { background: #b8912e; color: #ffffff; }
+.ept-ico.green { background: #16794c; color: #ffffff; }
+.ept-ico.slate { background: var(--brand-slate); color: #ffffff; }
+.exec-picker-trigger.compact .ept-ico { width: 22px; height: 22px; font-size: 11.5px; border-radius: 6px; }
+.ept-txt { min-width: 0; flex: 1; }
+.ept-main {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+.exec-picker-trigger.compact .ept-main { font-size: 12px; }
+.ept-sub {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-500);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+.ept-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.ept-pill {
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--brand-tint);
+  color: var(--brand-slate);
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+.ept-pill.ok { background: var(--green-bg); color: var(--green); border-color: rgba(22, 121, 76, 0.25); }
+.ept-pill.gold { background: #fef7e0; color: #8a5e10; border-color: #e6c66b; }
+[data-theme="dark"] .ept-pill.gold { background: #2b2412; color: #f4d274; border-color: #6b5317; }
+.ept-chev {
+  color: var(--ink-500);
+  font-size: 12px;
+  font-weight: 800;
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.exec-picker-trigger.compact .ept-chev { width: 18px; height: 18px; font-size: 10px; }
+
+/* Executive Picker Bottom Sheet */
+#execPickerSheet {
+  z-index: 165 !important;
+}
+.eps-filter-bar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  background: var(--white);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.eps-filter-btn {
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-700);
+  border-radius: 9px;
+  padding: 6px 4px;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: center;
+}
+.eps-filter-btn.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #ffffff;
+}
+.eps-filter-btn.on-gold {
+  background: #b8912e;
+  border-color: #b8912e;
+  color: #ffffff;
+}
+[data-theme="dark"] .eps-filter-btn.on { background: #c8a14b; border-color: #c8a14b; color: #0f233c; }
+
+.eps-sec-lbl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink-500);
+  padding: 4px 4px 6px;
+  margin-top: 4px;
+}
+.eps-sec-lbl:first-child { margin-top: 0; }
+.eps-item {
+  width: 100%;
+  border: 1.5px solid var(--line);
+  border-right: 4px solid #142a46;
+  background: var(--white);
+  color: var(--ink-900);
+  border-radius: 12px;
+  padding: 9px 11px;
+  margin-bottom: 7px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  text-align: right;
+  transition: transform 0.08s ease, border-color 0.14s ease, background 0.14s ease;
+}
+.eps-item:last-child { margin-bottom: 0; }
+.eps-item:active { transform: scale(0.985); }
+.eps-item.kind-sat { border-right-color: #c8a14b; }
+.eps-item.kind-all { border-right-color: #5b21b6; }
+.eps-item.kind-cycle { border-right-color: #c8a14b; }
+.eps-item.kind-holiday { border-right-color: #94a3b8; opacity: 0.78; border-style: dashed; border-right-style: solid; }
+.eps-item.selected {
+  border-color: #142a46;
+  background: linear-gradient(90deg, var(--white) 0%, rgba(20, 42, 70, 0.07) 100%);
+  box-shadow: 0 3px 12px rgba(20, 42, 70, 0.12);
+}
+[data-theme="dark"] .eps-item.selected {
+  border-color: #c8a14b;
+  background: linear-gradient(90deg, var(--white) 0%, rgba(200, 161, 75, 0.14) 100%);
+}
+.eps-item-l {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  flex: 1;
+}
+.eps-ico {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--brand-tint);
+  color: var(--brand-slate);
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.eps-item.kind-sat .eps-ico { background: #fef7e0; color: #8a5e10; }
+.eps-item.kind-cycle .eps-ico { background: #fef7e0; color: #8a5e10; }
+.eps-item.kind-all .eps-ico { background: #f3e8ff; color: #5b21b6; }
+.eps-item.selected .eps-ico { background: #142a46; color: #f6dc93; }
+[data-theme="dark"] .eps-item.kind-sat .eps-ico,
+[data-theme="dark"] .eps-item.kind-cycle .eps-ico { background: #2b2412; color: #f4d274; }
+[data-theme="dark"] .eps-item.kind-all .eps-ico { background: #2d1e54; color: #c4b5fd; }
+[data-theme="dark"] .eps-item.selected .eps-ico { background: #c8a14b; color: #0f233c; }
+
+.eps-txt { min-width: 0; flex: 1; }
+.eps-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--ink-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+.eps-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-500);
+}
+.eps-tag {
+  padding: 1px 7px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 800;
+  background: var(--bg);
+  color: var(--ink-700);
+}
+.eps-tag.daily { background: var(--blue-bg); color: var(--blue); }
+.eps-tag.sat { background: #fef7e0; color: #8a5e10; }
+.eps-tag.ok { background: var(--green-bg); color: var(--green); }
+[data-theme="dark"] .eps-tag.sat { background: #2b2412; color: #f4d274; }
+.eps-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #142a46;
+  color: #f6dc93;
+  font-size: 13px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+[data-theme="dark"] .eps-check { background: #c8a14b; color: #0f233c; }
+.eps-holiday-toggle {
+  width: 100%;
+  margin-top: 8px;
+  border: 1px dashed var(--line-strong);
+  background: transparent;
+  color: var(--ink-500);
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -12923,8 +13195,8 @@ table.t-daily td.td-rev-slim,
 
 <!-- Owner Quick Return Bar (when Founder is previewing Teacher/Supervisor views) -->
 <div id="ownerQuickReturnBar" class="owner-quick-bar no-print" style="display:none;">
-  <span>👑 وضع المؤسس نشط — تتصفح حالياً كـ <b id="ownerPreviewRoleLbl">معلم</b></span>
-  <button type="button" class="btn btn-sm" style="background:#d4af37; color:#1a1625; padding:3px 10px;" onclick="switchOwnerWorkspace('owner')">↩️ العودة للوحة المؤسس</button>
+  <span style="min-width:0; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">👑 المؤسس — <b id="ownerPreviewRoleLbl">معلم حلقة</b></span>
+  <button type="button" class="btn btn-sm" style="background:#d4af37; color:#1a1625; padding:4px 10px; font-size:11.5px; flex-shrink:0;" onclick="switchOwnerWorkspace('owner')">↩️ لوحة المؤسس</button>
 </div>
 
 <!-- ===== AUTHENTICATION SCREEN (v55: CLEAN 2-ROLE + GENDER IDENTITY + AUTO-FOUNDER LOGIN) ===== -->
@@ -13398,7 +13670,7 @@ table.t-daily td.td-rev-slim,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v95</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v96</span>
         </button>
       </div>
     </div>
@@ -13428,7 +13700,11 @@ table.t-daily td.td-rev-slim,
       <div class="page-head-card">
         <div class="phc-top">
           <div class="phc-title">🗂️ الأرشيف <span class="phc-count" id="archiveCountBadge">0</span></div>
-          <select id="archiveMonthFilter" onchange="renderArchiveView()" style="padding:6px 9px; border-radius:8px; border:1px solid var(--line-strong); font-weight:700; font-size:12px; background:var(--brand-tint); color:var(--ink-900); max-width:56%;"></select>
+          <select id="archiveMonthFilter" onchange="renderArchiveView()" style="display:none;"></select>
+          <button type="button" id="archiveMonthTrigger" class="exec-picker-trigger compact" onclick="openExecPicker('archiveMonth')">
+            <span class="ept-left"><span class="ept-ico slate">📅</span><span class="ept-txt"><span class="ept-main">جميع الأشهر</span></span></span>
+            <span class="ept-right"><span class="ept-chev">▾</span></span>
+          </button>
         </div>
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px;">
           <div class="pill-group" style="gap:5px;">
@@ -13476,7 +13752,11 @@ table.t-daily td.td-rev-slim,
       <div id="panelDailyReport">
         <div class="rep-studio-card no-print">
           <div class="rep-select-full">
-            <select id="dailyReportSessionSelect" onchange="selectSession(this.value); renderDailyReport();"></select>
+            <select id="dailyReportSessionSelect" onchange="selectSession(this.value); renderDailyReport();" style="display:none;"></select>
+            <button type="button" id="dailyReportSessionTrigger" class="exec-picker-trigger" onclick="openExecPicker('dailySession')">
+              <span class="ept-left"><span class="ept-ico">📖</span><span class="ept-txt"><span class="ept-main">اختر الجلسة...</span><span class="ept-sub">اضغط لعرض الجلسات</span></span></span>
+              <span class="ept-right"><span class="ept-chev">▾</span></span>
+            </button>
           </div>
           <div id="reportPendingWarning" class="rep-status-line"></div>
           <div class="rep-dock-4">
@@ -13503,7 +13783,11 @@ table.t-daily td.td-rev-slim,
       <div id="panelMonthlyReport" style="display:none;">
         <div class="rep-studio-card no-print">
           <div class="rep-select-full">
-            <select id="monthlyHijriFilter" onchange="renderMonthlyReport()"></select>
+            <select id="monthlyHijriFilter" onchange="renderMonthlyReport()" style="display:none;"></select>
+            <button type="button" id="monthlyHijriTrigger" class="exec-picker-trigger" onclick="openExecPicker('monthlyReport')">
+              <span class="ept-left"><span class="ept-ico green">📅</span><span class="ept-txt"><span class="ept-main">اختر الشهر...</span><span class="ept-sub">التقرير الشهري</span></span></span>
+              <span class="ept-right"><span class="ept-chev">▾</span></span>
+            </button>
             <span id="mcIncludedCountBadge" class="badge b-blue" style="display:none; padding:5px 8px;">+0</span>
           </div>
           <div class="rep-dock-4">
@@ -13549,8 +13833,11 @@ table.t-daily td.td-rev-slim,
     <section id="view-stats" class="view">
       <div class="card no-print" style="padding:11px;">
         <div style="display:flex; align-items:center; gap:8px;">
-          <label style="font-weight:800; font-size:13px; white-space:nowrap;">الفترة:</label>
-          <select id="statsMonthFilter" onchange="renderStats()" style="flex:1; min-width:0; padding:8px 10px; border-radius:9px; border:1.5px solid var(--line-strong); font-weight:800; background:var(--bg); color:var(--ink-900);"></select>
+          <select id="statsMonthFilter" onchange="renderStats()" style="display:none;"></select>
+          <button type="button" id="statsMonthTrigger" class="exec-picker-trigger" onclick="openExecPicker('statsPeriod')">
+            <span class="ept-left"><span class="ept-ico gold">⭐</span><span class="ept-txt"><span class="ept-main">اختر الفترة...</span><span class="ept-sub">فترة الإحصائيات</span></span></span>
+            <span class="ept-right"><span class="ept-chev">▾</span></span>
+          </button>
         </div>
         <div style="font-size:11px; font-weight:800; color:var(--ink-500); margin-top:8px;">📸 تصدير صور HD وملفات PDF (الكل + لوحة الأوائل بتصميم مستقل لكل فئة):</div>
         <div class="stats-cat-dock-5" id="btnCopyPointsLeaderboard">
@@ -13806,6 +14093,24 @@ table.t-daily td.td-rev-slim,
       <button type="button" class="btn btn-primary btn-sm" style="flex:1;" onclick="exportMonthlyPlanHD('pdf')">📑 PDF</button>
       <button type="button" class="btn btn-success btn-sm" style="flex:1;" onclick="copyMonthlyPlanWA()">💬 واتساب</button>
     </div>
+  </div>
+</div>
+
+<!-- ===== MODAL: EXECUTIVE BOTTOM-SHEET PICKER (v96) ===== -->
+<div class="modal-backdrop exec-modal-backdrop" id="execPickerSheet" onclick="if(event.target===this) closeModal('execPickerSheet')">
+  <div class="modal-box exec-modal-box" style="max-height:84vh;">
+    <div class="exec-modal-hdr">
+      <div class="es-handle"></div>
+      <div class="exec-modal-hdr-row">
+        <div style="min-width:0; flex:1;">
+          <h3 id="epsTitle">اختيار</h3>
+          <div class="exec-modal-sub" id="epsSub">اختر من القائمة أدناه</div>
+        </div>
+        <button type="button" class="exec-modal-close" onclick="closeModal('execPickerSheet')" aria-label="إغلاق">×</button>
+      </div>
+    </div>
+    <div id="epsFilterBar" class="eps-filter-bar" style="display:none;"></div>
+    <div class="exec-modal-body" id="epsBody"></div>
   </div>
 </div>
 
@@ -22350,6 +22655,7 @@ function populateSessionSelectors() {
   if (activeSessionId && sel2.value !== activeSessionId) {
     sel2.value = activeSessionId;
   }
+  if (typeof syncExecPickerTriggers === "function") syncExecPickerTriggers();
 }
 
 function selectSession(id) {
@@ -22392,6 +22698,7 @@ function renderArchiveView() {
   const months = Array.from(new Set(archived.map(s => s.hijriMonth).filter(Boolean)));
   mSel.innerHTML = `<option value="ALL">جميع الأشهر (${archived.length})</option>` + months.map(m => `<option value="${escapeHtml(m)}">${escapeHtml(m)}</option>`).join("");
   if (prevVal && Array.from(mSel.options).some(o => o.value === prevVal)) mSel.value = prevVal;
+  if (typeof syncExecPickerTriggers === "function") syncExecPickerTriggers();
 
   const filterM = mSel.value || "ALL";
   const filtered = archived.filter(s =>
@@ -26698,10 +27005,11 @@ function populateMonthFilters() {
   const sortedMonths = Array.from(monthMap.values()).sort((a, b) => b.sortKey.localeCompare(a.sortKey));
   const submitted = h.submittedMonths || {};
 
+  const totalRealSessions = sortedMonths.reduce((acc, m) => acc + (m.count || 0), 0);
   const buildMonthlyOpts = () => sortedMonths.map(m => {
     const doneMark = submitted[m.label] ? " ✓" : "";
-    return `<option value="${escapeHtml(m.label)}">${escapeHtml(m.label)} (${m.count} جلسة)${doneMark}</option>`;
-  }).join("") + `<option value="ALL">جميع الأشهر مجتمعة (${h.sessions.length} جلسة)</option>`;
+    return `<option value="${escapeHtml(m.label)}">${escapeHtml(m.label)} (${formatArabicSessionCount(m.count)})${doneMark}</option>`;
+  }).join("") + `<option value="ALL">جميع الأشهر مجتمعة (${formatArabicSessionCount(totalRealSessions)})</option>`;
 
   const mSel = document.getElementById("monthlyHijriFilter"), sSel = document.getElementById("statsMonthFilter");
   if (!mSel || !sSel) return;
@@ -26713,6 +27021,7 @@ function populateMonthFilters() {
   sSel.value = (prevS && Array.from(sSel.options).some(o => o.value === prevS)) ? prevS : (isPointsEnabled(h) ? "POINTS_CYCLE" : (sortedMonths[0]?.label || "ALL"));
   const tdEl = document.getElementById("monthlyTargetDays");
   if (tdEl) tdEl.value = h.monthDays || 12;
+  if (typeof syncExecPickerTriggers === "function") syncExecPickerTriggers();
 }
 
 function updateMonthDaysTarget(val) { const h = getActiveHalaqa(); h.monthDays = Number(val) || 12; saveState(); renderMonthlyReport(); }
@@ -29807,7 +30116,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v95 -->
+<!-- Makin App v96 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -33758,10 +34067,16 @@ function renderMonthlyPlanModal() {
 
   const monthBarHtml = `
     <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;">
-      <select style="flex:1; min-width:0; padding:7px 9px; border-radius:9px; border:1.5px solid var(--line-strong); font-weight:800; background:var(--white); color:var(--ink-900);" onchange="onMonthlyPlanMonthChange(this.value)">
-        ${months.map(m => `<option value="${escapeHtml(m)}" ${m === _mpSelectedMonth ? "selected" : ""}>📅 ${escapeHtml(m)}</option>`).join("")}
-      </select>
-      <span class="badge b-slate" style="padding:5px 8px; font-size:11px;">${dailyDoneCount} من ${estSessions} جلسة</span>
+      <button type="button" class="exec-picker-trigger" style="padding:6px 10px;" onclick="openExecPicker('mpMonth')">
+        <span class="ept-left">
+          <span class="ept-ico green" style="width:26px; height:26px; font-size:13px;">📅</span>
+          <span class="ept-txt"><span class="ept-main">${escapeHtml(_mpSelectedMonth)}</span></span>
+        </span>
+        <span class="ept-right">
+          <span class="ept-pill">${dailyDoneCount}/${estSessions} جلسة</span>
+          <span class="ept-chev">▾</span>
+        </span>
+      </button>
     </div>
     <div class="qa-search-row" style="margin-bottom:8px;">
       <span class="qa-search-ico">🔍</span>
@@ -34005,6 +34320,405 @@ async function exportMonthlyPlanHD(fmt = "png") {
   if (fmt === "pdf") await exportHighResPDF("mpExportPaper", fname);
   else await exportHighResPNG("mpExportPaper", fname);
   host.innerHTML = "";
+}
+
+// ==================== MAKIN v96: EXECUTIVE BOTTOM-SHEET PICKERS ENGINE ====================
+let _epsMode = "";
+let _epsSessionTypeFilter = "all";
+let _epsShowHolidays = false;
+
+function formatArabicSessionCount(n) {
+  const num = Math.max(0, Number(n) || 0);
+  if (num === 0) return "لا جلسات";
+  if (num === 1) return "جلسة واحدة";
+  if (num === 2) return "جلستان";
+  if (num <= 10) return `${num} جلسات`;
+  return `${num} جلسة`;
+}
+
+function getSessionEvalProgressText(s, h) {
+  if (!s || !h || !Array.isArray(h.students) || !h.students.length) return "";
+  if (s.noClass) return "يوم عطلة";
+  let done = 0;
+  h.students.forEach(st => {
+    const r = s.records?.[st.id];
+    if (r && isStudentFullyDone(s, st, r)) done++;
+  });
+  return `مُقيّم: ${done}/${h.students.length}`;
+}
+
+function syncExecPickerTriggers() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+
+  // 1) Daily Report Session Trigger
+  const dailyBtn = document.getElementById("dailyReportSessionTrigger");
+  if (dailyBtn) {
+    const s = getCurrentSession() || h.sessions.find(x => !x.noClass) || h.sessions[0] || null;
+    if (!s) {
+      dailyBtn.innerHTML = `<span class="ept-left"><span class="ept-ico">📖</span><span class="ept-txt"><span class="ept-main">لا توجد جلسات بعد</span><span class="ept-sub">افتح جلسة من تبويب الجلسة</span></span></span><span class="ept-right"><span class="ept-chev">▾</span></span>`;
+    } else {
+      const isSat = s.type === "saturday";
+      const ico = s.noClass ? "🛑" : (isSat ? "📘" : "📖");
+      const icoCls = s.noClass ? "slate" : (isSat ? "gold" : "");
+      const typeTxt = s.noClass ? "بدون حلقة (عطلة)" : (isSat ? "مراجعة صغرى وكبرى" : "تسميع يومي");
+      const pillCls = isSat ? "gold" : "";
+      const progTxt = getSessionEvalProgressText(s, h);
+      dailyBtn.innerHTML = `<span class="ept-left">
+        <span class="ept-ico ${icoCls}">${ico}</span>
+        <span class="ept-txt">
+          <span class="ept-main">${escapeHtml(s.dayName)} ${escapeHtml(s.hijriDate)}</span>
+          <span class="ept-sub">${escapeHtml(typeTxt)}${progTxt ? ` • ${escapeHtml(progTxt)}` : ''}</span>
+        </span>
+      </span>
+      <span class="ept-right">
+        ${isSessionArchived(s) ? `<span class="ept-pill">أرشيف</span>` : `<span class="ept-pill ${pillCls}">${isSat ? 'مراجعة' : 'تسميع'}</span>`}
+        <span class="ept-chev">▾</span>
+      </span>`;
+    }
+  }
+
+  // 2) Monthly Report Trigger
+  const monthlyBtn = document.getElementById("monthlyHijriTrigger");
+  const mSel = document.getElementById("monthlyHijriFilter");
+  if (monthlyBtn && mSel) {
+    const val = mSel.value || "ALL";
+    const submitted = h.submittedMonths || {};
+    const realSessions = h.sessions.filter(s => !s.noClass);
+    if (val === "ALL") {
+      monthlyBtn.innerHTML = `<span class="ept-left">
+        <span class="ept-ico slate">📊</span>
+        <span class="ept-txt">
+          <span class="ept-main">جميع الأشهر مجتمعة</span>
+          <span class="ept-sub">${formatArabicSessionCount(realSessions.length)} مسجّلة</span>
+        </span>
+      </span>
+      <span class="ept-right"><span class="ept-pill">شامل</span><span class="ept-chev">▾</span></span>`;
+    } else {
+      const cnt = realSessions.filter(s => getSessionReportMonth(s) === val).length;
+      const isSub = Boolean(submitted[val]);
+      monthlyBtn.innerHTML = `<span class="ept-left">
+        <span class="ept-ico green">📅</span>
+        <span class="ept-txt">
+          <span class="ept-main">${escapeHtml(val)}</span>
+          <span class="ept-sub">${formatArabicSessionCount(cnt)}</span>
+        </span>
+      </span>
+      <span class="ept-right">
+        ${isSub ? `<span class="ept-pill ok">تم الرفع ✓</span>` : ''}
+        <span class="ept-chev">▾</span>
+      </span>`;
+    }
+  }
+
+  // 3) Archive Month Trigger
+  const arcBtn = document.getElementById("archiveMonthTrigger");
+  const arcSel = document.getElementById("archiveMonthFilter");
+  if (arcBtn && arcSel) {
+    const val = arcSel.value || "ALL";
+    const arcSessions = h.sessions.filter(s => isSessionArchived(s) && isSessionHasRealActivity(s));
+    const lbl = val === "ALL" ? `جميع الأشهر (${arcSessions.length})` : val;
+    arcBtn.innerHTML = `<span class="ept-left">
+      <span class="ept-ico slate">📅</span>
+      <span class="ept-txt"><span class="ept-main">${escapeHtml(lbl)}</span></span>
+    </span>
+    <span class="ept-right"><span class="ept-chev">▾</span></span>`;
+  }
+
+  // 4) Stats Period Trigger
+  const stBtn = document.getElementById("statsMonthTrigger");
+  const stSel = document.getElementById("statsMonthFilter");
+  if (stBtn && stSel) {
+    const val = stSel.value || "ALL";
+    const realSessions = h.sessions.filter(s => !s.noClass);
+    if (val === "POINTS_CYCLE") {
+      const cycSt = getPointsCycleStatus(h);
+      const cycSub = cycSt.hasDuration ? (cycSt.expired ? "انتهت مدة الدورة" : `متبقٍ ${cycSt.daysLeft} يوم`) : "الدورة النشطة للتحفيز";
+      stBtn.innerHTML = `<span class="ept-left">
+        <span class="ept-ico gold">⭐</span>
+        <span class="ept-txt">
+          <span class="ept-main">دورة النقاط الحالية</span>
+          <span class="ept-sub">${escapeHtml(cycSub)}</span>
+        </span>
+      </span>
+      <span class="ept-right"><span class="ept-pill gold">النقاط</span><span class="ept-chev">▾</span></span>`;
+    } else if (val === "ALL") {
+      stBtn.innerHTML = `<span class="ept-left">
+        <span class="ept-ico slate">📊</span>
+        <span class="ept-txt">
+          <span class="ept-main">جميع الأشهر مجتمعة</span>
+          <span class="ept-sub">${formatArabicSessionCount(realSessions.length)}</span>
+        </span>
+      </span>
+      <span class="ept-right"><span class="ept-pill">شامل</span><span class="ept-chev">▾</span></span>`;
+    } else {
+      const cnt = realSessions.filter(s => getSessionReportMonth(s) === val).length;
+      stBtn.innerHTML = `<span class="ept-left">
+        <span class="ept-ico green">📅</span>
+        <span class="ept-txt">
+          <span class="ept-main">${escapeHtml(val)}</span>
+          <span class="ept-sub">${formatArabicSessionCount(cnt)}</span>
+        </span>
+      </span>
+      <span class="ept-right"><span class="ept-pill">شهري</span><span class="ept-chev">▾</span></span>`;
+    }
+  }
+}
+
+function openExecPicker(mode) {
+  _epsMode = mode;
+  _epsSessionTypeFilter = "all";
+  _epsShowHolidays = false;
+  renderExecPickerSheet();
+  openModal("execPickerSheet");
+}
+
+function setEpsSessionFilter(f) {
+  _epsSessionTypeFilter = f;
+  renderExecPickerSheet();
+}
+
+function toggleEpsHolidays() {
+  _epsShowHolidays = !_epsShowHolidays;
+  renderExecPickerSheet();
+}
+
+function selectExecPickerOption(val) {
+  closeModal("execPickerSheet");
+  if (_epsMode === "dailySession") {
+    const sel = document.getElementById("dailyReportSessionSelect");
+    if (sel) sel.value = val;
+    selectSession(val);
+    renderDailyReport();
+  } else if (_epsMode === "monthlyReport") {
+    const sel = document.getElementById("monthlyHijriFilter");
+    if (sel) sel.value = val;
+    syncExecPickerTriggers();
+    renderMonthlyReport();
+  } else if (_epsMode === "archiveMonth") {
+    const sel = document.getElementById("archiveMonthFilter");
+    if (sel) sel.value = val;
+    syncExecPickerTriggers();
+    renderArchiveView();
+  } else if (_epsMode === "statsPeriod") {
+    const sel = document.getElementById("statsMonthFilter");
+    if (sel) sel.value = val;
+    syncExecPickerTriggers();
+    renderStats();
+  } else if (_epsMode === "mpMonth") {
+    onMonthlyPlanMonthChange(val);
+  }
+}
+
+function renderExecPickerSheet() {
+  const h = getActiveHalaqa();
+  const titleEl = document.getElementById("epsTitle");
+  const subEl = document.getElementById("epsSub");
+  const filterBar = document.getElementById("epsFilterBar");
+  const body = document.getElementById("epsBody");
+  if (!h || !body) return;
+
+  if (_epsMode === "dailySession") {
+    titleEl.textContent = "📄 اختيار جلسة التقرير";
+    subEl.textContent = "اختر يوم التسميع أو المراجعة لعرض وتصدير تقريره الرسمي";
+    filterBar.style.display = "grid";
+    filterBar.innerHTML = `
+      <button type="button" class="eps-filter-btn ${_epsSessionTypeFilter==='all'?'on':''}" onclick="setEpsSessionFilter('all')">الكل</button>
+      <button type="button" class="eps-filter-btn ${_epsSessionTypeFilter==='daily'?'on':''}" onclick="setEpsSessionFilter('daily')">📖 تسميع يومي</button>
+      <button type="button" class="eps-filter-btn ${_epsSessionTypeFilter==='saturday'?'on-gold':''}" onclick="setEpsSessionFilter('saturday')">📘 مراجعة</button>
+    `;
+
+    const allSorted = [...h.sessions].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+    const holidayList = allSorted.filter(s => s.noClass);
+    const realList = allSorted.filter(s => !s.noClass && (_epsSessionTypeFilter === "all" || s.type === _epsSessionTypeFilter));
+    const activeList = realList.filter(s => !isSessionArchived(s));
+    const archivedList = realList.filter(s => isSessionArchived(s));
+
+    const renderSessionCard = s => {
+      const isSel = s.id === activeSessionId;
+      const isSat = s.type === "saturday";
+      const kindCls = s.noClass ? "kind-holiday" : (isSat ? "kind-sat" : "");
+      const ico = s.noClass ? "🛑" : (isSat ? "📘" : "📖");
+      const typeTag = s.noClass
+        ? `<span class="eps-tag">عطلة / بدون حلقة</span>`
+        : (isSat ? `<span class="eps-tag sat">مراجعة صغرى وكبرى</span>` : `<span class="eps-tag daily">تسميع يومي</span>`);
+      const progTxt = !s.noClass ? getSessionEvalProgressText(s, h) : "";
+      return `<button type="button" class="eps-item ${kindCls} ${isSel ? 'selected' : ''}" onclick="selectExecPickerOption('${s.id}')">
+        <span class="eps-item-l">
+          <span class="eps-ico">${ico}</span>
+          <span class="eps-txt">
+            <span class="eps-title">${escapeHtml(s.dayName)} ${escapeHtml(s.hijriDate)}</span>
+            <span class="eps-meta">${typeTag}${progTxt ? `<span>${escapeHtml(progTxt)}</span>` : ''}</span>
+          </span>
+        </span>
+        ${isSel ? `<span class="eps-check">✓</span>` : ''}
+      </button>`;
+    };
+
+    let out = "";
+    if (activeList.length) {
+      out += `<div class="eps-sec-lbl"><span>⚡ الجلسات الحالية والقادمة</span><span>${activeList.length}</span></div>`;
+      out += activeList.map(renderSessionCard).join("");
+    }
+    if (archivedList.length) {
+      out += `<div class="eps-sec-lbl"><span>🗂️ الأرشيف</span><span>${archivedList.length}</span></div>`;
+      out += archivedList.map(renderSessionCard).join("");
+    }
+    if (!out) {
+      out = `<div class="empty-state" style="padding:18px 8px;"><p>لا توجد جلسات مطابقة لهذا التصنيف.</p></div>`;
+    }
+    if (holidayList.length) {
+      if (_epsShowHolidays) {
+        out += `<div class="eps-sec-lbl"><span>🛑 أيام العطل (بدون حلقة)</span><span>${holidayList.length}</span></div>`;
+        out += holidayList.map(renderSessionCard).join("");
+      }
+      out += `<button type="button" class="eps-holiday-toggle" onclick="toggleEpsHolidays()">${_epsShowHolidays ? 'إخفاء أيام العطل ▲' : `إظهار أيام العطل المحفوظة (${holidayList.length}) ▾`}</button>`;
+    }
+    body.innerHTML = out;
+    return;
+  }
+
+  filterBar.style.display = "none";
+
+  // Helper to build sorted real-session months list
+  const buildMonthItems = () => {
+    const todayHj = getExactHijriInfo(todayISO());
+    const map = new Map();
+    const curKey = `${todayHj.year}-${String(todayHj.month).padStart(2, "0")}`;
+    map.set(todayHj.monthLabel, { label: todayHj.monthLabel, sortKey: curKey, count: 0 });
+    h.sessions.forEach(s => {
+      if (s.noClass) return;
+      const lbl = getSessionReportMonth(s);
+      const mk = getHijriMonthSortKey(lbl) || getSessionHijriKey(s);
+      if (!lbl) return;
+      if (!map.has(lbl)) map.set(lbl, { label: lbl, sortKey: mk || lbl, count: 0 });
+      map.get(lbl).count++;
+    });
+    return Array.from(map.values()).sort((a, b) => b.sortKey.localeCompare(a.sortKey));
+  };
+
+  if (_epsMode === "monthlyReport" || _epsMode === "statsPeriod") {
+    const isStats = _epsMode === "statsPeriod";
+    titleEl.textContent = isStats ? "🏆 اختيار فترة الإحصائيات" : "📊 اختيار شهر التقرير الشهري";
+    subEl.textContent = isStats ? "عرض المتصدرين والمقارنات للفترة المختارة" : "اختر الشهر الهجري أو جميع الأشهر مجتمعة";
+    const curVal = document.getElementById(isStats ? "statsMonthFilter" : "monthlyHijriFilter")?.value || "ALL";
+    const months = buildMonthItems();
+    const submitted = h.submittedMonths || {};
+    const totalReal = months.reduce((a, m) => a + m.count, 0);
+
+    let out = "";
+    if (isStats && isPointsEnabled(h)) {
+      const isSel = curVal === "POINTS_CYCLE";
+      const cycSt = getPointsCycleStatus(h);
+      const cycLbl = cycSt.hasDuration ? (cycSt.expired ? "انتهت المدة" : `متبقٍ ${cycSt.daysLeft} يوم`) : "الدورة النشطة";
+      out += `<div class="eps-sec-lbl"><span>⭐ دورة التحفيز</span></div>`;
+      out += `<button type="button" class="eps-item kind-cycle ${isSel ? 'selected' : ''}" onclick="selectExecPickerOption('POINTS_CYCLE')">
+        <span class="eps-item-l">
+          <span class="eps-ico">⭐</span>
+          <span class="eps-txt">
+            <span class="eps-title">دورة النقاط الحالية</span>
+            <span class="eps-meta"><span class="eps-tag sat">${escapeHtml(cycLbl)}</span></span>
+          </span>
+        </span>
+        ${isSel ? `<span class="eps-check">✓</span>` : ''}
+      </button>`;
+    }
+
+    out += `<div class="eps-sec-lbl"><span>📅 الأشهر الهجرية</span><span>${months.length}</span></div>`;
+    out += months.map(m => {
+      const isSel = curVal === m.label;
+      const isSub = Boolean(submitted[m.label]);
+      return `<button type="button" class="eps-item ${isSel ? 'selected' : ''}" onclick="selectExecPickerOption('${escapeHtml(m.label)}')">
+        <span class="eps-item-l">
+          <span class="eps-ico">📅</span>
+          <span class="eps-txt">
+            <span class="eps-title">${escapeHtml(m.label)}</span>
+            <span class="eps-meta">
+              <span class="eps-tag daily">${formatArabicSessionCount(m.count)}</span>
+              ${isSub ? `<span class="eps-tag ok">تم رفع التقرير ✓</span>` : ''}
+            </span>
+          </span>
+        </span>
+        ${isSel ? `<span class="eps-check">✓</span>` : ''}
+      </button>`;
+    }).join("");
+
+    const isAllSel = curVal === "ALL";
+    out += `<div class="eps-sec-lbl"><span>📊 تجميع شامل</span></div>`;
+    out += `<button type="button" class="eps-item kind-all ${isAllSel ? 'selected' : ''}" onclick="selectExecPickerOption('ALL')">
+      <span class="eps-item-l">
+        <span class="eps-ico">📊</span>
+        <span class="eps-txt">
+          <span class="eps-title">جميع الأشهر مجتمعة</span>
+          <span class="eps-meta"><span class="eps-tag">${formatArabicSessionCount(totalReal)}</span></span>
+        </span>
+      </span>
+      ${isAllSel ? `<span class="eps-check">✓</span>` : ''}
+    </button>`;
+    body.innerHTML = out;
+    return;
+  }
+
+  if (_epsMode === "archiveMonth") {
+    titleEl.textContent = "🗂️ تصفية الأرشيف بالشهر";
+    subEl.textContent = "اختر شهراً محدداً أو اعرض جميع الجلسات المؤرشفة";
+    const curVal = document.getElementById("archiveMonthFilter")?.value || "ALL";
+    const archived = h.sessions.filter(s => isSessionArchived(s) && isSessionHasRealActivity(s));
+    const map = new Map();
+    archived.forEach(s => {
+      const m = s.hijriMonth || "غير مصنف";
+      map.set(m, (map.get(m) || 0) + 1);
+    });
+    let out = `<button type="button" class="eps-item kind-all ${curVal === 'ALL' ? 'selected' : ''}" onclick="selectExecPickerOption('ALL')">
+      <span class="eps-item-l">
+        <span class="eps-ico">🗂️</span>
+        <span class="eps-txt">
+          <span class="eps-title">جميع الأشهر</span>
+          <span class="eps-meta"><span class="eps-tag">${formatArabicSessionCount(archived.length)}</span></span>
+        </span>
+      </span>
+      ${curVal === 'ALL' ? `<span class="eps-check">✓</span>` : ''}
+    </button>`;
+    Array.from(map.entries()).forEach(([m, cnt]) => {
+      const isSel = curVal === m;
+      out += `<button type="button" class="eps-item ${isSel ? 'selected' : ''}" onclick="selectExecPickerOption('${escapeHtml(m)}')">
+        <span class="eps-item-l">
+          <span class="eps-ico">📅</span>
+          <span class="eps-txt">
+            <span class="eps-title">${escapeHtml(m)}</span>
+            <span class="eps-meta"><span class="eps-tag daily">${formatArabicSessionCount(cnt)}</span></span>
+          </span>
+        </span>
+        ${isSel ? `<span class="eps-check">✓</span>` : ''}
+      </button>`;
+    });
+    body.innerHTML = out;
+    return;
+  }
+
+  if (_epsMode === "mpMonth") {
+    titleEl.textContent = "🎯 اختيار شهر الخطة الشهرية";
+    subEl.textContent = "اختر الشهر لمتابعة أو تعديل أهداف الطلاب";
+    const months = getMonthlyPlanMonthsList(h);
+    body.innerHTML = months.map(m => {
+      const isSel = _mpSelectedMonth === m;
+      const cnt = getMonthDailySessionsForPlan(h, m).filter(s => s.type === "daily").length;
+      const goalsCnt = h.students.filter(st => getMonthlyGoalEntry(h, m, st.id).targetPages > 0).length;
+      return `<button type="button" class="eps-item ${isSel ? 'selected' : ''}" onclick="selectExecPickerOption('${escapeHtml(m)}')">
+        <span class="eps-item-l">
+          <span class="eps-ico">📅</span>
+          <span class="eps-txt">
+            <span class="eps-title">${escapeHtml(m)}</span>
+            <span class="eps-meta">
+              <span class="eps-tag daily">${formatArabicSessionCount(cnt)}</span>
+              ${goalsCnt > 0 ? `<span class="eps-tag ok">${goalsCnt}/${h.students.length} أهداف</span>` : `<span class="eps-tag">بلا أهداف بعد</span>`}
+            </span>
+          </span>
+        </span>
+        ${isSel ? `<span class="eps-check">✓</span>` : ''}
+      </button>`;
+    }).join("");
+  }
 }
 
 function openQuickAttendanceModal() {
@@ -34380,7 +35094,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v95";
+const TIBYAN_APP_VERSION = "v96";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
