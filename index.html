@@ -12106,6 +12106,604 @@ table.t-daily td.td-norecite {
   .es-footer-row.v73-nav .btn { font-size: 12px; padding: 9px 4px; }
 }
 
+
+/* ==================== MAKIN v90: EXECUTIVE QUICK ATTENDANCE STUDIO (COMPACT, FOCUSED, 2ND-TAP TOGGLE) ==================== */
+#quickAttendanceModal .exec-modal-box {
+  max-height: 92vh !important;
+}
+.qa-top-strip {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  padding: 8px 11px 9px;
+  flex-shrink: 0;
+}
+.qa-prog-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink-700);
+  margin-bottom: 5px;
+}
+.qa-prog-track {
+  width: 100%;
+  height: 5px;
+  border-radius: 99px;
+  background: var(--line);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.qa-prog-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #16794c 0%, #22c55e 100%);
+  transition: width 0.2s ease;
+}
+.qa-filter-chips {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  margin-bottom: 7px;
+}
+.qa-fchip {
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-700);
+  border-radius: 8px;
+  padding: 4px 2px;
+  font-size: 10.5px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+.qa-fchip b { font-size: 12px; line-height: 1.1; }
+.qa-fchip.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #ffffff;
+}
+.qa-fchip.on-g { background: var(--green); border-color: var(--green); color: #ffffff; }
+.qa-fchip.on-o { background: var(--orange); border-color: var(--orange); color: #ffffff; }
+.qa-fchip.on-r { background: var(--red); border-color: var(--red); color: #ffffff; }
+[data-theme="dark"] .qa-fchip.on { background: #c8a14b; border-color: #c8a14b; color: #0f233c; }
+
+.qa-search-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.qa-search-row input {
+  width: 100%;
+  height: 33px;
+  padding: 0 28px 0 28px;
+  border: 1px solid var(--line-strong);
+  border-radius: 9px;
+  background: var(--bg);
+  color: var(--ink-900);
+  font-size: 12px;
+  font-weight: 600;
+}
+.qa-search-row input:focus {
+  outline: none;
+  border-color: #142a46;
+  background: var(--white);
+}
+.qa-search-ico {
+  position: absolute;
+  right: 8px;
+  font-size: 12px;
+  opacity: 0.65;
+  pointer-events: none;
+}
+.qa-search-clr {
+  position: absolute;
+  left: 5px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: var(--line);
+  color: var(--ink-700);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Compact Focused 2-Row Student Roll-Call Card */
+.qa-list-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 10px 10px;
+}
+.qa-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-right: 3.5px solid var(--line-strong);
+  border-radius: 11px;
+  padding: 6px 8px 7px;
+  margin-bottom: 6px;
+  transition: border-color 0.14s ease, background 0.14s ease;
+}
+.qa-card:last-child { margin-bottom: 0; }
+.qa-card.st-pres { border-right-color: var(--green); background: linear-gradient(90deg, var(--white) 86%, rgba(22, 121, 76, 0.06) 100%); }
+.qa-card.st-late { border-right-color: var(--orange); background: linear-gradient(90deg, var(--white) 86%, rgba(184, 86, 16, 0.06) 100%); }
+.qa-card.st-norec { border-right-color: #475569; }
+.qa-card.st-exc { border-right-color: var(--brand-slate); }
+.qa-card.st-abs { border-right-color: var(--red); background: linear-gradient(90deg, var(--white) 86%, rgba(185, 34, 34, 0.06) 100%); }
+
+.qa-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+.qa-card-id {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+.qa-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: var(--brand-tint);
+  color: var(--brand-slate);
+  font-size: 10.5px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.qa-card.st-pres .qa-num { background: var(--green-bg); color: var(--green); }
+.qa-card.st-late .qa-num { background: var(--orange-bg); color: var(--orange); }
+.qa-card.st-abs .qa-num { background: var(--red-bg); color: var(--red); }
+
+.qa-name {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--ink-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+.qa-state-tag {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1.5px 7px;
+  border-radius: 99px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: var(--bg);
+  color: var(--ink-500);
+}
+.qa-state-tag.st-pres { background: var(--green-bg); color: var(--green); }
+.qa-state-tag.st-late { background: var(--orange-bg); color: var(--orange); }
+.qa-state-tag.st-norec { background: #e2e8f0; color: #334155; }
+.qa-state-tag.st-exc { background: var(--brand-tint); color: var(--brand-slate); }
+.qa-state-tag.st-abs { background: var(--red-bg); color: var(--red); }
+[data-theme="dark"] .qa-state-tag.st-norec { background: #2d3b48; color: #cbd5e1; }
+
+.qa-seg-5 {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 3.5px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 2.5px;
+}
+.qa-btn {
+  border: none;
+  background: transparent;
+  color: var(--ink-700);
+  border-radius: 7px;
+  padding: 5.5px 1px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.qa-btn:active { transform: scale(0.95); }
+.qa-btn.on-green { background: var(--green); color: #ffffff; box-shadow: 0 2px 5px rgba(22, 121, 76, 0.24); }
+.qa-btn.on-orange { background: var(--orange); color: #ffffff; box-shadow: 0 2px 5px rgba(184, 86, 16, 0.24); }
+.qa-btn.on-norecite { background: #475569; color: #ffffff; }
+.qa-btn.on-slate { background: var(--brand-slate); color: #ffffff; }
+.qa-btn.on-red { background: var(--red); color: #ffffff; box-shadow: 0 2px 5px rgba(185, 34, 34, 0.24); }
+@media (max-width: 380px) {
+  .qa-btn { font-size: 10px; padding: 5.5px 1px; }
+  .qa-name { font-size: 12px; }
+  .qa-fchip { font-size: 9.5px; }
+}
+
+
+/* ==================== MAKIN v91: POLISHED EVAL SHEET PANELS + MONTHLY GOAL & DIAGNOSTIC STUDIO ==================== */
+/* 1) Clean Zero-Clip Wrapped Tajweed Chips */
+.tj-tags-bar {
+  flex-wrap: wrap !important;
+  overflow-x: visible !important;
+  gap: 4px !important;
+  padding: 3px 0 2px !important;
+  margin-top: 3px !important;
+  margin-bottom: 5px !important;
+}
+.tj-chip {
+  padding: 2.5px 8px !important;
+  font-size: 10.5px !important;
+}
+
+/* 2) Compact Tighter Per-Page Studio */
+.pp-studio-v86 {
+  padding: 7px !important;
+  margin-bottom: 7px !important;
+}
+.pp-studio-v86 .pp-eval-hdr {
+  margin-bottom: 5px !important;
+}
+.pp-studio-v86 .pp-tabs-strip {
+  margin-bottom: 6px !important;
+}
+.pp-active-box {
+  padding: 7px !important;
+  margin-bottom: 6px !important;
+}
+.pp-active-top {
+  margin-bottom: 6px !important;
+  font-size: 11.5px !important;
+}
+.pp-page-grade-lbl {
+  margin: 5px 0 4px !important;
+  font-size: 10.5px !important;
+}
+.pp-pe-btn {
+  padding: 6px 2px !important;
+  font-size: 11.5px !important;
+}
+.pp-overall-card {
+  padding: 7px 8px !important;
+  margin-top: 6px !important;
+}
+.pp-ov-row1 {
+  margin-bottom: 5px !important;
+}
+.pp-ov-override-row {
+  padding-top: 5px !important;
+}
+
+/* 3) Polished Review 5-Column Grid, Rabt Switch Card, Sabr Quick Grid & Homework Actions */
+.es-rev-eval-5 {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.es-rev-eval-5 .pill {
+  width: 100%;
+  padding: 6.5px 2px;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+  border-radius: 9px;
+}
+.es-rabt-toggle-card {
+  width: 100%;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  color: var(--ink-900);
+  border-radius: 10px;
+  padding: 7px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  transition: border-color 0.14s ease, background 0.14s ease;
+}
+.es-rabt-toggle-card.on {
+  border-color: rgba(22, 121, 76, 0.45);
+  background: var(--green-bg);
+  color: var(--green);
+}
+.es-hw-quick-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 8px;
+}
+.es-hw-quick-3.cols-2 {
+  grid-template-columns: 1fr 1fr;
+}
+.es-hw-qbtn {
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--brand-slate);
+  border-radius: 9px;
+  padding: 7px 4px;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.es-hw-qbtn.primary {
+  background: var(--blue-bg);
+  color: var(--blue);
+  border-color: rgba(21, 98, 154, 0.28);
+}
+.es-hw-qbtn.sabr {
+  background: var(--green-bg);
+  color: var(--green);
+  border-color: rgba(22, 121, 76, 0.28);
+}
+.es-hw-qbtn.danger {
+  background: var(--red-bg);
+  color: var(--red);
+  border-color: rgba(185, 34, 34, 0.25);
+}
+.es-sabr-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 8px;
+}
+.es-sabr-qchip {
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-900);
+  border-radius: 9px;
+  padding: 6px 4px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.25;
+}
+.es-sabr-qchip small {
+  display: block;
+  font-size: 9.5px;
+  color: var(--ink-500);
+  font-weight: 600;
+}
+.es-sabr-qchip.on {
+  background: var(--green);
+  border-color: var(--green);
+  color: #ffffff;
+}
+.es-sabr-qchip.on small { color: #dcfce7; }
+details.es-manual-rec-drawer {
+  background: var(--bg);
+  border: 1px dashed var(--line-strong);
+  border-radius: 10px;
+  padding: 7px 9px;
+}
+details.es-manual-rec-drawer > summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--ink-700);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+details.es-manual-rec-drawer > summary::-webkit-details-marker { display: none; }
+
+/* Header Goal Mini Pill inside Eval Sheet */
+.es-goal-pill {
+  border: 1px solid rgba(134, 239, 172, 0.45);
+  background: rgba(22, 163, 74, 0.22);
+  color: #bbf7d0;
+  padding: 1px 7px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.es-goal-pill.warn {
+  border-color: rgba(251, 191, 36, 0.5);
+  background: rgba(217, 119, 6, 0.26);
+  color: #fde68a;
+}
+
+/* 4) Monthly Plan & Root-Cause Diagnostic Studio (mp-*) */
+.mp-kpi-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 8px;
+}
+.mp-kpi-tile {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 3px solid #142a46;
+  border-radius: 10px;
+  padding: 6px 3px;
+  text-align: center;
+}
+.mp-kpi-tile.ok { border-top-color: var(--green); }
+.mp-kpi-tile.near { border-top-color: #ca8a04; }
+.mp-kpi-tile.miss { border-top-color: var(--red); }
+.mp-kpi-tile b { display: block; font-size: 15px; font-weight: 800; color: var(--ink-900); line-height: 1.15; }
+.mp-kpi-tile span { display: block; font-size: 10px; font-weight: 700; color: var(--ink-500); margin-top: 2px; }
+
+.mp-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-right: 4px solid var(--line-strong);
+  border-radius: 12px;
+  padding: 9px 10px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 5px rgba(16, 42, 73, 0.04);
+}
+.mp-card.st-ok { border-right-color: var(--green); }
+.mp-card.st-near { border-right-color: #ca8a04; }
+.mp-card.st-miss { border-right-color: var(--red); }
+
+.mp-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.mp-st-name {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink-900);
+  min-width: 0;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mp-bar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink-700);
+  margin-bottom: 4px;
+}
+.mp-bar-track {
+  width: 100%;
+  height: 7px;
+  border-radius: 99px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  margin-bottom: 7px;
+}
+.mp-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #16794c 0%, #22c55e 100%);
+}
+.mp-bar-fill.near { background: linear-gradient(90deg, #b85610 0%, #f59e0b 100%); }
+.mp-bar-fill.miss { background: linear-gradient(90deg, #b92222 0%, #ef4444 100%); }
+
+.mp-diag-box {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 6px 8px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--ink-900);
+  margin-bottom: 7px;
+}
+.mp-diag-box.is-miss {
+  background: var(--red-bg);
+  border-color: rgba(185, 34, 34, 0.22);
+}
+.mp-diag-box.is-ok {
+  background: var(--green-bg);
+  border-color: rgba(22, 121, 76, 0.24);
+  color: var(--green);
+}
+.mp-note-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.mp-note-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 5px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink-900);
+  font-size: 11.5px;
+}
+
+/* Goal Setup Stepper Row */
+.mp-setup-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 8px 9px;
+  margin-bottom: 7px;
+}
+.mp-setup-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.mp-setup-ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.mp-preset-pills {
+  display: flex;
+  gap: 3.5px;
+  flex-wrap: wrap;
+}
+.mp-ppill {
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-700);
+  border-radius: 7px;
+  padding: 4px 7px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.mp-ppill.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #ffffff;
+}
+[data-theme="dark"] .mp-ppill.on { background: #c8a14b; border-color: #c8a14b; color: #0f233c; }
+
+/* Stats Tab Monthly Plan Banner Card */
+.mp-stats-banner {
+  background: linear-gradient(135deg, #102540 0%, #1a3d5e 100%);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 11px 13px;
+  margin-bottom: 11px;
+  border-right: 4px solid #c8a14b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(16, 37, 64, 0.16);
+}
+.mp-stats-banner h4 { font-size: 13.5px; font-weight: 800; color: #f6dc93; margin-bottom: 2px; }
+.mp-stats-banner p { font-size: 11.5px; color: #d8e7f4; }
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -12558,6 +13156,10 @@ table.t-daily td.td-norecite {
           <span class="drawer-item-l"><span class="drawer-ico-box">📩</span><span>رسائل المشرف</span></span>
           <span class="badge b-slate" id="drawerSupMsgBadge" style="font-size:10.5px;">0</span>
         </button>
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openMonthlyPlanModal();">
+          <span class="drawer-item-l"><span class="drawer-ico-box gold">🎯</span><span>الخطة الشهرية والأهداف</span></span>
+          <span class="badge b-green" id="drawerMonthlyPlanBadge" style="font-size:10px;">جديد</span>
+        </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openQuickCompareCard();">
           <span class="drawer-item-l"><span class="drawer-ico-box gold">📈</span><span>بطاقة المقارنة (أسبوعي / شهري)</span></span>
           <span class="drawer-chev">‹</span>
@@ -12615,7 +13217,7 @@ table.t-daily td.td-norecite {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v89</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v91</span>
         </button>
       </div>
     </div>
@@ -12959,18 +13561,69 @@ table.t-daily td.td-norecite {
   </div>
 </div>
 
-<!-- ===== MODAL: FAST ROLL-CALL / QUICK ATTENDANCE (v50) ===== -->
-<div class="modal-backdrop" id="quickAttendanceModal" style="z-index:138;" onclick="if(event.target===this) closeModal('quickAttendanceModal')">
-  <div class="modal-box" style="max-width:560px;">
-    <div class="modal-header">
-      <h3 id="qaModalTitle">⚡ التفقد السريع للحضور والغياب</h3>
-      <button class="close-x" onclick="closeModal('quickAttendanceModal')">×</button>
+<!-- ===== MODAL: FAST ROLL-CALL / QUICK ATTENDANCE STUDIO (v90) ===== -->
+<div class="modal-backdrop exec-modal-backdrop" id="quickAttendanceModal" style="z-index:138;" onclick="if(event.target===this) closeModal('quickAttendanceModal')">
+  <div class="modal-box exec-modal-box">
+    <div class="exec-modal-hdr">
+      <div class="es-handle"></div>
+      <div class="exec-modal-hdr-row">
+        <div style="min-width:0; flex:1;">
+          <h3 id="qaModalTitle">⚡ التفقد السريع للحضور والغياب</h3>
+          <div class="exec-modal-sub" id="qaModalSub">اضغط مرة للتحديد — ومرة ثانية لإلغاء التحديد</div>
+        </div>
+        <button type="button" class="exec-modal-close" onclick="closeModal('quickAttendanceModal')" aria-label="إغلاق">×</button>
+      </div>
     </div>
-    <div id="qaSummaryBar" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px; margin-bottom:9px;"></div>
-    <div id="qaStudentsList" style="max-height:58vh; overflow-y:auto; margin-bottom:10px;"></div>
-    <div style="display:flex; gap:7px; justify-content:space-between; flex-wrap:wrap;">
-      <button type="button" class="btn btn-success btn-sm" onclick="qaMarkAllRemainingPresent()">✓ تعيين الباقي حاضر</button>
-      <button type="button" class="btn btn-primary btn-sm" onclick="closeModal('quickAttendanceModal')">✓ تم وإغلاق</button>
+
+    <div class="qa-top-strip">
+      <div class="qa-prog-row">
+        <span id="qaProgTxt">تم تفقد 0 من 0</span>
+        <span id="qaProgPct" style="color:var(--green);">0%</span>
+      </div>
+      <div class="qa-prog-track"><div class="qa-prog-fill" id="qaProgFill" style="width:0%;"></div></div>
+      <div id="qaSummaryBar" class="qa-filter-chips"></div>
+      <div class="qa-search-row">
+        <span class="qa-search-ico" aria-hidden="true">🔍</span>
+        <input type="text" id="qaSearchInput" autocomplete="off" placeholder="بحث سريع باسم الطالب..." oninput="onQaSearchInput(this.value)">
+        <button type="button" id="qaSearchClr" class="qa-search-clr" style="display:none;" onclick="clearQaSearch()" aria-label="مسح">×</button>
+      </div>
+    </div>
+
+    <div id="qaStudentsList" class="qa-list-scroll"></div>
+
+    <div class="exec-modal-footer">
+      <button type="button" class="btn btn-success btn-sm" style="flex:1; padding:9px 8px;" onclick="qaMarkAllRemainingPresent()">✓ تعيين الباقي حاضر</button>
+      <button type="button" class="btn es-btn-next btn-sm" style="flex:0.85; padding:9px 8px;" onclick="closeModal('quickAttendanceModal')">✓ تم وإغلاق</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== MODAL: MONTHLY STUDENT PLAN & DIAGNOSTIC ANALYZER (v91) ===== -->
+<div class="modal-backdrop exec-modal-backdrop" id="monthlyPlanModal" style="z-index:148;" onclick="if(event.target===this) closeModal('monthlyPlanModal')">
+  <div class="modal-box exec-modal-box">
+    <div class="exec-modal-hdr">
+      <div class="es-handle"></div>
+      <div class="exec-modal-hdr-row">
+        <div style="min-width:0; flex:1;">
+          <h3 id="mpModalTitle">🎯 الخطة الشهرية وتحليل الإنجاز</h3>
+          <div class="exec-modal-sub" id="mpModalSub">حدّد هدف كل طالب بالشهر وتابع سبب التحقيق أو التقصير تلقائياً</div>
+        </div>
+        <button type="button" class="exec-modal-close" onclick="closeModal('monthlyPlanModal')" aria-label="إغلاق">×</button>
+      </div>
+    </div>
+
+    <div class="exec-modal-tabs" style="grid-template-columns:1fr 1fr;">
+      <button type="button" class="exec-tab-btn on" id="mpTabBtn_track" onclick="switchMonthlyPlanTab('track')">📊 متابعة وتحليل السبب</button>
+      <button type="button" class="exec-tab-btn" id="mpTabBtn_setup" onclick="switchMonthlyPlanTab('setup')">✏️ تحديد أهداف الشهر</button>
+    </div>
+
+    <div class="exec-modal-body" id="mpModalBody"></div>
+
+    <div class="exec-modal-footer" style="flex-wrap:wrap; gap:6px;">
+      <button type="button" class="btn btn-soft btn-sm" style="flex:1;" onclick="exportMonthlyPlanHD('png')">📸 صورة HD</button>
+      <button type="button" class="btn btn-primary btn-sm" style="flex:1;" onclick="exportMonthlyPlanHD('pdf')">📑 PDF</button>
+      <button type="button" class="btn btn-success btn-sm" style="flex:1;" onclick="copyMonthlyPlanWA()">💬 واتساب</button>
     </div>
   </div>
 </div>
@@ -17732,9 +18385,12 @@ function shouldUsePerPageMode(r, st, kind, h) {
   const mKey = getPageModeKey(kind);
   if (r[mKey] === "single") return false;
   if (r[mKey] === "multi") return true;
-  // Auto-open per-page when recitation spans >= 1.15 pages
-  const totalPg = slots.reduce((a, p) => a + (Number(p.pages) || 0), 0);
-  return totalPg >= 1.15;
+  // Auto-open per-page ONLY when student actually recites >= 1.35 real pages AND at least 2 meaningful pages (>= 0.2 ص each)!
+  const realTotalPg = kind === "maj"
+    ? (parseArabicNum(r.majPages, 0) || slots.length)
+    : calcSegmentsPages(getSegments(r, kind));
+  const meaningfulSlots = slots.filter(p => (Number(p.pages) || 0) >= 0.2).length;
+  return realTotalPg >= 1.35 && meaningfulSlots >= 2;
 }
 
 function togglePerPageEvalMode(studentId, kind, toMode) {
@@ -18048,7 +18704,7 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
           </div>
         </div>
         <div class="pp-page-grade-lbl">
-          <span>🎯 تقييم <b>ص ${curPg.mushafPage}</b> فقط (لا يؤثر على باقي الصفحات):</span>
+          <span>🎯 تقييم <b>ص ${curPg.mushafPage}</b> فقط</span>
           <span>${curPg.manualEval ? "يدوي" : "تلقائي"}</span>
         </div>
         <div class="pp-page-eval-4">${pageGradeBtnsHtml}</div>
@@ -19952,6 +20608,10 @@ function updateDrawerQuickStates() {
     if (b1) b1.textContent = String(progs.istihda.items.length);
     if (b2) b2.textContent = String(progs.hadith.items.length);
     if (b3) b3.textContent = String(progs.activities.items.length);
+  }
+  const mpb = document.getElementById("drawerMonthlyPlanBadge");
+  if (mpb && typeof getMonthlyPlanDrawerBadgeText === "function") {
+    mpb.textContent = getMonthlyPlanDrawerBadgeText();
   }
 }
 
@@ -23673,6 +24333,11 @@ function syncStudentEvalSheet() {
   const ptsPill = (isPointsEnabled(h) && !isAbsHdr && !isNoRecHdr)
     ? `<button type="button" class="es-pts-btn ${evalBonusOpen ? "open" : ""}" id="esHeaderPtsBadge" onclick="toggleEvalBonusDrawer('${st.id}')" title="اضغط لتعديل السلوك والنقاط">⭐ ${r.points || 0} ▾</button>`
     : (isPointsEnabled(h) ? `<span class="es-pts-pill" id="esHeaderPtsBadge">⭐ ${r.points || 0}</span>` : "");
+  const _curGoalM = getSessionReportMonth(s);
+  const _stGoalObj = typeof getStudentMonthlyGoalQuick === "function" ? getStudentMonthlyGoalQuick(st, h, _curGoalM) : null;
+  const goalPill = (_stGoalObj && _stGoalObj.target > 0)
+    ? `<button type="button" class="es-goal-pill ${_stGoalObj.pct < 60 ? 'warn' : ''}" onclick="openMonthlyPlanModal('${escapeHtml(_curGoalM)}')" title="خطة الطالب الشهرية">🎯 ${formatNum(_stGoalObj.achieved)}/${formatNum(_stGoalObj.target)} ص</button>`
+    : "";
 
   hdrEl.innerHTML = `
     <div class="es-handle"></div>
@@ -23681,7 +24346,7 @@ function syncStudentEvalSheet() {
         <span class="es-num-badge">${idx + 1}</span>
         <div class="es-title-wrap">
           <div class="es-st-name">${escapeHtml(st.name)}</div>
-          <div class="es-st-meta"><span>${trackTag}</span>${statusChipHtml}${ptsPill}</div>
+          <div class="es-st-meta"><span>${trackTag}</span>${statusChipHtml}${ptsPill}${goalPill}</div>
         </div>
       </div>
       <div class="es-hdr-actions">
@@ -23846,72 +24511,85 @@ function renderCardBody(s, st, r, idx) {
       toolPanelHtml = `
         <div class="es-tool-panel">
           <div class="es-tool-panel-hdr">
-            <span>📝 الواجب القادم وتعديل السور</span>
+            <span>📝 خيارات الواجب والتسميع</span>
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','hw')">إخفاء</button>
           </div>
-          <div class="adv-row-card">
-            <div class="arc-l">
-              <div class="arc-t">الواجب القادم</div>
-              <div class="arc-v">${escapeHtml(hwPreview)}</div>
-            </div>
-            <div style="display:flex; gap:4px;">
-              <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','hw')">✏️ تغيير</button>
-              <button type="button" class="lms-btn" onclick="toggleHwSabrManual('${st.id}')">${r.hwSabrJuz ? 'إلغاء' : '🎓 سبر'}</button>
-            </div>
+          <div class="es-hw-quick-3 ${hasHwDot ? '' : 'cols-2'}">
+            <button type="button" class="es-hw-qbtn primary" onclick="openSurahPicker('${st.id}','hw')">✏️ واجب مخصص</button>
+            <button type="button" class="es-hw-qbtn sabr" onclick="toggleHwSabrManual('${st.id}')">${r.hwSabrJuz ? '↩️ إلغاء سبر' : '🎓 واجب سبر جزء'}</button>
+            ${hasHwDot ? `<button type="button" class="es-hw-qbtn danger" onclick="clearStudentHwManual('${st.id}')">🗑️ مسح الواجب</button>` : ''}
           </div>
-          <div class="adv-sec-ttl" style="margin-top:6px;">
-            <span>تعديل مقطع التسميع يدوياً</span>
-            <div style="display:flex; gap:4px;">
-              <button type="button" class="pill pill-sm on-blue" onclick="addExtraSurah('${st.id}','rec')">+ سورة</button>
-              ${dirToggleBtn}
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:7px;">
+            <button type="button" class="pill pill-sm on-blue" style="flex:1;" onclick="addExtraSurah('${st.id}','rec')">+ إضافة سورة ثانية للتسميع</button>
+            ${dirToggleBtn}
+          </div>
+          ${recExtras.length ? renderExtraSurahRowsHtml(st.id, recExtras, "rec", dir, false) : ''}
+          <details class="es-manual-rec-drawer">
+            <summary><span>🔧 تعديل أرقام الآيات والصفحات يدوياً</span><span>▾</span></summary>
+            <div class="surah-clean-grid" style="margin-top:8px; margin-bottom:2px;">
+              <div class="field surah-main-cell"><label>السورة</label><select onchange="onRecSurahChange('${st.id}', this.value)">${surahOptionsHtml(r.recSurahId, "-- اختر السورة --", dir)}</select></div>
+              <div class="field num-cell"><label>من</label><input type="text" inputmode="numeric" value="${r.recFrom || ''}" placeholder="1" onchange="onRecRangeChange('${st.id}','recFrom',this.value)"></div>
+              <div class="field num-cell"><label>إلى</label><input type="text" inputmode="numeric" value="${r.recTo || ''}" placeholder="${maxA1}" onchange="onRecRangeChange('${st.id}','recTo',this.value)"></div>
+              <div class="field num-cell"><label>صفحات</label><input type="text" inputmode="decimal" value="${formatNum(r.recPages || 0)}" onchange="updateRecField('${st.id}','recPages',parseArabicNum(this.value,0),true)"></div>
             </div>
-          </div>
-          <div class="surah-clean-grid" style="margin-bottom:4px;">
-            <div class="field surah-main-cell"><label>السورة</label><select onchange="onRecSurahChange('${st.id}', this.value)">${surahOptionsHtml(r.recSurahId, "-- اختر السورة --", dir)}</select></div>
-            <div class="field num-cell"><label>من</label><input type="text" inputmode="numeric" value="${r.recFrom || ''}" placeholder="1" onchange="onRecRangeChange('${st.id}','recFrom',this.value)"></div>
-            <div class="field num-cell"><label>إلى</label><input type="text" inputmode="numeric" value="${r.recTo || ''}" placeholder="${maxA1}" onchange="onRecRangeChange('${st.id}','recTo',this.value)"></div>
-            <div class="field num-cell"><label>صفحات</label><input type="text" inputmode="decimal" value="${formatNum(r.recPages || 0)}" onchange="updateRecField('${st.id}','recPages',parseArabicNum(this.value,0),true)"></div>
-          </div>
-          ${renderExtraSurahRowsHtml(st.id, recExtras, "rec", dir, false)}
+          </details>
         </div>`;
     } else if (evalSheetTool === "rev") {
+      const hasRevVal = Boolean(r.dRevFrom || r.dRevSurahId || dRevExtras.length || Number(r.dRevPages) > 0);
       toolPanelHtml = `
         <div class="es-tool-panel">
           <div class="es-tool-panel-hdr">
             <span>📘 مراجعة اليوم والربط</span>
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','rev')">إخفاء</button>
           </div>
-          <div class="adv-row-card">
+          <div class="adv-row-card" style="margin-bottom:8px;">
             <div class="arc-l">
-              <div class="arc-t">مقطع المراجعة (${formatNum(calcDailyReviewPages(r))} صفحة)</div>
-              <div class="arc-v">${escapeHtml(r.dRevSardLabel ? `📚 ${r.dRevSardLabel}` : (r.dRevIsPages && r.dRevFrom ? `📄 ${r.dRevFrom === r.dRevTo ? r.dRevFrom : r.dRevFrom + " ← " + r.dRevTo}` : (formatSegmentsInline(getSegments(r, "dRev")) || (r.dRevFrom ? `${r.dRevFrom}${r.dRevTo ? " ← " + r.dRevTo : ""}` : "لا توجد مراجعة"))))}</div>
+              <div class="arc-t">مقطع المراجعة (${formatNum(calcDailyReviewPages(r))} ص)</div>
+              <div class="arc-v">${escapeHtml(r.dRevSardLabel ? `📚 ${r.dRevSardLabel}` : (r.dRevIsPages && r.dRevFrom ? `📄 ${r.dRevFrom === r.dRevTo ? r.dRevFrom : r.dRevFrom + " ← " + r.dRevTo}` : (formatSegmentsInline(getSegments(r, "dRev")) || (r.dRevFrom ? `${r.dRevFrom}${r.dRevTo ? " ← " + r.dRevTo : ""}` : "لم يُحدد مقطع بعد"))))}</div>
             </div>
             <div style="display:flex; gap:4px;">
               <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','dRev')">📖 اختيار</button>
-              ${(r.dRevFrom || r.dRevSurahId || dRevExtras.length || Number(r.dRevPages) > 0) ? `<button type="button" class="lms-btn" onclick="clearDailyRev('${st.id}')">مسح</button>` : ''}
+              ${hasRevVal ? `<button type="button" class="lms-btn" onclick="clearDailyRev('${st.id}')">مسح</button>` : ''}
             </div>
           </div>
-          <div class="pill-group" style="margin-bottom:8px;">
+          <div class="es-rev-eval-5">
             ${["ممتاز", "جيد جداً", "جيد", "تثبيت", "إعادة"].map(ev => {
               const cls = ev === "ممتاز" ? "on-green" : ev === "إعادة" ? "on-red" : ev === "تثبيت" ? "on-orange" : "on-blue";
               const isOn = r.dRevEval === ev || (ev === "تثبيت" && r.dRevEval === "تثبيت حفظ");
-              return `<button type="button" class="pill pill-sm ${isOn?cls:''}" onclick="setDailyRevEval('${st.id}','${ev}')">${ev}</button>`;
+              const lbl = ev === "جيد جداً" ? "جيد جداً" : ev;
+              return `<button type="button" class="pill ${isOn?cls:''}" onclick="setDailyRevEval('${st.id}','${ev}')">${lbl}</button>`;
             }).join("")}
           </div>
-          <label class="check-inline">
-            <input type="checkbox" ${r.rabt ? "checked" : ""} onchange="updateRecField('${st.id}','rabt',this.checked,true)">
-            <span>تم الربط مع المحفوظ السابق ✓</span>
-          </label>
+          <button type="button" class="es-rabt-toggle-card ${r.rabt ? 'on' : ''}" onclick="updateRecField('${st.id}','rabt',${!r.rabt},true)">
+            <span>🔗 الربط مع المحفوظ السابق</span>
+            <span class="m-switch ${r.rabt ? 'on' : ''}" aria-hidden="true"></span>
+          </button>
         </div>`;
     } else if (evalSheetTool === "sabr") {
+      const _curRecSid = Number(r.recSurahId || st.startSurahId || (dir === "asc" ? 2 : 114));
+      const _curRecP = SURAH_MAP[_curRecSid] ? Math.floor(SURAH_MAP[_curRecSid].fs) : 582;
+      const _nearJuz = JUZ_PAGES.find(j => _curRecP >= j.startPage && _curRecP <= j.endPage) || JUZ_PAGES[29];
+      const _suggIds = Array.from(new Set([
+        _nearJuz.id,
+        dir === "desc" ? Math.min(30, _nearJuz.id + 1) : Math.max(1, _nearJuz.id - 1),
+        dir === "desc" ? Math.max(1, _nearJuz.id - 1) : Math.min(30, _nearJuz.id + 1)
+      ])).slice(0, 3);
       toolPanelHtml = `
         <div class="es-tool-panel">
           <div class="es-tool-panel-hdr">
             <span>🎓 سبر جزء جديد (يدخل الشهري بعد النجاح)</span>
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','sabr')">إخفاء</button>
           </div>
+          <div style="font-size:11px; font-weight:700; color:var(--ink-500); margin-bottom:5px;">اختيار سريع للأجزاء القريبة من حفظ الطالب:</div>
+          <div class="es-sabr-quick-grid">
+            ${_suggIds.map(jid => {
+              const j = JUZ_PAGE_MAP[jid];
+              const isSel = r.sabrJuz === j.name;
+              return `<button type="button" class="es-sabr-qchip ${isSel ? 'on' : ''}" onclick="onSabrJuzChange('${st.id}','${isSel ? '' : escapeHtml(j.name)}')"><b>جزء ${j.shortName}</b><small>الجزء ${j.id}</small></button>`;
+            }).join("")}
+          </div>
           <div class="field" style="margin-bottom:${r.sabrJuz ? '8px' : '0'};">
-            <select style="padding:8px 10px; font-size:13px;" onchange="onSabrJuzChange('${st.id}',this.value)">${juzOptionsHtml(r.sabrJuz)}</select>
+            <select style="padding:7px 10px; font-size:12.5px; font-weight:700;" onchange="onSabrJuzChange('${st.id}',this.value)">${juzOptionsHtml(r.sabrJuz)}</select>
           </div>
           ${r.sabrJuz ? `
             <div style="display:flex; gap:6px; flex-wrap:wrap;">
@@ -26211,6 +26889,7 @@ function renderStats() {
   el.innerHTML = `
     ${cycleBannerHtml}
     ${repeatAbsAlert}
+    ${renderMonthlyPlanStatsBanner(h, filterVal)}
     <div id="statsProgressCmpHost"></div>
     <div class="kpi-grid">
       <div class="kpi-box"><div class="kpi-val">${totals.sessionsCount}</div><div class="kpi-lbl">الجلسات</div></div>
@@ -28753,7 +29432,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v89 -->
+<!-- Makin App v91 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -32316,14 +32995,632 @@ function ensureQaModalObserver() {
   obs.observe(el, { attributes: true, attributeFilter: ["class"] });
 }
 
+let _qaFilterMode = "all";
+let _qaSearchVal = "";
+
+
+// ==================== MAKIN v91: MONTHLY STUDENT PLAN & ROOT-CAUSE DIAGNOSTIC ENGINE ====================
+function clearStudentHwManual(studentId) {
+  const s = getCurrentSession();
+  if (!s) return;
+  const r = getStudentRecord(s, studentId);
+  r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = "";
+  saveState();
+  syncStudentEvalSheet();
+  showToast("تم مسح الواجب المخصص");
+}
+
+let _mpActiveTab = "track";
+let _mpSelectedMonth = "";
+let _mpFilterStatus = "all";
+
+function ensureMonthlyGoalsMap(h) {
+  if (!h) return {};
+  if (!h.monthlyGoals || typeof h.monthlyGoals !== "object") h.monthlyGoals = {};
+  return h.monthlyGoals;
+}
+
+function getMonthlyGoalEntry(h, monthLabel, studentId) {
+  const mg = ensureMonthlyGoalsMap(h);
+  const mMap = mg[monthLabel] || {};
+  const entry = mMap[studentId];
+  if (entry && typeof entry === "object") return entry;
+  const st = h?.students?.find(x => x.id === studentId);
+  if (st && Number(st.monthlyGoalPages) > 0) {
+    return { targetPages: Number(st.monthlyGoalPages), reasonNote: "", inherited: true };
+  }
+  return { targetPages: 0, reasonNote: "", inherited: false };
+}
+
+function getMonthlyPlanMonthsList(h) {
+  const curM = getExactHijriInfo(todayISO()).monthLabel;
+  const set = new Set([curM]);
+  (h?.sessions || []).forEach(s => {
+    if (!s.noClass) {
+      const m = getSessionReportMonth(s);
+      if (m) set.add(m);
+    }
+  });
+  Object.keys(h?.monthlyGoals || {}).forEach(m => { if (m) set.add(m); });
+  return Array.from(set);
+}
+
+function getMonthDailySessionsForPlan(h, monthLabel) {
+  return (h?.sessions || [])
+    .filter(s => !s.noClass && isSessionHasRealActivity(s) && getSessionReportMonth(s) === monthLabel)
+    .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+}
+
+function getStudentMonthlyGoalQuick(st, h, monthLabel) {
+  if (!st || !h || !monthLabel) return null;
+  const g = getMonthlyGoalEntry(h, monthLabel, st.id);
+  const target = Number(g.targetPages) || 0;
+  if (target <= 0) return null;
+  const sessions = getMonthDailySessionsForPlan(h, monthLabel);
+  const base = getStudentBaselineTotals(h, monthLabel, st.id);
+  const stats = computeStudentStatsForSessions(st, sessions, h, base);
+  const achieved = st.track === "rashidi" ? stats.rashidiPages : stats.memPages;
+  const pct = Math.round((achieved / target) * 100);
+  return { target, achieved, pct };
+}
+
+function analyzeStudentMonthlyPlan(st, h, monthLabel, monthSessions) {
+  const g = getMonthlyGoalEntry(h, monthLabel, st.id);
+  const target = Math.max(0, Number(g.targetPages) || 0);
+  const base = getStudentBaselineTotals(h, monthLabel, st.id);
+  const stats = computeStudentStatsForSessions(st, monthSessions, h, base);
+  const achieved = Math.round((st.track === "rashidi" ? stats.rashidiPages : stats.memPages) * 100) / 100;
+  const pct = target > 0 ? Math.round((achieved / target) * 100) : 0;
+  const remaining = Math.max(0, Math.round((target - achieved) * 100) / 100);
+
+  let unexcusedAbs = 0, excusedAbs = 0, noReciteDays = 0, repeatDays = 0, recitedDays = 0, lateDays = 0, dailyTotal = 0;
+  monthSessions.forEach(s => {
+    const r = s.records?.[st.id];
+    if (!r) return;
+    const isDailyLike = st.track === "rashidi" || s.type === "daily";
+    if (!isDailyLike) return;
+    dailyTotal++;
+    if (r.attendance === "غياب غير مبرر") unexcusedAbs++;
+    else if (r.attendance === "غياب مبرر") excusedAbs++;
+    else if (isPresentNoRecite(r.attendance)) noReciteDays++;
+    else {
+      if (r.attendance === "متأخر") lateDays++;
+      if (r.recEval === "إعادة") repeatDays++;
+      else if (r.recEval && !r.recIsSabr) recitedDays++;
+    }
+  });
+
+  let status = "unset";
+  let statusLbl = "بلا خطة";
+  let badgeCls = "b-muted";
+  if (target > 0) {
+    if (achieved > target) { status = "ok"; statusLbl = "🏆 تجاوز الخطة"; badgeCls = "b-green"; }
+    else if (achieved >= target) { status = "ok"; statusLbl = "✅ حقق الخطة"; badgeCls = "b-green"; }
+    else if (pct >= 75) { status = "near"; statusLbl = "🟡 قريب من الهدف"; badgeCls = "b-orange"; }
+    else { status = "miss"; statusLbl = "🔴 لم يحقق الخطة"; badgeCls = "b-red"; }
+  }
+
+  // Smart Root-Cause Diagnostic Engine
+  const reasons = [];
+  const pace = Number(st.track === "rashidi" ? (st.rashidiPace || 1) : (st.pace || 0.5));
+  if (target > 0) {
+    if (status === "ok") {
+      if (achieved > target) {
+        reasons.push(`ما شاء الله! أنجز ${formatNum(achieved)} ص وتجاوز هدفه بـ +${formatNum(Math.round((achieved - target) * 100) / 100)} ص`);
+      } else {
+        reasons.push(`أتمّ خطته الشهرية بنجاح (${formatNum(achieved)}/${formatNum(target)} ص) مع التزام طيّب`);
+      }
+    } else {
+      if (unexcusedAbs >= 2 || (unexcusedAbs > 0 && unexcusedAbs * pace >= remaining * 0.45)) {
+        reasons.push(`🚫 الغياب بدون عذر (${unexcusedAbs} ${unexcusedAbs === 1 ? "يوم" : unexcusedAbs === 2 ? "يومان" : "أيام"})`);
+      }
+      if (excusedAbs >= 2 || (excusedAbs > 0 && excusedAbs * pace >= remaining * 0.5)) {
+        reasons.push(`📄 الغياب بعذر (${excusedAbs} ${excusedAbs === 1 ? "يوم" : excusedAbs === 2 ? "يومان" : "أيام"})`);
+      }
+      if (noReciteDays >= 2 || (noReciteDays > 0 && noReciteDays * pace >= remaining * 0.4)) {
+        reasons.push(`📋 حضر ولم يُسمّع (${noReciteDays} ${noReciteDays === 1 ? "مرة" : noReciteDays === 2 ? "مرتان" : "مرات"} — تقصير بالتحضير)`);
+      }
+      if (repeatDays >= 2 || (repeatDays > 0 && repeatDays * pace >= remaining * 0.4)) {
+        reasons.push(`🔁 تكرار الإعادات (${repeatDays} ${repeatDays === 1 ? "مرة" : repeatDays === 2 ? "مرتان" : "مرات"} — ضعف بالتثبيت)`);
+      }
+      if (!reasons.length) {
+        if (dailyTotal === 0) {
+          reasons.push("⏳ لم تُسجّل جلسات تسميع في هذا الشهر بعد");
+        } else if (recitedDays === 0) {
+          reasons.push("⏳ لم يبدأ بالتسميع الجديد هذا الشهر بعد");
+        } else {
+          const avgPerRecite = Math.round((achieved / recitedDays) * 100) / 100;
+          const expectedDailySessions = Math.max(dailyTotal, getExpectedDailySessionsPerMonth(h));
+          const reqPerSession = Math.round((target / Math.max(1, expectedDailySessions)) * 100) / 100;
+          if (avgPerRecite < reqPerSession * 0.85) {
+            reasons.push(`📉 تقصير بالمقدار اليومي (متوسطه ${formatNum(avgPerRecite)} ص/جلسة والمطلوب ${formatNum(reqPerSession)} ص)`);
+          } else {
+            reasons.push(`⚡ الخطة متبقٍ لها ${formatNum(remaining)} ص (${dailyTotal} جلسات منجزة حتى الآن)`);
+          }
+        }
+      }
+    }
+  }
+
+  return {
+    st,
+    target,
+    achieved,
+    pct,
+    remaining,
+    status,
+    statusLbl,
+    badgeCls,
+    unexcusedAbs,
+    excusedAbs,
+    noReciteDays,
+    repeatDays,
+    lateDays,
+    recitedDays,
+    dailyTotal,
+    diagnosisText: reasons.join(" • "),
+    reasonNote: g.reasonNote || ""
+  };
+}
+
+function getExpectedDailySessionsPerMonth(h) {
+  const cDays = getHalaqaClassDays(h);
+  const rDays = getHalaqaReviewDays(h);
+  const dailyPerWeek = Math.max(1, cDays.filter(d => !rDays.includes(d)).length);
+  return dailyPerWeek * 4;
+}
+
+function getMonthlyPlanDrawerBadgeText() {
+  const h = getActiveHalaqa();
+  if (!h || !h.students.length) return "0";
+  const m = getExactHijriInfo(todayISO()).monthLabel;
+  let setCnt = 0;
+  h.students.forEach(st => {
+    if (getMonthlyGoalEntry(h, m, st.id).targetPages > 0) setCnt++;
+  });
+  return setCnt > 0 ? `${setCnt}/${h.students.length}` : "جديد";
+}
+
+function renderMonthlyPlanStatsBanner(h, filterVal) {
+  if (!h || !h.students.length) return "";
+  const m = (filterVal && filterVal !== "ALL" && filterVal !== "POINTS_CYCLE")
+    ? filterVal
+    : getExactHijriInfo(todayISO()).monthLabel;
+  const sessions = getMonthDailySessionsForPlan(h, m);
+  const items = h.students.map(st => analyzeStudentMonthlyPlan(st, h, m, sessions));
+  const withGoal = items.filter(x => x.target > 0);
+  const okCnt = withGoal.filter(x => x.status === "ok").length;
+  const missCnt = withGoal.filter(x => x.status === "miss").length;
+  const sub = withGoal.length
+    ? `${escapeHtml(m)} • ✅ حققوا: ${okCnt} | 🔴 لم يحققوا: ${missCnt} (من ${withGoal.length} خطة)`
+    : `اسأل كل طالب كم صفحة سيحفظ هذا الشهر وتابع سبب التحقيق أو التقصير تلقائياً`;
+  return `<div class="mp-stats-banner">
+    <div style="min-width:0; flex:1;">
+      <h4>🎯 الخطة الشهرية وأهداف الطلاب</h4>
+      <p>${sub}</p>
+    </div>
+    <button type="button" class="btn btn-sm" style="background:#c8a14b; color:#0f233c; flex-shrink:0;" onclick="openMonthlyPlanModal('${escapeHtml(m)}')">فتح الخطة ←</button>
+  </div>`;
+}
+
+function openMonthlyPlanModal(monthLabel = "", initialTab = "") {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const months = getMonthlyPlanMonthsList(h);
+  _mpSelectedMonth = (monthLabel && months.includes(monthLabel)) ? monthLabel : (months[0] || getExactHijriInfo(todayISO()).monthLabel);
+  const hasAnyGoal = h.students.some(st => getMonthlyGoalEntry(h, _mpSelectedMonth, st.id).targetPages > 0);
+  _mpActiveTab = initialTab || (hasAnyGoal ? "track" : "setup");
+  _mpFilterStatus = "all";
+  renderMonthlyPlanModal();
+  openModal("monthlyPlanModal");
+}
+
+function switchMonthlyPlanTab(tab) {
+  _mpActiveTab = tab === "setup" ? "setup" : "track";
+  renderMonthlyPlanModal();
+}
+
+function onMonthlyPlanMonthChange(m) {
+  _mpSelectedMonth = m;
+  renderMonthlyPlanModal();
+}
+
+function setMonthlyPlanFilter(f) {
+  _mpFilterStatus = (_mpFilterStatus === f && f !== "all") ? "all" : f;
+  renderMonthlyPlanModal();
+}
+
+function setStudentMonthlyGoal(studentId, pagesVal, rerender = true) {
+  const h = getActiveHalaqa();
+  if (!h || !_mpSelectedMonth) return;
+  const val = Math.max(0, Math.min(200, Math.round(parseArabicNum(pagesVal, 0) * 2) / 2));
+  const mg = ensureMonthlyGoalsMap(h);
+  if (!mg[_mpSelectedMonth]) mg[_mpSelectedMonth] = {};
+  const prev = mg[_mpSelectedMonth][studentId] || {};
+  mg[_mpSelectedMonth][studentId] = {
+    targetPages: val,
+    reasonNote: prev.reasonNote || "",
+    updatedAt: new Date().toISOString()
+  };
+  const st = h.students.find(x => x.id === studentId);
+  if (st) st.monthlyGoalPages = val;
+  saveStateDebounced(260);
+  if (rerender) renderMonthlyPlanModal();
+}
+
+function stepStudentMonthlyGoal(studentId, delta) {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const cur = Number(getMonthlyGoalEntry(h, _mpSelectedMonth, studentId).targetPages) || 0;
+  setStudentMonthlyGoal(studentId, Math.max(0, cur + delta), true);
+}
+
+function updateStudentMonthlyReasonNote(studentId, noteTxt) {
+  const h = getActiveHalaqa();
+  if (!h || !_mpSelectedMonth) return;
+  const mg = ensureMonthlyGoalsMap(h);
+  if (!mg[_mpSelectedMonth]) mg[_mpSelectedMonth] = {};
+  const prev = getMonthlyGoalEntry(h, _mpSelectedMonth, studentId);
+  mg[_mpSelectedMonth][studentId] = {
+    targetPages: Number(prev.targetPages) || 0,
+    reasonNote: String(noteTxt || ""),
+    updatedAt: new Date().toISOString()
+  };
+  saveStateDebounced(350);
+}
+
+function autoFillMonthlyGoalsFromPace() {
+  const h = getActiveHalaqa();
+  if (!h || !h.students.length) return;
+  const estSessions = getExpectedDailySessionsPerMonth(h);
+  if (!confirm(`سيتم اقتراح هدف شهري لكل طالب بناءً على مقداره اليومي × ${estSessions} جلسات تسميع بالشهر (يمكنك تعديل أي طالب بعدها). هل تريد المتابعة؟`)) return;
+  const mg = ensureMonthlyGoalsMap(h);
+  if (!mg[_mpSelectedMonth]) mg[_mpSelectedMonth] = {};
+  h.students.forEach(st => {
+    const pace = Number(st.track === "rashidi" ? (st.rashidiPace || 1) : (st.pace || 0.5));
+    const suggested = Math.max(2, Math.round(pace * estSessions));
+    const prev = mg[_mpSelectedMonth][st.id] || {};
+    mg[_mpSelectedMonth][st.id] = {
+      targetPages: suggested,
+      reasonNote: prev.reasonNote || "",
+      updatedAt: new Date().toISOString()
+    };
+    st.monthlyGoalPages = suggested;
+  });
+  saveState();
+  renderMonthlyPlanModal();
+  showToast(`✓ تم اقتراح الأهداف الشهرية لـ ${h.students.length} طلاب بنجاح 🎯`);
+}
+
+function copyPreviousMonthGoals() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const mg = ensureMonthlyGoalsMap(h);
+  const otherMonths = Object.keys(mg).filter(m => m !== _mpSelectedMonth && Object.values(mg[m] || {}).some(v => Number(v?.targetPages) > 0));
+  if (!otherMonths.length) { showToast("لا توجد خطة محفوظة لشهر سابق بعد"); return; }
+  const srcMonth = otherMonths[otherMonths.length - 1];
+  if (!mg[_mpSelectedMonth]) mg[_mpSelectedMonth] = {};
+  let cnt = 0;
+  Object.entries(mg[srcMonth] || {}).forEach(([sid, obj]) => {
+    if (Number(obj?.targetPages) > 0) {
+      mg[_mpSelectedMonth][sid] = { targetPages: Number(obj.targetPages), reasonNote: "", updatedAt: new Date().toISOString() };
+      cnt++;
+    }
+  });
+  saveState();
+  renderMonthlyPlanModal();
+  showToast(`✓ تم نسخ ${cnt} هدف من شهر ${srcMonth}`);
+}
+
+function renderMonthlyPlanModal() {
+  const h = getActiveHalaqa();
+  const body = document.getElementById("mpModalBody");
+  if (!h || !body) return;
+  const prevScroll = body.scrollTop;
+
+  document.getElementById("mpTabBtn_track")?.classList.toggle("on", _mpActiveTab === "track");
+  document.getElementById("mpTabBtn_setup")?.classList.toggle("on", _mpActiveTab === "setup");
+
+  const months = getMonthlyPlanMonthsList(h);
+  const monthSessions = getMonthDailySessionsForPlan(h, _mpSelectedMonth);
+  const items = h.students.map(st => analyzeStudentMonthlyPlan(st, h, _mpSelectedMonth, monthSessions));
+  const withGoal = items.filter(x => x.target > 0);
+  const okCnt = withGoal.filter(x => x.status === "ok").length;
+  const nearCnt = withGoal.filter(x => x.status === "near").length;
+  const missCnt = withGoal.filter(x => x.status === "miss").length;
+  const unsetCnt = items.filter(x => x.status === "unset").length;
+  const sumTarget = withGoal.reduce((a, x) => a + x.target, 0);
+  const sumAch = withGoal.reduce((a, x) => a + Math.min(x.target, x.achieved), 0);
+  const overallPct = sumTarget > 0 ? Math.round((sumAch / sumTarget) * 100) : 0;
+
+  const monthBarHtml = `
+    <div style="display:flex; align-items:center; gap:7px; margin-bottom:9px;">
+      <label style="font-size:12px; font-weight:800; color:var(--brand-slate); white-space:nowrap;">الشهر:</label>
+      <select style="flex:1; min-width:0; padding:7px 9px; border-radius:9px; border:1.5px solid var(--line-strong); font-weight:800; background:var(--white); color:var(--ink-900);" onchange="onMonthlyPlanMonthChange(this.value)">
+        ${months.map(m => `<option value="${escapeHtml(m)}" ${m === _mpSelectedMonth ? "selected" : ""}>${escapeHtml(m)}</option>`).join("")}
+      </select>
+    </div>`;
+
+  if (_mpActiveTab === "setup") {
+    const estS = getExpectedDailySessionsPerMonth(h);
+    body.innerHTML = `
+      ${monthBarHtml}
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:9px;">
+        <button type="button" class="btn btn-primary btn-sm" style="width:100%;" onclick="autoFillMonthlyGoalsFromPace()">⚡ اقتراح تلقائي (${estS} جلسات)</button>
+        <button type="button" class="btn btn-soft btn-sm" style="width:100%;" onclick="copyPreviousMonthGoals()">📋 نسخ الشهر السابق</button>
+      </div>
+      ${items.map((x, idx) => `
+        <div class="mp-setup-card">
+          <div class="mp-setup-top">
+            <span class="mp-st-name">${idx + 1}. ${escapeHtml(x.st.name)}</span>
+            <span class="badge b-slate" style="font-size:10px;">يومي: ${formatNum(x.st.track === "rashidi" ? (x.st.rashidiPace || 1) : (x.st.pace || 0.5))} ص</span>
+          </div>
+          <div class="mp-setup-ctrl">
+            <div class="mp-preset-pills">
+              ${[5, 8, 10, 12, 15, 20].map(v => `<button type="button" class="mp-ppill ${x.target === v ? 'on' : ''}" onclick="setStudentMonthlyGoal('${x.st.id}',${v},true)">${v}</button>`).join("")}
+            </div>
+            <div class="sp-mini-step">
+              <button type="button" onclick="stepStudentMonthlyGoal('${x.st.id}', -1)">−</button>
+              <input type="number" min="0" max="200" step="0.5" value="${x.target || ''}" placeholder="0" onchange="setStudentMonthlyGoal('${x.st.id}', this.value, true)">
+              <button type="button" onclick="stepStudentMonthlyGoal('${x.st.id}', 1)">+</button>
+            </div>
+          </div>
+        </div>
+      `).join("") || `<div class="empty-state"><p>لا يوجد طلاب في الحلقة بعد.</p></div>`}
+    `;
+    body.scrollTop = prevScroll;
+    return;
+  }
+
+  // TAB 1: TRACKING & ROOT-CAUSE DIAGNOSTICS
+  const filtered = items.filter(x => {
+    if (_mpFilterStatus === "all") return true;
+    return x.status === _mpFilterStatus;
+  });
+
+  body.innerHTML = `
+    ${monthBarHtml}
+    <div class="mp-kpi-4">
+      <div class="mp-kpi-tile ok"><b>${okCnt}</b><span>✅ حققوا</span></div>
+      <div class="mp-kpi-tile near"><b>${nearCnt}</b><span>🟡 قريبون</span></div>
+      <div class="mp-kpi-tile miss"><b>${missCnt}</b><span>🔴 لم يحققوا</span></div>
+      <div class="mp-kpi-tile"><b>${overallPct}%</b><span>إنجاز الحلقة</span></div>
+    </div>
+
+    <div class="qa-filter-chips" style="margin-bottom:9px;">
+      <button type="button" class="qa-fchip ${_mpFilterStatus==='all'?'on':''}" onclick="setMonthlyPlanFilter('all')"><span>الكل</span><b>${items.length}</b></button>
+      <button type="button" class="qa-fchip ${_mpFilterStatus==='ok'?'on-g':''}" onclick="setMonthlyPlanFilter('ok')"><span>حققوا</span><b>${okCnt}</b></button>
+      <button type="button" class="qa-fchip ${_mpFilterStatus==='near'?'on-o':''}" onclick="setMonthlyPlanFilter('near')"><span>قريبون</span><b>${nearCnt}</b></button>
+      <button type="button" class="qa-fchip ${_mpFilterStatus==='miss'?'on-r':''}" onclick="setMonthlyPlanFilter('miss')"><span>تقصير</span><b>${missCnt}</b></button>
+      <button type="button" class="qa-fchip ${_mpFilterStatus==='unset'?'on':''}" onclick="setMonthlyPlanFilter('unset')"><span>بلا خطة</span><b>${unsetCnt}</b></button>
+    </div>
+
+    ${!withGoal.length ? `
+      <div class="empty-state" style="padding:18px 10px;">
+        <h3>لم تُحدد أهداف هذا الشهر بعد 🎯</h3>
+        <p style="font-size:12px; margin-bottom:10px;">اسأل طلابك كم صفحة سيحفظ كل منهم هذا الشهر وسجّلها في تبويب «تحديد أهداف الشهر».</p>
+        <button type="button" class="btn btn-primary btn-sm" onclick="switchMonthlyPlanTab('setup')">✏️ تحديد أهداف الطلاب الآن</button>
+      </div>
+    ` : filtered.map(x => {
+      if (x.status === "unset") {
+        return `<div class="mp-card">
+          <div class="mp-card-top" style="margin-bottom:0;">
+            <span class="mp-st-name">${escapeHtml(x.st.name)}</span>
+            <button type="button" class="lms-btn accent" onclick="switchMonthlyPlanTab('setup')">+ تحديد هدف</button>
+          </div>
+        </div>`;
+      }
+      const barPct = Math.min(100, Math.max(0, x.pct));
+      const barCls = x.status === "ok" ? "" : (x.status === "near" ? "near" : "miss");
+      const diagCls = x.status === "ok" ? "is-ok" : (x.status === "miss" ? "is-miss" : "");
+      return `<div class="mp-card st-${x.status}">
+        <div class="mp-card-top">
+          <span class="mp-st-name">${escapeHtml(x.st.name)}</span>
+          <span class="badge ${x.badgeCls}">${x.statusLbl}</span>
+        </div>
+        <div class="mp-bar-row">
+          <span>المنجز: <b>${formatNum(x.achieved)} ص</b> من <b>${formatNum(x.target)} ص</b></span>
+          <span><b>${x.pct}%</b>${x.remaining > 0 ? ` (متبقي ${formatNum(x.remaining)} ص)` : ''}</span>
+        </div>
+        <div class="mp-bar-track"><div class="mp-bar-fill ${barCls}" style="width:${barPct}%;"></div></div>
+        <div class="mp-diag-box ${diagCls}">
+          <b>${x.status === "ok" ? "✨ النتيجة:" : "🔍 تحليل السبب:"}</b> ${escapeHtml(x.diagnosisText)}
+        </div>
+        <div class="mp-note-row">
+          <input type="text" value="${escapeHtml(x.reasonNote)}" placeholder="سبب خاص أو ملاحظة (امتحانات، سفر، تشجيع...)" oninput="updateStudentMonthlyReasonNote('${x.st.id}', this.value)">
+          <button type="button" class="btn btn-success btn-sm" style="padding:5px 8px; font-size:11px; flex-shrink:0;" onclick="sendStudentMonthlyPlanWA('${x.st.id}')" title="إرسال نتيجة الخطة لواتساب الطالب">💬</button>
+        </div>
+      </div>`;
+    }).join("") || `<div class="empty-state"><p>لا يوجد طلاب في هذا التصنيف.</p></div>`}
+  `;
+  body.scrollTop = prevScroll;
+}
+
+function sendStudentMonthlyPlanWA(studentId) {
+  const h = getActiveHalaqa();
+  const st = h?.students?.find(x => x.id === studentId);
+  if (!h || !st) return;
+  const bm = getBrandMeta(h), gt = getGenderTerms(h);
+  const sessions = getMonthDailySessionsForPlan(h, _mpSelectedMonth);
+  const x = analyzeStudentMonthlyPlan(st, h, _mpSelectedMonth, sessions);
+  let txt = `السلام عليكم ورحمة الله وبركاته 🌿
+*تقرير الخطة الشهرية — ${st.name}*
+🕌 حلقة ${bm.name} | 📅 ${_mpSelectedMonth}
+━━━━━━━━━━━━━
+`;
+  txt += `🎯 *الهدف المتفق عليه:* ${formatNum(x.target)} صفحة
+`;
+  txt += `📖 *المنجز الفعلي:* ${formatNum(x.achieved)} صفحة (*${x.pct}%*)
+`;
+  txt += `📊 *النتيجة:* ${x.statusLbl}
+`;
+  if (x.status !== "ok" && x.diagnosisText) txt += `🔍 *السبب:* ${x.diagnosisText}
+`;
+  if (x.reasonNote) txt += `💬 *ملاحظة:* ${x.reasonNote}
+`;
+  txt += x.status === "ok"
+    ? `✨ بارك الله في همتك وثباتك، وإلى مزيد من الإتقان!
+`
+    : `💪 نأمل تدارك السبب والهمة في الشهر القادم بإذن الله.
+`;
+  txt += `━━━━━━━━━━━━━
+*${gt.supervisorTitle}: ${bm.sheikh}*`;
+  openWhatsAppToStudentNumber(st, txt);
+}
+
+function copyMonthlyPlanWA() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const bm = getBrandMeta(h);
+  const sessions = getMonthDailySessionsForPlan(h, _mpSelectedMonth);
+  const items = h.students.map(st => analyzeStudentMonthlyPlan(st, h, _mpSelectedMonth, sessions)).filter(x => x.target > 0);
+  if (!items.length) { showToast("حدّد أهداف الشهر للطلاب أولاً"); return; }
+  const ok = items.filter(x => x.status === "ok");
+  const near = items.filter(x => x.status === "near");
+  const miss = items.filter(x => x.status === "miss");
+
+  let txt = `🎯 *تقرير الخطة الشهرية — حلقة ${bm.name}*
+📅 *${_mpSelectedMonth}* | ${bm.branch}
+━━━━━━━━━━━━━
+`;
+  txt += `✅ حققوا الخطة: *${ok.length}* | 🟡 قريبون: *${near.length}* | 🔴 لم يحققوا: *${miss.length}*
+
+`;
+  if (ok.length) {
+    txt += `🏆 *الأبطال المحققون للخطة:*
+`;
+    ok.forEach(x => { txt += `• ${x.st.name}: ${formatNum(x.achieved)}/${formatNum(x.target)} ص (${x.pct}%)
+`; });
+    txt += `
+`;
+  }
+  if (near.length) {
+    txt += `🟡 *قريبون من تحقيق الهدف:*
+`;
+    near.forEach(x => { txt += `• ${x.st.name}: ${formatNum(x.achieved)}/${formatNum(x.target)} ص (${x.pct}%)${x.reasonNote ? ` — ${x.reasonNote}` : ''}
+`; });
+    txt += `
+`;
+  }
+  if (miss.length) {
+    txt += `📌 *يحتاجون متابعة في الشهر القادم:*
+`;
+    miss.forEach(x => { txt += `• ${x.st.name}: ${formatNum(x.achieved)}/${formatNum(x.target)} ص (${x.pct}%) — ${x.reasonNote || x.diagnosisText}
+`; });
+  }
+  txt += `━━━━━━━━━━━━━
+*${bm.program} — ${bm.org}*`;
+  copyTextToClipboard(txt, "تم نسخ ملخص الخطة الشهرية للواتساب 📋");
+}
+
+async function exportMonthlyPlanHD(fmt = "png") {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const bm = getBrandMeta(h);
+  const sessions = getMonthDailySessionsForPlan(h, _mpSelectedMonth);
+  const items = h.students.map(st => analyzeStudentMonthlyPlan(st, h, _mpSelectedMonth, sessions)).filter(x => x.target > 0);
+  if (!items.length) { showToast("حدّد أهداف الشهر للطلاب أولاً"); return; }
+
+  const okCnt = items.filter(x => x.status === "ok").length;
+  const missCnt = items.filter(x => x.status === "miss").length;
+  let host = document.getElementById("mpTempExportHost");
+  if (!host) {
+    host = document.createElement("div");
+    host.id = "mpTempExportHost";
+    host.style.cssText = "position:fixed; left:-99999px; top:0; z-index:-1;";
+    document.body.appendChild(host);
+  }
+  host.innerHTML = `<div id="mpExportPaper" class="pts-table-paper">
+    <div class="ptp-hdr">
+      <img src="${bm.logoSrc}" alt="الشعار">
+      <div class="ptp-hdr-mid">
+        <h2>تقرير متابعة الخطة الشهرية والأهداف</h2>
+        <p>${escapeHtml(bm.org)} • ${escapeHtml(bm.program)} • ${escapeHtml(bm.branch)}</p>
+      </div>
+      <div style="text-align:left; font-size:13px; font-weight:800; color:#102a49;">
+        <div>حلقة ${escapeHtml(bm.name)}</div>
+        <div style="color:#8a6518;">${escapeHtml(_mpSelectedMonth)}</div>
+      </div>
+    </div>
+    <div class="ptp-meta-3">
+      <div class="ptp-meta-cell">إجمالي الخطط: ${items.length}</div>
+      <div class="ptp-meta-cell" style="border-right-color:#16794c; color:#16794c;">حققوا الخطة: ${okCnt}</div>
+      <div class="ptp-meta-cell" style="border-right-color:#b92222; color:#b92222;">لم يحققوا: ${missCnt}</div>
+    </div>
+    <table class="t-points-all">
+      <colgroup><col style="width:6%;"><col style="width:24%;"><col style="width:11%;"><col style="width:11%;"><col style="width:10%;"><col style="width:14%;"><col style="width:24%;"></colgroup>
+      <thead><tr><th>م</th><th>اسم الطالب</th><th>الهدف</th><th>المنجز</th><th class="gold-th">النسبة</th><th>الحالة</th><th>السبب / الملاحظة</th></tr></thead>
+      <tbody>
+        ${items.map((x, i) => `<tr class="${x.status === 'ok' ? 'rank-gold' : ''}">
+          <td>${i + 1}</td>
+          <td class="txt-right">${escapeHtml(x.st.name)}</td>
+          <td>${formatNum(x.target)} ص</td>
+          <td><b>${formatNum(x.achieved)} ص</b></td>
+          <td class="pts-col">${x.pct}%</td>
+          <td>${x.statusLbl}</td>
+          <td style="text-align:right; font-size:11.5px;">${escapeHtml(x.reasonNote ? `${x.reasonNote} (${x.diagnosisText})` : x.diagnosisText)}</td>
+        </tr>`).join("")}
+      </tbody>
+    </table>
+    <div class="ir-footer">
+      <div><span>مشرف الحلقة</span>${escapeHtml(bm.sheikh)}</div>
+      <div><span>الصرح</span>${escapeHtml(bm.branch)}</div>
+      <div><span>التاريخ</span>${escapeHtml(_mpSelectedMonth)}</div>
+    </div>
+  </div>`;
+
+  const fname = `خطة_${cleanFilePart(bm.name)}_${cleanFilePart(_mpSelectedMonth)}`;
+  if (fmt === "pdf") await exportHighResPDF("mpExportPaper", fname);
+  else await exportHighResPNG("mpExportPaper", fname);
+  host.innerHTML = "";
+}
+
 function openQuickAttendanceModal() {
   const h = getActiveHalaqa(), s = getCurrentSession();
   if (!h || !s) return;
   ensureQaModalObserver();
   _qaDirtySession = false;
-  document.getElementById("qaModalTitle").textContent = `⚡ التفقد السريع — ${s.dayName} (${s.hijriDate})`;
+  _qaFilterMode = "all";
+  _qaSearchVal = "";
+  const sInp = document.getElementById("qaSearchInput");
+  if (sInp) sInp.value = "";
+  const sClr = document.getElementById("qaSearchClr");
+  if (sClr) sClr.style.display = "none";
+  document.getElementById("qaModalTitle").textContent = `⚡ التفقد السريع — ${s.dayName}`;
+  const sub = document.getElementById("qaModalSub");
+  if (sub) sub.textContent = `${s.hijriDate} • اضغط ثانيةً على أي حالة لإلغائها فوراً`;
   renderQuickAttendanceList();
   openModal("quickAttendanceModal");
+}
+
+function setQaFilter(mode) {
+  _qaFilterMode = (_qaFilterMode === mode && mode !== "all") ? "all" : mode;
+  renderQuickAttendanceList();
+}
+
+function onQaSearchInput(val) {
+  _qaSearchVal = String(val || "");
+  const clr = document.getElementById("qaSearchClr");
+  if (clr) clr.style.display = _qaSearchVal.trim() ? "inline-flex" : "none";
+  renderQuickAttendanceList();
+}
+
+function clearQaSearch() {
+  _qaSearchVal = "";
+  const inp = document.getElementById("qaSearchInput");
+  if (inp) inp.value = "";
+  const clr = document.getElementById("qaSearchClr");
+  if (clr) clr.style.display = "none";
+  renderQuickAttendanceList();
+}
+
+function getQaCardStateMeta(att, gt) {
+  if (att === "حاضر") return { cls: "st-pres", tag: `✓ ${gt.present}` };
+  if (att === "متأخر") return { cls: "st-late", tag: `⏰ ${gt.late}` };
+  if (att === "حضر ولم يُسمّع") return { cls: "st-norec", tag: "📋 لم يُسمّع" };
+  if (att === "غياب مبرر") return { cls: "st-exc", tag: "📄 بعذر" };
+  if (att === "غياب غير مبرر") return { cls: "st-abs", tag: `🚫 ${gt.absent}` };
+  return { cls: "", tag: "لم يتفقد" };
 }
 
 function renderQuickAttendanceList() {
@@ -32331,37 +33628,73 @@ function renderQuickAttendanceList() {
   const sumBar = document.getElementById("qaSummaryBar");
   const listEl = document.getElementById("qaStudentsList");
   if (!h || !s || !listEl) return;
+  const prevScroll = listEl.scrollTop;
   const gt = getGenderTerms(h);
+  const qNorm = normalizeSearchArabic(_qaSearchVal);
 
   let pres = 0, late = 0, abs = 0, unset = 0;
-  const rowsHtml = h.students.map((st, i) => {
+  const rows = [];
+
+  h.students.forEach((st, i) => {
     const r = getStudentRecord(s, st.id);
-    if (r.attendance === "حاضر" || r.attendance === "حضر ولم يُسمّع") pres++;
-    else if (r.attendance === "متأخر") late++;
-    else if (r.attendance.includes("غياب")) abs++;
+    const att = r.attendance || "لم يُسمّع";
+    const isP = att === "حاضر" || att === "حضر ولم يُسمّع";
+    const isL = att === "متأخر";
+    const isA = att.includes("غياب");
+    const isU = !isP && !isL && !isA;
+
+    if (isP) pres++;
+    else if (isL) late++;
+    else if (isA) abs++;
     else unset++;
 
-    return `<div class="qa-row">
-      <div class="qa-row-name">${i + 1}. ${escapeHtml(st.name)}</div>
-      <div class="qa-pills">
-        <button type="button" class="pill ${r.attendance==='حاضر'?'on-green':''}" onclick="qaSetStatus('${st.id}','حاضر')">${gt.present}</button>
-        <button type="button" class="pill ${r.attendance==='متأخر'?'on-orange':''}" onclick="qaSetStatus('${st.id}','متأخر')">${gt.late}</button>
-        <button type="button" class="pill ${r.attendance==='حضر ولم يُسمّع'?'on-norecite':''}" onclick="qaSetStatus('${st.id}','حضر ولم يُسمّع')">لم يُسمّع</button>
-        <button type="button" class="pill ${r.attendance==='غياب مبرر'?'on-slate':''}" onclick="qaSetStatus('${st.id}','غياب مبرر')">مبرر</button>
-        <button type="button" class="pill ${r.attendance==='غياب غير مبرر'?'on-red':''}" onclick="qaSetStatus('${st.id}','غياب غير مبرر')">${gt.absent}</button>
+    if (_qaFilterMode === "pres" && !isP) return;
+    if (_qaFilterMode === "late" && !isL) return;
+    if (_qaFilterMode === "abs" && !isA) return;
+    if (_qaFilterMode === "unset" && !isU) return;
+    if (qNorm && !matchesStudentSearch(st.name, qNorm)) return;
+
+    const meta = getQaCardStateMeta(att, gt);
+    rows.push(`<div class="qa-card ${meta.cls}" id="qaCard_${st.id}">
+      <div class="qa-card-top">
+        <div class="qa-card-id">
+          <span class="qa-num">${i + 1}</span>
+          <span class="qa-name">${escapeHtml(st.name)}</span>
+        </div>
+        <span class="qa-state-tag ${meta.cls}">${meta.tag}</span>
       </div>
-    </div>`;
-  }).join("");
+      <div class="qa-seg-5">
+        <button type="button" class="qa-btn ${att==='حاضر'?'on-green':''}" onclick="qaSetStatus('${st.id}','حاضر')">${gt.present}</button>
+        <button type="button" class="qa-btn ${att==='متأخر'?'on-orange':''}" onclick="qaSetStatus('${st.id}','متأخر')">${gt.late}</button>
+        <button type="button" class="qa-btn ${att==='حضر ولم يُسمّع'?'on-norecite':''}" onclick="qaSetStatus('${st.id}','حضر ولم يُسمّع')">لم يُسمّع</button>
+        <button type="button" class="qa-btn ${att==='غياب مبرر'?'on-slate':''}" onclick="qaSetStatus('${st.id}','غياب مبرر')">بعذر</button>
+        <button type="button" class="qa-btn ${att==='غياب غير مبرر'?'on-red':''}" onclick="qaSetStatus('${st.id}','غياب غير مبرر')">${gt.absent}</button>
+      </div>
+    </div>`);
+  });
+
+  const total = h.students.length;
+  const checked = total - unset;
+  const pct = total ? Math.round((checked / total) * 100) : 0;
+  const pt = document.getElementById("qaProgTxt");
+  const pp = document.getElementById("qaProgPct");
+  const pf = document.getElementById("qaProgFill");
+  if (pt) pt.textContent = `تم تفقد ${checked} من ${total}`;
+  if (pp) pp.textContent = `${pct}%`;
+  if (pf) pf.style.width = `${pct}%`;
 
   if (sumBar) {
     sumBar.innerHTML = `
-      <span class="badge b-green">${gt.present}: ${pres}</span>
-      <span class="badge b-orange">${gt.late}: ${late}</span>
-      <span class="badge b-red">غياب: ${abs}</span>
-      <span class="badge b-muted">لم يتفقد: ${unset}</span>
+      <button type="button" class="qa-fchip ${_qaFilterMode==='all'?'on':''}" onclick="setQaFilter('all')"><span>الكل</span><b>${total}</b></button>
+      <button type="button" class="qa-fchip ${_qaFilterMode==='pres'?'on-g':''}" onclick="setQaFilter('pres')"><span>${gt.present}</span><b>${pres}</b></button>
+      <button type="button" class="qa-fchip ${_qaFilterMode==='late'?'on-o':''}" onclick="setQaFilter('late')"><span>${gt.late}</span><b>${late}</b></button>
+      <button type="button" class="qa-fchip ${_qaFilterMode==='abs'?'on-r':''}" onclick="setQaFilter('abs')"><span>غياب</span><b>${abs}</b></button>
+      <button type="button" class="qa-fchip ${_qaFilterMode==='unset'?'on':''}" onclick="setQaFilter('unset')"><span>بانتظار</span><b>${unset}</b></button>
     `;
   }
-  listEl.innerHTML = rowsHtml || `<div class="empty-state"><p>لا يوجد ${gt.students} في الحلقة بعد.</p></div>`;
+
+  listEl.innerHTML = rows.join("") || `<div class="empty-state" style="padding:20px 10px;"><p>${total ? "لا توجد نتائج مطابقة لهذا الفلتر" : `لا يوجد ${gt.students} في الحلقة بعد.`}</p></div>`;
+  listEl.scrollTop = prevScroll;
 }
 
 function qaSetStatus(studentId, status) {
@@ -32369,6 +33702,26 @@ function qaSetStatus(studentId, status) {
   const st = h?.students.find(x => x.id === studentId);
   if (!s || !st) return;
   const r = getStudentRecord(s, studentId);
+
+  // 2nd tap on the same active status => TOGGLE OFF back to unchecked ("لم يُسمّع")!
+  if (r.attendance === status) {
+    r.attendance = "لم يُسمّع";
+    r.ptsAdab = undefined;
+    r.ptsParticip = undefined;
+    r.ptsEarly = undefined;
+    if (status.includes("غياب") || status === "حضر ولم يُسمّع") {
+      r.notes = "";
+      if (st.track === "rashidi" && !r.recEval) { r.hwRashidiFrom = ""; r.hwRashidiTo = ""; }
+      if (s.type === "daily" && !r.recEval) { r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = ""; }
+      if (s.type === "saturday" && !r.majEval) { r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; }
+    }
+    r.points = computeRecordPoints(s, r, st);
+    _qaDirtySession = true;
+    saveStateDebounced(300);
+    renderQuickAttendanceList();
+    return;
+  }
+
   if (status.includes("غياب") || status === "حضر ولم يُسمّع") {
     applyAbsenceCarryOver(s, st, r, status);
   } else {
@@ -32384,7 +33737,7 @@ function qaSetStatus(studentId, status) {
     r.points = computeRecordPoints(s, r, st);
   }
   _qaDirtySession = true;
-  saveStateDebounced(350);
+  saveStateDebounced(300);
   renderQuickAttendanceList();
 }
 
@@ -32595,7 +33948,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v89";
+const TIBYAN_APP_VERSION = "v91";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
