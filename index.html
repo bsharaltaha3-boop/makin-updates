@@ -12709,15 +12709,15 @@ details.es-manual-rec-drawer > summary::-webkit-details-marker { display: none; 
 .rep-sabr-badge {
   display: inline-block;
   background: #d1fae5;
-  color: #064e3b;
-  border: 1.5px solid #059669;
-  border-right: 4px solid #c8a14b;
-  border-radius: 6px;
-  padding: 1.5px 7px;
-  font-size: 11px;
+  color: #065f46;
+  border: 1px solid #059669;
+  border-right: 3px solid #c8a14b;
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 10.5px;
   font-weight: 800;
-  line-height: 1.35;
-  margin-left: 5px;
+  line-height: 1.25;
+  margin-left: 4px;
   vertical-align: middle;
   white-space: nowrap;
 }
@@ -12734,10 +12734,139 @@ table.t-daily td.td-note-sabr-rep {
   background: #fef2f2 !important;
 }
 #hdExportStage .rep-sabr-badge {
-  font-size: 12.2px !important;
-  padding: 2px 9px !important;
-  border-width: 1.5px !important;
-  border-right-width: 4px !important;
+  font-size: 11.5px !important;
+  padding: 1.5px 7px !important;
+  border-width: 1px !important;
+  border-right-width: 3.5px !important;
+  line-height: 1.22 !important;
+}
+
+/* ==================== MAKIN v95: CRYSTAL-CLEAR MONTHLY PLAN STUDIO ==================== */
+.mp-hero-card {
+  background: linear-gradient(145deg, #102540 0%, #1a3b60 100%);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 11px 12px;
+  margin-bottom: 9px;
+  border-right: 4px solid #c8a14b;
+}
+.mp-hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 7px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.mp-hero-pct {
+  background: #c8a14b;
+  color: #0f233c;
+  padding: 2px 9px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.mp-hero-track {
+  width: 100%;
+  height: 7px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.16);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.mp-hero-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #c8a14b 0%, #34d399 100%);
+  transition: width 0.25s ease;
+}
+.mp-hero-chips {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+}
+.mp-hchip {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2edf8;
+  border-radius: 9px;
+  padding: 5px 2px;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  text-align: center;
+}
+.mp-hchip b { font-size: 13px; color: #ffffff; line-height: 1.1; }
+.mp-hchip.on { background: #c8a14b; border-color: #c8a14b; color: #0f233c; }
+.mp-hchip.on b { color: #0f233c; }
+
+.mp-metrics-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 7px;
+}
+.mp-metric-box {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 5px 4px;
+  text-align: center;
+}
+.mp-metric-box span { display: block; font-size: 10px; font-weight: 700; color: var(--ink-500); }
+.mp-metric-box b { display: block; font-size: 13px; font-weight: 800; color: var(--ink-900); margin-top: 1px; }
+.mp-metric-box.done b { color: var(--green); }
+.mp-metric-box.rem b { color: var(--orange); }
+
+.mp-card.st-ontrack { border-right-color: var(--blue); }
+.mp-bar-fill.ontrack { background: linear-gradient(90deg, #15629a 0%, #38bdf8 100%); }
+.mp-diag-box.is-ontrack { background: var(--blue-bg); border-color: rgba(21, 98, 154, 0.24); color: var(--blue); }
+
+.mp-facts-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+.mp-fact-pill {
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 99px;
+  background: var(--red-bg);
+  color: var(--red);
+  border: 1px solid rgba(185, 34, 34, 0.2);
+}
+.mp-fact-pill.warn {
+  background: var(--orange-bg);
+  color: var(--orange);
+  border-color: rgba(184, 86, 16, 0.22);
+}
+.mp-guide-strip {
+  background: var(--brand-tint);
+  border: 1px solid var(--line);
+  border-right: 3.5px solid #c8a14b;
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-700);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.mp-pace-calc {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--blue);
+  background: var(--blue-bg);
+  padding: 2px 7px;
+  border-radius: 99px;
+  white-space: nowrap;
 }
 #hdExportStage table.t-daily td.td-note-sabr {
   background: #ecfdf5 !important;
@@ -13269,7 +13398,7 @@ table.t-daily td.td-rev-slim,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v94</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v95</span>
         </button>
       </div>
     </div>
@@ -13658,16 +13787,16 @@ table.t-daily td.td-rev-slim,
       <div class="es-handle"></div>
       <div class="exec-modal-hdr-row">
         <div style="min-width:0; flex:1;">
-          <h3 id="mpModalTitle">🎯 الخطة الشهرية وتحليل الإنجاز</h3>
-          <div class="exec-modal-sub" id="mpModalSub">حدّد هدف كل طالب بالشهر وتابع سبب التحقيق أو التقصير تلقائياً</div>
+          <h3 id="mpModalTitle">🎯 الخطة الشهرية (أهداف الحفظ)</h3>
+          <div class="exec-modal-sub" id="mpModalSub">حدّد لكل طالب عدد صفحاته هذا الشهر وتابع إنجازه بوضوح</div>
         </div>
         <button type="button" class="exec-modal-close" onclick="closeModal('monthlyPlanModal')" aria-label="إغلاق">×</button>
       </div>
     </div>
 
     <div class="exec-modal-tabs" style="grid-template-columns:1fr 1fr;">
-      <button type="button" class="exec-tab-btn on" id="mpTabBtn_track" onclick="switchMonthlyPlanTab('track')">📊 متابعة وتحليل السبب</button>
-      <button type="button" class="exec-tab-btn" id="mpTabBtn_setup" onclick="switchMonthlyPlanTab('setup')">✏️ تحديد أهداف الشهر</button>
+      <button type="button" class="exec-tab-btn on" id="mpTabBtn_track" onclick="switchMonthlyPlanTab('track')">📊 متابعة الإنجاز</button>
+      <button type="button" class="exec-tab-btn" id="mpTabBtn_setup" onclick="switchMonthlyPlanTab('setup')">✏️ تحديد الأهداف</button>
     </div>
 
     <div class="exec-modal-body" id="mpModalBody"></div>
@@ -15318,10 +15447,11 @@ function toggleTajweedTag(studentId, tag) {
   else r.tajweedTags.push(tag);
   r.notes = applyTajweedToNote(r.notes || "", r);
   openCardId = studentId;
-  saveStateDebounced(200);
+  saveState();
   if (document.getElementById("studentEvalSheet")?.classList.contains("show")) {
     syncStudentEvalSheet();
   }
+  renderStudentCardsOnly();
 }
 
 function renderTajweedTagsBar(studentId, r) {
@@ -16074,11 +16204,19 @@ function getDailySabrEval(r) {
   return r.recEval || "";
 }
 
-function stripRedundantSabrNoteText(noteStr) {
+function stripStaleHwSabrPrepText(noteStr) {
   let txt = String(noteStr || "").trim();
   if (!txt) return "";
+  txt = txt.replace(/(?:مبارك\s+إتمام[^؛،.!؟\n]*[؛،,]?\s*)?الواجب\s+القادم:?\s*مراجعة[^.!؟\n]*استعداداً\s+لاختبار\s+السبر\.?/g, "").trim();
+  txt = txt.replace(/^[—–\-•،؛,:\s]+/, "").trim();
+  return txt;
+}
+
+function stripRedundantSabrNoteText(noteStr) {
+  let txt = stripStaleHwSabrPrepText(noteStr);
+  if (!txt) return "";
   txt = txt.replace(/(?:مبارك|إعادة)\s+سبر[^،.!؟\n]*[،,]?\s*(?:فتح الله عليك|يُرجى المراجعة)?\.?/g, "").trim();
-  txt = txt.replace(/^[—–\-•،,:\s]+/, "").trim();
+  txt = txt.replace(/^[—–\-•،؛,:\s]+/, "").trim();
   return txt;
 }
 
@@ -16089,16 +16227,71 @@ function buildDailySabrNoteBadge(r, isHtml = true) {
   const jObj = getJuzByName(r.sabrJuz);
   const shortN = jObj ? jObj.shortName : formatJuzClean(r.sabrJuz);
   const hasSc = r.sabrScore !== "" && r.sabrScore !== null && r.sabrScore !== undefined && !isNaN(Number(r.sabrScore));
-  const scTxt = hasSc ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
+  const scNum = hasSc ? Math.round(Number(r.sabrScore)) : "";
   const isRep = sEv === "إعادة";
   if (isRep) {
-    const plain = `🔁 إعادة سبر جزء ${shortN}${scTxt}`;
+    const plain = hasSc ? `إعادة سبر ${shortN} ${scNum}%` : `إعادة سبر ${shortN}`;
     const badgeHtml = `<span class="rep-sabr-badge is-rep">${escapeHtml(plain)}</span>`;
     return { hasBadge: true, isRep: true, html: badgeHtml, plain };
   }
-  const plain = `🎓 سبر جزء ${shortN}${scTxt} • ${sEv}`;
+  const plain = hasSc ? `سبر ${shortN} ${scNum}%` : `سبر ${shortN} • ${sEv}`;
   const badgeHtml = `<span class="rep-sabr-badge">${escapeHtml(plain)}</span>`;
   return { hasBadge: true, isRep: false, html: badgeHtml, plain };
+}
+
+// Unified Daily Automatic Homework Calculator (v95 — NEVER leaves Homework blank after evaluation!)
+function recomputeAutoDailyHomework(st, r, h) {
+  if (!st || !r || st.track === "rashidi") return null;
+  const dir = st.direction || h?.defaultDir || "desc";
+  const pace = st.pace || 0.5;
+  const sabrObj = r.sabrJuz ? getJuzByName(r.sabrJuz) : null;
+  const sabrEv = sabrObj ? getDailySabrEval(r) : "";
+  const sabrPassed = Boolean(sabrObj && sabrEv && sabrEv !== "إعادة");
+
+  if (r.recIsSabr && sabrObj) {
+    if (sabrEv === "إعادة" || r.recEval === "إعادة") {
+      r.hwSabrJuz = r.sabrJuz;
+      r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
+    } else if (sabrPassed || (r.recEval && r.recEval !== "إعادة")) {
+      r.hwSabrJuz = "";
+      const curSaved = getStudentExtraEndJuzIds(st);
+      if (!curSaved.includes(sabrObj.id)) st.extraMemJuzIds = [...curSaved, sabrObj.id].sort((a, b) => a - b);
+      const nxtHw = computeFirstHwAfterJuz(sabrObj, dir, pace, getStudentJuzOrder(st, h), getStudentExtraEndJuzIds(st));
+      if (nxtHw) Object.assign(r, nxtHw);
+    }
+    return null;
+  }
+
+  const segs = getSegments(r, "rec");
+  if (!segs.length || !r.recEval) return null;
+
+  if (r.recEval === "إعادة") {
+    r.hwSabrJuz = "";
+    r.hwSurahId = segs[0].surahId; r.hwEndSurahId = ""; r.hwFrom = segs[0].from; r.hwTo = segs[0].to;
+    r.hwExtras = segs.slice(1).map(x => ({ ...x }));
+    return null;
+  }
+
+  const completedJuz = detectCompletedJuz(segs, dir);
+  if (completedJuz) {
+    if (sabrPassed && sabrObj.id === completedJuz.id) {
+      r.hwSabrJuz = "";
+      const curSaved = getStudentExtraEndJuzIds(st);
+      if (!curSaved.includes(completedJuz.id)) st.extraMemJuzIds = [...curSaved, completedJuz.id].sort((a, b) => a - b);
+      const nxtHw = computeFirstHwAfterJuz(completedJuz, dir, pace, getStudentJuzOrder(st, h), getStudentExtraEndJuzIds(st));
+      if (nxtHw) Object.assign(r, nxtHw);
+      return null;
+    }
+    r.hwSabrJuz = completedJuz.name;
+    r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
+    return completedJuz;
+  }
+
+  r.hwSabrJuz = "";
+  const last = segs[segs.length - 1];
+  const nxt = computeNextHomework(last.surahId, last.from, last.to, "", dir, pace);
+  if (nxt) Object.assign(r, nxt);
+  return null;
 }
 
 function calcPureDailyReviewPages(r) {
@@ -17277,21 +17470,17 @@ function setSabrScore(studentId, rawVal) {
     }
     if (r.recIsSabr) {
       r.recEval = ev;
-      if (ev === "إعادة") {
-        r.hwSabrJuz = r.sabrJuz;
-        r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
-      } else if (juz) {
-        r.hwSabrJuz = "";
-        if (st) { const curSaved = getStudentExtraEndJuzIds(st); if (!curSaved.includes(juz.id)) st.extraMemJuzIds = [...curSaved, juz.id].sort((a,b)=>a-b); }
-        const nxtHw = computeFirstHwAfterJuz(juz, dir, st.pace || 0.5, getStudentJuzOrder(st, h), getStudentExtraEndJuzIds(st));
-        if (nxtHw) Object.assign(r, nxtHw);
-      }
-    } else {
-      // Sabr done alongside normal recitation and/or Sard — stays completely independent!
-      if (juz && ev !== "إعادة" && st) {
-        const curSaved = getStudentExtraEndJuzIds(st);
-        if (!curSaved.includes(juz.id)) st.extraMemJuzIds = [...curSaved, juz.id].sort((a,b)=>a-b);
-      }
+    } else if (juz && ev !== "إعادة" && st) {
+      const curSaved = getStudentExtraEndJuzIds(st);
+      if (!curSaved.includes(juz.id)) st.extraMemJuzIds = [...curSaved, juz.id].sort((a, b) => a - b);
+    }
+    // Strip any stale "استعداداً لاختبار السبر" prep note while preserving Tajweed tags!
+    r.notes = applyTajweedToNote(stripStaleHwSabrPrepText(r.notes || ""), r);
+    // If homework was empty or pointed to Sabr of the same Juz just passed, auto-recompute cleanly!
+    const hwMissing = !r.hwSurahId && !r.hwSabrJuz;
+    const hwSamePassedSabr = Boolean(juz && ev !== "إعادة" && r.hwSabrJuz && getJuzByName(r.hwSabrJuz)?.id === juz.id);
+    if (r.recIsSabr || hwMissing || hwSamePassedSabr) {
+      recomputeAutoDailyHomework(st, r, h);
     }
   } else {
     // Saturday Major Review Sabr
@@ -18178,21 +18367,8 @@ function applyAutoEvalSilentFromCounters(studentId, kind) {
     const dir = st?.direction || h.defaultDir || "desc";
     let completedJuz = null;
     if (segs.length) {
-      if (ev === "إعادة") {
-        r.hwSabrJuz = "";
-        r.hwSurahId = segs[0].surahId; r.hwEndSurahId = ""; r.hwFrom = segs[0].from; r.hwTo = segs[0].to;
-        r.hwExtras = segs.slice(1).map(x => ({ ...x }));
-      } else {
-        completedJuz = detectCompletedJuz(segs, dir);
-        if (completedJuz) {
-          r.hwSabrJuz = completedJuz.name;
-          r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
-        } else {
-          r.hwSabrJuz = "";
-          const last = segs[segs.length - 1];
-          const nxt = computeNextHomework(last.surahId, last.from, last.to, "", dir, st?.pace || 0.5);
-          if (nxt) Object.assign(r, nxt);
-        }
+      completedJuz = recomputeAutoDailyHomework(st, r, h);
+      if (ev !== "إعادة") {
         if (ev === "جيد" && !r.dRevEval) {
           const s0 = SURAH_MAP[Number(segs[0].surahId)];
           if (segs.length === 1 && s0 && isShortFullSurah(s0, segs[0].from, segs[0].to)) {
@@ -18775,16 +18951,7 @@ function applyPerPageAutoEval(studentId, kind, overrideOverallEv = null, trigger
       if (r.dRevEval === "إعادة" && !(Number(r.dRevPages) > 0)) {
         r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevIsPages = false;
       }
-      const completedJuz = detectCompletedJuz(segs, dir);
-      if (completedJuz) {
-        r.hwSabrJuz = completedJuz.name;
-        r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
-      } else if (segs.length) {
-        r.hwSabrJuz = "";
-        const last = segs[segs.length - 1];
-        const nxt = computeNextHomework(last.surahId, last.from, last.to, "", dir, st?.pace || 0.5);
-        if (nxt) Object.assign(r, nxt);
-      }
+      const completedJuz = recomputeAutoDailyHomework(st, r, h);
       r.notes = applyTajweedToNote(buildConciseRecNote(overallEv, { completedJuz }), r);
     }
     if (triggerAdvance) removeStudentFromQueue(s, studentId);
@@ -20197,7 +20364,7 @@ function applySurahPicker(quickEval = null) {
     if (k === "hw") {
       r.hwSabrJuz = spState.sabrJuzName;
       r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwEndSurahId = ""; r.hwExtras = [];
-      r.notes = `الواجب القادم: مراجعة ${spState.sabrJuzName} كاملاً استعداداً لاختبار السبر.`;
+      r.notes = applyTajweedToNote(`الواجب القادم: سبر ${formatJuzClean(spState.sabrJuzName)}.`, r);
       openCardId = st.id;
       saveState(); renderSessionPreservingScroll();
       showToast(`🎓 تم تعيين الواجب القادم: سبر ${spState.sabrJuzName}`);
@@ -24380,21 +24547,7 @@ function nudgeRecEndAyah(studentId, delta) {
   const _stN = h?.students.find(x => x.id === studentId);
   if (r.recEval) {
     r.points = computeRecordPoints(s, r, _stN);
-    if (r.recEval !== "إعادة" && !r.sabrJuz) {
-      const _segsN = getSegments(r, "rec");
-      if (_segsN.length) {
-        const _lastN = _segsN[_segsN.length - 1];
-        const _dirN = _stN?.direction || h?.defaultDir || "desc";
-        const _compN = detectCompletedJuz(_segsN, _dirN);
-        if (_compN) {
-          r.hwSabrJuz = _compN.name; r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
-        } else {
-          r.hwSabrJuz = "";
-          const _nxtN = computeNextHomework(_lastN.surahId, _lastN.from, _lastN.to, "", _dirN, _stN?.pace || 0.5);
-          if (_nxtN) Object.assign(r, _nxtN);
-        }
-      }
-    }
+    recomputeAutoDailyHomework(_stN, r, h);
   }
   saveStateDebounced(260);
   syncStudentEvalSheet();
@@ -24421,21 +24574,7 @@ function finishRecSurahQuick(studentId) {
   const _stN = h?.students.find(x => x.id === studentId);
   if (r.recEval) {
     r.points = computeRecordPoints(s, r, _stN);
-    if (r.recEval !== "إعادة" && !r.sabrJuz) {
-      const _segsN = getSegments(r, "rec");
-      if (_segsN.length) {
-        const _lastN = _segsN[_segsN.length - 1];
-        const _dirN = _stN?.direction || h?.defaultDir || "desc";
-        const _compN = detectCompletedJuz(_segsN, _dirN);
-        if (_compN) {
-          r.hwSabrJuz = _compN.name; r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
-        } else {
-          r.hwSabrJuz = "";
-          const _nxtN = computeNextHomework(_lastN.surahId, _lastN.from, _lastN.to, "", _dirN, _stN?.pace || 0.5);
-          if (_nxtN) Object.assign(r, _nxtN);
-        }
-      }
-    }
+    recomputeAutoDailyHomework(_stN, r, h);
   }
   saveState();
   syncStudentEvalSheet();
@@ -24479,8 +24618,11 @@ function toggleHwSabrManual(studentId) {
   const h = getActiveHalaqa(), s = getCurrentSession(), st = h.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
   if (r.hwSabrJuz) {
     r.hwSabrJuz = "";
+    const cleanedNote = stripStaleHwSabrPrepText(r.notes || "");
+    r.notes = applyTajweedToNote(cleanedNote || (r.recEval ? buildConciseRecNote(r.recEval) : ""), r);
+    recomputeAutoDailyHomework(st, r, h);
     saveState(); renderSessionView();
-    showToast("تم إلغاء واجب السبر والعودة للواجب المعتاد");
+    showToast("تم إلغاء واجب السبر وضبط الواجب التلقائي ✓");
     return;
   }
   const segs = getSegments(r, "rec");
@@ -24488,7 +24630,7 @@ function toggleHwSabrManual(studentId) {
   const juz = refSurah ? getJuzAtPage(refSurah.p) : JUZ_PAGES[29];
   r.hwSabrJuz = juz.name;
   r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
-  r.notes = `مبارك إتمام ${juz.name}؛ الواجب القادم مراجعة الجزء كاملاً استعداداً لاختبار السبر.`;
+  r.notes = applyTajweedToNote(`الواجب القادم: سبر ${formatJuzClean(juz.name)}.`, r);
   saveState(); renderSessionView();
   showToast(`تم تعيين الواجب القادم: سبر ${juz.name} 🎓`);
 }
@@ -25720,39 +25862,17 @@ function setRecEval(studentId, ev, errCount = null) {
 
   // Case 2: Regular Memorization Recitation
   if (segs.length) {
-    if (ev === "إعادة") {
-      r.hwSabrJuz = "";
-      r.hwSurahId = segs[0].surahId; r.hwEndSurahId = ""; r.hwFrom = segs[0].from; r.hwTo = segs[0].to;
-      r.hwExtras = segs.slice(1).map(x => ({ ...x }));
-    } else if (r.sabrJuz) {
-      // Student also did Sabr today -> move homework right to the first Surah after that Juz!
-      const sabrObj = getJuzByName(r.sabrJuz);
-      r.hwSabrJuz = "";
-      if (st && sabrObj) { const curSaved = getStudentExtraEndJuzIds(st); if (!curSaved.includes(sabrObj.id)) st.extraMemJuzIds = [...curSaved, sabrObj.id].sort((a,b)=>a-b); }
-      const nxtHw = sabrObj ? computeFirstHwAfterJuz(sabrObj, dir, st?.pace || 0.5, getStudentJuzOrder(st, h), getStudentExtraEndJuzIds(st)) : null;
-      if (nxtHw) Object.assign(r, nxtHw);
-    } else {
-      completedJuz = detectCompletedJuz(segs, dir);
-      if (completedJuz) {
-        r.hwSabrJuz = completedJuz.name;
-        r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
+    completedJuz = recomputeAutoDailyHomework(st, r, h);
+    if (ev === "جيد" && !hasIndependentDailyReview(r)) {
+      const s0 = SURAH_MAP[Number(segs[0].surahId)];
+      if (segs.length === 1 && s0 && isShortFullSurah(s0, segs[0].from, segs[0].to)) {
+        r.dRevFrom = s0.n;
+        r.dRevTo = "";
       } else {
-        r.hwSabrJuz = "";
-        const last = segs[segs.length - 1];
-        const nxt = computeNextHomework(last.surahId, last.from, last.to, "", dir, st?.pace || 0.5);
-        if (nxt) Object.assign(r, nxt);
+        r.dRevFrom = `${s0?.n || ''} ${segs[0].from || 1}`;
+        r.dRevTo = String(segs[segs.length - 1].to || "");
       }
-      if (ev === "جيد" && !r.dRevEval) {
-        const s0 = SURAH_MAP[Number(segs[0].surahId)];
-        if (segs.length === 1 && s0 && isShortFullSurah(s0, segs[0].from, segs[0].to)) {
-          r.dRevFrom = s0.n;
-          r.dRevTo = "";
-        } else {
-          r.dRevFrom = `${s0?.n || ''} ${segs[0].from || 1}`;
-          r.dRevTo = String(segs[segs.length - 1].to || "");
-        }
-        r.dRevEval = "تثبيت";
-      }
+      r.dRevEval = "تثبيت";
     }
   }
 
@@ -26387,11 +26507,16 @@ function renderDailyReport() {
         ? buildDailySabrNoteBadge(r, true)
         : { hasBadge: false, isRep: false, html: "", plain: "" };
       const rawCleanNote = stripMushafPageTokens(r.notes || "");
-      const restNote = sabrNoteInfo.hasBadge ? stripRedundantSabrNoteText(rawCleanNote) : rawCleanNote;
+      const baseRestNote = sabrNoteInfo.hasBadge
+        ? stripRedundantSabrNoteText(rawCleanNote)
+        : (!r.hwSabrJuz ? stripStaleHwSabrPrepText(rawCleanNote) : rawCleanNote);
+      const finalRestNote = (!isRashidiRow && !isAbs && !isNoRec)
+        ? applyTajweedToNote(baseRestNote, r)
+        : baseRestNote;
       const noteCellCls = sabrNoteInfo.hasBadge ? (sabrNoteInfo.isRep ? "td-note-sabr-rep" : "td-note-sabr") : "";
       const noteCellHtml = sabrNoteInfo.hasBadge
-        ? `${sabrNoteInfo.html}${restNote ? ` <span>${escapeHtml(restNote)}</span>` : ""}`
-        : escapeHtml(rawCleanNote);
+        ? `${sabrNoteInfo.html}${finalRestNote ? ` <span>${escapeHtml(finalRestNote)}</span>` : ""}`
+        : escapeHtml(finalRestNote);
 
       tbl += `<tr>
         <td>${idx + 1}</td>
@@ -29333,10 +29458,15 @@ async function exportDailyExcelStyled() {
           ? buildDailySabrNoteBadge(r, false)
           : { hasBadge: false, isRep: false, plain: "" };
         const rawXlNote = stripMushafPageTokens(r.notes || "");
-        const restXlNote = xlSabrNote.hasBadge ? stripRedundantSabrNoteText(rawXlNote) : rawXlNote;
+        const baseXlRest = xlSabrNote.hasBadge
+          ? stripRedundantSabrNoteText(rawXlNote)
+          : (!r.hwSabrJuz ? stripStaleHwSabrPrepText(rawXlNote) : rawXlNote);
+        const restXlNote = (!isRashidiRow && !isAbs && !isNoRecXl)
+          ? applyTajweedToNote(baseXlRest, r)
+          : baseXlRest;
         const cleanNote = xlSabrNote.hasBadge
           ? (restXlNote ? `${xlSabrNote.plain} — ${restXlNote}` : xlSabrNote.plain)
-          : rawXlNote;
+          : restXlNote;
 
         const rIdx = 8 + idx;
         const row = ws.getRow(rIdx);
@@ -29677,7 +29807,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v94 -->
+<!-- Makin App v95 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -33259,6 +33389,7 @@ function clearStudentHwManual(studentId) {
 let _mpActiveTab = "track";
 let _mpSelectedMonth = "";
 let _mpFilterStatus = "all";
+let _mpSearchVal = "";
 
 function ensureMonthlyGoalsMap(h) {
   if (!h) return {};
@@ -33297,6 +33428,13 @@ function getMonthDailySessionsForPlan(h, monthLabel) {
     .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
 }
 
+function getExpectedDailySessionsPerMonth(h) {
+  const cDays = getHalaqaClassDays(h);
+  const rDays = getHalaqaReviewDays(h);
+  const dailyPerWeek = Math.max(1, cDays.filter(d => !rDays.includes(d)).length);
+  return dailyPerWeek * 4;
+}
+
 function getStudentMonthlyGoalQuick(st, h, monthLabel) {
   if (!st || !h || !monthLabel) return null;
   const g = getMonthlyGoalEntry(h, monthLabel, st.id);
@@ -33321,11 +33459,11 @@ function analyzeStudentMonthlyPlan(st, h, monthLabel, monthSessions) {
 
   let unexcusedAbs = 0, excusedAbs = 0, noReciteDays = 0, repeatDays = 0, recitedDays = 0, lateDays = 0, dailyTotal = 0;
   monthSessions.forEach(s => {
-    const r = s.records?.[st.id];
-    if (!r) return;
     const isDailyLike = st.track === "rashidi" || s.type === "daily";
     if (!isDailyLike) return;
     dailyTotal++;
+    const r = s.records?.[st.id];
+    if (!r) return;
     if (r.attendance === "غياب غير مبرر") unexcusedAbs++;
     else if (r.attendance === "غياب مبرر") excusedAbs++;
     else if (isPresentNoRecite(r.attendance)) noReciteDays++;
@@ -33336,55 +33474,73 @@ function analyzeStudentMonthlyPlan(st, h, monthLabel, monthSessions) {
     }
   });
 
+  const curHijriMonth = getExactHijriInfo(todayISO()).monthLabel;
+  const expectedSessions = getExpectedDailySessionsPerMonth(h);
+  const remainingSessions = Math.max(0, expectedSessions - dailyTotal);
+  const isMonthInProgress = (monthLabel === curHijriMonth) && remainingSessions > 0;
+  const expectedByNow = expectedSessions > 0
+    ? Math.round((target * (Math.min(dailyTotal, expectedSessions) / expectedSessions)) * 10) / 10
+    : target;
+  const neededPerSession = remainingSessions > 0
+    ? Math.round((remaining / remainingSessions) * 10) / 10
+    : remaining;
+
   let status = "unset";
-  let statusLbl = "بلا خطة";
+  let statusLbl = "بلا هدف";
   let badgeCls = "b-muted";
   if (target > 0) {
-    if (achieved > target) { status = "ok"; statusLbl = "🏆 تجاوز الخطة"; badgeCls = "b-green"; }
-    else if (achieved >= target) { status = "ok"; statusLbl = "✅ حقق الخطة"; badgeCls = "b-green"; }
-    else if (pct >= 75) { status = "near"; statusLbl = "🟡 قريب من الهدف"; badgeCls = "b-orange"; }
-    else { status = "miss"; statusLbl = "🔴 لم يحقق الخطة"; badgeCls = "b-red"; }
-  }
-
-  // Smart Root-Cause Diagnostic Engine
-  const reasons = [];
-  const pace = Number(st.track === "rashidi" ? (st.rashidiPace || 1) : (st.pace || 0.5));
-  if (target > 0) {
-    if (status === "ok") {
-      if (achieved > target) {
-        reasons.push(`ما شاء الله! أنجز ${formatNum(achieved)} ص وتجاوز هدفه بـ +${formatNum(Math.round((achieved - target) * 100) / 100)} ص`);
+    if (achieved > target) {
+      status = "ok"; statusLbl = "🏆 تجاوز الهدف"; badgeCls = "b-green";
+    } else if (achieved >= target) {
+      status = "ok"; statusLbl = "✅ أتمّ الهدف"; badgeCls = "b-green";
+    } else if (isMonthInProgress) {
+      if (dailyTotal === 0) {
+        status = "ontrack"; statusLbl = "⏳ بداية الشهر"; badgeCls = "b-slate";
+      } else if (achieved >= expectedByNow * 0.85 || pct >= 75) {
+        status = "ontrack"; statusLbl = "🟢 على المسار"; badgeCls = "b-blue";
+      } else if (achieved >= expectedByNow * 0.55 || pct >= 45) {
+        status = "near"; statusLbl = "🟡 يحتاج شدّة"; badgeCls = "b-orange";
       } else {
-        reasons.push(`أتمّ خطته الشهرية بنجاح (${formatNum(achieved)}/${formatNum(target)} ص) مع التزام طيّب`);
+        status = "miss"; statusLbl = "🔴 متأخر"; badgeCls = "b-red";
       }
     } else {
-      if (unexcusedAbs >= 2 || (unexcusedAbs > 0 && unexcusedAbs * pace >= remaining * 0.45)) {
-        reasons.push(`🚫 الغياب بدون عذر (${unexcusedAbs} ${unexcusedAbs === 1 ? "يوم" : unexcusedAbs === 2 ? "يومان" : "أيام"})`);
+      if (pct >= 75) {
+        status = "near"; statusLbl = "🟡 قريب من الهدف"; badgeCls = "b-orange";
+      } else {
+        status = "miss"; statusLbl = "🔴 لم يحقق الهدف"; badgeCls = "b-red";
       }
-      if (excusedAbs >= 2 || (excusedAbs > 0 && excusedAbs * pace >= remaining * 0.5)) {
-        reasons.push(`📄 الغياب بعذر (${excusedAbs} ${excusedAbs === 1 ? "يوم" : excusedAbs === 2 ? "يومان" : "أيام"})`);
-      }
-      if (noReciteDays >= 2 || (noReciteDays > 0 && noReciteDays * pace >= remaining * 0.4)) {
-        reasons.push(`📋 حضر ولم يُسمّع (${noReciteDays} ${noReciteDays === 1 ? "مرة" : noReciteDays === 2 ? "مرتان" : "مرات"} — تقصير بالتحضير)`);
-      }
-      if (repeatDays >= 2 || (repeatDays > 0 && repeatDays * pace >= remaining * 0.4)) {
-        reasons.push(`🔁 تكرار الإعادات (${repeatDays} ${repeatDays === 1 ? "مرة" : repeatDays === 2 ? "مرتان" : "مرات"} — ضعف بالتثبيت)`);
-      }
-      if (!reasons.length) {
-        if (dailyTotal === 0) {
-          reasons.push("⏳ لم تُسجّل جلسات تسميع في هذا الشهر بعد");
-        } else if (recitedDays === 0) {
-          reasons.push("⏳ لم يبدأ بالتسميع الجديد هذا الشهر بعد");
-        } else {
-          const avgPerRecite = Math.round((achieved / recitedDays) * 100) / 100;
-          const expectedDailySessions = Math.max(dailyTotal, getExpectedDailySessionsPerMonth(h));
-          const reqPerSession = Math.round((target / Math.max(1, expectedDailySessions)) * 100) / 100;
-          if (avgPerRecite < reqPerSession * 0.85) {
-            reasons.push(`📉 تقصير بالمقدار اليومي (متوسطه ${formatNum(avgPerRecite)} ص/جلسة والمطلوب ${formatNum(reqPerSession)} ص)`);
-          } else {
-            reasons.push(`⚡ الخطة متبقٍ لها ${formatNum(remaining)} ص (${dailyTotal} جلسات منجزة حتى الآن)`);
-          }
-        }
-      }
+    }
+  }
+
+  // Clear, Human-Readable Explanation & Next Step
+  const causes = [];
+  if (unexcusedAbs > 0) causes.push(`غياب بدون عذر (${unexcusedAbs})`);
+  if (excusedAbs > 0) causes.push(`غياب بعذر (${excusedAbs})`);
+  if (noReciteDays > 0) causes.push(`حضر ولم يُسمّع (${noReciteDays})`);
+  if (repeatDays > 0) causes.push(`إعادات (${repeatDays})`);
+
+  let diagnosisText = "";
+  if (target > 0) {
+    if (status === "ok") {
+      const extra = Math.round((achieved - target) * 100) / 100;
+      diagnosisText = extra > 0
+        ? `ما شاء الله! تجاوز هدفه بزيادة +${formatNum(extra)} ص.`
+        : `أتمّ خطة الشهر بنجاح (${formatNum(achieved)} ص).`;
+    } else if (dailyTotal === 0) {
+      const perS = Math.round((target / Math.max(1, expectedSessions)) * 10) / 10;
+      diagnosisText = `المطلوب ${formatNum(perS)} ص في كل جلسة تسميع خلال الشهر.`;
+    } else if (status === "ontrack") {
+      diagnosisText = `يسير بانتظام! المتبقي ${formatNum(remaining)} ص (${formatNum(neededPerSession)} ص لكل جلسة من ${remainingSessions} جلسات متبقية).`;
+    } else {
+      const causePart = causes.length
+        ? `السبب: ${causes.join(" • ")}.`
+        : (recitedDays > 0
+          ? `متوسط التسميع (${formatNum(Math.round((achieved / recitedDays) * 10) / 10)} ص/جلسة) أقل من المطلوب.`
+          : `لم يبدأ بالتسميع الجديد هذا الشهر بعد.`);
+      const actionPart = isMonthInProgress
+        ? ` للتعويض: ${formatNum(neededPerSession)} ص/جلسة خلال ${remainingSessions} جلسات متبقية.`
+        : "";
+      diagnosisText = `${causePart}${actionPart}`;
     }
   }
 
@@ -33404,16 +33560,12 @@ function analyzeStudentMonthlyPlan(st, h, monthLabel, monthSessions) {
     lateDays,
     recitedDays,
     dailyTotal,
-    diagnosisText: reasons.join(" • "),
+    expectedSessions,
+    remainingSessions,
+    neededPerSession,
+    diagnosisText,
     reasonNote: g.reasonNote || ""
   };
-}
-
-function getExpectedDailySessionsPerMonth(h) {
-  const cDays = getHalaqaClassDays(h);
-  const rDays = getHalaqaReviewDays(h);
-  const dailyPerWeek = Math.max(1, cDays.filter(d => !rDays.includes(d)).length);
-  return dailyPerWeek * 4;
 }
 
 function getMonthlyPlanDrawerBadgeText() {
@@ -33436,13 +33588,14 @@ function renderMonthlyPlanStatsBanner(h, filterVal) {
   const items = h.students.map(st => analyzeStudentMonthlyPlan(st, h, m, sessions));
   const withGoal = items.filter(x => x.target > 0);
   const okCnt = withGoal.filter(x => x.status === "ok").length;
+  const onTrackCnt = withGoal.filter(x => x.status === "ontrack").length;
   const missCnt = withGoal.filter(x => x.status === "miss").length;
   const sub = withGoal.length
-    ? `${escapeHtml(m)} • ✅ حققوا: ${okCnt} | 🔴 لم يحققوا: ${missCnt} (من ${withGoal.length} خطة)`
-    : `اسأل كل طالب كم صفحة سيحفظ هذا الشهر وتابع سبب التحقيق أو التقصير تلقائياً`;
+    ? `${escapeHtml(m)} • ✅ أتمّوا: ${okCnt} | 🟢 على المسار: ${onTrackCnt} | 🔴 متأخرون: ${missCnt}`
+    : `حدّد هدف كل طالب بالصفحات لهذا الشهر وتابع التزامه خطوة بخطوة`;
   return `<div class="mp-stats-banner">
     <div style="min-width:0; flex:1;">
-      <h4>🎯 الخطة الشهرية وأهداف الطلاب</h4>
+      <h4>🎯 الخطة الشهرية (أهداف الحفظ)</h4>
       <p>${sub}</p>
     </div>
     <button type="button" class="btn btn-sm" style="background:#c8a14b; color:#0f233c; flex-shrink:0;" onclick="openMonthlyPlanModal('${escapeHtml(m)}')">فتح الخطة ←</button>
@@ -33457,6 +33610,7 @@ function openMonthlyPlanModal(monthLabel = "", initialTab = "") {
   const hasAnyGoal = h.students.some(st => getMonthlyGoalEntry(h, _mpSelectedMonth, st.id).targetPages > 0);
   _mpActiveTab = initialTab || (hasAnyGoal ? "track" : "setup");
   _mpFilterStatus = "all";
+  _mpSearchVal = "";
   renderMonthlyPlanModal();
   openModal("monthlyPlanModal");
 }
@@ -33474,6 +33628,22 @@ function onMonthlyPlanMonthChange(m) {
 function setMonthlyPlanFilter(f) {
   _mpFilterStatus = (_mpFilterStatus === f && f !== "all") ? "all" : f;
   renderMonthlyPlanModal();
+}
+
+function onMonthlyPlanSearchInput(val) {
+  _mpSearchVal = String(val || "");
+  renderMonthlyPlanModal();
+}
+
+function editStudentMonthlyGoalQuick(studentId) {
+  const h = getActiveHalaqa();
+  const st = h?.students?.find(x => x.id === studentId);
+  if (!h || !st) return;
+  const cur = Number(getMonthlyGoalEntry(h, _mpSelectedMonth, studentId).targetPages) || 0;
+  const ans = prompt(`هدف الحفظ الشهري للطالب «${st.name}» لشهر ${_mpSelectedMonth} (عدد الصفحات):`, cur || 10);
+  if (ans === null) return;
+  setStudentMonthlyGoal(studentId, ans, true);
+  showToast(`✓ تم تحديث هدف ${st.name} إلى ${formatNum(getMonthlyGoalEntry(h, _mpSelectedMonth, studentId).targetPages)} ص`);
 }
 
 function setStudentMonthlyGoal(studentId, pagesVal, rerender = true) {
@@ -33535,7 +33705,7 @@ function autoFillMonthlyGoalsFromPace() {
   });
   saveState();
   renderMonthlyPlanModal();
-  showToast(`✓ تم اقتراح الأهداف الشهرية لـ ${h.students.length} طلاب بنجاح 🎯`);
+  showToast(`✓ تم توزيع الأهداف الشهرية تلقائياً لـ ${h.students.length} طلاب 🎯`);
 }
 
 function copyPreviousMonthGoals() {
@@ -33563,47 +33733,66 @@ function renderMonthlyPlanModal() {
   const body = document.getElementById("mpModalBody");
   if (!h || !body) return;
   const prevScroll = body.scrollTop;
+  const hadSearchFocus = document.activeElement?.id === "mpSearchInput";
 
   document.getElementById("mpTabBtn_track")?.classList.toggle("on", _mpActiveTab === "track");
   document.getElementById("mpTabBtn_setup")?.classList.toggle("on", _mpActiveTab === "setup");
 
   const months = getMonthlyPlanMonthsList(h);
   const monthSessions = getMonthDailySessionsForPlan(h, _mpSelectedMonth);
+  const dailyDoneCount = monthSessions.filter(s => s.type === "daily").length;
+  const estSessions = getExpectedDailySessionsPerMonth(h);
   const items = h.students.map(st => analyzeStudentMonthlyPlan(st, h, _mpSelectedMonth, monthSessions));
   const withGoal = items.filter(x => x.target > 0);
   const okCnt = withGoal.filter(x => x.status === "ok").length;
+  const onTrackCnt = withGoal.filter(x => x.status === "ontrack").length;
   const nearCnt = withGoal.filter(x => x.status === "near").length;
   const missCnt = withGoal.filter(x => x.status === "miss").length;
-  const unsetCnt = items.filter(x => x.status === "unset").length;
-  const sumTarget = withGoal.reduce((a, x) => a + x.target, 0);
-  const sumAch = withGoal.reduce((a, x) => a + Math.min(x.target, x.achieved), 0);
-  const overallPct = sumTarget > 0 ? Math.round((sumAch / sumTarget) * 100) : 0;
+  const sumTarget = Math.round(withGoal.reduce((a, x) => a + x.target, 0) * 10) / 10;
+  const sumAch = Math.round(withGoal.reduce((a, x) => a + x.achieved, 0) * 10) / 10;
+  const sumAchCapped = withGoal.reduce((a, x) => a + Math.min(x.target, x.achieved), 0);
+  const overallPct = sumTarget > 0 ? Math.round((sumAchCapped / sumTarget) * 100) : 0;
+
+  const qNorm = normalizeSearchArabic(_mpSearchVal);
+  const matchesSearch = x => !qNorm || normalizeSearchArabic(x.st.name).includes(qNorm);
 
   const monthBarHtml = `
-    <div style="display:flex; align-items:center; gap:7px; margin-bottom:9px;">
-      <label style="font-size:12px; font-weight:800; color:var(--brand-slate); white-space:nowrap;">الشهر:</label>
+    <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;">
       <select style="flex:1; min-width:0; padding:7px 9px; border-radius:9px; border:1.5px solid var(--line-strong); font-weight:800; background:var(--white); color:var(--ink-900);" onchange="onMonthlyPlanMonthChange(this.value)">
-        ${months.map(m => `<option value="${escapeHtml(m)}" ${m === _mpSelectedMonth ? "selected" : ""}>${escapeHtml(m)}</option>`).join("")}
+        ${months.map(m => `<option value="${escapeHtml(m)}" ${m === _mpSelectedMonth ? "selected" : ""}>📅 ${escapeHtml(m)}</option>`).join("")}
       </select>
+      <span class="badge b-slate" style="padding:5px 8px; font-size:11px;">${dailyDoneCount} من ${estSessions} جلسة</span>
+    </div>
+    <div class="qa-search-row" style="margin-bottom:8px;">
+      <span class="qa-search-ico">🔍</span>
+      <input type="text" id="mpSearchInput" value="${escapeHtml(_mpSearchVal)}" placeholder="ابحث باسم الطالب..." oninput="onMonthlyPlanSearchInput(this.value)">
+      ${_mpSearchVal ? `<button type="button" class="qa-search-clr" onclick="onMonthlyPlanSearchInput('')">×</button>` : ''}
     </div>`;
 
   if (_mpActiveTab === "setup") {
-    const estS = getExpectedDailySessionsPerMonth(h);
+    const setupList = items.filter(matchesSearch);
     body.innerHTML = `
       ${monthBarHtml}
+      <div class="mp-guide-strip">
+        💡 حدّد لكل طالب <b>عدد صفحات الحفظ</b> المتفق عليها في شهر <b>${escapeHtml(_mpSelectedMonth)}</b> (نصف جزء = 10 ص • جزء كامل = 20 ص).
+      </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:9px;">
-        <button type="button" class="btn btn-primary btn-sm" style="width:100%;" onclick="autoFillMonthlyGoalsFromPace()">⚡ اقتراح تلقائي (${estS} جلسات)</button>
+        <button type="button" class="btn btn-primary btn-sm" style="width:100%;" onclick="autoFillMonthlyGoalsFromPace()">⚡ توزيع تلقائي (${estSessions} جلسات)</button>
         <button type="button" class="btn btn-soft btn-sm" style="width:100%;" onclick="copyPreviousMonthGoals()">📋 نسخ الشهر السابق</button>
       </div>
-      ${items.map((x, idx) => `
-        <div class="mp-setup-card">
+      ${setupList.map((x, idx) => {
+        const curPace = Number(x.st.track === "rashidi" ? (x.st.rashidiPace || 1) : (x.st.pace || 0.5));
+        const perS = x.target > 0 ? Math.round((x.target / Math.max(1, estSessions)) * 10) / 10 : 0;
+        return `<div class="mp-setup-card">
           <div class="mp-setup-top">
             <span class="mp-st-name">${idx + 1}. ${escapeHtml(x.st.name)}</span>
-            <span class="badge b-slate" style="font-size:10px;">يومي: ${formatNum(x.st.track === "rashidi" ? (x.st.rashidiPace || 1) : (x.st.pace || 0.5))} ص</span>
+            <div style="display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+              ${x.target > 0 ? `<span class="mp-pace-calc">≈ ${formatNum(perS)} ص/جلسة</span>` : `<span class="badge b-muted" style="font-size:10px;">يومي: ${formatNum(curPace)} ص</span>`}
+            </div>
           </div>
           <div class="mp-setup-ctrl">
             <div class="mp-preset-pills">
-              ${[5, 8, 10, 12, 15, 20].map(v => `<button type="button" class="mp-ppill ${x.target === v ? 'on' : ''}" onclick="setStudentMonthlyGoal('${x.st.id}',${v},true)">${v}</button>`).join("")}
+              ${[4, 8, 10, 15, 20].map(v => `<button type="button" class="mp-ppill ${x.target === v ? 'on' : ''}" onclick="setStudentMonthlyGoal('${x.st.id}',${v},true)">${v === 20 ? '20 (جزء)' : v}</button>`).join("")}
             </div>
             <div class="sp-mini-step">
               <button type="button" onclick="stepStudentMonthlyGoal('${x.st.id}', -1)">−</button>
@@ -33611,40 +33800,43 @@ function renderMonthlyPlanModal() {
               <button type="button" onclick="stepStudentMonthlyGoal('${x.st.id}', 1)">+</button>
             </div>
           </div>
-        </div>
-      `).join("") || `<div class="empty-state"><p>لا يوجد طلاب في الحلقة بعد.</p></div>`}
+        </div>`;
+      }).join("") || `<div class="empty-state"><p>لا يوجد طلاب مطابقون للبحث.</p></div>`}
+      ${withGoal.length ? `<button type="button" class="btn btn-success" style="width:100%; margin-top:8px;" onclick="switchMonthlyPlanTab('track')">✓ حفظ وعرض شاشة المتابعة (${withGoal.length} أهداف) ←</button>` : ''}
     `;
     body.scrollTop = prevScroll;
+    if (hadSearchFocus) { const inp = document.getElementById("mpSearchInput"); if (inp) { inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); } }
     return;
   }
 
-  // TAB 1: TRACKING & ROOT-CAUSE DIAGNOSTICS
+  // TAB 1: CRYSTAL-CLEAR TRACKING & PROGRESS
   const filtered = items.filter(x => {
+    if (!matchesSearch(x)) return false;
     if (_mpFilterStatus === "all") return true;
     return x.status === _mpFilterStatus;
   });
 
   body.innerHTML = `
     ${monthBarHtml}
-    <div class="mp-kpi-4">
-      <div class="mp-kpi-tile ok"><b>${okCnt}</b><span>✅ حققوا</span></div>
-      <div class="mp-kpi-tile near"><b>${nearCnt}</b><span>🟡 قريبون</span></div>
-      <div class="mp-kpi-tile miss"><b>${missCnt}</b><span>🔴 لم يحققوا</span></div>
-      <div class="mp-kpi-tile"><b>${overallPct}%</b><span>إنجاز الحلقة</span></div>
-    </div>
-
-    <div class="qa-filter-chips" style="margin-bottom:9px;">
-      <button type="button" class="qa-fchip ${_mpFilterStatus==='all'?'on':''}" onclick="setMonthlyPlanFilter('all')"><span>الكل</span><b>${items.length}</b></button>
-      <button type="button" class="qa-fchip ${_mpFilterStatus==='ok'?'on-g':''}" onclick="setMonthlyPlanFilter('ok')"><span>حققوا</span><b>${okCnt}</b></button>
-      <button type="button" class="qa-fchip ${_mpFilterStatus==='near'?'on-o':''}" onclick="setMonthlyPlanFilter('near')"><span>قريبون</span><b>${nearCnt}</b></button>
-      <button type="button" class="qa-fchip ${_mpFilterStatus==='miss'?'on-r':''}" onclick="setMonthlyPlanFilter('miss')"><span>تقصير</span><b>${missCnt}</b></button>
-      <button type="button" class="qa-fchip ${_mpFilterStatus==='unset'?'on':''}" onclick="setMonthlyPlanFilter('unset')"><span>بلا خطة</span><b>${unsetCnt}</b></button>
+    <div class="mp-hero-card">
+      <div class="mp-hero-top">
+        <span>إنجاز الحلقة: <b>${formatNum(sumAch)}</b> من <b>${formatNum(sumTarget)} ص</b></span>
+        <span class="mp-hero-pct">${overallPct}%</span>
+      </div>
+      <div class="mp-hero-track"><div class="mp-hero-fill" style="width:${Math.min(100, overallPct)}%;"></div></div>
+      <div class="mp-hero-chips">
+        <button type="button" class="mp-hchip ${_mpFilterStatus==='all'?'on':''}" onclick="setMonthlyPlanFilter('all')"><b>${items.length}</b><span>الكل</span></button>
+        <button type="button" class="mp-hchip ${_mpFilterStatus==='ok'?'on':''}" onclick="setMonthlyPlanFilter('ok')"><b>${okCnt}</b><span>✅ أتمّوا</span></button>
+        <button type="button" class="mp-hchip ${_mpFilterStatus==='ontrack'?'on':''}" onclick="setMonthlyPlanFilter('ontrack')"><b>${onTrackCnt}</b><span>🟢 على المسار</span></button>
+        <button type="button" class="mp-hchip ${_mpFilterStatus==='near'?'on':''}" onclick="setMonthlyPlanFilter('near')"><b>${nearCnt}</b><span>🟡 شدّة</span></button>
+        <button type="button" class="mp-hchip ${_mpFilterStatus==='miss'?'on':''}" onclick="setMonthlyPlanFilter('miss')"><b>${missCnt}</b><span>🔴 متأخر</span></button>
+      </div>
     </div>
 
     ${!withGoal.length ? `
       <div class="empty-state" style="padding:18px 10px;">
         <h3>لم تُحدد أهداف هذا الشهر بعد 🎯</h3>
-        <p style="font-size:12px; margin-bottom:10px;">اسأل طلابك كم صفحة سيحفظ كل منهم هذا الشهر وسجّلها في تبويب «تحديد أهداف الشهر».</p>
+        <p style="font-size:12px; margin-bottom:10px;">اضغط أدناه لتحديد عدد الصفحات المطلوبة من كل طالب هذا الشهر (أو وزّعها تلقائياً بضغطة واحدة).</p>
         <button type="button" class="btn btn-primary btn-sm" onclick="switchMonthlyPlanTab('setup')">✏️ تحديد أهداف الطلاب الآن</button>
       </div>
     ` : filtered.map(x => {
@@ -33652,34 +33844,45 @@ function renderMonthlyPlanModal() {
         return `<div class="mp-card">
           <div class="mp-card-top" style="margin-bottom:0;">
             <span class="mp-st-name">${escapeHtml(x.st.name)}</span>
-            <button type="button" class="lms-btn accent" onclick="switchMonthlyPlanTab('setup')">+ تحديد هدف</button>
+            <button type="button" class="lms-btn accent" onclick="editStudentMonthlyGoalQuick('${x.st.id}')">+ تحديد هدف</button>
           </div>
         </div>`;
       }
       const barPct = Math.min(100, Math.max(0, x.pct));
-      const barCls = x.status === "ok" ? "" : (x.status === "near" ? "near" : "miss");
-      const diagCls = x.status === "ok" ? "is-ok" : (x.status === "miss" ? "is-miss" : "");
+      const barCls = x.status === "ok" ? "" : (x.status === "ontrack" ? "ontrack" : (x.status === "near" ? "near" : "miss"));
+      const diagCls = x.status === "ok" ? "is-ok" : (x.status === "ontrack" ? "is-ontrack" : (x.status === "miss" ? "is-miss" : ""));
+      const factPills = [
+        x.unexcusedAbs > 0 ? `<span class="mp-fact-pill">🚫 غياب بدون عذر: ${x.unexcusedAbs}</span>` : "",
+        x.excusedAbs > 0 ? `<span class="mp-fact-pill warn">📄 غياب بعذر: ${x.excusedAbs}</span>` : "",
+        x.noReciteDays > 0 ? `<span class="mp-fact-pill warn">📋 لم يُسمّع: ${x.noReciteDays}</span>` : "",
+        x.repeatDays > 0 ? `<span class="mp-fact-pill warn">🔁 إعادات: ${x.repeatDays}</span>` : ""
+      ].filter(Boolean).join("");
+
       return `<div class="mp-card st-${x.status}">
         <div class="mp-card-top">
           <span class="mp-st-name">${escapeHtml(x.st.name)}</span>
-          <span class="badge ${x.badgeCls}">${x.statusLbl}</span>
+          <div style="display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+            <span class="badge ${x.badgeCls}">${x.statusLbl}</span>
+            <button type="button" class="lms-btn" style="padding:2px 6px; font-size:10.5px;" onclick="editStudentMonthlyGoalQuick('${x.st.id}')" title="تعديل هدف الطالب">✏️</button>
+          </div>
         </div>
-        <div class="mp-bar-row">
-          <span>المنجز: <b>${formatNum(x.achieved)} ص</b> من <b>${formatNum(x.target)} ص</b></span>
-          <span><b>${x.pct}%</b>${x.remaining > 0 ? ` (متبقي ${formatNum(x.remaining)} ص)` : ''}</span>
+        <div class="mp-metrics-3">
+          <div class="mp-metric-box"><span>الهدف</span><b>${formatNum(x.target)} ص</b></div>
+          <div class="mp-metric-box done"><span>المنجز (${x.pct}%)</span><b>${formatNum(x.achieved)} ص</b></div>
+          <div class="mp-metric-box ${x.remaining > 0 ? 'rem' : 'done'}"><span>المتبقي</span><b>${x.remaining > 0 ? `${formatNum(x.remaining)} ص` : 'مكتمل ✓'}</b></div>
         </div>
         <div class="mp-bar-track"><div class="mp-bar-fill ${barCls}" style="width:${barPct}%;"></div></div>
-        <div class="mp-diag-box ${diagCls}">
-          <b>${x.status === "ok" ? "✨ النتيجة:" : "🔍 تحليل السبب:"}</b> ${escapeHtml(x.diagnosisText)}
-        </div>
+        ${factPills ? `<div class="mp-facts-row">${factPills}</div>` : ''}
+        <div class="mp-diag-box ${diagCls}">${escapeHtml(x.diagnosisText)}</div>
         <div class="mp-note-row">
-          <input type="text" value="${escapeHtml(x.reasonNote)}" placeholder="سبب خاص أو ملاحظة (امتحانات، سفر، تشجيع...)" oninput="updateStudentMonthlyReasonNote('${x.st.id}', this.value)">
-          <button type="button" class="btn btn-success btn-sm" style="padding:5px 8px; font-size:11px; flex-shrink:0;" onclick="sendStudentMonthlyPlanWA('${x.st.id}')" title="إرسال نتيجة الخطة لواتساب الطالب">💬</button>
+          <input type="text" value="${escapeHtml(x.reasonNote)}" placeholder="ملاحظة المعلم (امتحانات، سفر، تشجيع...)" oninput="updateStudentMonthlyReasonNote('${x.st.id}', this.value)">
+          <button type="button" class="btn btn-success btn-sm" style="padding:5px 9px; font-size:11px; flex-shrink:0;" onclick="sendStudentMonthlyPlanWA('${x.st.id}')" title="إرسال نتيجة الخطة لواتساب الطالب">💬</button>
         </div>
       </div>`;
     }).join("") || `<div class="empty-state"><p>لا يوجد طلاب في هذا التصنيف.</p></div>`}
   `;
   body.scrollTop = prevScroll;
+  if (hadSearchFocus) { const inp = document.getElementById("mpSearchInput"); if (inp) { inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); } }
 }
 
 function sendStudentMonthlyPlanWA(studentId) {
@@ -33689,28 +33892,17 @@ function sendStudentMonthlyPlanWA(studentId) {
   const bm = getBrandMeta(h), gt = getGenderTerms(h);
   const sessions = getMonthDailySessionsForPlan(h, _mpSelectedMonth);
   const x = analyzeStudentMonthlyPlan(st, h, _mpSelectedMonth, sessions);
-  let txt = `السلام عليكم ورحمة الله وبركاته 🌿
-*تقرير الخطة الشهرية — ${st.name}*
-🕌 حلقة ${bm.name} | 📅 ${_mpSelectedMonth}
-━━━━━━━━━━━━━
-`;
-  txt += `🎯 *الهدف المتفق عليه:* ${formatNum(x.target)} صفحة
-`;
-  txt += `📖 *المنجز الفعلي:* ${formatNum(x.achieved)} صفحة (*${x.pct}%*)
-`;
-  txt += `📊 *النتيجة:* ${x.statusLbl}
-`;
-  if (x.status !== "ok" && x.diagnosisText) txt += `🔍 *السبب:* ${x.diagnosisText}
-`;
-  if (x.reasonNote) txt += `💬 *ملاحظة:* ${x.reasonNote}
-`;
+  let txt = `السلام عليكم ورحمة الله وبركاته 🌿\n*متابعة الخطة الشهرية — ${st.name}*\n🕌 حلقة ${bm.name} | 📅 ${_mpSelectedMonth}\n━━━━━━━━━━━━━\n`;
+  txt += `🎯 *الهدف الشهري:* ${formatNum(x.target)} صفحة\n`;
+  txt += `📖 *المنجز حتى الآن:* ${formatNum(x.achieved)} صفحة (*${x.pct}%*)\n`;
+  if (x.remaining > 0) txt += `⏳ *المتبقي:* ${formatNum(x.remaining)} صفحة\n`;
+  txt += `📊 *الحالة:* ${x.statusLbl}\n`;
+  if (x.diagnosisText) txt += `📌 ${x.diagnosisText}\n`;
+  if (x.reasonNote) txt += `💬 *ملاحظة:* ${x.reasonNote}\n`;
   txt += x.status === "ok"
-    ? `✨ بارك الله في همتك وثباتك، وإلى مزيد من الإتقان!
-`
-    : `💪 نأمل تدارك السبب والهمة في الشهر القادم بإذن الله.
-`;
-  txt += `━━━━━━━━━━━━━
-*${gt.supervisorTitle}: ${bm.sheikh}*`;
+    ? `✨ بارك الله في همتك وثباتك، وإلى مزيد من الإتقان!\n`
+    : `💪 نأمل استمرار الهمة والمثابرة لإتمام الهدف بإذن الله.\n`;
+  txt += `━━━━━━━━━━━━━\n*${gt.supervisorTitle}: ${bm.sheikh}*`;
   openWhatsAppToStudentNumber(st, txt);
 }
 
@@ -33722,41 +33914,33 @@ function copyMonthlyPlanWA() {
   const items = h.students.map(st => analyzeStudentMonthlyPlan(st, h, _mpSelectedMonth, sessions)).filter(x => x.target > 0);
   if (!items.length) { showToast("حدّد أهداف الشهر للطلاب أولاً"); return; }
   const ok = items.filter(x => x.status === "ok");
+  const onTrack = items.filter(x => x.status === "ontrack");
   const near = items.filter(x => x.status === "near");
   const miss = items.filter(x => x.status === "miss");
 
-  let txt = `🎯 *تقرير الخطة الشهرية — حلقة ${bm.name}*
-📅 *${_mpSelectedMonth}* | ${bm.branch}
-━━━━━━━━━━━━━
-`;
-  txt += `✅ حققوا الخطة: *${ok.length}* | 🟡 قريبون: *${near.length}* | 🔴 لم يحققوا: *${miss.length}*
-
-`;
+  let txt = `🎯 *متابعة الخطة الشهرية — حلقة ${bm.name}*\n📅 *${_mpSelectedMonth}* | ${bm.branch}\n━━━━━━━━━━━━━\n`;
+  txt += `✅ أتمّوا الهدف: *${ok.length}* | 🟢 على المسار: *${onTrack.length}* | 🟡 شدّة: *${near.length}* | 🔴 متأخرون: *${miss.length}*\n\n`;
   if (ok.length) {
-    txt += `🏆 *الأبطال المحققون للخطة:*
-`;
-    ok.forEach(x => { txt += `• ${x.st.name}: ${formatNum(x.achieved)}/${formatNum(x.target)} ص (${x.pct}%)
-`; });
-    txt += `
-`;
+    txt += `🏆 *الأبطال المحققون للهدف:*\n`;
+    ok.forEach(x => { txt += `• ${x.st.name}: ${formatNum(x.achieved)}/${formatNum(x.target)} ص (${x.pct}%)\n`; });
+    txt += `\n`;
+  }
+  if (onTrack.length) {
+    txt += `🟢 *على المسار الصحيح:*\n`;
+    onTrack.forEach(x => { txt += `• ${x.st.name}: ${formatNum(x.achieved)}/${formatNum(x.target)} ص (${x.pct}%)\n`; });
+    txt += `\n`;
   }
   if (near.length) {
-    txt += `🟡 *قريبون من تحقيق الهدف:*
-`;
-    near.forEach(x => { txt += `• ${x.st.name}: ${formatNum(x.achieved)}/${formatNum(x.target)} ص (${x.pct}%)${x.reasonNote ? ` — ${x.reasonNote}` : ''}
-`; });
-    txt += `
-`;
+    txt += `🟡 *يحتاجون شدّة بسيطة:*\n`;
+    near.forEach(x => { txt += `• ${x.st.name}: ${formatNum(x.achieved)}/${formatNum(x.target)} ص (متبقي ${formatNum(x.remaining)} ص)${x.reasonNote ? ` — ${x.reasonNote}` : ''}\n`; });
+    txt += `\n`;
   }
   if (miss.length) {
-    txt += `📌 *يحتاجون متابعة في الشهر القادم:*
-`;
-    miss.forEach(x => { txt += `• ${x.st.name}: ${formatNum(x.achieved)}/${formatNum(x.target)} ص (${x.pct}%) — ${x.reasonNote || x.diagnosisText}
-`; });
+    txt += `📌 *يحتاجون متابعة:*\n`;
+    miss.forEach(x => { txt += `• ${x.st.name}: ${formatNum(x.achieved)}/${formatNum(x.target)} ص (${x.pct}%) — ${x.reasonNote || x.diagnosisText}\n`; });
   }
-  txt += `━━━━━━━━━━━━━
-*${bm.program} — ${bm.org}*`;
-  copyTextToClipboard(txt, "تم نسخ ملخص الخطة الشهرية للواتساب 📋");
+  txt += `━━━━━━━━━━━━━\n*${bm.program} — ${bm.org}*`;
+  copyText(txt, "تم نسخ ملخص الخطة الشهرية للواتساب 📋");
 }
 
 async function exportMonthlyPlanHD(fmt = "png") {
@@ -33768,6 +33952,7 @@ async function exportMonthlyPlanHD(fmt = "png") {
   if (!items.length) { showToast("حدّد أهداف الشهر للطلاب أولاً"); return; }
 
   const okCnt = items.filter(x => x.status === "ok").length;
+  const onTrackCnt = items.filter(x => x.status === "ontrack").length;
   const missCnt = items.filter(x => x.status === "miss").length;
   let host = document.getElementById("mpTempExportHost");
   if (!host) {
@@ -33780,7 +33965,7 @@ async function exportMonthlyPlanHD(fmt = "png") {
     <div class="ptp-hdr">
       <img src="${bm.logoSrc}" alt="الشعار">
       <div class="ptp-hdr-mid">
-        <h2>تقرير متابعة الخطة الشهرية والأهداف</h2>
+        <h2>تقرير متابعة الخطة الشهرية وأهداف الحفظ</h2>
         <p>${escapeHtml(bm.org)} • ${escapeHtml(bm.program)} • ${escapeHtml(bm.branch)}</p>
       </div>
       <div style="text-align:left; font-size:13px; font-weight:800; color:#102a49;">
@@ -33789,22 +33974,23 @@ async function exportMonthlyPlanHD(fmt = "png") {
       </div>
     </div>
     <div class="ptp-meta-3">
-      <div class="ptp-meta-cell">إجمالي الخطط: ${items.length}</div>
-      <div class="ptp-meta-cell" style="border-right-color:#16794c; color:#16794c;">حققوا الخطة: ${okCnt}</div>
-      <div class="ptp-meta-cell" style="border-right-color:#b92222; color:#b92222;">لم يحققوا: ${missCnt}</div>
+      <div class="ptp-meta-cell" style="border-right-color:#16794c; color:#16794c;">✅ أتمّوا الهدف: ${okCnt}</div>
+      <div class="ptp-meta-cell" style="border-right-color:#15629a; color:#15629a;">🟢 على المسار: ${onTrackCnt}</div>
+      <div class="ptp-meta-cell" style="border-right-color:#b92222; color:#b92222;">🔴 متأخرون: ${missCnt}</div>
     </div>
     <table class="t-points-all">
-      <colgroup><col style="width:6%;"><col style="width:24%;"><col style="width:11%;"><col style="width:11%;"><col style="width:10%;"><col style="width:14%;"><col style="width:24%;"></colgroup>
-      <thead><tr><th>م</th><th>اسم الطالب</th><th>الهدف</th><th>المنجز</th><th class="gold-th">النسبة</th><th>الحالة</th><th>السبب / الملاحظة</th></tr></thead>
+      <colgroup><col style="width:5%;"><col style="width:22%;"><col style="width:9%;"><col style="width:9%;"><col style="width:9%;"><col style="width:9%;"><col style="width:14%;"><col style="width:23%;"></colgroup>
+      <thead><tr><th>م</th><th>اسم الطالب</th><th>الهدف</th><th>المنجز</th><th>المتبقي</th><th class="gold-th">النسبة</th><th>الحالة</th><th>التوضيح / الملاحظة</th></tr></thead>
       <tbody>
         ${items.map((x, i) => `<tr class="${x.status === 'ok' ? 'rank-gold' : ''}">
           <td>${i + 1}</td>
           <td class="txt-right">${escapeHtml(x.st.name)}</td>
           <td>${formatNum(x.target)} ص</td>
           <td><b>${formatNum(x.achieved)} ص</b></td>
+          <td>${x.remaining > 0 ? `${formatNum(x.remaining)} ص` : '—'}</td>
           <td class="pts-col">${x.pct}%</td>
           <td>${x.statusLbl}</td>
-          <td style="text-align:right; font-size:11.5px;">${escapeHtml(x.reasonNote ? `${x.reasonNote} (${x.diagnosisText})` : x.diagnosisText)}</td>
+          <td style="text-align:right; font-size:11px;">${escapeHtml(x.reasonNote ? `${x.reasonNote} — ${x.diagnosisText}` : x.diagnosisText)}</td>
         </tr>`).join("")}
       </tbody>
     </table>
@@ -34194,7 +34380,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v94";
+const TIBYAN_APP_VERSION = "v95";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
