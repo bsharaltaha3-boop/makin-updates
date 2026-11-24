@@ -74,9 +74,7 @@
 [data-theme="dark"] .day-chip.is-today { box-shadow: inset 0 0 0 1.5px #caa642; }
 [data-theme="dark"] .mode-switch-pills { background: #131d24; border-color: #2b3c48; }
 [data-theme="dark"] .st-body { background: #141e25; }
-[data-theme="dark"] .hw-box { background: #1a2832; border-color: #466073; }
-[data-theme="dark"] .rev-panel-box { background: #262216; border-color: #5c4b1c; }
-[data-theme="dark"] .rev-panel-box summary { color: #f3d277; }
+
 [data-theme="dark"] .b-slate, [data-theme="dark"] .st-num, [data-theme="dark"] .btn-soft, [data-theme="dark"] .subtab-bar, [data-theme="dark"] .archive-month-hdr, [data-theme="dark"] .rank-pos { background: #243440; color: #dce7ef; }
 [data-theme="dark"] .subtab-btn.active { background: #19242c; color: #f1f5f9; }
 [data-theme="dark"] .b-muted { background: #23313c; color: #9ab0bf; }
@@ -104,37 +102,6 @@ body {
 }
 
 /* Session Completion Progress Bar */
-.session-progress-box {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 11px;
-  padding: 8px 11px;
-  margin-bottom: 8px;
-  box-shadow: var(--shadow);
-}
-.sp-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ink-700);
-  margin-bottom: 5px;
-}
-.sp-pct { color: var(--green); font-weight: 800; }
-.sp-track {
-  width: 100%;
-  height: 7px;
-  border-radius: 99px;
-  background: var(--brand-tint);
-  overflow: hidden;
-}
-.sp-fill {
-  height: 100%;
-  border-radius: 99px;
-  background: linear-gradient(90deg, #16794c 0%, #22c55e 100%);
-  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
 
 /* Quick Note Chips */
 .quick-note-chips {
@@ -416,52 +383,6 @@ body {
   flex-shrink: 0;
 }
 /* Monthly Full-Juz Sabr Plan Box (v17) */
-.sabr-plan-box {
-  background: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 100%);
-  border: 1px solid #86efac;
-  border-right: 4px solid var(--green);
-  border-radius: 10px;
-  padding: 9px 10px;
-  margin-bottom: 9px;
-}
-[data-theme="dark"] .sabr-plan-box {
-  background: linear-gradient(135deg, #102a1f 0%, #132538 100%);
-  border-color: #1f5c3f;
-}
-.sabr-plan-hdr {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--green);
-  margin-bottom: 6px;
-}
-.sabr-prog-track {
-  width: 100%;
-  height: 6px;
-  border-radius: 99px;
-  background: rgba(22, 121, 76, 0.14);
-  overflow: hidden;
-  margin: 5px 0 6px;
-}
-.sabr-prog-fill {
-  height: 100%;
-  border-radius: 99px;
-  background: var(--green);
-  transition: width 0.25s ease;
-}
-.rev-cycle-note {
-  font-size: 11.5px;
-  color: var(--blue);
-  background: var(--blue-bg);
-  padding: 5px 8px;
-  border-radius: 7px;
-  margin-bottom: 7px;
-  font-weight: 600;
-}
 
 .carry-summary-bar {
   background: var(--blue-bg);
@@ -1021,12 +942,6 @@ details.ob-brand-drawer > summary::-webkit-details-marker { display: none; }
 }
 .ob-restore-drop:hover { background: #e3ecf2; }
 [data-theme="dark"] .ob-restore-drop:hover { background: #263643; }
-.ob-restore-card {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 12px;
-}
 
 /* ===== HEADER ===== */
 .app-header {
@@ -1093,22 +1008,7 @@ details.ob-brand-drawer > summary::-webkit-details-marker { display: none; }
 }
 
 /* ===== COMFORTABLE 7-DAY NAVIGATOR, IKHLAS SPLASH & CLEAN UI (V10) ===== */
-.day-nav-card {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 15px;
-  padding: 11px 11px 10px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 12px rgba(43, 58, 68, 0.05);
-}
-.dn-top-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  gap: 6px;
-  margin-bottom: 9px;
-}
+
 .dn-month-title {
   font-size: 13.5px;
   font-weight: 800;
@@ -1121,40 +1021,7 @@ details.ob-brand-drawer > summary::-webkit-details-marker { display: none; }
   gap: 5px;
   min-width: 0;
 }
-.dn-week-controls {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  flex-shrink: 0;
-}
-.dn-arrow {
-  border: 1px solid var(--line-strong);
-  background: var(--brand-tint);
-  color: var(--brand-slate);
-  border-radius: 8px;
-  height: 30px;
-  min-width: 30px;
-  padding: 0 8px;
-  font-size: 12.5px;
-  font-weight: 700;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  line-height: 1;
-  transition: background 0.14s, transform 0.08s;
-}
-.dn-arrow.icon-only { width: 30px; padding: 0; font-size: 17px; font-weight: 800; }
-.dn-arrow:hover { background: #dce5eb; }
-.dn-arrow:active { transform: scale(0.95); }
 
-.week-strip-7 {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 4px;
-  margin-bottom: 10px;
-}
 .day-chip {
   position: relative;
   border: 1px solid var(--line);
@@ -1174,33 +1041,6 @@ details.ob-brand-drawer > summary::-webkit-details-marker { display: none; }
 .day-chip:hover { border-color: #9cb0bd; background: #eef3f6; }
 .day-chip.is-class-day { background: var(--white); border-color: #cbd7e0; }
 .day-chip.is-today { box-shadow: inset 0 0 0 1.5px var(--brand-slate); }
-.day-chip.selected-daily {
-  background: #33464f; border-color: #33464f; color: #ffffff;
-  box-shadow: 0 3px 9px rgba(51, 70, 79, 0.24);
-}
-.day-chip.selected-sat {
-  background: #b8912e; border-color: #b8912e; color: #ffffff;
-  box-shadow: 0 3px 9px rgba(184, 145, 46, 0.28);
-}
-.day-chip .d-name { font-size: 10.5px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
-.day-chip .d-num { font-size: 11.5px; font-weight: 800; line-height: 1.25; white-space: nowrap; }
-.day-chip .d-dot { width: 5px; height: 5px; border-radius: 50%; margin-top: 2px; background: transparent; }
-.day-chip.has-data .d-dot { background: #16a34a; }
-.day-chip.selected-daily.has-data .d-dot,
-.day-chip.selected-sat.has-data .d-dot { background: #ffffff; }
-
-.dn-active-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  gap: 8px;
-  padding-top: 9px;
-  border-top: 1px solid var(--line);
-}
-.dn-active-info { display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1; }
-.dn-active-date { font-size: 13px; font-weight: 800; color: var(--ink-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.dn-active-sub { font-size: 11px; color: var(--ink-500); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .mode-switch-pills {
   display: inline-flex; background: #edf2f6; border: 1px solid #d5dfe7;
@@ -1223,13 +1063,6 @@ details.ob-brand-drawer > summary::-webkit-details-marker { display: none; }
 .month-end-alert .mea-txt { font-size: 12.5px; line-height: 1.5; flex: 1; min-width: 200px; }
 .month-end-alert .mea-txt b { color: #f5d87e; }
 .month-end-alert .mea-btns { display: flex; gap: 6px; flex-wrap: wrap; }
-
-.slim-kpi-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 9px; }
-.slim-kpi { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 7px 4px; text-align: center; }
-.slim-kpi .sk-v { font-size: 16px; font-weight: 800; color: var(--brand-slate); line-height: 1.15; }
-.slim-kpi .sk-l { font-size: 10.5px; color: var(--ink-500); margin-top: 2px; }
-
-.session-tools-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 9px; }
 
 /* ===== IKHLAS EPHEMERAL SPLASH FLASH (3.5s) ===== */
 .ikhlas-overlay {
@@ -1337,14 +1170,6 @@ details.ob-brand-drawer > summary::-webkit-details-marker { display: none; }
 }
 
 /* ===== SESSION BAR (CLEAN FULL-WIDTH DROPDOWN ON MOBILE) ===== */
-.session-bar { display: flex; flex-direction: column; gap: 8px; }
-.session-row-top { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
-.session-row-top select {
-  flex: 1; min-width: 210px; padding: 8px 10px;
-  border-radius: 9px; border: 1px solid var(--line-strong);
-  font-weight: 700; font-size: 13.5px; background: var(--white); color: var(--brand-slate);
-}
-.session-row-actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
 
 /* ===== CRISP SINGLE-LINE STUDENT CARDS (FIXED LONG NAMES ON MOBILE!) ===== */
 .st-card {
@@ -1430,11 +1255,6 @@ details.ob-brand-drawer > summary::-webkit-details-marker { display: none; }
   cursor: pointer;
 }
 .quick-step-btn:hover { background: #dce5eb; }
-.flow-pill-on {
-  background: var(--green) !important;
-  color: #ffffff !important;
-  border-color: var(--green) !important;
-}
 
 .st-body { display: none; padding: 11px; border-top: 1px solid var(--line); background: #f9fbfc; }
 .st-card.open .st-body { display: block; }
@@ -1457,8 +1277,6 @@ details.ob-brand-drawer > summary::-webkit-details-marker { display: none; }
 .pill.on-orange { background: var(--orange); color: #fff; border-color: var(--orange); }
 .pill.on-red { background: var(--red); color: #fff; border-color: var(--red); }
 
-.row-compact { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 7px; align-items: end; }
-.row-two-surahs { display: grid; grid-template-columns: 2fr 1fr 2fr 1fr; gap: 7px; align-items: end; }
 @media (max-width: 600px) {
   .row-compact, .row-two-surahs { grid-template-columns: 1fr 1fr; }
   .row-compact .span2-m { grid-column: 1 / -1; }
@@ -1487,32 +1305,6 @@ details.ob-brand-drawer > summary::-webkit-details-marker { display: none; }
   }
 }
 
-.eval-grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 5px;
-}
-.eval-grid-4 .pill {
-  padding: 7px 3px;
-  font-size: 12.5px;
-  text-align: center;
-  width: 100%;
-  white-space: nowrap;
-}
-.att-grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 5px;
-  margin-bottom: 8px;
-}
-.att-grid-4 .pill {
-  padding: 6px 2px;
-  font-size: 11.5px;
-  text-align: center;
-  width: 100%;
-  white-space: nowrap;
-}
-
 .pace-seg {
   display: inline-flex;
   background: var(--brand-tint);
@@ -1535,19 +1327,6 @@ details.ob-brand-drawer > summary::-webkit-details-marker { display: none; }
 .pace-seg button.on { background: var(--brand-slate); color: #ffffff; }
 .pace-seg button.on-g { background: var(--green); color: #ffffff; }
 
-.maj-preview-strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  background: var(--brand-tint);
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  padding: 7px 10px;
-  margin-bottom: 8px;
-  font-size: 12.5px;
-}
-.maj-preview-strip b { color: var(--ink-900); }
 .maj-compact-inputs {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1574,24 +1353,6 @@ details.mini-more > summary {
 }
 details.mini-more > summary::-webkit-details-marker { display: none; }
 
-.src-days-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--blue);
-  background: var(--blue-bg);
-  padding: 2px 7px;
-  border-radius: 99px;
-}
-.hw-clean-box {
-  background: var(--brand-tint);
-  border: 1px dashed var(--line-strong);
-  border-radius: 10px;
-  padding: 9px 10px;
-  margin-bottom: 8px;
-}
 .hw-clean-head {
   display: flex;
   align-items: center;
@@ -1602,21 +1363,9 @@ details.mini-more > summary::-webkit-details-marker { display: none; }
 }
 
 .pts-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-.pts-stepper { display: inline-flex; align-items: center; gap: 6px; }
-.pts-stepper button {
-  width: 30px; height: 30px; border-radius: 8px;
-  border: 1px solid var(--line-strong); background: var(--brand-tint);
-  color: var(--brand-slate); font-weight: 700; font-size: 16px; cursor: pointer;
-}
-.pts-stepper input {
-  width: 64px; text-align: center; font-weight: 800; font-size: 14.5px;
-  color: var(--brand-slate); border: 1.5px solid var(--brand-slate); border-radius: 8px; padding: 4px;
-}
 
-.hw-box { background: #f4f7f9; border: 1px dashed #6b818e; border-radius: 9px; padding: 9px 10px; margin-bottom: 8px; }
 details.extra-box { background: var(--white); border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; margin-bottom: 8px; }
 details.extra-box summary { cursor: pointer; font-weight: 700; font-size: 12.5px; color: var(--ink-700); }
-.card-footer-nav { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 8px; }
 
 /* ===== ARCHIVE CARDS ===== */
 .archive-month-group { margin-bottom: 14px; }
@@ -1625,13 +1374,6 @@ details.extra-box summary { cursor: pointer; font-weight: 700; font-size: 12.5px
   padding: 6px 10px; background: #e8eef2; border-radius: 8px; margin-bottom: 8px;
   display: flex; align-items: center; justify-content: space-between;
 }
-.archive-item {
-  background: var(--white); border: 1px solid var(--line); border-right: 4px solid var(--brand-slate);
-  border-radius: 10px; padding: 11px 12px; margin-bottom: 8px;
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
-}
-.archive-item.sat-item { border-right-color: var(--brand-ochre); }
-.archive-meta { font-size: 12px; color: var(--ink-500); margin-top: 3px; display: flex; flex-wrap: wrap; gap: 8px; }
 
 /* ===== REPORTS SUB-TABS ===== */
 .subtab-bar {
@@ -1645,30 +1387,12 @@ details.extra-box summary { cursor: pointer; font-weight: 700; font-size: 12.5px
 .subtab-btn.active { background: var(--white); color: var(--brand-slate); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
 
 /* ===== FILTER BAR ===== */
-.filter-bar { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; margin-bottom: 10px; }
-.filter-bar input {
-  flex: 1; min-width: 160px; padding: 8px 11px;
-  border: 1px solid var(--line-strong); border-radius: 9px; background: var(--white);
-}
 
 /* ===== OFFICIAL REPORT PAPERS (PIXEL-EXACT TEMPLATES — CRISP BLACK INK & BORDERS v16) ===== */
 .report-paper {
   background: #ffffff; color: #000000; border: 1px solid var(--line);
   border-radius: var(--radius); padding: 16px; overflow-x: auto;
 }
-
-.official-daily-hdr {
-  display: grid; grid-template-columns: 1.15fr 2.2fr 1.15fr;
-  gap: 10px; align-items: center;
-  margin-bottom: 9px; padding-bottom: 9px; border-bottom: 2px solid #000000;
-  min-width: 820px;
-}
-.odh-right { font-size: 12.5px; font-weight: 800; color: #000000; line-height: 1.6; }
-.odh-center { text-align: center; }
-.odh-center h2 { font-size: 18px; font-weight: 800; color: #000000; margin-bottom: 4px; }
-.odh-meta-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 18px; font-size: 13px; font-weight: 800; color: #000000; }
-.odh-left { display: flex; justify-content: flex-end; align-items: center; }
-.odh-left img { height: 50px; width: auto; display: block; object-fit: contain; }
 
 table.t-daily { width: 100%; border-collapse: collapse; font-size: 12.5px; min-width: 820px; }
 table.t-daily th, table.t-daily td {
@@ -1761,14 +1485,6 @@ table.t-monthly tfoot tr.tm-summary-sub td { background: #e7e4d9; color: #000000
 .close-x { border: none; background: var(--brand-tint); width: 30px; height: 30px; border-radius: 8px; font-size: 18px; cursor: pointer; color: var(--ink-700); }
 .abs-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 9px; margin-bottom: 7px; background: #fafcfd; }
 
-.set-st-list {
-  max-height: 220px;
-  overflow-y: auto;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  background: #fafcfd;
-  padding: 4px;
-}
 .set-st-row {
   display: flex;
   align-items: center;
@@ -1788,26 +1504,7 @@ table.t-monthly tfoot tr.tm-summary-sub td { background: #e7e4d9; color: #000000
   min-width: 0;
   flex: 1;
 }
-.rev-panel-box {
-  background: #fffdf5;
-  border: 1px solid #e7d69e;
-  border-radius: 10px;
-  padding: 9px 10px;
-  margin-bottom: 8px;
-}
-.rev-panel-box summary {
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 12.5px;
-  color: #7c5e10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 6px;
-  list-style: none;
-}
-.rev-panel-box summary::-webkit-details-marker { display: none; }
+
 .base-st-card {
   background: #fafcfd;
   border: 1px solid var(--line);
@@ -1845,7 +1542,7 @@ table.t-monthly tfoot tr.tm-summary-sub td { background: #e7e4d9; color: #000000
 
 .empty-state { text-align: center; padding: 28px 14px; color: var(--ink-500); }
 .empty-state h3 { color: var(--brand-slate); margin-bottom: 6px; }
-.action-strip { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 11px; }
+
 .check-inline { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: var(--ink-700); cursor: pointer; }
 .check-inline input { width: 16px; height: 16px; accent-color: var(--brand-slate); }
 .sync-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; background: #22c55e; }
@@ -1874,7 +1571,6 @@ table.t-monthly tfoot tr.tm-summary-sub td { background: #e7e4d9; color: #000000
   min-width: 0 !important;
   width: 100% !important;
 }
-
 
 /* ==================== TIBYAN v20 EXECUTIVE UI, RIGHT DRAWER & LIVE MUSHAF STRIP ==================== */
 .menu-burger-btn {
@@ -1944,8 +1640,7 @@ table.t-monthly tfoot tr.tm-summary-sub td { background: #e7e4d9; color: #000000
 }
 .drawer-hero-title { font-size: 15px; font-weight: 800; margin-top: 6px; }
 .drawer-hero-sub { font-size: 11.5px; color: #cbd8e0; margin-top: 2px; }
-.drawer-sec { padding: 10px 10px 6px; border-bottom: 1px solid var(--line); }
-.drawer-sec-lbl { font-size: 10.5px; font-weight: 800; color: var(--ink-500); padding: 0 6px 5px; }
+
 .drawer-item {
   width: 100%;
   border: none;
@@ -2008,7 +1703,7 @@ table.t-monthly tfoot tr.tm-summary-sub td { background: #e7e4d9; color: #000000
   border-style: dashed;
 }
 [data-theme="dark"] .day-chip.is-noclass { background: #171f26; }
-.day-chip.is-noclass .d-dot { background: #94a3b8 !important; }
+
 .noclass-card {
   background: var(--white);
   border: 1.5px dashed var(--line-strong);
@@ -2019,21 +1714,6 @@ table.t-monthly tfoot tr.tm-summary-sub td { background: #e7e4d9; color: #000000
 }
 .noclass-card h3 { font-size: 15px; font-weight: 800; color: var(--brand-slate); margin-bottom: 5px; }
 .noclass-card p { font-size: 12px; color: var(--ink-500); margin-bottom: 12px; }
-.dn-day-status-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px dashed var(--line);
-}
-.day-jump-mini {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
 
 /* Executive Reports Toolbar */
 .rep-toolbar-card {
@@ -2125,101 +1805,7 @@ table.t-monthly tfoot tr.tm-summary-sub td { background: #e7e4d9; color: #000000
 .mem-hint-tag.rep { background: var(--orange-bg); color: var(--orange); }
 .mem-hint-tag.sabr { background: var(--green-bg); color: var(--green); }
 
-
 /* ==================== TIBYAN v21 ULTRA-CLEAN COMPACT SESSION & ZERO-CLUTTER CARDS ==================== */
-.slim-day-bar {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 6px 8px;
-  margin-bottom: 7px;
-  box-shadow: var(--shadow);
-}
-.sdb-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 5px;
-}
-.sdb-nav-group {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  flex: 1;
-  min-width: 0;
-}
-.sdb-step-btn {
-  border: 1px solid var(--line-strong);
-  background: var(--brand-tint);
-  color: var(--brand-slate);
-  width: 30px;
-  height: 32px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 800;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.sdb-step-btn:hover { background: #dce5eb; }
-.sdb-date-pill {
-  flex: 1;
-  min-width: 0;
-  border: 1px solid var(--line-strong);
-  background: var(--brand-tint);
-  color: var(--ink-900);
-  height: 32px;
-  border-radius: 8px;
-  padding: 0 9px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  cursor: pointer;
-  font-size: 12.5px;
-  font-weight: 800;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.sdb-date-pill.mode-sat {
-  background: #fef7e0;
-  border-color: #e6c66b;
-  color: #7c5809;
-}
-[data-theme="dark"] .sdb-date-pill.mode-sat {
-  background: #2b2412;
-  border-color: #6b5317;
-  color: #f4d274;
-}
-.sdb-date-pill.mode-nc {
-  background: #f1f5f9;
-  border-style: dashed;
-  color: var(--ink-500);
-}
-.sdb-icon-btn {
-  border: 1px solid var(--line-strong);
-  background: var(--white);
-  color: var(--brand-slate);
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 800;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.sdb-icon-btn:hover { background: var(--brand-tint); }
-.sdb-week-drawer {
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px dashed var(--line);
-}
 
 .slim-status-bar {
   position: relative;
@@ -2265,52 +1851,7 @@ table.t-monthly tfoot tr.tm-summary-sub td { background: #e7e4d9; color: #000000
   transition: width 0.3s ease;
 }
 
-.compact-filter-row {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-bottom: 8px;
-}
-.compact-filter-row .search-input-wrap { min-width: 110px; }
-.compact-filter-row .search-input-wrap input { padding: 6px 9px 6px 26px; font-size: 12.5px; border-radius: 8px; }
-
 /* Single clean Advanced Drawer inside Student Cards */
-details.adv-card-drawer {
-  background: var(--white);
-  border: 1px dashed var(--line-strong);
-  border-radius: 10px;
-  padding: 8px 10px;
-  margin-bottom: 8px;
-}
-details.adv-card-drawer > summary {
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ink-700);
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-}
-details.adv-card-drawer > summary::-webkit-details-marker { display: none; }
-.adv-sub-sec {
-  padding-top: 9px;
-  margin-top: 9px;
-  border-top: 1px solid var(--line);
-}
-.adv-sub-sec:first-of-type { border-top: none; margin-top: 6px; padding-top: 4px; }
-.adv-sec-ttl {
-  font-size: 11.5px;
-  font-weight: 800;
-  color: var(--brand-slate);
-  margin-bottom: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 5px;
-}
 
 .sabr-inline-bar {
   display: flex;
@@ -2347,7 +1888,6 @@ details.adv-card-drawer > summary::-webkit-details-marker { display: none; }
 .day-opt-btn:hover { background: var(--brand-tint); }
 .day-opt-btn.danger { color: var(--red); border-color: rgba(185,34,34,0.22); background: var(--red-bg); }
 
-
 /* ==================== TIBYAN v22: UNDO, MISTAKE COUNTER, QUEUE/SINK, CERTIFICATE, AUTO-SYNC ==================== */
 .toast {
   display: none;
@@ -2370,65 +1910,6 @@ details.adv-card-drawer > summary::-webkit-details-marker { display: none; }
 .toast-undo-btn:hover { background: rgba(255,255,255,0.28); }
 
 /* Slim 1-line Mistake Counter (zero clutter!) */
-.err-counter-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  padding: 4px 6px;
-  margin-bottom: 7px;
-}
-.err-ctrl-group {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-.err-btn {
-  border: 1px solid var(--line-strong);
-  background: var(--white);
-  color: var(--ink-900);
-  height: 28px;
-  min-width: 28px;
-  padding: 0 8px;
-  border-radius: 7px;
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.err-btn.plus {
-  background: var(--red-bg);
-  color: var(--red);
-  border-color: rgba(185, 34, 34, 0.25);
-  padding: 0 11px;
-}
-.err-btn:active { transform: scale(0.95); }
-.err-count-lbl {
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--ink-700);
-  min-width: 58px;
-  text-align: center;
-}
-.err-apply-btn {
-  border: none;
-  border-radius: 7px;
-  height: 28px;
-  padding: 0 10px;
-  font-size: 11.5px;
-  font-weight: 800;
-  cursor: pointer;
-  color: #ffffff;
-  background: var(--green);
-  white-space: nowrap;
-}
-.err-apply-btn.ev-vgood, .err-apply-btn.ev-good { background: var(--blue); }
-.err-apply-btn.ev-repeat { background: var(--red); }
 
 /* Queue Hand Button & Done Section Divider */
 .queue-hand-btn {
@@ -2512,134 +1993,10 @@ details.adv-card-drawer > summary::-webkit-details-marker { display: none; }
   display: flex;
   flex-direction: column;
 }
-.cert-outer-frame {
-  flex: 1;
-  border: 5px solid #2b3a44;
-  padding: 9px;
-  background: #ffffff;
-  display: flex;
-  flex-direction: column;
-}
-.cert-inner-frame {
-  flex: 1;
-  border: 1.5px solid #94a3b8;
-  padding: 24px 36px 20px;
-  text-align: center;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+
 /* Hifz / Sabr Juz Certificate Variant — Prestigious Matte Emerald-Slate */
-.cert-paper.is-hifz .cert-outer-frame { border-color: #164e3b; }
-.cert-paper.is-hifz .cert-inner-frame { border-color: #caa642; background: linear-gradient(180deg, #ffffff 0%, #fafcf9 100%); }
-.cert-paper.is-hifz .cert-kicker { background: #16794c; color: #ffffff; }
-.cert-paper.is-hifz .cert-title { color: #164e3b; }
-.cert-paper.is-hifz .cert-student-name { color: #1f2f38; border-bottom-color: #caa642; }
 
-.cert-top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 12px;
-  border-bottom: 1.5px solid #cbd5e1;
-  flex-shrink: 0;
-}
-.cert-org-txt {
-  text-align: right;
-  font-size: 14px;
-  font-weight: 800;
-  color: #2b3a44;
-  line-height: 1.55;
-}
-.cert-top-bar img { height: 58px; width: auto; max-width: 210px; object-fit: contain; display: block; }
-.cert-center-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 0;
-}
-.cert-kicker {
-  display: inline-block;
-  background: #33464f;
-  color: #ffffff;
-  padding: 5px 22px;
-  border-radius: 99px;
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-.cert-title {
-  font-size: 36px;
-  font-weight: 800;
-  color: #1f2f38;
-  margin-bottom: 8px;
-  line-height: 1.25;
-}
-.cert-lead {
-  font-size: 16.5px;
-  color: #475569;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-.cert-student-name {
-  font-size: 34px;
-  font-weight: 800;
-  color: #16794c;
-  padding: 4px 28px 8px;
-  display: inline-block;
-  border-bottom: 2.5px solid #33464f;
-  margin-bottom: 14px;
-  line-height: 1.3;
-}
-.cert-reason {
-  font-size: 19px;
-  font-weight: 700;
-  color: #1e293b;
-  line-height: 1.65;
-  max-width: 780px;
-  margin: 0 auto 12px;
-}
 /* Score & Grade Showcase Strip for Hifz/Sabr Certificates */
-.cert-sabr-metrics {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  width: 100%;
-  max-width: 720px;
-  margin: 4px auto 12px;
-}
-.cert-metric-box {
-  background: #f4f7f6;
-  border: 1.5px solid #cbd5e1;
-  border-top: 3px solid #16794c;
-  border-radius: 10px;
-  padding: 8px 10px;
-  text-align: center;
-}
-.cert-metric-box.accent-gold { border-top-color: #caa642; background: #fdfbf4; }
-.cert-metric-box span { display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 2px; }
-.cert-metric-box b { display: block; font-size: 19px; font-weight: 800; color: #1a242c; }
-
-.cert-dua {
-  font-size: 15px;
-  color: #475569;
-  font-weight: 600;
-}
-.cert-footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  padding-top: 12px;
-  border-top: 1.5px solid #cbd5e1;
-  font-size: 15px;
-  font-weight: 800;
-  color: #2b3a44;
-  flex-shrink: 0;
-}
-.cert-footer span { display: block; font-size: 12px; color: #64748b; font-weight: 600; margin-bottom: 2px; }
 
 /* HD Export Stage — Exact 1400×990 A4 Landscape Ratio with ZERO overflow clipping */
 #hdExportStage.is-cert-stage {
@@ -2655,22 +2012,6 @@ details.adv-card-drawer > summary::-webkit-details-marker { display: none; }
   height: 990px !important;
   padding: 32px !important;
 }
-#hdExportStage.is-cert-stage .cert-outer-frame { border-width: 7px !important; padding: 13px !important; }
-#hdExportStage.is-cert-stage .cert-inner-frame { border-width: 2px !important; padding: 34px 50px 28px !important; }
-#hdExportStage.is-cert-stage .cert-top-bar img { height: 82px !important; max-width: 290px !important; }
-#hdExportStage.is-cert-stage .cert-org-txt { font-size: 20px !important; }
-#hdExportStage.is-cert-stage .cert-kicker { font-size: 20px !important; padding: 7px 30px !important; }
-#hdExportStage.is-cert-stage .cert-title { font-size: 50px !important; }
-#hdExportStage.is-cert-stage .cert-lead { font-size: 23px !important; }
-#hdExportStage.is-cert-stage .cert-student-name { font-size: 48px !important; padding: 6px 38px 11px !important; }
-#hdExportStage.is-cert-stage .cert-reason { font-size: 27px !important; max-width: 1120px !important; }
-#hdExportStage.is-cert-stage .cert-sabr-metrics { max-width: 980px !important; gap: 18px !important; }
-#hdExportStage.is-cert-stage .cert-metric-box { padding: 12px 14px !important; border-width: 2px !important; border-top-width: 4px !important; }
-#hdExportStage.is-cert-stage .cert-metric-box span { font-size: 17px !important; }
-#hdExportStage.is-cert-stage .cert-metric-box b { font-size: 28px !important; }
-#hdExportStage.is-cert-stage .cert-dua { font-size: 21px !important; }
-#hdExportStage.is-cert-stage .cert-footer { font-size: 21px !important; padding-top: 16px !important; }
-#hdExportStage.is-cert-stage .cert-footer span { font-size: 16px !important; }
 
 /* Sabr Score Box (ONLY shown when Sabr is active) */
 .sabr-score-box {
@@ -2797,7 +2138,6 @@ details.adv-card-drawer > summary::-webkit-details-marker { display: none; }
   }
 }
 
-
 /* ==================== TIBYAN v26: TRUE WIDE LANDSCAPE HD REPORT (MATCHES OFFICIAL EXCEL 100%) ==================== */
 table.t-daily { min-width: 1180px; }
 table.t-daily th { white-space: nowrap; }
@@ -2895,25 +2235,15 @@ table.t-daily td.td-note { font-size: 12px; line-height: 1.28; min-width: 380px;
   line-height: 1.25 !important;
 }
 
-
 /* ==================== TIBYAN v27: COMPACT ZERO-WRAP CARDS & CALM ERROR BAR ==================== */
 .st-body { padding: 9px; }
 .st-body .panel-block { padding: 8px 9px; margin-bottom: 6px; }
-.att-grid-4 { margin-bottom: 6px; }
+
 .live-mushaf-strip { padding: 6px 8px; gap: 5px; margin-bottom: 6px; }
 .lms-main { font-size: 12.5px; line-height: 1.35; }
 .lms-sub { font-size: 10.5px; }
 .lms-btns { margin-right: auto; }
 .lms-btn { padding: 3px 7px; font-size: 11px; }
-.err-counter-row { padding: 3px 5px; margin-bottom: 6px; }
-.err-apply-btn.is-idle {
-  background: var(--white);
-  color: var(--ink-700);
-  border: 1px solid var(--line-strong);
-  font-weight: 700;
-}
-.err-apply-btn.is-idle:hover { background: var(--brand-tint); }
-
 
 /* ==================== TIBYAN v28: BONUS POINTS ROW, FULL-JUZ SABR & BACKUP NUDGE ==================== */
 .pts-bonus-row {
@@ -2971,7 +2301,6 @@ table.t-daily td.td-note { font-size: 12px; line-height: 1.28; min-width: 380px;
   font-weight: 800;
   color: var(--green);
 }
-
 
 /* ==================== TIBYAN v29: DARK ACTIVE STUDENT CARD, STABLE DRAWER & SMART STUDENT EDITOR ==================== */
 .st-card {
@@ -3071,23 +2400,7 @@ table.t-daily td.td-note { font-size: 12px; line-height: 1.28; min-width: 380px;
 }
 
 /* Smart Guided Student Add/Edit Modal */
-.stm-sec {
-  background: var(--brand-tint);
-  border: 1px solid var(--line);
-  border-radius: 11px;
-  padding: 10px 11px;
-  margin-bottom: 10px;
-}
-.stm-sec-hdr {
-  font-size: 12.5px;
-  font-weight: 800;
-  color: var(--brand-slate);
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-}
+
 .stm-choice-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3174,7 +2487,6 @@ table.t-daily td.td-note { font-size: 12px; line-height: 1.28; min-width: 380px;
   border-top: 1px dashed var(--line);
 }
 
-
 /* ==================== TIBYAN v35: MODERN PRO SURAH, AYAH & SABR JUZ SHEET (60FPS ZERO-LAG) ==================== */
 .lms-tap-area {
   cursor: pointer;
@@ -3222,23 +2534,7 @@ table.t-daily td.td-note { font-size: 12px; line-height: 1.28; min-width: 380px;
   margin: 8px auto 2px;
   flex-shrink: 0;
 }
-.sp-sheet-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 8px 14px 10px;
-  border-bottom: 1px solid var(--line);
-  flex-shrink: 0;
-}
-.sp-sheet-header h3 {
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--ink-900);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+
 .sp-sheet-body {
   flex: 1;
   overflow-y: auto;
@@ -3454,15 +2750,7 @@ table.t-daily td.td-note { font-size: 12px; line-height: 1.28; min-width: 380px;
   margin-bottom: 6px;
   text-align: center;
 }
-.sp-preset-row {
-  display: flex;
-  gap: 5px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  margin-bottom: 7px;
-  scrollbar-width: none;
-}
-.sp-preset-row::-webkit-scrollbar { display: none; }
+
 .sp-preset-btn {
   border: 1px solid var(--line-strong);
   background: var(--white);
@@ -3704,7 +2992,6 @@ table.t-daily td.td-note { font-size: 12px; line-height: 1.28; min-width: 380px;
   justify-content: space-between;
   gap: 7px;
 }
-
 
 /* ==================== TIBYAN v31: SLEEK MATTE MENUS (REPORTS, STUDENTS, ARCHIVE, STATS) ==================== */
 /* Unified Crisp Sub-tab Switcher (1-line, matte, elevated pill) */
@@ -4051,22 +3338,8 @@ table.t-daily td.td-note { font-size: 12px; line-height: 1.28; min-width: 380px;
 [data-theme="dark"] .mobile-nav-btn.active { color: #f3d277; }
 [data-theme="dark"] .mobile-nav-btn.active::before { background: #caa642; }
 
-
 /* ==================== TIBYAN v32: CLASS DAYS SCHEDULE ENGINE (ACTIVE DAYS ONLY, REST AUTO-CANCELLED) ==================== */
-.cd-week-grid {
-  display: grid;
-  gap: 5px;
-  margin-bottom: 8px;
-}
-.cd-month-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 5px;
-  max-height: 210px;
-  overflow-y: auto;
-  padding: 2px 1px;
-  margin-bottom: 8px;
-}
+
 @media (max-width: 420px) {
   .cd-month-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
@@ -4156,7 +3429,6 @@ table.t-daily td.td-note { font-size: 12px; line-height: 1.28; min-width: 380px;
   flex-wrap: wrap;
   gap: 6px;
 }
-
 
 /* ==================== TIBYAN v38: PRO EXECUTIVE DATE NAVIGATOR BAR ==================== */
 .pro-day-nav {
@@ -4355,12 +3627,8 @@ table.t-daily td.td-note { font-size: 12px; line-height: 1.28; min-width: 380px;
   animation: obStepIn 0.18s ease;
 }
 
-
 /* ==================== TIBYAN v40: EXECUTIVE COMPACT REPORTS & ULTRA-HD ZERO-CLIP EXPORT ==================== */
-.rep-cell-main {
-  font-weight: 800;
-  color: #000000;
-}
+
 .rep-arrow-sep {
   color: #15629a;
   font-weight: 800;
@@ -4454,10 +3722,6 @@ table.t-daily td.td-note {
   line-height: 1.28 !important;
   text-align: right !important;
 }
-#hdExportStage .rep-cell-main {
-  font-size: 13px !important;
-  font-weight: 800 !important;
-}
 
 /* Monthly Report Crisp Executive Pro Print Styling */
 .official-monthly-wrap {
@@ -4518,7 +3782,6 @@ table.t-monthly {
   padding: 7px 8px !important;
 }
 
-
 /* ==================== TIBYAN v42: ALIGNED MONTH SCHEDULE, SMOOTH ADV TABS & CLASSIC CERTS ==================== */
 .cd-month-nav {
   display: flex;
@@ -4553,33 +3816,7 @@ table.t-monthly {
 }
 
 /* Smooth Segmented Tabs inside Advanced Card Drawer */
-.adv-tabs-bar {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 4px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 3px;
-  margin: 8px 0 9px;
-}
-.adv-tab-btn {
-  border: none;
-  background: transparent;
-  color: var(--ink-700);
-  padding: 6px 4px;
-  border-radius: 7px;
-  font-size: 11.5px;
-  font-weight: 800;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.14s ease;
-}
-.adv-tab-btn.on {
-  background: var(--brand-slate);
-  color: #ffffff;
-  box-shadow: 0 2px 6px rgba(43, 58, 68, 0.2);
-}
+
 .adv-row-card {
   display: flex;
   align-items: center;
@@ -4620,30 +3857,7 @@ table.t-monthly {
 }
 
 /* Classic Prestigious Matte Certificate Refinement (v36 Aesthetic + Zero-Clip A4 Landscape) */
-.cert-ayah-top {
-  font-size: 17px;
-  font-weight: 800;
-  color: #8a6d1d;
-  margin-bottom: 10px;
-}
-.cert-paper.is-hifz .cert-outer-frame { border-color: #243b38; }
-.cert-paper.is-hifz .cert-inner-frame { border-color: #b49a5a; background: #ffffff; }
-.cert-paper.is-hifz .cert-kicker { background: #1e4b3c; color: #ffffff; }
-.cert-paper.is-hifz .cert-title { color: #1d352e; }
-.cert-paper.is-hifz .cert-student-name { color: #16794c; border-bottom-color: #243b38; }
-.cert-grade-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #f5f7f6;
-  border: 1.5px solid #cbd5e1;
-  color: #1f2f38;
-  border-radius: 99px;
-  padding: 5px 22px;
-  font-size: 16px;
-  font-weight: 800;
-  margin: 2px auto 12px;
-}
+
 .cert-phrase-chips {
   display: flex;
   gap: 5px;
@@ -4653,17 +3867,9 @@ table.t-monthly {
   scrollbar-width: none;
 }
 .cert-phrase-chips::-webkit-scrollbar { display: none; }
-#hdExportStage.is-cert-stage .cert-ayah-top { font-size: 24px !important; margin-bottom: 14px !important; }
-#hdExportStage.is-cert-stage .cert-grade-pill { font-size: 22px !important; padding: 7px 30px !important; margin-bottom: 16px !important; }
-
 
 /* ==================== TIBYAN v43: INDIVIDUAL REPORT CARD & UNIFIED PATH ENGINE ==================== */
-.path-preset-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 6px;
-  margin-bottom: 8px;
-}
+
 .path-preset-card {
   border: 1.5px solid var(--line-strong);
   background: var(--white);
@@ -4943,7 +4149,6 @@ table.t-indiv td.txt-right { text-align: right; }
   padding: 5.5px 7px !important;
 }
 
-
 /* ==================== TIBYAN v44: EXECUTIVE STUDENT PLAN, PROGRAMS MANAGER & LUXURY BRAND CERTS ==================== */
 .stm-tabs-bar {
   display: grid;
@@ -5092,305 +4297,24 @@ table.t-indiv td.txt-right { text-align: right; }
 }
 
 /* ===== LUXURY INSTITUTIONAL CERTIFICATES (v44 — RICH WARM BRAND PALETTE, ZERO STARK WHITE VOID) ===== */
-.cert-mode-tabs-3 {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 5px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 11px;
-  padding: 4px;
-  margin-bottom: 10px;
-}
-.cert-mode-tab {
-  border: none;
-  background: transparent;
-  color: var(--ink-700);
-  padding: 7px 4px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.14s;
-}
-.cert-mode-tab.on-hifz { background: #25343d; color: #f6dc93; box-shadow: 0 2px 7px rgba(37, 52, 61, 0.26); }
-.cert-mode-tab.on-excel { background: #2b3345; color: #f6dc93; box-shadow: 0 2px 7px rgba(43, 51, 69, 0.26); }
-.cert-mode-tab.on-adab { background: #4a453b; color: #f5efe0; box-shadow: 0 2px 7px rgba(74, 69, 59, 0.26); }
 
 /* Base Rich Institutional Certificate Canvas (1000×707 exact A4 Landscape) */
-.cert-paper.v44-cert {
-  padding: 18px;
-  background: #ebe6d8;
-  position: relative;
-}
-.v44-cert .cert-outer-frame {
-  border: 5px solid #25343d;
-  padding: 7px;
-  background: #f5f1e6;
-  position: relative;
-}
-.v44-cert .cert-inner-frame {
-  border: 2px solid #b4a28a;
-  padding: 0;
-  background: linear-gradient(180deg, #fdfcf8 0%, #f7f4ea 55%, #f2ede0 100%);
-  position: relative;
-  overflow: hidden;
-}
+
 /* Architectural Corner Accents (Pure CSS — sharp at 300 DPI!) */
-.v44-corner {
-  position: absolute;
-  width: 34px;
-  height: 34px;
-  border-color: #caa642;
-  border-style: solid;
-  pointer-events: none;
-  z-index: 3;
-}
-.v44-corner.tr { top: 8px; right: 8px; border-width: 3.5px 3.5px 0 0; }
-.v44-corner.tl { top: 8px; left: 8px; border-width: 3.5px 0 0 3.5px; }
-.v44-corner.br { bottom: 8px; right: 8px; border-width: 0 3.5px 3.5px 0; }
-.v44-corner.bl { bottom: 8px; left: 8px; border-width: 0 0 3.5px 3.5px; }
 
 /* Full-Width Executive Header Band (Eliminates top white void!) */
-.v44-cert-hdr {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 32px;
-  background: linear-gradient(135deg, #25343d 0%, #33464f 100%);
-  color: #ffffff;
-  border-bottom: 4px solid #caa642;
-  position: relative;
-  z-index: 2;
-}
-.v44-cert-hdr-org {
-  text-align: right;
-  font-size: 14.5px;
-  font-weight: 800;
-  line-height: 1.55;
-  color: #ffffff;
-}
-.v44-cert-hdr-org small {
-  display: block;
-  font-size: 12px;
-  font-weight: 600;
-  color: #e2d4ae;
-}
-.v44-cert-hdr-center {
-  text-align: center;
-  flex: 1;
-  padding: 0 14px;
-}
-.v44-cert-hdr-ayah {
-  font-size: 18px;
-  font-weight: 800;
-  color: #f4d887;
-  line-height: 1.4;
-}
-.v44-cert-hdr-logo {
-  background: #ffffff;
-  padding: 6px 13px;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.v44-cert-hdr-logo img {
-  height: 46px;
-  width: auto;
-  max-width: 170px;
-  object-fit: contain;
-  display: block;
-}
 
 /* Central Dignified Body */
-.v44-cert-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 46px 14px;
-  position: relative;
-  z-index: 2;
-}
-.v44-cert-seal-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #e7e4d9;
-  border: 1.5px solid #b4a28a;
-  color: #25343d;
-  padding: 4px 24px;
-  border-radius: 99px;
-  font-size: 13.5px;
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-.v44-cert-title {
-  font-size: 38px;
-  font-weight: 800;
-  color: #25343d;
-  line-height: 1.22;
-  margin-bottom: 6px;
-}
-.v44-cert-divider {
-  width: 240px;
-  height: 3px;
-  background: linear-gradient(90deg, transparent 0%, #caa642 20%, #25343d 50%, #caa642 80%, transparent 100%);
-  margin: 2px auto 11px;
-  border-radius: 99px;
-}
-.v44-cert-lead {
-  font-size: 16px;
-  font-weight: 700;
-  color: #4a5a66;
-  margin-bottom: 10px;
-}
-.v44-cert-name-plate {
-  display: inline-block;
-  background: #ffffff;
-  border: 1.5px solid #caa642;
-  border-right: 5px solid #25343d;
-  border-left: 5px solid #25343d;
-  border-radius: 12px;
-  padding: 7px 42px 9px;
-  font-size: 34px;
-  font-weight: 800;
-  color: #1f2f38;
-  margin-bottom: 13px;
-  box-shadow: 0 3px 12px rgba(37, 52, 61, 0.08);
-}
-.v44-cert-reason {
-  font-size: 18.5px;
-  font-weight: 700;
-  color: #1e293b;
-  line-height: 1.65;
-  max-width: 800px;
-  margin: 0 auto 12px;
-}
-.v44-cert-metrics {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  width: 100%;
-  max-width: 680px;
-  margin: 2px auto 12px;
-}
-.v44-metric-card {
-  background: #ffffff;
-  border: 1.5px solid #c9bfa9;
-  border-top: 3.5px solid #33464f;
-  border-radius: 10px;
-  padding: 7px 10px;
-  text-align: center;
-}
-.v44-metric-card.gold { border-top-color: #caa642; background: #fbf8ef; }
-.v44-metric-card span { display: block; font-size: 11.5px; font-weight: 700; color: #64748b; }
-.v44-metric-card b { display: block; font-size: 18px; font-weight: 800; color: #25343d; margin-top: 2px; }
-.v44-cert-honor-bar {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #efeae0;
-  border: 1.5px solid #b4a28a;
-  color: #2b3345;
-  padding: 6px 26px;
-  border-radius: 10px;
-  font-size: 15.5px;
-  font-weight: 800;
-  margin: 2px auto 12px;
-}
-.v44-cert-dua {
-  font-size: 14.5px;
-  font-weight: 700;
-  color: #4a5a66;
-}
 
 /* Formal Grounded Footer Band (Eliminates bottom white void!) */
-.v44-cert-footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  padding: 12px 32px 13px;
-  background: #e7e4d9;
-  border-top: 2px solid #b4a28a;
-  font-size: 14.5px;
-  font-weight: 800;
-  color: #25343d;
-  position: relative;
-  z-index: 2;
-}
-.v44-cert-footer span {
-  display: block;
-  font-size: 11px;
-  font-weight: 700;
-  color: #5b6a75;
-  margin-bottom: 2px;
-}
 
 /* DISTINCT THEME 1: HIFZ / ITQAN (Slate + Rich Ochre Gold + Warm Cream) */
-.v44-cert.theme-hifz { background: #e8e3d4; }
-.v44-cert.theme-hifz .cert-outer-frame { border-color: #25343d; }
-.v44-cert.theme-hifz .cert-inner-frame { border-color: #caa642; }
-.v44-cert.theme-hifz .v44-cert-hdr { background: linear-gradient(135deg, #22323b 0%, #33464f 100%); border-bottom-color: #caa642; }
-.v44-cert.theme-hifz .v44-cert-name-plate { color: #16794c; border-color: #caa642; border-right-color: #25343d; border-left-color: #25343d; }
 
 /* DISTINCT THEME 2: EXCELLENCE / TOP (Royal Brand Navy + Gold + Sand Cream) */
-.v44-cert.theme-excel { background: #e6e3da; }
-.v44-cert.theme-excel .cert-outer-frame { border-color: #2b3345; background: #f2efe5; }
-.v44-cert.theme-excel .cert-inner-frame { border-color: #caa642; background: linear-gradient(180deg, #fefdfb 0%, #f6f2e7 60%, #eee9db 100%); }
-.v44-cert.theme-excel .v44-cert-hdr { background: linear-gradient(135deg, #232a3b 0%, #343f57 100%); border-bottom-color: #caa642; }
-.v44-cert.theme-excel .v44-cert-title { color: #2b3345; }
-.v44-cert.theme-excel .v44-cert-seal-pill { background: #2b3345; border-color: #caa642; color: #f6dc93; }
-.v44-cert.theme-excel .v44-cert-name-plate { color: #2b3345; border-color: #caa642; border-right-color: #caa642; border-left-color: #caa642; }
-.v44-cert.theme-excel .v44-cert-footer { background: #e3dfd2; border-top-color: #2b3345; color: #2b3345; }
 
 /* DISTINCT THEME 3: ADAB & COMMITMENT (Warm Sand-Slate + Matte Cream + Ochre Accent) */
-.v44-cert.theme-adab { background: #e8e2d5; }
-.v44-cert.theme-adab .cert-outer-frame { border-color: #5c5142; background: #f4efe3; }
-.v44-cert.theme-adab .cert-inner-frame { border-color: #b4a28a; background: linear-gradient(180deg, #fdfbf6 0%, #f5efe2 58%, #ede5d4 100%); }
-.v44-cert.theme-adab .v44-cert-hdr { background: linear-gradient(135deg, #33464f 0%, #4b5c64 100%); border-bottom-color: #b4a28a; }
-.v44-cert.theme-adab .v44-cert-hdr-ayah { color: #f3e4c3; }
-.v44-cert.theme-adab .v44-cert-title { color: #3d352b; }
-.v44-cert.theme-adab .v44-cert-seal-pill { background: #e7dfd0; border-color: #b4a28a; color: #3d352b; }
-.v44-cert.theme-adab .v44-cert-name-plate { color: #25343d; border-color: #b4a28a; border-right-color: #b4a28a; border-left-color: #b4a28a; }
-.v44-cert.theme-adab .v44-corner { border-color: #b4a28a; }
-.v44-cert.theme-adab .v44-cert-footer { background: #e5ded0; border-top-color: #b4a28a; color: #33464f; }
 
 /* HD 1400×990 A4 Landscape Export Scaling for v44 Luxury Certificates */
-#hdExportStage.is-cert-stage .cert-paper.v44-cert { padding: 24px !important; }
-#hdExportStage.is-cert-stage .v44-cert .cert-outer-frame { border-width: 7px !important; padding: 10px !important; }
-#hdExportStage.is-cert-stage .v44-cert .cert-inner-frame { border-width: 2.5px !important; padding: 0 !important; }
-#hdExportStage.is-cert-stage .v44-corner { width: 48px !important; height: 48px !important; border-width: 5px !important; }
-#hdExportStage.is-cert-stage .v44-corner.tr { border-width: 5px 5px 0 0 !important; }
-#hdExportStage.is-cert-stage .v44-corner.tl { border-width: 5px 0 0 5px !important; }
-#hdExportStage.is-cert-stage .v44-corner.br { border-width: 0 5px 5px 0 !important; }
-#hdExportStage.is-cert-stage .v44-corner.bl { border-width: 0 0 5px 5px !important; }
-#hdExportStage.is-cert-stage .v44-cert-hdr { padding: 20px 44px !important; border-bottom-width: 5px !important; }
-#hdExportStage.is-cert-stage .v44-cert-hdr-org { font-size: 20px !important; }
-#hdExportStage.is-cert-stage .v44-cert-hdr-org small { font-size: 16.5px !important; }
-#hdExportStage.is-cert-stage .v44-cert-hdr-ayah { font-size: 25px !important; }
-#hdExportStage.is-cert-stage .v44-cert-hdr-logo { padding: 8px 18px !important; border-radius: 13px !important; }
-#hdExportStage.is-cert-stage .v44-cert-hdr-logo img { height: 64px !important; max-width: 240px !important; }
-#hdExportStage.is-cert-stage .v44-cert-body { padding: 22px 64px 18px !important; }
-#hdExportStage.is-cert-stage .v44-cert-seal-pill { font-size: 19px !important; padding: 6px 32px !important; margin-bottom: 14px !important; }
-#hdExportStage.is-cert-stage .v44-cert-title { font-size: 52px !important; margin-bottom: 9px !important; }
-#hdExportStage.is-cert-stage .v44-cert-divider { width: 340px !important; height: 4px !important; margin-bottom: 16px !important; }
-#hdExportStage.is-cert-stage .v44-cert-lead { font-size: 22.5px !important; margin-bottom: 14px !important; }
-#hdExportStage.is-cert-stage .v44-cert-name-plate { font-size: 48px !important; padding: 10px 58px 13px !important; margin-bottom: 18px !important; border-width: 2px !important; border-right-width: 7px !important; border-left-width: 7px !important; }
-#hdExportStage.is-cert-stage .v44-cert-reason { font-size: 26px !important; max-width: 1120px !important; margin-bottom: 16px !important; }
-#hdExportStage.is-cert-stage .v44-cert-metrics { max-width: 960px !important; gap: 18px !important; margin-bottom: 16px !important; }
-#hdExportStage.is-cert-stage .v44-metric-card { padding: 11px 14px !important; border-width: 2px !important; border-top-width: 5px !important; }
-#hdExportStage.is-cert-stage .v44-metric-card span { font-size: 16px !important; }
-#hdExportStage.is-cert-stage .v44-metric-card b { font-size: 26px !important; }
-#hdExportStage.is-cert-stage .v44-cert-honor-bar { font-size: 22px !important; padding: 9px 36px !important; margin-bottom: 16px !important; }
-#hdExportStage.is-cert-stage .v44-cert-dua { font-size: 20.5px !important; }
-#hdExportStage.is-cert-stage .v44-cert-footer { padding: 16px 44px 18px !important; font-size: 20.5px !important; }
-#hdExportStage.is-cert-stage .v44-cert-footer span { font-size: 15.5px !important; }
-
 
 /* ==================== TIBYAN v46: CLEAN CERT MODAL & OFFICIAL SOROUH MAKEEN MASTERPIECE CERTS ==================== */
 /* Sleek Zero-Overflow 3-Tab Certificate Switcher */
@@ -5486,265 +4410,20 @@ table.t-indiv td.txt-right { text-align: right; }
 }
 
 /* ===== OFFICIAL SOROUH MAKEEN MASTERPIECE CERTIFICATE (1000x707 A4 LANDSCAPE) ===== */
-.cert-paper.sm-cert {
-  width: 1000px;
-  min-width: 1000px;
-  height: 707px;
-  padding: 0;
-  background: #ffffff;
-  color: #10375c;
-  position: relative;
-  overflow: hidden;
-  display: block;
-  box-shadow: 0 4px 18px rgba(16, 55, 92, 0.12);
-}
-.sm-cert-bg-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  pointer-events: none;
-  z-index: 1;
-}
-.sm-cert-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  padding: 34px 58px 28px 58px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 
 /* Top Row: Official Logo (Right) + Calligraphic Title (Center) + Serial Number (Left) */
-.sm-top-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 124px;
-}
-.sm-logo-zone {
-  width: 215px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-top: 2px;
-  flex-shrink: 0;
-}
-.sm-logo-zone img {
-  height: 74px;
-  width: auto;
-  max-width: 205px;
-  object-fit: contain;
-  display: block;
-}
-.sm-title-zone {
-  flex: 1;
-  text-align: center;
-  padding-top: 12px;
-}
-.sm-kicker-tag {
-  display: inline-block;
-  font-size: 13px;
-  font-weight: 800;
-  color: #9e7724;
-  background: #faf5e8;
-  border: 1px solid #e5cf96;
-  padding: 2px 18px;
-  border-radius: 99px;
-  margin-bottom: 6px;
-}
-.sm-calli-title {
-  font-family: 'Aref Ruqaa', 'Amiri', 'Tajawal', serif;
-  font-size: 56px;
-  font-weight: 700;
-  color: #10375c;
-  line-height: 1.2;
-  margin-bottom: 4px;
-}
-.sm-title-rule {
-  width: 210px;
-  height: 3px;
-  margin: 4px auto 0;
-  border-radius: 99px;
-  background: linear-gradient(90deg, transparent 0%, #c89c3f 22%, #10375c 50%, #c89c3f 78%, transparent 100%);
-}
-.sm-serial-zone {
-  width: 215px;
-  text-align: left;
-  padding-top: 14px;
-  padding-left: 16px;
-  flex-shrink: 0;
-}
-.sm-serial-box {
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 800;
-  color: #10375c;
-  direction: rtl;
-}
 
 /* Center Formal Arabic Document Body (Clean, Dignified, Executive) */
-.sm-body-zone {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 6px 26px 8px;
-}
-.sm-attest-line {
-  font-size: 20.5px;
-  font-weight: 700;
-  color: #243b53;
-  line-height: 1.65;
-  margin-bottom: 8px;
-}
-.sm-attest-line b {
-  color: #10375c;
-  font-weight: 800;
-}
-.sm-student-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin: 4px 0 12px;
-  width: 100%;
-}
-.sm-student-prefix {
-  font-size: 20px;
-  font-weight: 700;
-  color: #334e68;
-}
-.sm-student-name {
-  font-size: 36px;
-  font-weight: 800;
-  color: #10375c;
-  padding: 3px 34px 7px;
-  border-bottom: 3px solid #c89c3f;
-  background: linear-gradient(180deg, transparent 58%, rgba(200, 156, 63, 0.12) 100%);
-  border-radius: 6px 6px 0 0;
-  line-height: 1.28;
-}
-.sm-reason-line {
-  font-size: 21px;
-  font-weight: 700;
-  color: #1d354d;
-  line-height: 1.72;
-  max-width: 820px;
-  margin: 0 auto 12px;
-}
-.sm-highlight-pills {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-.sm-pill {
-  background: #f4f7fb;
-  border: 1.5px solid #cbd9e8;
-  border-right: 4px solid #10375c;
-  border-radius: 9px;
-  padding: 6px 18px;
-  font-size: 16.5px;
-  font-weight: 800;
-  color: #10375c;
-}
-.sm-pill.gold {
-  background: #fdf9ef;
-  border-color: #e4cc8e;
-  border-right-color: #c89c3f;
-  color: #7a5812;
-}
 
 /* Official Sorouh Frosted Ice-Blue Duaa Pill Banner */
-.sm-duaa-pill {
-  width: 100%;
-  max-width: 830px;
-  background: #eaf0f6;
-  border: 1.25px solid #cfdce8;
-  border-radius: 14px;
-  padding: 11px 26px;
-  text-align: center;
-  font-size: 16.5px;
-  font-weight: 700;
-  color: #1a3650;
-  line-height: 1.6;
-  margin: 0 auto;
-}
 
 /* Bottom Signatures Footer */
-.sm-footer-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 14px;
-  align-items: end;
-  padding: 12px 30px 4px;
-  text-align: center;
-}
-.sm-foot-col {
-  font-size: 16px;
-  font-weight: 800;
-  color: #10375c;
-}
-.sm-foot-col span {
-  display: block;
-  font-size: 12.5px;
-  font-weight: 700;
-  color: #5b7288;
-  margin-bottom: 3px;
-}
 
 /* Theme 2: Excellence / Top (Royal Navy + Rich Gold) */
-.sm-cert.theme-excel .sm-calli-title { color: #0e2a47; font-size: 52px; }
-.sm-cert.theme-excel .sm-kicker-tag { background: #0e2a47; color: #f6dc93; border-color: #c89c3f; }
-.sm-cert.theme-excel .sm-duaa-pill { background: #edf1f8; border-color: #c7d4e6; border-right: 4px solid #c89c3f; border-left: 4px solid #c89c3f; }
 
 /* Theme 3: Adab & Commitment (Sorouh Petrol-Teal + Warm Champagne Gold) */
-.sm-cert.theme-adab .sm-calli-title { color: #16485b; font-size: 52px; }
-.sm-cert.theme-adab .sm-student-name { color: #16485b; border-bottom-color: #c5a049; }
-.sm-cert.theme-adab .sm-kicker-tag { background: #eef6f7; color: #16485b; border-color: #b7d2d9; }
-.sm-cert.theme-adab .sm-duaa-pill { background: #ecf4f5; border-color: #c3dce0; color: #164252; }
-.sm-cert.theme-adab .sm-foot-col { color: #16485b; }
-.sm-cert.theme-adab .sm-serial-box { color: #16485b; }
 
 /* HD 1400×990 A4 Landscape Export Scaling (Exact 1.4x Proportional Scale!) */
-#hdExportStage.is-cert-stage .cert-paper.sm-cert {
-  width: 1400px !important;
-  min-width: 1400px !important;
-  height: 990px !important;
-  padding: 0 !important;
-  box-shadow: none !important;
-}
-#hdExportStage.is-cert-stage .sm-cert-content { padding: 48px 82px 40px 82px !important; }
-#hdExportStage.is-cert-stage .sm-top-row { min-height: 174px !important; }
-#hdExportStage.is-cert-stage .sm-logo-zone { width: 300px !important; }
-#hdExportStage.is-cert-stage .sm-logo-zone img { height: 104px !important; max-width: 288px !important; }
-#hdExportStage.is-cert-stage .sm-serial-zone { width: 300px !important; padding-top: 20px !important; padding-left: 22px !important; }
-#hdExportStage.is-cert-stage .sm-serial-box { font-size: 22.5px !important; }
-#hdExportStage.is-cert-stage .sm-kicker-tag { font-size: 18px !important; padding: 3px 25px !important; margin-bottom: 9px !important; }
-#hdExportStage.is-cert-stage .sm-calli-title { font-size: 78px !important; }
-#hdExportStage.is-cert-stage .sm-cert.theme-excel .sm-calli-title,
-#hdExportStage.is-cert-stage .sm-cert.theme-adab .sm-calli-title { font-size: 73px !important; }
-#hdExportStage.is-cert-stage .sm-title-rule { width: 295px !important; height: 4px !important; }
-#hdExportStage.is-cert-stage .sm-attest-line { font-size: 29px !important; margin-bottom: 11px !important; }
-#hdExportStage.is-cert-stage .sm-student-prefix { font-size: 28px !important; }
-#hdExportStage.is-cert-stage .sm-student-name { font-size: 50px !important; padding: 4px 48px 10px !important; border-bottom-width: 4px !important; }
-#hdExportStage.is-cert-stage .sm-reason-line { font-size: 29.5px !important; max-width: 1150px !important; margin-bottom: 17px !important; }
-#hdExportStage.is-cert-stage .sm-highlight-pills { gap: 17px !important; margin-bottom: 20px !important; }
-#hdExportStage.is-cert-stage .sm-pill { font-size: 23px !important; padding: 9px 25px !important; border-width: 2px !important; border-right-width: 5px !important; }
-#hdExportStage.is-cert-stage .sm-duaa-pill { max-width: 1160px !important; padding: 15px 36px !important; font-size: 23px !important; border-radius: 19px !important; }
-#hdExportStage.is-cert-stage .sm-footer-row { padding: 17px 42px 6px !important; }
-#hdExportStage.is-cert-stage .sm-foot-col { font-size: 22.5px !important; }
-#hdExportStage.is-cert-stage .sm-foot-col span { font-size: 17.5px !important; }
-
 
 /* ==================== TIBYAN v47: ZERO-OVERFLOW TABS & 100% FAITHFUL OFFICIAL SOROUH CERTIFICATE ==================== */
 .stm-tab-btn, .prog-tab-btn {
@@ -5773,11 +4452,6 @@ table.t-indiv td.txt-right { text-align: right; }
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
-}
-.adv-tab-btn {
-  min-width: 0 !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
 }
 
 /* Official Sorouh Makeen Faithful Certificate (1000x707 A4 Landscape — Pure White, Zero Clutter!) */
@@ -5896,14 +4570,6 @@ table.t-indiv td.txt-right { text-align: right; }
   font-size: 27px;
   color: #183c66;
 }
-.smo-custom-reason {
-  font-size: 22px;
-  font-weight: 700;
-  color: #203354;
-  line-height: 1.75;
-  text-align: right;
-  padding: 4px 2px;
-}
 
 /* Official Rounded Soft Ice-Blue Duaa Pill (Matches Uploaded Certificate Exactly!) */
 .smo-duaa {
@@ -5953,46 +4619,11 @@ table.t-indiv td.txt-right { text-align: right; }
 #hdExportStage.is-cert-stage .smo-line { font-size: 31px !important; gap: 14px !important; }
 #hdExportStage.is-cert-stage .smo-line-val { font-size: 32px !important; border-bottom-width: 2.5px !important; padding: 0 16px 3px !important; }
 #hdExportStage.is-cert-stage .smo-line-val.is-name { font-size: 38px !important; }
-#hdExportStage.is-cert-stage .smo-custom-reason { font-size: 31px !important; }
+
 #hdExportStage.is-cert-stage .smo-duaa { padding: 18px 38px !important; font-size: 24.5px !important; border-radius: 21px !important; margin-top: 12px !important; }
 #hdExportStage.is-cert-stage .smo-footer { padding: 20px 50px 4px 50px !important; font-size: 25px !important; }
 
-
 /* ==================== TIBYAN v48: ALERT COUNTER, 5-JUZ REVIEW, ACCOUNTS & SUPERVISOR SUITE ==================== */
-.err-counter-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 5px;
-  padding: 5px 6px;
-}
-.err-counters-pair {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.alert-ctrl-group {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding-right: 6px;
-  border-right: 1px dashed var(--line-strong);
-}
-.err-btn.alert-plus {
-  background: var(--orange-bg);
-  color: var(--orange);
-  border-color: rgba(184, 86, 16, 0.28);
-  padding: 0 9px;
-}
-.alert-count-lbl {
-  font-size: 11.5px;
-  font-weight: 800;
-  color: var(--orange);
-  min-width: 50px;
-  text-align: center;
-}
 
 /* 5-Column Compact Choice Grid for Major Review up to 5 Juz */
 .stm-choice-row.cols-5 {
@@ -6014,16 +4645,7 @@ table.t-indiv td.txt-right { text-align: right; }
 }
 
 /* ===== AUTH SCREEN (TEACHER & SUPERVISOR ACCOUNTS) ===== */
-.auth-tabs-3 {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 4px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  padding: 4px;
-  border-radius: 13px;
-  margin-bottom: 13px;
-}
+
 .auth-tab-btn {
   border: none;
   background: transparent;
@@ -6093,22 +4715,6 @@ table.t-indiv td.txt-right { text-align: right; }
 }
 
 /* Upload to Supervisor CTA Bar in Teacher Reports */
-.sup-upload-strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px dashed var(--line);
-}
-.rep-exp-btn.sup-up {
-  background: linear-gradient(135deg, #10375c 0%, #1c5488 100%);
-  color: #ffffff;
-  width: 100%;
-  box-shadow: 0 3px 10px rgba(16, 55, 92, 0.2);
-}
 
 /* ===== SUPERVISOR EXECUTIVE SHELL ===== */
 .sup-header {
@@ -6790,7 +5396,6 @@ table.t-indiv td.txt-right { text-align: right; }
   background: var(--bg);
 }
 
-
 /* ==================== TIBYAN v51: CENTRAL FIREBASE AUTH, FOUNDER CONTROL PANEL & LIVE BANNER ==================== */
 .global-ann-banner {
   background: linear-gradient(135deg, #102a49 0%, #194575 100%);
@@ -6825,14 +5430,7 @@ table.t-indiv td.txt-right { text-align: right; }
   border-bottom: 3px solid #d4af37;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
 }
-.owner-pill-badge {
-  background: linear-gradient(135deg, #d4af37 0%, #f1d278 100%);
-  color: #1a1625;
-  font-size: 11px;
-  font-weight: 800;
-  padding: 3px 10px;
-  border-radius: 99px;
-}
+
 .invite-code-row {
   display: flex;
   align-items: center;
@@ -6899,7 +5497,6 @@ table.t-indiv td.txt-right { text-align: right; }
   font-weight: 700;
 }
 
-
 /* ==================== TIBYAN v54: LIVE IN-APP NOTIFICATION BANNER & PERFORMANCE ==================== */
 .live-notif-banner {
   position: fixed;
@@ -6928,18 +5525,7 @@ table.t-indiv td.txt-right { text-align: right; }
   opacity: 1;
   pointer-events: auto;
 }
-.lnb-ico {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  background: rgba(200, 161, 75, 0.2);
-  border: 1px solid rgba(200, 161, 75, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 17px;
-  flex-shrink: 0;
-}
+
 .lnb-body { flex: 1; min-width: 0; }
 .lnb-title { font-size: 13px; font-weight: 800; color: #f5d887; line-height: 1.3; margin-bottom: 2px; }
 .lnb-text { font-size: 12px; color: #eef5fc; line-height: 1.45; }
@@ -6954,7 +5540,6 @@ table.t-indiv td.txt-right { text-align: right; }
   cursor: pointer;
   flex-shrink: 0;
 }
-
 
 /* ==================== TIBYAN v55: PRO EXECUTIVE POLISH, 2-ROLE AUTH & WHATSAPP-STYLE NOTIFICATIONS ==================== */
 button, a, input, select, .st-head, .pdn-day-pill, .drawer-item {
@@ -7107,16 +5692,6 @@ html { scroll-behavior: auto; }
 .lnb-app-lbl { font-weight: 800; color: #f4d887; }
 .lnb-title { font-size: 13px; font-weight: 800; color: #ffffff; line-height: 1.3; margin-bottom: 2px; }
 .lnb-text { font-size: 12px; color: #dce8f5; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.lnb-action-pill {
-  background: #c8a14b;
-  color: #0f2540;
-  border: none;
-  border-radius: 99px;
-  padding: 4px 10px;
-  font-size: 11px;
-  font-weight: 800;
-  flex-shrink: 0;
-}
 
 /* Notification Center History List */
 .notif-hist-item {
@@ -7166,7 +5741,6 @@ html { scroll-behavior: auto; }
   border-radius: 11px;
   padding: 10px 11px;
 }
-
 
 /* ==================== MAKIN v62: MODERN MATTE APP UI, ROCK-SOLID SEARCH & ON-LINE CERTIFICATES ==================== */
 
@@ -7528,7 +6102,6 @@ html { scroll-behavior: auto; }
   color: #f4d98d;
   border-bottom-color: #c8a14b;
 }
-
 
 /* ==================== MAKIN v67: QUICK EVALUATION BOTTOM SHEET STUDIO ==================== */
 .st-card.eval-active {
@@ -7978,7 +6551,6 @@ html { scroll-behavior: auto; }
   font-weight: 800;
 }
 
-
 /* ==================== MAKIN v68: MODERN EXECUTIVE UI (SETTINGS, DRAWER, REPORTS, STUDENT PLAN) & 60FPS ==================== */
 .right-drawer { will-change: transform; contain: layout style; }
 .es-box { will-change: transform; contain: layout style; }
@@ -8379,7 +6951,6 @@ html { scroll-behavior: auto; }
   color: #ffffff;
 }
 
-
 /* ==================== MAKIN v72: EXECUTIVE HOMEWORK/SURAH PICKER & EVAL SHEET POLISH ==================== */
 .es-abs-notice {
   background: var(--red-bg);
@@ -8709,7 +7280,6 @@ html { scroll-behavior: auto; }
 }
 #surahPickerModal .sp-apply-btn:active { transform: scale(0.98); }
 
-
 /* ==================== MAKIN v73: EVAL FOOTER NAV, 4-TAB REVIEW PICKER, GRADING & POINTS CYCLE ==================== */
 .es-footer-row.v73-nav {
   grid-template-columns: 1fr 1.15fr 1fr;
@@ -8794,21 +7364,6 @@ html { scroll-behavior: auto; }
 .sp-sabr-card.on-sard .sj-tag { background: rgba(255, 255, 255, 0.22); color: #ffffff; }
 
 /* Pages Range Picker Panel inside Surah Picker */
-.sp-pages-info-bar {
-  background: var(--blue-bg);
-  color: var(--blue);
-  border: 1px solid rgba(21, 98, 154, 0.24);
-  border-radius: 10px;
-  padding: 7px 10px;
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 6px;
-}
 
 /* Settings Grading Rules Card */
 .grade-preset-grid {
@@ -8843,65 +7398,8 @@ html { scroll-behavior: auto; }
 [data-theme="dark"] .grade-preset-btn.on b,
 [data-theme="dark"] .grade-preset-btn.on span { color: #0f233c; }
 
-.grade-weight-3 {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 5px;
-  margin-bottom: 9px;
-}
-.grade-weight-3 button {
-  border: 1.5px solid var(--line-strong);
-  background: var(--bg);
-  color: var(--ink-700);
-  border-radius: 9px;
-  padding: 7px 4px;
-  font-size: 11px;
-  font-weight: 800;
-  cursor: pointer;
-  text-align: center;
-}
-.grade-weight-3 button.on {
-  background: var(--orange);
-  border-color: var(--orange);
-  color: #ffffff;
-}
-.grade-limits-3 {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
-  margin-bottom: 8px;
-}
-.grade-limits-3 .field label { font-size: 11px; text-align: center; }
-.grade-limits-3 .field input { text-align: center; font-weight: 800; font-size: 14px; padding: 6px 4px; direction: ltr; }
-.grade-live-preview {
-  background: var(--brand-tint);
-  border: 1px dashed var(--line-strong);
-  border-right: 3.5px solid #c8a14b;
-  border-radius: 9px;
-  padding: 7px 9px;
-  font-size: 11px;
-  color: var(--ink-700);
-  line-height: 1.75;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-.glp-chip {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  padding: 2px 7px;
-  font-weight: 700;
-  font-size: 10.5px;
-}
-
 /* Points Cycle Studio inside Programs Modal */
-.pts-dur-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 9px;
-}
+
 .pts-past-list {
   max-height: 215px;
   overflow-y: auto;
@@ -8911,58 +7409,7 @@ html { scroll-behavior: auto; }
   padding: 4px;
   margin-bottom: 8px;
 }
-.pts-past-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  padding: 6px 7px;
-  border-bottom: 1px solid var(--line);
-  background: var(--white);
-  border-radius: 7px;
-  margin-bottom: 4px;
-}
-.pts-past-row:last-child { margin-bottom: 0; border-bottom: none; }
-.pts-past-name {
-  min-width: 0;
-  flex: 1;
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--ink-900);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.pts-past-ctrl {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  flex-shrink: 0;
-}
-.pts-past-ctrl input {
-  width: 56px;
-  height: 29px;
-  text-align: center;
-  font-weight: 800;
-  font-size: 13px;
-  border: 1.5px solid var(--line-strong);
-  border-radius: 7px;
-  background: var(--white);
-  color: var(--ink-900);
-  direction: ltr;
-}
-.pts-past-ctrl button {
-  height: 29px;
-  padding: 0 7px;
-  border-radius: 7px;
-  border: 1px solid var(--line-strong);
-  background: var(--brand-tint);
-  color: var(--brand-slate);
-  font-size: 11px;
-  font-weight: 800;
-  cursor: pointer;
-  direction: ltr;
-}
+
 .pts-cycle-banner {
   background: var(--green-bg);
   border: 1px solid rgba(22, 121, 76, 0.28);
@@ -8983,7 +7430,6 @@ html { scroll-behavior: auto; }
   border-color: rgba(184, 86, 16, 0.34);
   border-right-color: var(--orange);
 }
-
 
 /* ==================== MAKIN v74: PRO PER-GRADE RULE MATRIX & ULTRA-CLEAR POINTS STUDIO ==================== */
 .gr-toggle-row {
@@ -9325,7 +7771,6 @@ html { scroll-behavior: auto; }
 .pts-rule-tile b { display: block; font-size: 12px; font-weight: 800; color: var(--brand-slate); margin-bottom: 3px; }
 .pts-rule-tile span { display: block; font-size: 11px; color: var(--ink-700); line-height: 1.55; font-weight: 600; }
 
-
 /* ==================== MAKIN v75: UNIFIED SURAH+PAGES, 5-PAGE PACE, POINTS TABLE & PODIUM POSTER ==================== */
 /* 3-Tab Review Mode Switcher (سورة وصفحات | سرد جزء | سبر) */
 #surahPickerModal .sp-mode-tabs.cols-3 {
@@ -9380,16 +7825,10 @@ html { scroll-behavior: auto; }
 }
 
 /* Points All-Students & Podium Poster Studio */
-.pts-stats-actions {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
-  margin-top: 8px;
-}
+
 @media (max-width: 440px) {
   .pts-stats-actions { grid-template-columns: 1fr 1fr; }
 }
-.pts-stats-actions .btn { width: 100%; font-size: 11.5px; padding: 7px 6px; }
 
 .pts-rank-scroll {
   max-height: 430px;
@@ -9498,15 +7937,7 @@ table.t-points-all tfoot td {
   overflow: hidden;
   border: 6px solid #c8a14b;
 }
-.ppp-hdr {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding-bottom: 18px;
-  margin-bottom: 22px;
-  border-bottom: 1.5px solid rgba(200, 161, 75, 0.4);
-}
+
 .ppp-logo-pill {
   background: #ffffff;
   padding: 9px 16px;
@@ -9517,41 +7948,6 @@ table.t-points-all tfoot td {
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.24);
 }
 .ppp-logo-pill img { height: 48px; width: auto; max-width: 170px; object-fit: contain; display: block; }
-.ppp-title-mid { flex: 1; text-align: center; }
-.ppp-kicker {
-  display: inline-block;
-  background: rgba(200, 161, 75, 0.2);
-  border: 1px solid rgba(244, 217, 141, 0.5);
-  color: #f4d98d;
-  padding: 3px 18px;
-  border-radius: 99px;
-  font-size: 14px;
-  font-weight: 800;
-  margin-bottom: 7px;
-}
-.ppp-title-mid h2 {
-  font-family: 'Amiri', 'Tajawal', serif;
-  font-size: 40px;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1.2;
-  margin-bottom: 5px;
-}
-.ppp-title-mid p {
-  font-size: 16px;
-  font-weight: 700;
-  color: #cfe0f2;
-}
-.ppp-branch-tag {
-  min-width: 155px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1.5px solid rgba(200, 161, 75, 0.55);
-  border-radius: 13px;
-  padding: 10px 14px;
-  text-align: center;
-}
-.ppp-branch-tag small { display: block; font-size: 11.5px; color: #c9d8e8; font-weight: 700; }
-.ppp-branch-tag b { display: block; font-size: 17px; color: #f4d98d; font-weight: 800; margin-top: 2px; }
 
 /* 3-Column Honor Podium (2nd | 1st Center Elevated | 3rd) */
 .ppp-podium-3 {
@@ -9583,8 +7979,7 @@ table.t-points-all tfoot td {
   border-color: #d99b66;
   background: linear-gradient(180deg, rgba(217, 155, 102, 0.16) 0%, rgba(12, 34, 63, 0.65) 100%);
 }
-.ppp-medal { font-size: 40px; line-height: 1.1; margin-bottom: 6px; }
-.ppp-pod-card.first .ppp-medal { font-size: 50px; }
+
 .ppp-rank-lbl { font-size: 13px; font-weight: 800; color: #f4d98d; margin-bottom: 6px; }
 .ppp-stu-name { font-size: 20px; font-weight: 800; color: #ffffff; line-height: 1.35; margin-bottom: 10px; }
 .ppp-pod-card.first .ppp-stu-name { font-size: 24px; }
@@ -9646,16 +8041,7 @@ table.t-points-all tfoot td {
   border-radius: 99px;
   white-space: nowrap;
 }
-.ppp-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 14px;
-  border-top: 1.5px solid rgba(200, 161, 75, 0.35);
-  font-size: 15px;
-  font-weight: 800;
-  color: #e2ecf6;
-}
+
 #hdExportStage.is-indiv-stage .pts-table-paper {
   width: 100% !important;
   min-width: 0 !important;
@@ -9666,71 +8052,10 @@ table.t-points-all tfoot td {
   min-width: 900px !important;
 }
 
-
 /* ==================== MAKIN v76: SURAH-TO-SURAH PAGE PICKER & 4-THEME HONOR EXPORT STUDIO ==================== */
-.sp-spg-card {
-  background: var(--white);
-  border: 1.5px solid var(--line);
-  border-right: 4px solid #15629a;
-  border-radius: 13px;
-  padding: 9px 10px 8px;
-  margin-bottom: 8px;
-  box-shadow: 0 2px 7px rgba(16, 42, 73, 0.04);
-}
-.sp-spg-card.is-end {
-  border-right-color: #16794c;
-}
-.sp-spg-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  margin-bottom: 6px;
-}
-.sp-spg-top label {
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--brand-slate);
-}
-.sp-spg-quick {
-  display: inline-flex;
-  gap: 4px;
-}
-.sp-spg-qbtn {
-  border: 1px solid var(--line-strong);
-  background: var(--brand-tint);
-  color: var(--brand-slate);
-  border-radius: 7px;
-  padding: 2px 7px;
-  font-size: 10.5px;
-  font-weight: 800;
-  cursor: pointer;
-}
-.sp-spg-qbtn:active { background: #142a46; color: #ffffff; }
-.sp-spg-sel {
-  width: 100%;
-  padding: 7px 10px;
-  border: 1.5px solid var(--line-strong);
-  border-radius: 9px;
-  background: var(--bg);
-  color: var(--ink-900);
-  font-size: 13px;
-  font-weight: 800;
-  margin-bottom: 7px;
-}
-.sp-spg-sel:focus {
-  outline: none;
-  border-color: #15629a;
-  background: var(--white);
-}
 
 /* 4-Category Quick Export Dock in Stats Tab & Export Modal */
-.stats-cat-dock-4 {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 5px;
-  margin-top: 8px;
-}
+
 .stats-cat-btn {
   border: 1.5px solid var(--line-strong);
   background: var(--bg);
@@ -9780,21 +8105,6 @@ table.t-points-all tfoot td {
   position: relative;
   z-index: 2;
 }
-.ppp-summary-strip {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 18px;
-}
-.ppp-sum-pill {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 8px 12px;
-  text-align: center;
-}
-.ppp-sum-pill small { display: block; font-size: 12px; color: rgba(255,255,255,0.78); font-weight: 700; }
-.ppp-sum-pill b { display: block; font-size: 20px; color: #ffffff; font-weight: 800; margin-top: 2px; }
 
 /* Theme 1: POINTS (Royal Navy & Matte Gold) */
 .pts-podium-poster.theme-points {
@@ -9807,8 +8117,7 @@ table.t-points-all tfoot td {
   background: linear-gradient(155deg, #07281f 0%, #104e3d 55%, #0a3328 100%);
   border-color: #d4af37;
 }
-.pts-podium-poster.theme-mem .ppp-kicker { background: rgba(212, 175, 55, 0.2); border-color: rgba(244, 217, 141, 0.55); color: #f6e09a; }
-.pts-podium-poster.theme-mem .ppp-branch-tag { border-color: rgba(212, 175, 55, 0.6); }
+
 .pts-podium-poster.theme-mem .ppp-pod-card.first { background: linear-gradient(180deg, rgba(212, 175, 55, 0.25) 0%, rgba(7, 40, 31, 0.78) 100%); border-color: #f6e09a; }
 .pts-podium-poster.theme-mem .ppp-pts-badge { background: #d4af37; color: #07281f; }
 .pts-podium-poster.theme-mem .ppp-pod-card.first .ppp-pts-badge { background: #f6e09a; color: #07281f; }
@@ -9820,8 +8129,7 @@ table.t-points-all tfoot td {
   background: linear-gradient(155deg, #331608 0%, #6b3310 52%, #3d1c0a 100%);
   border-color: #eab349;
 }
-.pts-podium-poster.theme-rev .ppp-kicker { background: rgba(234, 179, 73, 0.22); border-color: rgba(253, 224, 138, 0.55); color: #fde68a; }
-.pts-podium-poster.theme-rev .ppp-branch-tag { border-color: rgba(234, 179, 73, 0.6); }
+
 .pts-podium-poster.theme-rev .ppp-pod-card.first { background: linear-gradient(180deg, rgba(234, 179, 73, 0.28) 0%, rgba(51, 22, 8, 0.78) 100%); border-color: #fde68a; }
 .pts-podium-poster.theme-rev .ppp-pts-badge { background: #eab349; color: #331608; }
 .pts-podium-poster.theme-rev .ppp-pod-card.first .ppp-pts-badge { background: #fde68a; color: #331608; }
@@ -9833,9 +8141,7 @@ table.t-points-all tfoot td {
   background: linear-gradient(155deg, #082936 0%, #105068 55%, #0a3547 100%);
   border-color: #5eead4;
 }
-.pts-podium-poster.theme-att .ppp-kicker { background: rgba(94, 234, 212, 0.18); border-color: rgba(153, 246, 228, 0.55); color: #99f6e4; }
-.pts-podium-poster.theme-att .ppp-branch-tag { border-color: rgba(94, 234, 212, 0.55); }
-.pts-podium-poster.theme-att .ppp-branch-tag b { color: #99f6e4; }
+
 .pts-podium-poster.theme-att .ppp-pod-card.first { background: linear-gradient(180deg, rgba(94, 234, 212, 0.22) 0%, rgba(8, 41, 54, 0.78) 100%); border-color: #99f6e4; }
 .pts-podium-poster.theme-att .ppp-rank-lbl { color: #99f6e4; }
 .pts-podium-poster.theme-att .ppp-pts-badge { background: #5eead4; color: #082936; }
@@ -9872,33 +8178,7 @@ table.t-points-all tfoot td {
 .pts-table-paper.theme-att table.t-points-all td.pts-col { color: #0e5a6d; }
 .pts-table-paper.theme-att table.t-points-all tfoot td { background: #e0f3f7; color: #0a4656; }
 
-
 /* ==================== MAKIN v77: PER-PAGE EVALUATOR, SURAH-RELATIVE PAGES & MASTER ALL-IN-ONE POSTER ==================== */
-.sp-pnum-mode {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 3px;
-  margin-bottom: 8px;
-}
-.sp-pnum-btn {
-  border: none;
-  background: transparent;
-  color: var(--ink-700);
-  padding: 5px 4px;
-  border-radius: 7px;
-  font-size: 11px;
-  font-weight: 800;
-  cursor: pointer;
-}
-.sp-pnum-btn.on {
-  background: #142a46;
-  color: #ffffff;
-}
-[data-theme="dark"] .sp-pnum-btn.on { background: #c8a14b; color: #0f233c; }
 
 /* Per-Page Recitation Error/Alert Evaluator (When Student Recites 2–5 Pages) */
 .pp-eval-wrap {
@@ -10092,7 +8372,6 @@ table.t-points-all tfoot td {
 .pts-table-paper.theme-all table.t-points-all th { background: #3b1530; }
 .pts-table-paper.theme-all table.t-points-all th.gold-th { background: #c8a14b; color: #1a0d18 !important; }
 .pts-table-paper.theme-all tfoot td { background: #f3e6ee; color: #3b1530; }
-
 
 /* ==================== MAKIN v78: CLEAN EVAL SHEET LAYOUT + AGENCY-GRADE EDITORIAL HONOR POSTERS ==================== */
 /* 1) Eval Sheet Polish — Zero Overflow Ever! */
@@ -10551,7 +8830,6 @@ table.t-points-all tfoot td {
 .pts-podium-poster.theme-all .ppp-dua-line { color: #8c6312; }
 .pts-podium-poster.theme-all .ppp-foot-meta { color: #0e2340; }
 
-
 /* ==================== MAKIN v80: SLIM REPORT ROWS, SEQUENTIAL DAY LOCK, WEEKLY DAY PICKER & PROGRESS COMPARISON ==================== */
 /* 1) Keep Daily Report Eval & Review cells strictly single-line compact (Zero row height bloat!) */
 table.t-daily td.td-eval-slim {
@@ -10740,7 +9018,6 @@ table.t-daily td.td-rev-slim {
 .cmp-stu-info { min-width: 0; flex: 1; }
 .cmp-stu-name { font-size: 13px; font-weight: 800; color: var(--ink-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cmp-stu-deltas { font-size: 11px; color: var(--ink-700); font-weight: 700; margin-top: 2px; display: flex; flex-wrap: wrap; gap: 6px; }
-
 
 /* ==================== MAKIN v82: CLEAN REVIEW PICKER + STANDALONE HD COMPARISON CARD ==================== */
 /* 1) Streamlined Compact Review Page Cards (Both "من" and "إلى" fit cleanly on 1 screen!) */
@@ -11092,7 +9369,6 @@ table.t-daily td.td-rev-slim {
   min-width: 0 !important;
 }
 
-
 /* ==================== MAKIN v83: ZERO MID-WORD BREAKING IN REPORTS + POLISHED STATS PAGE ==================== */
 /* 1) Never split Arabic words character-by-character in Daily/Saturday tables (Preview + HD PNG/PDF!) */
 table.t-daily th,
@@ -11200,7 +9476,6 @@ table.t-daily td.td-span-range {
   padding: 5px 9px;
   border-radius: 9px;
 }
-
 
 /* ==================== MAKIN v84: TECHNICAL HARDENING, INDEXEDDB VAULT & OFFLINE STUDIO ==================== */
 .th-grid-3 {
@@ -11341,7 +9616,6 @@ table.t-daily td.td-span-range {
   font-weight: 700;
   line-height: 1.5;
 }
-
 
 /* ==================== MAKIN v85: COMPACT NOTES, TAJWEED TAGS, SMART QUEUE, PRESENT-NO-RECITE, WA HUB & PER-PAGE OVERALL ==================== */
 .es-att-5 {
@@ -11607,7 +9881,6 @@ table.t-daily td.td-norecite {
   font-weight: 800;
   color: #142a46;
 }
-
 
 /* ==================== MAKIN v86: FLAGSHIP EVAL SHEET STUDIO & ISOLATED PER-PAGE GRADING ==================== */
 .es-header {
@@ -11881,7 +10154,6 @@ table.t-daily td.td-norecite {
   border-radius: 11px !important;
 }
 
-
 /* ==================== MAKIN v87: SLEEK COMPACT TOAST & UNDO BAR ==================== */
 .toast {
   position: fixed !important;
@@ -11936,7 +10208,6 @@ table.t-daily td.td-norecite {
   flex-shrink: 0 !important;
 }
 .toast-undo-btn:active { transform: scale(0.95); }
-
 
 /* ==================== MAKIN v88: COMPREHENSIVE UI STABILITY, SMOOTH TRANSITIONS & ZERO OVERFLOW ==================== */
 /* Ultra-smooth zero-lock native scrolling on Android WebView (v89) */
@@ -12105,7 +10376,6 @@ table.t-daily td.td-norecite {
   .drawer-qtile .dqt-lbl { font-size: 10px; }
   .es-footer-row.v73-nav .btn { font-size: 12px; padding: 9px 4px; }
 }
-
 
 /* ==================== MAKIN v90: EXECUTIVE QUICK ATTENDANCE STUDIO (COMPACT, FOCUSED, 2ND-TAP TOGGLE) ==================== */
 #quickAttendanceModal .exec-modal-box {
@@ -12335,7 +10605,6 @@ table.t-daily td.td-norecite {
   .qa-name { font-size: 12px; }
   .qa-fchip { font-size: 9.5px; }
 }
-
 
 /* ==================== MAKIN v91: POLISHED EVAL SHEET PANELS + MONTHLY GOAL & DIAGNOSTIC STUDIO ==================== */
 /* 1) Clean Zero-Clip Wrapped Tajweed Chips */
@@ -12703,7 +10972,6 @@ details.es-manual-rec-drawer > summary::-webkit-details-marker { display: none; 
 }
 .mp-stats-banner h4 { font-size: 13.5px; font-weight: 800; color: #f6dc93; margin-bottom: 2px; }
 .mp-stats-banner p { font-size: 11.5px; color: #d8e7f4; }
-
 
 /* ==================== MAKIN v93: DISTINCTIVE SABR IN NOTES + ZERO-OVERFLOW REPORT CELLS + FULL-WIDTH HD EXPORT ==================== */
 .rep-sabr-badge {
@@ -13155,6 +11423,134 @@ table.t-daily td.td-rev-slim,
   font-size: 11.5px;
   font-weight: 700;
   cursor: pointer;
+}
+
+
+/* ==================== MAKIN v97: EXECUTIVE DIALOGS (CONFIRM/PROMPT) & UNIVERSAL SELECT ENHANCER ==================== */
+.ep-native-hidden {
+  display: none !important;
+}
+.ep-auto-trigger {
+  padding: 7px 10px !important;
+  border-radius: 10px !important;
+  min-height: 36px;
+}
+.ep-auto-trigger .ept-main {
+  font-size: 12.5px !important;
+}
+.ep-auto-trigger .ept-chev {
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 11px !important;
+}
+.eps-search-wrap {
+  background: var(--white);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+/* Custom Branded Confirm & Prompt Dialog (Replaces ALL native browser confirm/prompt!) */
+#makinDialogModal {
+  z-index: 240 !important;
+  background: rgba(10, 24, 42, 0.68) !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
+}
+.mkd-box {
+  width: 100%;
+  max-width: 400px;
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1.5px solid rgba(200, 161, 75, 0.45);
+  box-shadow: 0 22px 54px rgba(8, 20, 36, 0.46);
+  animation: esSlideUp 0.16s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+.mkd-hdr {
+  background: linear-gradient(145deg, #102540 0%, #1a375c 100%);
+  color: #ffffff;
+  padding: 12px 15px;
+  border-bottom: 2.5px solid #c8a14b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.mkd-hdr.is-danger {
+  background: linear-gradient(145deg, #5c1218 0%, #8b1e24 100%);
+  border-bottom-color: #f87171;
+}
+.mkd-hdr h4 {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.mkd-body {
+  padding: 15px 15px 12px;
+}
+.mkd-msg {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-900);
+  line-height: 1.65;
+  white-space: pre-line;
+  margin-bottom: 11px;
+}
+.mkd-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #142a46;
+  border-radius: 11px;
+  background: var(--bg);
+  color: var(--ink-900);
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 9px;
+}
+.mkd-input:focus {
+  outline: none;
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(20, 42, 70, 0.14);
+}
+[data-theme="dark"] .mkd-input { border-color: #c8a14b; }
+.mkd-presets {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.mkd-presets button {
+  border: 1px solid var(--line-strong);
+  background: var(--brand-tint);
+  color: var(--brand-slate);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.mkd-presets button:active { background: #142a46; color: #ffffff; }
+.mkd-footer {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 8px;
+  padding: 10px 15px 14px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+.mkd-footer .btn {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 800;
 }
 
 /* Native Print fallback */
@@ -13627,7 +12023,7 @@ table.t-daily td.td-rev-slim,
       <div class="drawer-card-group">
         <div class="drawer-item" style="cursor:pointer;" onclick="closeRightDrawer(); openProgramsModal('points');">
           <span class="drawer-item-l"><span class="drawer-ico-box gold">⭐</span><span>برنامج النقاط والتحفيز</span></span>
-          <button type="button" style="border:none; background:transparent; padding:4px; cursor:pointer; display:inline-flex; align-items:center;" onclick="event.stopPropagation(); togglePointsMode(); updateDrawerQuickStates();" aria-label="تفعيل أو إيقاف النقاط">
+          <button type="button" style="border:none; background:transparent; padding:4px; cursor:pointer; display:inline-flex; align-items:center;" onclick="event.stopPropagation(); togglePointsMode();" aria-label="تفعيل أو إيقاف النقاط">
             <span class="m-switch on" id="drawerPointsSwitch" aria-hidden="true"></span>
           </button>
         </div>
@@ -13670,7 +12066,7 @@ table.t-daily td.td-rev-slim,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v96</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v97</span>
         </button>
       </div>
     </div>
@@ -14110,7 +12506,35 @@ table.t-daily td.td-rev-slim,
       </div>
     </div>
     <div id="epsFilterBar" class="eps-filter-bar" style="display:none;"></div>
+    <div id="epsSearchWrap" class="eps-search-wrap" style="display:none;">
+      <div class="qa-search-row">
+        <span class="qa-search-ico">🔍</span>
+        <input type="text" id="epsSearchInput" placeholder="ابحث في القائمة..." oninput="onEpsSearchInput(this.value)">
+        <button type="button" id="epsSearchClr" class="qa-search-clr" style="display:none;" onclick="onEpsSearchInput('')">×</button>
+      </div>
+    </div>
     <div class="exec-modal-body" id="epsBody"></div>
+  </div>
+</div>
+
+<!-- ===== MODAL: EXECUTIVE CONFIRM & PROMPT DIALOG (v97 — REPLACES ALL BROWSER POPUPS) ===== -->
+<div class="modal-backdrop" id="makinDialogModal" onclick="if(event.target===this) resolveMakinDialog(false)">
+  <div class="mkd-box">
+    <div class="mkd-hdr" id="mkdHdr">
+      <h4 id="mkdTitle">تأكيد الإجراء</h4>
+      <button type="button" class="exec-modal-close" style="width:28px; height:28px; font-size:16px;" onclick="resolveMakinDialog(false)" aria-label="إغلاق">×</button>
+    </div>
+    <div class="mkd-body">
+      <div class="mkd-msg" id="mkdMsg"></div>
+      <div id="mkdPromptWrap" style="display:none;">
+        <input type="text" id="mkdInput" class="mkd-input" onkeydown="if(event.key==='Enter') resolveMakinDialog(true)">
+        <div id="mkdPresets" class="mkd-presets" style="display:none;"></div>
+      </div>
+    </div>
+    <div class="mkd-footer">
+      <button type="button" class="btn btn-outline" id="mkdCancelBtn" onclick="resolveMakinDialog(false)">إلغاء</button>
+      <button type="button" class="btn btn-primary" id="mkdOkBtn" onclick="resolveMakinDialog(true)">تأكيد ✓</button>
+    </div>
   </div>
 </div>
 
@@ -15756,7 +14180,7 @@ function toggleTajweedTag(studentId, tag) {
   if (document.getElementById("studentEvalSheet")?.classList.contains("show")) {
     syncStudentEvalSheet();
   }
-  renderStudentCardsOnly();
+  patchSingleStudentCard(studentId);
 }
 
 function renderTajweedTagsBar(studentId, r) {
@@ -17558,11 +15982,11 @@ function getStudentPastPoints(h, studentId) {
   return Math.max(0, Math.round(Number(pc?.pastPoints?.[studentId]) || 0));
 }
 
-function resetPointsCycleFromZero(askConfirm = true) {
+async function resetPointsCycleFromZero(askConfirm = true) {
   const h = getActiveHalaqa();
   if (!h) return;
   const pc = ensurePointsConfig(h);
-  if (askConfirm && !confirm("هل تريد إنهاء دورة النقاط الحالية والبدء بدورة جديدة من الصفر لكل طالب؟\n\n(تبقى جميع تقارير وأرشيف الجلسات السابقة محفوظة بالكامل دون حذف).")) {
+  if (askConfirm && !(await makinConfirm("هل تريد إنهاء دورة النقاط الحالية والبدء بدورة جديدة من الصفر لكل طالب؟\n\n(تبقى جميع تقارير وأرشيف الجلسات السابقة محفوظة بالكامل دون حذف).", { title: "🔄 بدء دورة نقاط جديدة", okText: "بدء من الصفر" }))) {
     return;
   }
   const { rows, totals } = computeMonthlyData("POINTS_CYCLE");
@@ -17697,15 +16121,15 @@ function savePointsPastAdjustmentsUI() {
   showToast("✓ تم حفظ نقاط الجلسات الماضية ودمجها في الدورة الحالية ⭐");
 }
 
-function togglePointsMode() {
+async function togglePointsMode() {
   const h = getActiveHalaqa();
   if (!h) return;
   const turningOn = !isPointsEnabled(h);
   if (turningOn) {
     const st = getPointsCycleStatus(h);
     if (st.expired) {
-      if (confirm(`انتهت مدة دورة النقاط السابقة بتاريخ (${st.endDate}).\nهل تريد تفعيل البرنامج والبدء بدورة جديدة من الصفر لكل طالب؟`)) {
-        resetPointsCycleFromZero(false);
+      if (await makinConfirm(`انتهت مدة دورة النقاط السابقة بتاريخ (${st.endDate}).\nهل تريد تفعيل البرنامج والبدء بدورة جديدة من الصفر لكل طالب؟`, { title: "⭐ تجديد دورة النقاط", okText: "بدء دورة جديدة" })) {
+        await resetPointsCycleFromZero(false);
         return;
       }
     }
@@ -17719,6 +16143,9 @@ function togglePointsMode() {
   renderMonthlyReport();
   renderArchiveView();
   renderStats();
+  if (document.getElementById("programsModal")?.classList.contains("show") && _activeProgTab === "points") {
+    renderProgramsModalBody();
+  }
   showToast(h.pointsEnabled ? "تم تفعيل وضع النقاط في جميع الشاشات والتقارير ⭐" : "تم إيقاف وضع النقاط وإزالتها من البطاقات والتقارير ✓");
 }
 
@@ -18373,7 +16800,14 @@ function saveState(skipCloud = false) {
   if (_debouncedSaveTimer) { clearTimeout(_debouncedSaveTimer); _debouncedSaveTimer = null; }
   _stateMutationSeq++;
   const h = appState.activeHalaqaId ? appState.halaqat[appState.activeHalaqaId] : null;
-  if (h && !_supervisorInspectHalaqa) h.lastModifiedAt = new Date().toISOString();
+  if (h && !_supervisorInspectHalaqa) {
+    const nowIso = new Date().toISOString();
+    h.lastModifiedAt = nowIso;
+    if (activeSessionId && Array.isArray(h.sessions)) {
+      const curS = h.sessions.find(x => x && x.id === activeSessionId);
+      if (curS) curS._updatedAt = nowIso;
+    }
+  }
   const scopedKey = getStorageKeyForUid();
   let serialized = "";
   try { serialized = JSON.stringify(appState); } catch {}
@@ -18692,11 +17126,11 @@ function applyAutoEvalSilentFromCounters(studentId, kind) {
   r.points = computeRecordPoints(s, r, st);
   saveStateDebounced(220);
 
-  // Smooth live UI refresh without closing sheet or triggering premature auto-advance!
+  // Smooth O(1) live UI refresh without closing sheet or rebuilding entire list!
   if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
     syncStudentEvalSheet();
   }
-  renderStudentCardsOnly();
+  patchSingleStudentCard(studentId);
 }
 
 function stepErrorCounter(studentId, kind, delta) {
@@ -19286,7 +17720,7 @@ function applyPerPageAutoEval(studentId, kind, overrideOverallEv = null, trigger
   if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
     syncStudentEvalSheet();
   }
-  renderStudentCardsOnly();
+  patchSingleStudentCard(studentId);
 }
 
 function confirmPerPageOverallEval(studentId, kind) {
@@ -20990,13 +19424,16 @@ function initApp() {
     installMakinOtaBannerGuard();
     const verBadge = document.getElementById("drawerAppVerBadge");
     if (verBadge) verBadge.textContent = TIBYAN_APP_VERSION;
+    runSilentDataSanitizer();
     routeAppByCurrentUser();
+    startUniversalSelectEnhancer();
     updateNotifToggleUI();
     updateCentralCloudIndicatorUI();
 
     // 2) Background boot: IndexedDB Hydration + Auto-Snapshot + Service Worker + Firebase + Offline Export Vault
     setTimeout(async () => {
       await hydrateStateFromIndexedDB(_bootUid);
+      if (runSilentDataSanitizer()) renderSessionView();
       ensureDailyAutoSnapshot();
       registerTibyanServiceWorker();
       ensureExactMushaf604Data();
@@ -22561,10 +20998,10 @@ function saveBulkStudents() {
   showToast(`تمت إضافة ${lines.length} طالب بنجاح`);
 }
 
-function deleteStudent(id) {
+async function deleteStudent(id) {
   const h = getActiveHalaqa();
   const target = h.students.find(x => x.id === id);
-  if (!target || !confirm(`إزالة الطالب "${target.name}" من الحلقة نهائياً؟`)) return;
+  if (!target || !(await makinConfirm(`إزالة الطالب «${target.name}» من الحلقة نهائياً؟`, { title: "🗑️ إزالة طالب", danger: true, okText: "نعم، إزالة" }))) return;
   h.students = h.students.filter(x => x.id !== id);
   if (openCardId === id) openCardId = null;
   saveState();
@@ -22788,10 +21225,10 @@ function openArchivedReport(id) {
   switchTab("reports");
 }
 
-function deleteSessionById(id) {
+async function deleteSessionById(id) {
   const h = getActiveHalaqa();
   const s = h.sessions.find(x => x.id === id);
-  if (!s || !confirm(`حذف جلسة ${s.dayName} (${s.hijriDate}) نهائياً؟`)) return;
+  if (!s || !(await makinConfirm(`حذف جلسة ${s.dayName} (${s.hijriDate}) نهائياً؟`, { title: "🗑️ حذف الجلسة", danger: true, okText: "نعم، حذف" }))) return;
   h.sessions = h.sessions.filter(x => x.id !== id);
   if (activeSessionId === id) { activeSessionId = null; ensureActiveSession(); }
   saveState();
@@ -22936,15 +21373,13 @@ function getStrayFutureSessions(h = null) {
     .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
 }
 
-function cleanupStrayFutureSessions() {
+async function cleanupStrayFutureSessions() {
   const h = getActiveHalaqa();
   if (!h) return;
   const stray = getStrayFutureSessions(h);
   if (!stray.length) { showToast("لا توجد جلسات مستقبلية للمسح ✓"); return; }
   const labels = stray.map(s => `${s.dayName} (${s.hijriDate})`).join("، ");
-  if (!confirm(`هل تريد حذف ${stray.length} جلسة تجريبية بتواريخ مستقبلية لم يحن موعدها بعد؟
-
-${labels}`)) return;
+  if (!(await makinConfirm(`هل تريد حذف ${stray.length} جلسة تجريبية بتواريخ مستقبلية لم يحن موعدها بعد؟\n\n${labels}`, { title: "🗑️ تنظيف الجلسات المستقبلية", danger: true, okText: "مسح الكل" }))) return;
   const dropIds = new Set(stray.map(s => s.id));
   h.sessions = h.sessions.filter(s => !dropIds.has(s.id));
   activeSessionId = null;
@@ -24363,6 +22798,205 @@ function getStudentPrevSessionHint(h, cur, stId, precomputedCandidates = null) {
   return { hadRepeat: false, hadHwSabr: "" };
 }
 
+function buildSingleStudentCardHtml(h, s, item, _prePrevCandidates, _preRelevantAttn) {
+  const { st, idx, r, isAbs, isPend, isDone, isOpen, qPos } = item;
+  const isNoRec = isPresentNoRecite(r.attendance);
+  const stClass = isAbs ? (r.attendance === "غياب مبرر" ? "st-excused" : "st-absent")
+    : isNoRec ? "st-norecite"
+    : !isDone ? (isPend ? "st-pending" : "st-late")
+    : r.attendance === "متأخر" ? "st-late" : "st-done";
+  const hint = getStudentPrevSessionHint(h, s, st.id, _prePrevCandidates);
+
+  const nameLen = st.name.trim().length;
+  const nameSizeCls = nameLen > 16 ? "name-long" : (nameLen > 12 ? "name-med" : "");
+
+  const dRevPg = (s.type === "daily" && !isAbs) ? calcDailyReviewPages(r) : 0;
+  const isRashidi = st.track === "rashidi";
+  const subText = isRashidi
+    ? `الرشيدي: ص ${r.rashidiFrom || st.rashidiPage || 1}${r.rashidiTo && Number(r.rashidiTo) !== Number(r.rashidiFrom || st.rashidiPage || 1) ? '–' + r.rashidiTo : ''} (${formatNum(r.rashidiPages || st.rashidiPace || 1)} ص)`
+    : (s.type === "daily"
+      ? [formatSegmentsInline(getSegments(r, "rec")), dRevPg > 0 ? `مراجعة: ${formatNum(dRevPg)} ص` : ""].filter(Boolean).join(" • ")
+      : [r.minText ? `صغرى: ${r.minText}` : "", r.majFrom ? `كبرى: ${formatMajStripDisplay(r.majFrom, r.majTo)}` : ""].filter(Boolean).join(" • "));
+
+  const attn = getStudentAttentionAlert(h, s, st.id, _preRelevantAttn);
+  let memTag = isRashidi ? `<span class="attn-tag rashidi">🔤 رشيدي</span>` : "";
+  if (attn) {
+    memTag += `<span class="attn-tag ${attn.type === 'absent' ? 'abs' : 'rep'}">${attn.shortBadge}</span>`;
+  } else if (hint.hadHwSabr || r.hwSabrJuz || r.sabrJuz) {
+    memTag += `<span class="mem-hint-tag sabr">🎓 سبر</span>`;
+  } else if (hint.hadRepeat && isPend) {
+    memTag += `<span class="mem-hint-tag rep">🔁 إعادة</span>`;
+  }
+
+  let statusBadge = "";
+  if (isAbs) statusBadge = `<span class="badge ${r.attendance==='غياب مبرر'?'b-slate':'b-red'}">${r.attendance==='غياب مبرر'?'مبرر':'غياب'}</span>`;
+  else if (isNoRec) statusBadge = `<span class="badge b-slate">حضر • لم يُسمّع</span>`;
+  else if (isPend) statusBadge = `<span class="badge b-muted">بانتظار</span>`;
+  else if (s.type === "daily" || isRashidi) {
+    const ec = r.recEval === "ممتاز" ? "b-green" : r.recEval === "إعادة" ? "b-red" : "b-blue";
+    statusBadge = `<span class="badge ${ec}">${r.recEval}</span>`;
+  } else if (!isDone) {
+    statusBadge = r.minEval && !r.majEval
+      ? `<span class="badge b-orange">بقي الكبرى</span>`
+      : `<span class="badge b-orange">بقي الصغرى</span>`;
+  } else {
+    const satEv = r.majEval || r.minEval || "";
+    const secCls = satEv === "ممتاز" ? "b-green" : satEv === "إعادة" ? "b-red" : "b-blue";
+    statusBadge = `<span class="badge ${secCls}">${escapeHtml(satEv)}</span>`;
+  }
+  const lateTag = r.attendance === "متأخر" ? `<span class="badge b-orange">متأخر</span>` : "";
+
+  const waQuickBtn = st.phone && String(st.phone).replace(/[^0-9]/g, "").length >= 7
+    ? `<button type="button" class="wa-direct-btn" onclick="event.stopPropagation(); openStudentWaHub('${st.id}');" title="إرسال مباشر لواتساب الطالب">💬</button>`
+    : "";
+  const queueBtn = !isDone
+    ? `<button type="button" class="queue-hand-btn ${qPos >= 0 ? 'in-q' : ''}" onclick="event.stopPropagation(); toggleStudentQueue('${st.id}');" title="${qPos >= 0 ? 'اضغط لتأجيل دوره لآخر الطابور' : 'إضافة لدور التسميع بالترتيب'}">✋${qPos >= 0 ? ` ${qPos + 1}` : ''}</button>`
+    : "";
+
+  let quickStrip = "";
+  if (!isAbs && isRashidi) {
+    const hwR = r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}${r.hwRashidiTo && Number(r.hwRashidiTo) !== Number(r.hwRashidiFrom) ? '–' + r.hwRashidiTo : ''}` : "";
+    quickStrip = `<div class="quick-strip" onclick="event.stopPropagation()">
+      <div class="pill-group">
+        <button class="pill pill-sm ${r.recEval==='ممتاز'?'on-green':''}" onclick="setRashidiEval('${st.id}','ممتاز')">ممتاز</button>
+        <button class="pill pill-sm ${r.recEval==='جيد جداً'?'on-blue':''}" onclick="setRashidiEval('${st.id}','جيد جداً')">جيد جداً</button>
+        <button class="pill pill-sm ${r.recEval==='جيد'?'on-blue':''}" onclick="setRashidiEval('${st.id}','جيد')">جيد</button>
+        <button class="pill pill-sm ${r.recEval==='إعادة'?'on-red':''}" onclick="setRashidiEval('${st.id}','إعادة')">إعادة</button>
+        <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
+      </div>
+      ${hwR ? `<span style="font-size:11px; color:var(--ink-500);">الواجب: <b>${escapeHtml(hwR)}</b></span>` : ''}
+    </div>`;
+  } else if (!isAbs && s.type === "daily" && (r.recSurahId || (r.recIsSabr && r.sabrJuz))) {
+    const hwInline = r.hwSabrJuz ? `🎓 سبر ${formatJuzClean(r.hwSabrJuz)}` : formatSegmentsInline(getSegments(r, "hw"));
+    quickStrip = `<div class="quick-strip" onclick="event.stopPropagation()">
+      <div class="pill-group">
+        <button class="pill pill-sm ${r.recEval==='ممتاز'?'on-green':''}" onclick="setRecEval('${st.id}','ممتاز')">ممتاز</button>
+        <button class="pill pill-sm ${r.recEval==='جيد جداً'?'on-blue':''}" onclick="setRecEval('${st.id}','جيد جداً')">جيد جداً</button>
+        <button class="pill pill-sm ${r.recEval==='جيد'?'on-blue':''}" onclick="setRecEval('${st.id}','جيد')">جيد</button>
+        <button class="pill pill-sm ${r.recEval==='إعادة'?'on-red':''}" onclick="setRecEval('${st.id}','إعادة')">إعادة</button>
+        <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
+      </div>
+      <div style="display:flex; align-items:center; gap:5px; flex-wrap:wrap;">
+        ${hwInline ? `<span style="font-size:11px; color:var(--ink-500);">الواجب: <b>${escapeHtml(hwInline)}</b></span>` : ''}
+        ${!r.hwSabrJuz ? `<button type="button" class="quick-step-btn" onclick="quickNextAyahStep('${st.id}')" title="إضافة نصف صفحة على الواجب الحالي">+½ ص</button>` : ""}
+      </div>
+    </div>`;
+  } else if (!isAbs && s.type === "saturday") {
+    const isDiffSat = Boolean(r.minEval && r.majEval && r.minEval !== r.majEval);
+    const satMainEv = r.majEval || r.minEval || "";
+    const qsFn = isDiffSat ? "setSatMajEval" : "quickSatBothEval";
+    const minDiffHint = isDiffSat
+      ? `<span class="badge ${r.minEval==='ممتاز'?'b-green':(r.minEval==='إعادة'?'b-red':'b-blue')}" style="font-size:10px; padding:1px 6px;">صغرى: ${escapeHtml(r.minEval)}</span>`
+      : "";
+    quickStrip = `<div class="quick-strip sat-quick" onclick="event.stopPropagation()">
+      <div class="pill-group" style="align-items:center;">
+        <span style="font-size:10.5px; font-weight:800; color:var(--ink-500);" title="تقييم سريع (يعتمد الكبرى على البطاقة)">${isDiffSat ? 'كبرى:' : 'معاً:'}</span>
+        <button class="pill pill-sm ${satMainEv==='ممتاز'?'on-green':''}" onclick="${qsFn}('${st.id}','ممتاز')">ممتاز</button>
+        <button class="pill pill-sm ${satMainEv==='جيد جداً'?'on-blue':''}" onclick="${qsFn}('${st.id}','جيد جداً')">جيد جداً</button>
+        <button class="pill pill-sm ${satMainEv==='جيد'?'on-blue':''}" onclick="${qsFn}('${st.id}','جيد')">جيد</button>
+        <button class="pill pill-sm ${satMainEv==='إعادة'?'on-red':''}" onclick="${qsFn}('${st.id}','إعادة')">إعادة</button>
+        <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
+        ${minDiffHint}
+      </div>
+      ${(r.nextMajSabrJuz || r.nextMajFrom) ? `<span style="font-size:11px; color:var(--ink-500);">القادم: <b>${escapeHtml(r.nextMajSabrJuz ? `🎓 سبر ${getJuzByName(r.nextMajSabrJuz)?.shortName || r.nextMajSabrJuz}` : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo))}</b></span>` : ''}
+    </div>`;
+  }
+
+  return `<div class="st-card ${stClass} ${qPos >= 0 ? 'in-queue' : ''} ${isOpen ? 'eval-active' : ''}" id="card_${st.id}" data-st-name="${escapeHtml(normalizeSearchArabic(st.name))}" data-is-done="${isDone ? '1' : '0'}" data-is-abs="${isAbs ? '1' : '0'}">
+    <div class="st-head" onclick="toggleCard('${st.id}')">
+      <div class="st-title-wrap">
+        <span class="st-num">${idx + 1}</span>
+        <div class="st-name-box">
+          <div class="st-name ${nameSizeCls}">${escapeHtml(st.name)}${memTag}</div>
+          ${subText ? `<div class="st-sub-range">${escapeHtml(subText)}</div>` : ''}
+        </div>
+      </div>
+      <div class="badges-wrap">
+        ${waQuickBtn}${queueBtn}${lateTag}${statusBadge}
+        ${isPointsEnabled(h) ? `<span class="badge b-slate st-pts-badge">⭐ ${r.points || 0}</span>` : ''}
+        <span style="color:var(--ink-500); font-size:11px;">‹</span>
+      </div>
+    </div>
+    ${quickStrip}
+  </div>`;
+}
+
+function updateSessionStatusBarOnly() {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  const sb = document.getElementById("sessionStatusBar");
+  if (!h || !s || !sb || s.noClass) return;
+  let excused = 0, absent = 0, pendingCnt = 0, doneCnt = 0;
+  h.students.forEach(st => {
+    const r = getStudentRecord(s, st.id);
+    if (isStudentPending(s, r, st)) pendingCnt++;
+    if (isStudentFullyDone(s, st, r)) doneCnt++;
+    if (r.attendance === "غياب مبرر") excused++;
+    else if (r.attendance === "غياب غير مبرر") absent++;
+  });
+  const totalSt = h.students.length;
+  const remCnt = Math.max(0, totalSt - doneCnt);
+  const absCnt = excused + absent;
+  const donePct = totalSt > 0 ? Math.round((doneCnt / totalSt) * 100) : 0;
+  const actionBtns = `<button class="btn btn-soft btn-sm" style="padding:5px 9px;" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">⚡ تفقد</button>` + (pendingCnt > 0
+    ? `<button class="btn btn-primary btn-sm" style="padding:5px 8px;" onclick="openNextPendingStudent()" title="فتح المتبقي التالي">⏭️</button>
+       <button class="btn btn-warn btn-sm" style="padding:5px 9px;" onclick="openAutoAbsentModal()">غياب (${pendingCnt})</button>`
+    : `<button class="btn btn-success btn-sm" style="padding:5px 10px;" onclick="currentReportSubtab='daily'; switchTab('reports')">📄 التقرير</button>`);
+  sb.innerHTML = `
+    <div class="ssb-info">
+      <span class="ssb-chip ok">✅ <b>${doneCnt}/${totalSt}</b></span>
+      <span class="ssb-chip">غياب <b>${absCnt}</b></span>
+    </div>
+    <div class="ssb-actions">${actionBtns}</div>
+    <div class="ssb-prog-line"><div class="ssb-prog-fill" style="width:${donePct}%;"></div></div>`;
+  const cAll = document.getElementById("sfsCntAll");
+  const cPend = document.getElementById("sfsCntPend");
+  const cAbs = document.getElementById("sfsCntAbs");
+  if (cAll) cAll.textContent = String(totalSt);
+  if (cPend) cPend.textContent = String(remCnt);
+  if (cAbs) cAbs.textContent = String(absCnt);
+}
+
+// Fast O(1) Single-Card DOM Patch (v97 — zero full-list rebuild during live evaluation!)
+function patchSingleStudentCard(studentId) {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  const cardEl = document.getElementById(`card_${studentId}`);
+  if (!h || !s || !cardEl) {
+    renderStudentCardsOnly();
+    return;
+  }
+  const idx = h.students.findIndex(x => x.id === studentId);
+  if (idx === -1) {
+    renderStudentCardsOnly();
+    return;
+  }
+  const st = h.students[idx];
+  const r = getStudentRecord(s, st.id);
+  const isAbs = r.attendance.includes("غياب");
+  const isPend = isStudentPending(s, r, st);
+  const isDone = isStudentFullyDone(s, st, r);
+  const isOpen = openCardId === st.id;
+  const wasDone = cardEl.dataset.isDone === "1";
+
+  // If autoSinkDone is active and the card is closed and changed completion state, reorder full list cleanly
+  if (autoSinkDone && !isOpen && wasDone !== isDone) {
+    updateSessionStatusBarOnly();
+    renderStudentCardsOnly();
+    return;
+  }
+
+  const queue = Array.isArray(s.queue) ? s.queue : [];
+  const qPos = !isDone ? queue.indexOf(st.id) : -1;
+  const item = { st, idx, r, isAbs, isPend, isDone, isOpen, qPos };
+  const tmp = document.createElement("div");
+  tmp.innerHTML = buildSingleStudentCardHtml(h, s, item, null, null);
+  const freshEl = tmp.firstElementChild;
+  if (freshEl) {
+    cardEl.replaceWith(freshEl);
+    applySessionSearchFilterDOM();
+  }
+  updateSessionStatusBarOnly();
+}
+
 function renderStudentCardsOnly() {
   const h = getActiveHalaqa(), s = getCurrentSession();
   const listEl = document.getElementById("studentCardsList");
@@ -24398,8 +23032,6 @@ function renderStudentCardsOnly() {
     return;
   }
 
-  // Order: Queued unfinished students first (1, 2, 3...), then remaining unfinished (including half-done Saturday cards!).
-  // NEVER sink a card while it is currently OPEN or only half-evaluated on Saturday!
   const useSink = autoSinkDone;
   let ordered = [];
   let doneSplitIndex = -1;
@@ -24419,139 +23051,17 @@ function renderStudentCardsOnly() {
     ordered = [...queuedPend, ...rest];
   }
 
-  let html = "";
+  let out = "";
   ordered.forEach((item, pos) => {
     if (pos === doneSplitIndex) {
-      html += `<div class="done-section-divider"><span>✓ المُنجَزون والغياب (${ordered.length - doneSplitIndex})</span></div>`;
+      out += `<div class="done-section-divider"><span>✓ المُنجَزون والغياب (${ordered.length - doneSplitIndex})</span></div>`;
     }
-    const { st, idx, r, isAbs, isPend, isDone, isOpen, qPos } = item;
-    const isNoRec = isPresentNoRecite(r.attendance);
-    const stClass = isAbs ? (r.attendance === "غياب مبرر" ? "st-excused" : "st-absent")
-      : isNoRec ? "st-norecite"
-      : !isDone ? (isPend ? "st-pending" : "st-late")
-      : r.attendance === "متأخر" ? "st-late" : "st-done";
-    const hint = getStudentPrevSessionHint(h, s, st.id, _prePrevCandidates);
-
-    const nameLen = st.name.trim().length;
-    const nameSizeCls = nameLen > 16 ? "name-long" : (nameLen > 12 ? "name-med" : "");
-
-    const dRevPg = (s.type === "daily" && !isAbs) ? calcDailyReviewPages(r) : 0;
-    const isRashidi = st.track === "rashidi";
-    const subText = isRashidi
-      ? `الرشيدي: ص ${r.rashidiFrom || st.rashidiPage || 1}${r.rashidiTo && Number(r.rashidiTo) !== Number(r.rashidiFrom || st.rashidiPage || 1) ? '–' + r.rashidiTo : ''} (${formatNum(r.rashidiPages || st.rashidiPace || 1)} ص)`
-      : (s.type === "daily"
-        ? [formatSegmentsInline(getSegments(r, "rec")), dRevPg > 0 ? `مراجعة: ${formatNum(dRevPg)} ص` : ""].filter(Boolean).join(" • ")
-        : [r.minText ? `صغرى: ${r.minText}` : "", r.majFrom ? `كبرى: ${formatMajStripDisplay(r.majFrom, r.majTo)}` : ""].filter(Boolean).join(" • "));
-
-    const attn = getStudentAttentionAlert(h, s, st.id, _preRelevantAttn);
-    let memTag = isRashidi ? `<span class="attn-tag rashidi">🔤 رشيدي</span>` : "";
-    if (attn) {
-      memTag += `<span class="attn-tag ${attn.type === 'absent' ? 'abs' : 'rep'}">${attn.shortBadge}</span>`;
-    } else if (hint.hadHwSabr || r.hwSabrJuz || r.sabrJuz) {
-      memTag += `<span class="mem-hint-tag sabr">🎓 سبر</span>`;
-    } else if (hint.hadRepeat && isPend) {
-      memTag += `<span class="mem-hint-tag rep">🔁 إعادة</span>`;
-    }
-
-    let statusBadge = "";
-    if (isAbs) statusBadge = `<span class="badge ${r.attendance==='غياب مبرر'?'b-slate':'b-red'}">${r.attendance==='غياب مبرر'?'مبرر':'غياب'}</span>`;
-    else if (isNoRec) statusBadge = `<span class="badge b-slate">حضر • لم يُسمّع</span>`;
-    else if (isPend) statusBadge = `<span class="badge b-muted">بانتظار</span>`;
-    else if (s.type === "daily" || isRashidi) {
-      const ec = r.recEval === "ممتاز" ? "b-green" : r.recEval === "إعادة" ? "b-red" : "b-blue";
-      statusBadge = `<span class="badge ${ec}">${r.recEval}</span>`;
-    } else if (!isDone) {
-      statusBadge = r.minEval && !r.majEval
-        ? `<span class="badge b-orange">بقي الكبرى</span>`
-        : `<span class="badge b-orange">بقي الصغرى</span>`;
-    } else {
-      const satEv = r.majEval || r.minEval || "";
-      const secCls = satEv === "ممتاز" ? "b-green" : satEv === "إعادة" ? "b-red" : "b-blue";
-      statusBadge = `<span class="badge ${secCls}">${escapeHtml(satEv)}</span>`;
-    }
-    const lateTag = r.attendance === "متأخر" ? `<span class="badge b-orange">متأخر</span>` : "";
-
-    const waQuickBtn = st.phone && String(st.phone).replace(/[^0-9]/g, "").length >= 7
-      ? `<button type="button" class="wa-direct-btn" onclick="event.stopPropagation(); openStudentWaHub('${st.id}');" title="إرسال مباشر لواتساب الطالب">💬</button>`
-      : "";
-    const queueBtn = !isDone
-      ? `<button type="button" class="queue-hand-btn ${qPos >= 0 ? 'in-q' : ''}" onclick="event.stopPropagation(); toggleStudentQueue('${st.id}');" title="${qPos >= 0 ? 'اضغط لتأجيل دوره لآخر الطابور' : 'إضافة لدور التسميع بالترتيب'}">✋${qPos >= 0 ? ` ${qPos + 1}` : ''}</button>`
-      : "";
-
-    let quickStrip = "";
-    if (!isAbs && isRashidi) {
-      const hwR = r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}${r.hwRashidiTo && Number(r.hwRashidiTo) !== Number(r.hwRashidiFrom) ? '–' + r.hwRashidiTo : ''}` : "";
-      quickStrip = `<div class="quick-strip" onclick="event.stopPropagation()">
-        <div class="pill-group">
-          <button class="pill pill-sm ${r.recEval==='ممتاز'?'on-green':''}" onclick="setRashidiEval('${st.id}','ممتاز')">ممتاز</button>
-          <button class="pill pill-sm ${r.recEval==='جيد جداً'?'on-blue':''}" onclick="setRashidiEval('${st.id}','جيد جداً')">جيد جداً</button>
-          <button class="pill pill-sm ${r.recEval==='جيد'?'on-blue':''}" onclick="setRashidiEval('${st.id}','جيد')">جيد</button>
-          <button class="pill pill-sm ${r.recEval==='إعادة'?'on-red':''}" onclick="setRashidiEval('${st.id}','إعادة')">إعادة</button>
-          <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
-        </div>
-        ${hwR ? `<span style="font-size:11px; color:var(--ink-500);">الواجب: <b>${escapeHtml(hwR)}</b></span>` : ''}
-      </div>`;
-    } else if (!isAbs && s.type === "daily" && (r.recSurahId || (r.recIsSabr && r.sabrJuz))) {
-      const hwInline = r.hwSabrJuz ? `🎓 سبر ${formatJuzClean(r.hwSabrJuz)}` : formatSegmentsInline(getSegments(r, "hw"));
-      quickStrip = `<div class="quick-strip" onclick="event.stopPropagation()">
-        <div class="pill-group">
-          <button class="pill pill-sm ${r.recEval==='ممتاز'?'on-green':''}" onclick="setRecEval('${st.id}','ممتاز')">ممتاز</button>
-          <button class="pill pill-sm ${r.recEval==='جيد جداً'?'on-blue':''}" onclick="setRecEval('${st.id}','جيد جداً')">جيد جداً</button>
-          <button class="pill pill-sm ${r.recEval==='جيد'?'on-blue':''}" onclick="setRecEval('${st.id}','جيد')">جيد</button>
-          <button class="pill pill-sm ${r.recEval==='إعادة'?'on-red':''}" onclick="setRecEval('${st.id}','إعادة')">إعادة</button>
-          <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
-        </div>
-        <div style="display:flex; align-items:center; gap:5px; flex-wrap:wrap;">
-          ${hwInline ? `<span style="font-size:11px; color:var(--ink-500);">الواجب: <b>${escapeHtml(hwInline)}</b></span>` : ''}
-          ${!r.hwSabrJuz ? `<button type="button" class="quick-step-btn" onclick="quickNextAyahStep('${st.id}')" title="إضافة نصف صفحة على الواجب الحالي">+½ ص</button>` : ""}
-        </div>
-      </div>`;
-    } else if (!isAbs && s.type === "saturday") {
-      // Rely on Major Review (الكبرى) as the main grade highlighted on the collapsed card, with a neat minor hint if they differ!
-      const isDiffSat = Boolean(r.minEval && r.majEval && r.minEval !== r.majEval);
-      const satMainEv = r.majEval || r.minEval || "";
-      const qsFn = isDiffSat ? "setSatMajEval" : "quickSatBothEval";
-      const minDiffHint = isDiffSat
-        ? `<span class="badge ${r.minEval==='ممتاز'?'b-green':(r.minEval==='إعادة'?'b-red':'b-blue')}" style="font-size:10px; padding:1px 6px;">صغرى: ${escapeHtml(r.minEval)}</span>`
-        : "";
-      quickStrip = `<div class="quick-strip sat-quick" onclick="event.stopPropagation()">
-        <div class="pill-group" style="align-items:center;">
-          <span style="font-size:10.5px; font-weight:800; color:var(--ink-500);" title="تقييم سريع (يعتمد الكبرى على البطاقة)">${isDiffSat ? 'كبرى:' : 'معاً:'}</span>
-          <button class="pill pill-sm ${satMainEv==='ممتاز'?'on-green':''}" onclick="${qsFn}('${st.id}','ممتاز')">ممتاز</button>
-          <button class="pill pill-sm ${satMainEv==='جيد جداً'?'on-blue':''}" onclick="${qsFn}('${st.id}','جيد جداً')">جيد جداً</button>
-          <button class="pill pill-sm ${satMainEv==='جيد'?'on-blue':''}" onclick="${qsFn}('${st.id}','جيد')">جيد</button>
-          <button class="pill pill-sm ${satMainEv==='إعادة'?'on-red':''}" onclick="${qsFn}('${st.id}','إعادة')">إعادة</button>
-          <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
-          ${minDiffHint}
-        </div>
-        ${(r.nextMajSabrJuz || r.nextMajFrom) ? `<span style="font-size:11px; color:var(--ink-500);">القادم: <b>${escapeHtml(r.nextMajSabrJuz ? `🎓 سبر ${getJuzByName(r.nextMajSabrJuz)?.shortName || r.nextMajSabrJuz}` : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo))}</b></span>` : ''}
-      </div>`;
-    }
-
-    html += `
-      <div class="st-card ${stClass} ${qPos >= 0 ? 'in-queue' : ''} ${isOpen ? 'eval-active' : ''}" id="card_${st.id}" data-st-name="${escapeHtml(normalizeSearchArabic(st.name))}" data-is-done="${isDone ? '1' : '0'}" data-is-abs="${isAbs ? '1' : '0'}">
-        <div class="st-head" onclick="toggleCard('${st.id}')">
-          <div class="st-title-wrap">
-            <span class="st-num">${idx + 1}</span>
-            <div class="st-name-box">
-              <div class="st-name ${nameSizeCls}">${escapeHtml(st.name)}${memTag}</div>
-              ${subText ? `<div class="st-sub-range">${escapeHtml(subText)}</div>` : ''}
-            </div>
-          </div>
-          <div class="badges-wrap">
-            ${waQuickBtn}${queueBtn}${lateTag}${statusBadge}
-            ${isPointsEnabled(h) ? `<span class="badge b-slate st-pts-badge">⭐ ${r.points || 0}</span>` : ''}
-            <span style="color:var(--ink-500); font-size:11px;">‹</span>
-          </div>
-        </div>
-        ${quickStrip}
-      </div>
-    `;
+    out += buildSingleStudentCardHtml(h, s, item, _prePrevCandidates, _preRelevantAttn);
   });
 
-  html += `<div id="sessionSearchEmptyMsg" class="card empty-state" style="padding:18px; display:none;"><p>لا يوجد طالب مطابق للبحث الحالي.</p></div>`;
+  out += `<div id="sessionSearchEmptyMsg" class="card empty-state" style="padding:18px; display:none;"><p>لا يوجد طالب مطابق للبحث الحالي.</p></div>`;
   listEl.classList.remove("has-open-card");
-  listEl.innerHTML = html;
+  listEl.innerHTML = out;
   applySessionSearchFilterDOM();
   syncStudentEvalSheet();
 }
@@ -27229,9 +25739,9 @@ function saveMonthlyBaseline() {
   showToast(`تم حفظ رصيد الأيام الماضية ودمجه في تقرير شهر ${_mbMonthLabel} ✓`);
 }
 
-function clearCurrentMonthBaseline() {
+async function clearCurrentMonthBaseline() {
   const h = getActiveHalaqa();
-  if (!h || !_mbMonthLabel || !confirm(`مسح الرصيد السابق المُدخل لشهر ${_mbMonthLabel}؟`)) return;
+  if (!h || !_mbMonthLabel || !(await makinConfirm(`مسح الرصيد السابق المُدخل لشهر ${_mbMonthLabel}؟`, { title: "🗑️ مسح الرصيد السابق", danger: true, okText: "مسح" }))) return;
   if (h.monthlyBaselines) delete h.monthlyBaselines[_mbMonthLabel];
   saveState();
   closeModal("monthBaselineModal");
@@ -27911,7 +26421,7 @@ function renderProgramsModalBody() {
           <h4>⭐ برنامج النقاط والتحفيز</h4>
           <p>${escapeHtml(pc.cycleName || 'الدورة الحالية')} • ${ptsOn ? 'نشط في البطاقات والتقارير' : 'متوقف حالياً (يمكنك تفعيله متى شئت)'}</p>
         </div>
-        <button type="button" class="btn ${ptsOn ? 'btn-success' : 'btn-accent'} btn-sm" onclick="togglePointsMode(); renderProgramsModalBody();">${ptsOn ? '✓ مفعّل' : '▶ تفعيل'}</button>
+        <button type="button" class="btn ${ptsOn ? 'btn-success' : 'btn-accent'} btn-sm" onclick="togglePointsMode();">${ptsOn ? '✓ مفعّل' : '▶ تفعيل'}</button>
       </div>
 
       <div class="pts-kpi-3">
@@ -28086,8 +26596,8 @@ function stepProgItemProgress(progKey, itemId, delta) {
   renderProgramsModalBody();
 }
 
-function deleteProgItem(progKey, itemId) {
-  if (!confirm("هل تريد حذف هذا الكتاب/النشاط؟")) return;
+async function deleteProgItem(progKey, itemId) {
+  if (!(await makinConfirm("هل تريد حذف هذا الكتاب/النشاط؟", { title: "🗑️ تأكيد الحذف", danger: true, okText: "حذف" }))) return;
   const progs = ensureHalaqaPrograms();
   progs[progKey].items = progs[progKey].items.filter(x => x.id !== itemId);
   if (_editingProgItemId === itemId) _editingProgItemId = null;
@@ -31337,12 +29847,7 @@ async function executeArchiveOldSessions() {
   const cands = getYearArchiveCandidates(h, cutoff);
   if (!cands.length) { showToast("لا توجد جلسات للأرشفة في هذا النطاق"); return; }
 
-  if (!confirm(`سيتم نقل ${cands.length} جلسة إلى الأرشيف السنوي «${label}».
-
-• ستبقى محفوظة محلياً ويمكنك استرجاعها في أي وقت.
-• سيتم تثبيت آخر آية وأجزاء كل طالب قبل النقل.
-
-هل تريد المتابعة؟`)) return;
+  if (!(await makinConfirm(`سيتم نقل ${cands.length} جلسة إلى الأرشيف السنوي «${label}».\n\n• ستبقى محفوظة محلياً ويمكنك استرجاعها في أي وقت.\n• سيتم تثبيت آخر آية وأجزاء كل طالب قبل النقل.`, { title: "📦 الأرشفة السنوية", okText: "أرشفة الآن" }))) return;
 
   // 1) Take automatic pre-archive safety snapshot
   await ensureDailyAutoSnapshot(`قبل أرشفة: ${label}`);
@@ -31458,7 +29963,7 @@ async function restoreYearArchiveToHalaqa(arcId) {
   const h = getActiveHalaqa();
   const arc = await idbGet(IDB_STORE_ARCHIVES, arcId);
   if (!h || !arc || !Array.isArray(arc.sessions)) return;
-  if (!confirm(`هل تريد استرجاع ${arc.sessions.length} جلسة من «${arc.label}» إلى الحلقة النشطة؟`)) return;
+  if (!(await makinConfirm(`هل تريد استرجاع ${arc.sessions.length} جلسة من «${arc.label}» إلى الحلقة النشطة؟`, { title: "↩️ استرجاع الأرشيف", okText: "استرجاع" }))) return;
 
   const existingIds = new Set((h.sessions || []).map(s => s.id));
   const existingDates = new Set((h.sessions || []).map(s => s.date));
@@ -31481,7 +29986,7 @@ async function restoreYearArchiveToHalaqa(arcId) {
 async function deleteYearArchive(arcId) {
   const arc = await idbGet(IDB_STORE_ARCHIVES, arcId);
   if (!arc) return;
-  if (!confirm(`هل أنت متأكد من حذف الأرشيف «${arc.label}» نهائياً من الجهاز؟ يُنصح بتصدير نسخة JSON منه أولاً.`)) return;
+  if (!(await makinConfirm(`هل أنت متأكد من حذف الأرشيف «${arc.label}» نهائياً من الجهاز؟ يُنصح بتصدير نسخة JSON منه أولاً.`, { title: "🗑️ حذف الأرشيف السنوي", danger: true, okText: "حذف نهائي" }))) return;
   await idbDelete(IDB_STORE_ARCHIVES, arcId);
   _yaInspectId = "";
   await renderYearArchiveModal();
@@ -31532,8 +30037,7 @@ async function createManualRecoverySnapshotNow() {
 async function restoreAutoSnapshot(snapId) {
   const sn = await idbGet(IDB_STORE_SNAPS, snapId);
   if (!sn || !sn.data?.halaqat) { showToast("تعذّر قراءة نقطة الاستعادة"); return; }
-  if (!confirm(`هل تريد استعادة بياناتك إلى «${sn.label}»؟
-(سيتم حفظ نسخة من وضعك الحالي تلقائياً قبل الاستعادة).`)) return;
+  if (!(await makinConfirm(`هل تريد استعادة بياناتك إلى «${sn.label}»؟\n(سيتم حفظ نسخة من وضعك الحالي تلقائياً قبل الاستعادة).`, { title: "🔄 استعادة نقطة أمان", okText: "استعادة الآن" }))) return;
   await ensureDailyAutoSnapshot("نسخة أمان قبل الاستعادة");
   appState = JSON.parse(JSON.stringify(sn.data));
   if (!appState.activeHalaqaId || !appState.halaqat[appState.activeHalaqaId]) {
@@ -32686,7 +31190,7 @@ async function supRemoveTeacher(linkKey) {
   const sup = getCurrentAccountUser();
   const lnk = tibyanAccounts.links[sup?.id]?.[linkKey];
   if (!sup || !lnk) return;
-  if (!confirm(`هل تريد إزالة «حلقة ${lnk.halaqaName}» (${lnk.teacherName}) من تحت إشرافك؟`)) return;
+  if (!(await makinConfirm(`هل تريد إزالة «حلقة ${lnk.halaqaName}» (${lnk.teacherName}) من تحت إشرافك؟`, { title: "🗑️ إزالة حلقة", danger: true, okText: "نعم، إزالة" }))) return;
   const tid = lnk.teacherId || linkKey;
   delete tibyanAccounts.links[sup.id][linkKey];
   const remaining = Object.values(tibyanAccounts.links[sup.id] || {}).some(x => x && x.teacherId === tid);
@@ -33479,7 +31983,7 @@ async function supAddCustomProgram() {
 
 async function supDeleteCustomProgram(key) {
   const sup = getCurrentAccountUser();
-  if (!sup || !confirm("هل تريد إزالة هذا البرنامج من الصرح؟")) return;
+  if (!sup || !(await makinConfirm("هل تريد إزالة هذا البرنامج من الصرح؟", { title: "🗑️ إزالة برنامج", danger: true, okText: "إزالة" }))) return;
   sup.customPrograms = (sup.customPrograms || []).filter(x => x.key !== key);
   saveAccountsState();
   await platformCloudPut(`users/${sup.id}`, sup);
@@ -33944,12 +32448,17 @@ function onMonthlyPlanSearchInput(val) {
   renderMonthlyPlanModal();
 }
 
-function editStudentMonthlyGoalQuick(studentId) {
+async function editStudentMonthlyGoalQuick(studentId) {
   const h = getActiveHalaqa();
   const st = h?.students?.find(x => x.id === studentId);
   if (!h || !st) return;
   const cur = Number(getMonthlyGoalEntry(h, _mpSelectedMonth, studentId).targetPages) || 0;
-  const ans = prompt(`هدف الحفظ الشهري للطالب «${st.name}» لشهر ${_mpSelectedMonth} (عدد الصفحات):`, cur || 10);
+  const ans = await makinPrompt(`هدف الحفظ الشهري للطالب «${st.name}» لشهر ${_mpSelectedMonth} (عدد الصفحات):`, cur || 10, {
+    title: "🎯 تعديل هدف الطالب",
+    inputType: "number",
+    okText: "حفظ الهدف ✓",
+    presets: [4, 8, 10, 15, 20]
+  });
   if (ans === null) return;
   setStudentMonthlyGoal(studentId, ans, true);
   showToast(`✓ تم تحديث هدف ${st.name} إلى ${formatNum(getMonthlyGoalEntry(h, _mpSelectedMonth, studentId).targetPages)} ص`);
@@ -33994,11 +32503,11 @@ function updateStudentMonthlyReasonNote(studentId, noteTxt) {
   saveStateDebounced(350);
 }
 
-function autoFillMonthlyGoalsFromPace() {
+async function autoFillMonthlyGoalsFromPace() {
   const h = getActiveHalaqa();
   if (!h || !h.students.length) return;
   const estSessions = getExpectedDailySessionsPerMonth(h);
-  if (!confirm(`سيتم اقتراح هدف شهري لكل طالب بناءً على مقداره اليومي × ${estSessions} جلسات تسميع بالشهر (يمكنك تعديل أي طالب بعدها). هل تريد المتابعة؟`)) return;
+  if (!(await makinConfirm(`سيتم توزيع هدف شهري تلقائياً لكل طالب بناءً على مقداره اليومي × ${estSessions} جلسات تسميع بالشهر (يمكنك تعديل أي طالب بعدها).`, { title: "⚡ توزيع الأهداف الشهرية", okText: "توزيع الآن" }))) return;
   const mg = ensureMonthlyGoalsMap(h);
   if (!mg[_mpSelectedMonth]) mg[_mpSelectedMonth] = {};
   h.students.forEach(st => {
@@ -34467,8 +32976,11 @@ function syncExecPickerTriggers() {
 
 function openExecPicker(mode) {
   _epsMode = mode;
+  _epsActiveNativeSelect = null;
   _epsSessionTypeFilter = "all";
   _epsShowHolidays = false;
+  const sw = document.getElementById("epsSearchWrap");
+  if (sw) sw.style.display = "none";
   renderExecPickerSheet();
   openModal("execPickerSheet");
 }
@@ -34718,6 +33230,312 @@ function renderExecPickerSheet() {
         ${isSel ? `<span class="eps-check">✓</span>` : ''}
       </button>`;
     }).join("");
+  }
+}
+
+// ==================== MAKIN v97: EXECUTIVE DIALOGS (CONFIRM/PROMPT), UNIVERSAL SELECT ENHANCER & SILENT SANITIZER ====================
+let _mkdResolver = null;
+let _mkdIsPrompt = false;
+
+function makinConfirm(message, opts = {}) {
+  return new Promise(resolve => {
+    if (_mkdResolver) { try { _mkdResolver(false); } catch {} _mkdResolver = null; }
+    _mkdResolver = resolve;
+    _mkdIsPrompt = false;
+    const hdr = document.getElementById("mkdHdr");
+    const ttl = document.getElementById("mkdTitle");
+    const msg = document.getElementById("mkdMsg");
+    const pWrap = document.getElementById("mkdPromptWrap");
+    const okBtn = document.getElementById("mkdOkBtn");
+    const canBtn = document.getElementById("mkdCancelBtn");
+    if (!hdr || !ttl || !msg || !okBtn) { resolve(true); return; }
+
+    hdr.classList.toggle("is-danger", Boolean(opts.danger));
+    ttl.textContent = opts.title || (opts.danger ? "⚠️ تأكيد الحذف" : "تأكيد الإجراء");
+    msg.textContent = String(message || "");
+    if (pWrap) pWrap.style.display = "none";
+    okBtn.className = "btn " + (opts.danger ? "btn-danger" : "btn-primary");
+    if (opts.danger) { okBtn.style.background = "#b92222"; okBtn.style.color = "#ffffff"; }
+    else { okBtn.style.background = ""; okBtn.style.color = ""; }
+    okBtn.textContent = opts.okText || "تأكيد ✓";
+    if (canBtn) canBtn.textContent = opts.cancelText || "إلغاء";
+    openModal("makinDialogModal");
+  });
+}
+
+function makinPrompt(message, defaultVal = "", opts = {}) {
+  return new Promise(resolve => {
+    if (_mkdResolver) { try { _mkdResolver(null); } catch {} _mkdResolver = null; }
+    _mkdResolver = resolve;
+    _mkdIsPrompt = true;
+    const hdr = document.getElementById("mkdHdr");
+    const ttl = document.getElementById("mkdTitle");
+    const msg = document.getElementById("mkdMsg");
+    const pWrap = document.getElementById("mkdPromptWrap");
+    const inp = document.getElementById("mkdInput");
+    const pre = document.getElementById("mkdPresets");
+    const okBtn = document.getElementById("mkdOkBtn");
+    const canBtn = document.getElementById("mkdCancelBtn");
+    if (!hdr || !ttl || !msg || !inp || !okBtn) { resolve(null); return; }
+
+    hdr.classList.remove("is-danger");
+    ttl.textContent = opts.title || "إدخال قيمة";
+    msg.textContent = String(message || "");
+    if (pWrap) pWrap.style.display = "block";
+    inp.type = opts.inputType || "text";
+    inp.value = String(defaultVal ?? "");
+    inp.placeholder = opts.placeholder || "";
+    if (pre) {
+      if (Array.isArray(opts.presets) && opts.presets.length) {
+        pre.style.display = "flex";
+        pre.innerHTML = opts.presets.map(v => `<button type="button" onclick="document.getElementById('mkdInput').value='${escapeHtml(String(v))}'">${escapeHtml(String(v))}</button>`).join("");
+      } else {
+        pre.style.display = "none";
+        pre.innerHTML = "";
+      }
+    }
+    okBtn.className = "btn btn-primary";
+    okBtn.style.background = "";
+    okBtn.style.color = "";
+    okBtn.textContent = opts.okText || "حفظ ✓";
+    if (canBtn) canBtn.textContent = opts.cancelText || "إلغاء";
+    openModal("makinDialogModal");
+    setTimeout(() => { try { inp.focus(); inp.select(); } catch {} }, 60);
+  });
+}
+
+function resolveMakinDialog(confirmed) {
+  closeModal("makinDialogModal");
+  const fn = _mkdResolver;
+  _mkdResolver = null;
+  if (!fn) return;
+  if (_mkdIsPrompt) {
+    const val = document.getElementById("mkdInput")?.value ?? "";
+    fn(confirmed ? val : null);
+  } else {
+    fn(Boolean(confirmed));
+  }
+}
+
+// ===== UNIVERSAL EXECUTIVE SELECT ENHANCER (ZERO NATIVE ANDROID DROPDOWNS!) =====
+let _epsActiveNativeSelect = null;
+let _epsSearchQuery = "";
+let _epSelectObserver = null;
+let _epEnhanceTimer = null;
+
+function onEpsSearchInput(val) {
+  _epsSearchQuery = String(val || "");
+  const inp = document.getElementById("epsSearchInput");
+  if (inp && inp.value !== _epsSearchQuery) inp.value = _epsSearchQuery;
+  const clr = document.getElementById("epsSearchClr");
+  if (clr) clr.style.display = _epsSearchQuery ? "inline-flex" : "none";
+  if (_epsMode === "nativeSelect") renderNativeSelectIntoExecPicker();
+}
+
+function selectNativeExecPickerOption(val) {
+  const sel = _epsActiveNativeSelect;
+  closeModal("execPickerSheet");
+  if (!sel) return;
+  sel.value = val;
+  if (typeof sel._epSyncLabel === "function") sel._epSyncLabel();
+  sel.dispatchEvent(new Event("change", { bubbles: true }));
+}
+
+function openNativeSelectAsExecPicker(sel) {
+  if (!sel) return;
+  _epsMode = "nativeSelect";
+  _epsActiveNativeSelect = sel;
+  _epsSearchQuery = "";
+  const sInp = document.getElementById("epsSearchInput");
+  if (sInp) sInp.value = "";
+  const sClr = document.getElementById("epsSearchClr");
+  if (sClr) sClr.style.display = "none";
+
+  const titleEl = document.getElementById("epsTitle");
+  const subEl = document.getElementById("epsSub");
+  const filterBar = document.getElementById("epsFilterBar");
+  const searchWrap = document.getElementById("epsSearchWrap");
+  if (filterBar) filterBar.style.display = "none";
+
+  const fieldLbl = sel.closest(".field")?.querySelector("label")?.textContent?.trim()
+    || sel.getAttribute("aria-label")
+    || sel.getAttribute("title")
+    || "اختيار من القائمة";
+  if (titleEl) titleEl.textContent = fieldLbl;
+  const totalOpts = sel.options ? sel.options.length : 0;
+  if (subEl) subEl.textContent = totalOpts > 8 ? `اختر من ${totalOpts} خيار أو ابحث سريعاً` : "اختر من القائمة أدناه";
+  if (searchWrap) searchWrap.style.display = totalOpts > 8 ? "block" : "none";
+
+  renderNativeSelectIntoExecPicker();
+  openModal("execPickerSheet");
+}
+
+function renderNativeSelectIntoExecPicker() {
+  const sel = _epsActiveNativeSelect;
+  const body = document.getElementById("epsBody");
+  if (!sel || !body) return;
+  const curVal = sel.value;
+  const qNorm = normalizeSearchArabic(_epsSearchQuery);
+
+  const renderOptBtn = opt => {
+    const txt = String(opt.textContent || "").trim();
+    if (qNorm && !normalizeSearchArabic(txt).includes(qNorm)) return "";
+    const isSel = opt.value === curVal;
+    const encVal = escapeHtml(opt.value).replace(/'/g, "&#39;");
+    return `<button type="button" class="eps-item ${isSel ? 'selected' : ''}" ${opt.disabled ? 'disabled style="opacity:0.45;"' : ''} onclick="selectNativeExecPickerOption('${encVal}')">
+      <span class="eps-item-l">
+        <span class="eps-txt"><span class="eps-title">${escapeHtml(txt)}</span></span>
+      </span>
+      ${isSel ? `<span class="eps-check">✓</span>` : ''}
+    </button>`;
+  };
+
+  let out = "";
+  const children = Array.from(sel.children || []);
+  children.forEach(ch => {
+    if (ch.tagName === "OPTGROUP") {
+      const itemsHtml = Array.from(ch.children).map(renderOptBtn).filter(Boolean).join("");
+      if (itemsHtml) {
+        out += `<div class="eps-sec-lbl"><span>${escapeHtml(ch.label || "")}</span></div>` + itemsHtml;
+      }
+    } else if (ch.tagName === "OPTION") {
+      out += renderOptBtn(ch);
+    }
+  });
+  body.innerHTML = out || `<div class="empty-state" style="padding:18px 8px;"><p>لا توجد نتائج مطابقة للبحث.</p></div>`;
+}
+
+function installSelectValueHookOnce() {
+  if (window._makinSelectHooked) return;
+  window._makinSelectHooked = true;
+  try {
+    const desc = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value");
+    if (desc && desc.set && desc.get) {
+      Object.defineProperty(HTMLSelectElement.prototype, "value", {
+        configurable: true,
+        get() { return desc.get.call(this); },
+        set(v) {
+          desc.set.call(this, v);
+          if (typeof this._epSyncLabel === "function") this._epSyncLabel();
+        }
+      });
+    }
+  } catch (e) {
+    console.warn("Select value hook skipped:", e);
+  }
+}
+
+function enhanceSingleNativeSelect(sel) {
+  if (!sel || sel.dataset.epSkip === "1") return;
+  // Skip selects that already have custom dedicated triggers (styled display:none inline)
+  if (sel.dataset.epBound !== "1" && sel.style.display === "none") return;
+
+  let trig = sel._epTrigger;
+  if (sel.dataset.epBound !== "1" || !trig || !trig.isConnected) {
+    sel.dataset.epBound = "1";
+    sel.classList.add("ep-native-hidden");
+    trig = document.createElement("button");
+    trig.type = "button";
+    trig.className = "exec-picker-trigger ep-auto-trigger";
+    trig.onclick = () => openNativeSelectAsExecPicker(sel);
+    sel.insertAdjacentElement("afterend", trig);
+    sel._epTrigger = trig;
+    sel._epSyncLabel = () => {
+      if (!trig || !trig.isConnected) return;
+      const opt = sel.options && sel.selectedIndex >= 0 ? sel.options[sel.selectedIndex] : null;
+      const lbl = (opt ? opt.textContent : "") || sel.options?.[0]?.textContent || "اختر...";
+      trig.innerHTML = `<span class="ept-left"><span class="ept-txt"><span class="ept-main">${escapeHtml(String(lbl).trim())}</span></span></span><span class="ept-right"><span class="ept-chev">▾</span></span>`;
+      trig.disabled = Boolean(sel.disabled);
+    };
+  }
+  if (typeof sel._epSyncLabel === "function") sel._epSyncLabel();
+}
+
+function enhanceAllVisibleSelects(root = document) {
+  try {
+    root.querySelectorAll("select").forEach(enhanceSingleNativeSelect);
+  } catch {}
+}
+
+function startUniversalSelectEnhancer() {
+  installSelectValueHookOnce();
+  enhanceAllVisibleSelects(document);
+  if (_epSelectObserver) return;
+  _epSelectObserver = new MutationObserver(() => {
+    clearTimeout(_epEnhanceTimer);
+    _epEnhanceTimer = setTimeout(() => enhanceAllVisibleSelects(document), 35);
+  });
+  _epSelectObserver.observe(document.body, { childList: true, subtree: true });
+}
+
+// ===== SILENT DATA SANITIZER (AUTO-REPAIRS LEGACY NOTES, TAJWEED TAGS & NUMERIC GLITCHES ONCE PER VERSION) =====
+function runSilentDataSanitizer() {
+  const hals = Object.values(appState?.halaqat || {});
+  if (!hals.length) return false;
+  let repaired = false;
+
+  hals.forEach(h => {
+    if (!h || h._sanitizedVersion === TIBYAN_APP_VERSION) return;
+    if (Array.isArray(h.sessions)) {
+      h.sessions.forEach(s => {
+        if (!s || !s.records || typeof s.records !== "object") return;
+        Object.values(s.records).forEach(r => {
+          if (!r || typeof r !== "object") return;
+          // 1) Guard numeric fields against NaN or invalid types
+          ["points", "recPages", "dRevPages", "minPages", "majPages", "rashidiPages", "recErrors", "recAlerts", "minErrors", "minAlerts", "majErrors", "majAlerts"].forEach(k => {
+            if (r[k] !== undefined && r[k] !== "" && r[k] !== null) {
+              const num = Number(r[k]);
+              if (isNaN(num) || num < 0) { r[k] = 0; repaired = true; }
+            }
+          });
+          // 2) Clean stale "استعداداً لاختبار السبر" prep text when hwSabrJuz is gone or Sabr already passed
+          if (typeof r.notes === "string" && r.notes.includes("استعداداً لاختبار السبر")) {
+            const sabrDone = Boolean(r.sabrJuz && getDailySabrEval(r) && getDailySabrEval(r) !== "إعادة");
+            if (!r.hwSabrJuz || sabrDone) {
+              const cleaned = applyTajweedToNote(stripStaleHwSabrPrepText(r.notes), r);
+              if (cleaned !== r.notes) { r.notes = cleaned; repaired = true; }
+            }
+          }
+          // 3) Guarantee active tajweedTags are reflected in r.notes
+          if (Array.isArray(r.tajweedTags) && r.tajweedTags.length) {
+            const synced = applyTajweedToNote(r.notes || "", r);
+            if (synced !== (r.notes || "")) { r.notes = synced; repaired = true; }
+          }
+        });
+      });
+    }
+    h._sanitizedVersion = TIBYAN_APP_VERSION;
+  });
+
+  if (repaired) {
+    saveState(true);
+  }
+  return repaired;
+}
+
+// ===== OFFLINE GOOGLE FONTS CACHER (ENSURES CRISP ARABIC PDF & HD PNG WITHOUT INTERNET) =====
+async function precacheOfflineGoogleFonts() {
+  if (typeof caches === "undefined" || !navigator.onLine) return false;
+  try {
+    const fontLink = document.querySelector('link[href*="fonts.googleapis.com/css2"]');
+    if (!fontLink?.href) return false;
+    const cache = await caches.open("makin-offline-fonts-v1");
+    const existing = await cache.match(fontLink.href);
+    if (existing) return true;
+    const res = await fetch(fontLink.href);
+    if (!res.ok) return false;
+    const cssText = await res.clone().text();
+    await cache.put(fontLink.href, res);
+    const woffUrls = Array.from(new Set(cssText.match(/https:\/\/fonts\.gstatic\.com\/[^)'"\s]+/g) || [])).slice(0, 12);
+    await Promise.all(woffUrls.map(async u => {
+      try {
+        const r = await fetch(u, { mode: "cors" });
+        if (r.ok) await cache.put(u, r);
+      } catch {}
+    }));
+    return true;
+  } catch {
+    return false;
   }
 }
 
@@ -35094,7 +33912,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v96";
+const TIBYAN_APP_VERSION = "v97";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -35249,6 +34067,66 @@ async function fbDbSet(path, val) {
   }
 }
 
+async function fbDbUpdate(path, patchObj) {
+  if (!_fbDb || !patchObj || typeof patchObj !== "object") return false;
+  try {
+    await _fbDb.ref(path).update(patchObj);
+    return true;
+  } catch (e) {
+    console.warn("fbDbUpdate error on", path, e?.message || e);
+    return false;
+  }
+}
+
+function fastStrHashV97(str) {
+  const s = String(str || "");
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) {
+    h = ((h << 5) + h) ^ s.charCodeAt(i);
+  }
+  return `${s.length}_${(h >>> 0).toString(36)}`;
+}
+
+// Conflict-Safe Session Union Merge (prevents an older device from ever overwriting newer sessions!)
+function mergeRemoteHalaqaIntoLocal(localH, remoteH) {
+  if (!remoteH || !remoteH.id) return false;
+  if (!localH) return true;
+  let changed = false;
+  const locSessions = Array.isArray(localH.sessions) ? localH.sessions : [];
+  const remSessions = Array.isArray(remoteH.sessions) ? remoteH.sessions : [];
+  const locById = new Map(locSessions.map(s => [s.id, s]));
+
+  remSessions.forEach(rs => {
+    if (!rs || !rs.id) return;
+    const ls = locById.get(rs.id);
+    if (!ls) {
+      locSessions.push(JSON.parse(JSON.stringify(rs)));
+      changed = true;
+    } else if ((rs._updatedAt || remoteH.lastModifiedAt || "") > (ls._updatedAt || localH.lastModifiedAt || "")) {
+      const idx = locSessions.indexOf(ls);
+      if (idx >= 0) {
+        locSessions[idx] = JSON.parse(JSON.stringify(rs));
+        changed = true;
+      }
+    }
+  });
+  if (changed) {
+    locSessions.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+    localH.sessions = locSessions;
+  }
+  if ((remoteH.lastModifiedAt || "") > (localH.lastModifiedAt || "")) {
+    if (Array.isArray(remoteH.students) && remoteH.students.length >= (localH.students?.length || 0)) {
+      localH.students = JSON.parse(JSON.stringify(remoteH.students));
+      changed = true;
+    }
+    if (remoteH.monthlyGoals && typeof remoteH.monthlyGoals === "object") {
+      localH.monthlyGoals = { ...(localH.monthlyGoals || {}), ...remoteH.monthlyGoals };
+      changed = true;
+    }
+  }
+  return changed;
+}
+
 // Keep legacy platformCloudPut/Get routed through authenticated Firebase SDK!
 async function platformCloudPut(path, data) {
   return await fbDbSet(path, data);
@@ -35298,9 +34176,17 @@ async function hydrateSignedInFirebaseUser(fbUser) {
           Object.entries(remoteHals).forEach(([hid, hObj]) => {
             if (!hObj || !hObj.id) return;
             const loc = appState.halaqat[hid];
-            if (!loc || ((hObj.lastModifiedAt || "") > (loc.lastModifiedAt || ""))) {
+            if (!loc) {
               appState.halaqat[hid] = hObj;
               merged = true;
+            } else if (mergeRemoteHalaqaIntoLocal(loc, hObj)) {
+              merged = true;
+            } else if ((hObj.lastModifiedAt || "") > (loc.lastModifiedAt || "")) {
+              appState.halaqat[hid] = hObj;
+              merged = true;
+            }
+            if (typeof snapshotSyncedHalaqaHashes === "function" && appState.halaqat[hid]) {
+              snapshotSyncedHalaqaHashes(hid, appState.halaqat[hid]);
             }
           });
           if (!appState.activeHalaqaId && Object.keys(appState.halaqat).length) {
@@ -35750,7 +34636,7 @@ async function handleRegisterSupervisor() {
 }
 
 async function logoutCurrentAccount(silent = false) {
-  if (!silent && !confirm("هل تريد تسجيل الخروج؟ (جميع بياناتك محفوظة بأمان على السحابة)")) return;
+  if (!silent && !(await makinConfirm("هل تريد تسجيل الخروج؟ (جميع بياناتك محفوظة بأمان على السحابة)", { title: "🚪 تسجيل الخروج", okText: "تسجيل الخروج" }))) return;
   closeAllModalsAndOverlays();
   const exitingUid = getEffectiveAccountUid();
   if (exitingUid && Object.keys(appState.halaqat || {}).length) {
@@ -35782,7 +34668,7 @@ async function logoutCurrentAccount(silent = false) {
 // Keep Supervisor code directory updated when regenerating code or updating profile
 async function supRegenerateCode() {
   const sup = getCurrentAccountUser();
-  if (!sup || !confirm("هل تريد توليد كود مشرف قوي جديد؟")) return;
+  if (!sup || !(await makinConfirm("هل تريد توليد كود مشرف قوي جديد؟ (سيُستبدل الكود السابق للربط الجديد).", { title: "🔑 توليد كود جديد", okText: "توليد الآن" }))) return;
   const oldCode = sup.supervisorCode;
   const newCode = generateStrongSupervisorCode();
   sup.supervisorCode = newCode;
@@ -35972,7 +34858,7 @@ function renderOwnerDashboardTab() {
 async function ownerToggleSupervisorStatus(supUid, nextActive) {
   const sp = _ownerDataCache.users?.[supUid];
   if (!sp) return;
-  if (!confirm(nextActive ? `إعادة تفعيل حساب مشرف «${sp.branchName}»؟` : `إيقاف حساب مشرف «${sp.branchName}» مؤقتاً؟`)) return;
+  if (!(await makinConfirm(nextActive ? `إعادة تفعيل حساب مشرف «${sp.branchName}»؟` : `إيقاف حساب مشرف «${sp.branchName}» مؤقتاً؟`, { title: nextActive ? "✓ تفعيل الحساب" : "⏸️ إيقاف مؤقت", danger: !nextActive, okText: nextActive ? "تفعيل" : "إيقاف" }))) return;
   sp.active = nextActive;
   await fbDbSet(`users/${supUid}/active`, nextActive);
   if (sp.supervisorCode) await fbDbSet(`supervisor_codes/${sp.supervisorCode}/active`, nextActive);
@@ -36043,7 +34929,7 @@ async function ownerGenerateInviteCode() {
 }
 
 async function ownerDeleteInviteCode(code) {
-  if (!confirm(`حذف الكود ${code}؟`)) return;
+  if (!(await makinConfirm(`حذف كود التفعيل ${code}؟`, { title: "🗑️ حذف الكود", danger: true, okText: "حذف" }))) return;
   await fbDbSet(`supervisor_invites/${code}`, null);
   delete _ownerDataCache.invites[code];
   renderOwnerInvitesTab();
@@ -36325,6 +35211,7 @@ async function precacheOfflineExportSuite(interactive = false) {
   }
   let okCount = 0;
   try {
+    await precacheOfflineGoogleFonts();
     await ensureExactMushaf604Data();
     const keys = ["html2canvas", "jspdf", "exceljs"];
     for (const k of keys) {
@@ -37190,8 +36077,40 @@ function updateCentralCloudIndicatorUI(overrideState = null) {
   }
 }
 
+let _cloudSyncPendingResync = false;
+let _lastSyncedCloudHashes = {};
+
+function buildCleanHalaqaForCloud(h) {
+  const copy = JSON.parse(JSON.stringify(h));
+  delete copy.customLogoSrc;
+  delete copy.customLogoB64;
+  return copy;
+}
+
+function snapshotSyncedHalaqaHashes(hid, cleanH) {
+  const fieldHashes = {};
+  Object.keys(cleanH || {}).forEach(k => {
+    if (k === "sessions") return;
+    try { fieldHashes[k] = fastStrHashV97(JSON.stringify(cleanH[k])); } catch {}
+  });
+  const sessArr = Array.isArray(cleanH?.sessions) ? cleanH.sessions : [];
+  const sessionHashes = sessArr.map(s => ({
+    id: s?.id || "",
+    hash: fastStrHashV97(JSON.stringify(s || {}))
+  }));
+  _lastSyncedCloudHashes[hid] = {
+    fieldHashes,
+    sessionHashes,
+    sessionCount: sessArr.length,
+    lastSyncedAt: cleanH?.lastModifiedAt || new Date().toISOString()
+  };
+}
+
 async function syncCentralCloudNow(showFeedback = false) {
-  if (_cloudSyncInFlight) return false;
+  if (_cloudSyncInFlight) {
+    _cloudSyncPendingResync = true;
+    return false;
+  }
   if (!navigator.onLine) {
     updateCentralCloudIndicatorUI("offline");
     if (showFeedback) showToast("📡 لا يوجد اتصال بالإنترنت — ستُحفظ البيانات تلقائياً فور عودة الشبكة");
@@ -37207,23 +36126,86 @@ async function syncCentralCloudNow(showFeedback = false) {
   }
 
   _cloudSyncInFlight = true;
+  _cloudSyncPendingResync = false;
+  const seqAtStart = _stateMutationSeq;
   updateCentralCloudIndicatorUI("syncing");
   try {
     let ok = true;
     if (isUserTeacherCapable(u)) {
-      const cleanMap = {};
-      Object.entries(appState.halaqat || {}).forEach(([hid, h]) => {
-        if (!h) return;
-        const copy = JSON.parse(JSON.stringify(h));
-        delete copy.customLogoSrc;
-        delete copy.customLogoB64;
-        cleanMap[hid] = copy;
-      });
-      ok = await fbDbSet(`teacher_halaqat/${fbUser.uid}`, cleanMap);
+      const localHals = appState.halaqat || {};
+      const localHids = Object.keys(localHals);
+
+      // Remove deleted halaqat from cloud if any
+      for (const prevHid of Object.keys(_lastSyncedCloudHashes)) {
+        if (!localHals[prevHid]) {
+          await fbDbSet(`teacher_halaqat/${fbUser.uid}/${prevHid}`, null);
+          delete _lastSyncedCloudHashes[prevHid];
+        }
+      }
+
+      for (const hid of localHids) {
+        const h = localHals[hid];
+        if (!h) continue;
+        const basePath = `teacher_halaqat/${fbUser.uid}/${hid}`;
+        let prevSnap = _lastSyncedCloudHashes[hid];
+
+        // Conflict Guard: check lightweight remote lastModifiedAt before writing
+        if (prevSnap?.lastSyncedAt) {
+          const remoteMod = await fbDbGet(`${basePath}/lastModifiedAt`);
+          if (remoteMod && remoteMod > prevSnap.lastSyncedAt && remoteMod > (h.lastModifiedAt || "")) {
+            const remoteH = await fbDbGet(basePath);
+            if (remoteH && mergeRemoteHalaqaIntoLocal(h, remoteH)) {
+              h.lastModifiedAt = new Date().toISOString();
+              prevSnap = null; // force clean full sync of merged result
+              try { localStorage.setItem(getStorageKeyForUid(fbUser.uid), JSON.stringify(appState)); } catch {}
+              queueIdbStateSave(getStorageKeyForUid(fbUser.uid), appState);
+            }
+          }
+        }
+
+        const cleanCopy = buildCleanHalaqaForCloud(h);
+        const curSess = Array.isArray(cleanCopy.sessions) ? cleanCopy.sessions : [];
+
+        // Check if safe to perform ultra-lightweight Delta Patch!
+        const canDelta = Boolean(
+          prevSnap &&
+          prevSnap.sessionCount === curSess.length &&
+          curSess.every((s, idx) => prevSnap.sessionHashes[idx] && prevSnap.sessionHashes[idx].id === (s?.id || ""))
+        );
+
+        let hOk = true;
+        if (canDelta) {
+          const patch = {};
+          const allKeys = new Set([...Object.keys(cleanCopy), ...Object.keys(prevSnap.fieldHashes || {})]);
+          allKeys.forEach(k => {
+            if (k === "sessions") return;
+            const curH = (k in cleanCopy) ? fastStrHashV97(JSON.stringify(cleanCopy[k])) : "__DEL__";
+            if (curH !== (prevSnap.fieldHashes[k] || "__DEL__")) {
+              patch[k] = (k in cleanCopy) ? cleanCopy[k] : null;
+            }
+          });
+          curSess.forEach((s, idx) => {
+            const sHash = fastStrHashV97(JSON.stringify(s || {}));
+            if (sHash !== prevSnap.sessionHashes[idx].hash) {
+              patch[`sessions/${idx}`] = s;
+            }
+          });
+          if (Object.keys(patch).length > 0) {
+            hOk = await fbDbUpdate(basePath, patch);
+          }
+        } else {
+          hOk = await fbDbSet(basePath, cleanCopy);
+        }
+
+        if (hOk) snapshotSyncedHalaqaHashes(hid, cleanCopy);
+        else ok = false;
+      }
     }
 
     if (ok) {
-      localStorage.removeItem(CLOUD_DIRTY_KEY);
+      if (_stateMutationSeq === seqAtStart) {
+        localStorage.removeItem(CLOUD_DIRTY_KEY);
+      }
       localStorage.setItem(CLOUD_LAST_SAVED_KEY, new Date().toISOString());
       updateCentralCloudIndicatorUI("saved");
       if (showFeedback) showToast("✅ تم حفظ جميع بيانات الطلاب والتقارير على حسابك السحابي ☁️");
@@ -37238,6 +36220,10 @@ async function syncCentralCloudNow(showFeedback = false) {
     return false;
   } finally {
     _cloudSyncInFlight = false;
+    if ((_cloudSyncPendingResync || _stateMutationSeq !== seqAtStart) && navigator.onLine) {
+      _cloudSyncPendingResync = false;
+      setTimeout(() => syncCentralCloudNow(false), 550);
+    }
   }
 }
 
@@ -37270,5 +36256,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v56 -->
+<!-- Makin App v97 -->
 </html>
