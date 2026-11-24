@@ -11937,6 +11937,195 @@ table.t-daily td.td-norecite {
 }
 .toast-undo-btn:active { transform: scale(0.95); }
 
+
+/* ==================== MAKIN v88: COMPREHENSIVE UI STABILITY, SMOOTH TRANSITIONS & ZERO OVERFLOW ==================== */
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+body.modal-open-lock {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+/* Smooth View & Modal Transitions */
+.view.active {
+  animation: viewFadeIn 0.16s ease-out;
+}
+@keyframes viewFadeIn {
+  from { opacity: 0.45; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.modal-backdrop {
+  overscroll-behavior: contain;
+}
+.modal-backdrop.show .modal-box {
+  animation: modalPopIn 0.17s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+@keyframes modalPopIn {
+  from { opacity: 0.55; transform: translateY(10px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Password Eye Toggle */
+.pwd-field-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.pwd-field-wrap input {
+  width: 100%;
+  padding-left: 34px !important;
+}
+.pwd-eye-btn {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--ink-500);
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+.pwd-eye-btn:active { background: var(--line); }
+
+/* Zero-Overflow Safeguards Across Buttons, Badges, Tabs & Menus */
+.btn, .badge, .pill, .lms-btn, .es-eval-btn, .pp-pe-btn, .pp-ov-mini-btn,
+.exec-tab-btn, .pts-subtab-btn, .stats-cat-btn, .drawer-qtile, .rep-dock-btn,
+.sp-mode-tab, .subtab-btn, .mobile-nav-btn, .sfs-btn {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.badge-wrap-ok {
+  white-space: normal !important;
+  line-height: 1.45 !important;
+  text-align: right;
+  display: inline-block;
+  border-radius: 10px !important;
+  padding: 5px 10px !important;
+}
+.modal-header h3 {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.modal-box {
+  overflow-x: hidden;
+}
+.modal-box .field input,
+.modal-box .field select,
+.modal-box .field textarea {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Saved Device Accounts Clean Truncation */
+.auth-acc-btn {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink-900);
+  padding: 8px 10px;
+  border-radius: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  text-align: right;
+}
+.auth-acc-btn:active { background: var(--brand-tint); }
+.auth-acc-info {
+  min-width: 0;
+  flex: 1;
+}
+.auth-acc-name {
+  font-size: 12.5px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.auth-acc-email {
+  font-size: 11px;
+  color: var(--ink-500);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  direction: ltr;
+  text-align: right;
+}
+
+/* WhatsApp Hub Phone Card — Clean 2-Row Layout (Zero Squeezing!) */
+.wa-hub-phone-card {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+}
+.wa-hub-phone-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.wa-hub-phone-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.wa-hub-phone-row input {
+  flex: 1 !important;
+  min-width: 0 !important;
+  width: auto !important;
+}
+
+/* Per-Page Tabs Grid — Clean Multi-Row Wrap for 5–50 Pages (ZERO Truncation!) */
+.pp-tabs-strip.is-many {
+  max-height: 158px;
+  overflow-y: auto;
+  padding: 2px 1px 3px;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.pp-tab-btn {
+  overflow: hidden;
+}
+.pp-tab-btn .pp-t-num,
+.pp-tab-btn .pp-t-ev {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pp-studio-v86 .pp-eval-hdr > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Narrow Screen (<= 380px) Micro-Polish */
+@media (max-width: 380px) {
+  .es-att-shell .es-att-5 .pill { font-size: 10.5px; padding: 6px 1px; }
+  .es-eval-btn, .pp-pe-btn { font-size: 11px; padding: 8px 1px; }
+  .exec-tab-btn { font-size: 11px; padding: 7px 2px; gap: 3px; }
+  .stats-cat-btn .sc-lbl { font-size: 10px; }
+  .rep-dock-btn .rd-lbl { font-size: 10.5px; }
+  .drawer-qtile .dqt-lbl { font-size: 10px; }
+  .es-footer-row.v73-nav .btn { font-size: 12px; padding: 9px 4px; }
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -12017,7 +12206,7 @@ table.t-daily td.td-norecite {
           <label>كلمة السر</label>
           <div class="ob-input-wrap">
             <span class="ob-input-ico">🔒</span>
-            <input type="password" id="authLoginPass" placeholder="أدخل كلمة السر..." onkeydown="if(event.key==='Enter') handleAuthLogin();">
+            <input type="password" id="authLoginPass" placeholder="أدخل كلمة السر..." style="padding-left:38px;" onkeydown="if(event.key==='Enter') handleAuthLogin();"><button type="button" class="pwd-eye-btn" onclick="togglePasswordVisibility('authLoginPass', this)" aria-label="إظهار أو إخفاء كلمة السر">👁️</button>
           </div>
         </div>
         <div style="text-align:left; margin-bottom:11px;">
@@ -12067,7 +12256,7 @@ table.t-daily td.td-norecite {
           </div>
           <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:7px; margin-bottom:9px;">
             <div class="field"><label>البريد الإلكتروني *</label><input type="email" id="authTEmail" placeholder="name@gmail.com" dir="ltr" style="text-align:right;"></div>
-            <div class="field"><label>كلمة السر *</label><input type="password" id="authTPass" placeholder="6 أحرف على الأقل"></div>
+            <div class="field"><label>كلمة السر *</label><div class="pwd-field-wrap"><input type="password" id="authTPass" placeholder="6 أحرف على الأقل"><button type="button" class="pwd-eye-btn" onclick="togglePasswordVisibility('authTPass', this)" aria-label="إظهار أو إخفاء كلمة السر">👁️</button></div></div>
           </div>
           <div class="ob-field" style="margin-bottom:12px;">
             <label><span>رمز المشرف (اختياري)</span><span style="font-size:10.5px; color:var(--ink-500);">للربط بصرح المشرف</span></label>
@@ -12111,7 +12300,7 @@ table.t-daily td.td-norecite {
           </div>
           <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:7px; margin-bottom:12px;">
             <div class="field"><label>البريد الإلكتروني *</label><input type="email" id="authSEmail" placeholder="sup@gmail.com" dir="ltr" style="text-align:right;"></div>
-            <div class="field"><label>كلمة السر *</label><input type="password" id="authSPass" placeholder="6 أحرف على الأقل"></div>
+            <div class="field"><label>كلمة السر *</label><div class="pwd-field-wrap"><input type="password" id="authSPass" placeholder="6 أحرف على الأقل"><button type="button" class="pwd-eye-btn" onclick="togglePasswordVisibility('authSPass', this)" aria-label="إظهار أو إخفاء كلمة السر">👁️</button></div></div>
           </div>
           <button type="button" class="ob-btn-next" id="btnAuthSupSubmit" style="width:100%; background:#10375c;" onclick="handleRegisterSupervisor()">🏛️ إنشاء حساب المشرف وتوليد الكود</button>
         </div>
@@ -12446,7 +12635,7 @@ table.t-daily td.td-norecite {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v87</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v88</span>
         </button>
       </div>
     </div>
@@ -15330,7 +15519,16 @@ function formatSegmentsInline(segs) {
   const t2 = parseArabicNum(last.to, (s2 || s1).a);
 
   if (segs.length === 1 || (s2 && s1.id === s2.id)) {
-    return `${s1.n} (${f1}–${t2})`;
+    return isShortFullSurah(s1, f1, t2) ? s1.n : `${s1.n} (${f1}–${t2})`;
+  }
+  if (!isConsecutiveSurahRun(segs)) {
+    return segs.map(seg => {
+      const si = SURAH_MAP[Number(seg.surahId)];
+      if (!si) return "";
+      const sf = Math.max(1, Math.min(si.a, parseArabicNum(seg.from, 1)));
+      const st = Math.max(sf, Math.min(si.a, parseArabicNum(seg.to, si.a)));
+      return isShortFullSurah(si, sf, st) ? si.n : `${si.n} (${sf}–${st})`;
+    }).filter(Boolean).join(" + ");
   }
   if (s2) {
     return `${formatSurahAyahPoint(s1, f1, false)} ← ${formatSurahAyahPoint(s2, t2, true)}`;
@@ -15365,8 +15563,13 @@ function formatSegmentsColumns(segs, isHtml = true) {
   }
 
   if (s2) {
-    const arrow = isHtml ? `${esc(s1.n)} <span class="rep-arrow-sep">←</span> ${esc(s2.n)}` : `${s1.n} ← ${s2.n}`;
-    return { surah: arrow, from: esc(fNum), to: esc(tNum), lines: 1 };
+    const sep = isConsecutiveSurahRun(segs)
+      ? (isHtml ? ` <span class="rep-arrow-sep">←</span> ` : ` ← `)
+      : (isHtml ? ` <span class="rep-arrow-sep">+</span> ` : ` + `);
+    const surahLbl = isConsecutiveSurahRun(segs)
+      ? `${esc(s1.n)}${sep}${esc(s2.n)}`
+      : segs.map(x => esc(SURAH_MAP[Number(x.surahId)]?.n || "")).filter(Boolean).join(sep);
+    return { surah: surahLbl, from: esc(fNum), to: esc(tNum), lines: 1 };
   }
 
   return { surah: esc(s1.n), from: esc(fNum), to: esc(tNum), lines: 1 };
@@ -17480,7 +17683,7 @@ function buildRecitationPageSlots(r, st, kind, h) {
   if (kind === "maj") {
     const p1 = parseArabicNum(r.majStartPage, 0);
     const pgCnt = Math.round(parseArabicNum(r.majPages, 0) || Number(st.revPace || 0));
-    if (p1 >= 1 && pgCnt >= 2 && pgCnt <= 6) {
+    if (p1 >= 1 && pgCnt >= 2 && pgCnt <= 20) {
       for (let i = 0; i < pgCnt; i++) {
         const mp = Math.min(604, p1 + i);
         const stInfo = getPageStartInfo(mp), enInfo = getPageEndInfo(mp);
@@ -17501,7 +17704,7 @@ function buildRecitationPageSlots(r, st, kind, h) {
     const tA = Math.max(fA, Math.min(sInfo.a, parseArabicNum(seg.to, sInfo.a)));
     const pStart = getPageForSurahAyah(sInfo.id, fA);
     const pEnd = getPageForSurahAyah(sInfo.id, tA);
-    for (let mp = pStart; mp <= pEnd && slots.length < 8; mp++) {
+    for (let mp = pStart; mp <= pEnd && slots.length < 50; mp++) {
       const pSt = getPageStartInfo(mp), pEn = getPageEndInfo(mp);
       let pf = (mp === pStart) ? fA : ((pSt?.surah?.id === sInfo.id) ? pSt.ayah : 1);
       let pt = (mp === pEnd) ? tA : ((pEn?.surah?.id === sInfo.id) ? pEn.ayah : sInfo.a);
@@ -17510,7 +17713,7 @@ function buildRecitationPageSlots(r, st, kind, h) {
       pushPage(mp, sInfo.id, pf, pt);
     }
   }
-  return slots.length >= 2 ? slots.slice(0, 6) : [];
+  return slots.length >= 2 ? slots.slice(0, 50) : [];
 }
 
 function getPageOverallKey(kind) {
@@ -17523,7 +17726,7 @@ function getSyncedPageEvals(r, st, kind, h) {
   const pKey = getPageEvalKey(kind);
   const saved = Array.isArray(r[pKey]) ? r[pKey] : [];
   return slots.map((slot, i) => {
-    const match = saved.find(x => x.mushafPage === slot.mushafPage) || saved[i];
+    const match = saved.find(x => x.mushafPage === slot.mushafPage) || null;
     const errors = match ? Math.max(0, Number(match.errors) || 0) : 0;
     const alerts = match ? Math.max(0, Number(match.alerts) || 0) : 0;
     const manualEval = (match && match.manualEval) ? String(match.manualEval) : "";
@@ -17545,7 +17748,7 @@ function shouldUsePerPageMode(r, st, kind, h) {
   if (kind === "rec" && r.recIsSabr && r.sabrJuz) return false;
   if (kind === "maj" && r.sabrJuz) return false;
   const slots = buildRecitationPageSlots(r, st, kind, h);
-  if (slots.length < 2 || slots.length > 6) return false;
+  if (slots.length < 2 || slots.length > 50) return false;
   const mKey = getPageModeKey(kind);
   if (r[mKey] === "single") return false;
   if (r[mKey] === "multi") return true;
@@ -17794,7 +17997,7 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
   const r = (s && st) ? getStudentRecord(s, studentId) : null;
   const slots = (r && st) ? buildRecitationPageSlots(r, st, kind, h) : [];
   const totalSlotsPg = slots.reduce((a, p) => a + (Number(p.pages) || 0), 0);
-  const canMulti = slots.length >= 2 && slots.length <= 6 && !(kind === "rec" && r.recIsSabr && r.sabrJuz) && !(kind === "maj" && r.sabrJuz);
+  const canMulti = slots.length >= 2 && slots.length <= 50 && !(kind === "rec" && r.recIsSabr && r.sabrJuz) && !(kind === "maj" && r.sabrJuz);
 
   if (canMulti && shouldUsePerPageMode(r, st, kind, h)) {
     const pages = getSyncedPageEvals(r, st, kind, h);
@@ -17846,7 +18049,7 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
         <span>📄 تقييم صفحة بصفحة (${pages.length} صفحات)</span>
         <button type="button" class="pp-mode-link" onclick="togglePerPageEvalMode('${studentId}','${kind}','single')">↩️ وضع إجمالي</button>
       </div>
-      <div class="pp-tabs-strip" style="grid-template-columns:repeat(${pages.length}, minmax(0, 1fr));">${tabsHtml}</div>
+      <div class="pp-tabs-strip ${pages.length > 6 ? 'is-many' : ''}" style="grid-template-columns:repeat(${pages.length <= 4 ? pages.length : (pages.length <= 6 ? 3 : 4)}, minmax(0, 1fr));">${tabsHtml}</div>
       <div class="pp-active-box">
         <div class="pp-active-top">
           <span style="min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">📖 صفحة ${activeIdx + 1}/${pages.length}: <b>${escapeHtml(curPg.label)}</b> (ص ${curPg.mushafPage})</span>
@@ -18791,7 +18994,7 @@ function spAddSeg() {
   const last = spState.segs[spState.segs.length - 1];
   const nxtId = getNextSurahIdByDir(last?.surahId, spState.dir);
   const info = SURAH_MAP[Number(nxtId)] || SURAH_MAP[114];
-  spState.segs.push({ surahId: String(info.id), from: 1, to: info.a });
+  spState.segs.push({ surahId: String(info.id), from: 1, to: spDefaultEndAyahForSurah(info, spState.kind) });
   spState.activeIdx = spState.segs.length - 1;
   spState.browserOpen = true;
   renderSurahPickerUI();
@@ -18857,6 +19060,21 @@ function renderSpSurahGrid() {
   `).join("");
 }
 
+function spDefaultEndAyahForSurah(info, kind) {
+  if (!info) return 1;
+  if (kind === "rec" || kind === "hw") {
+    const h = getActiveHalaqa();
+    const st = h?.students?.find(x => x.id === spState.studentId);
+    const pace = Math.max(0.5, Math.min(5, Number(st?.pace) || 1));
+    // For long surahs (> 1.4x daily pace and > 1.5 pages), default to student's daily pace instead of entire 15-page surah!
+    if (info.l > Math.max(1.5, pace * 1.4)) {
+      const ayahsPerPage = info.a / Math.max(0.25, info.l);
+      return Math.max(3, Math.min(info.a, Math.round(pace * ayahsPerPage)));
+    }
+  }
+  return info.a;
+}
+
 function spPickSurah(surahId, keepBrowser = false) {
   const info = SURAH_MAP[Number(surahId)];
   if (!info) return;
@@ -18864,9 +19082,9 @@ function spPickSurah(surahId, keepBrowser = false) {
   if (!seg) return;
   seg.surahId = String(info.id);
   seg.from = 1;
-  seg.to = info.a;
+  seg.to = spDefaultEndAyahForSurah(info, spState.kind);
   const sStartP = Math.max(1, Math.min(604, Math.floor(info.fs)));
-  const sEndP = Math.max(sStartP, Math.min(604, Math.floor(info.fe - 0.01)));
+  const sEndP = Math.max(sStartP, Math.min(604, getPageForSurahAyah(info.id, seg.to)));
   spState.pageFrom = sStartP;
   spState.pageTo = sEndP;
   if (!keepBrowser) spState.browserOpen = false;
@@ -19297,6 +19515,9 @@ function applySurahPicker(quickEval = null) {
     r.recEndSurahId = ""; r.twoSurahs = false;
     r.recExtras = rest;
     r.manualRec = true;
+    r.recPageEvals = null;
+    r.recOverallOverride = "";
+    _activePageTabMap[`${st.id}_rec`] = 0;
     r.recPages = calcSegmentsPages(validSegs);
     if (r.recEval && !quickEval) {
       r.points = computeRecordPoints(s, r, st);
@@ -19642,7 +19863,7 @@ function createHalaqaFromOnboarding() {
   const gender = document.getElementById("obGender")?.value || "male";
   const defaultRevPace = Number(document.getElementById("obDefaultRevPace").value) || 2;
   const rawStudents = document.getElementById("obStudents").value.trim();
-  if (!sheikh || !halaqaName) { showToast("أدخل اسم الشيخ واسم الحلقة أولاً"); return; }
+  if (!sheikh || !halaqaName) { setOnboardingStep(1); showToast("أدخل اسم الشيخ واسم الحلقة أولاً"); (!sheikh ? document.getElementById("obSheikh") : document.getElementById("obHalaqa"))?.focus(); return; }
 
   const students = [];
   if (rawStudents) {
@@ -19705,11 +19926,13 @@ function openRightDrawer() {
   updateDrawerQuickStates();
   document.getElementById("rightDrawerBackdrop")?.classList.add("open");
   document.getElementById("rightDrawer")?.classList.add("open");
+  if (typeof syncBodyScrollLock === "function") syncBodyScrollLock();
 }
 
 function closeRightDrawer() {
   document.getElementById("rightDrawerBackdrop")?.classList.remove("open");
   document.getElementById("rightDrawer")?.classList.remove("open");
+  if (typeof syncBodyScrollLock === "function") syncBodyScrollLock();
 }
 
 function drawerNav(tab) {
@@ -19760,6 +19983,7 @@ function switchTab(tab) {
   document.querySelectorAll("#appShell .view").forEach(v => v.classList.remove("active"));
   document.querySelectorAll("#appShell .nav-tab, #appShell .mobile-nav-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === tab));
   document.getElementById("view-" + tab)?.classList.add("active");
+  window.scrollTo({ top: 0, behavior: "instant" });
   updateDrawerQuickStates();
   if (tab === "session") renderSessionView();
   if (tab === "archive") renderArchiveView();
@@ -20227,15 +20451,13 @@ function renderStudentWaHub() {
 
   body.innerHTML = `
     <div class="wa-hub-phone-card">
-      <div style="min-width:0; flex:1;">
-        <div style="font-size:14px; font-weight:800;">${escapeHtml(st.name)}</div>
-        <div style="font-size:12px; color:#d5e9df; margin-top:2px; direction:ltr; text-align:right;">
-          ${hasPhone ? `📱 +${phone}` : "⚠️ لا يوجد رقم واتساب مثبت بعد"}
-        </div>
+      <div class="wa-hub-phone-top">
+        <div style="font-size:14px; font-weight:800; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(st.name)}</div>
+        <div style="font-size:11.5px; color:#d5e9df; direction:ltr; white-space:nowrap;">${hasPhone ? `📱 +${phone}` : "⚠️ بلا رقم"}</div>
       </div>
-      <div style="display:flex; gap:5px; align-items:center;">
-        <input type="tel" id="waHubPhoneInput" value="${escapeHtml(st.phone || "")}" placeholder="9639XXXXXXXX" dir="ltr" style="width:128px; padding:5px 7px; border-radius:8px; border:1px solid rgba(255,255,255,0.3); background:rgba(255,255,255,0.14); color:#fff; font-size:12px; text-align:right;">
-        <button type="button" class="btn btn-sm" style="background:#c8a14b; color:#0f233c; padding:5px 9px;" onclick="saveStudentPhoneFromWaHub()">✓ حفظ</button>
+      <div class="wa-hub-phone-row">
+        <input type="tel" id="waHubPhoneInput" value="${escapeHtml(st.phone || "")}" placeholder="رقم الواتساب (مثال: 9639XXXXXXXX)" dir="ltr" style="padding:6px 9px; border-radius:8px; border:1px solid rgba(255,255,255,0.32); background:rgba(255,255,255,0.14); color:#fff; font-size:12.5px; text-align:right;">
+        <button type="button" class="btn btn-sm" style="background:#c8a14b; color:#0f233c; padding:6px 12px; flex-shrink:0;" onclick="saveStudentPhoneFromWaHub()">✓ حفظ</button>
       </div>
     </div>
 
@@ -23310,7 +23532,25 @@ function nudgeRecEndAyah(studentId, delta) {
   r.manualRec = true;
   if (Array.isArray(r.recPageEvals)) r.recPageEvals = null;
   r.recPages = calcSegmentsPages(getSegments(r, "rec"));
-  if (r.recEval) r.points = computeRecordPoints(s, r, h?.students.find(x => x.id === studentId));
+  const _stN = h?.students.find(x => x.id === studentId);
+  if (r.recEval) {
+    r.points = computeRecordPoints(s, r, _stN);
+    if (r.recEval !== "إعادة" && !r.sabrJuz) {
+      const _segsN = getSegments(r, "rec");
+      if (_segsN.length) {
+        const _lastN = _segsN[_segsN.length - 1];
+        const _dirN = _stN?.direction || h?.defaultDir || "desc";
+        const _compN = detectCompletedJuz(_segsN, _dirN);
+        if (_compN) {
+          r.hwSabrJuz = _compN.name; r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
+        } else {
+          r.hwSabrJuz = "";
+          const _nxtN = computeNextHomework(_lastN.surahId, _lastN.from, _lastN.to, "", _dirN, _stN?.pace || 0.5);
+          if (_nxtN) Object.assign(r, _nxtN);
+        }
+      }
+    }
+  }
   saveStateDebounced(260);
   syncStudentEvalSheet();
   const cardSub = document.querySelector(`#card_${studentId} .st-sub-range`);
@@ -23333,7 +23573,25 @@ function finishRecSurahQuick(studentId) {
   r.manualRec = true;
   if (Array.isArray(r.recPageEvals)) r.recPageEvals = null;
   r.recPages = calcSegmentsPages(getSegments(r, "rec"));
-  if (r.recEval) r.points = computeRecordPoints(s, r, h?.students.find(x => x.id === studentId));
+  const _stN = h?.students.find(x => x.id === studentId);
+  if (r.recEval) {
+    r.points = computeRecordPoints(s, r, _stN);
+    if (r.recEval !== "إعادة" && !r.sabrJuz) {
+      const _segsN = getSegments(r, "rec");
+      if (_segsN.length) {
+        const _lastN = _segsN[_segsN.length - 1];
+        const _dirN = _stN?.direction || h?.defaultDir || "desc";
+        const _compN = detectCompletedJuz(_segsN, _dirN);
+        if (_compN) {
+          r.hwSabrJuz = _compN.name; r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
+        } else {
+          r.hwSabrJuz = "";
+          const _nxtN = computeNextHomework(_lastN.surahId, _lastN.from, _lastN.to, "", _dirN, _stN?.pace || 0.5);
+          if (_nxtN) Object.assign(r, _nxtN);
+        }
+      }
+    }
+  }
   saveState();
   syncStudentEvalSheet();
   const cardSub = document.querySelector(`#card_${studentId} .st-sub-range`);
@@ -23470,6 +23728,7 @@ function syncStudentEvalSheet() {
   `;
 
   sheet.classList.add("show");
+  if (typeof syncBodyScrollLock === "function") syncBodyScrollLock();
   requestAnimationFrame(() => {
     bodyEl.scrollTop = sameStudent ? prevBodyScroll : 0;
   });
@@ -28513,7 +28772,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v87 -->
+<!-- Makin App v88 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -30049,15 +30308,94 @@ function downloadBlob(blob, filename) {
   return Promise.resolve(true);
 }
 
-function openModal(id) { document.getElementById(id)?.classList.add("show"); }
+let _modalZCounter = 160;
+
+function syncBodyScrollLock() {
+  const anyModal = Boolean(document.querySelector(".modal-backdrop.show"));
+  const drawerOpen = Boolean(document.getElementById("rightDrawer")?.classList.contains("open"));
+  document.body.classList.toggle("modal-open-lock", anyModal || drawerOpen);
+}
+
+function closeAllModalsAndOverlays() {
+  document.querySelectorAll(".modal-backdrop.show").forEach(el => {
+    el.classList.remove("show");
+  });
+  closeRightDrawer();
+  openCardId = null;
+  if (typeof cancelAutoAdvance === "function") cancelAutoAdvance(false);
+  syncBodyScrollLock();
+}
+
+function openModal(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (id !== "studentEvalSheet") closeRightDrawer();
+  _modalZCounter = Math.min(245, Math.max(160, _modalZCounter + 1));
+  if (id !== "studentEvalSheet") el.style.zIndex = String(_modalZCounter);
+  el.classList.add("show");
+  syncBodyScrollLock();
+  try {
+    if (!window._makinBackPushed) {
+      history.pushState({ makinOverlay: true }, "");
+      window._makinBackPushed = true;
+    }
+  } catch {}
+}
+
 function closeModal(id) {
-  document.getElementById(id)?.classList.remove("show");
+  const el = document.getElementById(id);
+  if (el) el.classList.remove("show");
   if (id === "quickAttendanceModal" && _qaDirtySession) {
     _qaDirtySession = false;
     saveState();
     renderSessionPreservingScroll();
   }
+  syncBodyScrollLock();
 }
+
+// Universal backdrop click-outside-to-close + Escape key + Mobile Back button overlay dismissal
+(function bindUniversalOverlayControls() {
+  if (window._makinOverlayControlsBound) return;
+  window._makinOverlayControlsBound = true;
+  document.addEventListener("click", (e) => {
+    const t = e.target;
+    if (!t || !t.classList || !t.classList.contains("modal-backdrop") || !t.classList.contains("show")) return;
+    if (t.id === "studentEvalSheet") { closeStudentEvalSheet(); return; }
+    if (t.id === "supInspectModal") { closeSupInspectModal(); return; }
+    if (t.id) closeModal(t.id);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    const openModals = Array.from(document.querySelectorAll(".modal-backdrop.show"))
+      .sort((a, b) => (Number(b.style.zIndex) || 100) - (Number(a.style.zIndex) || 100));
+    if (openModals.length) {
+      const top = openModals[0];
+      if (top.id === "studentEvalSheet") closeStudentEvalSheet();
+      else if (top.id === "supInspectModal") closeSupInspectModal();
+      else closeModal(top.id);
+    } else if (document.getElementById("rightDrawer")?.classList.contains("open")) {
+      closeRightDrawer();
+    }
+  });
+  window.addEventListener("popstate", () => {
+    window._makinBackPushed = false;
+    const openModals = Array.from(document.querySelectorAll(".modal-backdrop.show"))
+      .sort((a, b) => (Number(b.style.zIndex) || 100) - (Number(a.style.zIndex) || 100));
+    if (openModals.length) {
+      const top = openModals[0];
+      if (top.id === "studentEvalSheet") closeStudentEvalSheet();
+      else if (top.id === "supInspectModal") closeSupInspectModal();
+      else closeModal(top.id);
+      if (document.querySelector(".modal-backdrop.show")) {
+        try { history.pushState({ makinOverlay: true }, ""); window._makinBackPushed = true; } catch {}
+      }
+      return;
+    }
+    if (document.getElementById("rightDrawer")?.classList.contains("open")) {
+      closeRightDrawer();
+    }
+  });
+})();
 
 window.addEventListener("resize", () => { if (document.getElementById("certModal")?.classList.contains("show")) fitCertPreviewToModal(); });
 
@@ -30221,7 +30559,7 @@ function prepareAuthScreen(canReturn = false) {
 
 function closeAuthScreenToApp() {
   document.getElementById("authScreen").style.display = "none";
-  initApp();
+  routeAppByCurrentUser();
 }
 
 function setAuthTab(tab) {
@@ -30236,6 +30574,14 @@ function setAuthTab(tab) {
   else if (tab === "supervisor") selectAuthSignupRole("supervisor");
 }
 
+function togglePasswordVisibility(inputId, btn) {
+  const inp = document.getElementById(inputId);
+  if (!inp) return;
+  const showing = inp.type === "text";
+  inp.type = showing ? "password" : "text";
+  if (btn) btn.textContent = showing ? "👁️" : "🙈";
+}
+
 function renderAuthQuickAccounts() {
   const box = document.getElementById("authQuickAccountsBox");
   if (!box) return;
@@ -30244,9 +30590,12 @@ function renderAuthQuickAccounts() {
   if (!users.length) { box.innerHTML = ""; return; }
   box.innerHTML = `<div style="font-size:11px; font-weight:800; color:var(--ink-500); margin-bottom:5px;">⚡ الحسابات المحفوظة على هذا الجهاز:</div>
     <div style="display:flex; flex-direction:column; gap:5px;">
-      ${users.map(u => `<button type="button" class="day-opt-btn" style="margin-bottom:0; padding:8px 10px;" onclick="quickFillLoginEmail('${escapeHtml(u.email)}')">
-        <span>${u.role === 'owner' ? '👑 مؤسس:' : (u.role === 'supervisor' ? '🏛️ مشرف:' : '📖 معلم:')} <b>${escapeHtml(u.name)}</b> <small style="color:var(--ink-500);">(${escapeHtml(u.email)})</small></span>
-        <span class="badge ${u.role === 'supervisor' ? 'b-blue' : 'b-green'}" style="font-size:10px;">${u.role === 'owner' ? 'مؤسس' : (u.role === 'supervisor' ? escapeHtml(u.branchName || 'مشرف') : 'معلم')}</span>
+      ${users.map(u => `<button type="button" class="auth-acc-btn" onclick="quickFillLoginEmail('${escapeHtml(u.email)}')">
+        <div class="auth-acc-info">
+          <div class="auth-acc-name">${u.role === 'owner' ? '👑' : (u.role === 'supervisor' ? '🏛️' : '📖')} ${escapeHtml(u.name)}</div>
+          <div class="auth-acc-email">${escapeHtml(u.email)}</div>
+        </div>
+        <span class="badge ${u.role === 'supervisor' ? 'b-blue' : 'b-green'}" style="font-size:10px; flex-shrink:0; max-width:96px;">${u.role === 'owner' ? 'مؤسس' : (u.role === 'supervisor' ? escapeHtml(u.branchName || 'مشرف') : 'معلم')}</span>
       </button>`).join("")}
     </div>`;
 }
@@ -30496,9 +30845,9 @@ function openTeacherAccountModal() {
 
   const allHals = Object.values(appState.halaqat || {});
   const statusTxt = u.supervisorStatus === "approved"
-    ? `<span class="badge b-green">✓ مرتبط رسمياً بصرح: ${escapeHtml(u.supervisorBranchName)} (المشرف: ${escapeHtml(u.supervisorName)})</span>`
+    ? `<span class="badge badge-wrap-ok b-green">✓ مرتبط رسمياً بصرح: ${escapeHtml(u.supervisorBranchName)} (المشرف: ${escapeHtml(u.supervisorName)})</span>`
     : (u.supervisorStatus === "pending"
-      ? `<span class="badge b-orange">⏳ بانتظار موافقة المشرف (${escapeHtml(u.supervisorName)} — ${escapeHtml(u.supervisorBranchName)})</span>`
+      ? `<span class="badge badge-wrap-ok b-orange">⏳ بانتظار موافقة المشرف (${escapeHtml(u.supervisorName)} — ${escapeHtml(u.supervisorBranchName)})</span>`
       : `<span class="badge b-muted">غير مرتبط بمشرف حالياً</span>`);
 
   const multiHalHtml = (u.supervisorId && allHals.length) ? `
@@ -30560,8 +30909,13 @@ async function linkAdditionalHalaqaToSupervisor(halaqaId) {
   const u = getCurrentAccountUser();
   const hal = appState.halaqat[halaqaId];
   if (!u || !u.supervisorId || !hal) return;
-  const sup = tibyanAccounts.users[u.supervisorId];
-  if (!sup) { showToast("تعذّر العثور على بيانات المشرف"); return; }
+  await ensureFirebaseReady(8000);
+  let sup = tibyanAccounts.users[u.supervisorId];
+  if (!sup && _fbDb) {
+    sup = await fbDbGet(`users/${u.supervisorId}`);
+    if (sup) { tibyanAccounts.users[u.supervisorId] = sup; saveAccountsState(); }
+  }
+  if (!sup) { showToast("تعذّر العثور على بيانات المشرف — تحقق من الاتصال"); return; }
   await submitJoinRequestToSupervisor(u, sup, hal);
   openTeacherAccountModal();
   updateUnsyncedIndicators();
@@ -30577,6 +30931,7 @@ async function uploadSpecificHalaqaToSupervisor(halaqaId) {
 }
 
 function openFullAuthScreen(canReturn = false) {
+  closeAllModalsAndOverlays();
   document.getElementById("appShell").style.display = "none";
   document.getElementById("supervisorShell").style.display = "none";
   document.getElementById("ownerShell").style.display = "none";
@@ -30591,8 +30946,8 @@ async function quickCreateTeacherAccountFromModal() {
   const email = normalizeEmail(document.getElementById("quickAccEmail")?.value);
   const pass = document.getElementById("quickAccPass")?.value || "";
   const supCode = (document.getElementById("quickAccSupCode")?.value || "").trim().toUpperCase();
-  if (!name || !email || !email.includes("@") || pass.length < 4) {
-    showToast("أدخل الاسم وبريداً صحيحاً وكلمة سر (4 أحرف على الأقل)");
+  if (!name || !email || !email.includes("@") || pass.length < 6) {
+    showToast("أدخل الاسم وبريداً صحيحاً وكلمة سر (6 أحرف أو أرقام على الأقل)");
     return;
   }
   document.getElementById("authTName").value = name;
@@ -30609,6 +30964,7 @@ async function teacherRequestSupervisorLink() {
   if (!isUserTeacherCapable(u)) return;
   const code = (document.getElementById("teacherLinkSupCodeInp")?.value || "").trim().toUpperCase();
   if (!code) { showToast("أدخل رمز المشرف أولاً"); return; }
+  if (!await ensureFirebaseReady(10000)) { showToast("تحقق من الاتصال بالإنترنت وحاول مجدداً"); return; }
   const sup = await findSupervisorByCode(code);
   if (!sup) { showToast("لم يتم العثور على مشرف بهذا الكود — تأكد من صحة الكود أو رابط السحابة"); return; }
   await submitJoinRequestToSupervisor(u, sup, h);
@@ -30631,6 +30987,7 @@ async function uploadTeacherReportsToSupervisor(sourceKind = "daily", targetHal 
     openTeacherAccountModal();
     return;
   }
+  if (!await ensureFirebaseReady(10000)) { showToast("تعذّر الاتصال بالسحابة — تحقق من الإنترنت وحاول مجدداً"); return; }
   await refreshTeacherSupervisorNotifications(false);
   if (u.supervisorStatus === "pending") {
     showToast(`طلبك لا يزال بانتظار موافقة المشرف (${u.supervisorName}) ⏳`);
@@ -30825,6 +31182,7 @@ function switchSupTab(tab) {
   ["overview", "branchReport", "messages", "programs", "profile"].forEach(k => {
     document.getElementById("sup-view-" + k)?.classList.toggle("active", k === _activeSupTab);
   });
+  window.scrollTo({ top: 0, behavior: "instant" });
   if (_activeSupTab === "overview") renderSupOverviewTab();
   else if (_activeSupTab === "branchReport") renderSupBranchReportTab();
   else if (_activeSupTab === "messages") renderSupMessagesTab();
@@ -31623,8 +31981,8 @@ function renderSupMessagesTab() {
         <label>نص الرسالة</label>
         <textarea id="supMsgBody" rows="3" placeholder="اكتب رسالتك أو توجيهك للمعلمين هنا..."></textarea>
         <div class="quick-note-chips">
-          <button type="button" class="qn-chip" onclick="document.getElementById('supMsgTitle').value='تذكير برفع التقارير'; document.getElementById('supMsgBody').value='السلام عليكم مشايخنا الكرام، نرجو الضغط على زر «رفع التقرير للمشرف» لإدراج إنجاز حلقاتكم في التقرير العام للصرح. بارك الله فيكم.';">⚡ تذكير برفع التقارير</button>
-          <button type="button" class="qn-chip" onclick="document.getElementById('supMsgTitle').value='شكر وتقدير'; document.getElementById('supMsgBody').value='بارك الله في جهودكم المباركة ومتابعتكم المتميزة لطلاب الحلقات، نسأل الله لكم التوفيق والسداد.';">⚡ رسالة شكر</button>
+          <button type="button" class="qn-chip" onclick="fillSupQuickMsg('تذكير برفع التقارير','السلام عليكم مشايخنا الكرام، نرجو الضغط على زر «رفع التقرير للمشرف» لإدراج إنجاز حلقاتكم في التقرير العام للصرح. بارك الله فيكم.')">⚡ تذكير برفع التقارير</button>
+          <button type="button" class="qn-chip" onclick="fillSupQuickMsg('شكر وتقدير','بارك الله في جهودكم المباركة ومتابعتكم المتميزة لطلاب الحلقات، نسأل الله لكم التوفيق والسداد.')">⚡ رسالة شكر</button>
         </div>
       </div>
       <button type="button" class="btn btn-primary" style="width:100%;" onclick="supSendMessage()">📤 إرسال الآن</button>
@@ -31648,6 +32006,12 @@ function renderSupMessagesTab() {
     }).join("") : `<div class="card empty-state"><p>لم ترسل أي رسائل بعد.</p></div>`}
   `;
   _supMsgPreselectTeacher = "all";
+}
+
+function fillSupQuickMsg(title, body) {
+  const t = document.getElementById("supMsgTitle"), b = document.getElementById("supMsgBody");
+  if (t) t.value = title || "";
+  if (b) b.value = body || "";
 }
 
 async function supSendMessage() {
@@ -32250,7 +32614,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v87";
+const TIBYAN_APP_VERSION = "v88";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -32464,7 +32828,8 @@ async function hydrateSignedInFirebaseUser(fbUser) {
             merged = true;
           }
           if (merged) {
-            localStorage.setItem(getStorageKeyForUid(fbUser.uid), JSON.stringify(appState));
+            try { localStorage.setItem(getStorageKeyForUid(fbUser.uid), JSON.stringify(appState)); } catch {}
+            if (typeof idbPutState === "function") idbPutState(fbUser.uid, appState).catch(() => {});
           }
         }
         // Flush ONLY this account's own local offline edits!
@@ -32501,7 +32866,7 @@ async function hydrateSignedInFirebaseUser(fbUser) {
       const authVisible = document.getElementById("authScreen")?.style.display !== "none";
       const changedUserOrData = merged || authVisible || prevUid !== fbUser.uid || prevRole !== profile.role || _lastHydratedUid !== fbUser.uid;
       _lastHydratedUid = fbUser.uid;
-      if (!anyModalOpen && !isUserTyping && changedUserOrData) {
+      if (authVisible || (!anyModalOpen && !isUserTyping && changedUserOrData)) {
         routeAppByCurrentUser();
       } else {
         updateTeacherAccountDrawerUI();
@@ -32596,11 +32961,12 @@ function translateFirebaseAuthError(err) {
 }
 
 async function handleAuthLogin() {
+  try { document.activeElement?.blur?.(); } catch {}
   const email = normalizeEmail(document.getElementById("authLoginEmail")?.value);
   const pass = document.getElementById("authLoginPass")?.value || "";
   if (!email || !pass) { showToast("أدخل البريد الإلكتروني وكلمة السر"); return; }
 
-  if (!await ensureFirebaseReady(6000)) { showToast("تعذّر الاتصال بسيرفر مكين — تحقق من الإنترنت وحاول مجدداً"); return; }
+  if (!await ensureFirebaseReady(12000)) { showToast("تعذّر الاتصال بسيرفر مكين — تحقق من الإنترنت وحاول مجدداً"); return; }
   setAuthBusy("btnAuthLoginSubmit", true, "🚀 دخول إلى حسابي");
   _isAuthFlowBusy = true;
   try {
@@ -32655,7 +33021,7 @@ async function handleForgotPassword() {
     document.getElementById("authLoginEmail")?.focus();
     return;
   }
-  if (!await ensureFirebaseReady(6000)) { showToast("تأكد من الاتصال بالإنترنت"); return; }
+  if (!await ensureFirebaseReady(12000)) { showToast("تأكد من الاتصال بالإنترنت"); return; }
   try {
     await _fbAuth.sendPasswordResetEmail(email);
     showToast("📧 تم إرسال رابط استعادة كلمة السر إلى بريدك الإلكتروني (تفقد البريد الوارد والرسائل غير المرغوب فيها)");
@@ -32697,7 +33063,7 @@ async function handleRegisterTeacher(preserveGuestLocal = false) {
 
   if (!name || !email || !email.includes("@")) { showToast("أدخل الاسم وبريداً إلكترونياً صحيحاً"); return; }
   if (pass.length < 6) { showToast("كلمة السر يجب أن تكون 6 أحرف أو أرقام على الأقل"); return; }
-  if (!await ensureFirebaseReady(6000)) { showToast("تأكد من الاتصال بالإنترنت وحاول مجدداً"); return; }
+  if (!await ensureFirebaseReady(12000)) { showToast("تأكد من الاتصال بالإنترنت وحاول مجدداً"); return; }
 
   const canCarryGuestHal = Boolean(preserveGuestLocal && !tibyanAccounts.currentSession && !_activeStorageUid && !localStorage.getItem(LEGACY_OWNER_KEY));
   const guestStateSnapshot = canCarryGuestHal ? JSON.parse(JSON.stringify(appState)) : null;
@@ -32798,7 +33164,7 @@ async function handleRegisterSupervisor() {
   if (!rawCode) { showToast("🔒 أدخل كود التفعيل الصادر عن المؤسس"); return; }
   if (!name || !branchName || !email || !email.includes("@")) { showToast("أدخل الاسم واسم الصرح والبريد الإلكتروني"); return; }
   if (pass.length < 6) { showToast("كلمة السر يجب أن تكون 6 أحرف على الأقل"); return; }
-  if (!await ensureFirebaseReady(6000)) { showToast("تأكد من الاتصال بالإنترنت وحاول مجدداً"); return; }
+  if (!await ensureFirebaseReady(12000)) { showToast("تأكد من الاتصال بالإنترنت وحاول مجدداً"); return; }
 
   setAuthBusy("btnAuthSupSubmit", true, "🏛️ إنشاء حساب المشرف وتوليد الكود");
   _isAuthFlowBusy = true;
@@ -32826,6 +33192,7 @@ async function handleRegisterSupervisor() {
       // Valid master key configured by owner
     } else {
       try { await fbUser.delete(); } catch {}
+      try { await _fbAuth.signOut(); } catch {}
       showToast("🔒 كود التفعيل غير صالح أو تم استخدامه مسبقاً — تواصل مع مؤسس التطبيق");
       return;
     }
@@ -32904,6 +33271,7 @@ async function handleRegisterSupervisor() {
 
 async function logoutCurrentAccount(silent = false) {
   if (!silent && !confirm("هل تريد تسجيل الخروج؟ (جميع بياناتك محفوظة بأمان على السحابة)")) return;
+  closeAllModalsAndOverlays();
   const exitingUid = getEffectiveAccountUid();
   if (exitingUid && Object.keys(appState.halaqat || {}).length) {
     try { localStorage.setItem(getStorageKeyForUid(exitingUid), JSON.stringify(appState)); } catch {}
@@ -33022,6 +33390,7 @@ async function refreshTeacherSupervisorNotifications(showAlert = false) {
 // FOUNDER / OWNER CONTROL PANEL ENGINE (لوحة المؤسس)
 // ==============================================================================
 function switchOwnerWorkspace(mode) {
+  closeAllModalsAndOverlays();
   _ownerWorkspaceMode = mode || "owner";
   routeAppByCurrentUser();
 }
@@ -33041,6 +33410,7 @@ function switchOwnerTab(tab) {
   ["dashboard", "invites", "broadcast"].forEach(k => {
     document.getElementById("owner-view-" + k)?.classList.toggle("active", k === _activeOwnerTab);
   });
+  window.scrollTo({ top: 0, behavior: "instant" });
   if (_activeOwnerTab === "dashboard") renderOwnerDashboardTab();
   else if (_activeOwnerTab === "invites") renderOwnerInvitesTab();
   else if (_activeOwnerTab === "broadcast") renderOwnerBroadcastTab();
@@ -33326,7 +33696,7 @@ function isUserTeacherCapable(u) {
 }
 
 // Wait gracefully for deferred Firebase SDK scripts to finish loading
-async function ensureFirebaseReady(timeoutMs = 7000) {
+async function ensureFirebaseReady(timeoutMs = 12000) {
   if (isCentralCloudReady()) return true;
   if (typeof firebase !== "undefined") {
     initCentralFirebaseSDK();
