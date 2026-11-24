@@ -11881,6 +11881,62 @@ table.t-daily td.td-norecite {
   border-radius: 11px !important;
 }
 
+
+/* ==================== MAKIN v87: SLEEK COMPACT TOAST & UNDO BAR ==================== */
+.toast {
+  position: fixed !important;
+  bottom: 72px !important;
+  left: 12px !important;
+  right: 12px !important;
+  width: fit-content !important;
+  min-width: 210px !important;
+  max-width: min(94vw, 440px) !important;
+  margin: 0 auto !important;
+  transform: none !important;
+  background: rgba(16, 37, 64, 0.96) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(200, 161, 75, 0.55) !important;
+  border-radius: 13px !important;
+  padding: 8px 12px !important;
+  font-weight: 700 !important;
+  font-size: 12.5px !important;
+  line-height: 1.38 !important;
+  z-index: 260 !important;
+  box-shadow: 0 8px 24px rgba(8, 20, 36, 0.34) !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  text-align: right !important;
+  cursor: pointer;
+  animation: toastPopIn 0.16s ease;
+}
+.toast.show { display: flex !important; }
+@keyframes toastPopIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.toast-msg {
+  flex: 1;
+  min-width: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.toast-undo-btn {
+  border: none !important;
+  background: #c8a14b !important;
+  color: #0f233c !important;
+  border-radius: 8px !important;
+  padding: 5px 11px !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  cursor: pointer;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+.toast-undo-btn:active { transform: scale(0.95); }
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -12390,7 +12446,7 @@ table.t-daily td.td-norecite {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v86</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v87</span>
         </button>
       </div>
     </div>
@@ -14356,11 +14412,15 @@ function isCountedPresent(att) {
 
 function getTajweedSuffixFromRecord(r) {
   const tags = Array.isArray(r?.tajweedTags) ? r.tajweedTags.filter(Boolean) : [];
-  return tags.length ? ` (تجويد: ${tags.join("، ")})` : "";
+  return tags.length ? ` ضعف في (${tags.join("، ")})` : "";
 }
 
 function stripTajweedSuffix(noteStr) {
-  return String(noteStr || "").replace(/\s*\(تجويد:\s*[^)]*\)\s*/g, " ").replace(/\s{2,}/g, " ").trim();
+  return String(noteStr || "")
+    .replace(/\s*ضعف\s+في\s*\([^)]*\)\.?\s*/g, " ")
+    .replace(/\s*\(تجويد:\s*[^)]*\)\s*/g, " ")
+    .replace(/\s{2,}/g, " ")
+    .trim();
 }
 
 function applyTajweedToNote(baseNote, r) {
@@ -17005,13 +17065,21 @@ function performLastUndo() {
   showToast("تم التراجع عن آخر إجراء ↩️");
 }
 
+function hideToast() {
+  const el = document.getElementById("toast");
+  if (el) el.classList.remove("show");
+  clearTimeout(window._toastTimer);
+}
+
 function showToast(msg, opts = null) {
   const el = document.getElementById("toast");
+  if (!el) return;
   const canUndo = Boolean(opts && opts.undo && lastUndoSnapshot);
-  el.innerHTML = `<span>${escapeHtml(msg)}</span>` + (canUndo ? `<button type="button" class="toast-undo-btn" onclick="performLastUndo()">↩️ تراجع</button>` : "");
+  el.onclick = () => hideToast();
+  el.innerHTML = `<span class="toast-msg">${escapeHtml(msg)}</span>` + (canUndo ? `<button type="button" class="toast-undo-btn" onclick="event.stopPropagation(); performLastUndo();">↩️ تراجع</button>` : "");
   el.classList.add("show");
   clearTimeout(window._toastTimer);
-  window._toastTimer = setTimeout(() => el.classList.remove("show"), canUndo ? 5000 : 2500);
+  window._toastTimer = setTimeout(() => el.classList.remove("show"), canUndo ? 2600 : 1900);
 }
 
 // CUSTOMIZABLE SHEIKH GRADING RULES (v74: Direct Per-Grade Errors & Alerts Matrix)
@@ -17481,9 +17549,9 @@ function shouldUsePerPageMode(r, st, kind, h) {
   const mKey = getPageModeKey(kind);
   if (r[mKey] === "single") return false;
   if (r[mKey] === "multi") return true;
-  // Auto-open per-page ONLY when recitation genuinely spans >= 1.35 pages (never on a 1-page recitation with 1 stray ayah!)
+  // Auto-open per-page when recitation spans >= 1.15 pages
   const totalPg = slots.reduce((a, p) => a + (Number(p.pages) || 0), 0);
-  return totalPg >= 1.35;
+  return totalPg >= 1.15;
 }
 
 function togglePerPageEvalMode(studentId, kind, toMode) {
@@ -17707,7 +17775,7 @@ function applyPerPageAutoEval(studentId, kind, overrideOverallEv = null, trigger
   if (triggerAdvance) {
     saveState();
     advanceAfterEval(studentId, overallEv);
-    showToast(`✓ تم اعتماد التقييم الإجمالي (${st.name}): ${overallEv}${failed.length && overallEv !== "إعادة" ? ` • إعادة: ${repeatShort}` : ""}`, { undo: true });
+    showToast(`✓ ${st.name}: ${overallEv}${failed.length && overallEv !== "إعادة" ? ` • إعادة: ${repeatShort}` : ""}`, { undo: true });
     return;
   }
   if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
@@ -17821,7 +17889,7 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
 
   const n = Math.max(0, Number(errs) || 0);
   const a = Math.max(0, Number(alerts) || 0);
-  const showManualSwitch = canMulti && totalSlotsPg >= 1.15;
+  const showManualSwitch = canMulti;
   const multiSwitchHtml = showManualSwitch
     ? `<div style="display:flex; justify-content:flex-end; margin-bottom:5px;"><button type="button" class="pp-mode-link" onclick="togglePerPageEvalMode('${studentId}','${kind}','multi')">📄 تقييم صفحة بصفحة (${slots.length} صفحات)</button></div>`
     : "";
@@ -28445,7 +28513,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v86 -->
+<!-- Makin App v87 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -32182,7 +32250,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v86";
+const TIBYAN_APP_VERSION = "v87";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
