@@ -11555,110 +11555,30 @@ table.t-daily td.td-rev-slim,
 
 
 /* ==================== MAKIN v98: BALANCED REPORT PROPORTIONS, COMPACT TAJWEED DRAWER, STUDENT FOCUS & BRAND LOCK ==================== */
-/* 1) Balanced Medium Export Widths (v99 — Comfortable Proportions on Phones & A4, Zero Excessive Whitespace!) */
-.official-daily-wrap { min-width: 980px; }
-table.t-daily { min-width: 980px; table-layout: fixed; }
-.official-monthly-wrap { min-width: 820px; }
+/* 1) Exact Original v97 Report Export Proportions Restored (v101 — Spacious, Crisp, Zero-Squish, Zero-Overlap!) */
+.official-daily-wrap { min-width: 1040px; }
+table.t-daily { min-width: 1040px; table-layout: fixed; }
+.official-monthly-wrap { min-width: 860px; }
 
 #hdExportStage {
-  width: 1100px !important;
-  padding: 14px 16px !important;
+  width: 1680px !important;
+  padding: 18px 22px !important;
 }
 #hdExportStage.is-monthly-stage {
-  width: 940px !important;
-  padding: 16px 18px !important;
+  width: 1180px !important;
+  padding: 20px 22px !important;
 }
 #hdExportStage.is-indiv-stage {
-  width: 860px !important;
-  padding: 14px 16px !important;
+  width: 1040px !important;
+  padding: 16px 18px !important;
 }
-#hdExportStage .official-daily-hdr-v20 {
-  margin-bottom: 6px !important;
-  padding-bottom: 6px !important;
-  grid-template-columns: 1.0fr 2.85fr 1.0fr !important;
-  gap: 8px !important;
-}
-#hdExportStage .odh-org-box {
-  font-size: 12.8px !important;
-  line-height: 1.48 !important;
-}
-#hdExportStage .odh-title-col h2 {
-  font-size: 20px !important;
-  margin-bottom: 5px !important;
-}
-#hdExportStage .odh-meta-grid {
-  max-width: 560px !important;
-  gap: 8px !important;
-}
-#hdExportStage .odh-meta-cell {
-  font-size: 12.5px !important;
-  padding: 3.5px 8px !important;
-}
-#hdExportStage .odh-logo-col img {
-  height: 50px !important;
-}
-#hdExportStage table.t-daily {
-  font-size: 12.6px !important;
-}
-#hdExportStage table.t-daily th {
-  font-size: 12.6px !important;
-  padding: 4.5px 3px !important;
-}
-#hdExportStage table.t-daily th.th-sub {
-  font-size: 11.4px !important;
-  padding: 3px 2px !important;
-}
-#hdExportStage table.t-daily td {
-  padding: 4px 4px !important;
-  font-size: 12.2px !important;
-  line-height: 1.28 !important;
-}
-#hdExportStage table.t-daily td.td-name-col {
-  font-size: 12.5px !important;
-  padding: 4px 5px !important;
-}
-#hdExportStage table.t-daily td.td-pts {
-  font-size: 13px !important;
-}
-#hdExportStage table.t-daily td.td-note {
-  font-size: 11.6px !important;
-  padding: 4px 6px !important;
-  line-height: 1.32 !important;
-}
-#hdExportStage table.t-daily tfoot td {
-  font-size: 12.2px !important;
-  padding: 5.5px 7px !important;
-}
-#hdExportStage.is-monthly-stage .om-banner {
-  padding: 11px 16px !important;
-  margin-bottom: 9px !important;
-}
-#hdExportStage.is-monthly-stage .om-banner img {
-  height: 50px !important;
-}
-#hdExportStage.is-monthly-stage .om-banner-title h2 {
-  font-size: 20px !important;
-}
-#hdExportStage.is-monthly-stage .om-banner-title p {
-  font-size: 13px !important;
-}
-#hdExportStage.is-monthly-stage .om-info-row {
-  font-size: 13px !important;
-  margin-bottom: 9px !important;
-}
-#hdExportStage.is-monthly-stage .om-info-cell {
-  padding: 6px 10px !important;
-}
-#hdExportStage.is-monthly-stage table.t-monthly {
-  font-size: 12.8px !important;
-}
-#hdExportStage.is-monthly-stage table.t-monthly th {
-  font-size: 12.5px !important;
-  padding: 6px 5px !important;
-}
-#hdExportStage.is-monthly-stage table.t-monthly td {
-  font-size: 12.5px !important;
-  padding: 5px 6px !important;
+/* Guarantee td-span-range NEVER spills over black vertical borders into adjacent cells */
+table.t-daily td.td-span-range,
+#hdExportStage table.t-daily td.td-span-range {
+  white-space: normal !important;
+  word-break: keep-all !important;
+  overflow-wrap: break-word !important;
+  line-height: 1.24 !important;
 }
 
 /* ==================== MAKIN v99: UNIVERSAL BUTTON & CHIP ZERO-OVERFLOW ARMOR ==================== */
@@ -12569,7 +12489,7 @@ table.t-daily { min-width: 980px; table-layout: fixed; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v100</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v102</span>
         </button>
       </div>
     </div>
@@ -17098,7 +17018,7 @@ function getStudentSabrRecords(st, h) {
     list.push({
       juzName: r.sabrJuz,
       juzId: jObj?.id || 30,
-      juzShort: jObj?.shortName || r.sabrJuz,
+      juzShort: jObj ? formatJuzCompact(jObj) : formatJuzClean(r.sabrJuz),
       pages: jObj?.pages || 20,
       isReviewSabr,
       score,
@@ -18831,6 +18751,7 @@ function openSurahPicker(studentId, kind) {
       }));
     }
   }
+  let predictedNextMajMeta = null;
   if (!existing.length && kind === "nextMaj") {
     if (r.nextMajStartSurahId && SURAH_MAP[Number(r.nextMajStartSurahId)]) {
       existing = expandContiguousRangeToSegments(r.nextMajStartSurahId, r.nextMajStartAyah || 1, r.nextMajEndSurahId || r.nextMajStartSurahId, r.nextMajEndAyah || SURAH_MAP[Number(r.nextMajStartSurahId)].a);
@@ -18838,6 +18759,16 @@ function openSurahPicker(studentId, kind) {
       const p1 = parseArabicNum(r.nextMajStartPage, 582), p2 = parseArabicNum(r.nextMajEndPage, p1);
       const rng = buildMajorReviewRange(p1, Math.max(1, p2 - p1 + 1), 1, 604);
       existing = expandContiguousRangeToSegments(rng.startSurahId, rng.startAyah, rng.endSurahId, rng.endAyah);
+    } else {
+      predictedNextMajMeta = getNextReviewHomeworkForStudent(h, s, st, r)?.majMeta || null;
+      if (predictedNextMajMeta?.startSurahId && SURAH_MAP[Number(predictedNextMajMeta.startSurahId)]) {
+        existing = expandContiguousRangeToSegments(
+          predictedNextMajMeta.startSurahId,
+          predictedNextMajMeta.startAyah || 1,
+          predictedNextMajMeta.endSurahId || predictedNextMajMeta.startSurahId,
+          predictedNextMajMeta.endAyah || SURAH_MAP[Number(predictedNextMajMeta.startSurahId)].a
+        );
+      }
     }
   }
   if (!existing.length) {
@@ -18874,6 +18805,16 @@ function openSurahPicker(studentId, kind) {
   } else if (kind === "nextMaj" && Array.isArray(r.nextMajSardJuzIds) && r.nextMajSardJuzIds.length) {
     activeSardIds = [...r.nextMajSardJuzIds];
     initMode = "sard";
+  } else if (kind === "hwNextMin" && Array.isArray(r.hwNextMinSardJuzIds) && r.hwNextMinSardJuzIds.length) {
+    activeSardIds = [...r.hwNextMinSardJuzIds];
+    initMode = "sard";
+  } else if (kind === "hwNextMin" && r.hwNextMinIsPages && r.hwNextMinPageFrom) {
+    pageFrom = parseArabicNum(r.hwNextMinPageFrom, pageFrom);
+    pageTo = parseArabicNum(r.hwNextMinPageTo, pageFrom);
+    initMode = "pages";
+  } else if (kind === "nextMaj" && predictedNextMajMeta?.sabrJuz) {
+    activeSabr = predictedNextMajMeta.sabrJuz;
+    initMode = "sabr";
   } else if (kind === "dRev" && r.dRevIsPages && r.dRevPageFrom) {
     pageFrom = parseArabicNum(r.dRevPageFrom, pageFrom);
     pageTo = parseArabicNum(r.dRevPageTo, pageFrom);
@@ -18915,18 +18856,25 @@ function openSurahPicker(studentId, kind) {
     pageFromSurahId = r.majStartSurahId || "";
     pageToSurahId = r.majEndSurahId || "";
   } else if (kind === "nextMaj") {
-    pageFromSurahId = r.nextMajStartSurahId || "";
-    pageToSurahId = r.nextMajEndSurahId || "";
+    pageFromSurahId = r.nextMajStartSurahId || predictedNextMajMeta?.startSurahId || "";
+    pageToSurahId = r.nextMajEndSurahId || predictedNextMajMeta?.endSurahId || "";
+    if (!r.nextMajStartPage && predictedNextMajMeta?.startPage) {
+      pageFrom = parseArabicNum(predictedNextMajMeta.startPage, pageFrom);
+      pageTo = parseArabicNum(predictedNextMajMeta.endPage, pageFrom);
+    }
+  } else if (kind === "hwNextMin") {
+    pageFromSurahId = r.hwNextMinPageFromSurahId || "";
+    pageToSurahId = r.hwNextMinPageToSurahId || "";
   }
   if (spIsReviewKind(kind) && (!pageFromSurahId || !pageToSurahId) && existing.length) {
     const firstS = SURAH_MAP[Number(existing[0].surahId)];
     if (firstS) {
-      if (!r.dRevIsPages && !r.minIsPages && !r.majIsPages && !r.nextMajIsPages) {
+      if (!r.dRevIsPages && !r.minIsPages && !r.majIsPages && !r.nextMajIsPages && !r.hwNextMinIsPages) {
         pageFrom = getPageForSurahAyah(firstS.id, existing[0].from || 1);
       }
       if (!pageFromSurahId) pageFromSurahId = String(firstS.id);
       const lastS = SURAH_MAP[Number(existing[existing.length - 1].surahId)] || firstS;
-      if (!r.dRevIsPages && !r.minIsPages && !r.majIsPages && !r.nextMajIsPages) {
+      if (!r.dRevIsPages && !r.minIsPages && !r.majIsPages && !r.nextMajIsPages && !r.hwNextMinIsPages) {
         pageTo = getPageForSurahAyah(lastS.id, existing[existing.length - 1].to || lastS.a);
       }
       if (!pageToSurahId) pageToSurahId = String(lastS.id);
@@ -19236,6 +19184,7 @@ function spSetPageVal(field, val) {
   } else {
     spState.pageTo = mushafPg;
   }
+  if (typeof enhanceAllVisibleSelects === "function") enhanceAllVisibleSelects(box);
   syncSpPageInputsOnly();
 }
 
@@ -19414,7 +19363,7 @@ function renderSpActiveSurahCard() {
     <button type="button" class="sp-surah-hero-mid" onclick="toggleSpBrowser()">
       <div class="sp-sh-info">
         <div class="sp-sh-name">${info ? `📖 سورة ${escapeHtml(info.n)}` : "اختر سورة..."}</div>
-        <div class="sp-sh-meta">${info ? `${info.a} آية • ص ${Math.floor(info.fs)}${Math.floor(info.fe - 0.01) > Math.floor(info.fs) ? "–" + Math.floor(info.fe - 0.01) : ""} • ${juzObj ? `جزء ${escapeHtml(juzObj.shortName)}` : ""}` : "اضغط لاختيار سورة من المصحف"}</div>
+        <div class="sp-sh-meta">${info ? `${info.a} آية • ص ${Math.floor(info.fs)}${Math.floor(info.fe - 0.01) > Math.floor(info.fs) ? "–" + Math.floor(info.fe - 0.01) : ""} • ${juzObj ? escapeHtml(formatJuzLabel(juzObj)) : ""}` : "اضغط لاختيار سورة من المصحف"}</div>
       </div>
       <span class="sp-sh-chg-pill">${spState.browserOpen ? "إغلاق ▲" : "تغيير السورة ▾"}</span>
     </button>
@@ -19879,7 +19828,7 @@ function clearSurahPickerSelection() {
   else if (k === "hwNextMin") { r.hwNextMinCustom = false; r.hwNextMinSurahId = ""; r.hwNextMinFrom = ""; r.hwNextMinTo = ""; r.hwNextMinExtras = []; r.hwNextMinIsPages = false; r.hwNextMinSardJuzIds = []; r.hwNextMinSardLabel = ""; r.hwNextMinText = ""; }
   else if (k === "min") { r.minSurahId = ""; r.minFrom = ""; r.minTo = ""; r.minExtras = []; r.minSurah = ""; r.minText = ""; r.minPages = 0; r.minIsPages = false; r.minSardJuzIds = []; r.manualMin = true; }
   else if (k === "maj") { r.majExtras = []; r.majFrom = ""; r.majTo = ""; r.majPages = 0; r.majStartSurahId = ""; r.majEndSurahId = ""; r.majIsPages = false; r.majSardJuzIds = []; r.majSardLabel = ""; }
-  else if (k === "nextMaj") { r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajTitle = ""; }
+  else if (k === "nextMaj") { r.nextMajManual = false; r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajTitle = ""; }
   else if (k === "dRev") { clearDailyRev(spState.studentId); closeModal("surahPickerModal"); return; }
   if (r.recEval || r.minEval || r.majEval) r.points = computeRecordPoints(s, r, st);
   openCardId = spState.studentId;
@@ -20008,6 +19957,7 @@ function applySurahPicker(quickEval = null) {
     } else if (k === "hwNextMin") {
       r.hwNextMinCustom = true; r.hwNextMinSurahId = ""; r.hwNextMinExtras = []; r.hwNextMinSardJuzIds = []; r.hwNextMinSardLabel = "";
       r.hwNextMinIsPages = true; r.hwNextMinPageFrom = p1; r.hwNextMinPageTo = p2;
+      r.hwNextMinPageFromSurahId = s1 ? String(s1.id) : ""; r.hwNextMinPageToSurahId = s2 ? String(s2.id) : "";
       r.hwNextMinFrom = fromCol; r.hwNextMinTo = toCol; r.hwNextMinText = toastLbl;
     }
     closeModal("surahPickerModal");
@@ -21045,7 +20995,7 @@ function saveStudentPhoneFromWaHub() {
   saveState();
   renderStudentWaHub();
   renderStudentCardsOnly();
-  if (document.getElementById("view-students")?.classList.contains("active")) renderStudentsList();
+  if (document.getElementById("view-students")?.classList.contains("active")) renderStudentsTab();
   showToast(raw ? "تم حفظ رقم واتساب الطالب بنجاح ✓" : "تم مسح الرقم");
 }
 
@@ -21406,7 +21356,7 @@ function renderStJuz30PickerGrid(selectedIds) {
   const selSet = new Set(selectedIds);
   grid.innerHTML = [...JUZ_PAGES].reverse().map(j => `
     <button type="button" class="juz30-btn ${selSet.has(j.id) ? 'on' : ''}" onclick="toggleStJuz30(${j.id})" title="${escapeHtml(j.name)}">
-      ${j.id}<span>${escapeHtml(j.shortName)}</span>
+      ${j.id}<span>${escapeHtml(j.id >= 26 ? j.shortName : "ج " + j.id)}</span>
     </button>
   `).join("");
 }
@@ -22622,7 +22572,7 @@ function getSessionHomeworkMode(s, h) {
   const nextDow = nextIso ? new Date(nextIso + "T12:00:00").getDay() : 1;
   const existingNext = (hal?.sessions || []).find(x => x.date === nextIso && !x.noClass);
   const nextType = existingNext ? existingNext.type : getDefaultSessionTypeForDow(nextDow, hal);
-  const nextDayName = AR_DAYS[nextDow] || "";
+  const nextDayName = ARABIC_DAYS[nextDow] || "";
   return {
     nextIso,
     nextDow,
@@ -22645,7 +22595,7 @@ function formatNextMajCompactText(r) {
 
 function getNextReviewHomeworkForStudent(h, s, st, r) {
   if (!h || !s || !st || !r || st.track === "rashidi") {
-    return { minText: "", majText: "", minSegs: [], hasCustomMin: false, hasCustomMaj: false };
+    return { minText: "", majText: "", minSegs: [], majMeta: null, hasCustomMin: false, hasCustomMaj: false };
   }
   const nextIso = findAdjacentClassISO(s.date, 1, h) || s.date;
   const fakeNextSat = { id: "__next_rev_preview__", date: nextIso, type: "saturday" };
@@ -22672,11 +22622,21 @@ function getNextReviewHomeworkForStudent(h, s, st, r) {
 
   // 2) Upcoming Major Review (custom override on `r` OR predicted from latest previous review session / student bounds!)
   let majText = "";
+  let majMeta = null;
   let hasCustomMaj = false;
   const directNextMaj = formatNextMajCompactText(r);
   if (directNextMaj && (r.nextMajManual || s.type === "saturday")) {
     majText = directNextMaj;
     hasCustomMaj = Boolean(r.nextMajManual);
+    majMeta = {
+      sabrJuz: r.nextMajSabrJuz || "",
+      startSurahId: r.nextMajStartSurahId || "",
+      startAyah: r.nextMajStartAyah || 1,
+      endSurahId: r.nextMajEndSurahId || "",
+      endAyah: r.nextMajEndAyah || 1,
+      startPage: r.nextMajStartPage || "",
+      endPage: r.nextMajEndPage || ""
+    };
   } else {
     const prevSats = (h.sessions || [])
       .filter(ps => ps.id !== s.id && ps.type === "saturday" && !ps.noClass && ps.date < nextIso)
@@ -22699,12 +22659,31 @@ function getNextReviewHomeworkForStudent(h, s, st, r) {
       const carrySabr = (!majPassed && pr.sabrJuz) ? pr.sabrJuz : (pr.nextMajSabrJuz || "");
       if (carrySabr) {
         majText = `سبر ${formatJuzClean(carrySabr)}`;
+        const jObj = getJuzByName(carrySabr);
+        majMeta = {
+          sabrJuz: jObj ? jObj.name : carrySabr,
+          startSurahId: jObj ? String(jObj.startSurah) : "",
+          startAyah: jObj ? jObj.startAyah : 1,
+          endSurahId: jObj ? String(jObj.endSurah) : "",
+          endAyah: jObj ? jObj.endAyah : 1,
+          startPage: jObj ? jObj.startPage : "",
+          endPage: jObj ? jObj.endPage : ""
+        };
         foundPrev = true;
         break;
       }
       const prNextTxt = formatNextMajCompactText(pr);
       if (prNextTxt) {
         majText = prNextTxt;
+        majMeta = {
+          sabrJuz: pr.nextMajSabrJuz || "",
+          startSurahId: pr.nextMajStartSurahId || "",
+          startAyah: pr.nextMajStartAyah || 1,
+          endSurahId: pr.nextMajEndSurahId || "",
+          endAyah: pr.nextMajEndAyah || 1,
+          startPage: pr.nextMajStartPage || "",
+          endPage: pr.nextMajEndPage || ""
+        };
         foundPrev = true;
         break;
       }
@@ -22713,9 +22692,24 @@ function getNextReviewHomeworkForStudent(h, s, st, r) {
         const nxtPt = getNextSurahAyahForward(prevPts.endSurahId, prevPts.endAyah);
         const rng = buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : bounds.startSurahId, nxtPt ? nxtPt.ayah : bounds.startAyah, revPace, bounds, sabrJuz);
         majText = formatMajStripDisplay(rng.fromLabel, rng.toLabel);
+        majMeta = {
+          sabrJuz: "",
+          startSurahId: rng.startSurahId, startAyah: rng.startAyah,
+          endSurahId: rng.endSurahId, endAyah: rng.endAyah,
+          startPage: rng.startPage, endPage: rng.endPage
+        };
       } else {
         const s1 = SURAH_MAP[prevPts.startSurahId], s2 = SURAH_MAP[prevPts.endSurahId];
-        if (s1 && s2) majText = formatMajStripDisplay(formatSurahAyahPoint(s1, prevPts.startAyah, false), formatSurahAyahPoint(s2, prevPts.endAyah, true));
+        if (s1 && s2) {
+          majText = formatMajStripDisplay(formatSurahAyahPoint(s1, prevPts.startAyah, false), formatSurahAyahPoint(s2, prevPts.endAyah, true));
+          majMeta = {
+            sabrJuz: "",
+            startSurahId: String(s1.id), startAyah: prevPts.startAyah,
+            endSurahId: String(s2.id), endAyah: prevPts.endAyah,
+            startPage: getPageForSurahAyah(s1.id, prevPts.startAyah),
+            endPage: getPageForSurahAyah(s2.id, prevPts.endAyah)
+          };
+        }
       }
       foundPrev = true;
       break;
@@ -22730,10 +22724,16 @@ function getNextReviewHomeworkForStudent(h, s, st, r) {
       }
       const rng = buildMajorReviewFromPoint(initSid, initA, revPace, bounds, sabrJuz);
       majText = formatMajStripDisplay(rng.fromLabel, rng.toLabel);
+      majMeta = {
+        sabrJuz: "",
+        startSurahId: rng.startSurahId, startAyah: rng.startAyah,
+        endSurahId: rng.endSurahId, endAyah: rng.endAyah,
+        startPage: rng.startPage, endPage: rng.endPage
+      };
     }
   }
 
-  return { minText: minText || "", majText: majText || "", minSegs, hasCustomMin, hasCustomMaj };
+  return { minText: minText || "", majText: majText || "", minSegs, majMeta, hasCustomMin, hasCustomMaj };
 }
 
 function getNextRecitationHomeworkForStudent(h, s, st, r, isHtml = true) {
@@ -22921,7 +22921,7 @@ function prefillDailyRecitation(notify = true, forceRefresh = false) {
           rec.dRevSurahId = ""; rec.dRevExtras = [];
           rec.dRevFrom = SURAH_MAP[jObj.startSurah]?.n || "";
           rec.dRevTo = SURAH_MAP[jObj.endSurah]?.n || "";
-          rec.dRevEval = `سبر جزء ${jObj.shortName}`;
+          rec.dRevEval = `سبر ${formatJuzLabel(jObj)}`;
           rec.dRevPages = jObj.pages;
         }
         if (!lastSrcSessionLabel) lastSrcSessionLabel = `${ps.dayName} ${ps.hijriDate}`;
@@ -23160,7 +23160,11 @@ function prefillSaturdayReviews(notify = true, forceRefresh = false) {
           rec.majEndSurahId = prevDailyRec.nextMajEndSurahId; rec.majEndAyah = prevDailyRec.nextMajEndAyah || 1;
           rec.majStartPage = prevDailyRec.nextMajStartPage; rec.majEndPage = prevDailyRec.nextMajEndPage;
           rec.majFrom = prevDailyRec.nextMajFrom; rec.majTo = prevDailyRec.nextMajTo;
-          rec.majPages = Math.max(0.25, Number(prevDailyRec.nextMajEndPage || 1) - Number(prevDailyRec.nextMajStartPage || 1) + 1); appliedFromPrev = true;
+          const _cs1 = SURAH_MAP[Number(prevDailyRec.nextMajStartSurahId)], _cs2 = SURAH_MAP[Number(prevDailyRec.nextMajEndSurahId)] || _cs1;
+          rec.majPages = (_cs1 && _cs2)
+            ? Math.max(0.25, Math.round((getMushafPos(_cs2.id, prevDailyRec.nextMajEndAyah || _cs2.a, true) - getMushafPos(_cs1.id, prevDailyRec.nextMajStartAyah || 1, false)) * 100) / 100)
+            : Math.max(0.25, Number(prevDailyRec.nextMajEndPage || 1) - Number(prevDailyRec.nextMajStartPage || 1) + 1);
+          appliedFromPrev = true;
         }
       }
       if (!appliedFromPrev) for (const ps of prevSats) {
@@ -24077,7 +24081,7 @@ function buildSingleStudentCardHtml(h, s, item, _prePrevCandidates, _preRelevant
         <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
         ${minDiffHint}
       </div>
-      ${(r.nextMajSabrJuz || r.nextMajFrom) ? `<span style="font-size:11px; color:var(--ink-500);">القادم: <b>${escapeHtml(r.nextMajSabrJuz ? `🎓 سبر ${getJuzByName(r.nextMajSabrJuz)?.shortName || r.nextMajSabrJuz}` : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo))}</b></span>` : ''}
+      ${(r.nextMajSabrJuz || r.nextMajFrom) ? `<span style="font-size:11px; color:var(--ink-500);">القادم: <b>${escapeHtml(r.nextMajSabrJuz ? `🎓 سبر ${formatJuzClean(r.nextMajSabrJuz)}` : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo))}</b></span>` : ''}
     </div>`;
   }
 
@@ -25079,7 +25083,7 @@ function renderCardBody(s, st, r, idx) {
 
     const sabrInlineChip = sabrProg ? `
       <div class="sabr-inline-bar">
-        <span>🎓 سبر ${escapeHtml(sabrProg.juz.shortName)}: ${sabrProg.alreadySabr ? 'تم السبر ✓' : `${formatNum(sabrProg.donePages)}/${sabrProg.juz.pages} ص`}</span>
+        <span>🎓 سبر ${escapeHtml(formatJuzLabel(sabrProg.juz))}: ${sabrProg.alreadySabr ? 'تم السبر ✓' : `${formatNum(sabrProg.donePages)}/${sabrProg.juz.pages} ص`}</span>
         <button type="button" class="btn ${sabrProg.alreadySabr ? 'btn-outline' : 'btn-success'} btn-sm" style="padding:2px 8px; font-size:11px;" onclick="markStudentSabrDone('${st.id}', ${sabrProg.juz.id})">${sabrProg.alreadySabr ? '↩️ إلغاء' : '✓ اعتماد'}</button>
       </div>` : "";
 
@@ -26473,50 +26477,43 @@ function renderDailyReport() {
 
   const hwModeInfo = getSessionHomeworkMode(s, h);
   const hwIsReview = hwModeInfo.hwMode === "review";
-  const maxNameLen = Math.max(...(h.students || []).map(x => String(x.name || "").trim().length), 10);
-  const nameW = maxNameLen <= 14 ? 10.2 : (maxNameLen <= 18 ? 11.2 : (maxNameLen <= 22 ? 12.0 : 12.8));
-
   let tbl = "";
   if (s.type === "daily") {
     let colgroup = "";
     if (hwIsReview) {
-      // Next class day is REVIEW (e.g., Wed -> Sat): Homework has 2 columns: الصغرى | الكبرى!
-      const noteW_p = +(100 - (2.5 + nameW + 8.0 + 3.1 + 3.1 + 5.6 + 3.6 + 6.0 + 6.0 + 5.4 + 9.2 + 9.2)).toFixed(1);
-      const noteW_n = +(100 - (2.5 + (nameW + 0.5) + 8.2 + 3.2 + 3.2 + 5.8 + 6.2 + 6.2 + 5.6 + 9.6 + 9.6)).toFixed(1);
+      // Exact v97 spacious proportions — 2 Review HW columns (الصغرى 9.25% + الكبرى 9.25% = 18.5%)
       colgroup = ptsOn
         ? `<colgroup>
-            <col style="width:2.5%"><col style="width:${nameW}%">
-            <col style="width:8.0%"><col style="width:3.1%"><col style="width:3.1%"><col style="width:5.6%">
-            <col style="width:3.6%">
-            <col style="width:6.0%"><col style="width:6.0%"><col style="width:5.4%">
-            <col style="width:9.2%"><col style="width:9.2%">
-            <col style="width:${noteW_p}%">
+            <col style="width:2.5%"><col style="width:11.5%">
+            <col style="width:8.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:5.5%">
+            <col style="width:3.5%">
+            <col style="width:6.5%"><col style="width:6.5%"><col style="width:6.5%">
+            <col style="width:9.25%"><col style="width:9.25%">
+            <col style="width:23.5%">
           </colgroup>`
         : `<colgroup>
-            <col style="width:2.5%"><col style="width:${(nameW + 0.5).toFixed(1)}%">
-            <col style="width:8.2%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.8%">
-            <col style="width:6.2%"><col style="width:6.2%"><col style="width:5.6%">
-            <col style="width:9.6%"><col style="width:9.6%">
-            <col style="width:${noteW_n}%">
+            <col style="width:2.5%"><col style="width:12.5%">
+            <col style="width:8.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:5.5%">
+            <col style="width:6.5%"><col style="width:6.5%"><col style="width:6.5%">
+            <col style="width:9.25%"><col style="width:9.25%">
+            <col style="width:26%">
           </colgroup>`;
     } else {
-      const noteW_pts = +(100 - (2.5 + nameW + 8.2 + 3.2 + 3.2 + 5.8 + 3.8 + 6.4 + 6.4 + 5.6 + 8.2 + 3.2 + 3.2)).toFixed(1);
-      const noteW_no = +(100 - (2.5 + (nameW + 0.6) + 8.4 + 3.3 + 3.3 + 6.0 + 6.6 + 6.6 + 5.8 + 8.4 + 3.3 + 3.3)).toFixed(1);
       colgroup = ptsOn
         ? `<colgroup>
-            <col style="width:2.5%"><col style="width:${nameW}%">
-            <col style="width:8.2%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.8%">
-            <col style="width:3.8%">
-            <col style="width:6.4%"><col style="width:6.4%"><col style="width:5.6%">
-            <col style="width:8.2%"><col style="width:3.2%"><col style="width:3.2%">
-            <col style="width:${noteW_pts}%">
+            <col style="width:2.5%"><col style="width:11.5%">
+            <col style="width:8.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:5.5%">
+            <col style="width:3.5%">
+            <col style="width:6.5%"><col style="width:6.5%"><col style="width:6.5%">
+            <col style="width:9.5%"><col style="width:4.5%"><col style="width:4.5%">
+            <col style="width:23.5%">
           </colgroup>`
         : `<colgroup>
-            <col style="width:2.5%"><col style="width:${(nameW + 0.6).toFixed(1)}%">
-            <col style="width:8.4%"><col style="width:3.3%"><col style="width:3.3%"><col style="width:6.0%">
-            <col style="width:6.6%"><col style="width:6.6%"><col style="width:5.8%">
-            <col style="width:8.4%"><col style="width:3.3%"><col style="width:3.3%">
-            <col style="width:${noteW_no}%">
+            <col style="width:2.5%"><col style="width:12.5%">
+            <col style="width:8.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:5.5%">
+            <col style="width:6.5%"><col style="width:6.5%"><col style="width:6.5%">
+            <col style="width:9.5%"><col style="width:4.5%"><col style="width:4.5%">
+            <col style="width:26%">
           </colgroup>`;
     }
 
@@ -26626,42 +26623,38 @@ function renderDailyReport() {
   } else {
     let colgroup = "";
     if (hwIsReview) {
-      const noteW_p = +(100 - (2.5 + nameW + 7.8 + 3.1 + 3.1 + 5.5 + 6.4 + 6.4 + 5.5 + 3.6 + 9.2 + 9.2)).toFixed(1);
-      const noteW_n = +(100 - (2.5 + (nameW + 0.5) + 8.0 + 3.2 + 3.2 + 5.7 + 6.6 + 6.6 + 5.7 + 9.6 + 9.6)).toFixed(1);
       colgroup = ptsOn
         ? `<colgroup>
-            <col style="width:2.5%"><col style="width:${nameW}%">
-            <col style="width:7.8%"><col style="width:3.1%"><col style="width:3.1%"><col style="width:5.5%">
-            <col style="width:6.4%"><col style="width:6.4%"><col style="width:5.5%">
-            <col style="width:3.6%">
-            <col style="width:9.2%"><col style="width:9.2%">
-            <col style="width:${noteW_p}%">
+            <col style="width:2.5%"><col style="width:12.0%">
+            <col style="width:8.5%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.2%">
+            <col style="width:7.0%"><col style="width:7.0%"><col style="width:6.0%">
+            <col style="width:3.4%">
+            <col style="width:8.9%"><col style="width:8.9%">
+            <col style="width:24.2%">
           </colgroup>`
         : `<colgroup>
-            <col style="width:2.5%"><col style="width:${(nameW + 0.5).toFixed(1)}%">
-            <col style="width:8.0%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.7%">
-            <col style="width:6.6%"><col style="width:6.6%"><col style="width:5.7%">
-            <col style="width:9.6%"><col style="width:9.6%">
-            <col style="width:${noteW_n}%">
+            <col style="width:2.5%"><col style="width:13.0%">
+            <col style="width:8.5%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.2%">
+            <col style="width:7.0%"><col style="width:7.0%"><col style="width:6.0%">
+            <col style="width:8.9%"><col style="width:8.9%">
+            <col style="width:26.6%">
           </colgroup>`;
     } else {
-      const noteW_pts = +(100 - (2.5 + nameW + 8.0 + 3.2 + 3.2 + 5.6 + 6.6 + 6.6 + 5.6 + 3.8 + 8.2 + 3.2 + 3.2)).toFixed(1);
-      const noteW_no = +(100 - (2.5 + (nameW + 0.6) + 8.2 + 3.3 + 3.3 + 5.8 + 6.8 + 6.8 + 5.8 + 8.4 + 3.3 + 3.3)).toFixed(1);
       colgroup = ptsOn
         ? `<colgroup>
-            <col style="width:2.5%"><col style="width:${nameW}%">
-            <col style="width:8.0%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.6%">
-            <col style="width:6.6%"><col style="width:6.6%"><col style="width:5.6%">
-            <col style="width:3.8%">
-            <col style="width:8.2%"><col style="width:3.2%"><col style="width:3.2%">
-            <col style="width:${noteW_pts}%">
+            <col style="width:2.5%"><col style="width:12.0%">
+            <col style="width:8.5%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.2%">
+            <col style="width:7.0%"><col style="width:7.0%"><col style="width:6.0%">
+            <col style="width:3.4%">
+            <col style="width:9.2%"><col style="width:4.3%"><col style="width:4.3%">
+            <col style="width:24.2%">
           </colgroup>`
         : `<colgroup>
-            <col style="width:2.5%"><col style="width:${(nameW + 0.6).toFixed(1)}%">
-            <col style="width:8.2%"><col style="width:3.3%"><col style="width:3.3%"><col style="width:5.8%">
-            <col style="width:6.8%"><col style="width:6.8%"><col style="width:5.8%">
-            <col style="width:8.4%"><col style="width:3.3%"><col style="width:3.3%">
-            <col style="width:${noteW_no}%">
+            <col style="width:2.5%"><col style="width:13.0%">
+            <col style="width:8.5%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.2%">
+            <col style="width:7.0%"><col style="width:7.0%"><col style="width:6.0%">
+            <col style="width:9.2%"><col style="width:4.3%"><col style="width:4.3%">
+            <col style="width:26.6%">
           </colgroup>`;
     }
 
@@ -26789,7 +26782,7 @@ function applyReportPreviewFit(which) {
   const content = paper.firstElementChild;
   if (!content) return;
   const availW = Math.max(240, shell.clientWidth - 16);
-  const naturalW = Math.max(content.scrollWidth || (isDaily ? 980 : 820), isDaily ? 980 : 820);
+  const naturalW = Math.max(content.scrollWidth || (isDaily ? 1040 : 860), isDaily ? 1040 : 860);
   if (availW >= naturalW) return;
 
   const scale = availW / naturalW;
@@ -27229,9 +27222,9 @@ function renderMonthlyReport() {
     </div>
     <table class="t-monthly" id="monthlyReportTable">
       <colgroup>
-        <col style="width:3.8%"><col style="width:16.2%">
-        <col style="width:13.5%"><col style="width:13.5%"><col style="width:7.5%">
-        <col style="width:9.0%"><col style="width:11.5%"><col style="width:25.0%">
+        <col style="width:4%"><col style="width:19%">
+        <col style="width:13.5%"><col style="width:13.5%"><col style="width:8%">
+        <col style="width:9%"><col style="width:12%"><col style="width:21%">
       </colgroup>
       <thead>
         <tr>
@@ -27435,10 +27428,8 @@ async function renderReportToHDCanvas(paperId) {
   if (document.fonts && document.fonts.ready) await document.fonts.ready;
   await new Promise(r => setTimeout(r, 160));
 
-  // v99: Balanced medium stage widths — crisp, readable, zero stretched empty whitespace!
-  const baseW = isCert ? 1400 : (isPoster ? 900 : (isIndiv ? 860 : (isMonthly ? 940 : 1100)));
-  stage.style.setProperty("width", baseW + "px", "important");
-  await new Promise(r => setTimeout(r, 30));
+  // Exact v97 spacious HD widths — crisp, aligned, zero squishing or text collision!
+  const baseW = isCert ? 1400 : (isPoster ? 900 : (isIndiv ? 1040 : (isMonthly ? 1180 : 1680)));
   const measuredW = isCert ? 1400 : Math.max(baseW, Math.ceil(stage.scrollWidth));
   if (!isCert && measuredW > baseW) {
     stage.style.setProperty("width", measuredW + "px", "important");
@@ -28726,7 +28717,7 @@ function renderIndivReportPaper() {
       evalHtml = `<td class="${evSt.cls}">${escapeHtml(evSt.text || "—")}</td>`;
     } else {
       const minTxt = formatSegmentsInline(getSegments(r, "min")) || stripMushafPageTokens(r.minText || "");
-      const majTxt = r.sabrJuz ? `سبر ${getJuzByName(r.sabrJuz)?.shortName || r.sabrJuz}` : formatMajStripDisplay(r.majFrom, r.majTo);
+      const majTxt = r.sabrJuz ? `سبر ${formatJuzClean(r.sabrJuz)}` : formatMajStripDisplay(r.majFrom, r.majTo);
       const parts = [];
       if (minTxt) parts.push(`صغرى: ${minTxt}`);
       if (majTxt && majTxt !== "—") parts.push(`كبرى: ${majTxt}`);
@@ -29824,7 +29815,7 @@ async function exportDailyExcelStyled() {
         ws.getCell(`A${footIdx}`).value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}  |  ${bm.branch}  |  صفحات المراجعة: ${formatNum(xlRevPgs)}${xlRashTag}  |  حضور: ${presentCnt}  |  غياب: ${excused + absent}`;
       }
       for (let c = 1; c <= totalCols; c++) styleCell(ws.getRow(footIdx).getCell(c), { fill: "FFE8EEF2", fontColor: "FF000000", bold: true, size: 10.5 });
-      ws.getRow(footIdx).height = 24;      ws.getRow(footIdx).height = 24;
+      ws.getRow(footIdx).height = 24;
     }
 
     const buf = await wb.xlsx.writeBuffer();
@@ -31571,6 +31562,11 @@ function openModal(id) {
 function closeModal(id) {
   const el = document.getElementById(id);
   if (el) el.classList.remove("show");
+  if (id === "makinDialogModal" && typeof _mkdResolver === "function") {
+    const fn = _mkdResolver;
+    _mkdResolver = null;
+    try { fn(_mkdIsPrompt ? null : false); } catch {}
+  }
   if (id === "quickAttendanceModal" && _qaDirtySession) {
     _qaDirtySession = false;
     saveState();
@@ -34716,11 +34712,14 @@ function onEpsSearchInput(val) {
   if (_epsMode === "nativeSelect") renderNativeSelectIntoExecPicker();
 }
 
-function selectNativeExecPickerOption(val) {
+function selectNativeExecPickerOption(idx) {
   const sel = _epsActiveNativeSelect;
   closeModal("execPickerSheet");
   if (!sel) return;
-  sel.value = val;
+  const opt = sel.options && sel.options[Number(idx)];
+  if (!opt) return;
+  sel.selectedIndex = Number(idx);
+  sel.value = opt.value;
   if (typeof sel._epSyncLabel === "function") sel._epSyncLabel();
   sel.dispatchEvent(new Event("change", { bubbles: true }));
 }
@@ -34758,15 +34757,18 @@ function renderNativeSelectIntoExecPicker() {
   const sel = _epsActiveNativeSelect;
   const body = document.getElementById("epsBody");
   if (!sel || !body) return;
+  const curIdx = sel.selectedIndex;
   const curVal = sel.value;
   const qNorm = normalizeSearchArabic(_epsSearchQuery);
+  const allOpts = Array.from(sel.options || []);
 
   const renderOptBtn = opt => {
+    const optIdx = allOpts.indexOf(opt);
+    if (optIdx < 0) return "";
     const txt = String(opt.textContent || "").trim();
     if (qNorm && !normalizeSearchArabic(txt).includes(qNorm)) return "";
-    const isSel = opt.value === curVal;
-    const encVal = escapeHtml(opt.value).replace(/'/g, "&#39;");
-    return `<button type="button" class="eps-item ${isSel ? 'selected' : ''}" ${opt.disabled ? 'disabled style="opacity:0.45;"' : ''} onclick="selectNativeExecPickerOption('${encVal}')">
+    const isSel = optIdx === curIdx || (curIdx < 0 && opt.value === curVal);
+    return `<button type="button" class="eps-item ${isSel ? 'selected' : ''}" ${opt.disabled ? 'disabled style="opacity:0.45;"' : ''} onclick="selectNativeExecPickerOption(${optIdx})">
       <span class="eps-item-l">
         <span class="eps-txt"><span class="eps-title">${escapeHtml(txt)}</span></span>
       </span>
@@ -34827,9 +34829,13 @@ function enhanceSingleNativeSelect(sel) {
     sel._epSyncLabel = () => {
       if (!trig || !trig.isConnected) return;
       const opt = sel.options && sel.selectedIndex >= 0 ? sel.options[sel.selectedIndex] : null;
-      const lbl = (opt ? opt.textContent : "") || sel.options?.[0]?.textContent || "اختر...";
-      trig.innerHTML = `<span class="ept-left"><span class="ept-txt"><span class="ept-main">${escapeHtml(String(lbl).trim())}</span></span></span><span class="ept-right"><span class="ept-chev">▾</span></span>`;
-      trig.disabled = Boolean(sel.disabled);
+      const lbl = String((opt ? opt.textContent : "") || sel.options?.[0]?.textContent || "اختر...").trim();
+      const dis = Boolean(sel.disabled);
+      if (trig.dataset.lastLbl !== lbl) {
+        trig.dataset.lastLbl = lbl;
+        trig.innerHTML = `<span class="ept-left"><span class="ept-txt"><span class="ept-main">${escapeHtml(lbl)}</span></span></span><span class="ept-right"><span class="ept-chev">▾</span></span>`;
+      }
+      if (trig.disabled !== dis) trig.disabled = dis;
     };
   }
   if (typeof sel._epSyncLabel === "function") sel._epSyncLabel();
@@ -34845,9 +34851,28 @@ function startUniversalSelectEnhancer() {
   installSelectValueHookOnce();
   enhanceAllVisibleSelects(document);
   if (_epSelectObserver) return;
-  _epSelectObserver = new MutationObserver(() => {
+  _epSelectObserver = new MutationObserver(muts => {
+    let relevant = false;
+    for (const m of muts) {
+      if (m.target && (m.target.tagName === "SELECT" || m.target.tagName === "OPTGROUP")) {
+        relevant = true;
+        break;
+      }
+      if (m.target && m.target.closest && m.target.closest(".ep-auto-trigger")) continue;
+      for (const n of m.addedNodes) {
+        if (n && n.nodeType === 1) {
+          if (n.classList && n.classList.contains("ep-auto-trigger")) continue;
+          if (n.tagName === "SELECT" || n.tagName === "OPTION" || (n.querySelector && n.querySelector("select"))) {
+            relevant = true;
+            break;
+          }
+        }
+      }
+      if (relevant) break;
+    }
+    if (!relevant) return;
     clearTimeout(_epEnhanceTimer);
-    _epEnhanceTimer = setTimeout(() => enhanceAllVisibleSelects(document), 35);
+    _epEnhanceTimer = setTimeout(() => enhanceAllVisibleSelects(document), 45);
   });
   _epSelectObserver.observe(document.body, { childList: true, subtree: true });
 }
@@ -35005,7 +35030,7 @@ function renderQuickAttendanceList() {
     if (_qaFilterMode === "late" && !isL) return;
     if (_qaFilterMode === "abs" && !isA) return;
     if (_qaFilterMode === "unset" && !isU) return;
-    if (qNorm && !matchesStudentSearch(st.name, qNorm)) return;
+    if (qNorm && !normalizeSearchArabic(st.name).includes(qNorm)) return;
 
     const meta = getQaCardStateMeta(att, gt);
     rows.push(`<div class="qa-card ${meta.cls}" id="qaCard_${st.id}">
@@ -35301,7 +35326,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v100";
+const TIBYAN_APP_VERSION = "v102";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
