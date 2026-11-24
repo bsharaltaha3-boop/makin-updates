@@ -13269,7 +13269,7 @@ table.t-daily td.td-rev-slim,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v93</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v94</span>
         </button>
       </div>
     </div>
@@ -16077,8 +16077,7 @@ function getDailySabrEval(r) {
 function stripRedundantSabrNoteText(noteStr) {
   let txt = String(noteStr || "").trim();
   if (!txt) return "";
-  txt = txt.replace(/(?:مبارك|إعادة)\s+سبر[^،.!؟
-]*[،,]?\s*(?:فتح الله عليك|يُرجى المراجعة)?\.?/g, "").trim();
+  txt = txt.replace(/(?:مبارك|إعادة)\s+سبر[^،.!؟\n]*[،,]?\s*(?:فتح الله عليك|يُرجى المراجعة)?\.?/g, "").trim();
   txt = txt.replace(/^[—–\-•،,:\s]+/, "").trim();
   return txt;
 }
@@ -29678,7 +29677,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v93 -->
+<!-- Makin App v94 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -34195,7 +34194,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v93";
+const TIBYAN_APP_VERSION = "v94";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
