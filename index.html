@@ -9667,6 +9667,433 @@ table.t-points-all tfoot td {
   min-width: 900px !important;
 }
 
+
+/* ==================== MAKIN v76: SURAH-TO-SURAH PAGE PICKER & 4-THEME HONOR EXPORT STUDIO ==================== */
+.sp-spg-card {
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  border-right: 4px solid #15629a;
+  border-radius: 13px;
+  padding: 9px 10px 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 7px rgba(16, 42, 73, 0.04);
+}
+.sp-spg-card.is-end {
+  border-right-color: #16794c;
+}
+.sp-spg-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.sp-spg-top label {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--brand-slate);
+}
+.sp-spg-quick {
+  display: inline-flex;
+  gap: 4px;
+}
+.sp-spg-qbtn {
+  border: 1px solid var(--line-strong);
+  background: var(--brand-tint);
+  color: var(--brand-slate);
+  border-radius: 7px;
+  padding: 2px 7px;
+  font-size: 10.5px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.sp-spg-qbtn:active { background: #142a46; color: #ffffff; }
+.sp-spg-sel {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 9px;
+  background: var(--bg);
+  color: var(--ink-900);
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 7px;
+}
+.sp-spg-sel:focus {
+  outline: none;
+  border-color: #15629a;
+  background: var(--white);
+}
+
+/* 4-Category Quick Export Dock in Stats Tab & Export Modal */
+.stats-cat-dock-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  margin-top: 8px;
+}
+.stats-cat-btn {
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-900);
+  border-radius: 11px;
+  padding: 7px 3px 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  transition: all 0.14s ease;
+}
+.stats-cat-btn:active { transform: scale(0.95); }
+.stats-cat-btn .sc-ico { font-size: 16px; line-height: 1; }
+.stats-cat-btn .sc-lbl { font-size: 11px; font-weight: 800; white-space: nowrap; }
+.stats-cat-btn.cat-points { border-color: rgba(20, 42, 70, 0.35); background: #eef3f9; color: #142a46; }
+.stats-cat-btn.cat-mem    { border-color: rgba(22, 121, 76, 0.35); background: #eaf7f0; color: #115e46; }
+.stats-cat-btn.cat-rev    { border-color: rgba(180, 95, 16, 0.35); background: #fef5e7; color: #8a460b; }
+.stats-cat-btn.cat-att    { border-color: rgba(14, 90, 109, 0.35); background: #e8f6f9; color: #0e5a6d; }
+[data-theme="dark"] .stats-cat-btn.cat-points { background: #192b42; color: #f4d98d; }
+[data-theme="dark"] .stats-cat-btn.cat-mem    { background: #103227; color: #6ee7b7; }
+[data-theme="dark"] .stats-cat-btn.cat-rev    { background: #332010; color: #fcd34d; }
+[data-theme="dark"] .stats-cat-btn.cat-att    { background: #112f3b; color: #7dd3fc; }
+
+.stats-cat-btn.on.cat-points { background: #142a46; border-color: #c8a14b; color: #f6dc93; box-shadow: 0 3px 9px rgba(20, 42, 70, 0.25); }
+.stats-cat-btn.on.cat-mem    { background: #115e46; border-color: #d4af37; color: #ffffff; box-shadow: 0 3px 9px rgba(17, 94, 70, 0.25); }
+.stats-cat-btn.on.cat-rev    { background: #8a460b; border-color: #f0c060; color: #ffffff; box-shadow: 0 3px 9px rgba(138, 70, 11, 0.25); }
+.stats-cat-btn.on.cat-att    { background: #0e5a6d; border-color: #6ee7b7; color: #ffffff; box-shadow: 0 3px 9px rgba(14, 90, 109, 0.25); }
+
+/* ===== 4 DISTINCT LUXURY PODIUM POSTER THEMES (SVG BACKDROP + UNIQUE IDENTITY!) ===== */
+.pts-podium-poster {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+}
+.ppp-bg-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.ppp-inner {
+  position: relative;
+  z-index: 2;
+}
+.ppp-summary-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.ppp-sum-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 8px 12px;
+  text-align: center;
+}
+.ppp-sum-pill small { display: block; font-size: 12px; color: rgba(255,255,255,0.78); font-weight: 700; }
+.ppp-sum-pill b { display: block; font-size: 20px; color: #ffffff; font-weight: 800; margin-top: 2px; }
+
+/* Theme 1: POINTS (Royal Navy & Matte Gold) */
+.pts-podium-poster.theme-points {
+  background: linear-gradient(155deg, #0a1d38 0%, #163a66 55%, #0d2547 100%);
+  border-color: #c8a14b;
+}
+
+/* Theme 2: MEMORIZATION (Deep Quranic Emerald & Warm Gold) */
+.pts-podium-poster.theme-mem {
+  background: linear-gradient(155deg, #07281f 0%, #104e3d 55%, #0a3328 100%);
+  border-color: #d4af37;
+}
+.pts-podium-poster.theme-mem .ppp-kicker { background: rgba(212, 175, 55, 0.2); border-color: rgba(244, 217, 141, 0.55); color: #f6e09a; }
+.pts-podium-poster.theme-mem .ppp-branch-tag { border-color: rgba(212, 175, 55, 0.6); }
+.pts-podium-poster.theme-mem .ppp-pod-card.first { background: linear-gradient(180deg, rgba(212, 175, 55, 0.25) 0%, rgba(7, 40, 31, 0.78) 100%); border-color: #f6e09a; }
+.pts-podium-poster.theme-mem .ppp-pts-badge { background: #d4af37; color: #07281f; }
+.pts-podium-poster.theme-mem .ppp-pod-card.first .ppp-pts-badge { background: #f6e09a; color: #07281f; }
+.pts-podium-poster.theme-mem .ppp-rest-row { border-right-color: #d4af37; border-color: rgba(110, 231, 183, 0.28); }
+.pts-podium-poster.theme-mem .ppp-rest-pts { background: #a7f3d0; color: #064e3b; }
+
+/* Theme 3: REVIEW (Warm Royal Amber-Bronze & Ivory Gold) */
+.pts-podium-poster.theme-rev {
+  background: linear-gradient(155deg, #331608 0%, #6b3310 52%, #3d1c0a 100%);
+  border-color: #eab349;
+}
+.pts-podium-poster.theme-rev .ppp-kicker { background: rgba(234, 179, 73, 0.22); border-color: rgba(253, 224, 138, 0.55); color: #fde68a; }
+.pts-podium-poster.theme-rev .ppp-branch-tag { border-color: rgba(234, 179, 73, 0.6); }
+.pts-podium-poster.theme-rev .ppp-pod-card.first { background: linear-gradient(180deg, rgba(234, 179, 73, 0.28) 0%, rgba(51, 22, 8, 0.78) 100%); border-color: #fde68a; }
+.pts-podium-poster.theme-rev .ppp-pts-badge { background: #eab349; color: #331608; }
+.pts-podium-poster.theme-rev .ppp-pod-card.first .ppp-pts-badge { background: #fde68a; color: #331608; }
+.pts-podium-poster.theme-rev .ppp-rest-row { border-right-color: #eab349; border-color: rgba(253, 224, 138, 0.3); }
+.pts-podium-poster.theme-rev .ppp-rest-pts { background: #fde68a; color: #451a03; }
+
+/* Theme 4: ATTENDANCE (Sapphire Petrol-Teal & Crisp Mint-Silver) */
+.pts-podium-poster.theme-att {
+  background: linear-gradient(155deg, #082936 0%, #105068 55%, #0a3547 100%);
+  border-color: #5eead4;
+}
+.pts-podium-poster.theme-att .ppp-kicker { background: rgba(94, 234, 212, 0.18); border-color: rgba(153, 246, 228, 0.55); color: #99f6e4; }
+.pts-podium-poster.theme-att .ppp-branch-tag { border-color: rgba(94, 234, 212, 0.55); }
+.pts-podium-poster.theme-att .ppp-branch-tag b { color: #99f6e4; }
+.pts-podium-poster.theme-att .ppp-pod-card.first { background: linear-gradient(180deg, rgba(94, 234, 212, 0.22) 0%, rgba(8, 41, 54, 0.78) 100%); border-color: #99f6e4; }
+.pts-podium-poster.theme-att .ppp-rank-lbl { color: #99f6e4; }
+.pts-podium-poster.theme-att .ppp-pts-badge { background: #5eead4; color: #082936; }
+.pts-podium-poster.theme-att .ppp-pod-card.first .ppp-pts-badge { background: #a7f3d0; color: #064e3b; }
+.pts-podium-poster.theme-att .ppp-rest-row { border-right-color: #5eead4; border-color: rgba(153, 246, 228, 0.28); }
+.pts-podium-poster.theme-att .ppp-rest-pos { background: rgba(94, 234, 212, 0.2); color: #99f6e4; }
+.pts-podium-poster.theme-att .ppp-rest-pts { background: #a7f3d0; color: #082936; }
+
+/* ===== 4 DISTINCT PRINTABLE TABLE THEMES ===== */
+.pts-table-paper.theme-mem { border-color: #115e46; }
+.pts-table-paper.theme-mem .ptp-hdr { border-bottom-color: #16794c; }
+.pts-table-paper.theme-mem .ptp-hdr-mid h2 { color: #0d4a37; }
+.pts-table-paper.theme-mem .ptp-meta-cell { border-right-color: #16794c; background: #f0faf5; color: #0d4a37; }
+.pts-table-paper.theme-mem table.t-points-all th { background: #115e46; }
+.pts-table-paper.theme-mem table.t-points-all th.gold-th { background: #d4af37; color: #07281f !important; }
+.pts-table-paper.theme-mem table.t-points-all td.pts-col { color: #115e46; }
+.pts-table-paper.theme-mem table.t-points-all tfoot td { background: #e3f5ec; color: #0d4a37; }
+
+.pts-table-paper.theme-rev { border-color: #8a460b; }
+.pts-table-paper.theme-rev .ptp-hdr { border-bottom-color: #d98218; }
+.pts-table-paper.theme-rev .ptp-hdr-mid h2 { color: #6e3412; }
+.pts-table-paper.theme-rev .ptp-meta-cell { border-right-color: #b85d10; background: #fdf6ec; color: #6e3412; }
+.pts-table-paper.theme-rev table.t-points-all th { background: #7c3a0d; }
+.pts-table-paper.theme-rev table.t-points-all th.gold-th { background: #eab349; color: #331608 !important; }
+.pts-table-paper.theme-rev table.t-points-all td.pts-col { color: #8a460b; }
+.pts-table-paper.theme-rev table.t-points-all tfoot td { background: #faebd7; color: #6e3412; }
+
+.pts-table-paper.theme-att { border-color: #0e5a6d; }
+.pts-table-paper.theme-att .ptp-hdr { border-bottom-color: #14859e; }
+.pts-table-paper.theme-att .ptp-hdr-mid h2 { color: #0a4656; }
+.pts-table-paper.theme-att .ptp-meta-cell { border-right-color: #0e5a6d; background: #edf8fa; color: #0a4656; }
+.pts-table-paper.theme-att table.t-points-all th { background: #0e5a6d; }
+.pts-table-paper.theme-att table.t-points-all th.gold-th { background: #22a38a; color: #ffffff !important; }
+.pts-table-paper.theme-att table.t-points-all td.pts-col { color: #0e5a6d; }
+.pts-table-paper.theme-att table.t-points-all tfoot td { background: #e0f3f7; color: #0a4656; }
+
+
+/* ==================== MAKIN v77: PER-PAGE EVALUATOR, SURAH-RELATIVE PAGES & MASTER ALL-IN-ONE POSTER ==================== */
+.sp-pnum-mode {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 3px;
+  margin-bottom: 8px;
+}
+.sp-pnum-btn {
+  border: none;
+  background: transparent;
+  color: var(--ink-700);
+  padding: 5px 4px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.sp-pnum-btn.on {
+  background: #142a46;
+  color: #ffffff;
+}
+[data-theme="dark"] .sp-pnum-btn.on { background: #c8a14b; color: #0f233c; }
+
+/* Per-Page Recitation Error/Alert Evaluator (When Student Recites 2–5 Pages) */
+.pp-eval-wrap {
+  background: var(--bg);
+  border: 1.5px solid var(--line-strong);
+  border-radius: 12px;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+.pp-eval-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 7px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--brand-slate);
+}
+.pp-tabs-strip {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 7px;
+}
+.pp-tab-btn {
+  border: 1.5px solid var(--line-strong);
+  background: var(--white);
+  color: var(--ink-900);
+  border-radius: 10px;
+  padding: 5px 3px 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  min-width: 0;
+  transition: all 0.13s ease;
+}
+.pp-tab-btn .pp-t-num { font-size: 11.5px; font-weight: 800; white-space: nowrap; }
+.pp-tab-btn .pp-t-ev { font-size: 9.5px; font-weight: 800; padding: 1px 5px; border-radius: 99px; white-space: nowrap; }
+.pp-tab-btn.st-ex .pp-t-ev { background: var(--green-bg); color: var(--green); }
+.pp-tab-btn.st-vg .pp-t-ev { background: var(--blue-bg); color: var(--blue); }
+.pp-tab-btn.st-gd .pp-t-ev { background: #fef9c3; color: #854d0e; }
+.pp-tab-btn.st-rp { border-color: rgba(185, 34, 34, 0.5); background: var(--red-bg); }
+.pp-tab-btn.st-rp .pp-t-ev { background: var(--red); color: #ffffff; }
+.pp-tab-btn.active {
+  border-color: #142a46;
+  box-shadow: 0 0 0 2.5px rgba(20, 42, 70, 0.2);
+  transform: translateY(-1px);
+}
+[data-theme="dark"] .pp-tab-btn.active { border-color: #c8a14b; box-shadow: 0 0 0 2.5px rgba(200, 161, 75, 0.25); }
+
+.pp-active-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-right: 3.5px solid #142a46;
+  border-radius: 9px;
+  padding: 5px 8px;
+  margin-bottom: 7px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-900);
+}
+.pp-repeat-banner {
+  background: var(--red-bg);
+  border: 1px solid rgba(185, 34, 34, 0.3);
+  border-right: 4px solid var(--red);
+  border-radius: 10px;
+  padding: 7px 9px;
+  margin-top: 7px;
+  font-size: 11.5px;
+  color: var(--ink-900);
+}
+.pp-repeat-banner b { color: var(--red); }
+.pp-repeat-hw-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin-top: 6px;
+}
+.pp-rhw-btn {
+  border: 1px solid var(--line-strong);
+  background: var(--white);
+  color: var(--ink-700);
+  border-radius: 8px;
+  padding: 5px 5px;
+  font-size: 10.5px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+}
+.pp-rhw-btn.on {
+  background: var(--red);
+  border-color: var(--red);
+  color: #ffffff;
+}
+.pp-mode-link {
+  border: 1px solid var(--line-strong);
+  background: var(--white);
+  color: var(--blue);
+  border-radius: 7px;
+  padding: 2px 7px;
+  font-size: 10.5px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* 5-Category Quick Export Dock (All-in-One Master + 4 Distinct Categories) */
+.stats-cat-dock-5 {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 8px;
+}
+.stats-cat-btn.cat-all {
+  border-color: rgba(124, 45, 76, 0.35);
+  background: #f9eef4;
+  color: #6b1d42;
+}
+[data-theme="dark"] .stats-cat-btn.cat-all { background: #301627; color: #f5b8d4; }
+.stats-cat-btn.on.cat-all {
+  background: linear-gradient(135deg, #4b1232 0%, #162e52 100%);
+  border-color: #e6be68;
+  color: #f8e1a6;
+  box-shadow: 0 3px 10px rgba(75, 18, 50, 0.28);
+}
+
+/* Theme 5: MASTER ALL-IN-ONE HONOR POSTER (Royal Plum-Navy & Champagne Gold) */
+.pts-podium-poster.theme-all {
+  background: linear-gradient(155deg, #270c22 0%, #142646 52%, #1d102a 100%);
+  border-color: #e6be68;
+}
+.ppp-quad-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.ppp-quad-card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+.ppp-quad-card.q-mem { border-top: 4px solid #34d399; }
+.ppp-quad-card.q-rev { border-top: 4px solid #f59e0b; }
+.ppp-quad-card.q-att { border-top: 4px solid #38bdf8; }
+.ppp-quad-card.q-pts { border-top: 4px solid #f4d98d; }
+.ppp-quad-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 800;
+  color: #f4d98d;
+  padding-bottom: 9px;
+  margin-bottom: 9px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.ppp-quad-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 9px;
+  border-radius: 10px;
+  background: rgba(8, 18, 34, 0.45);
+  margin-bottom: 7px;
+}
+.ppp-quad-item:last-child { margin-bottom: 0; }
+.ppp-quad-item.top { background: rgba(230, 190, 104, 0.18); border: 1px solid rgba(244, 217, 141, 0.4); }
+.ppp-quad-name { font-size: 16px; font-weight: 800; color: #ffffff; }
+.ppp-quad-val {
+  background: #f4d98d;
+  color: #142038;
+  font-size: 13.5px;
+  font-weight: 800;
+  padding: 3px 11px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.pts-table-paper.theme-all { border-color: #4b1232; }
+.pts-table-paper.theme-all .ptp-hdr { border-bottom-color: #c8a14b; }
+.pts-table-paper.theme-all .ptp-hdr-mid h2 { color: #4b1232; }
+.pts-table-paper.theme-all .ptp-meta-cell { border-right-color: #4b1232; background: #faf3f7; color: #4b1232; }
+.pts-table-paper.theme-all table.t-points-all th { background: #3b1530; }
+.pts-table-paper.theme-all table.t-points-all th.gold-th { background: #c8a14b; color: #1a0d18 !important; }
+.pts-table-paper.theme-all tfoot td { background: #f3e6ee; color: #3b1530; }
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -10172,7 +10599,7 @@ table.t-points-all tfoot td {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v75</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v77</span>
         </button>
       </div>
     </div>
@@ -10323,10 +10750,13 @@ table.t-points-all tfoot td {
           <label style="font-weight:800; font-size:13px; white-space:nowrap;">الفترة:</label>
           <select id="statsMonthFilter" onchange="renderStats()" style="flex:1; min-width:0; padding:8px 10px; border-radius:9px; border:1.5px solid var(--line-strong); font-weight:800; background:var(--bg); color:var(--ink-900);"></select>
         </div>
-        <div class="pts-stats-actions" id="btnCopyPointsLeaderboard">
-          <button type="button" class="btn btn-primary btn-sm" onclick="openPointsReportModal('table')">📋 صورة/PDF لجميع النقاط</button>
-          <button type="button" class="btn btn-soft btn-sm" onclick="openPointsReportModal('podium')">🏆 لوحة المتصدرين</button>
-          <button type="button" class="btn btn-outline btn-sm" onclick="copyPointsLeaderboardWA()">💬 نسخ للواتساب</button>
+        <div style="font-size:11px; font-weight:800; color:var(--ink-500); margin-top:8px;">📸 تصدير صور HD وملفات PDF (الكل + لوحة الأوائل بتصميم مستقل لكل فئة):</div>
+        <div class="stats-cat-dock-5" id="btnCopyPointsLeaderboard">
+          <button type="button" class="stats-cat-btn cat-all" onclick="openStatsExportModal('all','podium')"><span class="sc-ico">👑</span><span class="sc-lbl">الشامل</span></button>
+          <button type="button" class="stats-cat-btn cat-points" id="statsQuickPtsBtn" onclick="openStatsExportModal('points','podium')"><span class="sc-ico">⭐</span><span class="sc-lbl">النقاط</span></button>
+          <button type="button" class="stats-cat-btn cat-mem" onclick="openStatsExportModal('mem','podium')"><span class="sc-ico">📖</span><span class="sc-lbl">الحفظ</span></button>
+          <button type="button" class="stats-cat-btn cat-rev" onclick="openStatsExportModal('rev','podium')"><span class="sc-ico">🔄</span><span class="sc-lbl">المراجعة</span></button>
+          <button type="button" class="stats-cat-btn cat-att" onclick="openStatsExportModal('att','podium')"><span class="sc-ico">✅</span><span class="sc-lbl">الحضور</span></button>
         </div>
       </div>
       <div id="statsContent"></div>
@@ -11413,8 +11843,8 @@ table.t-points-all tfoot td {
 
         <!-- Review Sub-Unit Switcher (بالآيات vs من صفحة إلى صفحة) -->
         <div id="spReviewUnitToggle" class="sp-unit-toggle" style="display:none;">
-          <button type="button" class="sp-unit-btn on" id="spUnitAyahBtn" onclick="spSetReviewUnit('ayah')">🔢 بالآيات</button>
-          <button type="button" class="sp-unit-btn" id="spUnitPageBtn" onclick="spSetReviewUnit('page')">📄 من صفحة إلى صفحة</button>
+          <button type="button" class="sp-unit-btn on" id="spUnitPageBtn" onclick="spSetReviewUnit('page')">📄 من سورة إلى سورة (صفحات)</button>
+          <button type="button" class="sp-unit-btn" id="spUnitAyahBtn" onclick="spSetReviewUnit('ayah')">🔢 بالآيات</button>
         </div>
 
         <div id="spAyahBox" class="sp-ayah-box"></div>
@@ -11494,23 +11924,31 @@ table.t-points-all tfoot td {
   </div>
 </div>
 
-<!-- ===== MODAL: PRINTABLE ALL-POINTS SHEET & TOP LEADERS POSTER (v75) ===== -->
+<!-- ===== MODAL: 4-CATEGORY HONOR POSTERS & FULL SHEETS STUDIO (v76: POINTS | MEM | REV | ATT) ===== -->
 <div class="modal-backdrop" id="pointsReportModal" style="z-index:139;" onclick="if(event.target===this) closeModal('pointsReportModal')">
-  <div class="modal-box" style="max-width:660px; padding:15px;">
-    <div class="modal-header" style="margin-bottom:10px; padding-bottom:8px;">
-      <h3 style="font-size:15px;">🏆 طباعة وتصدير النقاط والمتصدرين</h3>
+  <div class="modal-box" style="max-width:670px; padding:15px;">
+    <div class="modal-header" style="margin-bottom:9px; padding-bottom:8px;">
+      <h3 id="prModalTitle" style="font-size:15px;">🏆 استوديو صور وملفات الإحصائيات</h3>
       <button class="close-x" onclick="closeModal('pointsReportModal')">×</button>
     </div>
 
+    <div class="stats-cat-dock-5" id="prCatTabsRow" style="margin-top:0; margin-bottom:9px;">
+      <button type="button" class="stats-cat-btn cat-all" id="prCatBtn_all" onclick="setStatsExportCategory('all')"><span class="sc-ico">👑</span><span class="sc-lbl">الشامل</span></button>
+      <button type="button" class="stats-cat-btn cat-points on" id="prCatBtn_points" onclick="setStatsExportCategory('points')"><span class="sc-ico">⭐</span><span class="sc-lbl">النقاط</span></button>
+      <button type="button" class="stats-cat-btn cat-mem" id="prCatBtn_mem" onclick="setStatsExportCategory('mem')"><span class="sc-ico">📖</span><span class="sc-lbl">الحفظ</span></button>
+      <button type="button" class="stats-cat-btn cat-rev" id="prCatBtn_rev" onclick="setStatsExportCategory('rev')"><span class="sc-ico">🔄</span><span class="sc-lbl">المراجعة</span></button>
+      <button type="button" class="stats-cat-btn cat-att" id="prCatBtn_att" onclick="setStatsExportCategory('att')"><span class="sc-ico">✅</span><span class="sc-lbl">الحضور</span></button>
+    </div>
+
     <div class="sp-mode-tabs" style="margin-bottom:9px;">
-      <button type="button" class="sp-mode-tab on" id="prTabTableBtn" onclick="setPointsReportMode('table')">📋 لائحة جميع الطلاب</button>
-      <button type="button" class="sp-mode-tab" id="prTabPodiumBtn" onclick="setPointsReportMode('podium')">🏆 لوحة المتصدرين</button>
+      <button type="button" class="sp-mode-tab on" id="prTabPodiumBtn" onclick="setPointsReportMode('podium')">🏆 لوحة المتصدرين</button>
+      <button type="button" class="sp-mode-tab" id="prTabTableBtn" onclick="setPointsReportMode('table')">📋 كشف جميع الطلاب</button>
     </div>
 
     <div id="prTableOptsRow" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px; margin-bottom:9px;">
-      <span style="font-size:12px; font-weight:800; color:var(--ink-700);">نطاق العرض:</span>
+      <span style="font-size:12px; font-weight:800; color:var(--ink-700);">نطاق الكشف:</span>
       <div class="pill-group" style="gap:5px;">
-        <button type="button" class="pill pill-sm on-slate" id="prScopeEarnedBtn" onclick="setPointsTableScope('earned')">الحاصلون على نقاط فقط</button>
+        <button type="button" class="pill pill-sm on-slate" id="prScopeEarnedBtn" onclick="setPointsTableScope('earned')">المُنجزون فقط</button>
         <button type="button" class="pill pill-sm" id="prScopeAllBtn" onclick="setPointsTableScope('all')">جميع طلاب الحلقة</button>
       </div>
     </div>
@@ -11533,7 +11971,7 @@ table.t-points-all tfoot td {
     <div class="cert-actions-grid">
       <button type="button" class="btn btn-primary" onclick="exportPointsReportPNG()">📸 حفظ صورة HD</button>
       <button type="button" class="btn btn-soft" onclick="exportPointsReportPDF()">📑 حفظ ملف PDF</button>
-      <button type="button" class="btn btn-success" onclick="copyPointsLeaderboardWA()">💬 نسخ للواتساب</button>
+      <button type="button" class="btn btn-success" onclick="copyCurrentStatsCategoryWA()">💬 نسخ للواتساب</button>
       <button type="button" class="btn btn-outline" onclick="closeModal('pointsReportModal')">إغلاق</button>
     </div>
   </div>
@@ -11862,8 +12300,14 @@ function formatPointsBreakdownText(s, r, st) {
       parts.push(`سبر: ${REV_POINTS[r.recEval] || 0}`);
     } else {
       if (r.recEval) {
-        const pg = Number(r.recPages) || calcRecordRecPages(r) || Number(st?.pace || 0.5);
-        parts.push(`حفظ (${formatNum(pg)} ص): ${calcMemPointsForEval(r.recEval, pg)}`);
+        const ppPts = computePerPageMemPoints(r);
+        if (ppPts !== null) {
+          const passedN = r.recPageEvals.filter(p => p.eval !== "إعادة").length;
+          parts.push(`حفظ (${passedN}/${r.recPageEvals.length} ص): ${ppPts}`);
+        } else {
+          const pg = Number(r.recPages) || calcRecordRecPages(r) || Number(st?.pace || 0.5);
+          parts.push(`حفظ (${formatNum(pg)} ص): ${calcMemPointsForEval(r.recEval, pg)}`);
+        }
       }
       if (r.sabrJuz) {
         const sEv = (r.dRevEval && REV_POINTS[r.dRevEval] !== undefined) ? r.dRevEval : "ممتاز";
@@ -11909,8 +12353,13 @@ function computeRecordPoints(s, r, st) {
       total += REV_POINTS[r.recEval] || 0;
     } else {
       if (r.recEval) {
-        const pg = Number(r.recPages) || calcRecordRecPages(r) || Number(st?.pace || 0.5);
-        total += calcMemPointsForEval(r.recEval, pg);
+        const ppPts = computePerPageMemPoints(r);
+        if (ppPts !== null) {
+          total += ppPts;
+        } else {
+          const pg = Number(r.recPages) || calcRecordRecPages(r) || Number(st?.pace || 0.5);
+          total += calcMemPointsForEval(r.recEval, pg);
+        }
       }
       if (r.sabrJuz) {
         const sabrEv = (r.dRevEval && REV_POINTS[r.dRevEval] !== undefined) ? r.dRevEval : "ممتاز";
@@ -14564,10 +15013,354 @@ function updateGradeTesterResult() {
   }
 }
 
+
+// ==================== PER-PAGE ERROR/ALERT EVALUATION ENGINE (v77) ====================
+const _activePageTabMap = {};
+
+function getPageEvalKey(kind) {
+  return kind === "min" ? "minPageEvals" : (kind === "maj" ? "majPageEvals" : "recPageEvals");
+}
+
+function getPageModeKey(kind) {
+  return kind === "min" ? "minPageMode" : (kind === "maj" ? "majPageMode" : "recPageMode");
+}
+
+function buildRecitationPageSlots(r, st, kind, h) {
+  if (!r || !st || st.track === "rashidi") return [];
+  const slots = [];
+  const pushPage = (mushafPage, surahId, fromA, toA) => {
+    const sInfo = SURAH_MAP[Number(surahId)];
+    if (!sInfo) return;
+    const f = Math.max(1, Math.min(sInfo.a, Math.round(fromA || 1)));
+    const t = Math.max(f, Math.min(sInfo.a, Math.round(toA || sInfo.a)));
+    const existing = slots.find(x => x.mushafPage === mushafPage);
+    if (existing) {
+      if (String(existing.surahId) === String(sInfo.id)) {
+        existing.from = Math.min(existing.from, f);
+        existing.to = Math.max(existing.to, t);
+        existing.label = isShortFullSurah(sInfo, existing.from, existing.to)
+          ? sInfo.n
+          : `${sInfo.n} (${existing.from}–${existing.to})`;
+      } else {
+        existing.extraSegs = existing.extraSegs || [];
+        existing.extraSegs.push({ surahId: String(sInfo.id), from: f, to: t });
+        existing.label += ` + ${sInfo.n}`;
+      }
+      return;
+    }
+    slots.push({
+      idx: slots.length + 1,
+      mushafPage,
+      surahId: String(sInfo.id),
+      surahName: sInfo.n,
+      from: f,
+      to: t,
+      extraSegs: [],
+      label: isShortFullSurah(sInfo, f, t) ? sInfo.n : `${sInfo.n} (${f}–${t})`
+    });
+  };
+
+  if (kind === "maj") {
+    const p1 = parseArabicNum(r.majStartPage, 0);
+    const pgCnt = Math.round(parseArabicNum(r.majPages, 0) || Number(st.revPace || 0));
+    if (p1 >= 1 && pgCnt >= 2 && pgCnt <= 5) {
+      for (let i = 0; i < pgCnt; i++) {
+        const mp = Math.min(604, p1 + i);
+        const stInfo = getPageStartInfo(mp), enInfo = getPageEndInfo(mp);
+        pushPage(mp, stInfo?.surah?.id || 2, stInfo?.ayah || 1, (enInfo?.surah?.id === stInfo?.surah?.id) ? enInfo.ayah : (stInfo?.surah?.a || 1));
+      }
+    }
+    return slots;
+  }
+
+  const segs = getSegments(r, kind);
+  if (!segs.length) return [];
+  const totalEstPages = kind === "rec"
+    ? Math.max(Number(r.recTotalPages) || 0, Number(r.recPages) || 0, calcSegmentsPages(segs))
+    : Math.max(Number(r.minPages) || 0, calcSegmentsPages(segs));
+
+  for (const seg of segs) {
+    const sInfo = SURAH_MAP[Number(seg.surahId)];
+    if (!sInfo) continue;
+    const fA = Math.max(1, Math.min(sInfo.a, parseArabicNum(seg.from, 1)));
+    const tA = Math.max(fA, Math.min(sInfo.a, parseArabicNum(seg.to, sInfo.a)));
+    const pStart = getPageForSurahAyah(sInfo.id, fA);
+    const pEnd = getPageForSurahAyah(sInfo.id, tA);
+    for (let mp = pStart; mp <= pEnd && slots.length < 8; mp++) {
+      const pSt = getPageStartInfo(mp), pEn = getPageEndInfo(mp);
+      let pf = (mp === pStart) ? fA : ((pSt?.surah?.id === sInfo.id) ? pSt.ayah : 1);
+      let pt = (mp === pEnd) ? tA : ((pEn?.surah?.id === sInfo.id) ? pEn.ayah : sInfo.a);
+      pf = Math.max(fA, Math.min(tA, pf));
+      pt = Math.max(pf, Math.min(tA, pt));
+      pushPage(mp, sInfo.id, pf, pt);
+    }
+  }
+  if (slots.length < 2 && totalEstPages < 1.55) return [];
+  return slots.slice(0, 6);
+}
+
+function getSyncedPageEvals(r, st, kind, h) {
+  const slots = buildRecitationPageSlots(r, st, kind, h);
+  if (slots.length < 2) return null;
+  const pKey = getPageEvalKey(kind);
+  const saved = Array.isArray(r[pKey]) ? r[pKey] : [];
+  return slots.map((slot, i) => {
+    const match = saved.find(x => x.mushafPage === slot.mushafPage) || saved[i];
+    const errors = match ? Math.max(0, Number(match.errors) || 0) : 0;
+    const alerts = match ? Math.max(0, Number(match.alerts) || 0) : 0;
+    return {
+      ...slot,
+      idx: i + 1,
+      errors,
+      alerts,
+      eval: evalFromErrorCount(errors, alerts, h)
+    };
+  });
+}
+
+function shouldUsePerPageMode(r, st, kind, h) {
+  if (!r || !st || st.track === "rashidi") return false;
+  if (kind === "rec" && r.recIsSabr && r.sabrJuz) return false;
+  if (kind === "maj" && r.sabrJuz) return false;
+  const slots = buildRecitationPageSlots(r, st, kind, h);
+  if (slots.length < 2 || slots.length > 5) return false;
+  const mKey = getPageModeKey(kind);
+  return r[mKey] !== "single";
+}
+
+function togglePerPageEvalMode(studentId, kind, toMode) {
+  const s = getCurrentSession();
+  if (!s) return;
+  const r = getStudentRecord(s, studentId);
+  r[getPageModeKey(kind)] = toMode === "single" ? "single" : "multi";
+  if (toMode === "single") {
+    r[getPageEvalKey(kind)] = null;
+  }
+  saveStateDebounced(180);
+  if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
+    syncStudentEvalSheet();
+  }
+  renderStudentCardsOnly();
+}
+
+function selectPerPageTab(studentId, kind, idx) {
+  _activePageTabMap[`${studentId}_${kind}`] = idx;
+  if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
+    syncStudentEvalSheet();
+  }
+}
+
+function setRecRepeatHwMode(studentId, hwOnly) {
+  const s = getCurrentSession();
+  if (!s) return;
+  const r = getStudentRecord(s, studentId);
+  r.recRepeatHwOnly = Boolean(hwOnly);
+  applyPerPageAutoEval(studentId, "rec");
+}
+
+function stepPageCounter(studentId, kind, pageIdx, type, delta) {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s) return;
+  const st = h.students.find(x => x.id === studentId);
+  if (!st) return;
+  const r = getStudentRecord(s, studentId);
+  const pages = getSyncedPageEvals(r, st, kind, h);
+  if (!pages || !pages[pageIdx]) return;
+  const pg = pages[pageIdx];
+  const field = type === "alert" ? "alerts" : "errors";
+  const nextVal = Math.max(0, (Number(pg[field]) || 0) + delta);
+  if (nextVal === (Number(pg[field]) || 0)) return;
+  pg[field] = nextVal;
+  pg.eval = evalFromErrorCount(pg.errors, pg.alerts, h);
+  r[getPageEvalKey(kind)] = pages;
+  _activePageTabMap[`${studentId}_${kind}`] = pageIdx;
+  applyPerPageAutoEval(studentId, kind);
+}
+
+function computePerPageMemPoints(r) {
+  if (!r || !Array.isArray(r.recPageEvals) || r.recPageEvals.length < 2) return null;
+  return r.recPageEvals.reduce((sum, p) => sum + (p.eval === "إعادة" ? 0 : calcMemPointsForEval(p.eval, 1)), 0);
+}
+
+function applyPerPageAutoEval(studentId, kind) {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s) return;
+  const st = h.students.find(x => x.id === studentId);
+  if (!st) return;
+  const r = getStudentRecord(s, studentId);
+  const pages = getSyncedPageEvals(r, st, kind, h);
+  if (!pages || pages.length < 2) return;
+  r[getPageEvalKey(kind)] = pages;
+
+  if (r.attendance === "لم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  ensureRecordBonuses(r);
+
+  const totalErrs = pages.reduce((a, p) => a + (Number(p.errors) || 0), 0);
+  const totalAlrts = pages.reduce((a, p) => a + (Number(p.alerts) || 0), 0);
+  const passed = pages.filter(p => p.eval !== "إعادة");
+  const failed = pages.filter(p => p.eval === "إعادة");
+
+  const gradeRank = ev => ev === "ممتاز" ? 4 : (ev === "جيد جداً" ? 3 : (ev === "جيد" ? 2 : 0));
+  let overallEv = "إعادة";
+  if (passed.length > 0) {
+    const avg = passed.reduce((a, p) => a + gradeRank(p.eval), 0) / passed.length;
+    if (failed.length === 0) {
+      overallEv = avg >= 3.5 ? "ممتاز" : (avg >= 2.5 ? "جيد جداً" : "جيد");
+    } else {
+      overallEv = (passed.length > failed.length && avg >= 3) ? "جيد جداً" : "جيد";
+    }
+  }
+
+  const repeatDesc = failed.map(p => `الصفحة ${p.idx}: ${p.label} [صفحة ${p.mushafPage}]`).join(" و");
+  const summaryParts = pages.map(p => `صفحة ${p.idx} (${p.eval})`).join("، ");
+
+  if (kind === "rec") {
+    r.recErrors = totalErrs;
+    r.recAlerts = totalAlrts;
+    r.recEval = overallEv;
+    r.recTotalPages = pages.length;
+    r.recPages = passed.length > 0 ? passed.length : pages.length;
+
+    const segs = getSegments(r, "rec");
+    const dir = st?.direction || h.defaultDir || "desc";
+    if (failed.length > 0 && passed.length > 0) {
+      const failedSegs = [];
+      failed.forEach(p => {
+        failedSegs.push({ surahId: String(p.surahId), from: p.from, to: p.to });
+        if (Array.isArray(p.extraSegs)) failedSegs.push(...p.extraSegs);
+      });
+      if (r.recRepeatHwOnly && failedSegs.length) {
+        r.hwSabrJuz = "";
+        r.hwSurahId = failedSegs[0].surahId; r.hwEndSurahId = "";
+        r.hwFrom = failedSegs[0].from; r.hwTo = failedSegs[0].to;
+        r.hwExtras = failedSegs.slice(1).map(x => ({ ...x }));
+      } else {
+        if (segs.length) {
+          const last = segs[segs.length - 1];
+          const nxt = computeNextHomework(last.surahId, last.from, last.to, "", dir, st?.pace || 0.5);
+          if (nxt) Object.assign(r, nxt);
+        }
+        r.dRevIsPages = true;
+        r.dRevFrom = `إعادة ${failed[0].surahName} ص ${failed[0].mushafPage}`;
+        r.dRevTo = failed.length > 1 ? `و${failed.slice(1).map(x => "ص " + x.mushafPage).join("، ")}` : `(${failed[0].from}–${failed[0].to})`;
+        r.dRevEval = "إعادة";
+        r.dRevPages = 0;
+      }
+      r.notes = `تسميع ${pages.length} صفحات (أتقن ${passed.length}) — إعادة ${repeatDesc}.`;
+    } else if (passed.length === 0) {
+      if (segs.length) {
+        r.hwSabrJuz = "";
+        r.hwSurahId = segs[0].surahId; r.hwEndSurahId = "";
+        r.hwFrom = segs[0].from; r.hwTo = segs[0].to;
+        r.hwExtras = segs.slice(1).map(x => ({ ...x }));
+      }
+      r.notes = `إعادة كامل المقطع (${pages.length} صفحات: ${repeatDesc})؛ يرجى التكرار والضبط للجلسة القادمة.`;
+    } else {
+      if (r.dRevEval === "إعادة" && String(r.dRevFrom || "").startsWith("إعادة ")) {
+        r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevIsPages = false;
+      }
+      const completedJuz = detectCompletedJuz(segs, dir);
+      if (completedJuz) {
+        r.hwSabrJuz = completedJuz.name;
+        r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
+      } else if (segs.length) {
+        r.hwSabrJuz = "";
+        const last = segs[segs.length - 1];
+        const nxt = computeNextHomework(last.surahId, last.from, last.to, "", dir, st?.pace || 0.5);
+        if (nxt) Object.assign(r, nxt);
+      }
+      r.notes = `تسميع ${pages.length} صفحات بتقييم ${overallEv} (${summaryParts}) بارك الله في همتك.`;
+    }
+  } else if (kind === "min") {
+    r.minErrors = totalErrs; r.minAlerts = totalAlrts; r.minEval = overallEv;
+    if (!(Number(r.minPages) > 0)) r.minPages = pages.length;
+    r.notes = failed.length
+      ? `الصغرى (${pages.length} ص): أتقن ${passed.length} — إعادة ${repeatDesc}.`
+      : `الصغرى (${pages.length} ص): ${overallEv} (${summaryParts}).`;
+  } else if (kind === "maj") {
+    r.majErrors = totalErrs; r.majAlerts = totalAlrts; r.majEval = overallEv;
+    if (!(Number(r.majPages) > 0)) r.majPages = pages.length;
+    applyNextMajorReview(st, r, overallEv !== "إعادة");
+    r.notes = failed.length
+      ? `الكبرى (${pages.length} ص): أتقن ${passed.length} — إعادة ${repeatDesc}.`
+      : `الكبرى (${pages.length} ص): ${overallEv} (${summaryParts}).`;
+  }
+
+  r.points = computeRecordPoints(s, r, st);
+  saveStateDebounced(200);
+  if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
+    syncStudentEvalSheet();
+  }
+  renderStudentCardsOnly();
+}
+
 function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  const st = h?.students?.find(x => x.id === studentId);
+  const r = (s && st) ? getStudentRecord(s, studentId) : null;
+  const slots = (r && st) ? buildRecitationPageSlots(r, st, kind, h) : [];
+  const canMulti = slots.length >= 2 && slots.length <= 5 && !(kind === "rec" && r.recIsSabr && r.sabrJuz) && !(kind === "maj" && r.sabrJuz);
+
+  if (canMulti && shouldUsePerPageMode(r, st, kind, h)) {
+    const pages = getSyncedPageEvals(r, st, kind, h);
+    const mapKey = `${studentId}_${kind}`;
+    let activeIdx = Number(_activePageTabMap[mapKey] || 0);
+    if (activeIdx < 0 || activeIdx >= pages.length) activeIdx = 0;
+    const curPg = pages[activeIdx];
+    const failed = pages.filter(p => p.eval === "إعادة");
+    const passedCnt = pages.length - failed.length;
+    const evCls = ev => ev === "ممتاز" ? "st-ex" : (ev === "جيد جداً" ? "st-vg" : (ev === "جيد" ? "st-gd" : "st-rp"));
+    const evShort = ev => ev === "جيد جداً" ? "ج.ج" : ev;
+    const nextIdx = (activeIdx + 1) % pages.length;
+
+    const tabsHtml = pages.map((p, idx) => `
+      <button type="button" class="pp-tab-btn ${evCls(p.eval)} ${idx === activeIdx ? "active" : ""}" onclick="selectPerPageTab('${studentId}','${kind}',${idx})">
+        <span class="pp-t-num">ص ${p.mushafPage}</span>
+        <span class="pp-t-ev">${p.eval === "إعادة" ? "🔁 إعادة" : evShort(p.eval)}${p.errors > 0 ? ` (${p.errors})` : ""}</span>
+      </button>`).join("");
+
+    const repeatHtml = failed.length ? `
+      <div class="pp-repeat-banner">
+        <div>⚠️ <b>صفحات الإعادة (${failed.length} من ${pages.length}):</b> ${failed.map(p => `<b>ص ${p.mushafPage}</b> (${escapeHtml(p.label)})`).join(" ، ")} ${passedCnt > 0 ? `• ✅ أتقن ${passedCnt} ص` : ""}</div>
+        ${kind === "rec" && passedCnt > 0 ? `
+          <div class="pp-repeat-hw-row">
+            <button type="button" class="pp-rhw-btn ${!r.recRepeatHwOnly ? "on" : ""}" onclick="setRecRepeatHwMode('${studentId}', false)">📘 إعادة بالمراجعة + حفظ جديد</button>
+            <button type="button" class="pp-rhw-btn ${r.recRepeatHwOnly ? "on" : ""}" onclick="setRecRepeatHwMode('${studentId}', true)">📌 الواجب القادم: الإعادة فقط</button>
+          </div>` : ""}
+      </div>` : "";
+
+    return `<div class="pp-eval-wrap">
+      <div class="pp-eval-hdr">
+        <span>📄 تقييم صفحة بصفحة (${pages.length} صفحات)</span>
+        <button type="button" class="pp-mode-link" onclick="togglePerPageEvalMode('${studentId}','${kind}','single')">تقييم إجمالي</button>
+      </div>
+      <div class="pp-tabs-strip" style="grid-template-columns:repeat(${pages.length}, minmax(0, 1fr));">${tabsHtml}</div>
+      <div class="pp-active-info">
+        <span style="min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">📖 صفحة ${activeIdx + 1}/${pages.length}: <b>${escapeHtml(curPg.label)}</b> (ص ${curPg.mushafPage})</span>
+        ${pages.length > 1 ? `<button type="button" class="lms-btn accent" style="padding:2px 7px; font-size:10.5px;" onclick="selectPerPageTab('${studentId}','${kind}',${nextIdx})">التالية ←</button>` : ""}
+      </div>
+      <div class="es-err-grid-2" style="margin-bottom:0;">
+        <div class="es-err-cap" title="أخطاء الصفحة الحالية فقط">
+          <button type="button" class="es-cap-btn plus-err" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'error',1)" aria-label="تسجيل خطأ">+</button>
+          <span class="es-cap-lbl" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'error',1)">أخطاء ص ${curPg.mushafPage}: <b>${curPg.errors}</b></span>
+          <button type="button" class="es-cap-btn" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'error',-1)" aria-label="إنقاص خطأ">−</button>
+        </div>
+        <div class="es-err-cap is-alert" title="تنبيهات الصفحة الحالية فقط">
+          <button type="button" class="es-cap-btn plus-alrt" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'alert',1)" aria-label="تسجيل تنبيه">+</button>
+          <span class="es-cap-lbl" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'alert',1)">تنبيه ص ${curPg.mushafPage}: <b>${curPg.alerts}</b></span>
+          <button type="button" class="es-cap-btn" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'alert',-1)" aria-label="إنقاص تنبيه">−</button>
+        </div>
+      </div>
+      ${repeatHtml}
+    </div>`;
+  }
+
   const n = Math.max(0, Number(errs) || 0);
   const a = Math.max(0, Number(alerts) || 0);
-  return `<div class="es-err-grid-2">
+  const multiSwitchHtml = canMulti
+    ? `<div style="display:flex; justify-content:flex-end; margin-bottom:4px;"><button type="button" class="pp-mode-link" onclick="togglePerPageEvalMode('${studentId}','${kind}','multi')">📄 فتح تقييم صفحة بصفحة (${slots.length} صفحات)</button></div>`
+    : "";
+  return `${multiSwitchHtml}<div class="es-err-grid-2">
     <div class="es-err-cap" title="تسجيل أخطاء الحفظ (يطبق التقييم تلقائياً حسب معيار الإعدادات)">
       <button type="button" class="es-cap-btn plus-err" onclick="stepErrorCounter('${studentId}','${kind}',1)" aria-label="تسجيل خطأ">+</button>
       <span class="es-cap-lbl" onclick="stepErrorCounter('${studentId}','${kind}',1)">أخطاء: <b id="esErrVal_${kind}">${n}</b></span>
@@ -14777,20 +15570,46 @@ function openSurahPicker(studentId, kind) {
     pageTo = parseArabicNum(r.majEndPage, Math.min(604, pageFrom + Math.max(0, (Number(r.majPages) || 2) - 1)));
   }
 
-  let reviewUnit = "ayah";
+  const hasExplicitAyahReview = (kind === "dRev" && Boolean(r.dRevSurahId) && !r.dRevIsPages)
+    || (kind === "min" && Boolean(r.minSurahId || (r.minText && !r.minIsPages)));
+  let reviewUnit = (spIsReviewKind(kind) && !hasExplicitAyahReview) ? "page" : "ayah";
+  let pageFromSurahId = "";
+  let pageToSurahId = "";
   if (initMode === "pages") {
     initMode = "surah";
     reviewUnit = "page";
-    const startSurahFromPg = getPageStartInfo(pageFrom)?.surah;
-    if (startSurahFromPg) existing = [{ surahId: String(startSurahFromPg.id), from: 1, to: startSurahFromPg.a }];
-  } else if (spIsReviewKind(kind) && existing.length) {
+  }
+  if (kind === "dRev") {
+    pageFromSurahId = r.dRevPageFromSurahId || "";
+    pageToSurahId = r.dRevPageToSurahId || "";
+  } else if (kind === "min") {
+    pageFromSurahId = r.minPageFromSurahId || "";
+    pageToSurahId = r.minPageToSurahId || "";
+  } else if (kind === "maj") {
+    pageFromSurahId = r.majStartSurahId || "";
+    pageToSurahId = r.majEndSurahId || "";
+  } else if (kind === "nextMaj") {
+    pageFromSurahId = r.nextMajStartSurahId || "";
+    pageToSurahId = r.nextMajEndSurahId || "";
+  }
+  if (spIsReviewKind(kind) && (!pageFromSurahId || !pageToSurahId) && existing.length) {
     const firstS = SURAH_MAP[Number(existing[0].surahId)];
     if (firstS) {
-      pageFrom = getPageForSurahAyah(firstS.id, existing[0].from || 1);
+      if (!r.dRevIsPages && !r.minIsPages && !r.majIsPages && !r.nextMajIsPages) {
+        pageFrom = getPageForSurahAyah(firstS.id, existing[0].from || 1);
+      }
+      if (!pageFromSurahId) pageFromSurahId = String(firstS.id);
       const lastS = SURAH_MAP[Number(existing[existing.length - 1].surahId)] || firstS;
-      pageTo = Math.max(pageFrom, getPageForSurahAyah(lastS.id, existing[existing.length - 1].to || lastS.a));
+      if (!r.dRevIsPages && !r.minIsPages && !r.majIsPages && !r.nextMajIsPages) {
+        pageTo = getPageForSurahAyah(lastS.id, existing[existing.length - 1].to || lastS.a);
+      }
+      if (!pageToSurahId) pageToSurahId = String(lastS.id);
     }
   }
+  pageFrom = Math.max(1, Math.min(604, pageFrom));
+  pageTo = Math.max(1, Math.min(604, pageTo));
+  if (!pageFromSurahId || !SURAH_MAP[Number(pageFromSurahId)]) pageFromSurahId = String(getPageStartInfo(pageFrom)?.surah?.id || 2);
+  if (!pageToSurahId || !SURAH_MAP[Number(pageToSurahId)]) pageToSurahId = String(getPageEndInfo(pageTo)?.surah?.id || pageFromSurahId);
 
   const hadRealExisting = Boolean(getSegments(r, kind).length || reviewUnit === "page" || (kind === "maj") || (kind === "nextMaj" && (r.nextMajStartSurahId || r.nextMajStartPage)));
   spState = {
@@ -14798,13 +15617,16 @@ function openSurahPicker(studentId, kind) {
     kind,
     mode: initMode,
     reviewUnit,
+    pageNumMode: "surah",
     dir: (kind === "maj" || kind === "nextMaj") ? "asc" : dir,
     segs: existing,
     activeIdx: 0,
     juzFilter: 0,
     browserOpen: !hadRealExisting,
-    pageFrom: Math.max(1, Math.min(604, pageFrom)),
-    pageTo: Math.max(1, Math.min(604, Math.max(pageFrom, pageTo))),
+    pageFrom,
+    pageTo,
+    pageFromSurahId,
+    pageToSurahId,
     sardJuzIds: activeSardIds,
     sabrJuzName: activeSabr,
     sabrScore: (r.sabrScore !== undefined && r.sabrScore !== null) ? r.sabrScore : ""
@@ -14874,14 +15696,20 @@ function spSetReviewUnit(unit) {
   if (!spIsReviewKind(spState.kind)) return;
   spState.reviewUnit = unit === "page" ? "page" : "ayah";
   if (spState.reviewUnit === "page") {
-    const seg = spState.segs[spState.activeIdx];
-    const info = SURAH_MAP[Number(seg?.surahId)];
-    if (info) {
-      const sStartP = Math.max(1, Math.min(604, Math.floor(info.fs)));
-      const sEndP = Math.max(sStartP, Math.min(604, Math.floor(info.fe - 0.01)));
-      if (spState.pageFrom < sStartP || spState.pageFrom > sEndP) {
-        spState.pageFrom = sStartP;
-        spState.pageTo = Math.min(sEndP, Math.max(sStartP, sEndP));
+    if (!spState.pageFromSurahId || !SURAH_MAP[Number(spState.pageFromSurahId)]) {
+      const seg = spState.segs[0];
+      const info = SURAH_MAP[Number(seg?.surahId)] || getPageStartInfo(spState.pageFrom || 2)?.surah;
+      if (info) {
+        spState.pageFromSurahId = String(info.id);
+        spState.pageFrom = Math.max(1, Math.min(604, Math.floor(info.fs)));
+      }
+    }
+    if (!spState.pageToSurahId || !SURAH_MAP[Number(spState.pageToSurahId)]) {
+      const lastSeg = spState.segs[spState.segs.length - 1];
+      const info2 = SURAH_MAP[Number(lastSeg?.surahId)] || getPageEndInfo(spState.pageTo || spState.pageFrom || 2)?.surah;
+      if (info2) {
+        spState.pageToSurahId = String(info2.id);
+        spState.pageTo = Math.max(1, Math.min(604, Math.floor(info2.fe - 0.01)));
       }
     }
   }
@@ -14955,22 +15783,27 @@ function renderSurahPickerUI() {
   if (pagesBox) pagesBox.style.display = isPageUnit ? "block" : "none";
   if (segBar) segBar.style.display = isPageUnit ? "none" : "flex";
 
+  const activeSurahHost = document.getElementById("spActiveSurahCard");
+  const drawer = document.getElementById("spBrowserDrawer");
+  if (activeSurahHost) activeSurahHost.style.display = isPageUnit ? "none" : "block";
+
   if (spState.mode === "sabr") {
     renderSpSabrGrid();
   } else if (spState.mode === "sard") {
     renderSpSardGrid();
+  } else if (isPageUnit) {
+    if (drawer) drawer.style.display = "none";
+    renderSpPagesBox();
   } else {
-    if (!isPageUnit) renderSpSegBar();
+    renderSpSegBar();
     renderSpActiveSurahCard();
-    const drawer = document.getElementById("spBrowserDrawer");
     if (drawer) drawer.style.display = spState.browserOpen ? "block" : "none";
     if (spState.browserOpen) {
       renderSpDirBtn();
       renderSpJuzStrip();
       renderSpSurahGrid();
     }
-    if (isPageUnit) renderSpPagesBox();
-    else renderSpAyahBox();
+    renderSpAyahBox();
   }
   renderSpPreview();
 }
@@ -15009,53 +15842,177 @@ function spToggleSardJuz(juzId) {
   renderSpPreview();
 }
 
-function spSetPageVal(field, val) {
-  const num = Math.max(1, Math.min(604, Math.round(parseArabicNum(val, 1))));
-  if (field === "from") {
-    spState.pageFrom = num;
-    if (spState.pageTo < spState.pageFrom) spState.pageTo = spState.pageFrom;
+function getSurahPageSpan(surahId) {
+  const s = SURAH_MAP[Number(surahId)];
+  if (!s) return { start: 1, end: 1, count: 1 };
+  const start = Math.max(1, Math.min(604, Math.floor(s.fs)));
+  const end = Math.max(start, Math.min(604, Math.floor(s.fe - 0.001)));
+  return { start, end, count: Math.max(1, end - start + 1) };
+}
+
+function spPageSurahOptsHtml(selectedId) {
+  return SURAHS.map(s => {
+    const sp = getSurahPageSpan(s.id);
+    const pgLbl = sp.count === 1 ? `1 صفحة • ص ${sp.start}` : `${sp.count} ص • المصحف ${sp.start}–${sp.end}`;
+    return `<option value="${s.id}" ${String(selectedId) === String(s.id) ? "selected" : ""}>${s.id}. سورة ${s.n} (${pgLbl})</option>`;
+  }).join("");
+}
+
+function spSetPageNumMode(mode) {
+  spState.pageNumMode = mode === "mushaf" ? "mushaf" : "surah";
+  renderSpPagesBox();
+}
+
+function spOnPageSurahPick(which, surahId) {
+  const s = SURAH_MAP[Number(surahId)];
+  if (!s) return;
+  const sp = getSurahPageSpan(s.id);
+  if (which === "from") {
+    spState.pageFromSurahId = String(s.id);
+    spState.pageFrom = sp.start;
+    if (!spState.pageToSurahId || spState.pageToSurahId === spState.pageFromSurahId) {
+      spState.pageToSurahId = String(s.id);
+      spState.pageTo = sp.end;
+    }
   } else {
-    spState.pageTo = num;
-    if (spState.pageFrom > spState.pageTo) spState.pageFrom = spState.pageTo;
+    spState.pageToSurahId = String(s.id);
+    spState.pageTo = (String(spState.pageFromSurahId) === String(s.id) || sp.count <= 2) ? sp.end : sp.start;
+  }
+  renderSpPagesBox();
+}
+
+function spJumpSurahPageBound(which, edge) {
+  const sid = which === "from" ? spState.pageFromSurahId : spState.pageToSurahId;
+  const sp = getSurahPageSpan(sid);
+  const pg = edge === "end" ? sp.end : sp.start;
+  if (which === "from") spState.pageFrom = pg;
+  else spState.pageTo = pg;
+  syncSpPageInputsOnly();
+}
+
+function spSetPageVal(field, val) {
+  const isRel = (spState.pageNumMode || "surah") === "surah";
+  if (isRel) {
+    const sid = field === "from" ? spState.pageFromSurahId : spState.pageToSurahId;
+    const sp = getSurahPageSpan(sid);
+    const rel = Math.max(1, Math.min(sp.count, Math.round(parseArabicNum(val, 1))));
+    const mushafPg = Math.max(1, Math.min(604, sp.start + rel - 1));
+    if (field === "from") spState.pageFrom = mushafPg;
+    else spState.pageTo = mushafPg;
+  } else {
+    const num = Math.max(1, Math.min(604, Math.round(parseArabicNum(val, 1))));
+    if (field === "from") {
+      spState.pageFrom = num;
+      const curSp = getSurahPageSpan(spState.pageFromSurahId);
+      if (num < curSp.start || num > curSp.end) {
+        const autoS = getPageStartInfo(num)?.surah;
+        if (autoS) spState.pageFromSurahId = String(autoS.id);
+      }
+    } else {
+      spState.pageTo = num;
+      const curSp = getSurahPageSpan(spState.pageToSurahId);
+      if (num < curSp.start || num > curSp.end) {
+        const autoS = getPageEndInfo(num)?.surah;
+        if (autoS) spState.pageToSurahId = String(autoS.id);
+      }
+    }
   }
   syncSpPageInputsOnly();
 }
 
 function spStepPageVal(field, delta) {
-  const cur = field === "from" ? (spState.pageFrom || 1) : (spState.pageTo || 1);
-  spSetPageVal(field, cur + delta);
+  const isRel = (spState.pageNumMode || "surah") === "surah";
+  if (isRel) {
+    const sid = field === "from" ? spState.pageFromSurahId : spState.pageToSurahId;
+    const sp = getSurahPageSpan(sid);
+    const curMushaf = field === "from" ? (spState.pageFrom || sp.start) : (spState.pageTo || sp.start);
+    const curRel = Math.max(1, Math.min(sp.count, curMushaf - sp.start + 1));
+    spSetPageVal(field, curRel + delta);
+  } else {
+    const cur = field === "from" ? (spState.pageFrom || 1) : (spState.pageTo || 1);
+    spSetPageVal(field, cur + delta);
+  }
 }
 
 function spApplyPageSpanPreset(spanPages) {
   const p1 = Math.max(1, Math.min(604, spState.pageFrom || 1));
-  spState.pageTo = Math.min(604, p1 + Math.max(1, spanPages) - 1);
-  syncSpPageInputsOnly();
+  const step = Math.max(1, spanPages) - 1;
+  const p2 = Math.min(604, p1 + step);
+  spState.pageTo = p2;
+  const autoS2 = getPageEndInfo(p2)?.surah;
+  if (autoS2) spState.pageToSurahId = String(autoS2.id);
+  renderSpPagesBox();
+}
+
+function getSpSurahPageSummary() {
+  const s1 = SURAH_MAP[Number(spState.pageFromSurahId)] || getPageStartInfo(spState.pageFrom || 2)?.surah;
+  const s2 = SURAH_MAP[Number(spState.pageToSurahId)] || getPageEndInfo(spState.pageTo || spState.pageFrom || 2)?.surah;
+  const sp1 = getSurahPageSpan(s1?.id || 2);
+  const sp2 = getSurahPageSpan(s2?.id || s1?.id || 2);
+  let p1 = Math.max(sp1.start, Math.min(sp1.end, Math.round(spState.pageFrom || sp1.start)));
+  let p2 = Math.max(sp2.start, Math.min(sp2.end, Math.round(spState.pageTo || sp2.start)));
+  const rel1 = Math.max(1, Math.min(sp1.count, p1 - sp1.start + 1));
+  const rel2 = Math.max(1, Math.min(sp2.count, p2 - sp2.start + 1));
+  const pCount = Math.abs(p2 - p1) + 1;
+  const sameS = Boolean(s1 && s2 && s1.id === s2.id);
+  const isRel = (spState.pageNumMode || "surah") === "surah";
+  const fromCol = s1
+    ? (isRel ? (sp1.count === 1 ? s1.n : `${s1.n} ص ${rel1}`) : `${s1.n} ص ${p1}`)
+    : `ص ${p1}`;
+  const toCol = sameS
+    ? (isRel ? `ص ${rel2}` : `ص ${p2}`)
+    : (s2 ? (isRel ? (sp2.count === 1 ? s2.n : `${s2.n} ص ${rel2}`) : `${s2.n} ص ${p2}`) : `ص ${p2}`);
+  const headerLbl = sameS ? s1.n : (s1 && s2 ? `${s1.n} ← ${s2.n}` : "صفحات");
+  const fullLabel = sameS
+    ? `${s1.n} (${isRel ? (rel1 === rel2 ? `صفحة ${rel1}` : `صفحة ${rel1} ← ${rel2}`) : (p1 === p2 ? `ص ${p1}` : `ص ${p1} ← ${p2}`)})`
+    : `${fromCol} ← ${toCol}`;
+  return { p1, p2, rel1, rel2, sp1, sp2, pCount, s1, s2, sameS, isRel, fromCol, toCol, headerLbl, fullLabel };
 }
 
 function syncSpPageInputsOnly() {
-  const p1 = Math.max(1, Math.min(604, spState.pageFrom || 1));
-  const p2 = Math.max(p1, Math.min(604, spState.pageTo || p1));
-  spState.pageFrom = p1; spState.pageTo = p2;
+  const sum = getSpSurahPageSummary();
+  spState.pageFrom = sum.p1;
+  spState.pageTo = sum.p2;
+  if (sum.s1) spState.pageFromSurahId = String(sum.s1.id);
+  if (sum.s2) spState.pageToSurahId = String(sum.s2.id);
+
+  const fSel = document.getElementById("spPageFromSurahSel");
+  const tSel = document.getElementById("spPageToSurahSel");
+  if (fSel && sum.s1 && fSel.value !== String(sum.s1.id)) fSel.value = String(sum.s1.id);
+  if (tSel && sum.s2 && tSel.value !== String(sum.s2.id)) tSel.value = String(sum.s2.id);
+
+  const fVal = sum.isRel ? sum.rel1 : sum.p1;
+  const tVal = sum.isRel ? sum.rel2 : sum.p2;
+  const fMin = sum.isRel ? 1 : sum.sp1.start;
+  const fMax = sum.isRel ? sum.sp1.count : sum.sp1.end;
+  const tMin = sum.isRel ? 1 : sum.sp2.start;
+  const tMax = sum.isRel ? sum.sp2.count : sum.sp2.end;
+
   const fR = document.getElementById("spPageFromRange");
   const fN = document.getElementById("spPageFromNum");
   const tR = document.getElementById("spPageToRange");
   const tN = document.getElementById("spPageToNum");
-  if (fR && Number(fR.value) !== p1) fR.value = p1;
-  if (fN && document.activeElement !== fN) fN.value = p1;
-  if (tR && Number(tR.value) !== p2) tR.value = p2;
-  if (tN && document.activeElement !== tN) tN.value = p2;
-  spUpdateSliderFill(fR, p1, 604);
-  spUpdateSliderFill(tR, p2, 604);
+  if (fR) { fR.min = fMin; fR.max = fMax; if (Number(fR.value) !== fVal) fR.value = fVal; }
+  if (fN) { fN.min = fMin; fN.max = fMax; if (document.activeElement !== fN) fN.value = fVal; }
+  if (tR) { tR.min = tMin; tR.max = tMax; if (Number(tR.value) !== tVal) tR.value = tVal; }
+  if (tN) { tN.min = tMin; tN.max = tMax; if (document.activeElement !== tN) tN.value = tVal; }
 
-  const s1 = getPageStartInfo(p1), s2 = getPageEndInfo(p2);
   const fHint = document.getElementById("spPageFromSurahHint");
   const tHint = document.getElementById("spPageToSurahHint");
   const bar = document.getElementById("spPagesInfoBar");
-  if (fHint && s1?.surah) fHint.textContent = `سورة ${s1.surah.n} • جزء ${getJuzAtPage(p1).shortName}`;
-  if (tHint && s2?.surah) tHint.textContent = `سورة ${s2.surah.n} • جزء ${getJuzAtPage(p2).shortName}`;
-  if (bar && s1?.surah && s2?.surah) {
-    const cnt = p2 - p1 + 1;
-    bar.innerHTML = `<span>📖 ${escapeHtml(s1.surah.n)}${s2.surah.id !== s1.surah.id ? ' ← ' + escapeHtml(s2.surah.n) : ''}</span><span class="badge b-blue">${cnt} ${cnt === 1 ? 'صفحة' : (cnt === 2 ? 'صفحتان' : 'صفحات')}</span>`;
+  if (fHint && sum.s1) {
+    fHint.textContent = sum.isRel
+      ? `صفحة ${sum.rel1} من ${sum.sp1.count} • المصحف ص ${sum.p1}`
+      : `المصحف ص ${sum.p1} (الصفحة ${sum.rel1} من السورة)`;
+  }
+  if (tHint && sum.s2) {
+    tHint.textContent = sum.isRel
+      ? `صفحة ${sum.rel2} من ${sum.sp2.count} • المصحف ص ${sum.p2}`
+      : `المصحف ص ${sum.p2} (الصفحة ${sum.rel2} من السورة)`;
+  }
+  if (bar) {
+    const mushafSpan = sum.p1 === sum.p2 ? `المصحف ص ${sum.p1}` : `المصحف ص ${sum.p1}–${sum.p2}`;
+    bar.innerHTML = `<span>📖 <b>${escapeHtml(sum.fullLabel)}</b> <small style="opacity:0.8;">(${mushafSpan})</small></span><span class="badge b-blue">${sum.pCount} ${sum.pCount === 1 ? "صفحة" : (sum.pCount === 2 ? "صفحتان" : "صفحات")}</span>`;
   }
   renderSpPreview();
 }
@@ -15063,47 +16020,72 @@ function syncSpPageInputsOnly() {
 function renderSpPagesBox() {
   const box = document.getElementById("spPagesBox");
   if (!box) return;
-  const p1 = Math.max(1, Math.min(604, spState.pageFrom || 582));
-  const p2 = Math.max(p1, Math.min(604, spState.pageTo || p1));
+  const sum = getSpSurahPageSummary();
+  const fVal = sum.isRel ? sum.rel1 : sum.p1;
+  const tVal = sum.isRel ? sum.rel2 : sum.p2;
+  const fMin = sum.isRel ? 1 : sum.sp1.start;
+  const fMax = sum.isRel ? sum.sp1.count : sum.sp1.end;
+  const tMin = sum.isRel ? 1 : sum.sp2.start;
+  const tMax = sum.isRel ? sum.sp2.count : sum.sp2.end;
+  const numLbl = sum.isRel ? "رقم الصفحة داخل السورة" : "رقم الصفحة في المصحف";
+
   box.innerHTML = `
+    <div class="sp-pnum-mode">
+      <button type="button" class="sp-pnum-btn ${sum.isRel ? "on" : ""}" onclick="spSetPageNumMode('surah')">📖 صفحة داخل السورة (1، 2، 3...)</button>
+      <button type="button" class="sp-pnum-btn ${!sum.isRel ? "on" : ""}" onclick="spSetPageNumMode('mushaf')">📕 صفحة المصحف (1–604)</button>
+    </div>
     <div id="spPagesInfoBar" class="sp-pages-info-bar"></div>
-    <div class="sp-preset-grid-4">
-      <button type="button" class="sp-preset-btn" onclick="spApplyPageSpanPreset(1)">1 صفحة</button>
-      <button type="button" class="sp-preset-btn" onclick="spApplyPageSpanPreset(2)">صفحتان</button>
-      <button type="button" class="sp-preset-btn accent" onclick="spApplyPageSpanPreset(5)">5 ص (ربع)</button>
-      <button type="button" class="sp-preset-btn accent" onclick="spApplyPageSpanPreset(10)">10 ص (نصف)</button>
-    </div>
-    <div class="sp-preset-grid-2">
-      <button type="button" class="sp-preset-btn" onclick="spApplyPageSpanPreset(3)">3 صفحات</button>
-      <button type="button" class="sp-preset-btn accent" onclick="spApplyPageSpanPreset(20)">20 صفحة (مقدار جزء)</button>
-    </div>
-    <div class="sp-slider-card">
-      <div class="sp-slider-hdr">
-        <label>▶️ من الصفحة</label>
+    <div class="sp-spg-card">
+      <div class="sp-spg-top">
+        <label>▶️ من السورة</label>
+        <div class="sp-spg-quick">
+          <button type="button" class="sp-spg-qbtn" onclick="spJumpSurahPageBound('from','start')">أولها</button>
+          <button type="button" class="sp-spg-qbtn" onclick="spJumpSurahPageBound('from','end')">آخرها</button>
+        </div>
+      </div>
+      <select id="spPageFromSurahSel" class="sp-spg-sel" onchange="spOnPageSurahPick('from', this.value)">${spPageSurahOptsHtml(spState.pageFromSurahId)}</select>
+      <div class="sp-slider-hdr" style="margin-bottom:4px;">
+        <label style="font-size:11.5px;">${numLbl}</label>
         <span class="sp-slider-max" id="spPageFromSurahHint"></span>
       </div>
       <div class="sp-step-grid">
         <button type="button" onclick="spStepPageVal('from',-5)">−5</button>
         <button type="button" onclick="spStepPageVal('from',-1)">−1</button>
-        <input type="number" id="spPageFromNum" inputmode="numeric" min="1" max="604" value="${p1}" oninput="spSetPageVal('from',this.value)">
+        <input type="number" id="spPageFromNum" inputmode="numeric" min="${fMin}" max="${fMax}" value="${fVal}" oninput="spSetPageVal('from',this.value)">
         <button type="button" onclick="spStepPageVal('from',1)">+1</button>
         <button type="button" onclick="spStepPageVal('from',5)">+5</button>
       </div>
-      <input type="range" id="spPageFromRange" class="sp-range-input" min="1" max="604" value="${p1}" oninput="spSetPageVal('from',this.value)">
+      ${fMax > fMin ? `<input type="range" id="spPageFromRange" class="sp-range-input" min="${fMin}" max="${fMax}" value="${fVal}" oninput="spSetPageVal('from',this.value)">` : ''}
     </div>
-    <div class="sp-slider-card">
-      <div class="sp-slider-hdr">
-        <label>⏹️ إلى الصفحة</label>
+
+    <div class="sp-spg-card is-end">
+      <div class="sp-spg-top">
+        <label>⏹️ إلى السورة</label>
+        <div class="sp-spg-quick">
+          <button type="button" class="sp-spg-qbtn" onclick="spJumpSurahPageBound('to','start')">أولها</button>
+          <button type="button" class="sp-spg-qbtn" onclick="spJumpSurahPageBound('to','end')">آخرها</button>
+        </div>
+      </div>
+      <select id="spPageToSurahSel" class="sp-spg-sel" onchange="spOnPageSurahPick('to', this.value)">${spPageSurahOptsHtml(spState.pageToSurahId)}</select>
+      <div class="sp-slider-hdr" style="margin-bottom:4px;">
+        <label style="font-size:11.5px;">${numLbl}</label>
         <span class="sp-slider-max" id="spPageToSurahHint"></span>
       </div>
       <div class="sp-step-grid">
         <button type="button" onclick="spStepPageVal('to',-5)">−5</button>
         <button type="button" onclick="spStepPageVal('to',-1)">−1</button>
-        <input type="number" id="spPageToNum" inputmode="numeric" min="1" max="604" value="${p2}" oninput="spSetPageVal('to',this.value)">
+        <input type="number" id="spPageToNum" inputmode="numeric" min="${tMin}" max="${tMax}" value="${tVal}" oninput="spSetPageVal('to',this.value)">
         <button type="button" onclick="spStepPageVal('to',1)">+1</button>
         <button type="button" onclick="spStepPageVal('to',5)">+5</button>
       </div>
-      <input type="range" id="spPageToRange" class="sp-range-input" min="1" max="604" value="${p2}" oninput="spSetPageVal('to',this.value)">
+      ${tMax > tMin ? `<input type="range" id="spPageToRange" class="sp-range-input" min="${tMin}" max="${tMax}" value="${tVal}" oninput="spSetPageVal('to',this.value)">` : ''}
+    </div>
+
+    <div class="sp-preset-grid-4" style="margin-bottom:0;">
+      <button type="button" class="sp-preset-btn" onclick="spApplyPageSpanPreset(2)">+صفحتان</button>
+      <button type="button" class="sp-preset-btn accent" onclick="spApplyPageSpanPreset(5)">+5 ص (ربع)</button>
+      <button type="button" class="sp-preset-btn accent" onclick="spApplyPageSpanPreset(10)">+10 ص (نصف)</button>
+      <button type="button" class="sp-preset-btn accent" onclick="spApplyPageSpanPreset(20)">+20 ص (جزء)</button>
     </div>`;
   syncSpPageInputsOnly();
 }
@@ -15536,16 +16518,8 @@ function renderSpPreview() {
   const el = document.getElementById("spPreviewStrip");
   if (!el) return;
   if (spState.mode === "surah" && spIsReviewKind(spState.kind) && spState.reviewUnit === "page") {
-    const p1 = Math.max(1, Math.min(604, spState.pageFrom || 1));
-    const p2 = Math.max(p1, Math.min(604, spState.pageTo || p1));
-    const cnt = p2 - p1 + 1;
-    const selSurah = SURAH_MAP[Number(spState.segs[spState.activeIdx]?.surahId)];
-    const s1 = (selSurah && p1 >= Math.floor(selSurah.fs) && p1 <= Math.floor(selSurah.fe)) ? selSurah : getPageStartInfo(p1)?.surah;
-    const s2 = (selSurah && p2 >= Math.floor(selSurah.fs) && p2 <= Math.floor(selSurah.fe)) ? selSurah : getPageEndInfo(p2)?.surah;
-    const rngTxt = (s1 && s2 && s1.id === s2.id)
-      ? `${s1.n} (${p1 === p2 ? `ص ${p1}` : `ص ${p1}–${p2}`})`
-      : `${s1 ? s1.n + " " : ""}ص ${p1}${p2 !== p1 ? ` ← ${s2 ? s2.n + " " : ""}ص ${p2}` : ""}`;
-    el.innerHTML = `<span>📄 <b>${escapeHtml(rngTxt)}</b></span><span class="badge b-blue">${cnt} صفحة</span>`;
+    const sum = getSpSurahPageSummary();
+    el.innerHTML = `<span>📄 <b>${escapeHtml(sum.fullLabel)}</b></span><span class="badge b-blue">${sum.pCount} صفحة</span>`;
     return;
   }
   if (spState.mode === "sard") {
@@ -15688,32 +16662,27 @@ function applySurahPicker(quickEval = null) {
     return;
   }
 
-  // MODE C: SURAH + MUSHAF PAGES RANGE (سورة ومن صفحة إلى صفحة)
+  // MODE C: FROM SURAH (PAGE) TO SURAH (PAGE) — (من سورة إلى سورة بالصفحات)
   if (spState.mode === "surah" && spIsReviewKind(k) && spState.reviewUnit === "page") {
-    const p1 = Math.max(1, Math.min(604, spState.pageFrom || 1));
-    const p2 = Math.max(p1, Math.min(604, spState.pageTo || p1));
-    const pCount = p2 - p1 + 1;
-    const selSurah = SURAH_MAP[Number(spState.segs[spState.activeIdx]?.surahId)];
+    const sum = getSpSurahPageSummary();
+    const p1 = sum.p1, p2 = sum.p2, pCount = sum.pCount;
+    const s1 = sum.s1, s2 = sum.s2;
     const s1Info = getPageStartInfo(p1), s2Info = getPageEndInfo(p2);
-    const s1 = (selSurah && p1 >= Math.floor(selSurah.fs) && p1 <= Math.floor(selSurah.fe)) ? selSurah : s1Info?.surah;
-    const s2 = (selSurah && p2 >= Math.floor(selSurah.fs) && p2 <= Math.floor(selSurah.fe)) ? selSurah : s2Info?.surah;
-    const sameS = Boolean(s1 && s2 && s1.id === s2.id);
-    const fromCol = s1 ? `${s1.n} ص ${p1}` : `ص ${p1}`;
-    const toCol = sameS ? `ص ${p2}` : (s2 ? `${s2.n} ص ${p2}` : `ص ${p2}`);
-    const surahHeaderLbl = sameS ? s1.n : (s1 && s2 ? `${s1.n} ← ${s2.n}` : "صفحات");
-    const toastLbl = sameS ? `${s1.n} (${p1 === p2 ? `ص ${p1}` : `ص ${p1}–${p2}`})` : `${fromCol}${p2 !== p1 ? ` ← ${toCol}` : ""}`;
+    const fromCol = sum.fromCol, toCol = sum.toCol, surahHeaderLbl = sum.headerLbl, toastLbl = sum.fullLabel;
 
     if (k === "dRev") {
       r.dRevSurahId = ""; r.dRevFromAyah = ""; r.dRevToAyah = ""; r.dRevExtras = [];
       r.dRevSardJuzIds = []; r.dRevSardLabel = "";
       if (!r.recIsSabr) { r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = ""; }
       r.dRevIsPages = true; r.dRevPageFrom = p1; r.dRevPageTo = p2;
+      r.dRevPageFromSurahId = s1 ? String(s1.id) : ""; r.dRevPageToSurahId = s2 ? String(s2.id) : "";
       r.dRevFrom = fromCol; r.dRevTo = toCol; r.dRevPages = pCount;
       if (!r.dRevEval && !quickEval) r.dRevEval = "ممتاز";
       r.points = computeRecordPoints(s, r, st);
     } else if (k === "min") {
       r.minSurahId = ""; r.minEndSurahId = ""; r.minExtras = []; r.minSardJuzIds = [];
       r.minIsPages = true; r.minPageFrom = p1; r.minPageTo = p2;
+      r.minPageFromSurahId = s1 ? String(s1.id) : ""; r.minPageToSurahId = s2 ? String(s2.id) : "";
       r.minSurah = surahHeaderLbl; r.minFrom = `ص ${p1}`; r.minTo = `ص ${p2}`;
       r.minText = toastLbl;
       r.minPages = pCount; r.manualMin = true;
@@ -15729,7 +16698,7 @@ function applySurahPicker(quickEval = null) {
     } else if (k === "nextMaj") {
       r.nextMajSabrJuz = ""; r.nextMajSardJuzIds = []; r.nextMajSardLabel = "";
       r.nextMajIsPages = true;
-      r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
+      r.nextMajStartSurahId = s1 ? String(s1.id) : ""; r.nextMajEndSurahId = s2 ? String(s2.id) : "";
       r.nextMajStartPage = p1; r.nextMajEndPage = p2;
       r.nextMajTitle = surahHeaderLbl; r.nextMajFrom = `ص ${p1}`; r.nextMajTo = `ص ${p2}`;
     }
@@ -20418,7 +21387,7 @@ function setRecEval(studentId, ev, errCount = null) {
     r.recEval = "";
     r.points = 0;
     r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined;
-    r.recErrors = 0; r.recAlerts = 0;
+    r.recErrors = 0; r.recAlerts = 0; r.recPageEvals = null; r.recRepeatHwOnly = false;
     r.rabt = false;
     r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = "";
     if ((r.dRevEval === "تثبيت" || r.dRevEval === "تثبيت حفظ") && !(Number(r.dRevPages) > 0)) {
@@ -21145,7 +22114,7 @@ function renderDailyReport() {
         <td>${recCols.surah}</td>
         <td>${recCols.from}</td>
         <td>${recCols.to}</td>
-        <td class="${evalSt.cls}" style="font-weight:800;">${escapeHtml(evalSt.text)}</td>
+        <td class="${evalSt.cls}" style="font-weight:800;">${escapeHtml(evalSt.text)}${(!isAbs && Array.isArray(r.recPageEvals) && r.recPageEvals.some(p => p.eval === "إعادة") && r.recEval !== "إعادة") ? `<div style="font-size:10px; color:#b92222; font-weight:800;">إعادة ${r.recPageEvals.filter(p => p.eval === "إعادة").map(p => "ص " + p.mushafPage).join("، ")}</div>` : ""}</td>
         ${ptsOn ? `<td class="td-pts">${r.points || 0}</td>` : ''}
         <td>${dRevCols.from}</td>
         <td>${dRevCols.to}</td>
@@ -21775,23 +22744,32 @@ function renderMonthlyReport() {
 function renderStats() {
   const h = getActiveHalaqa();
   const ptsOn = isPointsEnabled(h);
-  const copyBtn = document.getElementById("btnCopyPointsLeaderboard");
-  if (copyBtn) copyBtn.style.display = ptsOn ? "grid" : "none";
+  const dockEl = document.getElementById("btnCopyPointsLeaderboard");
+  const ptsBtn = document.getElementById("statsQuickPtsBtn");
+  if (dockEl) {
+    dockEl.style.display = "grid";
+    dockEl.style.gridTemplateColumns = ptsOn ? "repeat(5, minmax(0, 1fr))" : "repeat(4, minmax(0, 1fr))";
+  }
+  if (ptsBtn) ptsBtn.style.display = ptsOn ? "flex" : "none";
 
   const filterVal = document.getElementById("statsMonthFilter").value || "ALL";
   const { rows, totals } = computeMonthlyData(filterVal);
   const el = document.getElementById("statsContent");
   if (!rows.length) { el.innerHTML = `<div class="card empty-state"><h3>لا توجد بيانات بعد</h3></div>`; return; }
 
-  const card = (title, items, fn, empty = "لا توجد بيانات", certPreset = "") => {
-    const sl = items.slice(0, 10);
-    if (!sl.length) return `<div class="card"><div class="card-title">${title}</div><p style="color:var(--ink-500); font-size:13px;">${empty}</p></div>`;
-    return `<div class="card"><div class="card-title">${title}</div><ul class="rank-list">${sl.map((r, i) => `
-      <li class="rank-item ${i===0?'top1':''}">
-        <div><span class="rank-pos">${i + 1}</span><b>${escapeHtml(r.student.name)}</b></div>
-        <div style="display:inline-flex; align-items:center; gap:5px;">
+  const card = (title, items, fn, empty = "لا توجد بيانات", certPreset = "", exportCat = "") => {
+    const expBtns = exportCat ? `
+      <div style="display:flex; gap:4px; flex-wrap:wrap;">
+        <button type="button" class="btn btn-soft btn-sm" style="padding:4px 8px; font-size:11px;" onclick="openStatsExportModal('${exportCat}','table')">📋 للكل</button>
+        <button type="button" class="btn btn-primary btn-sm" style="padding:4px 8px; font-size:11px;" onclick="openStatsExportModal('${exportCat}','podium')">🏆 الأوائل</button>
+      </div>` : "";
+    if (!items.length) return `<div class="card"><div class="card-title"><span>${title}</span>${expBtns}</div><p style="color:var(--ink-500); font-size:13px;">${empty}</p></div>`;
+    return `<div class="card"><div class="card-title"><span>${title} (${items.length})</span>${expBtns}</div><ul class="rank-list pts-rank-scroll">${items.map((r, i) => `
+      <li class="rank-item ${i===0?'top1':(i===1?'top2':(i===2?'top3':''))}">
+        <div style="display:flex; align-items:center; min-width:0; flex:1;"><span class="rank-pos">${exportCat && i < 3 ? ["🥇","🥈","🥉"][i] : (i + 1)}</span><b style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(r.student.name)}</b></div>
+        <div style="display:inline-flex; align-items:center; gap:5px; flex-shrink:0;">
           ${certPreset && i < 3 ? `<button type="button" class="pill pill-sm" style="padding:2px 6px;" onclick="openCertificateModal('${r.student.id}','${escapeHtml(filterVal)}','${certPreset}',${i+1})" title="إصدار شهادة تكريم">🏅</button>` : ''}
-          <span class="badge b-slate">${fn(r)}</span>
+          <span class="badge ${i===0 && exportCat ? 'b-green' : 'b-slate'}">${fn(r)}</span>
         </div>
       </li>`).join("")}</ul></div>`;
   };
@@ -21860,9 +22838,9 @@ function renderStats() {
           ${listHtml}
         </div>`;
       })() : ''}
-      ${card("📖 الأكثر حفظاً", [...rows].filter(x=>x.memPages>0).sort((a,b)=>b.memPages-a.memPages), r=>`${formatNum(r.memPages)} صفحة`, "لا توجد بيانات", ptsOn ? "" : "excellence")}
-      ${card("🔄 الأكثر مراجعة", [...rows].filter(x=>x.revPages>0).sort((a,b)=>b.revPages-a.revPages), r=>`${formatNum(r.revPages)} صفحة`)}
-      ${card("✅ الأكثر حضوراً", [...rows].filter(x=>x.presentDays>0).sort((a,b)=>b.presentDays-a.presentDays), r=>`${r.presentDays} جلسة`)}
+      ${card("📖 الأكثر حفظاً", [...rows].filter(x=>(x.memPages+x.rashidiPages)>0).sort((a,b)=>(b.memPages+b.rashidiPages)-(a.memPages+a.rashidiPages)), r=>r.student.track==="rashidi"?`${formatNum(r.rashidiPages)} ص رشيدي`:`${formatNum(r.memPages)} صفحة`, "لا توجد بيانات", "excellence", "mem")}
+      ${card("🔄 الأكثر مراجعة", [...rows].filter(x=>x.revPages>0).sort((a,b)=>b.revPages-a.revPages), r=>`${formatNum(r.revPages)} صفحة`, "لا توجد بيانات", "excellence", "rev")}
+      ${card("✅ الأكثر حضوراً", [...rows].filter(x=>x.presentDays>0).sort((a,b)=>(b.presentDays-a.presentDays)||(a.lateDays-b.lateDays)||(a.totalAbsences-b.totalAbsences)), r=>`${r.presentDays} جلسة`, "لا توجد بيانات", "attendance", "att")}
       ${card("⚠️ الأكثر غياباً", [...rows].filter(x=>x.totalAbsences>0).sort((a,b)=>b.totalAbsences-a.totalAbsences), r=>`${r.totalAbsences} (${r.excusedDays} مبرر)`, "لا توجد غيابات 🎉")}
       ${card("⏰ الأكثر تأخراً", [...rows].filter(x=>x.lateDays>0).sort((a,b)=>b.lateDays-a.lateDays), r=>`${r.lateDays} مرة`, "لا توجد حالات تأخر 🎉")}
     </div>
@@ -23726,7 +24704,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v75 -->
+<!-- Makin App v77 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -23936,16 +24914,29 @@ function copyPointsLeaderboardWA() {
   copyText(txt, `تم نسخ قائمة النقاط (${earned.length} طالب) للواتساب 💬`);
 }
 
-// ==================== PRINTABLE ALL-POINTS SHEET & TOP LEADERS POSTER (v75) ====================
-let _prMode = "table"; // "table" | "podium"
+// ==================== 4-CATEGORY DISTINCT HONOR POSTERS & FULL SHEETS ENGINE (v76) ====================
+let _prCat = "points"; // "points" | "mem" | "rev" | "att"
+let _prMode = "podium"; // "podium" | "table"
 let _prScope = "earned"; // "earned" | "all"
 let _prPodiumLimit = 10;
 
-function openPointsReportModal(mode = "table") {
+function openStatsExportModal(cat = "points", mode = "podium") {
   const h = getActiveHalaqa();
   if (!h) return;
-  _prMode = mode === "podium" ? "podium" : "table";
+  const ptsOn = isPointsEnabled(h);
+  _prCat = (cat === "points" && !ptsOn) ? "all" : (["all", "points", "mem", "rev", "att"].includes(cat) ? cat : "all");
+  _prMode = mode === "table" ? "table" : "podium";
   openModal("pointsReportModal");
+  renderPointsReportModal();
+}
+
+function openPointsReportModal(mode = "table") {
+  openStatsExportModal("points", mode);
+}
+
+function setStatsExportCategory(cat) {
+  if (!["all", "points", "mem", "rev", "att"].includes(cat)) return;
+  _prCat = cat;
   renderPointsReportModal();
 }
 
@@ -23974,17 +24965,179 @@ function getPointsPeriodLabel(h, m) {
   return m === "ALL" ? "جميع الجلسات" : `شهر ${m} هـ`;
 }
 
+function getStatsCatDataset(cat, rows, totals, h) {
+  const gt = getGenderTerms(h);
+  const sessCnt = Math.max(1, totals.sessionsCount || 1);
+  if (cat === "mem") {
+    const score = r => Math.round(((r.memPages || 0) + (r.rashidiPages || 0)) * 100) / 100;
+    const sorted = [...rows].sort((a, b) => (score(b) - score(a)) || (b.sabrCount - a.sabrCount) || (b.revPages - a.revPages));
+    const earned = sorted.filter(r => score(r) > 0);
+    return {
+      key: "mem", themeCls: "theme-mem", filePrefix: "إنجاز_الحفظ_",
+      title: "📖 فرسان الحفظ والإتقان",
+      kicker: "✨ لوحة التميّز في حفظ كتاب الله ✨",
+      tableTitle: `📖 كشف إنجاز الحفظ — حلقة ${getBrandMeta(h).name}`,
+      scopeEarnedLbl: "من لديهم حفظ فقط",
+      dua: "«خيرُكم من تعلّم القرآن وعلّمه» — بارك الله في همم الحافظين",
+      valText: r => r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} ص رشيدي` : `${formatNum(r.memPages)} صفحة`,
+      subText: r => `${r.toMem && r.toMem !== "—" ? `واصل إلى: ${r.toMem}` : ""}${r.sabrCount > 0 ? ` • ${r.sabrCount} جزء مسبور` : ""}`,
+      kpis: [
+        ["إجمالي صفحات الحفظ", `${formatNum(totals.memPages)}${totals.rashidiPages > 0 ? " + " + formatNum(totals.rashidiPages) : ""} ص`],
+        ["أجزاء مسبورة", `${totals.sabrCount} جزء`],
+        [`عدد ${gt.students}`, `${earned.length} من ${rows.length}`]
+      ],
+      sorted, earned, hasVal: r => score(r) > 0
+    };
+  }
+  if (cat === "rev") {
+    const sorted = [...rows].sort((a, b) => (b.revPages - a.revPages) || (b.sabrCount - a.sabrCount) || (b.memPages - a.memPages));
+    const earned = sorted.filter(r => (r.revPages || 0) > 0);
+    return {
+      key: "rev", themeCls: "theme-rev", filePrefix: "إنجاز_المراجعة_",
+      title: "🔄 أبطال المراجعة والتثبيت",
+      kicker: "✨ لوحة الإتقان والمراجعة المستمرة ✨",
+      tableTitle: `🔄 كشف إنجاز المراجعة — حلقة ${getBrandMeta(h).name}`,
+      scopeEarnedLbl: "من لديهم مراجعة فقط",
+      dua: "«تعاهدوا هذا القرآن» — زادكم الله ثباتاً ورسوخاً في كتابه",
+      valText: r => `${formatNum(r.revPages)} صفحة`,
+      subText: r => `${r.sabrCount > 0 ? `سبر ${r.sabrCount} جزء • ` : ""}حضور ${r.presentDays} جلسة`,
+      kpis: [
+        ["إجمالي صفحات المراجعة", `${formatNum(totals.revPages)} ص`],
+        ["أجزاء مسبورة", `${totals.sabrCount} جزء`],
+        [`عدد ${gt.students}`, `${earned.length} من ${rows.length}`]
+      ],
+      sorted, earned, hasVal: r => (r.revPages || 0) > 0
+    };
+  }
+  if (cat === "att") {
+    const attPct = r => Math.min(100, Math.round(((r.presentDays || 0) / sessCnt) * 100));
+    const sorted = [...rows].sort((a, b) => (b.presentDays - a.presentDays) || (a.lateDays - b.lateDays) || (a.totalAbsences - b.totalAbsences));
+    const earned = sorted.filter(r => (r.presentDays || 0) > 0);
+    const avgPct = rows.length ? Math.round(rows.reduce((acc, r) => acc + attPct(r), 0) / rows.length) : 0;
+    const zeroAbs = earned.filter(r => r.totalAbsences === 0).length;
+    return {
+      key: "att", themeCls: "theme-att", filePrefix: "سجل_الحضور_",
+      title: "✅ أهل المواظبة والانضباط",
+      kicker: "✨ لوحة الالتزام والانضباط في الحضور ✨",
+      tableTitle: `✅ كشف المواظبة والحضور — حلقة ${getBrandMeta(h).name}`,
+      scopeEarnedLbl: "الحاضرون فقط",
+      dua: "«أحبُّ الأعمال إلى الله أدومُها وإن قلّ» — بورك في انتظامكم",
+      valText: r => `${r.presentDays} جلسة (${attPct(r)}%)`,
+      subText: r => r.totalAbsences === 0 ? (r.lateDays === 0 ? "انضباط تام بدون غياب ولا تأخر ✨" : `بدون غياب • تأخر ${r.lateDays}`) : `غياب ${r.totalAbsences} (${r.excusedDays} مبرر)`,
+      kpis: [
+        ["إجمالي الجلسات", `${totals.sessionsCount} جلسة`],
+        ["متوسط الحضور", `${avgPct}%`],
+        ["بلا أي غياب", `${zeroAbs} ${gt.student}`]
+      ],
+      sorted, earned, hasVal: r => (r.presentDays || 0) > 0, attPct
+    };
+  }
+  if (cat === "all") {
+    const sorted = [...rows].sort((a, b) => (b.totalPoints - a.totalPoints) || ((b.memPages + b.revPages) - (a.memPages + a.revPages)) || (b.presentDays - a.presentDays));
+    const earned = sorted.filter(r => (r.totalPoints > 0 || r.memPages > 0 || r.revPages > 0 || r.presentDays > 0));
+    return {
+      key: "all", themeCls: "theme-all", filePrefix: "الشرف_الشامل_",
+      title: "👑 لوحة الشرف الشاملة",
+      kicker: "✨ متصدرو الحلقة في الحفظ والمراجعة والحضور والنقاط ✨",
+      tableTitle: `👑 الكشف الشامل لطلاب حلقة ${getBrandMeta(h).name}`,
+      scopeEarnedLbl: "المشاركون فقط",
+      dua: "بارك الله في همم أهل القرآن وجعلهم من أهل الله وخاصته",
+      valText: r => `${formatNum(r.memPages)} حفظ • ${formatNum(r.revPages)} مراجعة`,
+      subText: r => `حضور ${r.presentDays}`,
+      kpis: [
+        ["صفحات الحفظ", `${formatNum(totals.memPages + totals.rashidiPages)} ص`],
+        ["صفحات المراجعة", `${formatNum(totals.revPages)} ص`],
+        ["الجلسات / الأجزاء", `${totals.sessionsCount} جلسة • ${totals.sabrCount} جزء`]
+      ],
+      sorted, earned, hasVal: r => (r.totalPoints > 0 || r.memPages > 0 || r.revPages > 0 || r.presentDays > 0)
+    };
+  }
+  // Default: POINTS
+  const sorted = [...rows].sort((a, b) => (b.totalPoints - a.totalPoints) || ((b.memPages + b.revPages) - (a.memPages + a.revPages)));
+  const earned = sorted.filter(r => (r.totalPoints || 0) > 0);
+  return {
+    key: "points", themeCls: "theme-points", filePrefix: "نتائج_النقاط_",
+    title: "🏆 متصدرو النقاط والتحفيز",
+    kicker: "✨ لوحة الشرف ومتصدرو النقاط ✨",
+    tableTitle: `⭐ كشف نقاط ${gt.students} — حلقة ${getBrandMeta(h).name}`,
+    scopeEarnedLbl: "الحاصلون على نقاط فقط",
+    dua: "«وفي ذلك فليتنافس المتنافسون» — بارك الله في همم أهل القرآن",
+    valText: r => `⭐ ${r.totalPoints} نقطة`,
+    subText: r => `${r.memPages > 0 ? `حفظ ${formatNum(r.memPages)} ص` : ""}${r.memPages > 0 && r.revPages > 0 ? " • " : ""}${r.revPages > 0 ? `مراجعة ${formatNum(r.revPages)} ص` : ""}`,
+    kpis: [
+      ["مجموع النقاط", `${totals.totalPoints} نقطة`],
+      ["الجلسات", `${totals.sessionsCount} جلسة`],
+      ["الحاصلون على نقاط", `${earned.length} من ${rows.length}`]
+    ],
+    sorted, earned, hasVal: r => (r.totalPoints || 0) > 0
+  };
+}
+
+function getPosterSvgDecor(cat) {
+  if (cat === "mem") {
+    if (cat === "all") {
+    return `<svg class="ppp-bg-svg" viewBox="0 0 900 760" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="90" cy="80" r="220" fill="rgba(230,190,104,0.09)"/>
+      <circle cx="820" cy="680" r="240" fill="rgba(230,190,104,0.08)"/>
+      <circle cx="450" cy="380" r="300" fill="none" stroke="rgba(230,190,104,0.07)" stroke-width="2"/>
+      <rect x="16" y="16" width="868" height="728" rx="16" fill="none" stroke="rgba(230,190,104,0.28)" stroke-width="2"/>
+    </svg>`;
+  }
+  return `<svg class="ppp-bg-svg" viewBox="0 0 900 760" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="80" cy="70" r="190" fill="rgba(212,175,55,0.08)"/>
+      <circle cx="830" cy="690" r="240" fill="rgba(52,211,153,0.07)"/>
+      <path d="M450 28 C610 28 730 140 730 280 L730 740 L170 740 L170 280 C170 140 290 28 450 28 Z" fill="none" stroke="rgba(212,175,55,0.12)" stroke-width="2"/>
+      <rect x="18" y="18" width="864" height="724" rx="14" fill="none" stroke="rgba(212,175,55,0.22)" stroke-width="1.5"/>
+    </svg>`;
+  }
+  if (cat === "rev") {
+    return `<svg class="ppp-bg-svg" viewBox="0 0 900 760" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="450" cy="180" r="320" fill="none" stroke="rgba(234,179,73,0.09)" stroke-width="2"/>
+      <circle cx="450" cy="180" r="220" fill="none" stroke="rgba(234,179,73,0.07)" stroke-width="1.5"/>
+      <circle cx="840" cy="90" r="170" fill="rgba(253,224,138,0.07)"/>
+      <circle cx="60" cy="680" r="190" fill="rgba(234,179,73,0.08)"/>
+      <rect x="16" y="16" width="868" height="728" rx="16" fill="none" stroke="rgba(253,224,138,0.24)" stroke-width="1.5" stroke-dasharray="10 6"/>
+    </svg>`;
+  }
+  if (cat === "att") {
+    return `<svg class="ppp-bg-svg" viewBox="0 0 900 760" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="820" cy="110" r="210" fill="rgba(94,234,212,0.08)"/>
+      <circle cx="90" cy="660" r="210" fill="rgba(56,189,248,0.08)"/>
+      <path d="M0 140 L900 140 M0 640 L900 640" stroke="rgba(153,246,228,0.09)" stroke-width="1.5"/>
+      <polygon points="450,26 474,50 450,74 426,50" fill="rgba(94,234,212,0.16)"/>
+      <rect x="18" y="18" width="864" height="724" rx="14" fill="none" stroke="rgba(94,234,212,0.24)" stroke-width="1.5"/>
+    </svg>`;
+  }
+  return `<svg class="ppp-bg-svg" viewBox="0 0 900 760" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="110" cy="90" r="200" fill="rgba(200,161,75,0.09)"/>
+    <circle cx="810" cy="670" r="230" fill="rgba(200,161,75,0.08)"/>
+    <rect x="18" y="18" width="864" height="724" rx="14" fill="none" stroke="rgba(200,161,75,0.26)" stroke-width="1.5"/>
+  </svg>`;
+}
+
 function renderPointsReportModal() {
   const h = getActiveHalaqa();
   const wrap = document.getElementById("prPaperWrap");
   if (!h || !wrap) return;
+  const ptsOn = isPointsEnabled(h);
+  if (_prCat === "points" && !ptsOn) _prCat = "mem";
   const bm = getBrandMeta(h);
   const gt = getGenderTerms(h);
-  const m = document.getElementById("statsMonthFilter")?.value || (isPointsEnabled(h) ? "POINTS_CYCLE" : "ALL");
+  const m = document.getElementById("statsMonthFilter")?.value || (ptsOn ? "POINTS_CYCLE" : "ALL");
   const { rows, totals } = computeMonthlyData(m);
-  const sortedAll = [...rows].sort((a, b) => (b.totalPoints - a.totalPoints) || ((b.memPages + b.revPages) - (a.memPages + a.revPages)));
-  const earnedOnly = sortedAll.filter(x => x.totalPoints > 0);
+  const ds = getStatsCatDataset(_prCat, rows, totals, h);
   const periodLbl = getPointsPeriodLabel(h, m);
+
+  const catRow = document.getElementById("prCatTabsRow");
+  const ptsTabBtn = document.getElementById("prCatBtn_points");
+  if (ptsTabBtn) ptsTabBtn.style.display = ptsOn ? "flex" : "none";
+  if (catRow) catRow.style.gridTemplateColumns = ptsOn ? "repeat(5, minmax(0, 1fr))" : "repeat(4, minmax(0, 1fr))";
+  ["all", "points", "mem", "rev", "att"].forEach(k => {
+    document.getElementById("prCatBtn_" + k)?.classList.toggle("on", _prCat === k);
+  });
+
+  const modalTitleEl = document.getElementById("prModalTitle");
+  if (modalTitleEl) modalTitleEl.textContent = `${ds.title} — تصدير HD`;
 
   document.getElementById("prTabTableBtn")?.classList.toggle("on", _prMode === "table");
   document.getElementById("prTabPodiumBtn")?.classList.toggle("on", _prMode === "podium");
@@ -23993,74 +25146,145 @@ function renderPointsReportModal() {
   if (tOpts) tOpts.style.display = _prMode === "table" ? "flex" : "none";
   if (pOpts) pOpts.style.display = _prMode === "podium" ? "flex" : "none";
 
+  const scBtn = document.getElementById("prScopeEarnedBtn");
+  if (scBtn) scBtn.textContent = ds.scopeEarnedLbl;
   document.getElementById("prScopeEarnedBtn")?.classList.toggle("on-slate", _prScope === "earned");
   document.getElementById("prScopeAllBtn")?.classList.toggle("on-slate", _prScope === "all");
   [3, 5, 10].forEach(n => document.getElementById("prTop" + n + "Btn")?.classList.toggle("on-slate", _prPodiumLimit === n));
 
   if (_prMode === "table") {
-    const list = _prScope === "all" ? sortedAll : earnedOnly;
-    const sumPts = list.reduce((a, b) => a + (b.totalPoints || 0), 0);
-    const bodyRows = list.length ? list.map((r, i) => {
-      const trCls = i === 0 && r.totalPoints > 0 ? "rank-gold" : (i === 1 && r.totalPoints > 0 ? "rank-silver" : (i === 2 && r.totalPoints > 0 ? "rank-bronze" : ""));
-      const rankDisp = (i < 3 && r.totalPoints > 0) ? ["🥇 1", "🥈 2", "🥉 3"][i] : String(i + 1);
-      return `<tr class="${trCls}">
-        <td>${rankDisp}</td>
-        <td class="txt-right">${escapeHtml(r.student.name)}</td>
-        <td>${r.presentDays}</td>
-        <td>${r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} (رشيدي)` : formatNum(r.memPages)}</td>
-        <td>${formatNum(r.revPages)}</td>
-        <td class="pts-col">${r.totalPoints}</td>
-      </tr>`;
-    }).join("") : `<tr><td colspan="6" style="padding:18px; color:#64748b;">لا يوجد طلاب حاصلون على نقاط في هذه الفترة بعد</td></tr>`;
+    const list = _prScope === "all" ? ds.sorted : ds.earned;
+    let colgroup = "", thead = "", tbody = "", tfoot = "";
 
-    wrap.innerHTML = `<div class="pts-table-paper" id="pointsTablePaper">
+    if (_prCat === "all") {
+      colgroup = ptsOn
+        ? `<colgroup><col style="width:8%"><col style="width:32%"><col style="width:12%"><col style="width:14%"><col style="width:14%"><col style="width:10%"><col style="width:10%"></colgroup>`
+        : `<colgroup><col style="width:9%"><col style="width:37%"><col style="width:13%"><col style="width:15%"><col style="width:15%"><col style="width:11%"></colgroup>`;
+      thead = `<tr><th>م</th><th>اسم ${gt.student}</th><th>الحضور</th><th>الحفظ (ص)</th><th>المراجعة (ص)</th><th>السبر</th>${ptsOn ? '<th class="gold-th">النقاط ⭐</th>' : ''}</tr>`;
+      tbody = list.length ? list.map((r, i) => {
+        const trCls = i === 0 ? "rank-gold" : (i === 1 ? "rank-silver" : (i === 2 ? "rank-bronze" : ""));
+        return `<tr class="${trCls}"><td>${i < 3 ? ["🥇","🥈","🥉"][i] : (i+1)}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${r.presentDays}</td><td>${r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} رشيدي` : formatNum(r.memPages)}</td><td>${formatNum(r.revPages)}</td><td>${r.sabrCount || "—"}</td>${ptsOn ? `<td class="pts-col">${r.totalPoints}</td>` : ""}</tr>`;
+      }).join("") : `<tr><td colspan="${ptsOn ? 7 : 6}" style="padding:18px; color:#64748b;">لا توجد بيانات في هذه الفترة بعد</td></tr>`;
+      tfoot = `<tr><td colspan="2">المجموع العام (${list.length} ${gt.student})</td><td>${totals.sessionsCount} جلسة</td><td>${formatNum(totals.memPages + totals.rashidiPages)} ص</td><td>${formatNum(totals.revPages)} ص</td><td>${totals.sabrCount}</td>${ptsOn ? `<td>${totals.totalPoints}</td>` : ""}</tr>`;
+    } else if (_prCat === "mem") {
+      colgroup = `<colgroup><col style="width:9%"><col style="width:28%"><col style="width:17%"><col style="width:17%"><col style="width:13%"><col style="width:16%"></colgroup>`;
+      thead = `<tr><th>المركز</th><th>اسم ${gt.student}</th><th>من</th><th>إلى</th><th>الأجزاء المسبورة</th><th class="gold-th">صفحات الحفظ 📖</th></tr>`;
+      tbody = list.length ? list.map((r, i) => {
+        const hasV = ds.hasVal(r);
+        const trCls = hasV && i === 0 ? "rank-gold" : (hasV && i === 1 ? "rank-silver" : (hasV && i === 2 ? "rank-bronze" : ""));
+        const rk = hasV && i < 3 ? ["🥇 1", "🥈 2", "🥉 3"][i] : String(i + 1);
+        return `<tr class="${trCls}"><td>${rk}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${escapeHtml(r.fromMem)}</td><td>${escapeHtml(r.toMem)}</td><td>${escapeHtml(r.sabrList.join("، ") || "—")}</td><td class="pts-col">${r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} رشيدي` : formatNum(r.memPages)}</td></tr>`;
+      }).join("") : `<tr><td colspan="6" style="padding:18px; color:#64748b;">لا توجد بيانات حفظ في هذه الفترة بعد</td></tr>`;
+      tfoot = `<tr><td colspan="4">المجموع العام (${list.length} ${gt.student})</td><td>${totals.sabrCount} جزء</td><td>${formatNum(totals.memPages + totals.rashidiPages)} صفحة</td></tr>`;
+    } else if (_prCat === "rev") {
+      colgroup = `<colgroup><col style="width:10%"><col style="width:36%"><col style="width:15%"><col style="width:21%"><col style="width:18%"></colgroup>`;
+      thead = `<tr><th>المركز</th><th>اسم ${gt.student}</th><th>الحضور</th><th>الأجزاء المسبورة</th><th class="gold-th">صفحات المراجعة 🔄</th></tr>`;
+      tbody = list.length ? list.map((r, i) => {
+        const hasV = ds.hasVal(r);
+        const trCls = hasV && i === 0 ? "rank-gold" : (hasV && i === 1 ? "rank-silver" : (hasV && i === 2 ? "rank-bronze" : ""));
+        const rk = hasV && i < 3 ? ["🥇 1", "🥈 2", "🥉 3"][i] : String(i + 1);
+        return `<tr class="${trCls}"><td>${rk}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${r.presentDays} جلسة</td><td>${escapeHtml(r.sabrList.join("، ") || "—")}</td><td class="pts-col">${formatNum(r.revPages)} ص</td></tr>`;
+      }).join("") : `<tr><td colspan="5" style="padding:18px; color:#64748b;">لا توجد بيانات مراجعة في هذه الفترة بعد</td></tr>`;
+      tfoot = `<tr><td colspan="2">المجموع العام (${list.length} ${gt.student})</td><td>${totals.sessionsCount} جلسة</td><td>${totals.sabrCount} جزء</td><td>${formatNum(totals.revPages)} صفحة</td></tr>`;
+    } else if (_prCat === "att") {
+      colgroup = `<colgroup><col style="width:10%"><col style="width:34%"><col style="width:13%"><col style="width:11%"><col style="width:16%"><col style="width:16%"></colgroup>`;
+      thead = `<tr><th>المركز</th><th>اسم ${gt.student}</th><th>الحضور</th><th>التأخر</th><th>الغياب</th><th class="gold-th">نسبة الالتزام ✅</th></tr>`;
+      tbody = list.length ? list.map((r, i) => {
+        const hasV = ds.hasVal(r);
+        const trCls = hasV && i === 0 ? "rank-gold" : (hasV && i === 1 ? "rank-silver" : (hasV && i === 2 ? "rank-bronze" : ""));
+        const rk = hasV && i < 3 ? ["🥇 1", "🥈 2", "🥉 3"][i] : String(i + 1);
+        const pct = ds.attPct(r);
+        const absTxt = r.totalAbsences === 0 ? "بدون غياب ✓" : `${r.totalAbsences} (${r.excusedDays} مبرر)`;
+        return `<tr class="${trCls}"><td>${rk}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${r.presentDays}</td><td>${r.lateDays}</td><td>${absTxt}</td><td class="pts-col">${pct}%</td></tr>`;
+      }).join("") : `<tr><td colspan="6" style="padding:18px; color:#64748b;">لا توجد سجلات حضور في هذه الفترة بعد</td></tr>`;
+      tfoot = `<tr><td colspan="2">الإجمالي (${list.length} ${gt.student})</td><td colspan="3">عدد جلسات الفترة: ${totals.sessionsCount} جلسة</td><td>${ds.kpis[1][1]}</td></tr>`;
+    } else {
+      const sumPts = list.reduce((a, b) => a + (b.totalPoints || 0), 0);
+      colgroup = `<colgroup><col style="width:10%"><col style="width:36%"><col style="width:12%"><col style="width:14%"><col style="width:14%"><col style="width:14%"></colgroup>`;
+      thead = `<tr><th>المركز</th><th>اسم ${gt.student}</th><th>الحضور</th><th>الحفظ (ص)</th><th>المراجعة (ص)</th><th class="gold-th">النقاط ⭐</th></tr>`;
+      tbody = list.length ? list.map((r, i) => {
+        const hasV = ds.hasVal(r);
+        const trCls = hasV && i === 0 ? "rank-gold" : (hasV && i === 1 ? "rank-silver" : (hasV && i === 2 ? "rank-bronze" : ""));
+        const rk = hasV && i < 3 ? ["🥇 1", "🥈 2", "🥉 3"][i] : String(i + 1);
+        return `<tr class="${trCls}"><td>${rk}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${r.presentDays}</td><td>${r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} رشيدي` : formatNum(r.memPages)}</td><td>${formatNum(r.revPages)}</td><td class="pts-col">${r.totalPoints}</td></tr>`;
+      }).join("") : `<tr><td colspan="6" style="padding:18px; color:#64748b;">لا يوجد طلاب حاصلون على نقاط في هذه الفترة بعد</td></tr>`;
+      tfoot = `<tr><td colspan="2">المجموع العام (${list.length} ${gt.student})</td><td>${totals.sessionsCount} جلسة</td><td>${formatNum(totals.memPages)} ص</td><td>${formatNum(totals.revPages)} ص</td><td>${sumPts} نقطة</td></tr>`;
+    }
+
+    wrap.innerHTML = `<div class="pts-table-paper ${ds.themeCls}" id="pointsTablePaper">
       <div class="ptp-hdr">
         <div style="font-size:12.5px; font-weight:800; color:#102a49; line-height:1.55;">
           ${escapeHtml(bm.org)}<br>${escapeHtml(bm.branch)} • ${escapeHtml(bm.program)}
         </div>
         <div class="ptp-hdr-mid">
-          <h2>🏆 كشف نقاط ${gt.students} حلقة ${escapeHtml(bm.name)}</h2>
+          <h2>${escapeHtml(ds.tableTitle)}</h2>
           <p>${escapeHtml(periodLbl)}</p>
         </div>
         <img src="${bm.logoSrc}" alt="الشعار">
       </div>
       <div class="ptp-meta-3">
         <div class="ptp-meta-cell">${gt.supervisorTitle}: ${escapeHtml(bm.sheikh)}</div>
-        <div class="ptp-meta-cell">عدد ${gt.students}: ${list.length}</div>
-        <div class="ptp-meta-cell">مجموع النقاط: ${sumPts} نقطة</div>
+        <div class="ptp-meta-cell">${ds.kpis[0][0]}: ${escapeHtml(ds.kpis[0][1])}</div>
+        <div class="ptp-meta-cell">${ds.kpis[2][0]}: ${escapeHtml(ds.kpis[2][1])}</div>
       </div>
-      <table class="t-points-all">
-        <colgroup>
-          <col style="width:10%"><col style="width:36%"><col style="width:12%"><col style="width:14%"><col style="width:14%"><col style="width:14%">
-        </colgroup>
-        <thead>
-          <tr>
-            <th>المركز</th>
-            <th>اسم ${gt.student}</th>
-            <th>الحضور</th>
-            <th>الحفظ (ص)</th>
-            <th>المراجعة (ص)</th>
-            <th class="gold-th">النقاط ⭐</th>
-          </tr>
-        </thead>
-        <tbody>${bodyRows}</tbody>
-        <tfoot>
-          <tr>
-            <td colspan="2">المجموع العام (${list.length} ${gt.student})</td>
-            <td>${totals.sessionsCount} جلسة</td>
-            <td>${formatNum(totals.memPages)} ص</td>
-            <td>${formatNum(totals.revPages)} ص</td>
-            <td>${sumPts} نقطة</td>
-          </tr>
-        </tfoot>
-      </table>
+      <table class="t-points-all">${colgroup}<thead>${thead}</thead><tbody>${tbody}</tbody><tfoot>${tfoot}</tfoot></table>
       <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700; color:#475569; padding-top:6px; border-top:1px solid #cbd5e1;">
         <span>${escapeHtml(bm.org)} — ${escapeHtml(bm.branch)}</span>
         <span>تاريخ الإصدار: ${escapeHtml(getExactHijriInfo(todayISO()).dateStr)}</span>
       </div>
     </div>`;
+  } else if (_prCat === "all") {
+    if (pOpts) pOpts.style.display = "none";
+    const dsMem = getStatsCatDataset("mem", rows, totals, h);
+    const dsRev = getStatsCatDataset("rev", rows, totals, h);
+    const dsAtt = getStatsCatDataset("att", rows, totals, h);
+    const dsPts = getStatsCatDataset("points", rows, totals, h);
+    const medals = ["🥇", "🥈", "🥉"];
+    const quadBox = (cls, ttl, list, valFn) => `
+      <div class="ppp-quad-card ${cls}">
+        <div class="ppp-quad-hdr"><span>${ttl}</span></div>
+        ${list.length ? list.slice(0, 3).map((r, idx) => `
+          <div class="ppp-quad-item ${idx === 0 ? "top" : ""}">
+            <span class="ppp-quad-name">${medals[idx]} ${escapeHtml(r.student.name)}</span>
+            <span class="ppp-quad-val">${escapeHtml(valFn(r))}</span>
+          </div>`).join("") : `<div style="color:#cbd5e1; font-size:14px; text-align:center; padding:16px 0;">لا توجد بيانات بعد</div>`}
+      </div>`;
+    const sabrTop = [...rows].filter(x => x.sabrCount > 0).sort((a, b) => b.sabrCount - a.sabrCount);
+    wrap.innerHTML = `<div class="pts-podium-poster theme-all" id="pointsPodiumPaper">
+      ${getPosterSvgDecor("all")}
+      <div class="ppp-inner">
+        <div class="ppp-hdr">
+          <div class="ppp-logo-pill"><img src="${bm.logoSrc}" alt="الشعار"></div>
+          <div class="ppp-title-mid">
+            <div class="ppp-kicker">${escapeHtml(ds.kicker)}</div>
+            <h2>لوحة الشرف الشاملة — حلقة ${escapeHtml(bm.name)}</h2>
+            <p>${escapeHtml(periodLbl)}</p>
+          </div>
+          <div class="ppp-branch-tag">
+            <small>${escapeHtml(bm.program)}</small>
+            <b>${escapeHtml(bm.branch)}</b>
+          </div>
+        </div>
+        <div class="ppp-summary-strip">
+          ${ds.kpis.map(([k, v]) => `<div class="ppp-sum-pill"><small>${escapeHtml(k)}</small><b>${escapeHtml(v)}</b></div>`).join("")}
+        </div>
+        <div class="ppp-quad-grid">
+          ${quadBox("q-mem", "📖 أوائل الحفظ", dsMem.earned, dsMem.valText)}
+          ${quadBox("q-rev", "🔄 أوائل المراجعة", dsRev.earned, dsRev.valText)}
+          ${quadBox("q-att", "✅ أوائل الحضور", dsAtt.earned, dsAtt.valText)}
+          ${ptsOn
+            ? quadBox("q-pts", "⭐ أوائل النقاط", dsPts.earned, dsPts.valText)
+            : quadBox("q-pts", "🎓 أبطال السبر", sabrTop, r => `${r.sabrCount} جزء`)}
+        </div>
+        <div class="ppp-footer">
+          <span>${gt.supervisorTitle}: ${escapeHtml(bm.sheikh)}</span>
+          <span style="color:#f4d98d;">${escapeHtml(ds.dua)}</span>
+          <span>${escapeHtml(bm.org)}</span>
+        </div>
+      </div>
+    </div>`;
   } else {
-    const topList = earnedOnly.slice(0, _prPodiumLimit);
+    const topList = ds.earned.slice(0, _prPodiumLimit);
     const p1 = topList[0], p2 = topList[1], p3 = topList[2];
     const rest = topList.slice(3);
 
@@ -24069,44 +25293,51 @@ function renderPointsReportModal() {
         <div class="ppp-medal">${medal}</div>
         <div class="ppp-rank-lbl">${lbl}</div>
         <div class="ppp-stu-name">${escapeHtml(r.student.name)}</div>
-        <div class="ppp-pts-badge">⭐ ${r.totalPoints} نقطة</div>
-        <div class="ppp-sub-meta">${r.memPages > 0 ? `حفظ ${formatNum(r.memPages)} ص` : ''}${r.memPages > 0 && r.revPages > 0 ? ' • ' : ''}${r.revPages > 0 ? `مراجعة ${formatNum(r.revPages)} ص` : ''}</div>
+        <div class="ppp-pts-badge">${escapeHtml(ds.valText(r))}</div>
+        ${ds.subText(r) ? `<div class="ppp-sub-meta">${escapeHtml(ds.subText(r))}</div>` : ''}
       </div>` : `<div></div>`;
 
-    wrap.innerHTML = `<div class="pts-podium-poster" id="pointsPodiumPaper">
-      <div class="ppp-hdr">
-        <div class="ppp-logo-pill"><img src="${bm.logoSrc}" alt="الشعار"></div>
-        <div class="ppp-title-mid">
-          <div class="ppp-kicker">✨ لوحة الشرف ومتصدرو النقاط ✨</div>
-          <h2>أوائل حلقة ${escapeHtml(bm.name)}</h2>
-          <p>${escapeHtml(periodLbl)}</p>
+    wrap.innerHTML = `<div class="pts-podium-poster ${ds.themeCls}" id="pointsPodiumPaper">
+      ${getPosterSvgDecor(_prCat)}
+      <div class="ppp-inner">
+        <div class="ppp-hdr">
+          <div class="ppp-logo-pill"><img src="${bm.logoSrc}" alt="الشعار"></div>
+          <div class="ppp-title-mid">
+            <div class="ppp-kicker">${escapeHtml(ds.kicker)}</div>
+            <h2>${escapeHtml(ds.title)} — حلقة ${escapeHtml(bm.name)}</h2>
+            <p>${escapeHtml(periodLbl)}</p>
+          </div>
+          <div class="ppp-branch-tag">
+            <small>${escapeHtml(bm.program)}</small>
+            <b>${escapeHtml(bm.branch)}</b>
+          </div>
         </div>
-        <div class="ppp-branch-tag">
-          <small>${escapeHtml(bm.program)}</small>
-          <b>${escapeHtml(bm.branch)}</b>
-        </div>
-      </div>
 
-      ${topList.length ? `
-        <div class="ppp-podium-3">
-          ${podCard(p2, "second", "🥈", "المركز الثاني")}
-          ${podCard(p1, "first", "🥇", "المركز الأول")}
-          ${podCard(p3, "third", "🥉", "المركز الثالث")}
+        <div class="ppp-summary-strip">
+          ${ds.kpis.map(([k, v]) => `<div class="ppp-sum-pill"><small>${escapeHtml(k)}</small><b>${escapeHtml(v)}</b></div>`).join("")}
         </div>
-        ${rest.length ? `<div class="ppp-rest-grid">${rest.map((r, k) => `
-          <div class="ppp-rest-row">
-            <div class="ppp-rest-l">
-              <span class="ppp-rest-pos">${k + 4}</span>
-              <span class="ppp-rest-name">${escapeHtml(r.student.name)}</span>
-            </div>
-            <span class="ppp-rest-pts">${r.totalPoints} نقطة</span>
-          </div>`).join("")}</div>` : ''}
-      ` : `<div style="text-align:center; padding:42px 16px; font-size:20px; color:#cfe0f2; font-weight:700;">لا يوجد متصدرون مسجّلون في هذه الفترة بعد</div>`}
 
-      <div class="ppp-footer">
-        <span>${gt.supervisorTitle}: ${escapeHtml(bm.sheikh)}</span>
-        <span style="color:#f4d98d;">بارك الله في همم أهل القرآن وجعلهم من أهل الله وخاصته</span>
-        <span>${escapeHtml(bm.org)}</span>
+        ${topList.length ? `
+          <div class="ppp-podium-3">
+            ${podCard(p2, "second", "🥈", "المركز الثاني")}
+            ${podCard(p1, "first", "🥇", "المركز الأول")}
+            ${podCard(p3, "third", "🥉", "المركز الثالث")}
+          </div>
+          ${rest.length ? `<div class="ppp-rest-grid">${rest.map((r, k) => `
+            <div class="ppp-rest-row">
+              <div class="ppp-rest-l">
+                <span class="ppp-rest-pos">${k + 4}</span>
+                <span class="ppp-rest-name">${escapeHtml(r.student.name)}</span>
+              </div>
+              <span class="ppp-rest-pts">${escapeHtml(ds.valText(r))}</span>
+            </div>`).join("")}</div>` : ''}
+        ` : `<div style="text-align:center; padding:42px 16px; font-size:20px; color:#e2ecf6; font-weight:700;">لا يوجد طلاب مسجّلون في هذه الفئة خلال هذه الفترة بعد</div>`}
+
+        <div class="ppp-footer">
+          <span>${gt.supervisorTitle}: ${escapeHtml(bm.sheikh)}</span>
+          <span style="opacity:0.95;">${escapeHtml(ds.dua)}</span>
+          <span>${escapeHtml(bm.org)}</span>
+        </div>
       </div>
     </div>`;
   }
@@ -24129,17 +25360,42 @@ function scalePointsReportPreview() {
   host.style.height = Math.round(natH * sc) + "px";
 }
 
+function copyCurrentStatsCategoryWA() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const bm = getBrandMeta(h);
+  const m = document.getElementById("statsMonthFilter")?.value || (isPointsEnabled(h) ? "POINTS_CYCLE" : "ALL");
+  const { rows, totals } = computeMonthlyData(m);
+  const ds = getStatsCatDataset(_prCat, rows, totals, h);
+  if (!ds.earned.length) { showToast("لا توجد بيانات للنسخ في هذه الفترة"); return; }
+  const medals = ["🥇", "🥈", "🥉"];
+  const periodLbl = getPointsPeriodLabel(h, m);
+  let txt = `${ds.title} — *حلقة ${bm.name} (${bm.branch})*
+📅 ${periodLbl}
+━━━━━━━━━━━━
+`;
+  ds.earned.forEach((r, i) => {
+    txt += `${medals[i] || (i + 1) + "."} *${r.student.name}* — *${ds.valText(r)}*
+`;
+  });
+  txt += `━━━━━━━━━━━━
+${ds.dua}`;
+  copyText(txt, `تم نسخ قائمة ${ds.title} (${ds.earned.length} طالب) للواتساب 💬`);
+}
+
 async function exportPointsReportPNG() {
   const h = getActiveHalaqa();
+  const dsPrefix = { all: "الشرف_الشامل_", points: "النقاط_", mem: "الحفظ_", rev: "المراجعة_", att: "الحضور_" }[_prCat] || "الإحصائيات_";
   const paperId = _prMode === "podium" ? "pointsPodiumPaper" : "pointsTablePaper";
-  const fname = (_prMode === "podium" ? "لوحة_المتصدرين_" : "لائحة_النقاط_") + cleanFilePart(h?.name || "الحلقة");
+  const fname = (_prMode === "podium" ? "لوحة_أوائل_" : "كشف_جميع_") + dsPrefix + cleanFilePart(h?.name || "الحلقة");
   await exportHighResPNG(paperId, fname);
 }
 
 async function exportPointsReportPDF() {
   const h = getActiveHalaqa();
+  const dsPrefix = { all: "الشرف_الشامل_", points: "النقاط_", mem: "الحفظ_", rev: "المراجعة_", att: "الحضور_" }[_prCat] || "الإحصائيات_";
   const paperId = _prMode === "podium" ? "pointsPodiumPaper" : "pointsTablePaper";
-  const fname = (_prMode === "podium" ? "لوحة_المتصدرين_" : "لائحة_النقاط_") + cleanFilePart(h?.name || "الحلقة");
+  const fname = (_prMode === "podium" ? "لوحة_أوائل_" : "كشف_جميع_") + dsPrefix + cleanFilePart(h?.name || "الحلقة");
   await exportHighResPDF(paperId, fname);
 }
 
@@ -26676,7 +27932,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v75";
+const TIBYAN_APP_VERSION = "v77";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
