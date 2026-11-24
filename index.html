@@ -11201,6 +11201,413 @@ table.t-daily td.td-span-range {
   border-radius: 9px;
 }
 
+
+/* ==================== MAKIN v84: TECHNICAL HARDENING, INDEXEDDB VAULT & OFFLINE STUDIO ==================== */
+.th-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 9px;
+}
+.th-stat-tile {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-top: 3px solid #142a46;
+  border-radius: 10px;
+  padding: 7px 5px;
+  text-align: center;
+}
+.th-stat-tile.ok { border-top-color: var(--green); }
+.th-stat-tile.warn { border-top-color: var(--orange); }
+.th-stat-tile .tsv { font-size: 13.5px; font-weight: 800; color: var(--ink-900); line-height: 1.2; }
+.th-stat-tile .tsl { font-size: 10px; font-weight: 700; color: var(--ink-500); margin-top: 2px; }
+
+.th-meter-wrap {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 7px 9px;
+  margin-bottom: 9px;
+}
+.th-meter-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink-700);
+  margin-bottom: 5px;
+}
+.th-meter-track {
+  width: 100%;
+  height: 7px;
+  border-radius: 99px;
+  background: var(--line);
+  overflow: hidden;
+}
+.th-meter-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #16794c 0%, #22c55e 100%);
+  transition: width 0.3s ease;
+}
+.th-meter-fill.warn { background: linear-gradient(90deg, #b85610 0%, #f59e0b 100%); }
+.th-meter-fill.danger { background: linear-gradient(90deg, #b92222 0%, #ef4444 100%); }
+
+.th-offline-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 9px;
+}
+.th-off-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 6px 8px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink-700);
+}
+.th-off-pill.ready {
+  background: var(--green-bg);
+  border-color: rgba(22, 121, 76, 0.3);
+  color: var(--green);
+}
+.th-actions-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.th-actions-2 .btn { width: 100%; }
+
+.ya-item-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-right: 4px solid #142a46;
+  border-radius: 11px;
+  padding: 9px 10px;
+  margin-bottom: 7px;
+}
+[data-theme="dark"] .ya-item-card { border-right-color: #c8a14b; }
+.ya-item-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.ya-item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--ink-700);
+  margin-bottom: 7px;
+}
+.ya-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--line);
+}
+.snap-row-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-right: 3.5px solid var(--green);
+  border-radius: 10px;
+  background: var(--bg);
+  margin-bottom: 6px;
+}
+.quota-warn-banner {
+  background: var(--red-bg);
+  border: 1.5px solid rgba(185, 34, 34, 0.32);
+  border-right: 4px solid var(--red);
+  color: var(--red);
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-bottom: 9px;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+
+/* ==================== MAKIN v85: COMPACT NOTES, TAJWEED TAGS, SMART QUEUE, PRESENT-NO-RECITE, WA HUB & PER-PAGE OVERALL ==================== */
+.es-att-5 {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.es-att-5 .pill {
+  padding: 7px 2px;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+  border-radius: 9px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pill.on-norecite {
+  background: #475569;
+  color: #ffffff;
+  border-color: #475569;
+}
+.st-card.st-norecite { border-right-color: #64748b; }
+table.t-daily td.td-norecite {
+  background: #e2e8f0 !important;
+  color: #1e293b !important;
+  font-weight: 800;
+}
+.es-norecite-notice {
+  background: var(--brand-tint);
+  border: 1px solid var(--line-strong);
+  border-right: 3.5px solid #475569;
+  color: var(--ink-700);
+  border-radius: 10px;
+  padding: 6px 10px;
+  margin-bottom: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+.tj-tags-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 2px 1px 4px;
+  margin-bottom: 7px;
+  scrollbar-width: none;
+}
+.tj-tags-bar::-webkit-scrollbar { display: none; }
+.tj-tag-lbl {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--ink-500);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: 2px;
+}
+.tj-chip {
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-700);
+  border-radius: 99px;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.12s ease;
+}
+.tj-chip.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #f6dc93;
+}
+[data-theme="dark"] .tj-chip.on {
+  background: #c8a14b;
+  border-color: #c8a14b;
+  color: #0f233c;
+}
+.pp-overall-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  background: var(--white);
+  border: 1.5px solid #142a46;
+  border-right: 4px solid #c8a14b;
+  border-radius: 10px;
+  padding: 7px 9px;
+  margin-top: 7px;
+}
+[data-theme="dark"] .pp-overall-bar { border-color: #c8a14b; }
+.pp-ov-info {
+  min-width: 0;
+  flex: 1;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-900);
+  line-height: 1.4;
+}
+.pp-ov-info small { display: block; font-size: 10.5px; color: var(--ink-500); font-weight: 600; }
+.pp-ov-apply-btn {
+  border: none;
+  background: #142a46;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+}
+[data-theme="dark"] .pp-ov-apply-btn { background: #c8a14b; color: #0f233c; }
+.pp-ov-apply-btn:active { transform: scale(0.96); }
+.wa-direct-btn {
+  border: 1px solid rgba(22, 121, 76, 0.32);
+  background: var(--green-bg);
+  color: var(--green);
+  height: 24px;
+  min-width: 26px;
+  padding: 0 6px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.wa-direct-btn:active { transform: scale(0.94); }
+.wa-hub-phone-card {
+  background: linear-gradient(135deg, #102540 0%, #16593d 100%);
+  color: #ffffff;
+  border-radius: 13px;
+  padding: 11px 13px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-right: 4px solid #c8a14b;
+}
+.wa-hub-sec-ttl {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--brand-slate);
+  margin: 8px 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wa-hub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 9px;
+}
+.wa-hub-tile {
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  color: var(--ink-900);
+  border-radius: 11px;
+  padding: 9px 8px;
+  cursor: pointer;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.08s ease, border-color 0.14s ease;
+}
+.wa-hub-tile:active { transform: scale(0.97); }
+.wa-hub-tile.is-img { border-color: rgba(21, 98, 154, 0.28); background: var(--brand-tint); }
+.wa-hub-tile .wht-ico { font-size: 18px; flex-shrink: 0; }
+.wa-hub-tile b { display: block; font-size: 12px; font-weight: 800; color: var(--ink-900); line-height: 1.25; }
+.wa-hub-tile span { display: block; font-size: 10px; color: var(--ink-500); font-weight: 600; }
+.st-daily-card-canvas, .st-daily-card-canvas * { letter-spacing: 0 !important; font-kerning: none; box-sizing: border-box; }
+.st-daily-card-canvas {
+  width: 760px;
+  min-width: 760px;
+  background: #ffffff;
+  color: #102a49;
+  font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
+  border: 4px solid #142a46;
+  overflow: hidden;
+}
+.sdc-hdr {
+  background: linear-gradient(145deg, #0f2542 0%, #193c66 100%);
+  color: #ffffff;
+  padding: 18px 24px;
+  border-bottom: 4px solid #c8a14b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.sdc-hdr-mid { flex: 1; text-align: center; }
+.sdc-hdr-mid h2 { font-size: 24px; font-weight: 900; color: #ffffff; margin-bottom: 3px; }
+.sdc-hdr-mid p { font-size: 14px; font-weight: 700; color: #f4d98d; }
+.sdc-body { padding: 18px 24px 20px; }
+.sdc-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #f4f7fb;
+  border: 1.5px solid #cbd5e1;
+  border-right: 5px solid #142a46;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+}
+.sdc-st-name { font-size: 24px; font-weight: 900; color: #0f2542; }
+.sdc-ev-pill {
+  padding: 7px 18px;
+  border-radius: 99px;
+  font-size: 17px;
+  font-weight: 900;
+  background: #16794c;
+  color: #ffffff;
+  white-space: nowrap;
+}
+.sdc-ev-pill.ev-blue { background: #15629a; }
+.sdc-ev-pill.ev-red { background: #b92222; }
+.sdc-ev-pill.ev-slate { background: #475569; }
+.sdc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.sdc-tile {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-top: 3.5px solid #142a46;
+  border-radius: 11px;
+  padding: 10px 14px;
+}
+.sdc-tile.gold { border-top-color: #c8a14b; background: #fdfbf4; }
+.sdc-tile span { display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 3px; }
+.sdc-tile b { display: block; font-size: 17px; font-weight: 800; color: #0f2542; line-height: 1.4; }
+.sdc-note {
+  background: #fdf9ef;
+  border: 1.5px solid #e0c888;
+  border-right: 4px solid #c8a14b;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+.sdc-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1.5px solid #cbd5e1;
+  font-size: 14px;
+  font-weight: 800;
+  color: #142a46;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -11710,7 +12117,7 @@ table.t-daily td.td-span-range {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v83</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v85</span>
         </button>
       </div>
     </div>
@@ -11742,10 +12149,13 @@ table.t-daily td.td-span-range {
           <div class="phc-title">🗂️ الأرشيف <span class="phc-count" id="archiveCountBadge">0</span></div>
           <select id="archiveMonthFilter" onchange="renderArchiveView()" style="padding:6px 9px; border-radius:8px; border:1px solid var(--line-strong); font-weight:700; font-size:12px; background:var(--brand-tint); color:var(--ink-900); max-width:56%;"></select>
         </div>
-        <div class="pill-group" style="gap:5px;">
-          <button type="button" class="pill pill-sm on-slate" id="arcTypeAll" onclick="setArchiveTypeFilter('all')">الكل</button>
-          <button type="button" class="pill pill-sm" id="arcTypeDaily" onclick="setArchiveTypeFilter('daily')">📖 التسميع</button>
-          <button type="button" class="pill pill-sm" id="arcTypeSat" onclick="setArchiveTypeFilter('saturday')">📘 المراجعة</button>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px;">
+          <div class="pill-group" style="gap:5px;">
+            <button type="button" class="pill pill-sm on-slate" id="arcTypeAll" onclick="setArchiveTypeFilter('all')">الكل</button>
+            <button type="button" class="pill pill-sm" id="arcTypeDaily" onclick="setArchiveTypeFilter('daily')">📖 التسميع</button>
+            <button type="button" class="pill pill-sm" id="arcTypeSat" onclick="setArchiveTypeFilter('saturday')">📘 المراجعة</button>
+          </div>
+          <button type="button" class="btn btn-soft btn-sm" style="padding:4px 9px; font-size:11.5px;" onclick="openYearArchiveModal()">📦 أرشيف السنوات</button>
         </div>
       </div>
       <div id="archiveListWrap"></div>
@@ -12472,6 +12882,41 @@ table.t-daily td.td-span-range {
   </div>
 </div>
 
+
+<!-- ===== MODAL: ACADEMIC YEAR / SEMESTER ARCHIVE VAULT (v84) ===== -->
+<div class="modal-backdrop" id="yearArchiveModal" style="z-index:143;" onclick="if(event.target===this) closeModal('yearArchiveModal')">
+  <div class="modal-box" style="max-width:580px;">
+    <div class="modal-header">
+      <h3>📦 أرشيف السنوات والفصول الدراسية</h3>
+      <button class="close-x" onclick="closeModal('yearArchiveModal')">×</button>
+    </div>
+    <div id="yearArchiveModalBody"></div>
+  </div>
+</div>
+
+<!-- ===== MODAL: AUTO-RECOVERY SAFETY SNAPSHOTS (v84) ===== -->
+<div class="modal-backdrop" id="autoSnapshotsModal" style="z-index:144;" onclick="if(event.target===this) closeModal('autoSnapshotsModal')">
+  <div class="modal-box" style="max-width:520px;">
+    <div class="modal-header">
+      <h3>🔄 نقاط الاستعادة التلقائية الآمنة</h3>
+      <button class="close-x" onclick="closeModal('autoSnapshotsModal')">×</button>
+    </div>
+    <div id="autoSnapshotsModalBody"></div>
+  </div>
+</div>
+
+
+<!-- ===== MODAL: STUDENT DIRECT WHATSAPP HUB (TEXT + HD IMAGES TO STUDENT NUMBER — v85) ===== -->
+<div class="modal-backdrop" id="studentWaHubModal" style="z-index:147;" onclick="if(event.target===this) closeModal('studentWaHubModal')">
+  <div class="modal-box" style="max-width:510px;">
+    <div class="modal-header">
+      <h3 id="waHubTitle">💬 إرسال مباشر لواتساب الطالب</h3>
+      <button class="close-x" onclick="closeModal('studentWaHubModal')">×</button>
+    </div>
+    <div id="studentWaHubBody"></div>
+  </div>
+</div>
+
 <!-- ===== MODAL: STUDENT INDIVIDUAL PROFILE & PARENT WHATSAPP CARD ===== -->
 <div class="modal-backdrop" id="studentProfileModal">
   <div class="modal-box" style="max-width:520px;">
@@ -12700,6 +13145,14 @@ table.t-daily td.td-span-range {
             <button type="button" class="btn btn-outline btn-sm" onclick="startNewHalaqaFlow()">+ حلقة جديدة</button>
           </div>
           <div id="halaqatSwitcherList"></div>
+        </div>
+
+        <div class="exec-card">
+          <div class="exec-card-ttl">
+            <span>🛡️ التحصين التقني والعمل بدون إنترنت</span>
+            <span class="badge b-green" id="thDbStatusBadge" style="font-size:10px;">IndexedDB نشطة ✓</span>
+          </div>
+          <div id="techHardeningHost"></div>
         </div>
 
         <div class="exec-card">
@@ -13194,6 +13647,15 @@ function getEvalCellStyle(val, isAbsent = false) {
       bold: true
     };
   }
+  if (txt === "لم يُسمّع" || txt === "حضر ولم يُسمّع") {
+    return {
+      text: "لم يُسمّع",
+      cls: "td-norecite",
+      xlFill: "FFE2E8F0",
+      xlFont: "FF1E293B",
+      bold: true
+    };
+  }
   return { text: txt, cls: "", xlFill: null, xlFont: "FF000000", bold: true };
 }
 
@@ -13258,8 +13720,29 @@ function loadCachedMushaf604() {
 loadCachedMushaf604();
 
 async function ensureExactMushaf604Data() {
-  if (MUSHAF_EXACT_604) return true;
+  if (MUSHAF_EXACT_604) {
+    // Mirror into IndexedDB offline vault if missing
+    if (typeof idbGet === "function") {
+      idbGet(IDB_STORE_LIBS, "mushaf604").then(ex => {
+        if (!ex) idbPut(IDB_STORE_LIBS, { key: "mushaf604", code: JSON.stringify(MUSHAF_EXACT_604), savedAt: new Date().toISOString(), byteSize: JSON.stringify(MUSHAF_EXACT_604).length * 2 });
+      }).catch(() => {});
+    }
+    return true;
+  }
   if (loadCachedMushaf604()) return true;
+  try {
+    if (typeof idbGet === "function") {
+      const idbRec = await idbGet(IDB_STORE_LIBS, "mushaf604");
+      if (idbRec?.code) {
+        const arr = JSON.parse(idbRec.code);
+        if (Array.isArray(arr) && arr.length === 604 && arr[0]?.[0] === 1 && arr[528]?.[0] === 54 && arr[528]?.[1] === 7 && arr[603]?.[0] === 112) {
+          MUSHAF_EXACT_604 = arr;
+          try { localStorage.setItem(MUSHAF_604_CACHE_KEY, idbRec.code); } catch {}
+          return true;
+        }
+      }
+    }
+  } catch {}
   try {
     const res = await fetch("https://api.alquran.cloud/v1/meta", { cache: "force-cache" });
     if (!res.ok) return false;
@@ -13267,8 +13750,12 @@ async function ensureExactMushaf604Data() {
     const refs = json?.data?.pages?.references;
     if (Array.isArray(refs) && refs.length === 604 && refs[0].surah === 1 && refs[528].surah === 54 && refs[528].ayah === 7 && refs[603].surah === 112) {
       const compact = refs.map(x => [Number(x.surah), Number(x.ayah)]);
+      const jsonStr = JSON.stringify(compact);
       MUSHAF_EXACT_604 = compact;
-      try { localStorage.setItem(MUSHAF_604_CACHE_KEY, JSON.stringify(compact)); } catch (e) {}
+      try { localStorage.setItem(MUSHAF_604_CACHE_KEY, jsonStr); } catch (e) {}
+      if (typeof idbPut === "function") {
+        await idbPut(IDB_STORE_LIBS, { key: "mushaf604", code: jsonStr, savedAt: new Date().toISOString(), byteSize: jsonStr.length * 2 });
+      }
       if (openCardId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
         syncStudentEvalSheet();
       }
@@ -13402,16 +13889,15 @@ const ARABIC_DAYS = ["الأحد", "الاثنين", "الثلاثاء", "الأ
 const DAY_NAME_TO_DOW = { "الأحد": 0, "الاثنين": 1, "الثلاثاء": 2, "الأربعاء": 3, "الخميس": 4, "الجمعة": 5, "السبت": 6 };
 const HIJRI_MONTHS = ["", "محرم", "صفر", "ربيع الأول", "ربيع الآخر", "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"];
 
-const JUZ_NAMES = [
-  "الجزء 1 (آلم)", "الجزء 2 (سيقول)", "الجزء 3 (تلك الرسل)", "الجزء 4 (لن تنالوا)",
-  "الجزء 5 (والمحصنات)", "الجزء 6 (لا يحب الله)", "الجزء 7 (وإذا سمعوا)", "الجزء 8 (ولو أننا)",
-  "الجزء 9 (قال الملأ)", "الجزء 10 (واعلموا)", "الجزء 11 (يعتذرون)", "الجزء 12 (وما من دابة)",
-  "الجزء 13 (وما أبرئ)", "الجزء 14 (ربما)", "الجزء 15 (سبحان الذي)", "الجزء 16 (قال ألم)",
-  "الجزء 17 (اقترب)", "الجزء 18 (قد أفلح)", "الجزء 19 (وقال الذين)", "الجزء 20 (أمن خلق)",
-  "الجزء 21 (اتل ما أوحي)", "الجزء 22 (ومن يقنت)", "الجزء 23 (وما لي)", "الجزء 24 (فمن أظلم)",
-  "الجزء 25 (إليه يرد)", "الجزء 26 (حم)", "الجزء 27 (قال فما خطبكم)", "الجزء 28 (قد سمع)",
-  "الجزء 29 (تبارك)", "الجزء 30 (عمّ)"
-];
+const JUZ_NAMES = Array.from({ length: 30 }, (_, i) => `الجزء ${i + 1}`);
+
+function formatJuzClean(nameStr) {
+  const s = String(nameStr || "").trim();
+  if (!s) return "";
+  const m = s.match(/الجزء\s*(\d{1,2})/);
+  if (m) return `الجزء ${Number(m[1])}`;
+  return s.replace(/\s*\([^)]*\)/g, "").trim();
+}
 
 const JUZ_PAGES = [
   { id: 1,  startPage: 1,   endPage: 21,  pages: 21, startSurah: 1,  startAyah: 1,   endSurah: 2,   endAyah: 141, shortName: "الأول", name: JUZ_NAMES[0] },
@@ -13455,7 +13941,16 @@ function getJuzAtPage(pageNum) {
 
 function getJuzByName(nameStr) {
   if (!nameStr) return null;
-  return JUZ_PAGES.find(j => j.name === nameStr) || null;
+  const raw = String(nameStr).trim();
+  const exact = JUZ_PAGES.find(j => j.name === raw);
+  if (exact) return exact;
+  const numM = raw.match(/(?:الجزء|جزء)\s*(\d{1,2})/);
+  if (numM) {
+    const id = Number(numM[1]);
+    if (JUZ_PAGE_MAP[id]) return JUZ_PAGE_MAP[id];
+  }
+  const clean = formatJuzClean(raw);
+  return JUZ_PAGES.find(j => j.name === clean || j.shortName === raw || raw.includes(`(${j.shortName})`)) || null;
 }
 
 // Detects if reciting `segs` in `direction` just completed a full Juz!
@@ -13574,9 +14069,95 @@ function formatPointsBreakdownText(s, r, st) {
   return parts.join(" + ") + ` = ${r.points || 0} نقطة`;
 }
 
+
+// ==================== v85: CONCISE NOTES, TAJWEED TAGS & PRESENT-NO-RECITE ENGINE ====================
+const TAJWEED_TAGS = ["مدود", "غنن", "قلقلة", "تشكيل", "أحكام", "مخارج", "وقف", "سرعة"];
+
+function isPresentNoRecite(att) {
+  return att === "حضر ولم يُسمّع";
+}
+
+function isCountedPresent(att) {
+  return att === "حاضر" || att === "متأخر" || att === "حضر ولم يُسمّع";
+}
+
+function getTajweedSuffixFromRecord(r) {
+  const tags = Array.isArray(r?.tajweedTags) ? r.tajweedTags.filter(Boolean) : [];
+  return tags.length ? ` (تجويد: ${tags.join("، ")})` : "";
+}
+
+function stripTajweedSuffix(noteStr) {
+  return String(noteStr || "").replace(/\s*\(تجويد:\s*[^)]*\)\s*/g, " ").replace(/\s{2,}/g, " ").trim();
+}
+
+function applyTajweedToNote(baseNote, r) {
+  const clean = stripTajweedSuffix(baseNote);
+  const tj = getTajweedSuffixFromRecord(r);
+  if (!tj) return clean;
+  return clean ? `${clean}${tj}` : tj.trim();
+}
+
+function toggleTajweedTag(studentId, tag) {
+  const s = getCurrentSession();
+  if (!s) return;
+  const r = getStudentRecord(s, studentId);
+  if (!Array.isArray(r.tajweedTags)) r.tajweedTags = [];
+  const idx = r.tajweedTags.indexOf(tag);
+  if (idx >= 0) r.tajweedTags.splice(idx, 1);
+  else r.tajweedTags.push(tag);
+  r.notes = applyTajweedToNote(r.notes || "", r);
+  openCardId = studentId;
+  saveStateDebounced(200);
+  if (document.getElementById("studentEvalSheet")?.classList.contains("show")) {
+    syncStudentEvalSheet();
+  }
+}
+
+function renderTajweedTagsBar(studentId, r) {
+  const active = Array.isArray(r?.tajweedTags) ? r.tajweedTags : [];
+  return `<div class="tj-tags-bar">
+    <span class="tj-tag-lbl">🎙️ تجويد:</span>
+    ${TAJWEED_TAGS.map(t => `<button type="button" class="tj-chip ${active.includes(t) ? "on" : ""}" onclick="toggleTajweedTag('${studentId}','${t}')">${active.includes(t) ? "✓ " : ""}${t}</button>`).join("")}
+  </div>`;
+}
+
+function buildConciseRecNote(ev, opts = {}) {
+  const { completedJuz = null, sabrJuz = "", score = "", repeatPagesTxt = "", isRashidi = false } = opts;
+  if (sabrJuz) {
+    const cleanJ = formatJuzClean(sabrJuz);
+    const sc = (score !== "" && score !== undefined && score !== null) ? ` (${score}%)` : "";
+    if (ev === "إعادة") return `إعادة سبر ${cleanJ}${sc}، يُرجى المراجعة.`;
+    return `مبارك سبر ${cleanJ}${sc}، فتح الله عليك.`;
+  }
+  if (isRashidi) {
+    if (ev === "ممتاز") return "فتح الله عليك، قراءة متقنة.";
+    if (ev === "جيد جداً") return "أحسنت، تقدّم طيّب.";
+    if (ev === "جيد") return "جهد طيّب، يُرجى التدريب.";
+    if (ev === "إعادة") return "يُرجى إعادة التدريب للجلسة القادمة.";
+    return "";
+  }
+  let base = "";
+  if (completedJuz && ev !== "إعادة") {
+    base = `مبارك إتمام ${formatJuzClean(completedJuz.name || completedJuz)}، فتح الله عليك.`;
+  } else if (ev === "ممتاز") {
+    base = "فتح الله عليك، حفظ متقن.";
+  } else if (ev === "جيد جداً") {
+    base = "أحسنت، يحتاج مزيد تثبيت.";
+  } else if (ev === "جيد") {
+    base = "جهد طيّب، يُرجى زيادة التكرار.";
+  } else if (ev === "إعادة") {
+    base = "يُرجى إعادة التثبيت للجلسة القادمة.";
+  }
+  if (repeatPagesTxt && ev !== "إعادة") {
+    base = `${base ? base + " — " : ""}إعادة: ${repeatPagesTxt}.`;
+  }
+  return base;
+}
+
+
 function computeRecordPoints(s, r, st) {
   if (!s || !r) return 0;
-  if (r.attendance && r.attendance.includes("غياب")) return 0;
+  if (r.attendance && (r.attendance.includes("غياب") || r.attendance === "حضر ولم يُسمّع")) return 0;
   const isRashidi = st?.track === "rashidi";
   const hasAnyEval = (s.type === "daily" || isRashidi)
     ? Boolean(r.recEval || r.sabrJuz || (r.dRevEval && r.dRevEval !== "تثبيت" && r.dRevEval !== "تثبيت حفظ"))
@@ -15398,7 +15979,7 @@ function setSabrScore(studentId, rawVal) {
 
   const juz = getJuzByName(r.sabrJuz);
   const dir = st.direction || h.defaultDir || "desc";
-  if (r.attendance === "لم يُسمّع" || r.attendance.includes("غياب")) {
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) {
     r.attendance = "حاضر";
     ensureRecordBonuses(r);
   }
@@ -15410,7 +15991,7 @@ function setSabrScore(studentId, rawVal) {
         r.hwSabrJuz = r.sabrJuz;
         r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
         r.dRevEval = `إعادة سبر (${score}%)`;
-        r.notes = `إعادة سبر ${r.sabrJuz} (الدرجة: ${score}% — إعادة)؛ يرجى المراجعة الجيدة للجلسة القادمة.`;
+        r.notes = applyTajweedToNote(buildConciseRecNote("إعادة", { sabrJuz: r.sabrJuz, score }), r);
       } else if (juz) {
         r.hwSabrJuz = "";
         r.dRevFrom = SURAH_MAP[juz.startSurah]?.n || "";
@@ -15421,7 +16002,7 @@ function setSabrScore(studentId, rawVal) {
         const nxtHw = computeFirstHwAfterJuz(juz, dir, st.pace || 0.5, getStudentJuzOrder(st, h), getStudentExtraEndJuzIds(st));
         if (nxtHw) Object.assign(r, nxtHw);
         const nxtLbl = formatSegmentsInline(getSegments(r, "hw"));
-        r.notes = `مبارك إتمام سبر ${juz.name} بدرجة ${score}% (${ev}) بارك الله في همتك.${nxtLbl ? ` ننتقل إلى: ${nxtLbl}.` : ''}`;
+        r.notes = applyTajweedToNote(buildConciseRecNote(ev, { sabrJuz: juz.name, score }), r);
       }
     } else {
       // Sabr done alongside normal recitation in daily review column
@@ -15431,9 +16012,7 @@ function setSabrScore(studentId, rawVal) {
         r.dRevEval = ev === "إعادة" ? `إعادة سبر (${score}%)` : `سبر جزء ${juz.shortName} (${score}%)`;
         r.dRevPages = ev === "إعادة" ? 0 : juz.pages;
       }
-      r.notes = ev === "إعادة"
-        ? `يرجى إعادة تثبيت وسبر ${r.sabrJuz} (الدرجة: ${score}%).`
-        : `مبارك إتمام سبر ${r.sabrJuz} بدرجة ${score}% (${ev}) بارك الله فيك.`;
+      r.notes = applyTajweedToNote(buildConciseRecNote(ev, { sabrJuz: r.sabrJuz, score }), r);
     }
   } else {
     // Saturday Major Review Sabr
@@ -15443,9 +16022,7 @@ function setSabrScore(studentId, rawVal) {
       r.majPages = juz.pages;
     }
     applyNextMajorReview(st, r, ev !== "إعادة");
-    r.notes = ev === "إعادة"
-      ? `إعادة سبر ${r.sabrJuz} (الدرجة: ${score}% — إعادة)؛ يرجى المراجعة الجيدة للسبت القادم.`
-      : `ما شاء الله! أتمّ سبر ${r.sabrJuz} بدرجة ${score}% (${ev}) بنجاح.${r.nextMajFrom ? ` المراجعة الكبرى القادمة: ${formatMajStripDisplay(r.nextMajFrom, r.nextMajTo)}.` : ''}`;
+    r.notes = applyTajweedToNote(buildConciseRecNote(ev, { sabrJuz: r.sabrJuz, score }), r);
   }
 
   r.points = computeRecordPoints(s, r, st);
@@ -15788,12 +16365,261 @@ function loadState(uidOverride = null, opts = {}) {
   } catch (e) { console.error(e); }
 }
 
+
+// ==================== MAKIN v84: INDEXEDDB STORAGE VAULT, OFFLINE CACHE & AUTO-SNAPSHOTS ====================
+const MAKIN_IDB_NAME = "MakinStorageVault_v1";
+const MAKIN_IDB_VER = 1;
+const IDB_STORE_STATES = "appStates";
+const IDB_STORE_LIBS = "offlineLibs";
+const IDB_STORE_ARCHIVES = "yearArchives";
+const IDB_STORE_SNAPS = "autoSnapshots";
+
+let _makinIdbPromise = null;
+let _makinIdbAvailable = typeof indexedDB !== "undefined";
+let _localStorageQuotaReached = false;
+let _stateMutationSeq = 0;
+let _idbWriteTimer = null;
+let _idbWriteInFlight = false;
+let _idbWriteQueued = null;
+
+function openMakinIDB() {
+  if (!_makinIdbAvailable) return Promise.resolve(null);
+  if (_makinIdbPromise) return _makinIdbPromise;
+  _makinIdbPromise = new Promise(resolve => {
+    try {
+      const req = indexedDB.open(MAKIN_IDB_NAME, MAKIN_IDB_VER);
+      req.onupgradeneeded = ev => {
+        const db = ev.target.result;
+        if (!db.objectStoreNames.contains(IDB_STORE_STATES)) db.createObjectStore(IDB_STORE_STATES, { keyPath: "key" });
+        if (!db.objectStoreNames.contains(IDB_STORE_LIBS)) db.createObjectStore(IDB_STORE_LIBS, { keyPath: "key" });
+        if (!db.objectStoreNames.contains(IDB_STORE_ARCHIVES)) db.createObjectStore(IDB_STORE_ARCHIVES, { keyPath: "id" });
+        if (!db.objectStoreNames.contains(IDB_STORE_SNAPS)) db.createObjectStore(IDB_STORE_SNAPS, { keyPath: "id" });
+      };
+      req.onsuccess = () => {
+        const db = req.result;
+        db.onversionchange = () => { try { db.close(); } catch {} _makinIdbPromise = null; };
+        resolve(db);
+      };
+      req.onerror = () => { _makinIdbAvailable = false; _makinIdbPromise = null; resolve(null); };
+      req.onblocked = () => { resolve(null); };
+    } catch {
+      _makinIdbAvailable = false;
+      _makinIdbPromise = null;
+      resolve(null);
+    }
+  });
+  return _makinIdbPromise;
+}
+
+async function idbPut(storeName, obj) {
+  const db = await openMakinIDB();
+  if (!db) return false;
+  return new Promise(resolve => {
+    try {
+      const tx = db.transaction(storeName, "readwrite");
+      tx.objectStore(storeName).put(obj);
+      tx.oncomplete = () => resolve(true);
+      tx.onerror = () => resolve(false);
+      tx.onabort = () => resolve(false);
+    } catch { resolve(false); }
+  });
+}
+
+async function idbGet(storeName, key) {
+  const db = await openMakinIDB();
+  if (!db) return null;
+  return new Promise(resolve => {
+    try {
+      const tx = db.transaction(storeName, "readonly");
+      const req = tx.objectStore(storeName).get(key);
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => resolve(null);
+    } catch { resolve(null); }
+  });
+}
+
+async function idbGetAll(storeName) {
+  const db = await openMakinIDB();
+  if (!db) return [];
+  return new Promise(resolve => {
+    try {
+      const tx = db.transaction(storeName, "readonly");
+      const req = tx.objectStore(storeName).getAll();
+      req.onsuccess = () => resolve(Array.isArray(req.result) ? req.result : []);
+      req.onerror = () => resolve([]);
+    } catch { resolve([]); }
+  });
+}
+
+async function idbDelete(storeName, key) {
+  const db = await openMakinIDB();
+  if (!db) return false;
+  return new Promise(resolve => {
+    try {
+      const tx = db.transaction(storeName, "readwrite");
+      tx.objectStore(storeName).delete(key);
+      tx.oncomplete = () => resolve(true);
+      tx.onerror = () => resolve(false);
+    } catch { resolve(false); }
+  });
+}
+
+function getAppStateLatestModifiedIso(stObj) {
+  let latest = "";
+  Object.values(stObj?.halaqat || {}).forEach(h => {
+    if (h?.lastModifiedAt && h.lastModifiedAt > latest) latest = h.lastModifiedAt;
+  });
+  return latest;
+}
+
+function queueIdbStateSave(scopedKey, stateObj, serializedJson = "") {
+  if (!_makinIdbAvailable || !scopedKey || !stateObj) return;
+  let cloneData = null;
+  try {
+    const jsonStr = serializedJson || JSON.stringify(stateObj);
+    cloneData = JSON.parse(jsonStr);
+    _idbWriteQueued = {
+      key: scopedKey,
+      data: cloneData,
+      updatedAt: getAppStateLatestModifiedIso(cloneData) || new Date().toISOString(),
+      byteSize: jsonStr.length * 2
+    };
+  } catch { return; }
+
+  if (_idbWriteInFlight) return;
+  clearTimeout(_idbWriteTimer);
+  _idbWriteTimer = setTimeout(flushIdbStateSaveQueue, 40);
+}
+
+async function flushIdbStateSaveQueue() {
+  if (_idbWriteInFlight || !_idbWriteQueued) return;
+  _idbWriteInFlight = true;
+  try {
+    while (_idbWriteQueued) {
+      const payload = _idbWriteQueued;
+      _idbWriteQueued = null;
+      await idbPut(IDB_STORE_STATES, payload);
+    }
+  } finally {
+    _idbWriteInFlight = false;
+  }
+}
+
+async function hydrateStateFromIndexedDB(uidOverride = null) {
+  if (!_makinIdbAvailable) return false;
+  const uid = getEffectiveAccountUid(uidOverride);
+  const scopedKey = getStorageKeyForUid(uid);
+  const seqAtStart = _stateMutationSeq;
+  try {
+    const rec = await idbGet(IDB_STORE_STATES, scopedKey);
+    if (_stateMutationSeq !== seqAtStart) return false; // User already edited in memory
+
+    const locCount = Object.keys(appState?.halaqat || {}).length;
+    const idbData = rec?.data;
+    const idbCount = Object.keys(idbData?.halaqat || {}).length;
+
+    if (idbCount > 0) {
+      const locTs = getAppStateLatestModifiedIso(appState);
+      const idbTs = getAppStateLatestModifiedIso(idbData) || rec.updatedAt || "";
+      // Hydrate if localStorage was empty/evicted OR IndexedDB holds strictly newer data (e.g. after QuotaExceeded!)
+      if (locCount === 0 || (idbTs && (!locTs || idbTs > locTs))) {
+        appState = idbData;
+        if (!appState.activeHalaqaId || !appState.halaqat[appState.activeHalaqaId]) {
+          appState.activeHalaqaId = Object.keys(appState.halaqat)[0] || null;
+        }
+        try {
+          localStorage.setItem(scopedKey, JSON.stringify(appState));
+          _localStorageQuotaReached = false;
+        } catch { _localStorageQuotaReached = true; }
+        if (typeof routeAppByCurrentUser === "function") routeAppByCurrentUser();
+        return true;
+      }
+    }
+
+    // Mirror current localStorage state into IndexedDB on first run if missing or older
+    if (locCount > 0 && (!rec || getAppStateLatestModifiedIso(appState) > (rec.updatedAt || ""))) {
+      queueIdbStateSave(scopedKey, appState);
+    }
+  } catch (e) { console.warn("IDB hydrate skipped:", e); }
+  return false;
+}
+
+// Rolling Daily Auto-Recovery Snapshots (keeps latest 5 per account automatically in IndexedDB!)
+async function ensureDailyAutoSnapshot(forceLabel = "") {
+  if (!_makinIdbAvailable) return false;
+  const uid = getEffectiveAccountUid() || "local";
+  const hals = Object.values(appState?.halaqat || {});
+  if (!hals.length) return false;
+  const totalSess = hals.reduce((sum, h) => sum + (h.sessions?.length || 0), 0);
+  const totalSt = hals.reduce((sum, h) => sum + (h.students?.length || 0), 0);
+  if (totalSess === 0 && totalSt === 0) return false;
+
+  const iso = todayISO();
+  const snapId = forceLabel ? `${uid}__manual__${Date.now()}` : `${uid}__day__${iso}`;
+  if (!forceLabel) {
+    const existing = await idbGet(IDB_STORE_SNAPS, snapId);
+    if (existing) return false;
+  }
+
+  try {
+    const raw = JSON.stringify(appState);
+    const activeH = getActiveHalaqa();
+    await idbPut(IDB_STORE_SNAPS, {
+      id: snapId,
+      uid,
+      createdAt: new Date().toISOString(),
+      isoDate: iso,
+      label: forceLabel || `لقطة تلقائية (${getExactHijriInfo(iso).formatted})`,
+      halaqaName: activeH?.name || hals[0]?.name || "حلقة",
+      studentsCount: totalSt,
+      sessionsCount: totalSess,
+      byteSize: raw.length * 2,
+      data: JSON.parse(raw)
+    });
+    // Prune older snapshots beyond latest 6 for this account
+    const allSnaps = (await idbGetAll(IDB_STORE_SNAPS))
+      .filter(x => x.uid === uid)
+      .sort((a, b) => (b.createdAt || "").localeCompare(a.createdAt || ""));
+    for (const old of allSnaps.slice(6)) {
+      await idbDelete(IDB_STORE_SNAPS, old.id);
+    }
+    return true;
+  } catch { return false; }
+}
+
+function formatByteSizeArabic(bytes) {
+  const b = Math.max(0, Number(bytes) || 0);
+  if (b < 1024) return `${b} بايت`;
+  if (b < 1024 * 1024) return `${(b / 1024).toFixed(1)} KB`;
+  return `${(b / (1024 * 1024)).toFixed(2)} MB`;
+}
+
+
 let _debouncedSaveTimer = null;
 function saveState(skipCloud = false) {
   if (_debouncedSaveTimer) { clearTimeout(_debouncedSaveTimer); _debouncedSaveTimer = null; }
+  _stateMutationSeq++;
   const h = appState.activeHalaqaId ? appState.halaqat[appState.activeHalaqaId] : null;
   if (h && !_supervisorInspectHalaqa) h.lastModifiedAt = new Date().toISOString();
-  try { localStorage.setItem(getStorageKeyForUid(), JSON.stringify(appState)); } catch {}
+  const scopedKey = getStorageKeyForUid();
+  let serialized = "";
+  try { serialized = JSON.stringify(appState); } catch {}
+  if (serialized) {
+    // 1) Primary High-Capacity IndexedDB Vault (virtually unlimited — never loses data!)
+    queueIdbStateSave(scopedKey, appState, serialized);
+    // 2) Fast-Boot localStorage Mirror with Quota Protection
+    try {
+      localStorage.setItem(scopedKey, serialized);
+      _localStorageQuotaReached = false;
+    } catch (err) {
+      _localStorageQuotaReached = true;
+      console.warn("localStorage quota full — safely persisted in IndexedDB:", err);
+      if (!window._quotaWarnShownOnce) {
+        window._quotaWarnShownOnce = true;
+        showToast("💾 ذاكرة البدء السريع ممتلئة — تم الحفظ بأمان في IndexedDB (يُنصح بأرشفة الجلسات القديمة)");
+      }
+    }
+  }
   if (typeof updateUnsyncedIndicators === "function") updateUnsyncedIndicators();
   if (!skipCloud) {
     if (typeof markCloudSyncDirty === "function") markCloudSyncDirty();
@@ -15805,7 +16631,7 @@ function saveStateDebounced(delayMs = 350) {
   clearTimeout(_debouncedSaveTimer);
   _debouncedSaveTimer = setTimeout(() => { _debouncedSaveTimer = null; saveState(); }, delayMs);
 }
-window.addEventListener("pagehide", () => { if (_debouncedSaveTimer) saveState(); });
+window.addEventListener("pagehide", () => { if (_debouncedSaveTimer) saveState(); if (_idbWriteQueued) flushIdbStateSaveQueue(); });
 document.addEventListener("visibilitychange", () => { if (document.hidden && _debouncedSaveTimer) saveState(); });
 let _supervisorInspectHalaqa = null;
 function getActiveHalaqa() { if (_supervisorInspectHalaqa) return _supervisorInspectHalaqa; return appState.activeHalaqaId ? (appState.halaqat[appState.activeHalaqaId] || null) : null; }
@@ -16020,7 +16846,7 @@ function applyAutoEvalSilentFromCounters(studentId, kind) {
   const alrts = Math.max(0, Number(r[aKey]) || 0);
   const ev = evalFromErrorCount(errs, alrts, h);
 
-  if (r.attendance === "لم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
   const errTag = errs > 0 ? ` (${errorCountArabicText(errs)})` : "";
 
@@ -16050,13 +16876,11 @@ function applyAutoEvalSilentFromCounters(studentId, kind) {
     r.rashidiPages = Number(r.rashidiPages) || Math.max(0.5, t - f + 1);
     if (ev === "إعادة") {
       r.hwRashidiFrom = f; r.hwRashidiTo = t;
-      r.notes = `إعادة القاعدة الرشيدية (ص ${f}${t !== f ? "–" + t : ""})؛ يرجى التدريب الجيد بالمنزل.`;
+      r.notes = applyTajweedToNote(buildConciseRecNote("إعادة", { isRashidi: true }), r);
     } else {
       const nf = Math.min(85, t + 1), nt = Math.min(85, nf + Math.max(0, Math.ceil(pace) - 1));
       r.hwRashidiFrom = nf; r.hwRashidiTo = nt; st.rashidiPage = nf;
-      r.notes = ev === "ممتاز"
-        ? `قراءة متقنة في الرشيدي (ص ${f}${t !== f ? "–" + t : ""})، الواجب القادم ص ${nf}${nt !== nf ? "–" + nt : ""}.`
-        : `تقدّم طيّب في الرشيدي (ص ${f}${t !== f ? "–" + t : ""})، الواجب القادم ص ${nf}${nt !== nf ? "–" + nt : ""}.`;
+      r.notes = applyTajweedToNote(buildConciseRecNote(ev, { isRashidi: true }), r);
     }
   } else {
     r.recEval = ev;
@@ -16094,12 +16918,7 @@ function applyAutoEvalSilentFromCounters(studentId, kind) {
         }
       }
     }
-    const label = formatSegmentsInline(segs) || "المقطع";
-    if (completedJuz && ev !== "إعادة") r.notes = `مبارك إتمام ${completedJuz.name} بتقييم ${ev}${errTag}؛ الواجب القادم مراجعة الجزء كاملاً استعداداً لاختبار السبر.`;
-    else if (ev === "ممتاز") r.notes = `تلاوة متقنة وحفظ ممتاز (${label})${errTag} بارك الله في همتك.`;
-    else if (ev === "جيد جداً") r.notes = `حفظ جيد جداً (${label})${errTag}؛ بمزيد من التكرار يرتقي للامتياز.`;
-    else if (ev === "جيد") r.notes = `مستوى جيد (${label})${errTag}؛ يرجى تثبيت المقطع في المراجعة لرفع الإتقان.`;
-    else r.notes = `يرجى تكرار (${label})${errTag} وضبط الآيات لإتقان الإعادة في الجلسة القادمة.`;
+    r.notes = applyTajweedToNote(buildConciseRecNote(ev, { completedJuz }), r);
   }
 
   r.points = computeRecordPoints(s, r, st);
@@ -16444,24 +17263,10 @@ function computePerPageMemPoints(r) {
   return Math.round(weightedBase * factor);
 }
 
-function applyPerPageAutoEval(studentId, kind) {
-  const h = getActiveHalaqa(), s = getCurrentSession();
-  if (!h || !s) return;
-  const st = h.students.find(x => x.id === studentId);
-  if (!st) return;
-  const r = getStudentRecord(s, studentId);
-  const pages = getSyncedPageEvals(r, st, kind, h);
-  if (!pages || pages.length < 2) return;
-  r[getPageEvalKey(kind)] = pages;
-
-  if (r.attendance === "لم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
-  ensureRecordBonuses(r);
-
-  const totalErrs = pages.reduce((a, p) => a + (Number(p.errors) || 0), 0);
-  const totalAlrts = pages.reduce((a, p) => a + (Number(p.alerts) || 0), 0);
+function computePerPageOverallGrade(pages) {
+  if (!Array.isArray(pages) || !pages.length) return { overallEv: "ممتاز", passed: [], failed: [] };
   const passed = pages.filter(p => p.eval !== "إعادة");
   const failed = pages.filter(p => p.eval === "إعادة");
-
   const gradeRank = ev => ev === "ممتاز" ? 4 : (ev === "جيد جداً" ? 3 : (ev === "جيد" ? 2 : 0));
   let overallEv = "إعادة";
   if (passed.length > 0) {
@@ -16473,9 +17278,31 @@ function applyPerPageAutoEval(studentId, kind) {
       overallEv = (passed.length >= failed.length && avg >= 3) ? "جيد جداً" : "جيد";
     }
   }
+  return { overallEv, passed, failed };
+}
 
-  const repeatDesc = failed.map(p => `${p.label} [صفحة ${p.mushafPage}]`).join(" و");
-  const summaryParts = pages.map(p => `ص ${p.mushafPage}: ${p.eval}`).join("، ");
+function formatFailedPagesShort(failed) {
+  return (failed || []).map(p => p.label || `ص ${p.mushafPage}`).join(" و");
+}
+
+function applyPerPageAutoEval(studentId, kind, overrideOverallEv = null, triggerAdvance = false) {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s) return;
+  const st = h.students.find(x => x.id === studentId);
+  if (!st) return;
+  const r = getStudentRecord(s, studentId);
+  const pages = getSyncedPageEvals(r, st, kind, h);
+  if (!pages || pages.length < 2) return;
+  r[getPageEvalKey(kind)] = pages;
+
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  ensureRecordBonuses(r);
+
+  const totalErrs = pages.reduce((a, p) => a + (Number(p.errors) || 0), 0);
+  const totalAlrts = pages.reduce((a, p) => a + (Number(p.alerts) || 0), 0);
+  const { overallEv: calcEv, passed, failed } = computePerPageOverallGrade(pages);
+  const overallEv = overrideOverallEv || calcEv;
+  const repeatShort = formatFailedPagesShort(failed);
 
   if (kind === "rec") {
     const segs = getSegments(r, "rec");
@@ -16488,7 +17315,15 @@ function applyPerPageAutoEval(studentId, kind) {
     r.recPages = failed.length === 0 ? actualTotalPg : (passed.length > 0 ? Math.max(0.1, actualPassedPg) : actualTotalPg);
 
     const dir = st?.direction || h.defaultDir || "desc";
-    if (failed.length > 0 && passed.length > 0) {
+    if (overallEv === "إعادة" || passed.length === 0) {
+      if (segs.length) {
+        r.hwSabrJuz = "";
+        r.hwSurahId = segs[0].surahId; r.hwEndSurahId = "";
+        r.hwFrom = segs[0].from; r.hwTo = segs[0].to;
+        r.hwExtras = segs.slice(1).map(x => ({ ...x }));
+      }
+      r.notes = applyTajweedToNote(buildConciseRecNote("إعادة"), r);
+    } else if (failed.length > 0) {
       const failedSegs = [];
       failed.forEach(p => {
         failedSegs.push({ surahId: String(p.surahId), from: p.from, to: p.to });
@@ -16514,15 +17349,7 @@ function applyPerPageAutoEval(studentId, kind) {
         r.dRevEval = "إعادة";
         r.dRevPages = 0;
       }
-      r.notes = `تسميع (${formatSegmentsInline(segs)}) — إعادة ${repeatDesc}.`;
-    } else if (passed.length === 0) {
-      if (segs.length) {
-        r.hwSabrJuz = "";
-        r.hwSurahId = segs[0].surahId; r.hwEndSurahId = "";
-        r.hwFrom = segs[0].from; r.hwTo = segs[0].to;
-        r.hwExtras = segs.slice(1).map(x => ({ ...x }));
-      }
-      r.notes = `إعادة كامل المقطع (${repeatDesc})؛ يرجى التكرار والضبط للجلسة القادمة.`;
+      r.notes = applyTajweedToNote(buildConciseRecNote(overallEv, { repeatPagesTxt: repeatShort }), r);
     } else {
       if (r.dRevEval === "إعادة" && !(Number(r.dRevPages) > 0)) {
         r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevIsPages = false;
@@ -16537,29 +17364,40 @@ function applyPerPageAutoEval(studentId, kind) {
         const nxt = computeNextHomework(last.surahId, last.from, last.to, "", dir, st?.pace || 0.5);
         if (nxt) Object.assign(r, nxt);
       }
-      r.notes = `تسميع (${formatSegmentsInline(segs)}) بتقييم ${overallEv} (${summaryParts}) بارك الله في همتك.`;
+      r.notes = applyTajweedToNote(buildConciseRecNote(overallEv, { completedJuz }), r);
     }
+    removeStudentFromQueue(s, studentId);
   } else if (kind === "min") {
     r.minErrors = totalErrs; r.minAlerts = totalAlrts; r.minEval = overallEv;
     if (!(Number(r.minPages) > 0)) r.minPages = calcRecordMinPages(r) || pages.length;
-    r.notes = failed.length
-      ? `الصغرى: إعادة ${repeatDesc}.`
-      : `الصغرى: ${overallEv} (${summaryParts}).`;
+    const baseSat = buildSaturdayAutoNote(st, r, null, null, false);
+    r.notes = applyTajweedToNote((failed.length && overallEv !== "إعادة") ? `${baseSat} — إعادة: ${repeatShort}.` : baseSat, r);
+    if (isStudentFullyDone(s, st, r)) removeStudentFromQueue(s, studentId);
   } else if (kind === "maj") {
     r.majErrors = totalErrs; r.majAlerts = totalAlrts; r.majEval = overallEv;
     if (!(Number(r.majPages) > 0)) r.majPages = pages.length;
     applyNextMajorReview(st, r, overallEv !== "إعادة");
-    r.notes = failed.length
-      ? `الكبرى: إعادة ${repeatDesc}.`
-      : `الكبرى: ${overallEv} (${summaryParts}).`;
+    const baseSat = buildSaturdayAutoNote(st, r, null, null, false);
+    r.notes = applyTajweedToNote((failed.length && overallEv !== "إعادة") ? `${baseSat} — إعادة: ${repeatShort}.` : baseSat, r);
+    if (isStudentFullyDone(s, st, r)) removeStudentFromQueue(s, studentId);
   }
 
   r.points = computeRecordPoints(s, r, st);
-  saveStateDebounced(200);
+  saveStateDebounced(triggerAdvance ? 50 : 200);
+  if (triggerAdvance) {
+    saveState();
+    advanceAfterEval(studentId, overallEv);
+    showToast(`✓ تم اعتماد التقييم الإجمالي (${st.name}): ${overallEv}${failed.length && overallEv !== "إعادة" ? ` • إعادة: ${repeatShort}` : ""}`, { undo: true });
+    return;
+  }
   if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
     syncStudentEvalSheet();
   }
   renderStudentCardsOnly();
+}
+
+function confirmPerPageOverallEval(studentId, kind) {
+  applyPerPageAutoEval(studentId, kind, null, true);
 }
 
 function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
@@ -16620,6 +17458,19 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
         </div>
       </div>
       ${repeatHtml}
+      ${(() => {
+        const ov = computePerPageOverallGrade(pages);
+        const totE = pages.reduce((a, p) => a + (Number(p.errors) || 0), 0);
+        const totA = pages.reduce((a, p) => a + (Number(p.alerts) || 0), 0);
+        const ovCls = ov.overallEv === "ممتاز" ? "b-green" : (ov.overallEv === "إعادة" ? "b-red" : "b-blue");
+        return `<div class="pp-overall-bar">
+          <div class="pp-ov-info">
+            <div>📊 التقييم الإجمالي: <span class="badge ${ovCls}">${ov.overallEv}</span></div>
+            <small>أخطاء: ${totE} • تنبيه: ${totA} • مقبول: ${passedCnt}/${pages.length}${failed.length && ov.overallEv !== "إعادة" ? " • الإعادة بالملاحظات" : ""}</small>
+          </div>
+          <button type="button" class="pp-ov-apply-btn" onclick="confirmPerPageOverallEval('${studentId}','${kind}')">✓ اعتماد الإجمالي</button>
+        </div>`;
+      })()}
     </div>`;
   }
 
@@ -16643,18 +17494,47 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
 }
 
 // Queue (الدور) & Auto-Sink Helpers
-function toggleStudentQueue(studentId) {
-  const s = getCurrentSession();
-  if (!s) return;
+function pruneDoneFromQueue(s, h) {
+  if (!s || !Array.isArray(s.queue) || !h) return [];
+  s.queue = s.queue.filter(qid => {
+    const qSt = h.students.find(x => x.id === qid);
+    return Boolean(qSt && !isStudentFullyDone(s, qSt, getStudentRecord(s, qid)));
+  });
+  return s.queue;
+}
+
+function toggleStudentQueue(studentId, fromEvalSheet = false) {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s) return;
+  const st = h.students.find(x => x.id === studentId);
+  if (!st) return;
   if (!Array.isArray(s.queue)) s.queue = [];
+  pruneDoneFromQueue(s, h);
+
   const pos = s.queue.indexOf(studentId);
-  if (pos >= 0) {
-    s.queue.splice(pos, 1);
-  } else {
+  if (pos === -1) {
     s.queue.push(studentId);
+    saveState(true);
+    renderStudentCardsOnly();
+    showToast(`✋ ${st.name}: رقم ${s.queue.length} في دور التسميع`);
+    return;
   }
-  saveState(true);
-  renderStudentCardsOnly();
+
+  if (pos < s.queue.length - 1) {
+    s.queue.splice(pos, 1);
+    s.queue.push(studentId);
+    const nextUpId = s.queue[pos];
+    const nextUpSt = h.students.find(x => x.id === nextUpId);
+    if (fromEvalSheet && nextUpId) openCardId = nextUpId;
+    saveState(true);
+    renderStudentCardsOnly();
+    showToast(`↩️ تم تأجيل ${st.name} لآخر الطابور (${s.queue.length})${nextUpSt ? ` • الدور الآن لـ ${nextUpSt.name}` : ""}`);
+  } else {
+    s.queue.splice(pos, 1);
+    saveState(true);
+    renderStudentCardsOnly();
+    showToast(`تم إزالة ${st.name} من طابور التسميع`);
+  }
 }
 
 function removeStudentFromQueue(s, studentId) {
@@ -18167,10 +19047,13 @@ function initApp() {
     updateNotifToggleUI();
     updateCentralCloudIndicatorUI();
 
-    // 2) Background boot: Service Worker + Firebase SDK + Real-Time Sync & Notifications
+    // 2) Background boot: IndexedDB Hydration + Auto-Snapshot + Service Worker + Firebase + Offline Export Vault
     setTimeout(async () => {
+      await hydrateStateFromIndexedDB(_bootUid);
+      ensureDailyAutoSnapshot();
       registerTibyanServiceWorker();
       ensureExactMushaf604Data();
+      setTimeout(() => { if (navigator.onLine) precacheOfflineExportSuite(false); }, 4500);
       const ready = await ensureFirebaseReady(8000);
       if (ready && _fbAuth?.currentUser) {
         startLiveNotificationListeners();
@@ -18315,20 +19198,21 @@ function toggleTheme() {
 }
 
 const QUICK_NOTE_CHIPS = [
-  "أحسنت بارك الله فيك",
-  "تلاوة متقنة ومخارج سليمة",
-  "يحتاج لمزيد من التكرار",
-  "انضباط وحضور متميّز",
-  "يرجى متابعة المراجعة بالمنزل"
+  "فتح الله عليك",
+  "بارك الله فيك",
+  "أحسنت، واصل",
+  "يحتاج تكرار",
+  "متابعة بالمنزل"
 ];
 
 function appendQuickNote(studentId, phrase) {
   const s = getCurrentSession();
   if (!s) return;
   const r = getStudentRecord(s, studentId);
-  const cur = String(r.notes || "").trim();
+  const cur = stripTajweedSuffix(r.notes || "");
   if (cur.includes(phrase)) { showToast("الملاحظة مضافة مسبقاً"); return; }
-  r.notes = cur ? `${cur} — ${phrase}.` : `${phrase}.`;
+  const merged = cur ? `${cur} — ${phrase}.` : `${phrase}.`;
+  r.notes = applyTajweedToNote(merged, r);
   openCardId = studentId; openAdvCardId = studentId; evalSheetTool = "notes";
   saveState();
   renderSessionPreservingScroll();
@@ -18693,8 +19577,9 @@ function renderStudentsListOnly() {
       </div>`}
       <div class="st-mgmt-actions">
         <div style="display:flex; gap:6px; flex:1;">
-          <button class="btn btn-primary btn-sm" style="flex:1;" onclick="openEditStudentModal('${st.id}')">✏️ تعديل الخطة</button>
-          <button class="btn btn-soft btn-sm" style="flex:1;" onclick="openIndivReportModal('${st.id}')">📋 كشف فردي</button>
+          <button class="btn btn-primary btn-sm" style="flex:1;" onclick="openEditStudentModal('${st.id}')">✏️ الخطة</button>
+          <button class="btn btn-soft btn-sm" style="flex:1;" onclick="openIndivReportModal('${st.id}')">📋 الكشف</button>
+          <button class="btn ${st.phone ? 'btn-success' : 'btn-outline'} btn-sm" onclick="openStudentWaHub('${st.id}')" title="إرسال مباشر لواتساب الطالب">💬</button>
           <button class="btn btn-outline btn-sm" onclick="openStudentProfile('${st.id}')" title="ملف الطالب">📊</button>
         </div>
         <button class="st-del-icon-btn" onclick="deleteStudent('${st.id}')" title="حذف الطالب">🗑️</button>
@@ -18804,7 +19689,7 @@ function openStudentProfile(studentId) {
       ${row.sabrList.length ? `<br>🎓 <b>الأجزاء المسبورة:</b> ${escapeHtml(row.sabrList.join("، "))}` : ""}
     </div>
     <div style="display:flex; gap:7px; flex-wrap:wrap; margin-bottom:12px;">
-      <button class="btn btn-success btn-sm" style="flex:1;" onclick="shareStudentParentWA('${st.id}', '${escapeHtml(monthFilter)}', true)">📲 إرسال لولي الأمر (واتساب)</button>
+      <button class="btn btn-success btn-sm" style="flex:1;" onclick="closeModal('studentProfileModal'); openStudentWaHub('${st.id}');">💬 مركز إرسال واتساب</button>
       <button class="btn btn-primary btn-sm" onclick="openIndivReportModal('${st.id}', '${escapeHtml(monthFilter)}', 'monthly')">📋 كشف فردي</button>
       <button class="btn btn-soft btn-sm" onclick="openIndivReportModal('${st.id}', '${escapeHtml(monthFilter)}', 'compare')">📈 بطاقة المقارنة</button>
       <button class="btn btn-soft btn-sm" onclick="openCertificateModal('${st.id}', '${escapeHtml(monthFilter)}')">🏅 شهادة</button>
@@ -18870,6 +19755,327 @@ function buildStudentParentWAText(studentId, monthFilter) {
   txt += `*${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}*`;
   return txt;
 }
+
+// ==================== MAKIN v85: STUDENT DIRECT WHATSAPP HUB (TEXTS + HD IMAGES TO SAVED NUMBER) ====================
+let _waHubStudentId = "";
+let _waHubAutoOpenChat = true;
+
+function getCleanStudentPhone(st) {
+  let digits = String(st?.phone || "").replace(/[^0-9]/g, "");
+  if (!digits) return "";
+  if (digits.startsWith("00")) digits = digits.slice(2);
+  if (digits.startsWith("09") && digits.length === 10) digits = "963" + digits.slice(1);
+  return digits;
+}
+
+function openWhatsAppToStudentNumber(st, text) {
+  const phone = getCleanStudentPhone(st);
+  const url = phone
+    ? `https://wa.me/${phone}?text=${encodeURIComponent(text || "")}`
+    : `https://wa.me/?text=${encodeURIComponent(text || "")}`;
+  window.open(url, "_blank");
+}
+
+function openStudentWaHub(studentId) {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const st = h.students.find(x => x.id === studentId);
+  if (!st) return;
+  _waHubStudentId = st.id;
+  renderStudentWaHub();
+  openModal("studentWaHubModal");
+}
+
+function saveStudentPhoneFromWaHub() {
+  const h = getActiveHalaqa();
+  const st = h?.students.find(x => x.id === _waHubStudentId);
+  const inp = document.getElementById("waHubPhoneInput");
+  if (!st || !inp) return;
+  const raw = String(inp.value || "").trim();
+  st.phone = raw;
+  saveState();
+  renderStudentWaHub();
+  renderStudentCardsOnly();
+  if (document.getElementById("view-students")?.classList.contains("active")) renderStudentsList();
+  showToast(raw ? "تم حفظ رقم واتساب الطالب بنجاح ✓" : "تم مسح الرقم");
+}
+
+function renderStudentWaHub() {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  const st = h?.students.find(x => x.id === _waHubStudentId);
+  const body = document.getElementById("studentWaHubBody");
+  const title = document.getElementById("waHubTitle");
+  if (!st || !body) return;
+  if (title) title.textContent = `💬 واتساب — ${st.name}`;
+
+  const phone = getCleanStudentPhone(st);
+  const hasPhone = phone.length >= 7;
+
+  body.innerHTML = `
+    <div class="wa-hub-phone-card">
+      <div style="min-width:0; flex:1;">
+        <div style="font-size:14px; font-weight:800;">${escapeHtml(st.name)}</div>
+        <div style="font-size:12px; color:#d5e9df; margin-top:2px; direction:ltr; text-align:right;">
+          ${hasPhone ? `📱 +${phone}` : "⚠️ لا يوجد رقم واتساب مثبت بعد"}
+        </div>
+      </div>
+      <div style="display:flex; gap:5px; align-items:center;">
+        <input type="tel" id="waHubPhoneInput" value="${escapeHtml(st.phone || "")}" placeholder="9639XXXXXXXX" dir="ltr" style="width:128px; padding:5px 7px; border-radius:8px; border:1px solid rgba(255,255,255,0.3); background:rgba(255,255,255,0.14); color:#fff; font-size:12px; text-align:right;">
+        <button type="button" class="btn btn-sm" style="background:#c8a14b; color:#0f233c; padding:5px 9px;" onclick="saveStudentPhoneFromWaHub()">✓ حفظ</button>
+      </div>
+    </div>
+
+    <div class="wa-hub-sec-ttl"><span>📝 إرسال رسالة نصية مباشرة لرقم الطالب:</span></div>
+    <div class="wa-hub-grid">
+      <button type="button" class="wa-hub-tile" onclick="waHubSendText('today')">
+        <span class="wht-ico">📋</span>
+        <div><b>نتيجة جلسة اليوم</b><span>التقييم والواجب والملاحظة</span></div>
+      </button>
+      <button type="button" class="wa-hub-tile" onclick="waHubSendText('homework')">
+        <span class="wht-ico">📖</span>
+        <div><b>الواجب القادم فقط</b><span>تذكير سريع بالمطلوب</span></div>
+      </button>
+      <button type="button" class="wa-hub-tile" onclick="waHubSendText('weekly')">
+        <span class="wht-ico">📆</span>
+        <div><b>ملخص الأسبوع + المقارنة</b><span>إنجاز الأسبوع مقارنة بالسابق</span></div>
+      </button>
+      <button type="button" class="wa-hub-tile" onclick="waHubSendText('monthly')">
+        <span class="wht-ico">📅</span>
+        <div><b>ملخص الشهر الكامل</b><span>الحفظ والمراجعة والحضور</span></div>
+      </button>
+    </div>
+
+    <div class="wa-hub-sec-ttl">
+      <span>📸 إرسال صور HD مباشرة لرقم الطالب:</span>
+      <label class="check-inline" style="font-size:10.5px;">
+        <input type="checkbox" ${_waHubAutoOpenChat ? "checked" : ""} onchange="_waHubAutoOpenChat=this.checked;">
+        <span>فتح محادثة الرقم تلقائياً</span>
+      </label>
+    </div>
+    <div class="wa-hub-grid">
+      <button type="button" class="wa-hub-tile is-img" onclick="waHubSendImage('todayCard')">
+        <span class="wht-ico">🖼️</span>
+        <div><b>صورة بطاقة اليوم</b><span>تقييم + واجب + ملاحظة</span></div>
+      </button>
+      <button type="button" class="wa-hub-tile is-img" onclick="waHubSendImage('weekly')">
+        <span class="wht-ico">📆</span>
+        <div><b>صورة الكشف الأسبوعي</b><span>جدول الجلسات والمقارنة</span></div>
+      </button>
+      <button type="button" class="wa-hub-tile is-img" onclick="waHubSendImage('monthly')">
+        <span class="wht-ico">📊</span>
+        <div><b>صورة الكشف الشهري</b><span>كشف كامل وخريطة الأجزاء</span></div>
+      </button>
+      <button type="button" class="wa-hub-tile is-img" onclick="waHubSendImage('compare')">
+        <span class="wht-ico">📈</span>
+        <div><b>صورة بطاقة المقارنة</b><span>تقدّم الطالب أسبوعي/شهري</span></div>
+      </button>
+    </div>
+    <button type="button" class="btn btn-soft btn-sm" style="width:100%; margin-bottom:10px;" onclick="closeModal('studentWaHubModal'); openCertificateModal('${st.id}');">🏅 إصدار شهادة تكريم / حفظ وإرسالها للرقم</button>
+
+    <div class="field" style="margin-bottom:0;">
+      <label>✉️ رسالة سريعة مخصّصة لرقم الطالب:</label>
+      <div style="display:flex; gap:6px;">
+        <input type="text" id="waHubCustomMsg" placeholder="اكتب رسالتك هنا...">
+        <button type="button" class="btn btn-success btn-sm" onclick="waHubSendText('custom')">📲 إرسال</button>
+      </div>
+    </div>
+  `;
+}
+
+function buildStudentTodaySummaryWAText(st, s, h) {
+  const bm = getBrandMeta(h), gt = getGenderTerms(h);
+  const r = s ? getStudentRecord(s, st.id) : null;
+  const ptsOn = isPointsEnabled(h);
+  let txt = `السلام عليكم ورحمة الله وبركاته 🌿\n`;
+  txt += `*متابعة ${gt.student}: ${st.name}*\n`;
+  txt += `🕌 *حلقة ${bm.name}*`;
+  if (s) txt += ` | 📅 *${s.dayName} ${s.hijriDate}*`;
+  txt += `\n━━━━━━━━━━━━━\n`;
+  if (!s || !r) {
+    txt += `📖 *المطلوب حالياً:* ${getStudentCurrentPlaceSummary(st, h)}\n`;
+  } else if (r.attendance.includes("غياب")) {
+    txt += `🚫 *الحالة:* ${r.attendance}\n`;
+    const hw = st.track === "rashidi"
+      ? (r.hwRashidiFrom ? `الرشيدي ص ${r.hwRashidiFrom}${r.hwRashidiTo && r.hwRashidiTo != r.hwRashidiFrom ? "–" + r.hwRashidiTo : ""}` : "")
+      : (s.type === "daily" ? (r.hwSabrJuz ? `سبر ${formatJuzClean(r.hwSabrJuz)}` : formatSegmentsInline(getSegments(r, "hw"))) : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo));
+    if (hw && hw !== "—") txt += `📝 *الواجب القادم:* ${hw}\n`;
+  } else if (isPresentNoRecite(r.attendance)) {
+    txt += `📋 *الحالة:* حضر الجلسة ولم يُسمّع اليوم\n`;
+    const hw = s.type === "daily" ? (r.hwSabrJuz ? `سبر ${formatJuzClean(r.hwSabrJuz)}` : formatSegmentsInline(getSegments(r, "hw"))) : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo);
+    if (hw && hw !== "—") txt += `📝 *الواجب القادم:* ${hw}\n`;
+  } else if (st.track === "rashidi") {
+    txt += `🔤 *الرشيدي:* ص ${r.rashidiFrom || st.rashidiPage || 1}${r.rashidiTo && r.rashidiTo != r.rashidiFrom ? "–" + r.rashidiTo : ""} — *${r.recEval || "—"}*\n`;
+    if (r.hwRashidiFrom) txt += `📝 *الواجب القادم:* ص ${r.hwRashidiFrom}${r.hwRashidiTo && r.hwRashidiTo != r.hwRashidiFrom ? "–" + r.hwRashidiTo : ""}\n`;
+    if (ptsOn) txt += `⭐ *النقاط:* ${r.points || 0}\n`;
+  } else if (s.type === "daily") {
+    const recTxt = (r.recIsSabr && r.sabrJuz) ? `سبر ${formatJuzClean(r.sabrJuz)}` : (formatSegmentsInline(getSegments(r, "rec")) || "—");
+    const hwTxt = r.hwSabrJuz ? `سبر ${formatJuzClean(r.hwSabrJuz)}` : (formatSegmentsInline(getSegments(r, "hw")) || "—");
+    txt += `📖 *تسميع اليوم:* ${recTxt}\n`;
+    txt += `✅ *التقييم:* ${r.recEval || "لم يُقيّم"}\n`;
+    if (r.dRevEval) txt += `🔄 *المراجعة:* ${r.dRevFrom || ""}${r.dRevTo ? " ← " + r.dRevTo : ""} (${r.dRevEval})\n`;
+    txt += `📝 *الواجب القادم:* ${hwTxt}\n`;
+    if (ptsOn) txt += `⭐ *النقاط:* ${r.points || 0}\n`;
+  } else {
+    const minTxt = formatSegmentsInline(getSegments(r, "min")) || stripMushafPageTokens(r.minText || "");
+    const majTxt = r.sabrJuz ? `سبر ${formatJuzClean(r.sabrJuz)}` : formatMajStripDisplay(r.majFrom, r.majTo);
+    if (minTxt) txt += `📗 *المراجعة الصغرى:* ${minTxt} (${r.minEval || "—"})\n`;
+    if (majTxt && majTxt !== "—") txt += `📘 *المراجعة الكبرى:* ${majTxt} (${r.majEval || "—"})\n`;
+    const nxtM = r.nextMajSabrJuz ? `سبر ${formatJuzClean(r.nextMajSabrJuz)}` : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo);
+    if (nxtM && nxtM !== "—") txt += `📝 *الكبرى القادمة:* ${nxtM}\n`;
+    if (ptsOn) txt += `⭐ *النقاط:* ${r.points || 0}\n`;
+  }
+  if (r?.notes && String(r.notes).trim()) txt += `💬 *ملاحظة:* ${stripMushafPageTokens(r.notes)}\n`;
+  txt += `━━━━━━━━━━━━━\n*${gt.supervisorTitle}: ${bm.sheikh}*`;
+  return txt;
+}
+
+function waHubSendText(kind) {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  const st = h?.students.find(x => x.id === _waHubStudentId);
+  if (!st || !h) return;
+  const bm = getBrandMeta(h), gt = getGenderTerms(h);
+  let txt = "";
+
+  if (kind === "today") {
+    txt = buildStudentTodaySummaryWAText(st, s, h);
+  } else if (kind === "homework") {
+    const hw = getStudentCurrentPlaceSummary(st, h);
+    txt = `السلام عليكم ورحمة الله وبركاته 🌿\n*تذكير بالواجب القادم — ${st.name}*\n🕌 حلقة ${bm.name}\n📖 *الواجب:* ${hw}\nنسأل الله لك التوفيق والإتقان ✨\n*${gt.supervisorTitle}: ${bm.sheikh}*`;
+  } else if (kind === "weekly") {
+    const curWk = getWeekSatKeyForISO(todayISO());
+    const wkInfo = getWeekDisplayRange(curWk);
+    const allWk = getWeekCandidateSessions(h, curWk);
+    const row = computeStudentStatsForSessions(st, allWk, h, null);
+    const cmp = computeStudentProgressComparison(st, h, "weekly", curWk, null);
+    const ptsOn = isPointsEnabled(h);
+    txt = `السلام عليكم ورحمة الله وبركاته 🌿\n*ملخص الأسبوع — ${st.name}*\n🕌 حلقة ${bm.name} | 📆 ${wkInfo.label}\n━━━━━━━━━━━━━\n`;
+    txt += `📖 *${st.track === "rashidi" ? "الرشيدي" : "الحفظ"}:* ${formatNum(st.track === "rashidi" ? row.rashidiPages : row.memPages)} ص\n`;
+    if (st.track !== "rashidi") txt += `🔄 *المراجعة:* ${formatNum(row.revPages)} ص\n`;
+    txt += `✅ *الحضور:* ${row.presentDays} يوم | *الغياب:* ${row.totalAbsences}\n`;
+    if (ptsOn) txt += `⭐ *النقاط:* ${row.totalPoints}\n`;
+    if (cmp && cmp.prevHasData) {
+      txt += `📈 *المقارنة مع الأسبوع السابق:* ${cmp.verdictLabel}\n`;
+    }
+    txt += `━━━━━━━━━━━━━\n*${gt.supervisorTitle}: ${bm.sheikh}*`;
+  } else if (kind === "monthly") {
+    const m = getExactHijriInfo(todayISO()).monthLabel;
+    txt = buildStudentParentWAText(st.id, m);
+  } else if (kind === "custom") {
+    const msg = (document.getElementById("waHubCustomMsg")?.value || "").trim();
+    if (!msg) { showToast("اكتب الرسالة أولاً"); return; }
+    txt = `السلام عليكم ورحمة الله وبركاته 🌿\n*بخصوص ${gt.student}: ${st.name}*\n${msg}\n— *${gt.supervisorTitle}: ${bm.sheikh}*`;
+  }
+
+  openWhatsAppToStudentNumber(st, txt);
+  showToast(getCleanStudentPhone(st) ? `تم فتح واتساب على رقم ${st.name} مباشرةً 📲` : "تم فتح واتساب بالرسالة الجاهزة 📲");
+}
+
+function buildStudentDailyCardHtml(st, s, h) {
+  const bm = getBrandMeta(h), gt = getGenderTerms(h);
+  const r = s ? getStudentRecord(s, st.id) : createEmptyRecord();
+  const ptsOn = isPointsEnabled(h);
+  const isAbs = r.attendance.includes("غياب");
+  const isNoRec = isPresentNoRecite(r.attendance);
+
+  let mainTitle = "تسميع اليوم", mainVal = "—", hwVal = getStudentCurrentPlaceSummary(st, h), evalTxt = "—", evCls = "ev-slate";
+  if (isAbs) {
+    evalTxt = r.attendance; evCls = "ev-red";
+  } else if (isNoRec) {
+    evalTxt = "حضر ولم يُسمّع"; evCls = "ev-slate";
+  } else if (st.track === "rashidi") {
+    mainTitle = "القاعدة الرشيدية";
+    mainVal = `ص ${r.rashidiFrom || st.rashidiPage || 1}${r.rashidiTo && r.rashidiTo != r.rashidiFrom ? "–" + r.rashidiTo : ""}`;
+    hwVal = r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}${r.hwRashidiTo && r.hwRashidiTo != r.hwRashidiFrom ? "–" + r.hwRashidiTo : ""}` : hwVal;
+    evalTxt = r.recEval || "—";
+    evCls = evalTxt === "ممتاز" ? "" : (evalTxt === "إعادة" ? "ev-red" : "ev-blue");
+  } else if (s?.type === "daily") {
+    mainVal = (r.recIsSabr && r.sabrJuz) ? `سبر ${formatJuzClean(r.sabrJuz)}` : (formatSegmentsInline(getSegments(r, "rec")) || "—");
+    hwVal = r.hwSabrJuz ? `سبر ${formatJuzClean(r.hwSabrJuz)}` : (formatSegmentsInline(getSegments(r, "hw")) || hwVal);
+    evalTxt = r.recEval || "—";
+    evCls = evalTxt === "ممتاز" ? "" : (evalTxt === "إعادة" ? "ev-red" : "ev-blue");
+  } else {
+    mainTitle = "المراجعة الأسبوعية";
+    const p = [];
+    const minT = formatSegmentsInline(getSegments(r, "min")) || stripMushafPageTokens(r.minText || "");
+    const majT = r.sabrJuz ? `سبر ${formatJuzClean(r.sabrJuz)}` : formatMajStripDisplay(r.majFrom, r.majTo);
+    if (minT) p.push(`صغرى: ${minT}`);
+    if (majT && majT !== "—") p.push(`كبرى: ${majT}`);
+    mainVal = p.join(" | ") || "—";
+    hwVal = r.nextMajSabrJuz ? `سبر ${formatJuzClean(r.nextMajSabrJuz)}` : (formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) || "—");
+    evalTxt = r.majEval || r.minEval || "—";
+    evCls = evalTxt === "ممتاز" ? "" : (evalTxt === "إعادة" ? "ev-red" : "ev-blue");
+  }
+
+  return `<div class="st-daily-card-canvas" id="waTempDailyCard">
+    <div class="sdc-hdr">
+      <div style="font-size:13px; font-weight:800; color:#e2edf8;">${escapeHtml(bm.org)}<br>${escapeHtml(bm.branch)}</div>
+      <div class="sdc-hdr-mid">
+        <h2>📋 بطاقة متابعة جلسة اليوم</h2>
+        <p>${s ? `${escapeHtml(s.dayName)} • ${escapeHtml(s.hijriDate)}` : ""} — حلقة ${escapeHtml(bm.name)}</p>
+      </div>
+      <div class="ccp-logo-box"><img src="${bm.logoSrc}" alt="الشعار"></div>
+    </div>
+    <div class="sdc-body">
+      <div class="sdc-hero">
+        <div>
+          <div style="font-size:12px; font-weight:700; color:#64748b;">اسم ${gt.student}</div>
+          <div class="sdc-st-name">${escapeHtml(st.name)}</div>
+        </div>
+        <div class="sdc-ev-pill ${evCls}">${escapeHtml(evalTxt)}</div>
+      </div>
+      <div class="sdc-grid">
+        <div class="sdc-tile"><span>📖 ${mainTitle}</span><b>${escapeHtml(mainVal)}</b></div>
+        <div class="sdc-tile gold"><span>📝 الواجب القادم</span><b>${escapeHtml(hwVal)}</b></div>
+      </div>
+      ${r.notes ? `<div class="sdc-note">💬 <b>ملاحظة ${gt.supervisorTitle}:</b> ${escapeHtml(stripMushafPageTokens(r.notes))}</div>` : ""}
+      <div class="sdc-foot">
+        <span>${gt.supervisorTitle}: ${escapeHtml(bm.sheikh)}</span>
+        ${ptsOn ? `<span>⭐ نقاط اليوم: ${r.points || 0}</span>` : `<span>حلقة ${escapeHtml(bm.name)}</span>`}
+      </div>
+    </div>
+  </div>`;
+}
+
+async function waHubSendImage(kind) {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  const st = h?.students.find(x => x.id === _waHubStudentId);
+  if (!st || !h) return;
+
+  if (kind === "todayCard") {
+    showToast("📸 جاري تجهيز صورة بطاقة اليوم بأعلى دقة...");
+    let host = document.getElementById("waTempDailyCardHost");
+    if (!host) {
+      host = document.createElement("div");
+      host.id = "waTempDailyCardHost";
+      host.style.cssText = "position:fixed; left:-99999px; top:0; z-index:-1;";
+      document.body.appendChild(host);
+    }
+    host.innerHTML = buildStudentDailyCardHtml(st, s, h);
+    const fname = `بطاقة_اليوم_${cleanFilePart(st.name)}_${todayISO()}`;
+    await exportHighResPNG("waTempDailyCard", fname);
+    host.innerHTML = "";
+    if (_waHubAutoOpenChat) {
+      setTimeout(() => {
+        openWhatsAppToStudentNumber(st, `السلام عليكم ورحمة الله وبركاته 🌿\nمرفق بطاقة متابعة جلسة اليوم للـ${getGenderTerms(h).student} *${st.name}* 📸`);
+      }, 650);
+    }
+    return;
+  }
+
+  closeModal("studentWaHubModal");
+  const mode = kind === "weekly" ? "weekly" : (kind === "compare" ? "compare" : "monthly");
+  openIndivReportModal(st.id, "", mode, "", "weekly");
+  await new Promise(r => setTimeout(r, 140));
+  await exportIndivReportPNG();
+  if (_waHubAutoOpenChat) {
+    const lbl = mode === "weekly" ? "الكشف الأسبوعي" : (mode === "compare" ? "بطاقة المقارنة" : "الكشف الشهري");
+    setTimeout(() => {
+      openWhatsAppToStudentNumber(st, `السلام عليكم ورحمة الله وبركاته 🌿\nمرفق ${lbl} للـ${getGenderTerms(h).student} *${st.name}* 📸`);
+    }, 700);
+  }
+}
+
+
 function shareStudentParentWA(studentId, monthFilter, openWA = false) {
   const h = getActiveHalaqa();
   const st = h.students.find(x => x.id === studentId);
@@ -19568,10 +20774,10 @@ function renderArchiveView() {
       h.students.forEach(st => {
         const r = s.records?.[st.id];
         if (!r) return;
-        if (r.attendance === "حاضر" || r.attendance === "متأخر") pres++;
+        if (isCountedPresent(r.attendance)) pres++;
         else if (r.attendance.includes("غياب")) abs++;
         pts += Number(r.points) || 0;
-        const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع";
+        const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
         if (s.type === "daily") {
           if (!isAbs && r.recEval && r.recEval !== "إعادة") memPgs += Number(r.recPages) || calcRecordRecPages(r);
           if (!isAbs) revPgs += calcDailyReviewPages(r);
@@ -20053,7 +21259,7 @@ function getStudentRecord(session, studentId) {
 }
 
 function isStudentPending(s, r, st = null) {
-  if (r.attendance === "غياب مبرر" || r.attendance === "غياب غير مبرر") return false;
+  if (r.attendance === "غياب مبرر" || r.attendance === "غياب غير مبرر" || r.attendance === "حضر ولم يُسمّع") return false;
   if (st?.track === "rashidi") return !r.recEval;
   if (s.type === "daily") return !r.recEval;
   return !r.minEval && !r.majEval;
@@ -20063,7 +21269,7 @@ function isStudentPending(s, r, st = null) {
 // On Saturday, a student with Minor Review is NOT finished until BOTH Minor & Major reviews are evaluated!
 function isStudentFullyDone(s, st, r) {
   if (!s || !r) return false;
-  if (r.attendance === "غياب مبرر" || r.attendance === "غياب غير مبرر") return true;
+  if (r.attendance === "غياب مبرر" || r.attendance === "غياب غير مبرر" || r.attendance === "حضر ولم يُسمّع") return true;
   if (st?.track === "rashidi") return Boolean(r.recEval);
   if (s.type === "daily") return Boolean(r.recEval);
   const hasMinorTask = Boolean(r.minSurahId || r.minSurah || r.minText);
@@ -20510,7 +21716,11 @@ function applyAbsenceCarryOver(s, st, r, status) {
     if (st) applyNextMajorReview(st, r, false);
     if (_prevSabr) r.sabrJuz = "";
   }
-  r.notes = status === "غياب مبرر" ? "غياب مبرر؛ يبقى الواجب كما هو للجلسة القادمة." : "غياب غير مبرر؛ يرجى الالتزام بالحضور وتحضير الواجب.";
+  if (status === "حضر ولم يُسمّع") {
+    r.notes = applyTajweedToNote("حضر ولم يُسمّع اليوم.", r);
+  } else {
+    r.notes = status === "غياب مبرر" ? "غياب مبرر." : "غياب غير مبرر، يُرجى الالتزام.";
+  }
 }
 
 function openAutoAbsentModal() {
@@ -21090,7 +22300,7 @@ function renderSessionView() {
     if (r.attendance === "غياب مبرر") excused++;
     else if (r.attendance === "غياب غير مبرر") absent++;
     totalPts += Number(r.points) || 0;
-    const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع";
+    const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
     if (st.track === "rashidi") {
       if (!isAbs && r.recEval && r.recEval !== "إعادة") totalMemPages += Number(r.rashidiPages) || 0;
     } else if (s.type === "daily") {
@@ -21261,7 +22471,9 @@ function renderStudentCardsOnly() {
       html += `<div class="done-section-divider"><span>✓ المُنجَزون والغياب (${ordered.length - doneSplitIndex})</span></div>`;
     }
     const { st, idx, r, isAbs, isPend, isDone, isOpen, qPos } = item;
+    const isNoRec = isPresentNoRecite(r.attendance);
     const stClass = isAbs ? (r.attendance === "غياب مبرر" ? "st-excused" : "st-absent")
+      : isNoRec ? "st-norecite"
       : !isDone ? (isPend ? "st-pending" : "st-late")
       : r.attendance === "متأخر" ? "st-late" : "st-done";
     const hint = getStudentPrevSessionHint(h, s, st.id, _prePrevCandidates);
@@ -21289,7 +22501,8 @@ function renderStudentCardsOnly() {
 
     let statusBadge = "";
     if (isAbs) statusBadge = `<span class="badge ${r.attendance==='غياب مبرر'?'b-slate':'b-red'}">${r.attendance==='غياب مبرر'?'مبرر':'غياب'}</span>`;
-    else if (isPend) statusBadge = `<span class="badge b-muted">لم يُسمّع</span>`;
+    else if (isNoRec) statusBadge = `<span class="badge b-slate">حضر • لم يُسمّع</span>`;
+    else if (isPend) statusBadge = `<span class="badge b-muted">بانتظار</span>`;
     else if (s.type === "daily" || isRashidi) {
       const ec = r.recEval === "ممتاز" ? "b-green" : r.recEval === "إعادة" ? "b-red" : "b-blue";
       statusBadge = `<span class="badge ${ec}">${r.recEval}</span>`;
@@ -21304,8 +22517,11 @@ function renderStudentCardsOnly() {
     }
     const lateTag = r.attendance === "متأخر" ? `<span class="badge b-orange">متأخر</span>` : "";
 
+    const waQuickBtn = st.phone && String(st.phone).replace(/[^0-9]/g, "").length >= 7
+      ? `<button type="button" class="wa-direct-btn" onclick="event.stopPropagation(); openStudentWaHub('${st.id}');" title="إرسال مباشر لواتساب الطالب">💬</button>`
+      : "";
     const queueBtn = !isDone
-      ? `<button type="button" class="queue-hand-btn ${qPos >= 0 ? 'in-q' : ''}" onclick="event.stopPropagation(); toggleStudentQueue('${st.id}');" title="${qPos >= 0 ? 'إزالة من دور التسميع' : 'إضافة إلى دور التسميع (جاهز)'}">✋${qPos >= 0 ? ` ${qPos + 1}` : ''}</button>`
+      ? `<button type="button" class="queue-hand-btn ${qPos >= 0 ? 'in-q' : ''}" onclick="event.stopPropagation(); toggleStudentQueue('${st.id}');" title="${qPos >= 0 ? 'اضغط لتأجيل دوره لآخر الطابور' : 'إضافة لدور التسميع بالترتيب'}">✋${qPos >= 0 ? ` ${qPos + 1}` : ''}</button>`
       : "";
 
     let quickStrip = "";
@@ -21317,21 +22533,23 @@ function renderStudentCardsOnly() {
           <button class="pill pill-sm ${r.recEval==='جيد جداً'?'on-blue':''}" onclick="setRashidiEval('${st.id}','جيد جداً')">جيد جداً</button>
           <button class="pill pill-sm ${r.recEval==='جيد'?'on-blue':''}" onclick="setRashidiEval('${st.id}','جيد')">جيد</button>
           <button class="pill pill-sm ${r.recEval==='إعادة'?'on-red':''}" onclick="setRashidiEval('${st.id}','إعادة')">إعادة</button>
+          <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
         </div>
         ${hwR ? `<span style="font-size:11px; color:var(--ink-500);">الواجب: <b>${escapeHtml(hwR)}</b></span>` : ''}
       </div>`;
     } else if (!isAbs && s.type === "daily" && (r.recSurahId || (r.recIsSabr && r.sabrJuz))) {
-      const hwInline = r.hwSabrJuz ? `🎓 سبر ${r.hwSabrJuz}` : formatSegmentsInline(getSegments(r, "hw"));
+      const hwInline = r.hwSabrJuz ? `🎓 سبر ${formatJuzClean(r.hwSabrJuz)}` : formatSegmentsInline(getSegments(r, "hw"));
       quickStrip = `<div class="quick-strip" onclick="event.stopPropagation()">
         <div class="pill-group">
           <button class="pill pill-sm ${r.recEval==='ممتاز'?'on-green':''}" onclick="setRecEval('${st.id}','ممتاز')">ممتاز</button>
           <button class="pill pill-sm ${r.recEval==='جيد جداً'?'on-blue':''}" onclick="setRecEval('${st.id}','جيد جداً')">جيد جداً</button>
           <button class="pill pill-sm ${r.recEval==='جيد'?'on-blue':''}" onclick="setRecEval('${st.id}','جيد')">جيد</button>
           <button class="pill pill-sm ${r.recEval==='إعادة'?'on-red':''}" onclick="setRecEval('${st.id}','إعادة')">إعادة</button>
+          <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
         </div>
         <div style="display:flex; align-items:center; gap:5px; flex-wrap:wrap;">
           ${hwInline ? `<span style="font-size:11px; color:var(--ink-500);">الواجب: <b>${escapeHtml(hwInline)}</b></span>` : ''}
-          <button type="button" class="quick-step-btn" onclick="quickNextAyahStep('${st.id}')" title="إضافة نصف صفحة على الواجب الحالي">+½ ص</button>
+          ${!r.hwSabrJuz ? `<button type="button" class="quick-step-btn" onclick="quickNextAyahStep('${st.id}')" title="إضافة نصف صفحة على الواجب الحالي">+½ ص</button>` : ""}
         </div>
       </div>`;
     } else if (!isAbs && s.type === "saturday") {
@@ -21349,6 +22567,7 @@ function renderStudentCardsOnly() {
           <button class="pill pill-sm ${satMainEv==='جيد جداً'?'on-blue':''}" onclick="${qsFn}('${st.id}','جيد جداً')">جيد جداً</button>
           <button class="pill pill-sm ${satMainEv==='جيد'?'on-blue':''}" onclick="${qsFn}('${st.id}','جيد')">جيد</button>
           <button class="pill pill-sm ${satMainEv==='إعادة'?'on-red':''}" onclick="${qsFn}('${st.id}','إعادة')">إعادة</button>
+          <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
           ${minDiffHint}
         </div>
         ${(r.nextMajSabrJuz || r.nextMajFrom) ? `<span style="font-size:11px; color:var(--ink-500);">القادم: <b>${escapeHtml(r.nextMajSabrJuz ? `🎓 سبر ${getJuzByName(r.nextMajSabrJuz)?.shortName || r.nextMajSabrJuz}` : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo))}</b></span>` : ''}
@@ -21366,7 +22585,7 @@ function renderStudentCardsOnly() {
             </div>
           </div>
           <div class="badges-wrap">
-            ${queueBtn}${lateTag}${statusBadge}
+            ${waQuickBtn}${queueBtn}${lateTag}${statusBadge}
             ${isPointsEnabled(h) ? `<span class="badge b-slate st-pts-badge">⭐ ${r.points || 0}</span>` : ''}
             <span style="color:var(--ink-500); font-size:11px;">‹</span>
           </div>
@@ -21808,8 +23027,10 @@ function syncStudentEvalSheet() {
         </div>
       </div>
       <div class="es-hdr-actions">
-        <button type="button" class="es-ico-btn" onclick="openStudentProfile('${st.id}')" title="ملف الطالب وكشفه">📊 ملفه</button>
-        <button type="button" class="es-ico-btn" onclick="openEditStudentModal('${st.id}')" title="تعديل خطة الحفظ والمراجعة">✏️ خطته</button>
+        ${st.phone && String(st.phone).replace(/[^0-9]/g, "").length >= 7 ? `<button type="button" class="es-ico-btn" style="background:rgba(22,163,74,0.28); border-color:rgba(134,239,172,0.5);" onclick="openStudentWaHub('${st.id}')" title="إرسال مباشر لواتساب الطالب">💬</button>` : ''}
+        ${Array.isArray(s.queue) && s.queue.includes(st.id) && !isStudentFullyDone(s, st, r) ? `<button type="button" class="es-ico-btn" style="background:rgba(200,161,75,0.28); border-color:rgba(244,217,141,0.55);" onclick="toggleStudentQueue('${st.id}', true)" title="تأجيل دوره لآخر الطابور">✋↩️</button>` : ''}
+        <button type="button" class="es-ico-btn" onclick="openStudentProfile('${st.id}')" title="ملف الطالب وكشفه">📊</button>
+        <button type="button" class="es-ico-btn" onclick="openEditStudentModal('${st.id}')" title="تعديل خطة الحفظ والمراجعة">✏️</button>
         <button type="button" class="es-ico-btn close" onclick="closeStudentEvalSheet()" aria-label="إغلاق">×</button>
       </div>
     </div>
@@ -21842,6 +23063,7 @@ function renderCardBody(s, st, r, idx) {
   const attBtns = [
     { val: "حاضر", lbl: _gt.present, cls: "on-green" },
     { val: "متأخر", lbl: _gt.late, cls: "on-orange" },
+    { val: "حضر ولم يُسمّع", lbl: "لم يُسمّع", cls: "on-norecite" },
     { val: "غياب مبرر", lbl: "مبرر", cls: "on-slate" },
     { val: "غياب غير مبرر", lbl: _gt.absent, cls: "on-red" }
   ].map(b => `<button type="button" class="pill ${r.attendance===b.val?b.cls:''}" onclick="setAttendance('${st.id}','${b.val}')">${b.lbl}</button>`).join("");
@@ -21957,7 +23179,7 @@ function renderCardBody(s, st, r, idx) {
     const dRevExtras = Array.isArray(r.dRevExtras) ? r.dRevExtras : [];
     const sInfo1 = SURAH_MAP[Number(r.recSurahId)];
     const maxA1 = sInfo1?.a || 286;
-    const hwPreview = r.hwSabrJuz ? `🎓 سبر ${r.hwSabrJuz}` : (formatSegmentsInline(getSegments(r, "hw")) || "يُضبط تلقائياً بعد التقييم");
+    const hwPreview = r.hwSabrJuz ? `🎓 سبر ${formatJuzClean(r.hwSabrJuz)}` : (formatSegmentsInline(getSegments(r, "hw")) || "يُضبط تلقائياً بعد التقييم");
     const recSummary = formatSegmentsInline(getSegments(r, "rec")) || "اضغط لاختيار السورة والآيات";
 
     const hasHwDot = Boolean(r.hwSurahId || r.hwSabrJuz);
@@ -22061,7 +23283,7 @@ function renderCardBody(s, st, r, idx) {
     bodyCore = `
       <div class="es-card">
         ${r.sabrJuz ? `<div class="sabr-active-strip">
-          <span>🎓 سبر كامل: ${escapeHtml(r.sabrJuz)} (${formatNum(r.dRevPages || getJuzByName(r.sabrJuz)?.pages || 20)} ص)${r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null ? ` • ${r.sabrScore}%` : ''}</span>
+          <span>🎓 سبر كامل: ${escapeHtml(formatJuzClean(r.sabrJuz))} (${formatNum(r.dRevPages || getJuzByName(r.sabrJuz)?.pages || 20)} ص)${r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null ? ` • ${r.sabrScore}%` : ''}</span>
           <div style="display:flex; gap:4px;">
             ${r.recEval !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="padding:2px 8px; font-size:11px;" onclick="openSabrHifzCertificate('${st.id}')">🎓 شهادة</button>` : ''}
             <button type="button" class="btn btn-outline btn-sm" style="padding:2px 7px; font-size:11px;" onclick="onSabrJuzChange('${st.id}','')">إلغاء</button>
@@ -22069,7 +23291,7 @@ function renderCardBody(s, st, r, idx) {
         </div>` : ''}
         <div class="es-rec-box">
           <div class="es-rec-top" onclick="openSurahPicker('${st.id}','rec')" title="اضغط لتغيير السورة والآيات أو السبر">
-            <div class="es-rec-title">📖 ${escapeHtml(r.recIsSabr && r.sabrJuz ? `سبر ${r.sabrJuz} كاملاً` : recSummary)}</div>
+            <div class="es-rec-title">📖 ${escapeHtml(r.recIsSabr && r.sabrJuz ? `سبر ${formatJuzClean(r.sabrJuz)} كاملاً` : recSummary)}</div>
             <span class="es-rec-pg-badge">${r.recIsSabr && r.sabrJuz ? `${formatNum(r.dRevPages || getJuzByName(r.sabrJuz)?.pages || 20)} ص` : `${formatNum(r.recPages || 0)} ص`}</span>
           </div>
           ${!(r.recIsSabr && r.sabrJuz) ? `
@@ -22084,6 +23306,7 @@ function renderCardBody(s, st, r, idx) {
         ${r.sabrJuz ? renderSabrScoreBox(st.id, r, false) : ''}
         ${!(r.recIsSabr && r.sabrJuz) ? renderErrorCounterBar(st.id, "rec", r.recErrors, r.recAlerts) : ''}
         <div class="es-eval-4" id="esEvalRow_rec">${makeSmartEvalBtns(r.recEval, "setRecEval", r.recErrors, r.recAlerts)}</div>
+        ${renderTajweedTagsBar(st.id, r)}
         <div class="es-hw-block">
           <div class="es-hw-row">
             <span class="lms-tap-area" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" onclick="openSurahPicker('${st.id}','hw')" title="اضغط لتغيير الواجب">📝 <b>الواجب:</b> ${escapeHtml(hwPreview)}</span>
@@ -22126,7 +23349,7 @@ function renderCardBody(s, st, r, idx) {
     const sabrJuzId = getStudentMonthlySabrJuzId(st, h, curMonth);
     const sabrProg = sabrJuzId ? getStudentMonthlySabrProgress(st, h, curMonth, sabrJuzId) : null;
     const revPace = Number(st.revPace || (sabrJuzId ? 5 : (h.defaultRevPace || 2)));
-    const nextMajPreview = r.nextMajSabrJuz ? `🎓 سبر ${r.nextMajSabrJuz}` : (r.nextMajSardLabel ? `📚 ${r.nextMajSardLabel}` : (r.nextMajIsPages && r.nextMajFrom ? `📄 ${r.nextMajFrom === r.nextMajTo ? r.nextMajFrom : r.nextMajFrom + ' ← ' + r.nextMajTo}` : (r.nextMajFrom ? formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) : "يُضبط تلقائياً بعد تقييم الكبرى")));
+    const nextMajPreview = r.nextMajSabrJuz ? `🎓 سبر ${formatJuzClean(r.nextMajSabrJuz)}` : (r.nextMajSardLabel ? `📚 ${r.nextMajSardLabel}` : (r.nextMajIsPages && r.nextMajFrom ? `📄 ${r.nextMajFrom === r.nextMajTo ? r.nextMajFrom : r.nextMajFrom + ' ← ' + r.nextMajTo}` : (r.nextMajFrom ? formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) : "يُضبط تلقائياً بعد تقييم الكبرى")));
 
     if (!r.minSurahId && (r.minSurah || r.minText)) {
       const mS = findSurahByName(r.minSurah || r.minText);
@@ -22238,7 +23461,7 @@ function renderCardBody(s, st, r, idx) {
 
       <div class="es-card">
         ${sabrInlineChip || (r.sabrJuz ? `<div class="sabr-active-strip">
-          <span>🎓 سبر كامل: ${escapeHtml(r.sabrJuz)} (${formatNum(r.majPages || 20)} ص)${r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null ? ` • ${r.sabrScore}%` : ''}</span>
+          <span>🎓 سبر كامل: ${escapeHtml(formatJuzClean(r.sabrJuz))} (${formatNum(r.majPages || 20)} ص)${r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null ? ` • ${r.sabrScore}%` : ''}</span>
           <div style="display:flex; gap:4px;">
             ${r.majEval !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="padding:2px 8px; font-size:11px;" onclick="openSabrHifzCertificate('${st.id}')">🎓 شهادة</button>` : ''}
             <button type="button" class="btn btn-outline btn-sm" style="padding:2px 7px; font-size:11px;" onclick="onSabrJuzChange('${st.id}','')">إلغاء</button>
@@ -22264,7 +23487,8 @@ function renderCardBody(s, st, r, idx) {
           </div>
         </div>
         ${r.sabrJuz ? renderSabrScoreBox(st.id, r, true) : renderErrorCounterBar(st.id, "maj", r.majErrors, r.majAlerts)}
-        <div class="es-eval-4" id="esEvalRow_maj" style="margin-bottom:0;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors, r.majAlerts)}</div>
+        <div class="es-eval-4" id="esEvalRow_maj" style="margin-bottom:6px;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors, r.majAlerts)}</div>
+        ${renderTajweedTagsBar(st.id, r)}
       </div>
 
       <div class="es-tools-4">
@@ -22288,10 +23512,11 @@ function renderCardBody(s, st, r, idx) {
     `;
   }
 
+  const isNoRecCard = isPresentNoRecite(r.attendance);
   const absNoticeHtml = isAbsCard
     ? `<div class="es-abs-notice">🚫 مسجّل ${escapeHtml(r.attendance)} — الواجب مُرحّل للجلسة القادمة (اضغط على التقييم لإلغاء الغياب تلقائياً)</div>`
-    : "";
-  return `${_attnBannerHtml}<div class="es-att-4">${attBtns}</div>${absNoticeHtml}${bonusSectionHtml}${bodyCore}`;
+    : (isNoRecCard ? `<div class="es-norecite-notice">📋 مسجّل: <b>حضر ولم يُسمّع</b> — يُحتسب حاضراً ويُرحّل واجبه للجلسة القادمة</div>` : "");
+  return `${_attnBannerHtml}<div class="es-att-5">${attBtns}</div>${absNoticeHtml}${!isNoRecCard ? bonusSectionHtml : ""}${bodyCore}`;
 }
 
 // ==================== RECORD MUTATIONS ====================
@@ -22335,7 +23560,7 @@ function stepPoints(studentId, delta) {
 function togglePointBonus(studentId, key) {
   captureUndoSnapshot(studentId);
   const h = getActiveHalaqa(), s = getCurrentSession(), st = h.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
-  if (r.attendance === "لم يُسمّع" || r.attendance.includes("غياب")) {
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) {
     r.attendance = "حاضر";
   }
   ensureRecordBonuses(r);
@@ -22828,7 +24053,7 @@ function setAttendance(studentId, status) {
   if (r.attendance === status) {
     r.attendance = "لم يُسمّع";
     r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined;
-    if (status.includes("غياب")) {
+    if (status.includes("غياب") || status === "حضر ولم يُسمّع") {
       r.notes = "";
       if (st?.track === "rashidi" && !r.recEval) {
         r.hwRashidiFrom = ""; r.hwRashidiTo = "";
@@ -22845,7 +24070,7 @@ function setAttendance(studentId, status) {
     showToast(`تم إلغاء حالة «${status}» ↩️`, { undo: true });
     return;
   }
-  if (status.includes("غياب")) {
+  if (status.includes("غياب") || status === "حضر ولم يُسمّع") {
     applyAbsenceCarryOver(s, st, r, status);
   } else {
     r.attendance = status;
@@ -22909,18 +24134,13 @@ function setRecEval(studentId, ev, errCount = null) {
     return;
   }
 
-  if (r.attendance === "لم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
   r.recEval = ev;
-  // Clear stale per-page evals & auto-repeat review when teacher manually picks a grade!
-  if (Array.isArray(r.recPageEvals)) {
-    r.recPageEvals = null;
-    r.recRepeatHwOnly = false;
-    const _recSegsReset = getSegments(r, "rec");
-    if (_recSegsReset.length) r.recPages = calcSegmentsPages(_recSegsReset);
-    if (r.dRevEval === "إعادة" && !(Number(r.dRevPages) > 0)) {
-      r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevIsPages = false;
-    }
+  // If per-page evaluations exist, adopt this button as the OVERALL grade while preserving repeated page(s) in notes!
+  if (Array.isArray(r.recPageEvals) && r.recPageEvals.length >= 2) {
+    applyPerPageAutoEval(studentId, "rec", ev, true);
+    return;
   }
   removeStudentFromQueue(s, studentId);
 
@@ -22945,7 +24165,7 @@ function setRecEval(studentId, ev, errCount = null) {
       r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
       r.dRevEval = "إعادة سبر";
       r.dRevPages = 0;
-      r.notes = `يرجى إعادة مراجعة وتثبيت ${r.sabrJuz}${errTag} لإتقان السبر في الجلسة القادمة.`;
+      r.notes = applyTajweedToNote(buildConciseRecNote("إعادة", { sabrJuz: r.sabrJuz }), r);
     } else if (sabrObj) {
       r.hwSabrJuz = "";
       r.dRevFrom = SURAH_MAP[sabrObj.startSurah]?.n || "";
@@ -22956,7 +24176,7 @@ function setRecEval(studentId, ev, errCount = null) {
       const nxtHw = computeFirstHwAfterJuz(sabrObj, dir, st?.pace || 0.5, getStudentJuzOrder(st, h), getStudentExtraEndJuzIds(st));
       if (nxtHw) Object.assign(r, nxtHw);
       const nxtLbl = formatSegmentsInline(getSegments(r, "hw"));
-      r.notes = `مبارك إتمام سبر ${sabrObj.name} بتقييم ${ev}${errTag} بارك الله في همتك.${nxtLbl ? ` ننتقل إلى: ${nxtLbl}.` : ''}`;
+      r.notes = applyTajweedToNote(buildConciseRecNote(ev, { sabrJuz: sabrObj.name }), r);
     }
     r.points = computeRecordPoints(s, r, st);
     saveState();
@@ -23005,13 +24225,8 @@ function setRecEval(studentId, ev, errCount = null) {
 
   r.points = computeRecordPoints(s, r, st);
 
-  const label = formatSegmentsInline(segs) || "المقطع";
-  if (completedJuz && ev !== "إعادة") {
-    r.notes = `مبارك إتمام ${completedJuz.name} بتقييم ${ev}${errTag}؛ الواجب القادم مراجعة الجزء كاملاً استعداداً لاختبار السبر.`;
-  } else if (ev === "ممتاز") r.notes = `تلاوة متقنة وحفظ ممتاز (${label})${errTag} بارك الله في همتك.`;
-  else if (ev === "جيد جداً") r.notes = `حفظ جيد جداً (${label})${errTag}؛ بمزيد من التكرار يرتقي للامتياز.`;
-  else if (ev === "جيد") r.notes = `مستوى جيد (${label})${errTag}؛ يرجى تثبيت المقطع في المراجعة لرفع الإتقان.`;
-  else if (ev === "إعادة") r.notes = `يرجى تكرار (${label})${errTag} وضبط الآيات لإتقان الإعادة في الجلسة القادمة.`;
+  r.notes = applyTajweedToNote(buildConciseRecNote(ev, { completedJuz }), r);
+  removeStudentFromQueue(s, studentId);
 
   saveState();
   advanceAfterEval(studentId, ev);
@@ -23207,7 +24422,7 @@ function quickSatBothEval(studentId, ev) {
     showToast(`تم إلغاء تقييم ${st.name} ↩️`, { undo: true });
     return;
   }
-  if (r.attendance === "لم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
   r.minEval = ev;
   r.majEval = ev;
@@ -23338,41 +24553,30 @@ function autoAssignSatHomework(st, r, ev) {
 function buildSaturdayAutoNote(st, r, errMin = null, errMaj = null, wrapped = false) {
   const minEv = r.minEval || "";
   const majEv = r.majEval || "";
-  const minRng = formatSegmentsInline(getSegments(r, "min")) || stripMushafPageTokens(r.minText || "");
-  const majRngRaw = formatMajStripDisplay(r.majFrom, r.majTo);
-  const majRng = majRngRaw && majRngRaw !== "—" ? majRngRaw : "";
-  const minErr = (errMin !== null && errMin > 0) ? ` (${errorCountArabicText(errMin)})` : "";
-  const majErr = (errMaj !== null && errMaj > 0) ? ` (${errorCountArabicText(errMaj)})` : "";
-  const nxtMajRaw = r.nextMajSabrJuz ? `سبر ${r.nextMajSabrJuz}` : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo);
-  const nxtMajTxt = (nxtMajRaw && nxtMajRaw !== "—" && majEv !== "إعادة") ? ` القادم: ${nxtMajRaw}.` : "";
-  const wrapMsg = wrapped ? ` (ختم دورة المراجعة ويعود من أول المحفوظ).` : "";
+  const wrapTag = wrapped ? " (أتمّ دورة المراجعة)." : "";
+  let base = "";
 
   if (minEv === "إعادة" && majEv === "إعادة") {
-    const majTarget = r.sabrJuz ? `سبر ${r.sabrJuz}` : `مقطع الكبرى${majRng ? ' (' + majRng + ')' : ''}`;
-    return `يرجى تثبيت الصغرى${minRng ? ' (' + minRng + ')' : ''}${minErr} ضمن المحفوظ، وإعادة ${majTarget}${majErr} للسبت القادم.`;
-  }
-  if (majEv === "إعادة") {
-    const minPart = minEv ? `الصغرى (${minEv})${minErr}، و` : "";
-    const majTarget = r.sabrJuz ? `سبر ${r.sabrJuz}` : `مقطع الكبرى${majRng ? ' (' + majRng + ')' : ''}`;
-    return `${minPart}يرجى إعادة تثبيت ${majTarget}${majErr} جيداً للسبت القادم.`;
-  }
-  if (minEv === "إعادة") {
-    const majPart = majEv ? `الكبرى (${majEv})${majErr}، و` : "";
-    return `${majPart}يرجى تثبيت مقطع الصغرى${minRng ? ' (' + minRng + ')' : ''}${minErr} ضمن المحفوظ.${nxtMajTxt}`;
-  }
-  if (minEv && majEv) {
+    base = "يُرجى إعادة التثبيت للسبت القادم.";
+  } else if (majEv === "إعادة") {
+    base = r.sabrJuz ? `إعادة سبر ${formatJuzClean(r.sabrJuz)} للسبت القادم.` : "يُرجى إعادة الكبرى للسبت القادم.";
+  } else if (minEv === "إعادة") {
+    base = majEv ? `الكبرى (${majEv})، يُرجى تثبيت الصغرى.` : "يُرجى تثبيت الصغرى.";
+  } else if (minEv && majEv) {
     if (minEv === majEv) {
-      return `صغرى وكبرى بتقييم ${minEv}${minErr || majErr} بارك الله فيك.${wrapMsg}${nxtMajTxt}`;
+      base = minEv === "ممتاز" ? "بارك الله فيك، مراجعة متقنة."
+        : (minEv === "جيد جداً" ? "أحسنت، مراجعة طيّبة." : "جهد طيّب، يُرجى التثبيت.");
+    } else {
+      base = `صغرى (${minEv})، كبرى (${majEv})، بارك الله فيك.`;
     }
-    return `الصغرى (${minEv})${minErr} والكبرى (${majEv})${majErr} بارك الله فيك.${wrapMsg}${nxtMajTxt}`;
+  } else if (majEv) {
+    base = majEv === "ممتاز" ? "فتح الله عليك، كبرى متقنة."
+      : (majEv === "جيد جداً" ? "أحسنت، مراجعة طيّبة." : "جهد طيّب، يُرجى التثبيت.");
+  } else if (minEv) {
+    base = minEv === "ممتاز" ? "بارك الله فيك، صغرى متقنة."
+      : (minEv === "جيد جداً" ? "أحسنت، صغرى طيّبة." : "جهد طيّب، يُرجى التثبيت.");
   }
-  if (majEv) {
-    return `مراجعة كبرى بتقييم ${majEv}${majErr} بارك الله فيك.${wrapMsg}${nxtMajTxt}`;
-  }
-  if (minEv) {
-    return `مراجعة صغرى بتقييم ${minEv}${minErr} بارك الله فيك.`;
-  }
-  return "";
+  return applyTajweedToNote(base ? `${base}${wrapTag}` : "", r);
 }
 
 function setSatMinEval(studentId, ev, errCount = null) {
@@ -23397,8 +24601,9 @@ function setSatMinEval(studentId, ev, errCount = null) {
     return;
   }
 
-  if (r.attendance === "لم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
+  if (Array.isArray(r.minPageEvals) && r.minPageEvals.length >= 2) { applyPerPageAutoEval(studentId, "min", ev, true); return; }
   r.minEval = ev;
   if (!(Number(r.minPages) > 0)) r.minPages = calcRecordMinPages(r);
   r.points = computeRecordPoints(s, r, st);
@@ -23443,8 +24648,9 @@ function setSatMajEval(studentId, ev, errCount = null) {
     return;
   }
 
-  if (r.attendance === "لم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
+  if (Array.isArray(r.majPageEvals) && r.majPageEvals.length >= 2) { applyPerPageAutoEval(studentId, "maj", ev, true); return; }
   r.majEval = ev;
   if (r.sabrJuz && r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && evalFromSabrScore(r.sabrScore) !== ev) {
     r.sabrScore = "";
@@ -23552,7 +24758,7 @@ function renderDailyReport() {
     if (r.attendance === "غياب مبرر") excused++;
     if (r.attendance === "غياب غير مبرر") absent++;
     totalPts += Number(r.points) || 0;
-    const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع";
+    const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
     if (!isAbs) {
       if (st.track === "rashidi") {
         if (r.recEval && r.recEval !== "إعادة") dayRashidiPgs += Number(r.rashidiPages) || 0;
@@ -23637,7 +24843,8 @@ function renderDailyReport() {
         : ((r.dRevIsPages || r.dRevSardLabel)
           ? { from: escapeHtml(compactDRevFrom), to: escapeHtml(compactDRevTo), lines: 1 }
           : formatReviewPairColumns(getSegments(r, "dRev"), compactDRevFrom, compactDRevTo, true));
-      const evalRaw = isAbs ? _gtRep.absent : (r.recEval || "") + (_recSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : "");
+      const isNoRec = isPresentNoRecite(r.attendance);
+      const evalRaw = isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : ((r.recEval || "") + (_recSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : "")));
       const evalSt = getEvalCellStyle(evalRaw, isAbs);
       const cleanDRevEval = (r.dRevEval === "بانتظار التقييم" && !r.sabrJuz) ? "" : (r.dRevEval || "");
       const revRaw = (isRashidiRow || isPendingSabrOnly)
@@ -23718,9 +24925,10 @@ function renderDailyReport() {
       const hwCols = isRashidiRow
         ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1 }
         : formatSatNextMajColumns(r, true);
-      const minSt = getEvalCellStyle(isAbs ? _gtRep.absent : (isRashidiRow ? (r.recEval || "") : (r.minEval || "")), isAbs);
+      const isNoRec = isPresentNoRecite(r.attendance);
+      const minSt = getEvalCellStyle(isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isRashidiRow ? (r.recEval || "") : (r.minEval || ""))), isAbs);
       const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
-      const majRaw = isRashidiRow ? "" : (isAbs ? _gtRep.absent : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || ""))));
+      const majRaw = isRashidiRow ? "" : (isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || "")))));
       const majSt = getEvalCellStyle(majRaw, !isRashidiRow && isAbs);
 
       tbl += `<tr>
@@ -23901,7 +25109,7 @@ function computeMonthlyData(monthFilter) {
     sessions.forEach(s => {
       const r = s.records?.[st.id];
       if (!r) return;
-      if (r.attendance === "حاضر") presentDays++;
+      if (r.attendance === "حاضر" || r.attendance === "حضر ولم يُسمّع") presentDays++;
       else if (r.attendance === "متأخر") { presentDays++; lateDays++; }
       else if (r.attendance === "غياب مبرر") excusedDays++;
       else if (r.attendance === "غياب غير مبرر") absentDays++;
@@ -23911,7 +25119,7 @@ function computeMonthlyData(monthFilter) {
         if (!sabrList.some(x => x.startsWith(r.sabrJuz))) sabrList.push(scLbl);
       }
 
-      const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع";
+      const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
       if (st.track === "rashidi") {
         if (!isAbs && r.recEval && r.recEval !== "إعادة") {
           const rf = parseArabicNum(r.rashidiFrom, 0), rt = parseArabicNum(r.rashidiTo, rf);
@@ -24126,7 +25334,7 @@ function renderMonthCarryList(candidates) {
       const r = s.records?.[st.id];
       if (!r) return;
       pts += Number(r.points) || 0;
-      if (r.attendance === "حاضر" || r.attendance === "متأخر") pres++;
+      if (isCountedPresent(r.attendance)) pres++;
     });
     const typeLbl = s.type === "saturday" ? "مراجعة" : "تسميع";
     return `<div class="carry-row ${checked ? 'checked' : ''}" onclick="toggleMcDraftSession('${s.id}')">
@@ -24393,7 +25601,7 @@ async function renderReportToHDCanvas(paperId) {
   const stage = document.getElementById("hdExportStage");
   const isCert = paperId === "certPaperCanvas";
   const isMonthly = paperId === "monthlyReportPaper";
-  const isIndiv = paperId === "indivReportCanvas" || paperId === "supTeacherCardCanvas" || paperId === "pointsTablePaper";
+  const isIndiv = paperId === "indivReportCanvas" || paperId === "supTeacherCardCanvas" || paperId === "pointsTablePaper" || paperId === "waTempDailyCard";
   const isPoster = paperId === "supBranchPosterCanvas" || paperId === "pointsPodiumPaper";
 
   stage.classList.remove("is-cert-stage", "is-monthly-stage", "is-indiv-stage", "is-poster-stage");
@@ -24913,7 +26121,7 @@ function computeStudentStatsForSessions(st, sessions, h, extraBase = null) {
   (sessions || []).forEach(s => {
     const r = s.records?.[st.id];
     if (!r) return;
-    if (r.attendance === "حاضر") presentDays++;
+    if (r.attendance === "حاضر" || r.attendance === "حضر ولم يُسمّع") presentDays++;
     else if (r.attendance === "متأخر") { presentDays++; lateDays++; }
     else if (r.attendance === "غياب مبرر") excusedDays++;
     else if (r.attendance === "غياب غير مبرر") absentDays++;
@@ -24923,7 +26131,7 @@ function computeStudentStatsForSessions(st, sessions, h, extraBase = null) {
         ? `${r.sabrJuz} (${Math.round(Number(r.sabrScore))}%)` : r.sabrJuz;
       if (!sabrList.some(x => x.startsWith(r.sabrJuz))) sabrList.push(scLbl);
     }
-    const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع";
+    const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
     if (!isAbs) {
       if (st.track === "rashidi") {
         if (r.recEval && r.recEval !== "إعادة") {
@@ -25674,6 +26882,9 @@ function renderIndivReportPaper() {
     if (isAbs) {
       portionTxt = r.attendance;
       evalHtml = `<td class="td-absent">غائب</td>`;
+    } else if (isPresentNoRecite(r.attendance)) {
+      portionTxt = "حضر الجلسة بدون تسميع";
+      evalHtml = `<td class="td-norecite">لم يُسمّع</td>`;
     } else if (st.track === "rashidi") {
       portionTxt = r.rashidiFrom ? `الرشيدي ص ${r.rashidiFrom}${r.rashidiTo && Number(r.rashidiTo) !== Number(r.rashidiFrom) ? "–" + r.rashidiTo : ""}` : "الرشيدي";
       const evSt = getEvalCellStyle(r.recEval || "", false);
@@ -26419,9 +27630,9 @@ async function exportDailyExcelStyled() {
       const r = getStudentRecord(s, st.id);
       if (r.attendance === "غياب مبرر") excused++;
       else if (r.attendance === "غياب غير مبرر") absent++;
-      else if (r.attendance === "حاضر" || r.attendance === "متأخر") presentCnt++;
+      else if (isCountedPresent(r.attendance)) presentCnt++;
       totalPts += Number(r.points) || 0;
-      const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع";
+      const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
       if (!isAbs) {
         if (st.track === "rashidi") {
           if (r.recEval && r.recEval !== "إعادة") xlRashidiPgs += Number(r.rashidiPages) || 0;
@@ -26539,7 +27750,8 @@ async function exportDailyExcelStyled() {
             ? { from: compactDRevFrom, to: compactDRevTo, lines: 1 }
             : formatReviewPairColumns(getSegments(r, "dRev"), compactDRevFrom, compactDRevTo, false));
 
-        const evalSt = getEvalCellStyle(isAbs ? getGenderTerms(h).absent : (r.recEval || "") + (_xlSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : ""), isAbs);
+        const isNoRecXl = isPresentNoRecite(r.attendance);
+        const evalSt = getEvalCellStyle(isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : ((r.recEval || "") + (_xlSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : ""))), isAbs);
         const cleanXlRev = (r.dRevEval === "بانتظار التقييم" && !r.sabrJuz) ? "" : (r.dRevEval || "");
         const revSt = getEvalCellStyle((isRashidiRow || isPendingSabrOnly) ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.recEval === "إعادة" || String(r.dRevEval || "").includes("إعادة")) : cleanXlRev), false);
         const hasHwSabr = Boolean(r.hwSabrJuz);
@@ -26641,8 +27853,9 @@ async function exportDailyExcelStyled() {
           : formatSatNextMajColumns(r, false);
 
         const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
-        const minSt = getEvalCellStyle(isAbs ? getGenderTerms(h).absent : (isRashidiRow ? (r.recEval || "") : (r.minEval || "")), isAbs);
-        const majSt = getEvalCellStyle(isRashidiRow ? "" : (isAbs ? getGenderTerms(h).absent : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || "")))), !isRashidiRow && isAbs);
+        const isNoRecXl = isPresentNoRecite(r.attendance);
+        const minSt = getEvalCellStyle(isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : (isRashidiRow ? (r.recEval || "") : (r.minEval || ""))), isAbs);
+        const majSt = getEvalCellStyle(isRashidiRow ? "" : (isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || ""))))), !isRashidiRow && isAbs);
         const hasHwSabr = Boolean(r.nextMajSabrJuz || (r.sabrJuz && (r.majEval === "إعادة" || isAbs)));
         const cleanNote = stripMushafPageTokens(r.notes || "");
 
@@ -26878,7 +28091,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v83 -->
+<!-- Makin App v85 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -26934,7 +28147,7 @@ function copyDailyWhatsApp() {
 
   h.students.forEach(st => {
     const r = getStudentRecord(s, st.id);
-    if (r.attendance === "حاضر" || r.attendance === "متأخر") presentCnt++;
+    if (isCountedPresent(r.attendance)) presentCnt++;
     if (r.attendance.includes("غياب") || r.attendance === "لم يُسمّع") return;
 
     if (isSat) {
@@ -27648,6 +28861,9 @@ function switchSettingsTab(tabKey) {
     document.getElementById("setTabBtn_" + k)?.classList.toggle("on", k === tabKey);
     document.getElementById("setPane_" + k)?.classList.toggle("active", k === tabKey);
   });
+  if (tabKey === "cloud" && typeof renderTechHardeningCard === "function") {
+    renderTechHardeningCard();
+  }
 }
 
 function openSettingsModal() {
@@ -27847,6 +29063,463 @@ async function fetchCloudHalaqa(fbUrl, roomCode) {
   } catch { showToast("تعذّر الاتصال بالسحابة"); }
 }
 
+
+// ==================== MAKIN v84: TECH HARDENING DASHBOARD, YEAR ARCHIVE & SNAPSHOT RECOVERY ====================
+async function renderTechHardeningCard() {
+  const host = document.getElementById("techHardeningHost");
+  const badge = document.getElementById("thDbStatusBadge");
+  if (!host) return;
+
+  const h = getActiveHalaqa();
+  const activeSessCnt = (h?.sessions || []).length;
+  const allSessCnt = Object.values(appState?.halaqat || {}).reduce((s, x) => s + (x.sessions?.length || 0), 0);
+  let stateBytes = 0;
+  try { stateBytes = JSON.stringify(appState).length * 2; } catch {}
+  const lsLimitBytes = 4.8 * 1024 * 1024;
+  const lsPct = Math.min(100, Math.round((stateBytes / lsLimitBytes) * 100));
+  const meterCls = lsPct >= 80 ? "danger" : (lsPct >= 55 ? "warn" : "");
+
+  const [libH2c, libPdf, libXls, libMushaf, allArchives, allSnaps] = await Promise.all([
+    idbGet(IDB_STORE_LIBS, "html2canvas"),
+    idbGet(IDB_STORE_LIBS, "jspdf"),
+    idbGet(IDB_STORE_LIBS, "exceljs"),
+    idbGet(IDB_STORE_LIBS, "mushaf604"),
+    idbGetAll(IDB_STORE_ARCHIVES),
+    idbGetAll(IDB_STORE_SNAPS)
+  ]);
+
+  const uid = getEffectiveAccountUid() || "local";
+  const mySnaps = allSnaps.filter(x => x.uid === uid);
+  const myArchives = h ? allArchives.filter(x => x.halaqaId === h.id) : allArchives;
+
+  const hasH2c = Boolean(libH2c?.code) || isExportLibLoadedInWindow("html2canvas");
+  const hasPdf = Boolean(libPdf?.code) || isExportLibLoadedInWindow("jspdf");
+  const hasXls = Boolean(libXls?.code) || isExportLibLoadedInWindow("exceljs");
+  const hasMushaf = Boolean(libMushaf?.code) || Boolean(MUSHAF_EXACT_604);
+  const readyCnt = [hasH2c, hasPdf, hasXls, hasMushaf].filter(Boolean).length;
+  const offlineBytes = (libH2c?.byteSize || 0) + (libPdf?.byteSize || 0) + (libXls?.byteSize || 0) + (libMushaf?.byteSize || 0);
+
+  if (badge) {
+    badge.className = "badge " + (_makinIdbAvailable ? "b-green" : "b-orange");
+    badge.textContent = _makinIdbAvailable ? "IndexedDB نشطة ✓" : "تخزين محلي أساسي";
+  }
+
+  host.innerHTML = `
+    ${_localStorageQuotaReached ? `<div class="quota-warn-banner">⚠️ ذاكرة البدء السريع ممتلئة؛ بياناتك محفوظة بأمان تام في <b>IndexedDB</b>. يُنصح بأرشفة الجلسات القديمة عبر «أرشيف السنوات» أدناه لتسريع الإقلاع.</div>` : ""}
+    <div class="th-grid-3">
+      <div class="th-stat-tile ok">
+        <div class="tsv">${formatByteSizeArabic(stateBytes)}</div>
+        <div class="tsl">حجم بياناتك النشطة</div>
+      </div>
+      <div class="th-stat-tile ${readyCnt === 4 ? "ok" : "warn"}">
+        <div class="tsv">${readyCnt} / 4</div>
+        <div class="tsl">جاهزية بدون إنترنت</div>
+      </div>
+      <div class="th-stat-tile">
+        <div class="tsv">${allSessCnt} جلسة</div>
+        <div class="tsl">${myArchives.length} أرشيف سنوي</div>
+      </div>
+    </div>
+
+    <div class="th-meter-wrap">
+      <div class="th-meter-top">
+        <span>⚡ امتلاء ذاكرة البدء السريع (الحماية المزدوجة: IndexedDB)</span>
+        <span>${lsPct}%</span>
+      </div>
+      <div class="th-meter-track"><div class="th-meter-fill ${meterCls}" style="width:${Math.max(3, lsPct)}%;"></div></div>
+    </div>
+
+    <div style="font-size:11.5px; font-weight:800; color:var(--brand-slate); margin-bottom:5px;">
+      📡 محركات التصدير والعمل داخل المسجد بدون إنترنت ${offlineBytes > 0 ? `<small style="color:var(--ink-500); font-weight:600;">(${formatByteSizeArabic(offlineBytes)})</small>` : ""}:
+    </div>
+    <div class="th-offline-list">
+      <div class="th-off-pill ${hasH2c ? "ready" : ""}"><span>📸 الصور HD</span><span>${hasH2c ? "جاهز ✓" : "غير محمّل"}</span></div>
+      <div class="th-off-pill ${hasPdf ? "ready" : ""}"><span>📑 ملفات PDF</span><span>${hasPdf ? "جاهز ✓" : "غير محمّل"}</span></div>
+      <div class="th-off-pill ${hasXls ? "ready" : ""}"><span>📥 ملفات Excel</span><span>${hasXls ? "جاهز ✓" : "غير محمّل"}</span></div>
+      <div class="th-off-pill ${hasMushaf ? "ready" : ""}"><span>📖 فهرس المصحف</span><span>${hasMushaf ? "جاهز ✓" : "غير محمّل"}</span></div>
+    </div>
+
+    <button type="button" class="btn ${readyCnt === 4 ? "btn-soft" : "btn-primary"} btn-sm" style="width:100%; margin-bottom:8px;" ${_offlinePrecacheBusy ? "disabled" : ""} onclick="precacheOfflineExportSuite(true)">
+      ${_offlinePrecacheBusy ? "⏳ جاري التحميل والتخزين المحلي..." : (readyCnt === 4 ? "✓ جميع المحركات جاهزة بدون إنترنت (تحديث)" : "⚡ تجهيز التصدير بدون إنترنت الآن")}
+    </button>
+
+    <div class="th-actions-2">
+      <button type="button" class="btn btn-soft btn-sm" onclick="closeModal('settingsModal'); openYearArchiveModal();">📦 أرشيف السنوات (${myArchives.length})</button>
+      <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('settingsModal'); openAutoSnapshotsModal();">🔄 لقطات الاستعادة (${mySnaps.length})</button>
+    </div>
+  `;
+}
+
+// ===== ACADEMIC YEAR / SEMESTER ARCHIVER (PRESERVES STUDENT CONTINUITY 100%) =====
+let _yaInspectId = "";
+
+async function openYearArchiveModal() {
+  _yaInspectId = "";
+  openModal("yearArchiveModal");
+  await renderYearArchiveModal();
+}
+
+function getYearArchiveCandidates(h, cutoffMode) {
+  const active = (h?.sessions || []).filter(s => s && s.date).sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+  const today = todayISO();
+  if (cutoffMode === "all_past") {
+    return active.filter(s => s.date < today);
+  }
+  const monthsBack = cutoffMode === "6m" ? 6 : (cutoffMode === "3m" ? 3 : 1);
+  const dt = new Date(today + "T12:00:00");
+  dt.setMonth(dt.getMonth() - monthsBack);
+  const cutIso = dateToISO(dt);
+  return active.filter(s => s.date <= cutIso);
+}
+
+function onYearArchiveCutoffChange() {
+  const h = getActiveHalaqa();
+  const sel = document.getElementById("yaCutoffSelect");
+  const info = document.getElementById("yaCutoffPreview");
+  const btn = document.getElementById("yaExecuteBtn");
+  if (!h || !sel || !info) return;
+  const cands = getYearArchiveCandidates(h, sel.value);
+  if (!cands.length) {
+    info.innerHTML = `<span style="color:var(--ink-500);">لا توجد جلسات تطابق هذا النطاق الزمني حالياً.</span>`;
+    if (btn) btn.disabled = true;
+  } else {
+    const first = cands[0], last = cands[cands.length - 1];
+    info.innerHTML = `سيتم نقل <b>${cands.length} جلسة</b> (من ${escapeHtml(first.hijriDate || first.date)} حتى ${escapeHtml(last.hijriDate || last.date)}) إلى الأرشيف السنوي مع الحفاظ التام على آخر آية وحفظ وأجزاء كل طالب.`;
+    if (btn) btn.disabled = false;
+  }
+}
+
+async function renderYearArchiveModal() {
+  const body = document.getElementById("yearArchiveModalBody");
+  const h = getActiveHalaqa();
+  if (!body || !h) return;
+
+  const allArchives = (await idbGetAll(IDB_STORE_ARCHIVES))
+    .filter(a => a.halaqaId === h.id)
+    .sort((a, b) => (b.createdAt || "").localeCompare(a.createdAt || ""));
+
+  if (_yaInspectId) {
+    const arc = allArchives.find(x => x.id === _yaInspectId);
+    if (arc) {
+      const rows = arc.summary?.rows || [];
+      body.innerHTML = `
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:9px;">
+          <div>
+            <b style="font-size:14.5px; color:var(--brand-slate);">📦 ${escapeHtml(arc.label)}</b>
+            <div style="font-size:11.5px; color:var(--ink-500);">${arc.sessionsCount} جلسة • ${escapeHtml(arc.fromHijri || arc.fromDate)} ← ${escapeHtml(arc.toHijri || arc.toDate)}</div>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" onclick="_yaInspectId=''; renderYearArchiveModal();">↩️ رجوع</button>
+        </div>
+        <div class="th-grid-3">
+          <div class="th-stat-tile ok"><div class="tsv">${formatNum(arc.summary?.totals?.memPages || 0)} ص</div><div class="tsl">إجمالي الحفظ</div></div>
+          <div class="th-stat-tile"><div class="tsv">${formatNum(arc.summary?.totals?.revPages || 0)} ص</div><div class="tsl">إجمالي المراجعة</div></div>
+          <div class="th-stat-tile"><div class="tsv">${arc.summary?.totals?.sabrCount || 0}</div><div class="tsl">أجزاء مسبورة</div></div>
+        </div>
+        <div style="max-height:48vh; overflow-y:auto; border:1px solid var(--line); border-radius:10px; margin-bottom:10px;">
+          <table style="width:100%; border-collapse:collapse; font-size:12px;">
+            <thead>
+              <tr style="background:var(--brand-tint);">
+                <th style="padding:6px; border-bottom:1px solid var(--line); text-align:right;">الطالب</th>
+                <th style="padding:6px; border-bottom:1px solid var(--line);">الحفظ</th>
+                <th style="padding:6px; border-bottom:1px solid var(--line);">المراجعة</th>
+                <th style="padding:6px; border-bottom:1px solid var(--line);">الحضور</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.map(r => `<tr>
+                <td style="padding:6px; border-bottom:1px solid var(--line); font-weight:700;">${escapeHtml(r.name)}</td>
+                <td style="padding:6px; border-bottom:1px solid var(--line); text-align:center;">${formatNum(r.memPages)} ص</td>
+                <td style="padding:6px; border-bottom:1px solid var(--line); text-align:center;">${formatNum(r.revPages)} ص</td>
+                <td style="padding:6px; border-bottom:1px solid var(--line); text-align:center;">${r.presentDays} يوم</td>
+              </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex; gap:7px; flex-wrap:wrap; justify-content:flex-end;">
+          <button type="button" class="btn btn-soft btn-sm" onclick="exportYearArchiveJSON('${arc.id}')">💾 تنزيل ملف الأرشيف</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="restoreYearArchiveToHalaqa('${arc.id}')">↩️ استرجاع الجلسات للحلقة</button>
+        </div>`;
+      return;
+    }
+    _yaInspectId = "";
+  }
+
+  const hjNow = getExactHijriInfo(todayISO());
+  const defaultLbl = `أرشيف فصل ${hjNow.monthName} ${hjNow.year} هـ`;
+
+  body.innerHTML = `
+    <div style="background:var(--brand-tint); border:1px solid var(--line); border-right:4px solid #142a46; border-radius:11px; padding:10px; margin-bottom:11px;">
+      <div style="font-size:12.5px; font-weight:800; color:var(--brand-slate); margin-bottom:7px;">📦 إغلاق فصل / سنة ونقل الجلسات القديمة للأرشيف البارد</div>
+      <div style="font-size:11.5px; color:var(--ink-700); line-height:1.55; margin-bottom:8px;">
+        يُخفّف هذا الإجراء التطبيق ويجعله سريعاً لسنوات طويلة، مع حفظ جميع الجلسات وملخصات الطلاب في <b>IndexedDB</b> وإمكانية استرجاعها بأي وقت، دون التأثير على آخر آية وصل إليها أي طالب.
+      </div>
+      <div class="exec-grid-2" style="margin-bottom:8px;">
+        <div class="field">
+          <label>اسم الأرشيف</label>
+          <input type="text" id="yaNewLabel" value="${escapeHtml(defaultLbl)}">
+        </div>
+        <div class="field">
+          <label>الجلسات المراد أرشفتها</label>
+          <select id="yaCutoffSelect" onchange="onYearArchiveCutoffChange()">
+            <option value="3m">الأقدم من 3 أشهر</option>
+            <option value="6m">الأقدم من 6 أشهر</option>
+            <option value="1m">الأقدم من شهر واحد</option>
+            <option value="all_past">جميع الجلسات قبل اليوم (بداية فصل جديد)</option>
+          </select>
+        </div>
+      </div>
+      <div id="yaCutoffPreview" style="font-size:11.5px; color:var(--ink-700); margin-bottom:8px; font-weight:600;"></div>
+      <label class="check-inline" style="margin-bottom:9px;">
+        <input type="checkbox" id="yaDownloadCopy" checked>
+        <span>تنزيل نسخة ملف JSON من الأرشيف على الجهاز تلقائياً</span>
+      </label>
+      <button type="button" class="btn btn-primary btn-sm" id="yaExecuteBtn" style="width:100%;" onclick="executeArchiveOldSessions()">📦 أرشفة الجلسات المحددة الآن</button>
+    </div>
+
+    <div style="font-size:12.5px; font-weight:800; color:var(--brand-slate); margin-bottom:7px;">📚 الأرشيفات المحفوظة (${allArchives.length}):</div>
+    ${allArchives.length ? allArchives.map(a => `
+      <div class="ya-item-card">
+        <div class="ya-item-top">
+          <div>
+            <b style="font-size:13.5px; color:var(--ink-900);">${escapeHtml(a.label)}</b>
+            <div style="font-size:11px; color:var(--ink-500);">${escapeHtml(a.fromHijri || a.fromDate)} ← ${escapeHtml(a.toHijri || a.toDate)}</div>
+          </div>
+          <span class="badge b-blue">${a.sessionsCount} جلسة</span>
+        </div>
+        <div class="ya-item-meta">
+          <span class="arc-chip">📖 حفظ: ${formatNum(a.summary?.totals?.memPages || 0)} ص</span>
+          <span class="arc-chip">🔄 مراجعة: ${formatNum(a.summary?.totals?.revPages || 0)} ص</span>
+          <span class="arc-chip">🎓 سبر: ${a.summary?.totals?.sabrCount || 0}</span>
+        </div>
+        <div class="ya-item-actions">
+          <button type="button" class="btn btn-soft btn-sm" onclick="_yaInspectId='${a.id}'; renderYearArchiveModal();">👁️ الملخص</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="exportYearArchiveJSON('${a.id}')">💾 تصدير</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="restoreYearArchiveToHalaqa('${a.id}')">↩️ استرجاع</button>
+          <button type="button" class="btn btn-danger btn-sm" style="margin-right:auto;" onclick="deleteYearArchive('${a.id}')">🗑️</button>
+        </div>
+      </div>`).join("") : `<div style="text-align:center; padding:16px 8px; color:var(--ink-500); font-size:12px;">لا توجد أرشيفات سنوية محفوظة بعد.</div>`}
+  `;
+  onYearArchiveCutoffChange();
+}
+
+async function executeArchiveOldSessions() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const cutoff = document.getElementById("yaCutoffSelect")?.value || "3m";
+  const label = (document.getElementById("yaNewLabel")?.value || "").trim() || `أرشيف ${todayISO()}`;
+  const wantDownload = Boolean(document.getElementById("yaDownloadCopy")?.checked);
+  const cands = getYearArchiveCandidates(h, cutoff);
+  if (!cands.length) { showToast("لا توجد جلسات للأرشفة في هذا النطاق"); return; }
+
+  if (!confirm(`سيتم نقل ${cands.length} جلسة إلى الأرشيف السنوي «${label}».
+
+• ستبقى محفوظة محلياً ويمكنك استرجاعها في أي وقت.
+• سيتم تثبيت آخر آية وأجزاء كل طالب قبل النقل.
+
+هل تريد المتابعة؟`)) return;
+
+  // 1) Take automatic pre-archive safety snapshot
+  await ensureDailyAutoSnapshot(`قبل أرشفة: ${label}`);
+
+  // 2) Preserve every student's latest memorization position, review cursor & passed Sabr Juz!
+  const sortedCands = [...cands].sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+  const summaryRows = [];
+  let totMem = 0, totRev = 0, totSabr = 0;
+
+  h.students.forEach(st => {
+    const stStats = computeStudentStatsForSessions(st, sortedCands, h, null);
+    totMem += stStats.memPages;
+    totRev += stStats.revPages;
+    totSabr += stStats.sabrList.length;
+    summaryRows.push({
+      id: st.id,
+      name: st.name,
+      memPages: stStats.memPages,
+      rashidiPages: stStats.rashidiPages,
+      revPages: stStats.revPages,
+      presentDays: stStats.presentDays,
+      totalAbsences: stStats.totalAbsences,
+      totalPoints: stStats.totalPoints,
+      sabrList: stStats.sabrList
+    });
+
+    // Freeze any passed Sabr Juz into student's permanent extraMemJuzIds
+    const extraSet = new Set(Array.isArray(st.extraMemJuzIds) ? st.extraMemJuzIds.map(Number) : []);
+    sortedCands.forEach(s => {
+      const r = s.records?.[st.id];
+      if (!r) return;
+      if (isPassedNewMemSabrForMonthly(s, r)) {
+        const jObj = getJuzByName(r.sabrJuz);
+        if (jObj) extraSet.add(jObj.id);
+      }
+    });
+    if (extraSet.size) st.extraMemJuzIds = Array.from(extraSet).sort((a, b) => a - b);
+
+    // Preserve latest homework / recitation position if no newer active sessions carry it
+    const lastDaily = [...sortedCands].reverse().find(s => s.type === "daily" && s.records?.[st.id]);
+    if (lastDaily) {
+      const r = lastDaily.records[st.id];
+      if (st.track === "rashidi") {
+        const nxtPg = parseArabicNum(r.hwRashidiFrom || r.rashidiTo, 0);
+        if (nxtPg > 0) st.rashidiPage = nxtPg;
+      } else {
+        const hwSegs = getSegments(r, "hw");
+        if (hwSegs.length) {
+          st.startSurahId = String(hwSegs[0].surahId);
+          st.startFromAyah = String(hwSegs[0].from || 1);
+        }
+      }
+    }
+    const lastSat = [...sortedCands].reverse().find(s => s.type === "saturday" && s.records?.[st.id]);
+    if (lastSat && st.track !== "rashidi") {
+      const r = lastSat.records[st.id];
+      const nxtP = Number(r.nextMajPage) || Number(r.majPage) || 0;
+      if (nxtP >= 1 && nxtP <= 604) st.revPage = nxtP;
+    }
+  });
+
+  const archiveObj = {
+    id: uid("yarc"),
+    halaqaId: h.id,
+    halaqaName: h.name,
+    label,
+    createdAt: new Date().toISOString(),
+    fromDate: sortedCands[0].date,
+    toDate: sortedCands[sortedCands.length - 1].date,
+    fromHijri: sortedCands[0].hijriDate || sortedCands[0].date,
+    toHijri: sortedCands[sortedCands.length - 1].hijriDate || sortedCands[sortedCands.length - 1].date,
+    sessionsCount: sortedCands.length,
+    summary: {
+      totals: {
+        memPages: Math.round(totMem * 100) / 100,
+        revPages: Math.round(totRev * 100) / 100,
+        sabrCount: totSabr
+      },
+      rows: summaryRows
+    },
+    sessions: JSON.parse(JSON.stringify(sortedCands))
+  };
+
+  const savedOk = await idbPut(IDB_STORE_ARCHIVES, archiveObj);
+  if (!savedOk) { showToast("⚠️ تعذّر الحفظ في IndexedDB — لم تُحذف أي جلسة"); return; }
+
+  if (wantDownload) {
+    downloadBlob(new Blob([JSON.stringify(archiveObj, null, 2)], { type: "application/json" }), `أرشيف_${cleanFilePart(h.name)}_${cleanFilePart(label)}.json`);
+  }
+
+  const archivedIds = new Set(sortedCands.map(s => s.id));
+  h.sessions = (h.sessions || []).filter(s => !archivedIds.has(s.id));
+  if (archivedIds.has(activeSessionId)) activeSessionId = null;
+
+  ensureActiveSession();
+  saveState();
+  populateMonthFilters();
+  renderSessionView();
+  renderArchiveView();
+  renderTechHardeningCard();
+  await renderYearArchiveModal();
+  showToast(`📦 تمت أرشفة ${sortedCands.length} جلسة بنجاح وتخفيف التطبيق!`);
+}
+
+async function exportYearArchiveJSON(arcId) {
+  const arc = await idbGet(IDB_STORE_ARCHIVES, arcId);
+  if (!arc) return;
+  downloadBlob(new Blob([JSON.stringify(arc, null, 2)], { type: "application/json" }), `أرشيف_${cleanFilePart(arc.halaqaName || "حلقة")}_${cleanFilePart(arc.label)}.json`);
+  showToast("تم تنزيل ملف الأرشيف السنوي 💾");
+}
+
+async function restoreYearArchiveToHalaqa(arcId) {
+  const h = getActiveHalaqa();
+  const arc = await idbGet(IDB_STORE_ARCHIVES, arcId);
+  if (!h || !arc || !Array.isArray(arc.sessions)) return;
+  if (!confirm(`هل تريد استرجاع ${arc.sessions.length} جلسة من «${arc.label}» إلى الحلقة النشطة؟`)) return;
+
+  const existingIds = new Set((h.sessions || []).map(s => s.id));
+  const existingDates = new Set((h.sessions || []).map(s => s.date));
+  let added = 0;
+  arc.sessions.forEach(s => {
+    if (!existingIds.has(s.id) && !existingDates.has(s.date)) {
+      h.sessions.push(JSON.parse(JSON.stringify(s)));
+      added++;
+    }
+  });
+  h.sessions.sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+  saveState();
+  populateMonthFilters();
+  renderSessionView();
+  renderArchiveView();
+  renderTechHardeningCard();
+  showToast(`↩️ تم استرجاع ${added} جلسة إلى الحلقة بنجاح`);
+}
+
+async function deleteYearArchive(arcId) {
+  const arc = await idbGet(IDB_STORE_ARCHIVES, arcId);
+  if (!arc) return;
+  if (!confirm(`هل أنت متأكد من حذف الأرشيف «${arc.label}» نهائياً من الجهاز؟ يُنصح بتصدير نسخة JSON منه أولاً.`)) return;
+  await idbDelete(IDB_STORE_ARCHIVES, arcId);
+  _yaInspectId = "";
+  await renderYearArchiveModal();
+  renderTechHardeningCard();
+  showToast("تم حذف الأرشيف السنوي");
+}
+
+// ===== AUTO-RECOVERY SNAPSHOTS MANAGER =====
+async function openAutoSnapshotsModal() {
+  openModal("autoSnapshotsModal");
+  await renderAutoSnapshotsModal();
+}
+
+async function renderAutoSnapshotsModal() {
+  const body = document.getElementById("autoSnapshotsModalBody");
+  if (!body) return;
+  const uid = getEffectiveAccountUid() || "local";
+  const snaps = (await idbGetAll(IDB_STORE_SNAPS))
+    .filter(x => x.uid === uid)
+    .sort((a, b) => (b.createdAt || "").localeCompare(a.createdAt || ""));
+
+  body.innerHTML = `
+    <p style="font-size:12px; color:var(--ink-700); background:var(--brand-tint); padding:8px 10px; border-radius:9px; border-right:3.5px solid var(--green); margin-bottom:10px; line-height:1.55;">
+      يحفظ التطبيق تلقائياً <b>نقطة استعادة يومية</b> في قاعدة البيانات الآمنة <b>IndexedDB</b> (آخر 6 نقاط)، لتتمكن من العودة لأي يوم بضغطة واحدة في حال حدوث خطأ غير مقصود.
+    </p>
+    <button type="button" class="btn btn-primary btn-sm" style="width:100%; margin-bottom:10px;" onclick="createManualRecoverySnapshotNow()">📸 حفظ نقطة استعادة جديدة الآن</button>
+    ${snaps.length ? snaps.map(sn => `
+      <div class="snap-row-card">
+        <div style="min-width:0; flex:1;">
+          <b style="font-size:12.5px; color:var(--ink-900); display:block;">${escapeHtml(sn.label)}</b>
+          <div style="font-size:11px; color:var(--ink-500); margin-top:2px;">
+            ${escapeHtml(sn.halaqaName || "حلقة")} • ${sn.studentsCount || 0} طالب • ${sn.sessionsCount || 0} جلسة • ${formatByteSizeArabic(sn.byteSize || 0)}
+          </div>
+        </div>
+        <button type="button" class="btn btn-soft btn-sm" onclick="restoreAutoSnapshot('${sn.id}')">↩️ استعادة</button>
+      </div>`).join("") : `<div style="text-align:center; padding:16px 8px; color:var(--ink-500); font-size:12px;">لا توجد نقاط استعادة محفوظة بعد — اضغط «حفظ نقطة استعادة جديدة الآن».</div>`}
+  `;
+}
+
+async function createManualRecoverySnapshotNow() {
+  const nowStr = new Date().toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" });
+  const ok = await ensureDailyAutoSnapshot(`نقطة أمان يدوية (${getExactHijriInfo(todayISO()).formatted} • ${nowStr})`);
+  await renderAutoSnapshotsModal();
+  renderTechHardeningCard();
+  showToast(ok ? "تم حفظ نقطة الاستعادة بأمان في IndexedDB ✓" : "تعذّر حفظ النقطة حالياً");
+}
+
+async function restoreAutoSnapshot(snapId) {
+  const sn = await idbGet(IDB_STORE_SNAPS, snapId);
+  if (!sn || !sn.data?.halaqat) { showToast("تعذّر قراءة نقطة الاستعادة"); return; }
+  if (!confirm(`هل تريد استعادة بياناتك إلى «${sn.label}»؟
+(سيتم حفظ نسخة من وضعك الحالي تلقائياً قبل الاستعادة).`)) return;
+  await ensureDailyAutoSnapshot("نسخة أمان قبل الاستعادة");
+  appState = JSON.parse(JSON.stringify(sn.data));
+  if (!appState.activeHalaqaId || !appState.halaqat[appState.activeHalaqaId]) {
+    appState.activeHalaqaId = Object.keys(appState.halaqat)[0] || null;
+  }
+  saveState();
+  closeModal("autoSnapshotsModal");
+  initApp();
+  showToast("تمت استعادة البيانات من نقطة الأمان بنجاح ↩️");
+}
+
+
 function exportBackupJSON() {
   const h = getActiveHalaqa();
   localStorage.setItem("tibyan_last_backup_iso_v1", todayISO());
@@ -27870,9 +29543,11 @@ function importBackupFile(ev) {
     try {
       const parsed = JSON.parse(r.result);
       if (parsed?.halaqat) {
-        appState = parsed;
-        if (!appState.activeHalaqaId) appState.activeHalaqaId = Object.keys(appState.halaqat)[0] || null;
-        saveState(); closeModal("settingsModal"); initApp(); showToast("تمت استعادة النسخة بنجاح");
+        ensureDailyAutoSnapshot("قبل استعادة نسخة JSON").finally(() => {
+          appState = parsed;
+          if (!appState.activeHalaqaId) appState.activeHalaqaId = Object.keys(appState.halaqat)[0] || null;
+          saveState(); closeModal("settingsModal"); initApp(); showToast("تمت استعادة النسخة بنجاح ✓ (وحُفظت لقطة أمان تلقائية)");
+        });
       } else showToast("ملف غير صالح");
     } catch { showToast("تعذّر قراءة الملف"); }
   };
@@ -28662,7 +30337,7 @@ function computeHalaqaSummaryForSupervisor(hData, monthLabel, supCustomProgs = [
       if (!r) return;
       if (r.attendance && r.attendance !== "لم يُسمّع") {
         totalSlots++;
-        if (r.attendance === "حاضر" || r.attendance === "متأخر") presentSlots++;
+        if (isCountedPresent(r.attendance)) presentSlots++;
       }
       totalPoints += Number(r.points) || 0;
       const isAbs = r.attendance && (r.attendance.includes("غياب") || r.attendance === "لم يُسمّع");
@@ -29824,7 +31499,7 @@ function setRashidiEval(studentId, ev, errCount = null) {
     return;
   }
 
-  if (r.attendance === "لم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
   r.recEval = ev;
   removeStudentFromQueue(s, studentId);
@@ -29839,16 +31514,14 @@ function setRashidiEval(studentId, ev, errCount = null) {
   if (ev === "إعادة") {
     r.hwRashidiFrom = f;
     r.hwRashidiTo = t;
-    r.notes = `إعادة القاعدة الرشيدية (ص ${f}${t !== f ? '–' + t : ''})؛ يرجى التدريب الجيد بالمنزل.`;
+    r.notes = applyTajweedToNote(buildConciseRecNote("إعادة", { isRashidi: true }), r);
   } else {
     const nf = Math.min(85, t + 1);
     const nt = Math.min(85, nf + Math.max(0, Math.ceil(pace) - 1));
     r.hwRashidiFrom = nf;
     r.hwRashidiTo = nt;
     st.rashidiPage = nf;
-    r.notes = ev === "ممتاز"
-      ? `قراءة متقنة في الرشيدي (ص ${f}${t !== f ? '–' + t : ''})، الواجب القادم ص ${nf}${nt !== nf ? '–' + nt : ''}.`
-      : `تقدّم طيّب في الرشيدي (ص ${f}${t !== f ? '–' + t : ''})، الواجب القادم ص ${nf}${nt !== nf ? '–' + nt : ''}.`;
+    r.notes = applyTajweedToNote(buildConciseRecNote(ev, { isRashidi: true }), r);
   }
 
   r.points = computeRecordPoints(s, r, st);
@@ -29896,7 +31569,7 @@ function renderQuickAttendanceList() {
   let pres = 0, late = 0, abs = 0, unset = 0;
   const rowsHtml = h.students.map((st, i) => {
     const r = getStudentRecord(s, st.id);
-    if (r.attendance === "حاضر") pres++;
+    if (r.attendance === "حاضر" || r.attendance === "حضر ولم يُسمّع") pres++;
     else if (r.attendance === "متأخر") late++;
     else if (r.attendance.includes("غياب")) abs++;
     else unset++;
@@ -29906,6 +31579,7 @@ function renderQuickAttendanceList() {
       <div class="qa-pills">
         <button type="button" class="pill ${r.attendance==='حاضر'?'on-green':''}" onclick="qaSetStatus('${st.id}','حاضر')">${gt.present}</button>
         <button type="button" class="pill ${r.attendance==='متأخر'?'on-orange':''}" onclick="qaSetStatus('${st.id}','متأخر')">${gt.late}</button>
+        <button type="button" class="pill ${r.attendance==='حضر ولم يُسمّع'?'on-norecite':''}" onclick="qaSetStatus('${st.id}','حضر ولم يُسمّع')">لم يُسمّع</button>
         <button type="button" class="pill ${r.attendance==='غياب مبرر'?'on-slate':''}" onclick="qaSetStatus('${st.id}','غياب مبرر')">مبرر</button>
         <button type="button" class="pill ${r.attendance==='غياب غير مبرر'?'on-red':''}" onclick="qaSetStatus('${st.id}','غياب غير مبرر')">${gt.absent}</button>
       </div>
@@ -29928,10 +31602,10 @@ function qaSetStatus(studentId, status) {
   const st = h?.students.find(x => x.id === studentId);
   if (!s || !st) return;
   const r = getStudentRecord(s, studentId);
-  if (status.includes("غياب")) {
+  if (status.includes("غياب") || status === "حضر ولم يُسمّع") {
     applyAbsenceCarryOver(s, st, r, status);
   } else {
-    if (r.attendance && r.attendance.includes("غياب")) {
+    if (r.attendance && (r.attendance.includes("غياب") || r.attendance === "حضر ولم يُسمّع")) {
       r.notes = "";
       if (st.track === "rashidi" && !r.recEval) { r.hwRashidiFrom = ""; r.hwRashidiTo = ""; }
       if (s.type === "daily" && !r.recEval) { r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = ""; }
@@ -30154,7 +31828,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v83";
+const TIBYAN_APP_VERSION = "v85";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -30347,6 +32021,7 @@ async function hydrateSignedInFirebaseUser(fbUser) {
       if (_activeStorageUid !== fbUser.uid) {
         resetRuntimeWorkspaceState();
         loadState(fbUser.uid, { allowLegacyMigration: false });
+        await hydrateStateFromIndexedDB(fbUser.uid);
         merged = true;
       }
 
@@ -30539,6 +32214,7 @@ async function handleAuthLogin() {
     localStorage.removeItem(CLOUD_DIRTY_KEY);
     resetRuntimeWorkspaceState();
     loadState(fbUser.uid, { allowLegacyMigration: true });
+    await hydrateStateFromIndexedDB(fbUser.uid);
     document.getElementById("authLoginPass").value = "";
     await hydrateSignedInFirebaseUser(fbUser);
     showToast(`أهلاً بك يا ${profile.name} ✓`);
@@ -31280,24 +32956,123 @@ function loadScriptWithTimeout(url, timeoutMs = 15000) {
   });
 }
 
+const _exportLibMinBytes = { exceljs: 180000, html2canvas: 40000, jspdf: 70000 };
+
+function isExportLibLoadedInWindow(key) {
+  if (key === "exceljs") return typeof ExcelJS !== "undefined";
+  if (key === "html2canvas") return typeof html2canvas !== "undefined";
+  if (key === "jspdf") return Boolean(window.jspdf && window.jspdf.jsPDF);
+  return false;
+}
+
+function execExportLibSource(key, code) {
+  if (!code || code.length < (_exportLibMinBytes[key] || 10000)) return false;
+  try {
+    const s = document.createElement("script");
+    s.type = "text/javascript";
+    s.dataset.makinOfflineLib = key;
+    s.textContent = code;
+    document.head.appendChild(s);
+    if (isExportLibLoadedInWindow(key)) return true;
+    s.remove();
+  } catch (e) { console.warn("Offline lib exec fallback:", key, e); }
+  return false;
+}
+
+async function fetchAndCacheExportLib(key, timeoutMs = 18000) {
+  const urls = _exportLibUrls[key];
+  if (!Array.isArray(urls) || !urls.length) return null;
+  const minLen = _exportLibMinBytes[key] || 10000;
+  for (const u of urls) {
+    try {
+      const ctrl = (typeof AbortController !== "undefined") ? new AbortController() : null;
+      const tmr = ctrl ? setTimeout(() => ctrl.abort(), timeoutMs) : null;
+      const res = await fetch(u, { mode: "cors", cache: "force-cache", signal: ctrl?.signal });
+      if (tmr) clearTimeout(tmr);
+      if (!res.ok) continue;
+      const code = await res.text();
+      if (code && code.length >= minLen) {
+        await idbPut(IDB_STORE_LIBS, {
+          key,
+          code,
+          url: u,
+          savedAt: new Date().toISOString(),
+          byteSize: code.length * 2
+        });
+        return code;
+      }
+    } catch {}
+  }
+  return null;
+}
+
 function ensureExportLib(key) {
-  if (key === "exceljs" && typeof ExcelJS !== "undefined") return Promise.resolve(true);
-  if (key === "html2canvas" && typeof html2canvas !== "undefined") return Promise.resolve(true);
-  if (key === "jspdf" && window.jspdf && window.jspdf.jsPDF) return Promise.resolve(true);
+  if (isExportLibLoadedInWindow(key)) return Promise.resolve(true);
   if (_exportLibPromises[key]) return _exportLibPromises[key];
 
   const urls = _exportLibUrls[key];
   if (!Array.isArray(urls) || !urls.length) return Promise.resolve(false);
 
   _exportLibPromises[key] = (async () => {
+    // 1) Try 100% Offline IndexedDB Vault FIRST!
+    try {
+      const cached = await idbGet(IDB_STORE_LIBS, key);
+      if (cached?.code) {
+        if (execExportLibSource(key, cached.code)) return true;
+        // Corrupted cache entry — clean it up before re-fetching
+        await idbDelete(IDB_STORE_LIBS, key);
+      }
+    } catch {}
+
+    // 2) Fetch via CORS, permanently cache in IndexedDB for offline use, then execute!
+    const fetchedCode = await fetchAndCacheExportLib(key, 18000);
+    if (fetchedCode && execExportLibSource(key, fetchedCode)) return true;
+
+    // 3) Final fallback: standard <script src> tag (in case CORS was blocked by a proxy)
     for (const u of urls) {
       const ok = await loadScriptWithTimeout(u, 15000);
-      if (ok) return true;
+      if (ok && isExportLibLoadedInWindow(key)) return true;
     }
     delete _exportLibPromises[key];
     return false;
   })();
   return _exportLibPromises[key];
+}
+
+let _offlinePrecacheBusy = false;
+async function precacheOfflineExportSuite(interactive = false) {
+  if (_offlinePrecacheBusy) return;
+  if (!navigator.onLine) {
+    if (interactive) showToast("⚠️ أنت غير متصل بالإنترنت حالياً — اتصل مرة واحدة لتجهيز المحركات للعمل بدون إنترنت");
+    return;
+  }
+  _offlinePrecacheBusy = true;
+  if (interactive) {
+    showToast("⚡ جاري تحميل وتخزين محركات PDF والصور والإكسل للعمل بدون إنترنت...");
+    renderTechHardeningCard();
+  }
+  let okCount = 0;
+  try {
+    await ensureExactMushaf604Data();
+    const keys = ["html2canvas", "jspdf", "exceljs"];
+    for (const k of keys) {
+      const ex = await idbGet(IDB_STORE_LIBS, k);
+      if (ex?.code && ex.code.length >= (_exportLibMinBytes[k] || 10000)) {
+        okCount++;
+        continue;
+      }
+      const code = await fetchAndCacheExportLib(k, 22000);
+      if (code) okCount++;
+      if (interactive) renderTechHardeningCard();
+    }
+  } finally {
+    _offlinePrecacheBusy = false;
+    if (interactive) {
+      renderTechHardeningCard();
+      if (okCount === 3) showToast("✅ تم تجهيز التطبيق بالكامل! يمكنك الآن تصدير PDF والصور والإكسل بدون إنترنت تماماً");
+      else showToast(`تم حفظ ${okCount} من 3 محركات — تأكد من استقرار الإنترنت وحاول مجدداً لإكمال الباقي`);
+    }
+  }
 }
 
 // ===== REAL-TIME IN-APP + ANDROID SYSTEM NOTIFICATIONS ENGINE =====
