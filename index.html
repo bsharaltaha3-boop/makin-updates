@@ -10551,6 +10551,196 @@ table.t-points-all tfoot td {
 .pts-podium-poster.theme-all .ppp-dua-line { color: #8c6312; }
 .pts-podium-poster.theme-all .ppp-foot-meta { color: #0e2340; }
 
+
+/* ==================== MAKIN v80: SLIM REPORT ROWS, SEQUENTIAL DAY LOCK, WEEKLY DAY PICKER & PROGRESS COMPARISON ==================== */
+/* 1) Keep Daily Report Eval & Review cells strictly single-line compact (Zero row height bloat!) */
+table.t-daily td.td-eval-slim {
+  white-space: nowrap !important;
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+}
+table.t-daily td.td-rev-slim {
+  white-space: nowrap !important;
+  font-size: 11.5px;
+}
+#hdExportStage table.t-daily td.td-eval-slim,
+#hdExportStage table.t-daily td.td-rev-slim {
+  white-space: nowrap !important;
+}
+
+/* 2) Sequential Future Day Lock Styling */
+.pdn-day-pill.is-locked {
+  opacity: 0.48;
+  background: var(--bg);
+  border-style: dashed;
+  border-color: var(--line-strong);
+  color: var(--ink-500);
+}
+.pdn-day-pill.is-locked .pdn-dp-name { opacity: 0.85; }
+.pdn-day-pill.is-done-day .pdn-dp-dot { background: #16a34a; }
+.seq-lock-card {
+  background: var(--white);
+  border: 1.5px dashed var(--line-strong);
+  border-top: 4px solid #c8a14b;
+  border-radius: 15px;
+  padding: 20px 16px;
+  text-align: center;
+  margin-bottom: 11px;
+  box-shadow: var(--shadow);
+}
+.seq-lock-card h3 { font-size: 15px; font-weight: 800; color: var(--brand-slate); margin-bottom: 6px; }
+.seq-lock-card p { font-size: 12.5px; color: var(--ink-700); line-height: 1.6; margin-bottom: 13px; }
+
+/* 3) Weekly Individual Report — Selectable Day Chips */
+.ir-wk-days-box {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 8px 10px;
+  margin-bottom: 9px;
+}
+.ir-wk-days-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--brand-slate);
+  margin-bottom: 6px;
+}
+.ir-wk-days-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.ir-day-chip {
+  border: 1.5px solid var(--line-strong);
+  background: var(--white);
+  color: var(--ink-700);
+  border-radius: 9px;
+  padding: 5px 9px;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.13s ease;
+}
+.ir-day-chip.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #ffffff;
+}
+[data-theme="dark"] .ir-day-chip.on {
+  background: #c8a14b;
+  border-color: #c8a14b;
+  color: #0f233c;
+}
+
+/* 4) Progress Comparison Box inside Individual Report Card (Printable A4 Crisp!) */
+.ir-cmp-box {
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 9px 12px;
+  margin-bottom: 11px;
+  background: #f8fafc;
+}
+.ir-cmp-box.is-up { border-color: #86efac; background: #f2fbf6; }
+.ir-cmp-box.is-down { border-color: #fca5a5; background: #fef6f6; }
+.ir-cmp-box.is-flat { border-color: #cbd5e1; background: #f8fafc; }
+.ir-cmp-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 7px;
+}
+.ir-cmp-title { font-size: 12.5px; font-weight: 800; color: #1e293b; }
+.ir-cmp-verdict {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 3px 11px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.ir-cmp-verdict.up { background: #16794c; color: #ffffff; }
+.ir-cmp-verdict.down { background: #b92222; color: #ffffff; }
+.ir-cmp-verdict.flat { background: #33464f; color: #ffffff; }
+.ir-cmp-grid {
+  display: grid;
+  gap: 7px;
+}
+.ir-cmp-cell {
+  background: #ffffff;
+  border: 1px solid #d5e0ec;
+  border-radius: 8px;
+  padding: 6px 8px;
+  text-align: center;
+}
+.ir-cmp-cell .cc-lbl { font-size: 10.5px; font-weight: 700; color: #64748b; }
+.ir-cmp-cell .cc-nums { font-size: 13px; font-weight: 800; color: #0f172a; margin: 2px 0; }
+.ir-cmp-cell .cc-delta { font-size: 11.5px; font-weight: 800; }
+.cc-delta.up { color: #16794c; }
+.cc-delta.down { color: #b92222; }
+.cc-delta.flat { color: #475569; }
+.ir-cmp-msg {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #334155;
+  margin-top: 7px;
+  padding-top: 6px;
+  border-top: 1px dashed #cbd5e1;
+}
+
+/* 5) Stats Progress Comparison Studio Card */
+.cmp-studio-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 4px solid #142a46;
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 11px;
+  box-shadow: var(--shadow);
+}
+[data-theme="dark"] .cmp-studio-card { border-top-color: #c8a14b; }
+.cmp-summary-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin: 8px 0 9px;
+}
+.cmp-sum-pill {
+  border-radius: 10px;
+  padding: 7px 4px;
+  text-align: center;
+  border: 1px solid var(--line);
+}
+.cmp-sum-pill.up { background: var(--green-bg); border-color: rgba(22,121,76,0.28); color: var(--green); }
+.cmp-sum-pill.flat { background: var(--brand-tint); color: var(--brand-slate); }
+.cmp-sum-pill.down { background: var(--red-bg); border-color: rgba(185,34,34,0.28); color: var(--red); }
+.cmp-sum-pill b { display: block; font-size: 16px; font-weight: 800; line-height: 1.15; }
+.cmp-sum-pill span { font-size: 11px; font-weight: 700; }
+.cmp-stu-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 9px;
+  border: 1px solid var(--line);
+  border-right: 4px solid var(--line-strong);
+  border-radius: 10px;
+  margin-bottom: 6px;
+  background: var(--bg);
+}
+.cmp-stu-row.up { border-right-color: var(--green); }
+.cmp-stu-row.down { border-right-color: var(--red); }
+.cmp-stu-row.flat { border-right-color: var(--brand-slate); }
+.cmp-stu-info { min-width: 0; flex: 1; }
+.cmp-stu-name { font-size: 13px; font-weight: 800; color: var(--ink-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cmp-stu-deltas { font-size: 11px; color: var(--ink-700); font-weight: 700; margin-top: 2px; display: flex; flex-wrap: wrap; gap: 6px; }
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -11056,7 +11246,7 @@ table.t-points-all tfoot td {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v78</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v80</span>
         </button>
       </div>
     </div>
@@ -11902,7 +12092,14 @@ table.t-points-all tfoot td {
             <span>🗓️ أيام الدوام المعتمدة</span>
             <button type="button" class="btn btn-primary btn-sm" onclick="closeModal('settingsModal'); openClassDaysModal();">✏️ تعديل الأيام</button>
           </div>
-          <div id="setClassDaysSummary" style="font-size:12.5px; color:var(--ink-700); line-height:1.6;"></div>
+          <div id="setClassDaysSummary" style="font-size:12.5px; color:var(--ink-700); line-height:1.6; margin-bottom:9px;"></div>
+          <label class="gr-toggle-row" for="setSeqDayLock" style="margin-bottom:0;">
+            <div>
+              <b>🔒 قفل الأيام القادمة بالتسلسل (منع الخربطة)</b>
+              <small>يفتح يوماً قادماً واحداً فقط حتى تُنهي جلسته أو تسجّله كعطلة</small>
+            </div>
+            <input type="checkbox" id="setSeqDayLock" checked style="width:18px; height:18px; accent-color:var(--green); flex-shrink:0;">
+          </label>
         </div>
 
         <div class="exec-card">
@@ -12130,6 +12327,8 @@ table.t-points-all tfoot td {
         <select id="irWeekSelect" onchange="onIndivReportFilterChange()"></select>
       </div>
     </div>
+
+    <div id="irWeekDaysPickerWrap" class="ir-wk-days-box" style="display:none;"></div>
 
     <div class="field" style="margin-bottom:9px;">
       <label id="irSheikhNoteLbl">توصية المعلم لولي الأمر (تُحفظ تلقائياً)</label>
@@ -14767,6 +14966,7 @@ function setSabrScore(studentId, rawVal) {
   } else {
     // Saturday Major Review Sabr
     r.majEval = ev;
+  if (Array.isArray(r.majPageEvals)) r.majPageEvals = null;
     if (juz) {
       r.majPages = juz.pages;
     }
@@ -15354,6 +15554,7 @@ function applyAutoEvalSilentFromCounters(studentId, kind) {
 
   if (kind === "min") {
     r.minEval = ev;
+  if (Array.isArray(r.minPageEvals)) r.minPageEvals = null;
     if (!(Number(r.minPages) > 0)) r.minPages = calcRecordMinPages(r);
     r.notes = buildSaturdayAutoNote(st, r, errs || null, r.majErrors || null, false);
   } else if (kind === "maj") {
@@ -15600,6 +15801,13 @@ function getPageModeKey(kind) {
   return kind === "min" ? "minPageMode" : (kind === "maj" ? "majPageMode" : "recPageMode");
 }
 
+function formatSingleOrRangeLabel(sInfo, f, t) {
+  if (!sInfo) return "";
+  if (isShortFullSurah(sInfo, f, t)) return sInfo.n;
+  if (f === t) return `${sInfo.n} (آية ${f})`;
+  return `${sInfo.n} (${f}–${t})`;
+}
+
 function buildRecitationPageSlots(r, st, kind, h) {
   if (!r || !st || st.track === "rashidi") return [];
   const slots = [];
@@ -15608,18 +15816,19 @@ function buildRecitationPageSlots(r, st, kind, h) {
     if (!sInfo) return;
     const f = Math.max(1, Math.min(sInfo.a, Math.round(fromA || 1)));
     const t = Math.max(f, Math.min(sInfo.a, Math.round(toA || sInfo.a)));
+    const segPg = calcRangePages(sInfo.id, f, t);
     const existing = slots.find(x => x.mushafPage === mushafPage);
     if (existing) {
       if (String(existing.surahId) === String(sInfo.id)) {
         existing.from = Math.min(existing.from, f);
         existing.to = Math.max(existing.to, t);
-        existing.label = isShortFullSurah(sInfo, existing.from, existing.to)
-          ? sInfo.n
-          : `${sInfo.n} (${existing.from}–${existing.to})`;
+        existing.pages = calcRangePages(sInfo.id, existing.from, existing.to);
+        existing.label = formatSingleOrRangeLabel(sInfo, existing.from, existing.to);
       } else {
         existing.extraSegs = existing.extraSegs || [];
         existing.extraSegs.push({ surahId: String(sInfo.id), from: f, to: t });
-        existing.label += ` + ${sInfo.n}`;
+        existing.pages = Math.round(((Number(existing.pages) || 0) + segPg) * 100) / 100;
+        existing.label += ` + ${formatSingleOrRangeLabel(sInfo, f, t)}`;
       }
       return;
     }
@@ -15630,15 +15839,16 @@ function buildRecitationPageSlots(r, st, kind, h) {
       surahName: sInfo.n,
       from: f,
       to: t,
+      pages: segPg,
       extraSegs: [],
-      label: isShortFullSurah(sInfo, f, t) ? sInfo.n : `${sInfo.n} (${f}–${t})`
+      label: formatSingleOrRangeLabel(sInfo, f, t)
     });
   };
 
   if (kind === "maj") {
     const p1 = parseArabicNum(r.majStartPage, 0);
     const pgCnt = Math.round(parseArabicNum(r.majPages, 0) || Number(st.revPace || 0));
-    if (p1 >= 1 && pgCnt >= 2 && pgCnt <= 5) {
+    if (p1 >= 1 && pgCnt >= 2 && pgCnt <= 6) {
       for (let i = 0; i < pgCnt; i++) {
         const mp = Math.min(604, p1 + i);
         const stInfo = getPageStartInfo(mp), enInfo = getPageEndInfo(mp);
@@ -15650,10 +15860,8 @@ function buildRecitationPageSlots(r, st, kind, h) {
 
   const segs = getSegments(r, kind);
   if (!segs.length) return [];
-  const totalEstPages = kind === "rec"
-    ? Math.max(Number(r.recTotalPages) || 0, Number(r.recPages) || 0, calcSegmentsPages(segs))
-    : Math.max(Number(r.minPages) || 0, calcSegmentsPages(segs));
 
+  // Follow exact Madinah Mushaf page boundaries — even if a page has just 1 ayah!
   for (const seg of segs) {
     const sInfo = SURAH_MAP[Number(seg.surahId)];
     if (!sInfo) continue;
@@ -15670,29 +15878,7 @@ function buildRecitationPageSlots(r, st, kind, h) {
       pushPage(mp, sInfo.id, pf, pt);
     }
   }
-  // Compute share of each page; merge tiny 1-2 ayah spillover edges (< 18% of a page) when total < 1.55 pages
-  if (totalEstPages < 1.45) return [];
-  // Drop/merge tiny edge spillover (e.g. 1 ayah at the very end/start of a page) into neighbor
-  if (slots.length > 2) {
-    const cleaned = [];
-    slots.forEach(sl => {
-      const pSt = getPageStartInfo(sl.mushafPage), pEn = getPageEndInfo(sl.mushafPage);
-      const pgAyahs = (pSt?.surah?.id === pEn?.surah?.id && pSt?.surah?.id === Number(sl.surahId))
-        ? Math.max(1, pEn.ayah - pSt.ayah + 1)
-        : Math.max(5, Math.round((SURAH_MAP[Number(sl.surahId)]?.a || 15) / Math.max(1, SURAH_MAP[Number(sl.surahId)]?.l || 1)));
-      const recAyahs = sl.to - sl.from + 1;
-      const frac = recAyahs / pgAyahs;
-      if (frac < 0.14 && cleaned.length > 0 && String(cleaned[cleaned.length - 1].surahId) === String(sl.surahId)) {
-        const prev = cleaned[cleaned.length - 1];
-        prev.to = Math.max(prev.to, sl.to);
-        prev.label = `${prev.surahName} (${prev.from}–${prev.to})`;
-      } else {
-        cleaned.push(sl);
-      }
-    });
-    return cleaned.slice(0, 5);
-  }
-  return slots.slice(0, 5);
+  return slots.length >= 2 ? slots.slice(0, 6) : [];
 }
 
 function getSyncedPageEvals(r, st, kind, h) {
@@ -15719,7 +15905,7 @@ function shouldUsePerPageMode(r, st, kind, h) {
   if (kind === "rec" && r.recIsSabr && r.sabrJuz) return false;
   if (kind === "maj" && r.sabrJuz) return false;
   const slots = buildRecitationPageSlots(r, st, kind, h);
-  if (slots.length < 2 || slots.length > 5) return false;
+  if (slots.length < 2 || slots.length > 6) return false;
   const mKey = getPageModeKey(kind);
   return r[mKey] !== "single";
 }
@@ -15775,7 +15961,15 @@ function stepPageCounter(studentId, kind, pageIdx, type, delta) {
 
 function computePerPageMemPoints(r) {
   if (!r || !Array.isArray(r.recPageEvals) || r.recPageEvals.length < 2) return null;
-  return r.recPageEvals.reduce((sum, p) => sum + (p.eval === "إعادة" ? 0 : calcMemPointsForEval(p.eval, 1)), 0);
+  const passed = r.recPageEvals.filter(p => p.eval && p.eval !== "إعادة");
+  if (!passed.length) return 0;
+  const totalPassedPg = passed.reduce((a, p) => a + Math.max(0.05, Number(p.pages) || 0.5), 0);
+  const weightedBase = passed.reduce((a, p) => a + (MEM_FULL_POINTS[p.eval] || 0) * Math.max(0.05, Number(p.pages) || 0.5), 0) / totalPassedPg;
+  let factor = 1;
+  if (totalPassedPg <= 0.65) factor = 0.5;
+  else if (totalPassedPg <= 1.25) factor = 1;
+  else factor = Math.round(totalPassedPg * 2) / 2;
+  return Math.round(weightedBase * factor);
 }
 
 function applyPerPageAutoEval(studentId, kind) {
@@ -15799,25 +15993,28 @@ function applyPerPageAutoEval(studentId, kind) {
   const gradeRank = ev => ev === "ممتاز" ? 4 : (ev === "جيد جداً" ? 3 : (ev === "جيد" ? 2 : 0));
   let overallEv = "إعادة";
   if (passed.length > 0) {
-    const avg = passed.reduce((a, p) => a + gradeRank(p.eval), 0) / passed.length;
+    const wSum = passed.reduce((a, p) => a + Math.max(0.05, Number(p.pages) || 0.5), 0);
+    const avg = passed.reduce((a, p) => a + gradeRank(p.eval) * Math.max(0.05, Number(p.pages) || 0.5), 0) / wSum;
     if (failed.length === 0) {
       overallEv = avg >= 3.5 ? "ممتاز" : (avg >= 2.5 ? "جيد جداً" : "جيد");
     } else {
-      overallEv = (passed.length > failed.length && avg >= 3) ? "جيد جداً" : "جيد";
+      overallEv = (passed.length >= failed.length && avg >= 3) ? "جيد جداً" : "جيد";
     }
   }
 
-  const repeatDesc = failed.map(p => `الصفحة ${p.idx}: ${p.label} [صفحة ${p.mushafPage}]`).join(" و");
-  const summaryParts = pages.map(p => `صفحة ${p.idx} (${p.eval})`).join("، ");
+  const repeatDesc = failed.map(p => `${p.label} [صفحة ${p.mushafPage}]`).join(" و");
+  const summaryParts = pages.map(p => `ص ${p.mushafPage}: ${p.eval}`).join("، ");
 
   if (kind === "rec") {
+    const segs = getSegments(r, "rec");
+    const actualTotalPg = calcSegmentsPages(segs) || Math.round(pages.reduce((a, p) => a + (Number(p.pages) || 0), 0) * 100) / 100;
+    const actualPassedPg = Math.round(passed.reduce((a, p) => a + (Number(p.pages) || 0), 0) * 100) / 100;
     r.recErrors = totalErrs;
     r.recAlerts = totalAlrts;
     r.recEval = overallEv;
-    r.recTotalPages = pages.length;
-    r.recPages = passed.length > 0 ? passed.length : pages.length;
+    r.recTotalPages = actualTotalPg;
+    r.recPages = failed.length === 0 ? actualTotalPg : (passed.length > 0 ? Math.max(0.1, actualPassedPg) : actualTotalPg);
 
-    const segs = getSegments(r, "rec");
     const dir = st?.direction || h.defaultDir || "desc";
     if (failed.length > 0 && passed.length > 0) {
       const failedSegs = [];
@@ -15836,13 +16033,16 @@ function applyPerPageAutoEval(studentId, kind) {
           const nxt = computeNextHomework(last.surahId, last.from, last.to, "", dir, st?.pace || 0.5);
           if (nxt) Object.assign(r, nxt);
         }
-        r.dRevIsPages = true;
-        r.dRevFrom = `إعادة ${failed[0].surahName} ص ${failed[0].mushafPage}`;
-        r.dRevTo = failed.length > 1 ? `و${failed.slice(1).map(x => "ص " + x.mushafPage).join("، ")}` : `(${failed[0].from}–${failed[0].to})`;
+        r.dRevIsPages = false;
+        r.dRevFrom = `${failed[0].surahName} ${failed[0].from}`;
+        const lastFail = failed[failed.length - 1];
+        r.dRevTo = lastFail.surahId === failed[0].surahId
+          ? String(lastFail.to)
+          : `${lastFail.surahName} ${lastFail.to}`;
         r.dRevEval = "إعادة";
         r.dRevPages = 0;
       }
-      r.notes = `تسميع ${pages.length} صفحات (أتقن ${passed.length}) — إعادة ${repeatDesc}.`;
+      r.notes = `تسميع (${formatSegmentsInline(segs)}) — إعادة ${repeatDesc}.`;
     } else if (passed.length === 0) {
       if (segs.length) {
         r.hwSabrJuz = "";
@@ -15850,9 +16050,9 @@ function applyPerPageAutoEval(studentId, kind) {
         r.hwFrom = segs[0].from; r.hwTo = segs[0].to;
         r.hwExtras = segs.slice(1).map(x => ({ ...x }));
       }
-      r.notes = `إعادة كامل المقطع (${pages.length} صفحات: ${repeatDesc})؛ يرجى التكرار والضبط للجلسة القادمة.`;
+      r.notes = `إعادة كامل المقطع (${repeatDesc})؛ يرجى التكرار والضبط للجلسة القادمة.`;
     } else {
-      if (r.dRevEval === "إعادة" && String(r.dRevFrom || "").startsWith("إعادة ")) {
+      if (r.dRevEval === "إعادة" && !(Number(r.dRevPages) > 0)) {
         r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevIsPages = false;
       }
       const completedJuz = detectCompletedJuz(segs, dir);
@@ -15865,21 +16065,21 @@ function applyPerPageAutoEval(studentId, kind) {
         const nxt = computeNextHomework(last.surahId, last.from, last.to, "", dir, st?.pace || 0.5);
         if (nxt) Object.assign(r, nxt);
       }
-      r.notes = `تسميع ${pages.length} صفحات بتقييم ${overallEv} (${summaryParts}) بارك الله في همتك.`;
+      r.notes = `تسميع (${formatSegmentsInline(segs)}) بتقييم ${overallEv} (${summaryParts}) بارك الله في همتك.`;
     }
   } else if (kind === "min") {
     r.minErrors = totalErrs; r.minAlerts = totalAlrts; r.minEval = overallEv;
-    if (!(Number(r.minPages) > 0)) r.minPages = pages.length;
+    if (!(Number(r.minPages) > 0)) r.minPages = calcRecordMinPages(r) || pages.length;
     r.notes = failed.length
-      ? `الصغرى (${pages.length} ص): أتقن ${passed.length} — إعادة ${repeatDesc}.`
-      : `الصغرى (${pages.length} ص): ${overallEv} (${summaryParts}).`;
+      ? `الصغرى: إعادة ${repeatDesc}.`
+      : `الصغرى: ${overallEv} (${summaryParts}).`;
   } else if (kind === "maj") {
     r.majErrors = totalErrs; r.majAlerts = totalAlrts; r.majEval = overallEv;
     if (!(Number(r.majPages) > 0)) r.majPages = pages.length;
     applyNextMajorReview(st, r, overallEv !== "إعادة");
     r.notes = failed.length
-      ? `الكبرى (${pages.length} ص): أتقن ${passed.length} — إعادة ${repeatDesc}.`
-      : `الكبرى (${pages.length} ص): ${overallEv} (${summaryParts}).`;
+      ? `الكبرى: إعادة ${repeatDesc}.`
+      : `الكبرى: ${overallEv} (${summaryParts}).`;
   }
 
   r.points = computeRecordPoints(s, r, st);
@@ -15895,7 +16095,7 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
   const st = h?.students?.find(x => x.id === studentId);
   const r = (s && st) ? getStudentRecord(s, studentId) : null;
   const slots = (r && st) ? buildRecitationPageSlots(r, st, kind, h) : [];
-  const canMulti = slots.length >= 2 && slots.length <= 5 && !(kind === "rec" && r.recIsSabr && r.sabrJuz) && !(kind === "maj" && r.sabrJuz);
+  const canMulti = slots.length >= 2 && slots.length <= 6 && !(kind === "rec" && r.recIsSabr && r.sabrJuz) && !(kind === "maj" && r.sabrJuz);
 
   if (canMulti && shouldUsePerPageMode(r, st, kind, h)) {
     const pages = getSyncedPageEvals(r, st, kind, h);
@@ -19019,10 +19219,88 @@ function jumpToTodayWeek() {
   }
 }
 
+
+// ==================== SEQUENTIAL FUTURE DAY LOCK ENGINE (v80) ====================
+function isSessionFinishedForUnlock(s, h) {
+  if (!s || !h) return false;
+  if (s.noClass || s.finalized) return true;
+  if (!h.students || !h.students.length) return false;
+  if (!isSessionHasRealActivity(s)) return false;
+  return h.students.every(st => !isStudentPending(s, getStudentRecord(s, st.id), st));
+}
+
+function getSequentialUnlockState(h = null) {
+  const hal = h || getActiveHalaqa();
+  if (!hal || hal.sequentialDayLock === false || !hal.students || !hal.students.length) {
+    return { enabled: false, unlockedIso: null, blockingSession: null, pendingCnt: 0 };
+  }
+  const meaningful = (hal.sessions || [])
+    .filter(s => s && s.date && (s.noClass || s.finalized || isSessionHasRealActivity(s)))
+    .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+
+  if (!meaningful.length) {
+    // New halaqa with no recorded sessions yet: allow up to today's active class day (or next upcoming class day)
+    const tod = todayISO();
+    const firstAllowed = isAllowedClassISO(tod, hal) ? tod : getNextClassDateInfo(hal).iso;
+    return { enabled: true, unlockedIso: firstAllowed, blockingSession: null, pendingCnt: hal.students.length };
+  }
+
+  const lastS = meaningful[meaningful.length - 1];
+  if (!isSessionFinishedForUnlock(lastS, hal)) {
+    const pCnt = hal.students.filter(st => isStudentPending(lastS, getStudentRecord(lastS, st.id), st)).length;
+    return { enabled: true, unlockedIso: lastS.date, blockingSession: lastS, pendingCnt: pCnt };
+  }
+
+  const nextUnlockedIso = findAdjacentClassISO(lastS.date, 1, hal);
+  return { enabled: true, unlockedIso: nextUnlockedIso, blockingSession: null, pendingCnt: 0 };
+}
+
+function isDateSequentiallyLocked(iso, h = null) {
+  if (!iso) return false;
+  const st = getSequentialUnlockState(h);
+  if (!st.enabled || !st.unlockedIso) return false;
+  return iso > st.unlockedIso;
+}
+
+function toggleSessionFinalized(val) {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s) return;
+  s.finalized = Boolean(val);
+  saveState();
+  renderSessionView();
+  if (s.finalized) {
+    const nextIso = findAdjacentClassISO(s.date, 1, h);
+    const hj = getExactHijriInfo(nextIso);
+    showToast(`✓ تم إنهاء جلسة ${s.dayName} — فُتح يوم ${hj.dayName} (${hj.day}/${hj.month}) تلقائياً 🔓`);
+  } else {
+    showToast("تم إعادة فتح الجلسة للتعديل");
+  }
+}
+
+function showSequentialLockToast(targetIso) {
+  const h = getActiveHalaqa();
+  const st = getSequentialUnlockState(h);
+  if (!st.enabled || !st.unlockedIso) return;
+  const hjOpen = getExactHijriInfo(st.unlockedIso);
+  if (st.blockingSession) {
+    showToast(`🔒 مقفول! أنهِ جلسة ${hjOpen.dayName} (${hjOpen.day}/${hjOpen.month}) أو اعتمد الغياب (${st.pendingCnt}) أو سجّلها عطلة أولاً`);
+  } else {
+    showToast(`🔒 مقفول! مسموح بيوم قادم واحد فقط: ${hjOpen.dayName} (${hjOpen.day}/${hjOpen.month}) — أعطه أو سجّله عطلة ليفتح التالي`);
+  }
+}
+
 function openOrCreateByISO(iso) {
   const h = getActiveHalaqa();
   if (!h || !iso) return;
   const hj = getExactHijriInfo(iso);
+  if (isDateSequentiallyLocked(iso, h)) {
+    showSequentialLockToast(iso);
+    const lockSt = getSequentialUnlockState(h);
+    if (lockSt.unlockedIso && getCurrentSession()?.date !== lockSt.unlockedIso) {
+      openOrCreateByISO(lockSt.unlockedIso);
+    }
+    return;
+  }
   const existing = h.sessions.find(s => s.date === iso);
   if (existing) {
     if (pruneEmptyGhostSessions(existing.id)) saveState(true);
@@ -19223,6 +19501,10 @@ function createNewSession() {
   const existingCheck = h.sessions.find(s => s.date === date);
   if (!isAllowedClassDow(hj.dow, h) && !existingCheck) {
     showToast(`يوم ${hj.dayName} ملغى من جدول الدوام — عدّل أيام الدوام أولاً`);
+    return;
+  }
+  if (isDateSequentiallyLocked(date, h)) {
+    showSequentialLockToast(date);
     return;
   }
   const dayName = hj.dayName;
@@ -19744,6 +20026,14 @@ function getNextHijriMonthLabel(lbl) {
   return `${HIJRI_MONTHS[m]} ${y}`;
 }
 
+function getPrevHijriMonthLabel(lbl) {
+  const parsed = parseHijriMonthLabel(lbl);
+  if (!parsed) return "";
+  let m = parsed.month - 1, y = parsed.year;
+  if (m < 1) { m = 12; y -= 1; }
+  return `${HIJRI_MONTHS[m]} ${y}`;
+}
+
 function getSessionOrigMonth(s) {
   if (!s) return "";
   return s.hijriMonth || getHijriMonthLabelFromKey(getSessionHijriKey(s));
@@ -19948,6 +20238,13 @@ function openDayOptionsModal() {
       </button>
     ` : ''}
 
+    ${!isNC ? `
+      <button type="button" class="day-opt-btn" style="border-color:rgba(22,121,76,0.35); background:var(--green-bg); color:var(--green);" onclick="closeModal('dayOptionsModal'); toggleSessionFinalized(${!s.finalized});">
+        <span>${s.finalized ? '🔓 الجلسة مُغلقة — إعادة فتحها' : '✅ إنهاء الجلسة وفتح اليوم القادم'}</span>
+        <span>${s.finalized ? '↩️' : '›'}</span>
+      </button>
+    ` : ''}
+
     <button type="button" class="day-opt-btn" onclick="closeModal('dayOptionsModal'); toggleCarrySessionToNextMonth('${s.id}');">
       <span>${isCarried ? `↩️ إعادة لشهره الأصلي (${escapeHtml(origM)})` : '↗️ ضمّ هذا اليوم لتقرير الشهر التالي'}</span>
       <span>‹</span>
@@ -20061,12 +20358,14 @@ function renderTodayBanner() {
     const todayCls = d.iso === tod ? "is-today" : "";
     const dataCls = hasActivity ? "has-data" : "";
     const ncCls = isNoClass ? "is-nc" : "";
+    const isLocked = isDateSequentiallyLocked(d.iso, h);
+    const lockCls = isLocked ? "is-locked" : "";
     const shortName = activeClassDows.length <= 4 ? d.hj.dayName : d.hj.dayName.replace(/^ال/, "");
     const mShort = (HIJRI_MONTHS[d.hj.month] || "").split(" ")[0];
     const numLabel = compactNum ? `${d.hj.day} ${mShort}` : (activeClassDows.length <= 4 ? `${d.hj.day} ${mShort}` : `${d.hj.day}`);
 
-    return `<button type="button" class="pdn-day-pill ${todayCls} ${dataCls} ${ncCls} ${selCls}" onclick="weekCalendarExpanded=false; calendarMonthShift=0; openOrCreateByISO('${d.iso}');" title="${escapeHtml(d.hj.fullText)}">
-      <span class="pdn-dp-name">${escapeHtml(shortName)}${isRevDay ? ' <span style="font-size:10px;">📘</span>' : ''}</span>
+    return `<button type="button" class="pdn-day-pill ${todayCls} ${dataCls} ${ncCls} ${lockCls} ${selCls}" onclick="weekCalendarExpanded=false; calendarMonthShift=0; openOrCreateByISO('${d.iso}');" title="${isLocked ? 'مقفول حتى إتمام اليوم الحالي' : escapeHtml(d.hj.fullText)}">
+      <span class="pdn-dp-name">${isLocked ? '🔒 ' : ''}${escapeHtml(shortName)}${!isLocked && isRevDay ? ' <span style="font-size:10px;">📘</span>' : ''}</span>
       <span class="pdn-dp-num">${escapeHtml(numLabel)}</span>
       <span class="pdn-dp-dot"></span>
     </button>`;
@@ -20158,6 +20457,20 @@ function renderSessionView() {
       <h3>أهلاً بك يا ${getGenderTerms(h).teacher} ${escapeHtml(h.sheikh)}</h3>
       <p style="margin-bottom:13px;">اضغط أدناه لفتح أقرب يوم دوام:</p>
       <button class="btn btn-primary" onclick="openOrCreateByISO('${nxt.iso}')">⚡ فتح يوم ${nxt.hijri.dayName} (${nxt.hijri.day}/${nxt.hijri.month})</button>
+    </div>`;
+    closeStudentEvalSheet(false);
+    return;
+  }
+
+  if (isDateSequentiallyLocked(s.date, h)) {
+    const lSt = getSequentialUnlockState(h);
+    const hjOpen = getExactHijriInfo(lSt.unlockedIso);
+    container.innerHTML = `<div class="seq-lock-card">
+      <div style="font-size:32px; margin-bottom:6px;">🔒</div>
+      <h3>هذا اليوم (${escapeHtml(s.dayName)} ${escapeHtml(s.hijriDate)}) مقفول مؤقتاً</h3>
+      <p>لمنع خربطة التسميع والواجبات، يُسمح بفتح <b>يوم قادم واحد فقط</b>.<br>
+      أنهِ جلسة <b>${escapeHtml(hjOpen.dayName)} (${escapeHtml(hjOpen.formatted)})</b> بتقييم الطلاب/اعتماد الغياب أو تسجيلها كعطلة، وسيفتح هذا اليوم تلقائياً.</p>
+      <button type="button" class="btn btn-primary" onclick="openOrCreateByISO('${lSt.unlockedIso}')">➡️ الانتقال ليوم ${escapeHtml(hjOpen.dayName)} (${hjOpen.day}/${hjOpen.month})</button>
     </div>`;
     closeStudentEvalSheet(false);
     return;
@@ -20772,6 +21085,7 @@ function nudgeRecEndAyah(studentId, delta) {
     r.recTo = Math.max(f, Math.min(info.a, cur + delta));
   }
   r.manualRec = true;
+  if (Array.isArray(r.recPageEvals)) r.recPageEvals = null;
   r.recPages = calcSegmentsPages(getSegments(r, "rec"));
   if (r.recEval) r.points = computeRecordPoints(s, r, h?.students.find(x => x.id === studentId));
   saveStateDebounced(260);
@@ -20794,6 +21108,7 @@ function finishRecSurahQuick(studentId) {
   }
   if (!targetInfo) { showToast("اختر سورة أولاً"); return; }
   r.manualRec = true;
+  if (Array.isArray(r.recPageEvals)) r.recPageEvals = null;
   r.recPages = calcSegmentsPages(getSegments(r, "rec"));
   if (r.recEval) r.points = computeRecordPoints(s, r, h?.students.find(x => x.id === studentId));
   saveState();
@@ -22007,6 +22322,16 @@ function setRecEval(studentId, ev, errCount = null) {
   if (r.attendance === "لم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
   r.recEval = ev;
+  // Clear stale per-page evals & auto-repeat review when teacher manually picks a grade!
+  if (Array.isArray(r.recPageEvals)) {
+    r.recPageEvals = null;
+    r.recRepeatHwOnly = false;
+    const _recSegsReset = getSegments(r, "rec");
+    if (_recSegsReset.length) r.recPages = calcSegmentsPages(_recSegsReset);
+    if (r.dRevEval === "إعادة" && !(Number(r.dRevPages) > 0)) {
+      r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevIsPages = false;
+    }
+  }
   removeStudentFromQueue(s, studentId);
 
   // Clear stale auto-generated "تثبيت" if user switched away from "جيد"
@@ -22698,15 +23023,20 @@ function renderDailyReport() {
         ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1 }
         : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, true) : formatSegmentsColumns(getSegments(r, "hw"), true));
       const isRashidiRow = st.track === "rashidi";
-      const dRevCols = isRashidiRow
+      const isPendingSabrOnly = Boolean(r.recIsSabr && r.sabrJuz && !r.recEval && !isAbs);
+      const isPendingNoEval = Boolean(!r.recEval && !isAbs && r.attendance === "لم يُسمّع");
+      // Compact legacy "إعادة القمر ص 529" / "(11–27)" into crisp single-line cells so row height never inflates!
+      const compactDRevFrom = String(r.dRevFrom || "").replace(/^إعادة\s+/, "").replace(/\s*ص\s*\d+/g, "").trim();
+      const compactDRevTo = String(r.dRevTo || "").replace(/^\(|\)$/g, "").trim();
+      const dRevCols = (isRashidiRow || isPendingSabrOnly || (isPendingNoEval && !r.dRevEval))
         ? { from: "", to: "", lines: 1 }
         : ((r.dRevIsPages || r.dRevSardLabel)
-          ? { from: escapeHtml(r.dRevFrom || ""), to: escapeHtml(r.dRevTo || ""), lines: 1 }
-          : formatReviewPairColumns(getSegments(r, "dRev"), r.dRevFrom, r.dRevTo, true));
+          ? { from: escapeHtml(compactDRevFrom), to: escapeHtml(compactDRevTo), lines: 1 }
+          : formatReviewPairColumns(getSegments(r, "dRev"), compactDRevFrom, compactDRevTo, true));
       const evalRaw = isAbs ? _gtRep.absent : (r.recEval || "") + (_recSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : "");
       const evalSt = getEvalCellStyle(evalRaw, isAbs);
       const cleanDRevEval = (r.dRevEval === "بانتظار التقييم" && !r.sabrJuz) ? "" : (r.dRevEval || "");
-      const revRaw = isRashidiRow
+      const revRaw = (isRashidiRow || isPendingSabrOnly)
         ? ""
         : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.recEval === "إعادة" || String(r.dRevEval || "").includes("إعادة")) : cleanDRevEval);
       const revSt = getEvalCellStyle(revRaw, false);
@@ -22717,11 +23047,11 @@ function renderDailyReport() {
         <td>${recCols.surah}</td>
         <td>${recCols.from}</td>
         <td>${recCols.to}</td>
-        <td class="${evalSt.cls}" style="font-weight:800;">${escapeHtml(evalSt.text)}${(!isAbs && Array.isArray(r.recPageEvals) && r.recPageEvals.some(p => p.eval === "إعادة") && r.recEval !== "إعادة") ? `<div style="font-size:10px; color:#b92222; font-weight:800;">إعادة ${r.recPageEvals.filter(p => p.eval === "إعادة").map(p => "ص " + p.mushafPage).join("، ")}</div>` : ""}</td>
+        <td class="${evalSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(evalSt.text)}</td>
         ${ptsOn ? `<td class="td-pts">${r.points || 0}</td>` : ''}
-        <td>${dRevCols.from}</td>
-        <td>${dRevCols.to}</td>
-        <td class="${revSt.cls}" style="font-weight:800;">${escapeHtml(revSt.text)}</td>
+        <td class="td-rev-slim">${dRevCols.from}</td>
+        <td class="td-rev-slim">${dRevCols.to}</td>
+        <td class="${revSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(revSt.text)}</td>
         <td>${hwCols.surah}</td>
         <td>${hwCols.from}</td>
         <td>${hwCols.to}</td>
@@ -23410,6 +23740,7 @@ function renderStats() {
   el.innerHTML = `
     ${cycleBannerHtml}
     ${repeatAbsAlert}
+    <div id="statsProgressCmpHost"></div>
     <div class="kpi-grid">
       <div class="kpi-box"><div class="kpi-val">${totals.sessionsCount}</div><div class="kpi-lbl">الجلسات</div></div>
       <div class="kpi-box"><div class="kpi-val">${formatNum(totals.memPages)}</div><div class="kpi-lbl">صفحات الحفظ</div></div>
@@ -23448,6 +23779,7 @@ function renderStats() {
       ${card("⏰ الأكثر تأخراً", [...rows].filter(x=>x.lateDays>0).sort((a,b)=>b.lateDays-a.lateDays), r=>`${r.lateDays} مرة`, "لا توجد حالات تأخر 🎉")}
     </div>
   `;
+  renderStatsComparisonCard();
 }
 
 // ==================== ULTRA-HD UNCLIPPED PNG & IDENTICAL 1-PAGE A4 PDF ENGINE ====================
@@ -23966,6 +24298,325 @@ function copyProgramWAText(progKey) {
 let _irStudentId = null;
 let _irMonthFilter = "";
 
+// ==================== PROGRESS COMPARISON ENGINE (WEEK-OVER-WEEK & MONTH-OVER-MONTH — v80) ====================
+function computeStudentStatsForSessions(st, sessions, h, extraBase = null) {
+  let firstMem = extraBase?.fromMem || null;
+  let lastMem = extraBase?.toMem || null;
+  let memPages = extraBase?.memPages || 0;
+  let revPages = extraBase?.revPages || 0;
+  let rashidiPages = 0;
+  let totalPoints = extraBase?.points || 0;
+  let presentDays = 0, lateDays = 0, excusedDays = 0, absentDays = 0;
+  const sabrList = [...(extraBase?.sabrList || [])];
+
+  (sessions || []).forEach(s => {
+    const r = s.records?.[st.id];
+    if (!r) return;
+    if (r.attendance === "حاضر") presentDays++;
+    else if (r.attendance === "متأخر") { presentDays++; lateDays++; }
+    else if (r.attendance === "غياب مبرر") excusedDays++;
+    else if (r.attendance === "غياب غير مبرر") absentDays++;
+    totalPoints += Number(r.points) || 0;
+    if (isPassedNewMemSabrForMonthly(s, r)) {
+      const scLbl = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
+        ? `${r.sabrJuz} (${Math.round(Number(r.sabrScore))}%)` : r.sabrJuz;
+      if (!sabrList.some(x => x.startsWith(r.sabrJuz))) sabrList.push(scLbl);
+    }
+    const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع";
+    if (!isAbs) {
+      if (st.track === "rashidi") {
+        if (r.recEval && r.recEval !== "إعادة") {
+          const rf = parseArabicNum(r.rashidiFrom, 0), rt = parseArabicNum(r.rashidiTo, rf);
+          if (!firstMem && rf) firstMem = `الرشيدي ص ${rf}`;
+          if (rt) lastMem = `الرشيدي ص ${rt}`;
+          rashidiPages += Number(r.rashidiPages) || 0;
+        }
+      } else if (s.type === "daily") {
+        if (r.recEval && r.recEval !== "إعادة" && !r.recIsSabr) {
+          const segs = getSegments(r, "rec");
+          if (segs.length) {
+            const s1 = SURAH_MAP[Number(segs[0].surahId)], s2 = SURAH_MAP[Number(segs[segs.length - 1].surahId)] || s1;
+            if (!firstMem && s1) firstMem = `${s1.n}${segs[0].from ? " - " + segs[0].from : ""}`;
+            if (s2) lastMem = `${s2.n}${segs[segs.length - 1].to ? " - " + segs[segs.length - 1].to : ""}`;
+            memPages += Number(r.recPages) || calcSegmentsPages(segs);
+          }
+        }
+        revPages += calcDailyReviewPages(r);
+      } else {
+        if (r.minEval && r.minEval !== "إعادة") revPages += Number(r.minPages) || calcRecordMinPages(r);
+        if (r.majEval && r.majEval !== "إعادة") revPages += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+      }
+    }
+  });
+
+  return {
+    fromMem: firstMem || "—",
+    toMem: lastMem || "—",
+    memPages: Math.round(memPages * 100) / 100,
+    rashidiPages: Math.round(rashidiPages * 100) / 100,
+    revPages: Math.round(revPages * 100) / 100,
+    totalPoints,
+    presentDays,
+    lateDays,
+    excusedDays,
+    absentDays,
+    totalAbsences: excusedDays + absentDays,
+    sabrList,
+    sessionsCount: (sessions || []).length
+  };
+}
+
+function getPrevWeekSatKey(satIso) {
+  const d = new Date((satIso || getWeekSatKeyForISO(todayISO())) + "T12:00:00");
+  d.setDate(d.getDate() - 7);
+  return dateToISO(d);
+}
+
+function computeStudentProgressComparison(st, h, mode, currentRef, selectedWeekDates = null) {
+  if (!st || !h) return null;
+  const ptsOn = isPointsEnabled(h);
+  const allActive = (h.sessions || [])
+    .filter(s => !s.noClass && isSessionHasRealActivity(s))
+    .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+
+  let curSess = [], prevSess = [], curLabel = "", prevLabel = "", curBase = null, prevBase = null;
+
+  if (mode === "weekly") {
+    const wk = getWeekDisplayRange(currentRef || getWeekSatKeyForISO(todayISO()));
+    const prevWkKey = getPrevWeekSatKey(wk.satIso);
+    const prevWk = getWeekDisplayRange(prevWkKey);
+    curLabel = `الأسبوع (${wk.label})`;
+    prevLabel = `الأسبوع السابق (${prevWk.label})`;
+    curSess = allActive.filter(s => s.date >= wk.satIso && s.date <= wk.friIso);
+    if (selectedWeekDates && selectedWeekDates.size > 0) {
+      curSess = curSess.filter(s => selectedWeekDates.has(s.date));
+    }
+    prevSess = allActive.filter(s => s.date >= prevWk.satIso && s.date <= prevWk.friIso);
+  } else {
+    if (!currentRef || currentRef === "ALL" || currentRef === "POINTS_CYCLE") return null;
+    const prevM = getPrevHijriMonthLabel(currentRef);
+    curLabel = `شهر ${currentRef} هـ`;
+    prevLabel = prevM ? `الشهر السابق (${prevM} هـ)` : "الشهر السابق";
+    curSess = allActive.filter(s => getSessionReportMonth(s) === currentRef);
+    prevSess = prevM ? allActive.filter(s => getSessionReportMonth(s) === prevM) : [];
+    curBase = getStudentBaselineTotals(h, currentRef, st.id);
+    prevBase = prevM ? getStudentBaselineTotals(h, prevM, st.id) : null;
+  }
+
+  const cur = computeStudentStatsForSessions(st, curSess, h, curBase);
+  const prev = computeStudentStatsForSessions(st, prevSess, h, prevBase);
+  const prevHasData = prevSess.length > 0 || (prevBase && (prevBase.memPages > 0 || prevBase.revPages > 0 || prevBase.points > 0));
+
+  const isRashidi = st.track === "rashidi";
+  const curMem = isRashidi ? cur.rashidiPages : cur.memPages;
+  const prevMem = isRashidi ? prev.rashidiPages : prev.memPages;
+  const dMem = Math.round((curMem - prevMem) * 100) / 100;
+  const dRev = Math.round((cur.revPages - prev.revPages) * 100) / 100;
+  const dPres = cur.presentDays - prev.presentDays;
+  const dPts = cur.totalPoints - prev.totalPoints;
+
+  let verdict = "flat"; // "up" | "flat" | "down" | "new"
+  let verdictLabel = "➖ مستوى ثابت";
+  let verdictMsg = "مستوى مستقر ومنتظم مقارنة بالفترة السابقة، نطمح لمزيد من التقدّم بإذن الله.";
+
+  if (!prevHasData) {
+    verdict = "new";
+    verdictLabel = "🆕 لا توجد فترة سابقة";
+    verdictMsg = "تُعرض مقارنة التقدّم والتراجع تلقائياً بمجرد توفر سجل للفترة السابقة.";
+  } else {
+    let score = 0;
+    if (dMem >= 0.25) score += 2;
+    else if (dMem <= -0.25) score -= 2;
+    if (!isRashidi) {
+      if (dRev >= 0.5) score += 1.5;
+      else if (dRev <= -0.5) score -= 1.5;
+    }
+    if (dPres >= 1) score += 1;
+    else if (dPres <= -1) score -= 1;
+    if (ptsOn) {
+      if (dPts >= 5) score += 1;
+      else if (dPts <= -5) score -= 1;
+    }
+    if (score >= 1.5) {
+      verdict = "up";
+      verdictLabel = "📈 تقدّم ملحوظ";
+      verdictMsg = "ما شاء الله! تحسّن واضح وتقدّم في الأداء مقارنة بالفترة السابقة، بارك الله في همتك.";
+    } else if (score <= -1.5) {
+      verdict = "down";
+      verdictLabel = "📉 تراجع — يحتاج همّة";
+      verdictMsg = "لوحظ تراجع مقارنة بالفترة السابقة؛ نرجو مضاعفة الجهد والمتابعة لتعويض الفرق والعودة للتميّز.";
+    }
+  }
+
+  return {
+    mode, curLabel, prevLabel, prevHasData, isRashidi,
+    cur, prev, curMem, prevMem, dMem, dRev, dPres, dPts,
+    verdict, verdictLabel, verdictMsg
+  };
+}
+
+function formatCmpDeltaBadge(val, unit = "") {
+  const n = Math.round((Number(val) || 0) * 100) / 100;
+  if (n > 0) return { cls: "up", txt: `↑ +${formatNum(n)}${unit ? " " + unit : ""}` };
+  if (n < 0) return { cls: "down", txt: `↓ ${formatNum(n)}${unit ? " " + unit : ""}` };
+  return { cls: "flat", txt: "➖ ثابت" };
+}
+
+function renderIndivComparisonHtml(cmp, ptsOn) {
+  if (!cmp) return "";
+  if (!cmp.prevHasData) {
+    return `<div class="ir-cmp-box is-flat">
+      <div class="ir-cmp-top">
+        <span class="ir-cmp-title">📊 مقارنة الأداء (${escapeHtml(cmp.prevLabel)})</span>
+        <span class="ir-cmp-verdict flat">${cmp.verdictLabel}</span>
+      </div>
+      <div style="font-size:11.5px; color:#475569; font-weight:700;">${escapeHtml(cmp.verdictMsg)}</div>
+    </div>`;
+  }
+  const mD = formatCmpDeltaBadge(cmp.dMem, "ص");
+  const rD = formatCmpDeltaBadge(cmp.dRev, "ص");
+  const pD = formatCmpDeltaBadge(cmp.dPres, "يوم");
+  const tD = formatCmpDeltaBadge(cmp.dPts, "ن");
+  const boxCls = cmp.verdict === "up" ? "is-up" : (cmp.verdict === "down" ? "is-down" : "is-flat");
+  const vCls = cmp.verdict === "up" ? "up" : (cmp.verdict === "down" ? "down" : "flat");
+  const cols = cmp.isRashidi ? (ptsOn ? 3 : 2) : (ptsOn ? 4 : 3);
+
+  return `<div class="ir-cmp-box ${boxCls}">
+    <div class="ir-cmp-top">
+      <span class="ir-cmp-title">📈 مقارنة الأداء مع ${escapeHtml(cmp.prevLabel)}</span>
+      <span class="ir-cmp-verdict ${vCls}">${cmp.verdictLabel}</span>
+    </div>
+    <div class="ir-cmp-grid" style="grid-template-columns:repeat(${cols}, minmax(0, 1fr));">
+      <div class="ir-cmp-cell">
+        <div class="cc-lbl">${cmp.isRashidi ? "الرشيدي" : "الحفظ"}</div>
+        <div class="cc-nums">${formatNum(cmp.curMem)} ص <span style="font-size:10.5px; color:#64748b;">(سابقاً ${formatNum(cmp.prevMem)})</span></div>
+        <div class="cc-delta ${mD.cls}">${mD.txt}</div>
+      </div>
+      ${!cmp.isRashidi ? `<div class="ir-cmp-cell">
+        <div class="cc-lbl">المراجعة</div>
+        <div class="cc-nums">${formatNum(cmp.cur.revPages)} ص <span style="font-size:10.5px; color:#64748b;">(سابقاً ${formatNum(cmp.prev.revPages)})</span></div>
+        <div class="cc-delta ${rD.cls}">${rD.txt}</div>
+      </div>` : ""}
+      <div class="ir-cmp-cell">
+        <div class="cc-lbl">الحضور</div>
+        <div class="cc-nums">${cmp.cur.presentDays} <span style="font-size:10.5px; color:#64748b;">(سابقاً ${cmp.prev.presentDays})</span></div>
+        <div class="cc-delta ${pD.cls}">${pD.txt}</div>
+      </div>
+      ${ptsOn ? `<div class="ir-cmp-cell">
+        <div class="cc-lbl">النقاط</div>
+        <div class="cc-nums">${cmp.cur.totalPoints} <span style="font-size:10.5px; color:#64748b;">(سابقاً ${cmp.prev.totalPoints})</span></div>
+        <div class="cc-delta ${tD.cls}">${tD.txt}</div>
+      </div>` : ""}
+    </div>
+    <div class="ir-cmp-msg">${escapeHtml(cmp.verdictMsg)}</div>
+  </div>`;
+}
+
+// ==================== STATS PROGRESS COMPARISON WIDGET (v80) ====================
+let _statsCmpMode = "weekly"; // "weekly" | "monthly"
+let _statsCmpPeriod = "";
+
+function setStatsCmpMode(mode) {
+  _statsCmpMode = mode === "monthly" ? "monthly" : "weekly";
+  _statsCmpPeriod = "";
+  renderStatsComparisonCard();
+}
+
+function setStatsCmpPeriod(val) {
+  _statsCmpPeriod = val;
+  renderStatsComparisonCard();
+}
+
+function renderStatsComparisonCard() {
+  const host = document.getElementById("statsProgressCmpHost");
+  const h = getActiveHalaqa();
+  if (!host || !h || !h.students.length) return;
+  const ptsOn = isPointsEnabled(h);
+  const allActive = (h.sessions || []).filter(s => !s.noClass && isSessionHasRealActivity(s));
+
+  let optsHtml = "", activeRef = "";
+  if (_statsCmpMode === "weekly") {
+    const curWk = getWeekSatKeyForISO(todayISO());
+    const prevWk = getPrevWeekSatKey(curWk);
+    const wkSet = new Set([curWk, prevWk]);
+    allActive.forEach(s => { if (s.date) wkSet.add(getWeekSatKeyForISO(s.date)); });
+    const weeks = Array.from(wkSet).sort((a, b) => b.localeCompare(a));
+    activeRef = (_statsCmpPeriod && weeks.includes(_statsCmpPeriod)) ? _statsCmpPeriod : weeks[0];
+    _statsCmpPeriod = activeRef;
+    optsHtml = weeks.map(wk => {
+      const info = getWeekDisplayRange(wk);
+      const tag = wk === curWk ? " (الحالي)" : "";
+      return `<option value="${wk}" ${wk === activeRef ? "selected" : ""}>أسبوع ${escapeHtml(info.label)}${tag}</option>`;
+    }).join("");
+  } else {
+    const mSet = new Set([getExactHijriInfo(todayISO()).monthLabel]);
+    allActive.forEach(s => { const m = getSessionReportMonth(s); if (m) mSet.add(m); });
+    const months = Array.from(mSet).sort((a, b) => getHijriMonthSortKey(b) - getHijriMonthSortKey(a));
+    activeRef = (_statsCmpPeriod && months.includes(_statsCmpPeriod)) ? _statsCmpPeriod : months[0];
+    _statsCmpPeriod = activeRef;
+    optsHtml = months.map(m => `<option value="${escapeHtml(m)}" ${m === activeRef ? "selected" : ""}>شهر ${escapeHtml(m)} هـ</option>`).join("");
+  }
+
+  const cmpRows = h.students.map(st => ({
+    st,
+    cmp: computeStudentProgressComparison(st, h, _statsCmpMode, activeRef)
+  })).filter(x => x.cmp);
+
+  const upCnt = cmpRows.filter(x => x.cmp.verdict === "up").length;
+  const flatCnt = cmpRows.filter(x => x.cmp.verdict === "flat").length;
+  const downCnt = cmpRows.filter(x => x.cmp.verdict === "down").length;
+  const hasPrevAny = cmpRows.some(x => x.cmp.prevHasData);
+
+  const orderRank = v => v === "up" ? 0 : (v === "down" ? 1 : (v === "flat" ? 2 : 3));
+  cmpRows.sort((a, b) => (orderRank(a.cmp.verdict) - orderRank(b.cmp.verdict)) || (b.cmp.dMem - a.cmp.dMem));
+
+  const listHtml = !hasPrevAny
+    ? `<div style="text-align:center; padding:14px 8px; color:var(--ink-500); font-size:12.5px; font-weight:700;">لا توجد جلسات مسجّلة في الفترة السابقة للمقارنة بعد — ستظهر المقارنة تلقائياً فور تسجيل فترتين متتاليتين.</div>`
+    : `<div class="pts-rank-scroll" style="max-height:330px;">${cmpRows.map(({ st, cmp }) => {
+        const mD = formatCmpDeltaBadge(cmp.dMem, "ص");
+        const rD = formatCmpDeltaBadge(cmp.dRev, "ص");
+        const pD = formatCmpDeltaBadge(cmp.dPres, "حضور");
+        const bCls = cmp.verdict === "up" ? "b-green" : (cmp.verdict === "down" ? "b-red" : "b-slate");
+        const openCall = _statsCmpMode === "weekly"
+          ? `openIndivReportModal('${st.id}','','weekly','${activeRef}')`
+          : `openIndivReportModal('${st.id}','${escapeHtml(activeRef)}','monthly')`;
+        return `<div class="cmp-stu-row ${cmp.verdict}">
+          <div class="cmp-stu-info">
+            <div class="cmp-stu-name">${escapeHtml(st.name)}</div>
+            <div class="cmp-stu-deltas">
+              <span>${cmp.isRashidi ? "رشيدي" : "حفظ"}: <b class="cc-delta ${mD.cls}">${mD.txt}</b></span>
+              ${!cmp.isRashidi ? `<span>مراجعة: <b class="cc-delta ${rD.cls}">${rD.txt}</b></span>` : ""}
+              <span><b class="cc-delta ${pD.cls}">${pD.txt}</b></span>
+            </div>
+          </div>
+          <div style="display:inline-flex; align-items:center; gap:5px; flex-shrink:0;">
+            <span class="badge ${bCls}">${cmp.verdict === "up" ? "📈 تقدّم" : (cmp.verdict === "down" ? "📉 تراجع" : "➖ ثابت")}</span>
+            <button type="button" class="btn btn-soft btn-sm" style="padding:4px 8px; font-size:11px;" onclick="${openCall}">📋 الكشف</button>
+          </div>
+        </div>`;
+      }).join("")}</div>`;
+
+  host.innerHTML = `<div class="cmp-studio-card">
+    <div class="card-title" style="margin-bottom:8px;">
+      <span>📈 مقارنة التقدّم والتراجع (مع الفترة السابقة)</span>
+    </div>
+    <div class="sp-mode-tabs" style="margin-bottom:8px;">
+      <button type="button" class="sp-mode-tab ${_statsCmpMode === "weekly" ? "on" : ""}" onclick="setStatsCmpMode('weekly')">📆 أسبوع مقابل الأسبوع السابق</button>
+      <button type="button" class="sp-mode-tab ${_statsCmpMode === "monthly" ? "on" : ""}" onclick="setStatsCmpMode('monthly')">📅 شهر مقابل الشهر السابق</button>
+    </div>
+    <div class="field" style="margin-bottom:4px;">
+      <select onchange="setStatsCmpPeriod(this.value)" style="padding:7px 10px; font-weight:800; font-size:12.5px;">${optsHtml}</select>
+    </div>
+    ${hasPrevAny ? `<div class="cmp-summary-3">
+      <div class="cmp-sum-pill up"><b>${upCnt}</b><span>📈 متقدمون</span></div>
+      <div class="cmp-sum-pill flat"><b>${flatCnt}</b><span>➖ ثابتون</span></div>
+      <div class="cmp-sum-pill down"><b>${downCnt}</b><span>📉 تراجع / متابعة</span></div>
+    </div>` : ""}
+    ${listHtml}
+  </div>`;
+}
+
+// ==================== INDIVIDUAL FOLLOW-UP REPORT CARD (WEEKLY WITH DAY PICKER + MONTHLY + COMPARISON) ====================
 function openQuickIndivReport() {
   const h = getActiveHalaqa();
   if (!h || !h.students.length) { showToast("أضف طلاباً للحلقة أولاً"); return; }
@@ -23974,6 +24625,7 @@ function openQuickIndivReport() {
 
 let _irPeriodMode = "monthly"; // "monthly" | "weekly"
 let _irWeekKey = ""; // Saturday ISO date representing week start (Sat..Fri)
+let _irSelectedWeekDates = new Set(); // Exact ISO dates chosen by teacher for weekly report!
 
 function getWeekSatKeyForISO(iso) {
   const dt = new Date((iso || todayISO()) + "T12:00:00");
@@ -23996,6 +24648,66 @@ function getWeekDisplayRange(satIso) {
   return { satIso, friIso: dateToISO(d2), label };
 }
 
+function getWeekCandidateSessions(h, satIso) {
+  const wkInfo = getWeekDisplayRange(satIso || getWeekSatKeyForISO(todayISO()));
+  return (h?.sessions || [])
+    .filter(s => !s.noClass && isSessionHasRealActivity(s) && s.date >= wkInfo.satIso && s.date <= wkInfo.friIso)
+    .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+}
+
+function syncDefaultSelectedWeekDates() {
+  const h = getActiveHalaqa();
+  const cands = getWeekCandidateSessions(h, _irWeekKey);
+  _irSelectedWeekDates = new Set(cands.map(s => s.date));
+  renderIrWeekDaysPicker();
+}
+
+function toggleIrWeekDay(iso) {
+  if (_irSelectedWeekDates.has(iso)) {
+    if (_irSelectedWeekDates.size <= 1) { showToast("يجب تحديد يوم واحد على الأقل في الكشف الأسبوعي"); return; }
+    _irSelectedWeekDates.delete(iso);
+  } else {
+    _irSelectedWeekDates.add(iso);
+  }
+  renderIrWeekDaysPicker();
+  renderIndivReportPaper();
+}
+
+function selectAllIrWeekDays() {
+  syncDefaultSelectedWeekDates();
+  renderIndivReportPaper();
+}
+
+function renderIrWeekDaysPicker() {
+  const box = document.getElementById("irWeekDaysPickerWrap");
+  if (!box) return;
+  if (_irPeriodMode !== "weekly") { box.style.display = "none"; return; }
+  const h = getActiveHalaqa();
+  const cands = getWeekCandidateSessions(h, _irWeekKey);
+  box.style.display = "block";
+  if (!cands.length) {
+    box.innerHTML = `<div style="font-size:11.5px; color:var(--ink-500); font-weight:700;">لا توجد جلسات مسجّلة في هذا الأسبوع بعد.</div>`;
+    return;
+  }
+  const allOn = cands.every(s => _irSelectedWeekDates.has(s.date));
+  box.innerHTML = `
+    <div class="ir-wk-days-hdr">
+      <span>📅 حدد أيام الكشف في هذا الأسبوع (${_irSelectedWeekDates.size} من ${cands.length}):</span>
+      ${!allOn ? `<button type="button" class="pp-mode-link" onclick="selectAllIrWeekDays()">تحديد الكل</button>` : `<span style="color:var(--green); font-size:10.5px;">✓ كل أيام الأسبوع</span>`}
+    </div>
+    <div class="ir-wk-days-chips">
+      ${cands.map(s => {
+        const on = _irSelectedWeekDates.has(s.date);
+        const hj = getExactHijriInfo(s.date);
+        const ico = s.type === "saturday" ? "📘" : "📖";
+        return `<button type="button" class="ir-day-chip ${on ? "on" : ""}" onclick="toggleIrWeekDay('${s.date}')">
+          <span>${on ? "☑" : "☐"}</span>
+          <span>${ico} ${escapeHtml(s.dayName)} (${hj.day}/${hj.month})</span>
+        </button>`;
+      }).join("")}
+    </div>`;
+}
+
 function setIndivReportPeriod(mode) {
   _irPeriodMode = mode === "weekly" ? "weekly" : "monthly";
   document.getElementById("irPeriodMonthlyBtn")?.classList.toggle("on", _irPeriodMode === "monthly");
@@ -24006,11 +24718,13 @@ function setIndivReportPeriod(mode) {
   if (ww) ww.style.display = _irPeriodMode === "weekly" ? "block" : "none";
   const hd = document.getElementById("irModalHeading");
   if (hd) hd.textContent = _irPeriodMode === "weekly" ? "📆 كشف المتابعة الأسبوعي للطالب" : "📅 كشف المتابعة الشهري للطالب";
+  if (_irPeriodMode === "weekly") syncDefaultSelectedWeekDates();
+  else renderIrWeekDaysPicker();
   loadIndivReportNoteInput();
   renderIndivReportPaper();
 }
 
-function openIndivReportModal(studentId, monthFilter = "", periodMode = "monthly") {
+function openIndivReportModal(studentId, monthFilter = "", periodMode = "monthly", weekKeyOverride = "") {
   const h = getActiveHalaqa();
   if (!h) return;
   const st = h.students.find(x => x.id === studentId) || h.students[0];
@@ -24021,7 +24735,7 @@ function openIndivReportModal(studentId, monthFilter = "", periodMode = "monthly
   const stSel = document.getElementById("irStudentSelect");
   if (stSel) {
     stSel.innerHTML = h.students.map((s, idx) =>
-      `<option value="${s.id}" ${s.id === st.id ? 'selected' : ''}>${idx + 1}. ${escapeHtml(s.name)}</option>`
+      `<option value="${s.id}" ${s.id === st.id ? "selected" : ""}>${idx + 1}. ${escapeHtml(s.name)}</option>`
     ).join("");
   }
 
@@ -24041,8 +24755,8 @@ function openIndivReportModal(studentId, monthFilter = "", periodMode = "monthly
 
   // Populate Available Weeks (Sat -> Fri)
   const curWk = getWeekSatKeyForISO(todayISO());
-  const prevD = new Date(curWk + "T12:00:00"); prevD.setDate(prevD.getDate() - 7);
-  const weeksSet = new Set([curWk, dateToISO(prevD)]);
+  const prevWk = getPrevWeekSatKey(curWk);
+  const weeksSet = new Set([curWk, prevWk]);
   (h.sessions || []).forEach(s => {
     if (!s.noClass && s.date && isSessionHasRealActivity(s)) weeksSet.add(getWeekSatKeyForISO(s.date));
   });
@@ -24054,7 +24768,7 @@ function openIndivReportModal(studentId, monthFilter = "", periodMode = "monthly
       const tag = wk === curWk ? " (الأسبوع الحالي)" : "";
       return `<option value="${wk}">${escapeHtml(info.label)}${tag}</option>`;
     }).join("");
-    _irWeekKey = sortedWeeks[0] || curWk;
+    _irWeekKey = (weekKeyOverride && sortedWeeks.includes(weekKeyOverride)) ? weekKeyOverride : (sortedWeeks[0] || curWk);
     wSel.value = _irWeekKey;
   }
 
@@ -24077,9 +24791,13 @@ function loadIndivReportNoteInput() {
 }
 
 function onIndivReportFilterChange() {
+  const prevWk = _irWeekKey;
   _irStudentId = document.getElementById("irStudentSelect")?.value || _irStudentId;
   _irMonthFilter = document.getElementById("irMonthSelect")?.value || _irMonthFilter;
   _irWeekKey = document.getElementById("irWeekSelect")?.value || _irWeekKey;
+  if (_irPeriodMode === "weekly" && _irWeekKey !== prevWk) {
+    syncDefaultSelectedWeekDates();
+  }
   loadIndivReportNoteInput();
   renderIndivReportPaper();
 }
@@ -24089,8 +24807,20 @@ function onIndivReportNoteInput(val) {
   if (!h || !_irStudentId) return;
   if (!h.monthlyNotes) h.monthlyNotes = {};
   h.monthlyNotes[getIndivNoteKey(_irStudentId, _irMonthFilter)] = val;
-  saveState();
-  renderIndivReportPaper();
+  saveStateDebounced(350);
+  const noteEl = document.getElementById("irCanvasNoteBox");
+  if (noteEl) {
+    const t = String(val || "").trim();
+    if (t) {
+      noteEl.style.display = "block";
+      noteEl.innerHTML = `<b>📝 توصية ${getGenderTerms(h).supervisorTitle} لولي الأمر:</b> ${escapeHtml(t)}`;
+    } else {
+      noteEl.style.display = "none";
+    }
+    requestAnimationFrame(fitIndivReportPreview);
+  } else {
+    renderIndivReportPaper();
+  }
 }
 
 function setIndivQuickNote(txt) {
@@ -24128,7 +24858,7 @@ function renderIndivReportPaper() {
 
   let periodSessions = [];
   let row = {
-    fromMem: "—", toMem: "—", memPages: 0, revPages: 0, sabrList: [], totalPoints: 0,
+    fromMem: "—", toMem: "—", memPages: 0, rashidiPages: 0, revPages: 0, sabrList: [], totalPoints: 0,
     presentDays: 0, lateDays: 0, excusedDays: 0, absentDays: 0, totalAbsences: 0, customNote: ""
   };
   let docTitle = "كشف المتابعة الفردي الشهري";
@@ -24136,49 +24866,15 @@ function renderIndivReportPaper() {
 
   if (isWeekly) {
     docTitle = "كشف المتابعة الفردي الأسبوعي";
-    periodSubTitle = `الأسبوع: ${wkInfo.label}`;
-    periodSessions = (h.sessions || [])
-      .filter(s => !s.noClass && isSessionHasRealActivity(s) && s.date >= wkInfo.satIso && s.date <= wkInfo.friIso)
-      .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
-
-    let firstMem = null, lastMem = null;
-    periodSessions.forEach(s => {
-      const r = s.records?.[st.id];
-      if (!r) return;
-      if (r.attendance === "حاضر") row.presentDays++;
-      else if (r.attendance === "متأخر") { row.presentDays++; row.lateDays++; }
-      else if (r.attendance === "غياب مبرر") row.excusedDays++;
-      else if (r.attendance === "غياب غير مبرر") row.absentDays++;
-      row.totalPoints += Number(r.points) || 0;
-      if (isPassedNewMemSabrForMonthly(s, r)) {
-        const scLbl = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
-          ? `${r.sabrJuz} (${Math.round(Number(r.sabrScore))}%)` : r.sabrJuz;
-        if (!row.sabrList.some(x => x.startsWith(r.sabrJuz))) row.sabrList.push(scLbl);
-      }
-      const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع";
-      if (!isAbs) {
-        if (s.type === "daily") {
-          if (r.recEval && r.recEval !== "إعادة" && !r.recIsSabr) {
-            const segs = getSegments(r, "rec");
-            if (segs.length) {
-              const s1 = SURAH_MAP[Number(segs[0].surahId)], s2 = SURAH_MAP[Number(segs[segs.length - 1].surahId)] || s1;
-              if (!firstMem && s1) firstMem = `${s1.n}${segs[0].from ? ' - ' + segs[0].from : ''}`;
-              if (s2) lastMem = `${s2.n}${segs[segs.length - 1].to ? ' - ' + segs[segs.length - 1].to : ''}`;
-              row.memPages += Number(r.recPages) || calcSegmentsPages(segs);
-            }
-          }
-          row.revPages += calcDailyReviewPages(r);
-        } else {
-          if (r.minEval && r.minEval !== "إعادة") row.revPages += Number(r.minPages) || calcRecordMinPages(r);
-          if (r.majEval && r.majEval !== "إعادة") row.revPages += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
-        }
-      }
-    });
-    row.fromMem = firstMem || "—";
-    row.toMem = lastMem || "—";
-    row.memPages = Math.round(row.memPages * 100) / 100;
-    row.revPages = Math.round(row.revPages * 100) / 100;
-    row.totalAbsences = row.excusedDays + row.absentDays;
+    const allWeekSess = getWeekCandidateSessions(h, wkInfo.satIso);
+    periodSessions = (_irSelectedWeekDates && _irSelectedWeekDates.size > 0)
+      ? allWeekSess.filter(s => _irSelectedWeekDates.has(s.date))
+      : allWeekSess;
+    const isPartialDays = allWeekSess.length > 0 && periodSessions.length < allWeekSess.length;
+    periodSubTitle = isPartialDays
+      ? `الأسبوع: ${wkInfo.label} (${periodSessions.map(s => s.dayName).join("، ")})`
+      : `الأسبوع: ${wkInfo.label}`;
+    row = computeStudentStatsForSessions(st, periodSessions, h, null);
   } else {
     const { rows } = computeMonthlyData(monthVal);
     row = rows.find(r => r.student.id === st.id) || row;
@@ -24187,7 +24883,14 @@ function renderIndivReportPaper() {
       .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
   }
 
-  // 30-Juz Visual Progress Map (shown in Monthly; compactly shown in Weekly too)
+  const cmpObj = computeStudentProgressComparison(
+    st, h,
+    isWeekly ? "weekly" : "monthly",
+    isWeekly ? wkInfo.satIso : monthVal,
+    isWeekly ? _irSelectedWeekDates : null
+  );
+  const cmpHtml = renderIndivComparisonHtml(cmpObj, ptsOn);
+
   const completedJuzSet = new Set(getStudentCompletedJuzIds(st, h));
   getStudentSabrRecords(st, h).filter(sr => !sr.isReviewSabr).forEach(sr => completedJuzSet.add(sr.juzId));
   let activeJuzId = 0;
@@ -24223,6 +24926,10 @@ function renderIndivReportPaper() {
     if (isAbs) {
       portionTxt = r.attendance;
       evalHtml = `<td class="td-absent">غائب</td>`;
+    } else if (st.track === "rashidi") {
+      portionTxt = r.rashidiFrom ? `الرشيدي ص ${r.rashidiFrom}${r.rashidiTo && Number(r.rashidiTo) !== Number(r.rashidiFrom) ? "–" + r.rashidiTo : ""}` : "الرشيدي";
+      const evSt = getEvalCellStyle(r.recEval || "", false);
+      evalHtml = `<td class="${evSt.cls}">${escapeHtml(evSt.text || "—")}</td>`;
     } else if (s.type === "daily") {
       const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore))) ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
       portionTxt = (r.recIsSabr && r.sabrJuz) ? `سبر ${r.sabrJuz}` : (formatSegmentsInline(getSegments(r, "rec")) || "—");
@@ -24258,6 +24965,7 @@ function renderIndivReportPaper() {
   }
 
   const sheikhNote = (document.getElementById("irSheikhNoteInput")?.value || row.customNote || "").trim();
+  const isRashidi = st.track === "rashidi";
   const kpiCols = ptsOn ? 5 : 4;
   const hjToday = getExactHijriInfo(todayISO());
   const curPlace = getStudentCurrentPlaceSummary(st, h);
@@ -24275,31 +24983,33 @@ function renderIndivReportPaper() {
       </div>
 
       <div class="ir-info-bar">
-        <div class="ir-info-cell"><span>اسم الطالب${stAgeGrade ? ` (${escapeHtml(stAgeGrade)})` : ''}</span><b>${escapeHtml(st.name)}</b></div>
-        <div class="ir-info-cell"><span>مسار الحفظ</span><b style="font-size:12.5px;">${escapeHtml(getStudentPathLabel(st, h))}</b></div>
-        <div class="ir-info-cell"><span>المقدار المعتمد</span><b style="font-size:12.5px;">حفظ ${formatNum(st.pace || 0.5)} ص • كبرى ${formatNum(st.revPace || 2)} ص</b></div>
+        <div class="ir-info-cell"><span>اسم ${getGenderTerms(h).student}${stAgeGrade ? ` (${escapeHtml(stAgeGrade)})` : ""}</span><b>${escapeHtml(st.name)}</b></div>
+        <div class="ir-info-cell"><span>المسار</span><b style="font-size:12.5px;">${escapeHtml(getStudentPathLabel(st, h))}</b></div>
+        <div class="ir-info-cell"><span>المقدار المعتمد</span><b style="font-size:12.5px;">${isRashidi ? `الرشيدي ${formatNum(st.rashidiPace || 1)} ص يومياً` : `حفظ ${formatNum(st.pace || 0.5)} ص • كبرى ${formatNum(st.revPace || 2)} ص`}</b></div>
       </div>
 
       <div class="ir-kpi-grid" style="grid-template-columns:repeat(${kpiCols}, minmax(0, 1fr));">
-        <div class="ir-kpi-tile g"><div class="kv">${formatNum(row.memPages)}</div><div class="kl">صفحات الحفظ</div></div>
+        <div class="ir-kpi-tile g"><div class="kv">${formatNum(isRashidi ? row.rashidiPages : row.memPages)}</div><div class="kl">${isRashidi ? "صفحات الرشيدي" : "صفحات الحفظ"}</div></div>
         <div class="ir-kpi-tile o"><div class="kv">${formatNum(row.revPages)}</div><div class="kl">صفحات المراجعة</div></div>
         <div class="ir-kpi-tile b"><div class="kv">${row.presentDays}</div><div class="kl">أيام الحضور</div></div>
         <div class="ir-kpi-tile r"><div class="kv">${row.totalAbsences}</div><div class="kl">الغياب (${row.excusedDays} مبرر)</div></div>
-        ${ptsOn ? `<div class="ir-kpi-tile"><div class="kv">${row.totalPoints}</div><div class="kl">مجموع النقاط</div></div>` : ''}
+        ${ptsOn ? `<div class="ir-kpi-tile"><div class="kv">${row.totalPoints}</div><div class="kl">مجموع النقاط</div></div>` : ""}
       </div>
+
+      ${cmpHtml}
 
       <div class="ir-scope-box">
-        <div>📖 <b>إنجاز الحفظ (${isWeekly ? 'هذا الأسبوع' : 'هذا الشهر'}):</b> من <b>${escapeHtml(row.fromMem)}</b> إلى <b>${escapeHtml(row.toMem)}</b> &nbsp;|&nbsp; 📌 <b>الواجب / الحالي:</b> ${escapeHtml(curPlace)}</div>
-        ${row.sabrList.length ? `<div>🎓 <b>الأجزاء المسبورة بنجاح (حفظ جديد):</b> ${escapeHtml(row.sabrList.join("، "))}</div>` : ''}
+        <div>📖 <b>إنجاز ${isRashidi ? "الرشيدي" : "الحفظ"} (${isWeekly ? "الفترة المحددة" : "هذا الشهر"}):</b> من <b>${escapeHtml(row.fromMem)}</b> إلى <b>${escapeHtml(row.toMem)}</b> &nbsp;|&nbsp; 📌 <b>الواجب / الحالي:</b> ${escapeHtml(curPlace)}</div>
+        ${row.sabrList.length ? `<div>🎓 <b>الأجزاء المسبورة بنجاح (حفظ جديد):</b> ${escapeHtml(row.sabrList.join("، "))}</div>` : ""}
       </div>
 
-      ${!isWeekly ? `<div class="ir-juz-map-box">
+      ${(!isWeekly && !isRashidi) ? `<div class="ir-juz-map-box">
         <div class="ir-juz-map-hdr">
           <span>🗺️ خريطة أجزاء القرآن الكريم (من الجزء 30 عمّ إلى الجزء 1)</span>
           <span style="color:#16794c;">المحفوظ: ${completedJuzSet.size} / 30 جزء</span>
         </div>
         <div class="ir-juz-map-grid">${juzCellsHtml}</div>
-      </div>` : ''}
+      </div>` : ""}
 
       <table class="t-indiv">
         <colgroup>
@@ -24312,7 +25022,7 @@ function renderIndivReportPaper() {
         <tbody>${logRowsHtml}</tbody>
       </table>
 
-      ${sheikhNote ? `<div class="ir-note-box"><b>📝 توصية ${getGenderTerms(h).supervisorTitle} لولي الأمر:</b> ${escapeHtml(sheikhNote)}</div>` : ''}
+      <div id="irCanvasNoteBox" class="ir-note-box" style="${sheikhNote ? "" : "display:none;"}"><b>📝 توصية ${getGenderTerms(h).supervisorTitle} لولي الأمر:</b> ${escapeHtml(sheikhNote)}</div>
 
       <div class="ir-footer">
         <div><span>${getGenderTerms(h).supervisorTitle}</span>${escapeHtml(bm.sheikh)}</div>
@@ -24329,7 +25039,7 @@ function getIndivReportFileName() {
   const st = h?.students.find(x => x.id === _irStudentId);
   const kind = _irPeriodMode === "weekly" ? "كشف_أسبوعي" : "كشف_شهري";
   const period = _irPeriodMode === "weekly" ? (_irWeekKey || todayISO()) : cleanFilePart(_irMonthFilter || "شامل");
-  return `${kind}_${cleanFilePart(st?.name || 'طالب')}_${period}`;
+  return `${kind}_${cleanFilePart(st?.name || "طالب")}_${period}`;
 }
 
 function exportIndivReportPNG() {
@@ -24341,7 +25051,88 @@ function exportIndivReportPDF() {
 }
 
 function shareIndivReportParentWA() {
-  if (_irStudentId) shareStudentParentWA(_irStudentId, _irMonthFilter || getExactHijriInfo(todayISO()).monthLabel, true);
+  const h = getActiveHalaqa();
+  const st = h?.students.find(x => x.id === _irStudentId);
+  if (!st || !h) return;
+  const bm = getBrandMeta(h);
+  const gt = getGenderTerms(h);
+  const ptsOn = isPointsEnabled(h);
+  const isWeekly = _irPeriodMode === "weekly";
+  const wkInfo = getWeekDisplayRange(_irWeekKey || getWeekSatKeyForISO(todayISO()));
+  const monthVal = _irMonthFilter || getExactHijriInfo(todayISO()).monthLabel;
+
+  let periodTxt = isWeekly ? `الأسبوع (${wkInfo.label})` : (monthVal === "ALL" ? "شامل" : `شهر ${monthVal} هـ`);
+  let row = null;
+  if (isWeekly) {
+    const allWeekSess = getWeekCandidateSessions(h, wkInfo.satIso);
+    const chosen = (_irSelectedWeekDates && _irSelectedWeekDates.size > 0)
+      ? allWeekSess.filter(s => _irSelectedWeekDates.has(s.date))
+      : allWeekSess;
+    if (allWeekSess.length > 0 && chosen.length < allWeekSess.length) {
+      periodTxt += ` — أيام: ${chosen.map(s => s.dayName).join("، ")}`;
+    }
+    row = computeStudentStatsForSessions(st, chosen, h, null);
+  } else {
+    row = computeMonthlyData(monthVal).rows.find(r => r.student.id === st.id);
+  }
+
+  const cmp = computeStudentProgressComparison(
+    st, h,
+    isWeekly ? "weekly" : "monthly",
+    isWeekly ? wkInfo.satIso : monthVal,
+    isWeekly ? _irSelectedWeekDates : null
+  );
+  const sheikhNote = (document.getElementById("irSheikhNoteInput")?.value || "").trim();
+
+  let txt = `السلام عليكم ورحمة الله وبركاته 🌿
+`;
+  txt += `*${isWeekly ? "كشف المتابعة الأسبوعي" : "كشف المتابعة الشهري"} للـ${gt.student}: ${st.name}*
+`;
+  txt += `🕌 *حلقة ${bm.name}* | 📅 *${periodTxt}*
+`;
+  txt += `━━━━━━━━━━━━━
+`;
+  if (row) {
+    const memVal = st.track === "rashidi" ? row.rashidiPages : row.memPages;
+    txt += `📖 *${st.track === "rashidi" ? "الرشيدي" : "صفحات الحفظ"}:* ${formatNum(memVal)} صفحة (${row.fromMem} ← ${row.toMem})
+`;
+    if (st.track !== "rashidi") txt += `🔄 *صفحات المراجعة:* ${formatNum(row.revPages)} صفحة
+`;
+    if (ptsOn) txt += `⭐ *مجموع النقاط:* ${row.totalPoints} نقطة
+`;
+    txt += `✅ *الحضور:* ${row.presentDays} يوم | *الغياب:* ${row.totalAbsences} (${row.excusedDays} مبرر)
+`;
+    if (row.sabrList.length) txt += `🎓 *الأجزاء المسبورة:* ${row.sabrList.join("، ")}
+`;
+  }
+  if (cmp && cmp.prevHasData) {
+    const mD = formatCmpDeltaBadge(cmp.dMem, "ص");
+    const rD = formatCmpDeltaBadge(cmp.dRev, "ص");
+    txt += `━━━━━━━━━━━━━
+`;
+    txt += `📊 *مقارنة الأداء مع ${cmp.prevLabel}:* ${cmp.verdictLabel}
+`;
+    txt += `• ${cmp.isRashidi ? "الرشيدي" : "الحفظ"}: ${formatNum(cmp.curMem)} ص مقابل ${formatNum(cmp.prevMem)} ص (${mD.txt})
+`;
+    if (!cmp.isRashidi) txt += `• المراجعة: ${formatNum(cmp.cur.revPages)} ص مقابل ${formatNum(cmp.prev.revPages)} ص (${rD.txt})
+`;
+    txt += `• الحضور: ${cmp.cur.presentDays} مقابل ${cmp.prev.presentDays}
+`;
+  }
+  if (sheikhNote) txt += `📝 *ملاحظة ${gt.supervisorTitle}:* ${sheikhNote}
+`;
+  txt += `━━━━━━━━━━━━━
+`;
+  txt += `شاكرين لكم متابعتكم الطيبة وبارك الله في ${gt.boyGirl} 🌹
+`;
+  txt += `*${gt.supervisorTitle}: ${bm.sheikh}*`;
+
+  const cleanPhone = (st?.phone || "").replace(/[^0-9]/g, "");
+  const url = cleanPhone
+    ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(txt)}`
+    : `https://wa.me/?text=${encodeURIComponent(txt)}`;
+  window.open(url, "_blank");
+  showToast(`تم فتح واتساب مع ${isWeekly ? "الكشف الأسبوعي" : "الكشف الشهري"} والمقارنة 📲`);
 }
 
 // ==================== CLEAN MINIMALIST APPRECIATION & HIFZ/SABR CERTIFICATE ENGINE (v37) ====================
@@ -25307,7 +26098,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v78 -->
+<!-- Makin App v80 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -26106,6 +26897,7 @@ function openSettingsModal() {
     </div>`).join("");
 
   loadGradingRulesIntoSettings(h);
+  const seqCb = document.getElementById("setSeqDayLock"); if (seqCb) seqCb.checked = (h.sequentialDayLock !== false);
   const cdSum = document.getElementById("setClassDaysSummary");
   if (cdSum) cdSum.innerHTML = getClassDaysSummaryHtml(h);
   renderSettingsStudentsList();
@@ -26218,6 +27010,7 @@ function saveHalaqaSettings() {
   h.monthDays = Number(document.getElementById("setMonthDays").value) || 12;
   h.defaultRevPace = Number(document.getElementById("setDefaultRevPace").value) || 2;
   h.gradingRules = readGradingRulesFromSettings();
+  const seqCb = document.getElementById("setSeqDayLock"); if (seqCb) h.sequentialDayLock = seqCb.checked;
   h.fbUrl = document.getElementById("setFbUrl").value.trim().replace(/\/+$/, "");
   h.roomCode = document.getElementById("setRoomCode").value.trim();
   saveState();
@@ -28581,7 +29374,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v78";
+const TIBYAN_APP_VERSION = "v80";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
