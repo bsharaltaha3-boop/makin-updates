@@ -10173,7 +10173,7 @@ table.t-daily td.td-norecite {
   font-weight: 700 !important;
   font-size: 12.5px !important;
   line-height: 1.38 !important;
-  z-index: 260 !important;
+  z-index: 295 !important;
   box-shadow: 0 8px 24px rgba(8, 20, 36, 0.34) !important;
   align-items: center !important;
   justify-content: space-between !important;
@@ -11260,7 +11260,7 @@ table.t-daily td.td-rev-slim,
 
 /* Executive Picker Bottom Sheet */
 #execPickerSheet {
-  z-index: 165 !important;
+  z-index: 265 !important;
 }
 .eps-filter-bar {
   display: grid;
@@ -11452,7 +11452,7 @@ table.t-daily td.td-rev-slim,
 
 /* Custom Branded Confirm & Prompt Dialog (Replaces ALL native browser confirm/prompt!) */
 #makinDialogModal {
-  z-index: 240 !important;
+  z-index: 280 !important;
   background: rgba(10, 24, 42, 0.68) !important;
   align-items: center !important;
   justify-content: center !important;
@@ -11555,110 +11555,30 @@ table.t-daily td.td-rev-slim,
 
 
 /* ==================== MAKIN v98: BALANCED REPORT PROPORTIONS, COMPACT TAJWEED DRAWER, STUDENT FOCUS & BRAND LOCK ==================== */
-/* 1) Balanced Medium Export Widths (v99 — Comfortable Proportions on Phones & A4, Zero Excessive Whitespace!) */
-.official-daily-wrap { min-width: 980px; }
-table.t-daily { min-width: 980px; table-layout: fixed; }
-.official-monthly-wrap { min-width: 820px; }
+/* 1) Exact Original v97 Report Export Proportions Restored (v101 — Spacious, Crisp, Zero-Squish, Zero-Overlap!) */
+.official-daily-wrap { min-width: 1040px; }
+table.t-daily { min-width: 1040px; table-layout: fixed; }
+.official-monthly-wrap { min-width: 860px; }
 
 #hdExportStage {
-  width: 1100px !important;
-  padding: 14px 16px !important;
+  width: 1680px !important;
+  padding: 18px 22px !important;
 }
 #hdExportStage.is-monthly-stage {
-  width: 940px !important;
-  padding: 16px 18px !important;
+  width: 1180px !important;
+  padding: 20px 22px !important;
 }
 #hdExportStage.is-indiv-stage {
-  width: 860px !important;
-  padding: 14px 16px !important;
+  width: 1040px !important;
+  padding: 16px 18px !important;
 }
-#hdExportStage .official-daily-hdr-v20 {
-  margin-bottom: 6px !important;
-  padding-bottom: 6px !important;
-  grid-template-columns: 1.0fr 2.85fr 1.0fr !important;
-  gap: 8px !important;
-}
-#hdExportStage .odh-org-box {
-  font-size: 12.8px !important;
-  line-height: 1.48 !important;
-}
-#hdExportStage .odh-title-col h2 {
-  font-size: 20px !important;
-  margin-bottom: 5px !important;
-}
-#hdExportStage .odh-meta-grid {
-  max-width: 560px !important;
-  gap: 8px !important;
-}
-#hdExportStage .odh-meta-cell {
-  font-size: 12.5px !important;
-  padding: 3.5px 8px !important;
-}
-#hdExportStage .odh-logo-col img {
-  height: 50px !important;
-}
-#hdExportStage table.t-daily {
-  font-size: 12.6px !important;
-}
-#hdExportStage table.t-daily th {
-  font-size: 12.6px !important;
-  padding: 4.5px 3px !important;
-}
-#hdExportStage table.t-daily th.th-sub {
-  font-size: 11.4px !important;
-  padding: 3px 2px !important;
-}
-#hdExportStage table.t-daily td {
-  padding: 4px 4px !important;
-  font-size: 12.2px !important;
-  line-height: 1.28 !important;
-}
-#hdExportStage table.t-daily td.td-name-col {
-  font-size: 12.5px !important;
-  padding: 4px 5px !important;
-}
-#hdExportStage table.t-daily td.td-pts {
-  font-size: 13px !important;
-}
-#hdExportStage table.t-daily td.td-note {
-  font-size: 11.6px !important;
-  padding: 4px 6px !important;
-  line-height: 1.32 !important;
-}
-#hdExportStage table.t-daily tfoot td {
-  font-size: 12.2px !important;
-  padding: 5.5px 7px !important;
-}
-#hdExportStage.is-monthly-stage .om-banner {
-  padding: 11px 16px !important;
-  margin-bottom: 9px !important;
-}
-#hdExportStage.is-monthly-stage .om-banner img {
-  height: 50px !important;
-}
-#hdExportStage.is-monthly-stage .om-banner-title h2 {
-  font-size: 20px !important;
-}
-#hdExportStage.is-monthly-stage .om-banner-title p {
-  font-size: 13px !important;
-}
-#hdExportStage.is-monthly-stage .om-info-row {
-  font-size: 13px !important;
-  margin-bottom: 9px !important;
-}
-#hdExportStage.is-monthly-stage .om-info-cell {
-  padding: 6px 10px !important;
-}
-#hdExportStage.is-monthly-stage table.t-monthly {
-  font-size: 12.8px !important;
-}
-#hdExportStage.is-monthly-stage table.t-monthly th {
-  font-size: 12.5px !important;
-  padding: 6px 5px !important;
-}
-#hdExportStage.is-monthly-stage table.t-monthly td {
-  font-size: 12.5px !important;
-  padding: 5px 6px !important;
+/* Guarantee td-span-range NEVER spills over black vertical borders into adjacent cells */
+table.t-daily td.td-span-range,
+#hdExportStage table.t-daily td.td-span-range {
+  white-space: normal !important;
+  word-break: keep-all !important;
+  overflow-wrap: break-word !important;
+  line-height: 1.24 !important;
 }
 
 /* ==================== MAKIN v99: UNIVERSAL BUTTON & CHIP ZERO-OVERFLOW ARMOR ==================== */
@@ -12569,7 +12489,7 @@ table.t-daily { min-width: 980px; table-layout: fixed; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v99</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v101</span>
         </button>
       </div>
     </div>
@@ -14495,10 +14415,17 @@ function formatPageSurahAyahPoint(pageNum, surahInfo, ayahNum, isEnd = false) {
 }
 
 function stripMushafPageTokens(str) {
-  return String(str ?? "")
+  let out = String(str ?? "")
     .replace(/\(\s*ص[\s\u00A0]*\d+\s*\)/g, "")
     .replace(/(^|[\s(←–\-:,])ص[\s\u00A0]*\d+(?=\s+[\u0600-\u06FF])/g, "$1")
-    .replace(/([\u0600-\u06FF][\u0600-\u06FF\s]{1,22}?)\s*←\s*\1(?=[\s.،؛:!؟)]|$)/g, "$1")
+    .replace(/([\u0600-\u06FF][\u0600-\u06FF\s]{1,22}?)\s*←\s*\1(?=[\s.،؛:!؟)]|$)/g, "$1");
+  // Strip legacy Juz opening words in parentheses right after الجزء/جزء (e.g., "الجزء 9 (قال الملأ)" -> "الجزء 9")
+  out = out.replace(/(الجزء|جزء)\s*(\d{1,2})\s*\([^)]+\)/g, (_, _w, num) => {
+    const id = Number(num);
+    if (typeof JUZ_PAGE_MAP !== "undefined" && JUZ_PAGE_MAP[id]) return formatJuzLabel(JUZ_PAGE_MAP[id]);
+    return `الجزء ${id}`;
+  });
+  return out
     .replace(/\s+([.،؛:])/g, "$1")
     .replace(/\s{2,}/g, " ")
     .trim();
@@ -14527,48 +14454,66 @@ const HIJRI_MONTHS = ["", "محرم", "صفر", "ربيع الأول", "ربيع
 
 const JUZ_NAMES = Array.from({ length: 30 }, (_, i) => `الجزء ${i + 1}`);
 
-function formatJuzClean(nameStr) {
-  const s = String(nameStr || "").trim();
-  if (!s) return "";
-  const m = s.match(/الجزء\s*(\d{1,2})/);
-  if (m) return `الجزء ${Number(m[1])}`;
-  return s.replace(/\s*\([^)]*\)/g, "").trim();
-}
+const LEGACY_JUZ_ORDINAL_MAP = {
+  "الأول": 1, "الثاني": 2, "الثالث": 3, "الرابع": 4, "الخامس": 5,
+  "السادس": 6, "السابع": 7, "الثامن": 8, "التاسع": 9, "العاشر": 10,
+  "الحادي عشر": 11, "الثاني عشر": 12, "الثالث عشر": 13, "الرابع عشر": 14, "الخامس عشر": 15,
+  "السادس عشر": 16, "السابع عشر": 17, "الثامن عشر": 18, "التاسع عشر": 19, "العشرون": 20,
+  "الحادي والعشرون": 21, "الثاني والعشرون": 22, "الثالث والعشرون": 23, "الرابع والعشرون": 24, "الخامس والعشرون": 25,
+  "حم": 26, "الأحقاف": 26, "الذاريات": 27, "قد سمع": 28, "تبارك": 29, "عمّ": 30, "عم": 30
+};
 
 const JUZ_PAGES = [
-  { id: 1,  startPage: 1,   endPage: 21,  pages: 21, startSurah: 1,  startAyah: 1,   endSurah: 2,   endAyah: 141, shortName: "الأول", name: JUZ_NAMES[0] },
-  { id: 2,  startPage: 22,  endPage: 41,  pages: 20, startSurah: 2,  startAyah: 142, endSurah: 2,   endAyah: 252, shortName: "الثاني", name: JUZ_NAMES[1] },
-  { id: 3,  startPage: 42,  endPage: 61,  pages: 20, startSurah: 2,  startAyah: 253, endSurah: 3,   endAyah: 92,  shortName: "الثالث", name: JUZ_NAMES[2] },
-  { id: 4,  startPage: 62,  endPage: 81,  pages: 20, startSurah: 3,  startAyah: 93,  endSurah: 4,   endAyah: 23,  shortName: "الرابع", name: JUZ_NAMES[3] },
-  { id: 5,  startPage: 82,  endPage: 101, pages: 20, startSurah: 4,  startAyah: 24,  endSurah: 4,   endAyah: 147, shortName: "الخامس", name: JUZ_NAMES[4] },
-  { id: 6,  startPage: 102, endPage: 121, pages: 20, startSurah: 4,  startAyah: 148, endSurah: 5,   endAyah: 81,  shortName: "السادس", name: JUZ_NAMES[5] },
-  { id: 7,  startPage: 122, endPage: 141, pages: 20, startSurah: 5,  startAyah: 82,  endSurah: 6,   endAyah: 110, shortName: "السابع", name: JUZ_NAMES[6] },
-  { id: 8,  startPage: 142, endPage: 161, pages: 20, startSurah: 6,  startAyah: 111, endSurah: 7,   endAyah: 87,  shortName: "الثامن", name: JUZ_NAMES[7] },
-  { id: 9,  startPage: 162, endPage: 181, pages: 20, startSurah: 7,  startAyah: 88,  endSurah: 8,   endAyah: 40,  shortName: "التاسع", name: JUZ_NAMES[8] },
-  { id: 10, startPage: 182, endPage: 201, pages: 20, startSurah: 8,  startAyah: 41,  endSurah: 9,   endAyah: 92,  shortName: "العاشر", name: JUZ_NAMES[9] },
-  { id: 11, startPage: 202, endPage: 221, pages: 20, startSurah: 9,  startAyah: 93,  endSurah: 11,  endAyah: 5,   shortName: "الحادي عشر", name: JUZ_NAMES[10] },
-  { id: 12, startPage: 222, endPage: 241, pages: 20, startSurah: 11, startAyah: 6,   endSurah: 12,  endAyah: 52,  shortName: "الثاني عشر", name: JUZ_NAMES[11] },
-  { id: 13, startPage: 242, endPage: 261, pages: 20, startSurah: 12, startAyah: 53,  endSurah: 14,  endAyah: 52,  shortName: "الثالث عشر", name: JUZ_NAMES[12] },
-  { id: 14, startPage: 262, endPage: 281, pages: 20, startSurah: 15, startAyah: 1,   endSurah: 16,  endAyah: 128, shortName: "الرابع عشر", name: JUZ_NAMES[13] },
-  { id: 15, startPage: 282, endPage: 301, pages: 20, startSurah: 17, startAyah: 1,   endSurah: 18,  endAyah: 74,  shortName: "الخامس عشر", name: JUZ_NAMES[14] },
-  { id: 16, startPage: 302, endPage: 321, pages: 20, startSurah: 18, startAyah: 75,  endSurah: 20,  endAyah: 135, shortName: "السادس عشر", name: JUZ_NAMES[15] },
-  { id: 17, startPage: 322, endPage: 341, pages: 20, startSurah: 21, startAyah: 1,   endSurah: 22,  endAyah: 78,  shortName: "السابع عشر", name: JUZ_NAMES[16] },
-  { id: 18, startPage: 342, endPage: 361, pages: 20, startSurah: 23, startAyah: 1,   endSurah: 25,  endAyah: 20,  shortName: "الثامن عشر", name: JUZ_NAMES[17] },
-  { id: 19, startPage: 362, endPage: 381, pages: 20, startSurah: 25, startAyah: 21,  endSurah: 27,  endAyah: 55,  shortName: "التاسع عشر", name: JUZ_NAMES[18] },
-  { id: 20, startPage: 382, endPage: 401, pages: 20, startSurah: 27, startAyah: 56,  endSurah: 29,  endAyah: 45,  shortName: "العشرون", name: JUZ_NAMES[19] },
-  { id: 21, startPage: 402, endPage: 421, pages: 20, startSurah: 29, startAyah: 46,  endSurah: 33,  endAyah: 30,  shortName: "الحادي والعشرون", name: JUZ_NAMES[20] },
-  { id: 22, startPage: 422, endPage: 441, pages: 20, startSurah: 33, startAyah: 31,  endSurah: 36,  endAyah: 27,  shortName: "الثاني والعشرون", name: JUZ_NAMES[21] },
-  { id: 23, startPage: 442, endPage: 461, pages: 20, startSurah: 36, startAyah: 28,  endSurah: 39,  endAyah: 31,  shortName: "الثالث والعشرون", name: JUZ_NAMES[22] },
-  { id: 24, startPage: 462, endPage: 481, pages: 20, startSurah: 39, startAyah: 32,  endSurah: 41,  endAyah: 46,  shortName: "الرابع والعشرون", name: JUZ_NAMES[23] },
-  { id: 25, startPage: 482, endPage: 501, pages: 20, startSurah: 41, startAyah: 47,  endSurah: 45,  endAyah: 37,  shortName: "الخامس والعشرون", name: JUZ_NAMES[24] },
-  { id: 26, startPage: 502, endPage: 521, pages: 20, startSurah: 46, startAyah: 1,   endSurah: 51,  endAyah: 30,  shortName: "حم", name: JUZ_NAMES[25] },
+  { id: 1,  startPage: 1,   endPage: 21,  pages: 21, startSurah: 1,  startAyah: 1,   endSurah: 2,   endAyah: 141, shortName: "1",       name: JUZ_NAMES[0] },
+  { id: 2,  startPage: 22,  endPage: 41,  pages: 20, startSurah: 2,  startAyah: 142, endSurah: 2,   endAyah: 252, shortName: "2",       name: JUZ_NAMES[1] },
+  { id: 3,  startPage: 42,  endPage: 61,  pages: 20, startSurah: 2,  startAyah: 253, endSurah: 3,   endAyah: 92,  shortName: "3",       name: JUZ_NAMES[2] },
+  { id: 4,  startPage: 62,  endPage: 81,  pages: 20, startSurah: 3,  startAyah: 93,  endSurah: 4,   endAyah: 23,  shortName: "4",       name: JUZ_NAMES[3] },
+  { id: 5,  startPage: 82,  endPage: 101, pages: 20, startSurah: 4,  startAyah: 24,  endSurah: 4,   endAyah: 147, shortName: "5",       name: JUZ_NAMES[4] },
+  { id: 6,  startPage: 102, endPage: 121, pages: 20, startSurah: 4,  startAyah: 148, endSurah: 5,   endAyah: 81,  shortName: "6",       name: JUZ_NAMES[5] },
+  { id: 7,  startPage: 122, endPage: 141, pages: 20, startSurah: 5,  startAyah: 82,  endSurah: 6,   endAyah: 110, shortName: "7",       name: JUZ_NAMES[6] },
+  { id: 8,  startPage: 142, endPage: 161, pages: 20, startSurah: 6,  startAyah: 111, endSurah: 7,   endAyah: 87,  shortName: "8",       name: JUZ_NAMES[7] },
+  { id: 9,  startPage: 162, endPage: 181, pages: 20, startSurah: 7,  startAyah: 88,  endSurah: 8,   endAyah: 40,  shortName: "9",       name: JUZ_NAMES[8] },
+  { id: 10, startPage: 182, endPage: 201, pages: 20, startSurah: 8,  startAyah: 41,  endSurah: 9,   endAyah: 92,  shortName: "10",      name: JUZ_NAMES[9] },
+  { id: 11, startPage: 202, endPage: 221, pages: 20, startSurah: 9,  startAyah: 93,  endSurah: 11,  endAyah: 5,   shortName: "11",      name: JUZ_NAMES[10] },
+  { id: 12, startPage: 222, endPage: 241, pages: 20, startSurah: 11, startAyah: 6,   endSurah: 12,  endAyah: 52,  shortName: "12",      name: JUZ_NAMES[11] },
+  { id: 13, startPage: 242, endPage: 261, pages: 20, startSurah: 12, startAyah: 53,  endSurah: 14,  endAyah: 52,  shortName: "13",      name: JUZ_NAMES[12] },
+  { id: 14, startPage: 262, endPage: 281, pages: 20, startSurah: 15, startAyah: 1,   endSurah: 16,  endAyah: 128, shortName: "14",      name: JUZ_NAMES[13] },
+  { id: 15, startPage: 282, endPage: 301, pages: 20, startSurah: 17, startAyah: 1,   endSurah: 18,  endAyah: 74,  shortName: "15",      name: JUZ_NAMES[14] },
+  { id: 16, startPage: 302, endPage: 321, pages: 20, startSurah: 18, startAyah: 75,  endSurah: 20,  endAyah: 135, shortName: "16",      name: JUZ_NAMES[15] },
+  { id: 17, startPage: 322, endPage: 341, pages: 20, startSurah: 21, startAyah: 1,   endSurah: 22,  endAyah: 78,  shortName: "17",      name: JUZ_NAMES[16] },
+  { id: 18, startPage: 342, endPage: 361, pages: 20, startSurah: 23, startAyah: 1,   endSurah: 25,  endAyah: 20,  shortName: "18",      name: JUZ_NAMES[17] },
+  { id: 19, startPage: 362, endPage: 381, pages: 20, startSurah: 25, startAyah: 21,  endSurah: 27,  endAyah: 55,  shortName: "19",      name: JUZ_NAMES[18] },
+  { id: 20, startPage: 382, endPage: 401, pages: 20, startSurah: 27, startAyah: 56,  endSurah: 29,  endAyah: 45,  shortName: "20",      name: JUZ_NAMES[19] },
+  { id: 21, startPage: 402, endPage: 421, pages: 20, startSurah: 29, startAyah: 46,  endSurah: 33,  endAyah: 30,  shortName: "21",      name: JUZ_NAMES[20] },
+  { id: 22, startPage: 422, endPage: 441, pages: 20, startSurah: 33, startAyah: 31,  endSurah: 36,  endAyah: 27,  shortName: "22",      name: JUZ_NAMES[21] },
+  { id: 23, startPage: 442, endPage: 461, pages: 20, startSurah: 36, startAyah: 28,  endSurah: 39,  endAyah: 31,  shortName: "23",      name: JUZ_NAMES[22] },
+  { id: 24, startPage: 462, endPage: 481, pages: 20, startSurah: 39, startAyah: 32,  endSurah: 41,  endAyah: 46,  shortName: "24",      name: JUZ_NAMES[23] },
+  { id: 25, startPage: 482, endPage: 501, pages: 20, startSurah: 41, startAyah: 47,  endSurah: 45,  endAyah: 37,  shortName: "25",      name: JUZ_NAMES[24] },
+  { id: 26, startPage: 502, endPage: 521, pages: 20, startSurah: 46, startAyah: 1,   endSurah: 51,  endAyah: 30,  shortName: "الأحقاف", name: JUZ_NAMES[25] },
   { id: 27, startPage: 522, endPage: 541, pages: 20, startSurah: 51, startAyah: 31,  endSurah: 57,  endAyah: 29,  shortName: "الذاريات", name: JUZ_NAMES[26] },
-  { id: 28, startPage: 542, endPage: 561, pages: 20, startSurah: 58, startAyah: 1,   endSurah: 66,  endAyah: 12,  shortName: "قد سمع", name: JUZ_NAMES[27] },
-  { id: 29, startPage: 562, endPage: 581, pages: 20, startSurah: 67, startAyah: 1,   endSurah: 77,  endAyah: 50,  shortName: "تبارك", name: JUZ_NAMES[28] },
-  { id: 30, startPage: 582, endPage: 604, pages: 23, startSurah: 78, startAyah: 1,   endSurah: 114, endAyah: 6,   shortName: "عمّ", name: JUZ_NAMES[29] }
+  { id: 28, startPage: 542, endPage: 561, pages: 20, startSurah: 58, startAyah: 1,   endSurah: 66,  endAyah: 12,  shortName: "قد سمع",  name: JUZ_NAMES[27] },
+  { id: 29, startPage: 562, endPage: 581, pages: 20, startSurah: 67, startAyah: 1,   endSurah: 77,  endAyah: 50,  shortName: "تبارك",   name: JUZ_NAMES[28] },
+  { id: 30, startPage: 582, endPage: 604, pages: 23, startSurah: 78, startAyah: 1,   endSurah: 114, endAyah: 6,   shortName: "عمّ",     name: JUZ_NAMES[29] }
 ];
 const JUZ_PAGE_MAP = {};
 JUZ_PAGES.forEach(j => { JUZ_PAGE_MAP[j.id] = j; });
+
+// Concise Juz Display (v100): Famous last 5 named (عمّ، تبارك، قد سمع، الذاريات، الأحقاف), 1–25 numbered only!
+function formatJuzLabel(jObj) {
+  if (!jObj) return "";
+  return jObj.id >= 26 ? `جزء ${jObj.shortName}` : `الجزء ${jObj.id}`;
+}
+function formatJuzCompact(jObj) {
+  if (!jObj) return "";
+  return jObj.id >= 26 ? jObj.shortName : `ج ${jObj.id}`;
+}
+function formatJuzClean(nameStr) {
+  const s = String(nameStr || "").trim();
+  if (!s) return "";
+  const jObj = getJuzByName(s);
+  if (jObj) return formatJuzLabel(jObj);
+  return s.replace(/\s*\([^)]*\)/g, "").trim();
+}
 
 function getJuzAtPage(pageNum) {
   const p = Math.max(1, Math.min(604, Math.round(Number(pageNum) || 582)));
@@ -14577,16 +14522,21 @@ function getJuzAtPage(pageNum) {
 
 function getJuzByName(nameStr) {
   if (!nameStr) return null;
+  if (typeof nameStr === "object" && nameStr.id && JUZ_PAGE_MAP[nameStr.id]) return JUZ_PAGE_MAP[nameStr.id];
   const raw = String(nameStr).trim();
   const exact = JUZ_PAGES.find(j => j.name === raw);
   if (exact) return exact;
-  const numM = raw.match(/(?:الجزء|جزء)\s*(\d{1,2})/);
+  const numM = raw.match(/(?:الجزء|جزء|ج)\s*(\d{1,2})/);
   if (numM) {
     const id = Number(numM[1]);
     if (JUZ_PAGE_MAP[id]) return JUZ_PAGE_MAP[id];
   }
-  const clean = formatJuzClean(raw);
-  return JUZ_PAGES.find(j => j.name === clean || j.shortName === raw || raw.includes(`(${j.shortName})`)) || null;
+  const stripped = raw.replace(/\s*\([^)]*\)/g, "").replace(/^(?:الجزء|جزء)\s+/, "").trim();
+  if (LEGACY_JUZ_ORDINAL_MAP[stripped]) return JUZ_PAGE_MAP[LEGACY_JUZ_ORDINAL_MAP[stripped]];
+  for (const [k, id] of Object.entries(LEGACY_JUZ_ORDINAL_MAP)) {
+    if (raw === k || raw.includes(`(${k})`) || raw.endsWith(` ${k}`)) return JUZ_PAGE_MAP[id];
+  }
+  return JUZ_PAGES.find(j => j.shortName === stripped) || null;
 }
 
 // Detects if reciting `segs` in `direction` just completed a full Juz!
@@ -14620,9 +14570,9 @@ function detectCompletedJuz(segs, direction = "desc") {
 
 function formatHwSabrColumns(sabrJuzName, isHtml = true) {
   const j = getJuzByName(sabrJuzName);
-  const shortLbl = j ? j.shortName : String(sabrJuzName || "").replace(/^الجزء\s*\d+\s*/, "").replace(/[()]/g, "").trim();
+  const lbl = j ? formatJuzLabel(j) : formatJuzClean(sabrJuzName);
   const esc = v => isHtml ? escapeHtml(v) : v;
-  return { surah: esc("سبر"), from: esc("جزء"), to: esc(shortLbl || sabrJuzName), lines: 1 };
+  return { surah: esc("سبر"), from: esc(""), to: esc(lbl || sabrJuzName), lines: 1 };
 }
 
 // Exact Halqa Points Rules (v28):
@@ -15692,7 +15642,7 @@ function buildDailySabrNoteBadge(r, isHtml = true) {
   const sEv = getDailySabrEval(r);
   if (!sEv) return { hasBadge: false, isRep: false, html: "", plain: "" };
   const jObj = getJuzByName(r.sabrJuz);
-  const shortN = jObj ? jObj.shortName : formatJuzClean(r.sabrJuz);
+  const shortN = jObj ? formatJuzCompact(jObj) : formatJuzClean(r.sabrJuz);
   const hasSc = r.sabrScore !== "" && r.sabrScore !== null && r.sabrScore !== undefined && !isNaN(Number(r.sabrScore));
   const scNum = hasSc ? Math.round(Number(r.sabrScore)) : "";
   const isRep = sEv === "إعادة";
@@ -15858,6 +15808,16 @@ function getSegments(r, kind) {
         return expandContiguousRangeToSegments(r.minSurahId, r.minFrom, r.minEndSurahId, r.minTo);
       }
       segs.push({ surahId: String(r.minSurahId), from: r.minFrom || 1, to: r.minTo || SURAH_MAP[Number(r.minSurahId)].a });
+    }
+    extras.forEach(e => {
+      if (e && e.surahId && SURAH_MAP[Number(e.surahId)]) {
+        segs.push({ surahId: String(e.surahId), from: e.from || 1, to: e.to || SURAH_MAP[Number(e.surahId)].a });
+      }
+    });
+  } else if (kind === "hwNextMin") {
+    const extras = Array.isArray(r.hwNextMinExtras) ? r.hwNextMinExtras : [];
+    if (r.hwNextMinSurahId && SURAH_MAP[Number(r.hwNextMinSurahId)]) {
+      segs.push({ surahId: String(r.hwNextMinSurahId), from: r.hwNextMinFrom || 1, to: r.hwNextMinTo || SURAH_MAP[Number(r.hwNextMinSurahId)].a });
     }
     extras.forEach(e => {
       if (e && e.surahId && SURAH_MAP[Number(e.surahId)]) {
@@ -16612,7 +16572,7 @@ function formatSatNextMajColumns(r, isHtml = true) {
     if (jObj) {
       const s1 = SURAH_MAP[jObj.startSurah], s2 = SURAH_MAP[jObj.endSurah];
       return {
-        surah: esc(`سبر ${jObj.shortName}`),
+        surah: esc(`سبر ${formatJuzCompact(jObj)}`),
         from: esc(formatSurahAyahPoint(s1, jObj.startAyah, false)),
         to: esc(formatSurahAyahPoint(s2, jObj.endAyah, true)),
         lines: 1
@@ -18142,8 +18102,8 @@ function getSyncedPageEvals(r, st, kind, h) {
 
 function shouldUsePerPageMode(r, st, kind, h) {
   if (!r || !st || st.track === "rashidi") return false;
+  if (kind === "maj") return false; // v100: Major Review is ALWAYS evaluated as a whole, never page-by-page!
   if (kind === "rec" && r.recIsSabr && r.sabrJuz) return false;
-  if (kind === "maj" && r.sabrJuz) return false;
   const slots = buildRecitationPageSlots(r, st, kind, h);
   if (slots.length < 2 || slots.length > 50) return false;
   const mKey = getPageModeKey(kind);
@@ -18488,7 +18448,7 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
   const r = (s && st) ? getStudentRecord(s, studentId) : null;
   const slots = (r && st) ? buildRecitationPageSlots(r, st, kind, h) : [];
   const totalSlotsPg = slots.reduce((a, p) => a + (Number(p.pages) || 0), 0);
-  const canMulti = slots.length >= 2 && slots.length <= 50 && !(kind === "rec" && r.recIsSabr && r.sabrJuz) && !(kind === "maj" && r.sabrJuz);
+  const canMulti = kind !== "maj" && slots.length >= 2 && slots.length <= 50 && !(kind === "rec" && r.recIsSabr && r.sabrJuz);
 
   if (canMulti && shouldUsePerPageMode(r, st, kind, h)) {
     const pages = getSyncedPageEvals(r, st, kind, h);
@@ -18697,7 +18657,7 @@ function surahOptionsHtml(selectedId, placeholder = "-- اختر السورة --
 
 function juzOptionsHtml(selectedVal) {
   let html = `<option value="">بدون سبر</option>`;
-  JUZ_NAMES.forEach(name => { html += `<option value="${name}" ${selectedVal === name ? "selected" : ""}>${name}</option>`; });
+  JUZ_PAGES.forEach(j => { const lbl = formatJuzLabel(j); html += `<option value="${j.name}" ${selectedVal === j.name ? "selected" : ""}>${lbl}</option>`; });
   return html;
 }
 
@@ -18717,7 +18677,7 @@ let spState = {
 let spSearch = "";
 
 function spIsReviewKind(kind) {
-  return kind === "dRev" || kind === "min" || kind === "maj" || kind === "nextMaj";
+  return kind === "dRev" || kind === "min" || kind === "maj" || kind === "nextMaj" || kind === "hwNextMin";
 }
 
 function spCanUseSabr(kind) {
@@ -18733,13 +18693,14 @@ function formatSardJuzInfo(juzIds) {
   if (!ids.length) return { ids: [], label: "", shortNames: "", fromCol: "", toCol: "", totalPages: 0 };
   const objs = ids.map(id => JUZ_PAGE_MAP[id]);
   const totalPages = objs.reduce((acc, j) => acc + (j.pages || 20), 0);
-  const shortNames = objs.map(j => j.shortName).join(" + ");
+  const shortNames = objs.map(j => formatJuzCompact(j)).join(" + ");
   if (objs.length === 1) {
+    const jLbl = formatJuzLabel(objs[0]);
     return {
       ids,
-      label: `سرد جزء ${objs[0].shortName}`,
-      shortNames: objs[0].shortName,
-      fromCol: `سرد جزء ${objs[0].shortName}`,
+      label: `سرد ${jLbl}`,
+      shortNames: formatJuzCompact(objs[0]),
+      fromCol: `سرد ${jLbl}`,
       toCol: "كاملاً",
       totalPages
     };
@@ -18769,6 +18730,26 @@ function openSurahPicker(studentId, kind) {
   if (!existing.length && kind === "maj") {
     const pts = getMajorReviewStartEndPoints(r, st, h, s);
     existing = expandContiguousRangeToSegments(pts.startSurahId, pts.startAyah, pts.endSurahId, pts.endAyah);
+  }
+  if (!existing.length && kind === "hwNextMin") {
+    const revHw = getNextReviewHomeworkForStudent(h, s, st, r);
+    if (revHw.minSegs && revHw.minSegs.length) {
+      existing = revHw.minSegs.map(seg => ({
+        surahId: String(seg.surahId),
+        from: parseArabicNum(seg.from, 1),
+        to: parseArabicNum(seg.to, SURAH_MAP[Number(seg.surahId)]?.a || 1)
+      }));
+    }
+  }
+  if (!existing.length && kind === "hw" && s.type === "saturday") {
+    const recHw = getNextRecitationHomeworkForStudent(h, s, st, r, false);
+    if (recHw.segs && recHw.segs.length) {
+      existing = recHw.segs.map(seg => ({
+        surahId: String(seg.surahId),
+        from: parseArabicNum(seg.from, 1),
+        to: parseArabicNum(seg.to, SURAH_MAP[Number(seg.surahId)]?.a || 1)
+      }));
+    }
   }
   if (!existing.length && kind === "nextMaj") {
     if (r.nextMajStartSurahId && SURAH_MAP[Number(r.nextMajStartSurahId)]) {
@@ -18835,7 +18816,8 @@ function openSurahPicker(studentId, kind) {
   }
 
   const hasExplicitAyahReview = (kind === "dRev" && Boolean(r.dRevSurahId) && !r.dRevIsPages)
-    || (kind === "min" && Boolean(r.minSurahId || (r.minText && !r.minIsPages)));
+    || (kind === "min" && Boolean(r.minSurahId || (r.minText && !r.minIsPages)))
+    || (kind === "hwNextMin" && !r.hwNextMinIsPages);
   let reviewUnit = (spIsReviewKind(kind) && !hasExplicitAyahReview) ? "page" : "ayah";
   let pageFromSurahId = "";
   let pageToSurahId = "";
@@ -18906,7 +18888,8 @@ function openSurahPicker(studentId, kind) {
     hw: "📝 الواجب المنزلي",
     min: "📗 المراجعة الصغرى",
     maj: "📘 المراجعة الكبرى",
-    nextMaj: "📝 واجب الكبرى القادم",
+    nextMaj: "📝 واجب المراجعة الكبرى",
+    hwNextMin: "📗 واجب المراجعة الصغرى",
     dRev: "🔄 مراجعة اليوم"
   };
   document.getElementById("spModalTitle").textContent = titles[kind] || "📖 اختيار السورة والآيات";
@@ -19087,7 +19070,7 @@ function renderSpSardGrid() {
     const s2 = SURAH_MAP[j.endSurah]?.n || "";
     return `<button type="button" class="sp-sabr-card ${isMem ? 'in-mem' : ''} ${isSel ? 'on-sard' : ''}" onclick="spToggleSardJuz(${j.id})">
       <div class="sj-top">
-        <span>${j.id}. جزء ${escapeHtml(j.shortName)}</span>
+        <span>${escapeHtml(formatJuzLabel(j))}</span>
         ${isSel ? '<span class="sj-tag">✓ محدد</span>' : (isMem ? '<span class="sj-tag">محفوظ</span>' : `<span class="sj-sub">${j.pages} ص</span>`)}
       </div>
       <div class="sj-sub">${escapeHtml(s1)} ← ${escapeHtml(s2)} (${j.pages} ص)</div>
@@ -19412,7 +19395,7 @@ function renderSpSabrGrid() {
     const s2 = SURAH_MAP[j.endSurah]?.n || "";
     return `<button type="button" class="sp-sabr-card ${isMem ? 'in-mem' : ''} ${isSel ? 'on' : ''}" onclick="spPickSabrJuz(${j.id})">
       <div class="sj-top">
-        <span>${j.id}. جزء ${escapeHtml(j.shortName)}</span>
+        <span>${escapeHtml(formatJuzLabel(j))}</span>
         ${isSel ? '<span class="sj-tag">✓ محدد</span>' : (isMem ? '<span class="sj-tag">محفوظ</span>' : `<span class="sj-sub">${j.pages} ص</span>`)}
       </div>
       <div class="sj-sub">${escapeHtml(s1)} ← ${escapeHtml(s2)} (${j.pages} ص)</div>
@@ -19511,7 +19494,7 @@ function renderSpJuzStrip() {
   const juzOrder = spState.dir === "desc" ? [...JUZ_PAGES].reverse() : JUZ_PAGES;
   let html = `<button type="button" class="sp-juz-pill ${spState.juzFilter === 0 ? 'on' : ''}" onclick="spSetJuzFilter(0)">الكل (114)</button>`;
   juzOrder.forEach(j => {
-    html += `<button type="button" class="sp-juz-pill ${spState.juzFilter === j.id ? 'on' : ''}" onclick="spSetJuzFilter(${j.id})">${j.id} ${escapeHtml(j.shortName)}</button>`;
+    html += `<button type="button" class="sp-juz-pill ${spState.juzFilter === j.id ? 'on' : ''}" onclick="spSetJuzFilter(${j.id})">${escapeHtml(formatJuzCompact(j))}</button>`;
   });
   el.innerHTML = html;
 }
@@ -19812,7 +19795,8 @@ function clearSurahPickerSelection() {
     return;
   }
   if (k === "rec") { r.recSurahId = ""; r.recFrom = ""; r.recTo = ""; r.recExtras = []; r.recPages = 0; r.recEndSurahId = ""; r.recIsSabr = false; r.manualRec = true; }
-  else if (k === "hw") { r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwEndSurahId = ""; r.hwSabrJuz = ""; }
+  else if (k === "hw") { r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwEndSurahId = ""; r.hwSabrJuz = ""; r.hwManualOnSat = false; }
+  else if (k === "hwNextMin") { r.hwNextMinCustom = false; r.hwNextMinSurahId = ""; r.hwNextMinFrom = ""; r.hwNextMinTo = ""; r.hwNextMinExtras = []; r.hwNextMinIsPages = false; r.hwNextMinSardJuzIds = []; r.hwNextMinSardLabel = ""; r.hwNextMinText = ""; }
   else if (k === "min") { r.minSurahId = ""; r.minFrom = ""; r.minTo = ""; r.minExtras = []; r.minSurah = ""; r.minText = ""; r.minPages = 0; r.minIsPages = false; r.minSardJuzIds = []; r.manualMin = true; }
   else if (k === "maj") { r.majExtras = []; r.majFrom = ""; r.majTo = ""; r.majPages = 0; r.majStartSurahId = ""; r.majEndSurahId = ""; r.majIsPages = false; r.majSardJuzIds = []; r.majSardLabel = ""; }
   else if (k === "nextMaj") { r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajTitle = ""; }
@@ -19852,6 +19836,7 @@ function applySurahPicker(quickEval = null) {
     closeModal("surahPickerModal");
     if (k === "hw") {
       r.hwSabrJuz = spState.sabrJuzName;
+      if (s.type === "saturday") r.hwManualOnSat = true;
       r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwEndSurahId = ""; r.hwExtras = [];
       r.notes = applyTajweedToNote(`الواجب القادم: سبر ${formatJuzClean(spState.sabrJuzName)}.`, r);
       openCardId = st.id;
@@ -19862,12 +19847,13 @@ function applySurahPicker(quickEval = null) {
     if (k === "nextMaj") {
       const jObj = getJuzByName(spState.sabrJuzName);
       r.nextMajSabrJuz = spState.sabrJuzName;
+      r.nextMajManual = true;
       if (jObj) {
         const s1 = SURAH_MAP[jObj.startSurah], s2 = SURAH_MAP[jObj.endSurah];
         r.nextMajStartSurahId = String(jObj.startSurah); r.nextMajStartAyah = jObj.startAyah;
         r.nextMajEndSurahId = String(jObj.endSurah); r.nextMajEndAyah = jObj.endAyah;
         r.nextMajStartPage = jObj.startPage; r.nextMajEndPage = jObj.endPage;
-        r.nextMajTitle = `سبر ${jObj.shortName}`;
+        r.nextMajTitle = `سبر ${formatJuzCompact(jObj)}`;
         r.nextMajFrom = formatSurahAyahPoint(s1, jObj.startAyah, false);
         r.nextMajTo = formatSurahAyahPoint(s2, jObj.endAyah, true);
       }
@@ -19935,10 +19921,14 @@ function applySurahPicker(quickEval = null) {
       if (r.majEval && !quickEval) applyNextMajorReview(st, r, r.majEval !== "إعادة");
     } else if (k === "nextMaj") {
       r.nextMajSabrJuz = ""; r.nextMajSardJuzIds = []; r.nextMajSardLabel = "";
-      r.nextMajIsPages = true;
+      r.nextMajIsPages = true; r.nextMajManual = true;
       r.nextMajStartSurahId = s1 ? String(s1.id) : ""; r.nextMajEndSurahId = s2 ? String(s2.id) : "";
       r.nextMajStartPage = p1; r.nextMajEndPage = p2;
-      r.nextMajTitle = surahHeaderLbl; r.nextMajFrom = `ص ${p1}`; r.nextMajTo = `ص ${p2}`;
+      r.nextMajTitle = surahHeaderLbl; r.nextMajFrom = fromCol; r.nextMajTo = toCol;
+    } else if (k === "hwNextMin") {
+      r.hwNextMinCustom = true; r.hwNextMinSurahId = ""; r.hwNextMinExtras = []; r.hwNextMinSardJuzIds = []; r.hwNextMinSardLabel = "";
+      r.hwNextMinIsPages = true; r.hwNextMinPageFrom = p1; r.hwNextMinPageTo = p2;
+      r.hwNextMinFrom = fromCol; r.hwNextMinTo = toCol; r.hwNextMinText = toastLbl;
     }
     closeModal("surahPickerModal");
     if (quickEval) {
@@ -19981,11 +19971,15 @@ function applySurahPicker(quickEval = null) {
       r.majFrom = info.fromCol; r.majTo = info.toCol; r.majPages = info.totalPages;
       if (r.majEval && !quickEval) applyNextMajorReview(st, r, r.majEval !== "إعادة");
     } else if (k === "nextMaj") {
-      r.nextMajSabrJuz = ""; r.nextMajIsPages = false;
+      r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajManual = true;
       r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
       r.nextMajSardJuzIds = [...info.ids]; r.nextMajSardLabel = info.label;
       r.nextMajStartPage = firstJ.startPage; r.nextMajEndPage = lastJ.endPage;
       r.nextMajTitle = "سرد"; r.nextMajFrom = info.fromCol; r.nextMajTo = info.toCol;
+    } else if (k === "hwNextMin") {
+      r.hwNextMinCustom = true; r.hwNextMinSurahId = ""; r.hwNextMinExtras = []; r.hwNextMinIsPages = false;
+      r.hwNextMinSardJuzIds = [...info.ids]; r.hwNextMinSardLabel = info.label;
+      r.hwNextMinText = info.label;
     }
     closeModal("surahPickerModal");
     if (quickEval) {
@@ -20028,6 +20022,12 @@ function applySurahPicker(quickEval = null) {
     r.hwSurahId = first.surahId; r.hwFrom = first.from; r.hwTo = first.to;
     r.hwEndSurahId = "";
     r.hwExtras = rest;
+    if (s.type === "saturday") r.hwManualOnSat = true;
+  } else if (k === "hwNextMin") {
+    r.hwNextMinCustom = true; r.hwNextMinIsPages = false; r.hwNextMinSardJuzIds = []; r.hwNextMinSardLabel = "";
+    r.hwNextMinSurahId = first.surahId; r.hwNextMinFrom = first.from; r.hwNextMinTo = first.to;
+    r.hwNextMinExtras = rest;
+    r.hwNextMinText = formatSegmentsInline(validSegs);
   } else if (k === "min") {
     r.minIsPages = false; r.minSardJuzIds = [];
     r.minSurahId = first.surahId; r.minFrom = first.from; r.minTo = first.to;
@@ -20046,7 +20046,7 @@ function applySurahPicker(quickEval = null) {
     const a1 = parseArabicNum(first.from, 1), a2 = parseArabicNum(lastSeg.to, s2.a);
     const p1 = getPageForSurahAyah(s1.id, a1), p2 = getPageForSurahAyah(s2.id, a2);
     const rng = formatMajorRangeObject(s1, a1, s2, a2, p1, p2, calcSegmentsPages(validSegs), p1, false, 1, 604);
-    r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = "";
+    r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.nextMajManual = true;
     r.nextMajStartSurahId = rng.startSurahId; r.nextMajStartAyah = rng.startAyah;
     r.nextMajEndSurahId = rng.endSurahId; r.nextMajEndAyah = rng.endAyah;
     r.nextMajStartPage = rng.startPage; r.nextMajEndPage = rng.endPage;
@@ -21076,7 +21076,15 @@ function buildStudentTodaySummaryWAText(st, s, h) {
     if (ptsOn) txt += `⭐ *النقاط:* ${r.points || 0}\n`;
   } else if (s.type === "daily") {
     const recTxt = (r.recIsSabr && r.sabrJuz) ? `سبر ${formatJuzClean(r.sabrJuz)}` : (formatSegmentsInline(getSegments(r, "rec")) || "—");
-    const hwTxt = r.hwSabrJuz ? `سبر ${formatJuzClean(r.hwSabrJuz)}` : (formatSegmentsInline(getSegments(r, "hw")) || "—");
+    const _waMode = getSessionHomeworkMode(s, h);
+    let hwTxt = r.hwSabrJuz ? `سبر ${formatJuzClean(r.hwSabrJuz)}` : (formatSegmentsInline(getSegments(r, "hw")) || "—");
+    if (_waMode.hwMode === "review") {
+      const rh = getNextReviewHomeworkForStudent(h, s, st, r);
+      const pts2 = [];
+      if (rh.minText) pts2.push(`الصغرى: ${rh.minText}`);
+      if (rh.majText) pts2.push(`الكبرى: ${rh.majText}`);
+      hwTxt = pts2.join(" | ") || "—";
+    }
     txt += `📖 *تسميع اليوم:* ${recTxt}\n`;
     txt += `✅ *التقييم:* ${r.recEval || "لم يُقيّم"}\n`;
     if (r.dRevEval) txt += `🔄 *المراجعة:* ${r.dRevFrom || ""}${r.dRevTo ? " ← " + r.dRevTo : ""} (${r.dRevEval})\n`;
@@ -21087,8 +21095,14 @@ function buildStudentTodaySummaryWAText(st, s, h) {
     const majTxt = r.sabrJuz ? `سبر ${formatJuzClean(r.sabrJuz)}` : formatMajStripDisplay(r.majFrom, r.majTo);
     if (minTxt) txt += `📗 *المراجعة الصغرى:* ${minTxt} (${r.minEval || "—"})\n`;
     if (majTxt && majTxt !== "—") txt += `📘 *المراجعة الكبرى:* ${majTxt} (${r.majEval || "—"})\n`;
-    const nxtM = r.nextMajSabrJuz ? `سبر ${formatJuzClean(r.nextMajSabrJuz)}` : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo);
-    if (nxtM && nxtM !== "—") txt += `📝 *الكبرى القادمة:* ${nxtM}\n`;
+    const _waModeSat = getSessionHomeworkMode(s, h);
+    if (_waModeSat.hwMode === "recitation") {
+      const rhRec = getNextRecitationHomeworkForStudent(h, s, st, r, false);
+      if (rhRec.inlineText) txt += `📝 *واجب التسميع القادم:* ${rhRec.inlineText}\n`;
+    } else {
+      const nxtM = r.nextMajSabrJuz ? `سبر ${formatJuzClean(r.nextMajSabrJuz)}` : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo);
+      if (nxtM && nxtM !== "—") txt += `📝 *الكبرى القادمة:* ${nxtM}\n`;
+    }
     if (ptsOn) txt += `⭐ *النقاط:* ${r.points || 0}\n`;
   }
   if (r?.notes && String(r.notes).trim()) txt += `💬 *ملاحظة:* ${stripMushafPageTokens(r.notes)}\n`;
@@ -21157,7 +21171,12 @@ function buildStudentDailyCardHtml(st, s, h) {
     evCls = evalTxt === "ممتاز" ? "" : (evalTxt === "إعادة" ? "ev-red" : "ev-blue");
   } else if (s?.type === "daily") {
     mainVal = (r.recIsSabr && r.sabrJuz) ? `سبر ${formatJuzClean(r.sabrJuz)}` : (formatSegmentsInline(getSegments(r, "rec")) || "—");
-    hwVal = r.hwSabrJuz ? `سبر ${formatJuzClean(r.hwSabrJuz)}` : (formatSegmentsInline(getSegments(r, "hw")) || hwVal);
+    if (getSessionHomeworkMode(s, h).hwMode === "review") {
+      const rh = getNextReviewHomeworkForStudent(h, s, st, r);
+      hwVal = [rh.minText ? `صغرى: ${rh.minText}` : "", rh.majText ? `كبرى: ${rh.majText}` : ""].filter(Boolean).join(" | ") || "—";
+    } else {
+      hwVal = r.hwSabrJuz ? `سبر ${formatJuzClean(r.hwSabrJuz)}` : (formatSegmentsInline(getSegments(r, "hw")) || hwVal);
+    }
     evalTxt = r.recEval || "—";
     evCls = evalTxt === "ممتاز" ? "" : (evalTxt === "إعادة" ? "ev-red" : "ev-blue");
   } else {
@@ -21168,7 +21187,11 @@ function buildStudentDailyCardHtml(st, s, h) {
     if (minT) p.push(`صغرى: ${minT}`);
     if (majT && majT !== "—") p.push(`كبرى: ${majT}`);
     mainVal = p.join(" | ") || "—";
-    hwVal = r.nextMajSabrJuz ? `سبر ${formatJuzClean(r.nextMajSabrJuz)}` : (formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) || "—");
+    if (getSessionHomeworkMode(s, h).hwMode === "recitation") {
+      hwVal = getNextRecitationHomeworkForStudent(h, s, st, r, false).inlineText || "—";
+    } else {
+      hwVal = r.nextMajSabrJuz ? `سبر ${formatJuzClean(r.nextMajSabrJuz)}` : (formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) || "—");
+    }
     evalTxt = r.majEval || r.minEval || "—";
     evCls = evalTxt === "ممتاز" ? "" : (evalTxt === "إعادة" ? "ev-red" : "ev-blue");
   }
@@ -22505,6 +22528,221 @@ function createSessionCore(type, dayName, date, hijriDate, hijriMonth, autoPrefi
   showToast(`تم فتح ${dayName} (${hijriDate}) — ${type === "saturday" ? "ملف المراجعة (صغرى وكبرى)" : "ملف التسميع اليومي"}`);
 }
 
+
+// ==================== DYNAMIC NEXT-CLASS-DAY HOMEWORK ENGINE (v100) ====================
+// Automatically inspects the NEXT scheduled class day after session `s` (adapts instantly if classDays/reviewDays change!):
+// - Daily -> Review (e.g., Wed -> Sat): Homework displays الصغرى & الكبرى for the upcoming review day!
+// - Review -> Daily (e.g., Sat -> Mon): Homework displays التسميع الجديد (السورة | من | إلى) for the upcoming recitation day!
+// - Daily -> Daily (e.g., Mon -> Wed): Homework displays التسميع الجديد (السورة | من | إلى).
+// - Review -> Review: Homework displays الصغرى & الكبرى.
+function getSessionHomeworkMode(s, h) {
+  const hal = h || getActiveHalaqa();
+  if (!s || !s.date) return { nextType: "daily", nextDayName: "", hwMode: "recitation", nextIso: "" };
+  const nextIso = findAdjacentClassISO(s.date, 1, hal);
+  const nextDow = nextIso ? new Date(nextIso + "T12:00:00").getDay() : 1;
+  const existingNext = (hal?.sessions || []).find(x => x.date === nextIso && !x.noClass);
+  const nextType = existingNext ? existingNext.type : getDefaultSessionTypeForDow(nextDow, hal);
+  const nextDayName = AR_DAYS[nextDow] || "";
+  return {
+    nextIso,
+    nextDow,
+    nextType,
+    nextDayName,
+    hwMode: nextType === "saturday" ? "review" : "recitation"
+  };
+}
+
+function formatNextMajCompactText(r) {
+  if (!r) return "";
+  if (r.nextMajSabrJuz) return `سبر ${formatJuzClean(r.nextMajSabrJuz)}`;
+  if (r.nextMajSardLabel) return r.nextMajSardLabel;
+  if (r.nextMajIsPages && r.nextMajFrom) {
+    return r.nextMajFrom === r.nextMajTo ? r.nextMajFrom : `${r.nextMajFrom} ← ${r.nextMajTo}`;
+  }
+  if (r.nextMajFrom) return formatMajStripDisplay(r.nextMajFrom, r.nextMajTo);
+  return "";
+}
+
+function getNextReviewHomeworkForStudent(h, s, st, r) {
+  if (!h || !s || !st || !r || st.track === "rashidi") {
+    return { minText: "", majText: "", minSegs: [], hasCustomMin: false, hasCustomMaj: false };
+  }
+  const nextIso = findAdjacentClassISO(s.date, 1, h) || s.date;
+  const fakeNextSat = { id: "__next_rev_preview__", date: nextIso, type: "saturday" };
+
+  // 1) Upcoming Minor Review (custom override on `r` OR auto-computed from week's recitations INCLUDING today `s`!)
+  let minText = "";
+  let minSegs = [];
+  let hasCustomMin = false;
+  if (r.hwNextMinCustom) {
+    hasCustomMin = true;
+    if (r.hwNextMinSardLabel) minText = r.hwNextMinSardLabel;
+    else if (r.hwNextMinIsPages && r.hwNextMinFrom) minText = r.hwNextMinFrom === r.hwNextMinTo ? r.hwNextMinFrom : `${r.hwNextMinFrom} ← ${r.hwNextMinTo}`;
+    else {
+      minSegs = getSegments(r, "hwNextMin");
+      minText = formatSegmentsInline(minSegs) || r.hwNextMinText || "";
+    }
+  } else {
+    const autoMin = computeStudentMinorFromPrevDaily(h, fakeNextSat, st.id);
+    if (autoMin && autoMin.merged && autoMin.merged.length) {
+      minSegs = autoMin.merged;
+      minText = formatSegmentsInline(autoMin.merged);
+    }
+  }
+
+  // 2) Upcoming Major Review (custom override on `r` OR predicted from latest previous review session / student bounds!)
+  let majText = "";
+  let hasCustomMaj = false;
+  const directNextMaj = formatNextMajCompactText(r);
+  if (directNextMaj && (r.nextMajManual || s.type === "saturday")) {
+    majText = directNextMaj;
+    hasCustomMaj = Boolean(r.nextMajManual);
+  } else {
+    const prevSats = (h.sessions || [])
+      .filter(ps => ps.id !== s.id && ps.type === "saturday" && !ps.noClass && ps.date < nextIso)
+      .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+    const curMonth = getSessionReportMonth(s);
+    const bounds = getStudentRevCycleBounds(st, h);
+    const sabrJuzId = getStudentMonthlySabrJuzId(st, h, curMonth);
+    const sabrJuz = sabrJuzId ? JUZ_PAGE_MAP[sabrJuzId] : null;
+    const revPace = Number(st.revPace || (sabrJuz ? 5 : (h.defaultRevPace || 2)));
+
+    let foundPrev = false;
+    for (const ps of prevSats) {
+      const pr = ps.records?.[st.id];
+      if (!pr) continue;
+      const isAbs = Boolean(pr.attendance && pr.attendance.includes("غياب"));
+      const hasMajEval = Boolean(pr.majEval && String(pr.majEval).trim());
+      if (!hasMajEval && !isAbs) continue;
+      const majPassed = hasMajEval && pr.majEval !== "إعادة" && !isAbs;
+
+      const carrySabr = (!majPassed && pr.sabrJuz) ? pr.sabrJuz : (pr.nextMajSabrJuz || "");
+      if (carrySabr) {
+        majText = `سبر ${formatJuzClean(carrySabr)}`;
+        foundPrev = true;
+        break;
+      }
+      const prNextTxt = formatNextMajCompactText(pr);
+      if (prNextTxt) {
+        majText = prNextTxt;
+        foundPrev = true;
+        break;
+      }
+      const prevPts = getMajorReviewStartEndPoints(pr, st, h, ps);
+      if (majPassed) {
+        const nxtPt = getNextSurahAyahForward(prevPts.endSurahId, prevPts.endAyah);
+        const rng = buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : bounds.startSurahId, nxtPt ? nxtPt.ayah : bounds.startAyah, revPace, bounds, sabrJuz);
+        majText = formatMajStripDisplay(rng.fromLabel, rng.toLabel);
+      } else {
+        const s1 = SURAH_MAP[prevPts.startSurahId], s2 = SURAH_MAP[prevPts.endSurahId];
+        if (s1 && s2) majText = formatMajStripDisplay(formatSurahAyahPoint(s1, prevPts.startAyah, false), formatSurahAyahPoint(s2, prevPts.endAyah, true));
+      }
+      foundPrev = true;
+      break;
+    }
+
+    if (!foundPrev) {
+      let initSid = sabrJuz ? sabrJuz.startSurah : bounds.startSurahId;
+      let initA = sabrJuz ? sabrJuz.startAyah : bounds.startAyah;
+      if (!sabrJuz && st.revPage && Number(st.revPage) >= bounds.startPage && Number(st.revPage) <= bounds.endPage) {
+        const pi = getPageStartInfo(Number(st.revPage));
+        initSid = pi.surah.id; initA = pi.ayah;
+      }
+      const rng = buildMajorReviewFromPoint(initSid, initA, revPace, bounds, sabrJuz);
+      majText = formatMajStripDisplay(rng.fromLabel, rng.toLabel);
+    }
+  }
+
+  return { minText: minText || "", majText: majText || "", minSegs, hasCustomMin, hasCustomMaj };
+}
+
+function getNextRecitationHomeworkForStudent(h, s, st, r, isHtml = true) {
+  const esc = v => isHtml ? escapeHtml(String(v || "")) : String(v || "");
+  if (!h || !s || !st || !r) return { surah: "", from: "", to: "", inlineText: "", isSabr: false, sabrJuz: "", segs: [], lines: 1 };
+
+  if (st.track === "rashidi") {
+    const f = r.hwRashidiFrom || r.rashidiFrom || st.rashidiPage || "";
+    const t = r.hwRashidiTo || r.rashidiTo || f;
+    return {
+      surah: f ? esc("الرشيدي") : "",
+      from: f ? esc(`ص ${f}`) : "",
+      to: t ? esc(`ص ${t}`) : "",
+      inlineText: f ? `الرشيدي ص ${f}${t && t != f ? "–" + t : ""}` : "",
+      isSabr: false, sabrJuz: "", segs: [], lines: 1
+    };
+  }
+
+  // 1) If current session `r` already has direct hw (daily session OR manual override on review day)
+  if (r.hwSabrJuz) {
+    const cols = formatHwSabrColumns(r.hwSabrJuz, isHtml);
+    return { ...cols, inlineText: `سبر ${formatJuzClean(r.hwSabrJuz)}`, isSabr: true, sabrJuz: r.hwSabrJuz, segs: [] };
+  }
+  const directSegs = getSegments(r, "hw");
+  if (directSegs.length) {
+    const cols = formatSegmentsColumns(directSegs, isHtml);
+    return { ...cols, inlineText: formatSegmentsInline(directSegs), isSabr: false, sabrJuz: "", segs: directSegs };
+  }
+
+  // 2) On a Review Day before a Daily Recitation Day (e.g., Sat -> Mon): pull student's upcoming recitation from latest daily session!
+  if (s.type === "saturday") {
+    const prevDailies = (h.sessions || [])
+      .filter(ps => ps.id !== s.id && ps.type === "daily" && !ps.noClass && ps.date < s.date)
+      .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
+    for (const ps of prevDailies) {
+      const pr = ps.records?.[st.id];
+      if (!pr) continue;
+      const isAbs = Boolean(pr.attendance && pr.attendance.includes("غياب"));
+      const hasEval = Boolean(pr.recEval && String(pr.recEval).trim());
+      if (!hasEval && !isAbs) continue;
+
+      const prevRecSegs = getSegments(pr, "rec");
+      const hwSegs = getSegments(pr, "hw");
+      if (isAbs || pr.recEval === "إعادة") {
+        const keep = hwSegs.length ? hwSegs : prevRecSegs;
+        if (keep.length) {
+          const cols = formatSegmentsColumns(keep, isHtml);
+          return { ...cols, inlineText: formatSegmentsInline(keep), isSabr: false, sabrJuz: "", segs: keep };
+        }
+        continue;
+      }
+      if (pr.hwSabrJuz) {
+        const cols = formatHwSabrColumns(pr.hwSabrJuz, isHtml);
+        return { ...cols, inlineText: `سبر ${formatJuzClean(pr.hwSabrJuz)}`, isSabr: true, sabrJuz: pr.hwSabrJuz, segs: [] };
+      }
+      if (hwSegs.length) {
+        const cols = formatSegmentsColumns(hwSegs, isHtml);
+        return { ...cols, inlineText: formatSegmentsInline(hwSegs), isSabr: false, sabrJuz: "", segs: hwSegs };
+      }
+      if (prevRecSegs.length) {
+        const last = prevRecSegs[prevRecSegs.length - 1];
+        const nxt = computeNextHomework(last.surahId, last.from, last.to, "", st.direction || h.defaultDir, st.pace || 0.5);
+        if (nxt && nxt.hwSurahId) {
+          const nxtSegs = [{ surahId: String(nxt.hwSurahId), from: nxt.hwFrom, to: nxt.hwTo }, ...(nxt.hwExtras || [])];
+          const cols = formatSegmentsColumns(nxtSegs, isHtml);
+          return { ...cols, inlineText: formatSegmentsInline(nxtSegs), isSabr: false, sabrJuz: "", segs: nxtSegs };
+        }
+      }
+    }
+
+    // Fallback: student's starting point if no daily recitation sessions yet
+    if (st.startSurahId && SURAH_MAP[Number(st.startSurahId)]) {
+      const s0 = SURAH_MAP[Number(st.startSurahId)];
+      const pace = st.pace || 0.5;
+      const fA = Math.max(1, Math.min(s0.a, parseArabicNum(st.startFromAyah, 1)));
+      const rem = s0.a - fA + 1;
+      const targetA = Math.max(3, Math.round(pace * (s0.a / Math.max(0.2, s0.l))));
+      const tA = (rem <= targetA * 1.25) ? s0.a : Math.min(s0.a, fA + targetA - 1);
+      const initSegs = [{ surahId: String(s0.id), from: fA, to: tA }];
+      const cols = formatSegmentsColumns(initSegs, isHtml);
+      return { ...cols, inlineText: formatSegmentsInline(initSegs), isSabr: false, sabrJuz: "", segs: initSegs };
+    }
+  }
+
+  return { surah: "", from: "", to: "", inlineText: "", isSabr: false, sabrJuz: "", segs: [], lines: 1 };
+}
+
+
 // ==================== AUTO-PREFILL ENGINES ====================
 function prefillDailyRecitation(notify = true, forceRefresh = false) {
   const h = getActiveHalaqa(), cur = getCurrentSession();
@@ -22538,7 +22776,32 @@ function prefillDailyRecitation(notify = true, forceRefresh = false) {
     if (forceRefresh) rec.manualRec = false;
 
     let found = false;
-    for (const ps of prevSessions) {
+    // v100: If teacher explicitly customized upcoming recitation homework on the immediately preceding review day (e.g., Saturday), inherit it first!
+    const prevSatCustom = (h.sessions || [])
+      .filter(ps => ps.id !== cur.id && ps.type === "saturday" && !ps.noClass && ps.date < cur.date)
+      .sort((a, b) => (b.date || "").localeCompare(a.date || ""))[0];
+    const latestPrevDailyDate = prevSessions[0]?.date || "";
+    if (prevSatCustom && prevSatCustom.date > latestPrevDailyDate) {
+      const psr = prevSatCustom.records?.[st.id];
+      if (psr && psr.hwManualOnSat) {
+        if (psr.hwSabrJuz) {
+          rec.recSurahId = ""; rec.recFrom = ""; rec.recTo = ""; rec.recExtras = []; rec.recPages = 0;
+          rec.recIsSabr = true; rec.sabrJuz = psr.hwSabrJuz;
+          found = true; filled++;
+        } else {
+          const satHwSegs = getSegments(psr, "hw");
+          if (satHwSegs.length) {
+            rec.recIsSabr = false;
+            rec.recSurahId = satHwSegs[0].surahId; rec.recFrom = satHwSegs[0].from; rec.recTo = satHwSegs[0].to;
+            rec.recEndSurahId = ""; rec.twoSurahs = false;
+            rec.recExtras = satHwSegs.slice(1).map(x => ({ ...x }));
+            rec.recPages = calcSegmentsPages(satHwSegs);
+            found = true; filled++;
+          }
+        }
+      }
+    }
+    if (!found) for (const ps of prevSessions) {
       const pr = ps.records?.[st.id];
       if (!pr) continue;
       const prevRecSegs = getSegments(pr, "rec");
@@ -22738,14 +23001,39 @@ function prefillSaturdayReviews(notify = true, forceRefresh = false) {
     // 1) Minor Review (Same Week ONLY — repeat in Minor NEVER carries over to next Saturday!)
     const curIsAbs = Boolean(rec.attendance && rec.attendance.includes("غياب"));
     const shouldRefreshMin = !rec.minEval && !curIsAbs && (!rec.manualMin || forceRefresh);
+    const prevDailyBeforeSat = (h.sessions || [])
+      .filter(ps => ps.id !== cur.id && ps.type === "daily" && !ps.noClass && ps.date < cur.date)
+      .sort((a, b) => (b.date || "").localeCompare(a.date || ""))[0];
+    const prevDailyRec = prevDailyBeforeSat?.records?.[st.id];
+    const prevSatDate = prevSats[0]?.date || "";
+    const hasFreshDailyOverrides = Boolean(prevDailyRec && prevDailyBeforeSat.date > prevSatDate);
+
     if (shouldRefreshMin) {
       if (forceRefresh) rec.manualMin = false;
+      if (hasFreshDailyOverrides && prevDailyRec.hwNextMinCustom) {
+        const cSegs = getSegments(prevDailyRec, "hwNextMin");
+        if (prevDailyRec.hwNextMinSardLabel && Array.isArray(prevDailyRec.hwNextMinSardJuzIds) && prevDailyRec.hwNextMinSardJuzIds.length) {
+          const si = formatSardJuzInfo(prevDailyRec.hwNextMinSardJuzIds);
+          rec.minSurahId = ""; rec.minEndSurahId = ""; rec.minExtras = []; rec.minIsPages = false;
+          rec.minSardJuzIds = [...si.ids]; rec.minSurah = "سرد"; rec.minFrom = si.fromCol; rec.minTo = si.toCol;
+          rec.minText = si.label; rec.minPages = si.totalPages; filled++;
+        } else if (prevDailyRec.hwNextMinIsPages && prevDailyRec.hwNextMinPageFrom) {
+          rec.minSurahId = ""; rec.minEndSurahId = ""; rec.minExtras = []; rec.minSardJuzIds = [];
+          rec.minIsPages = true; rec.minPageFrom = prevDailyRec.hwNextMinPageFrom; rec.minPageTo = prevDailyRec.hwNextMinPageTo;
+          rec.minSurah = prevDailyRec.hwNextMinText || "صفحات"; rec.minFrom = prevDailyRec.hwNextMinFrom; rec.minTo = prevDailyRec.hwNextMinTo;
+          rec.minText = prevDailyRec.hwNextMinText; rec.minPages = Math.max(1, prevDailyRec.hwNextMinPageTo - prevDailyRec.hwNextMinPageFrom + 1); filled++;
+        } else if (cSegs.length) {
+          applyStudentMinorAuto(rec, { merged: cSegs, srcLabel: `مخصّص (${prevDailyBeforeSat.dayName})` });
+          filled++;
+        }
+      } else {
       const res = computeStudentMinorFromPrevDaily(h, cur, st.id);
       if (res && applyStudentMinorAuto(rec, res)) {
         filled++;
       } else {
         rec.minSurahId = ""; rec.minEndSurahId = ""; rec.minSurah = ""; rec.minFrom = ""; rec.minTo = "";
         rec.minExtras = []; rec.minText = ""; rec.minPages = 0; rec.minSourceLabel = "";
+      }
       }
     }
 
@@ -22762,7 +23050,40 @@ function prefillSaturdayReviews(notify = true, forceRefresh = false) {
       const revPace = Number(st.revPace || (sabrJuz ? 5 : (h.defaultRevPace || 2)));
 
       let appliedFromPrev = false;
-      for (const ps of prevSats) {
+      if (hasFreshDailyOverrides && prevDailyRec.nextMajManual) {
+        if (prevDailyRec.nextMajSabrJuz) {
+          const jObj = getJuzByName(prevDailyRec.nextMajSabrJuz);
+          if (jObj) {
+            const s1 = SURAH_MAP[jObj.startSurah], s2 = SURAH_MAP[jObj.endSurah];
+            rec.sabrJuz = jObj.name; rec.majExtras = [];
+            rec.majStartSurahId = String(jObj.startSurah); rec.majStartAyah = jObj.startAyah;
+            rec.majEndSurahId = String(jObj.endSurah); rec.majEndAyah = jObj.endAyah;
+            rec.majStartPage = jObj.startPage; rec.majEndPage = jObj.endPage;
+            rec.majFrom = formatSurahAyahPoint(s1, jObj.startAyah, false); rec.majTo = formatSurahAyahPoint(s2, jObj.endAyah, true);
+            rec.majPages = jObj.pages; appliedFromPrev = true;
+          }
+        } else if (prevDailyRec.nextMajSardLabel && Array.isArray(prevDailyRec.nextMajSardJuzIds)) {
+          const si = formatSardJuzInfo(prevDailyRec.nextMajSardJuzIds);
+          rec.sabrJuz = ""; rec.majIsPages = false; rec.majExtras = [];
+          rec.majSardJuzIds = [...si.ids]; rec.majSardLabel = si.label;
+          rec.majStartPage = prevDailyRec.nextMajStartPage; rec.majEndPage = prevDailyRec.nextMajEndPage;
+          rec.majFrom = si.fromCol; rec.majTo = si.toCol; rec.majPages = si.totalPages; appliedFromPrev = true;
+        } else if (prevDailyRec.nextMajIsPages && prevDailyRec.nextMajStartPage) {
+          rec.sabrJuz = ""; rec.majSardJuzIds = []; rec.majSardLabel = ""; rec.majIsPages = true;
+          rec.majStartSurahId = prevDailyRec.nextMajStartSurahId || ""; rec.majEndSurahId = prevDailyRec.nextMajEndSurahId || "";
+          rec.majStartPage = prevDailyRec.nextMajStartPage; rec.majEndPage = prevDailyRec.nextMajEndPage;
+          rec.majFrom = prevDailyRec.nextMajFrom; rec.majTo = prevDailyRec.nextMajTo;
+          rec.majPages = Math.max(1, Number(prevDailyRec.nextMajEndPage) - Number(prevDailyRec.nextMajStartPage) + 1); appliedFromPrev = true;
+        } else if (prevDailyRec.nextMajStartSurahId && prevDailyRec.nextMajEndSurahId) {
+          rec.sabrJuz = ""; rec.majIsPages = false; rec.majSardJuzIds = []; rec.majSardLabel = "";
+          rec.majStartSurahId = prevDailyRec.nextMajStartSurahId; rec.majStartAyah = prevDailyRec.nextMajStartAyah || 1;
+          rec.majEndSurahId = prevDailyRec.nextMajEndSurahId; rec.majEndAyah = prevDailyRec.nextMajEndAyah || 1;
+          rec.majStartPage = prevDailyRec.nextMajStartPage; rec.majEndPage = prevDailyRec.nextMajEndPage;
+          rec.majFrom = prevDailyRec.nextMajFrom; rec.majTo = prevDailyRec.nextMajTo;
+          rec.majPages = Math.max(0.25, Number(prevDailyRec.nextMajEndPage || 1) - Number(prevDailyRec.nextMajStartPage || 1) + 1); appliedFromPrev = true;
+        }
+      }
+      if (!appliedFromPrev) for (const ps of prevSats) {
         const pr = ps.records?.[st.id];
         if (!pr) continue;
         const isAbs = Boolean(pr.attendance && pr.attendance.includes("غياب"));
@@ -24526,7 +24847,7 @@ function renderCardBody(s, st, r, idx) {
             ${_suggIds.map(jid => {
               const j = JUZ_PAGE_MAP[jid];
               const isSel = r.sabrJuz === j.name;
-              return `<button type="button" class="es-sabr-qchip ${isSel ? 'on' : ''}" onclick="onSabrJuzChange('${st.id}','${isSel ? '' : escapeHtml(j.name)}')"><b>جزء ${j.shortName}</b><small>الجزء ${j.id}</small></button>`;
+              return `<button type="button" class="es-sabr-qchip ${isSel ? 'on' : ''}" onclick="onSabrJuzChange('${st.id}','${isSel ? '' : escapeHtml(j.name)}')"><b>${escapeHtml(formatJuzLabel(j))}</b><small>${j.pages} ص</small></button>`;
             }).join("")}
           </div>
           <div class="field" style="margin-bottom:${r.sabrJuz ? '8px' : '0'};">
@@ -24580,18 +24901,41 @@ function renderCardBody(s, st, r, idx) {
         ${!(r.recIsSabr && r.sabrJuz) ? renderErrorCounterBar(st.id, "rec", r.recErrors, r.recAlerts) : ''}
         ${!shouldUsePerPageMode(r, st, "rec", h) ? `<div class="es-eval-4" id="esEvalRow_rec">${makeSmartEvalBtns(r.recEval, "setRecEval", r.recErrors, r.recAlerts)}</div>` : ''}
         ${renderTajweedTagsBar(st.id, r)}
-        <div class="es-hw-block">
-          <div class="es-hw-row">
-            <span class="lms-tap-area" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" onclick="openSurahPicker('${st.id}','hw')" title="اضغط لتغيير الواجب">📝 <b>الواجب:</b> ${escapeHtml(hwPreview)}</span>
-            <button type="button" class="lms-btn accent" style="padding:2px 8px; font-size:11px;" onclick="openSurahPicker('${st.id}','hw')">✏️ تعديل</button>
-          </div>
-          <div class="es-pace-row">
-            <span>مقدار الحفظ اليومي:</span>
-            <div class="pace-seg pace-6" title="مقدار الحفظ اليومي (حتى 5 صفحات)">
-              ${[0.5, 1, 2, 3, 4, 5].map(p => `<button type="button" class="${Number(st.pace||0.5)===p?'on':''}" onclick="setStudentPace('${st.id}',${p})">${p===0.5?'½':p}</button>`).join("")}
+        ${(() => {
+          const hwModeInfo = getSessionHomeworkMode(s, h);
+          if (hwModeInfo.hwMode === "review") {
+            const revHw = getNextReviewHomeworkForStudent(h, s, st, r);
+            return `<div class="es-hw-block">
+              <div style="font-size:11px; font-weight:800; color:var(--brand-slate); margin-bottom:2px;">📝 الواجب المنزلي ليوم ${escapeHtml(hwModeInfo.nextDayName || 'المراجعة')} (مراجعة):</div>
+              <div class="es-hw-row">
+                <span class="lms-tap-area" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" onclick="openSurahPicker('${st.id}','hwNextMin')">📗 <b>الصغرى:</b> ${escapeHtml(revHw.minText || "تُجمع تلقائياً بعد التقييم")}</span>
+                <button type="button" class="lms-btn accent" style="padding:2px 8px; font-size:11px;" onclick="openSurahPicker('${st.id}','hwNextMin')">✏️</button>
+              </div>
+              <div class="es-hw-row">
+                <span class="lms-tap-area" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" onclick="openSurahPicker('${st.id}','nextMaj')">📘 <b>الكبرى:</b> ${escapeHtml(revHw.majText || "تلقائي")}</span>
+                <button type="button" class="lms-btn accent" style="padding:2px 8px; font-size:11px;" onclick="openSurahPicker('${st.id}','nextMaj')">✏️</button>
+              </div>
+              <div class="es-pace-row">
+                <span>مقدار الحفظ اليومي:</span>
+                <div class="pace-seg pace-6" title="مقدار الحفظ اليومي (حتى 5 صفحات)">
+                  ${[0.5, 1, 2, 3, 4, 5].map(p => `<button type="button" class="${Number(st.pace||0.5)===p?'on':''}" onclick="setStudentPace('${st.id}',${p})">${p===0.5?'½':p}</button>`).join("")}
+                </div>
+              </div>
+            </div>`;
+          }
+          return `<div class="es-hw-block">
+            <div class="es-hw-row">
+              <span class="lms-tap-area" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" onclick="openSurahPicker('${st.id}','hw')" title="اضغط لتغيير الواجب">📝 <b>الواجب:</b> ${escapeHtml(hwPreview)}</span>
+              <button type="button" class="lms-btn accent" style="padding:2px 8px; font-size:11px;" onclick="openSurahPicker('${st.id}','hw')">✏️ تعديل</button>
             </div>
-          </div>
-        </div>
+            <div class="es-pace-row">
+              <span>مقدار الحفظ اليومي:</span>
+              <div class="pace-seg pace-6" title="مقدار الحفظ اليومي (حتى 5 صفحات)">
+                ${[0.5, 1, 2, 3, 4, 5].map(p => `<button type="button" class="${Number(st.pace||0.5)===p?'on':''}" onclick="setStudentPace('${st.id}',${p})">${p===0.5?'½':p}</button>`).join("")}
+              </div>
+            </div>
+          </div>`;
+        })()}
       </div>
 
       ${(String(r.notes || "").trim() && evalSheetTool !== "notes") ? `<div class="es-note-preview" onclick="toggleEvalSheetTool('${st.id}','notes')" title="اضغط لتعديل الملاحظة">
@@ -24650,7 +24994,7 @@ function renderCardBody(s, st, r, idx) {
 
     const eligibleJuzList = completedJuzIds.length ? JUZ_PAGES.filter(j => completedJuzIds.includes(j.id)) : JUZ_PAGES;
     const sabrJuzOpts = `<option value="">-- بدون خطة سبر --</option>` + eligibleJuzList.map(j =>
-      `<option value="${j.id}" ${j.id === sabrJuzId ? 'selected' : ''}>${j.name} (ص ${j.startPage}–${j.endPage})</option>`
+      `<option value="${j.id}" ${j.id === sabrJuzId ? 'selected' : ''}>${formatJuzLabel(j)}</option>`
     ).join("");
 
     const sabrInlineChip = sabrProg ? `
@@ -24664,16 +25008,26 @@ function renderCardBody(s, st, r, idx) {
     const hasNotesDot = Boolean(String(r.notes || "").trim());
 
     let satToolPanel = "";
+    const satHwModeInfo = getSessionHomeworkMode(s, h);
+    const satNextRecHw = satHwModeInfo.hwMode === "recitation" ? getNextRecitationHomeworkForStudent(h, s, st, r, false) : null;
     if (evalSheetTool === "hw") {
       satToolPanel = `
         <div class="es-tool-panel">
           <div class="es-tool-panel-hdr">
-            <span>📝 واجب الكبرى للسبت القادم</span>
+            <span>📝 الواجب المنزلي القادم</span>
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','hw')">إخفاء</button>
           </div>
+          ${satHwModeInfo.hwMode === "recitation" ? `
+            <div class="adv-row-card" style="margin-bottom:7px; border-right:3.5px solid var(--green);">
+              <div class="arc-l">
+                <div class="arc-t">📖 واجب التسميع ليوم ${escapeHtml(satHwModeInfo.nextDayName || "التسميع")} (يظهر بالتقرير)</div>
+                <div class="arc-v">${escapeHtml(satNextRecHw?.inlineText || "غير محدد بعد")}</div>
+              </div>
+              <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','hw')">✏️ تعديل</button>
+            </div>` : ""}
           <div class="adv-row-card" style="margin-bottom:0;">
             <div class="arc-l">
-              <div class="arc-t">الواجب القادم</div>
+              <div class="arc-t">📘 المراجعة الكبرى القادمة</div>
               <div class="arc-v">${escapeHtml(nextMajPreview)}</div>
             </div>
             <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','nextMaj')">✏️ تعديل</button>
@@ -24766,6 +25120,13 @@ function renderCardBody(s, st, r, idx) {
         ${r.sabrJuz ? renderSabrScoreBox(st.id, r, true) : renderErrorCounterBar(st.id, "maj", r.majErrors, r.majAlerts)}
         ${(r.sabrJuz || !shouldUsePerPageMode(r, st, "maj", h)) ? `<div class="es-eval-4" id="esEvalRow_maj" style="margin-bottom:6px;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors, r.majAlerts)}</div>` : ''}
         ${renderTajweedTagsBar(st.id, r)}
+        ${satHwModeInfo.hwMode === "recitation" ? `
+          <div class="es-hw-block">
+            <div class="es-hw-row">
+              <span class="lms-tap-area" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" onclick="openSurahPicker('${st.id}','hw')">📝 <b>واجب ${escapeHtml(satHwModeInfo.nextDayName || "التسميع")}:</b> ${escapeHtml(satNextRecHw?.inlineText || "—")}</span>
+              <button type="button" class="lms-btn accent" style="padding:2px 8px; font-size:11px;" onclick="openSurahPicker('${st.id}','hw')">✏️ تعديل</button>
+            </div>
+          </div>` : ""}
       </div>
 
       ${(String(r.notes || "").trim() && evalSheetTool !== "notes") ? `<div class="es-note-preview" onclick="toggleEvalSheetTool('${st.id}','notes')" title="اضغط لتعديل الملاحظة">
@@ -25248,7 +25609,7 @@ function applyNextMajorReview(st, r, passed) {
     r.nextMajEndAyah = rng.endAyah;
     r.nextMajStartPage = rng.startPage;
     r.nextMajEndPage = rng.endPage;
-    r.nextMajTitle = sabrCarryName ? `سبر ${getJuzByName(sabrCarryName)?.shortName || sabrCarryName}` : rng.surahLabel;
+    r.nextMajTitle = sabrCarryName ? `سبر ${formatJuzCompact(getJuzByName(sabrCarryName)) || formatJuzClean(sabrCarryName)}` : rng.surahLabel;
     r.nextMajFrom = rng.fromLabel;
     r.nextMajTo = rng.toLabel;
   };
@@ -25962,7 +26323,7 @@ function getCompactSabrCellText(sabrJuzName, scTag = "", isRepeat = false) {
   if (!sabrJuzName) return "";
   if (isRepeat) return `إعادة سبر${scTag}`;
   const jObj = getJuzByName(sabrJuzName);
-  const shortN = jObj ? jObj.shortName : sabrJuzName;
+  const shortN = jObj ? formatJuzCompact(jObj) : formatJuzClean(sabrJuzName);
   return `سبر ${shortN}${scTag}`;
 }
 
@@ -26030,28 +26391,47 @@ function renderDailyReport() {
     ? `ورقـة المراجعة الأسبوعية لحلقة ${escapeHtml(bm.name)}`
     : `ورقـة التسميـــع اليومي لحلقة ${escapeHtml(bm.name)}`;
 
+  const hwModeInfo = getSessionHomeworkMode(s, h);
+  const hwIsReview = hwModeInfo.hwMode === "review";
   let tbl = "";
   if (s.type === "daily") {
-    const maxNameLen = Math.max(...(h.students || []).map(x => String(x.name || "").trim().length), 10);
-    const nameW = maxNameLen <= 14 ? 10.2 : (maxNameLen <= 18 ? 11.2 : (maxNameLen <= 22 ? 12.0 : 12.8));
-    const noteW_pts = +(100 - (2.5 + nameW + 8.2 + 3.2 + 3.2 + 5.8 + 3.8 + 6.4 + 6.4 + 5.6 + 8.2 + 3.2 + 3.2)).toFixed(1);
-    const noteW_no = +(100 - (2.5 + (nameW + 0.6) + 8.4 + 3.3 + 3.3 + 6.0 + 6.6 + 6.6 + 5.8 + 8.4 + 3.3 + 3.3)).toFixed(1);
-    const colgroup = ptsOn
-      ? `<colgroup>
-          <col style="width:2.5%"><col style="width:${nameW}%">
-          <col style="width:8.2%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.8%">
-          <col style="width:3.8%">
-          <col style="width:6.4%"><col style="width:6.4%"><col style="width:5.6%">
-          <col style="width:8.2%"><col style="width:3.2%"><col style="width:3.2%">
-          <col style="width:${noteW_pts}%">
-        </colgroup>`
-      : `<colgroup>
-          <col style="width:2.5%"><col style="width:${(nameW + 0.6).toFixed(1)}%">
-          <col style="width:8.4%"><col style="width:3.3%"><col style="width:3.3%"><col style="width:6.0%">
-          <col style="width:6.6%"><col style="width:6.6%"><col style="width:5.8%">
-          <col style="width:8.4%"><col style="width:3.3%"><col style="width:3.3%">
-          <col style="width:${noteW_no}%">
-        </colgroup>`;
+    let colgroup = "";
+    if (hwIsReview) {
+      // Exact v97 spacious proportions — 2 Review HW columns (الصغرى 9.25% + الكبرى 9.25% = 18.5%)
+      colgroup = ptsOn
+        ? `<colgroup>
+            <col style="width:2.5%"><col style="width:11.5%">
+            <col style="width:8.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:5.5%">
+            <col style="width:3.5%">
+            <col style="width:6.5%"><col style="width:6.5%"><col style="width:6.5%">
+            <col style="width:9.25%"><col style="width:9.25%">
+            <col style="width:23.5%">
+          </colgroup>`
+        : `<colgroup>
+            <col style="width:2.5%"><col style="width:12.5%">
+            <col style="width:8.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:5.5%">
+            <col style="width:6.5%"><col style="width:6.5%"><col style="width:6.5%">
+            <col style="width:9.25%"><col style="width:9.25%">
+            <col style="width:26%">
+          </colgroup>`;
+    } else {
+      colgroup = ptsOn
+        ? `<colgroup>
+            <col style="width:2.5%"><col style="width:11.5%">
+            <col style="width:8.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:5.5%">
+            <col style="width:3.5%">
+            <col style="width:6.5%"><col style="width:6.5%"><col style="width:6.5%">
+            <col style="width:9.5%"><col style="width:4.5%"><col style="width:4.5%">
+            <col style="width:23.5%">
+          </colgroup>`
+        : `<colgroup>
+            <col style="width:2.5%"><col style="width:12.5%">
+            <col style="width:8.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:5.5%">
+            <col style="width:6.5%"><col style="width:6.5%"><col style="width:6.5%">
+            <col style="width:9.5%"><col style="width:4.5%"><col style="width:4.5%">
+            <col style="width:26%">
+          </colgroup>`;
+    }
 
     tbl = `<table class="t-daily" id="dailyReportTable">${colgroup}
       <thead>
@@ -26061,13 +26441,17 @@ function renderDailyReport() {
           <th colspan="4" class="th-slate">التسميع الجديد</th>
           ${ptsOn ? '<th rowspan="2" class="th-red">النقاط</th>' : ''}
           <th colspan="3" class="th-ochre">المراجعة</th>
-          <th colspan="3" class="th-slate">الواجب المنزلي</th>
+          ${hwIsReview
+            ? '<th colspan="2" class="th-slate">الواجب المنزلي (مراجعة)</th>'
+            : '<th colspan="3" class="th-slate">الواجب المنزلي</th>'}
           <th rowspan="2" class="th-gray">تنبيهات الحفظ والأداء</th>
         </tr>
         <tr>
           <th class="th-sub">السورة</th><th class="th-sub">من</th><th class="th-sub">إلى</th><th class="th-slate">التقييم</th>
           <th class="th-sub">من</th><th class="th-sub">إلى</th><th class="th-ochre">التقييم</th>
-          <th class="th-sub">السورة</th><th class="th-sub">من</th><th class="th-sub">إلى</th>
+          ${hwIsReview
+            ? '<th class="th-sub">الصغرى</th><th class="th-sub">الكبرى</th>'
+            : '<th class="th-sub">السورة</th><th class="th-sub">من</th><th class="th-sub">إلى</th>'}
         </tr>
       </thead><tbody>`;
     h.students.forEach((st, idx) => {
@@ -26076,18 +26460,32 @@ function renderDailyReport() {
       const _recSabrObj = (r.recIsSabr && r.sabrJuz) ? getJuzByName(r.sabrJuz) : null;
       const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
         ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
-      const recCols = st.track === "rashidi"
+      const isRashidiRow = st.track === "rashidi";
+      const recCols = isRashidiRow
         ? { surah: "الرشيدي", from: escapeHtml(r.rashidiFrom ? `ص ${r.rashidiFrom}` : ""), to: escapeHtml(r.rashidiTo ? `ص ${r.rashidiTo}` : ""), lines: 1 }
         : (_recSabrObj
-          ? { surah: escapeHtml(`جزء ${_recSabrObj.shortName}`), from: escapeHtml(SURAH_MAP[_recSabrObj.startSurah]?.n || ""), to: escapeHtml(SURAH_MAP[_recSabrObj.endSurah]?.n || ""), lines: 1 }
+          ? { surah: escapeHtml(formatJuzLabel(_recSabrObj)), from: escapeHtml(SURAH_MAP[_recSabrObj.startSurah]?.n || ""), to: escapeHtml(SURAH_MAP[_recSabrObj.endSurah]?.n || ""), lines: 1 }
           : formatSegmentsColumns(getSegments(r, "rec"), true));
-      const hwCols = st.track === "rashidi"
-        ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1 }
-        : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, true) : formatSegmentsColumns(getSegments(r, "hw"), true));
-      const isRashidiRow = st.track === "rashidi";
+
+      let hwCellsHtml = "";
+      if (hwIsReview) {
+        if (isRashidiRow) {
+          const rf = r.hwRashidiFrom || r.rashidiFrom || "";
+          const rt = r.hwRashidiTo || r.rashidiTo || rf;
+          hwCellsHtml = `<td colspan="2">${rf ? escapeHtml(`الرشيدي ص ${rf}${rt && rt != rf ? "–" + rt : ""}`) : ""}</td>`;
+        } else {
+          const revHw = getNextReviewHomeworkForStudent(h, s, st, r);
+          hwCellsHtml = `<td class="td-rev-slim">${escapeHtml(revHw.minText)}</td><td class="td-rev-slim">${escapeHtml(revHw.majText)}</td>`;
+        }
+      } else {
+        const hwCols = isRashidiRow
+          ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1 }
+          : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, true) : formatSegmentsColumns(getSegments(r, "hw"), true));
+        hwCellsHtml = `<td>${hwCols.surah}</td>${renderReportRangePairCells(hwCols.from, hwCols.to)}`;
+      }
+
       const isPendingSabrOnly = Boolean(r.recIsSabr && r.sabrJuz && !r.recEval && !isAbs);
       const isPendingNoEval = Boolean(!r.recEval && !isAbs && r.attendance === "لم يُسمّع");
-      // Compact legacy "إعادة القمر ص 529" / "(11–27)" into crisp single-line cells so row height never inflates!
       const compactDRevFrom = String(r.dRevFrom || "").replace(/^إعادة\s+/, "").replace(/\s*ص\s*\d+/g, "").trim();
       const compactDRevTo = String(r.dRevTo || "").replace(/^\(|\)$/g, "").trim();
       const hasIndepRev = !isRashidiRow && !isAbs && hasIndependentDailyReview(r);
@@ -26127,37 +26525,54 @@ function renderDailyReport() {
         <td class="td-rev-slim">${dRevCols.from}</td>
         <td class="td-rev-slim">${dRevCols.to}</td>
         <td class="${revSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(revSt.text)}</td>
-        <td>${hwCols.surah}</td>
-        ${renderReportRangePairCells(hwCols.from, hwCols.to)}
+        ${hwCellsHtml}
         <td class="txt-right td-note ${noteCellCls}">${noteCellHtml}</td>
       </tr>`;
     });
+    const dailyRightSpan = hwIsReview ? 6 : 7;
+    const dailyAllSpan = hwIsReview ? 12 : 13;
     const footHtml = ptsOn
       ? `<td colspan="6">مجموع نقاط الحلقة اليوم</td><td>${totalPts}</td>
-         <td colspan="7" class="txt-right">${_gtRep.supervisorTitle}: ${escapeHtml(bm.sheikh)} | ${escapeHtml(bm.branch)} | حفظ: ${formatNum(dayMemPgs)} ص${dayRashidiPgs > 0 ? ` | رشيدي: ${formatNum(dayRashidiPgs)} ص` : ""} | مراجعة: ${formatNum(dayRevPgs)} ص | حضور: ${h.students.length - excused - absent - pendingCnt} | غياب: ${excused + absent}</td>`
-      : `<td colspan="13" class="txt-right">${_gtRep.supervisorTitle}: ${escapeHtml(bm.sheikh)} | ${escapeHtml(bm.branch)} | صفحات الحفظ: ${formatNum(dayMemPgs)} ص${dayRashidiPgs > 0 ? ` | الرشيدي: ${formatNum(dayRashidiPgs)} ص` : ""} | صفحات المراجعة: ${formatNum(dayRevPgs)} ص | حضور: ${h.students.length - excused - absent - pendingCnt} | غياب: ${excused + absent}</td>`;
+         <td colspan="${dailyRightSpan}" class="txt-right">${_gtRep.supervisorTitle}: ${escapeHtml(bm.sheikh)} | ${escapeHtml(bm.branch)} | حفظ: ${formatNum(dayMemPgs)} ص${dayRashidiPgs > 0 ? ` | رشيدي: ${formatNum(dayRashidiPgs)} ص` : ""} | مراجعة: ${formatNum(dayRevPgs)} ص | حضور: ${h.students.length - excused - absent - pendingCnt} | غياب: ${excused + absent}</td>`
+      : `<td colspan="${dailyAllSpan}" class="txt-right">${_gtRep.supervisorTitle}: ${escapeHtml(bm.sheikh)} | ${escapeHtml(bm.branch)} | صفحات الحفظ: ${formatNum(dayMemPgs)} ص${dayRashidiPgs > 0 ? ` | الرشيدي: ${formatNum(dayRashidiPgs)} ص` : ""} | صفحات المراجعة: ${formatNum(dayRevPgs)} ص | حضور: ${h.students.length - excused - absent - pendingCnt} | غياب: ${excused + absent}</td>`;
     tbl += `</tbody><tfoot><tr>${footHtml}</tr></tfoot></table>`;
   } else {
-    const maxNameLen = Math.max(...(h.students || []).map(x => String(x.name || "").trim().length), 10);
-    const nameW = maxNameLen <= 14 ? 10.2 : (maxNameLen <= 18 ? 11.2 : (maxNameLen <= 22 ? 12.0 : 12.8));
-    const noteW_pts = +(100 - (2.5 + nameW + 8.0 + 3.2 + 3.2 + 5.6 + 6.6 + 6.6 + 5.6 + 3.8 + 8.2 + 3.2 + 3.2)).toFixed(1);
-    const noteW_no = +(100 - (2.5 + (nameW + 0.6) + 8.2 + 3.3 + 3.3 + 5.8 + 6.8 + 6.8 + 5.8 + 8.4 + 3.3 + 3.3)).toFixed(1);
-    const colgroup = ptsOn
-      ? `<colgroup>
-          <col style="width:2.5%"><col style="width:${nameW}%">
-          <col style="width:8.0%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.6%">
-          <col style="width:6.6%"><col style="width:6.6%"><col style="width:5.6%">
-          <col style="width:3.8%">
-          <col style="width:8.2%"><col style="width:3.2%"><col style="width:3.2%">
-          <col style="width:${noteW_pts}%">
-        </colgroup>`
-      : `<colgroup>
-          <col style="width:2.5%"><col style="width:${(nameW + 0.6).toFixed(1)}%">
-          <col style="width:8.2%"><col style="width:3.3%"><col style="width:3.3%"><col style="width:5.8%">
-          <col style="width:6.8%"><col style="width:6.8%"><col style="width:5.8%">
-          <col style="width:8.4%"><col style="width:3.3%"><col style="width:3.3%">
-          <col style="width:${noteW_no}%">
-        </colgroup>`;
+    let colgroup = "";
+    if (hwIsReview) {
+      colgroup = ptsOn
+        ? `<colgroup>
+            <col style="width:2.5%"><col style="width:12.0%">
+            <col style="width:8.5%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.2%">
+            <col style="width:7.0%"><col style="width:7.0%"><col style="width:6.0%">
+            <col style="width:3.4%">
+            <col style="width:8.9%"><col style="width:8.9%">
+            <col style="width:24.2%">
+          </colgroup>`
+        : `<colgroup>
+            <col style="width:2.5%"><col style="width:13.0%">
+            <col style="width:8.5%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.2%">
+            <col style="width:7.0%"><col style="width:7.0%"><col style="width:6.0%">
+            <col style="width:8.9%"><col style="width:8.9%">
+            <col style="width:26.6%">
+          </colgroup>`;
+    } else {
+      colgroup = ptsOn
+        ? `<colgroup>
+            <col style="width:2.5%"><col style="width:12.0%">
+            <col style="width:8.5%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.2%">
+            <col style="width:7.0%"><col style="width:7.0%"><col style="width:6.0%">
+            <col style="width:3.4%">
+            <col style="width:9.2%"><col style="width:4.3%"><col style="width:4.3%">
+            <col style="width:24.2%">
+          </colgroup>`
+        : `<colgroup>
+            <col style="width:2.5%"><col style="width:13.0%">
+            <col style="width:8.5%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.2%">
+            <col style="width:7.0%"><col style="width:7.0%"><col style="width:6.0%">
+            <col style="width:9.2%"><col style="width:4.3%"><col style="width:4.3%">
+            <col style="width:26.6%">
+          </colgroup>`;
+    }
 
     tbl = `<table class="t-daily" id="dailyReportTable">${colgroup}
       <thead>
@@ -26167,13 +26582,17 @@ function renderDailyReport() {
           <th colspan="4" class="th-slate">المراجعة الصغرى</th>
           <th colspan="3" class="th-ochre">المراجعة الكبرى</th>
           ${ptsOn ? '<th rowspan="2" class="th-red">النقاط</th>' : ''}
-          <th colspan="3" class="th-slate">الواجب المنزلي (مراجعة كبرى)</th>
+          ${hwIsReview
+            ? '<th colspan="2" class="th-slate">الواجب المنزلي (مراجعة)</th>'
+            : '<th colspan="3" class="th-slate">الواجب المنزلي (التسميع)</th>'}
           <th rowspan="2" class="th-gray">تنبيهات الحفظ والأداء</th>
         </tr>
         <tr>
           <th class="th-sub">السورة</th><th class="th-sub">من</th><th class="th-sub">إلى</th><th class="th-slate">التقييم</th>
           <th class="th-sub">من</th><th class="th-sub">إلى</th><th class="th-ochre">التقييم</th>
-          <th class="th-sub">السورة</th><th class="th-sub">من</th><th class="th-sub">إلى</th>
+          ${hwIsReview
+            ? '<th class="th-sub">الصغرى</th><th class="th-sub">الكبرى</th>'
+            : '<th class="th-sub">السورة</th><th class="th-sub">من</th><th class="th-sub">إلى</th>'}
         </tr>
       </thead><tbody>`;
     h.students.forEach((st, idx) => {
@@ -26182,18 +26601,31 @@ function renderDailyReport() {
       const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
         ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
       const minSegs = getSegments(r, "min");
-      const minCols = st.track === "rashidi"
+      const isRashidiRow = st.track === "rashidi";
+      const minCols = isRashidiRow
         ? { surah: "الرشيدي", from: escapeHtml(r.rashidiFrom ? `ص ${r.rashidiFrom}` : ""), to: escapeHtml(r.rashidiTo ? `ص ${r.rashidiTo}` : ""), lines: 1 }
         : (minSegs.length ? formatSegmentsColumns(minSegs, true) : { surah: escapeHtml(r.minSurah || r.minText || ""), from: escapeHtml(r.minFrom || ""), to: escapeHtml(r.minTo || ""), lines: 1 });
-      const isRashidiRow = st.track === "rashidi";
       const majCols = isRashidiRow
         ? { from: "", to: "", lines: 1 }
         : ((r.majIsPages || r.majSardLabel)
           ? { from: escapeHtml(r.majFrom || ""), to: escapeHtml(r.majTo || ""), lines: 1 }
           : formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, true));
-      const hwCols = isRashidiRow
-        ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1 }
-        : formatSatNextMajColumns(r, true);
+
+      let hwCellsHtml = "";
+      if (hwIsReview) {
+        if (isRashidiRow) {
+          const rf = r.hwRashidiFrom || r.rashidiFrom || "";
+          const rt = r.hwRashidiTo || r.rashidiTo || rf;
+          hwCellsHtml = `<td colspan="2">${rf ? escapeHtml(`الرشيدي ص ${rf}${rt && rt != rf ? "–" + rt : ""}`) : ""}</td>`;
+        } else {
+          const revHw = getNextReviewHomeworkForStudent(h, s, st, r);
+          hwCellsHtml = `<td class="td-rev-slim">${escapeHtml(revHw.minText)}</td><td class="td-rev-slim">${escapeHtml(revHw.majText)}</td>`;
+        }
+      } else {
+        const recHw = getNextRecitationHomeworkForStudent(h, s, st, r, true);
+        hwCellsHtml = `<td>${recHw.surah}</td>${renderReportRangePairCells(recHw.from, recHw.to)}`;
+      }
+
       const isNoRec = isPresentNoRecite(r.attendance);
       const minSt = getEvalCellStyle(isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isRashidiRow ? (r.recEval || "") : (r.minEval || ""))), isAbs);
       const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
@@ -26210,15 +26642,16 @@ function renderDailyReport() {
         <td class="td-rev-slim">${majCols.to}</td>
         <td class="${majSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(majSt.text)}</td>
         ${ptsOn ? `<td class="td-pts">${r.points || 0}</td>` : ''}
-        <td>${hwCols.surah}</td>
-        ${renderReportRangePairCells(hwCols.from, hwCols.to)}
+        ${hwCellsHtml}
         <td class="txt-right td-note">${escapeHtml(stripMushafPageTokens(r.notes || ""))}</td>
       </tr>`;
     });
+    const satRightSpan = hwIsReview ? 3 : 4;
+    const satAllSpan = hwIsReview ? 12 : 13;
     const footHtml = ptsOn
       ? `<td colspan="9">مجموع نقاط الحلقة اليوم</td><td>${totalPts}</td>
-         <td colspan="4" class="txt-right">${_gtRep.supervisorTitle}: ${escapeHtml(bm.sheikh)} | ${escapeHtml(bm.branch)} | مراجعة: ${formatNum(dayRevPgs)} ص | حضور: ${h.students.length - excused - absent - pendingCnt} | غياب: ${excused + absent}</td>`
-      : `<td colspan="13" class="txt-right">${_gtRep.supervisorTitle}: ${escapeHtml(bm.sheikh)} | ${escapeHtml(bm.branch)} | صفحات المراجعة: ${formatNum(dayRevPgs)} ص | حضور: ${h.students.length - excused - absent - pendingCnt} | غياب: ${excused + absent}</td>`;
+         <td colspan="${satRightSpan}" class="txt-right">${_gtRep.supervisorTitle}: ${escapeHtml(bm.sheikh)} | ${escapeHtml(bm.branch)} | مراجعة: ${formatNum(dayRevPgs)} ص | حضور: ${h.students.length - excused - absent - pendingCnt} | غياب: ${excused + absent}</td>`
+      : `<td colspan="${satAllSpan}" class="txt-right">${_gtRep.supervisorTitle}: ${escapeHtml(bm.sheikh)} | ${escapeHtml(bm.branch)} | صفحات المراجعة: ${formatNum(dayRevPgs)} ص | حضور: ${h.students.length - excused - absent - pendingCnt} | غياب: ${excused + absent}</td>`;
     tbl += `</tbody><tfoot><tr>${footHtml}</tr></tfoot></table>`;
   }
 
@@ -26265,7 +26698,7 @@ function applyReportPreviewFit(which) {
   const content = paper.firstElementChild;
   if (!content) return;
   const availW = Math.max(240, shell.clientWidth - 16);
-  const naturalW = Math.max(content.scrollWidth || (isDaily ? 980 : 820), isDaily ? 980 : 820);
+  const naturalW = Math.max(content.scrollWidth || (isDaily ? 1040 : 860), isDaily ? 1040 : 860);
   if (availW >= naturalW) return;
 
   const scale = availW / naturalW;
@@ -26705,9 +27138,9 @@ function renderMonthlyReport() {
     </div>
     <table class="t-monthly" id="monthlyReportTable">
       <colgroup>
-        <col style="width:3.8%"><col style="width:16.2%">
-        <col style="width:13.5%"><col style="width:13.5%"><col style="width:7.5%">
-        <col style="width:9.0%"><col style="width:11.5%"><col style="width:25.0%">
+        <col style="width:4%"><col style="width:19%">
+        <col style="width:13.5%"><col style="width:13.5%"><col style="width:8%">
+        <col style="width:9%"><col style="width:12%"><col style="width:21%">
       </colgroup>
       <thead>
         <tr>
@@ -26911,10 +27344,8 @@ async function renderReportToHDCanvas(paperId) {
   if (document.fonts && document.fonts.ready) await document.fonts.ready;
   await new Promise(r => setTimeout(r, 160));
 
-  // v99: Balanced medium stage widths — crisp, readable, zero stretched empty whitespace!
-  const baseW = isCert ? 1400 : (isPoster ? 900 : (isIndiv ? 860 : (isMonthly ? 940 : 1100)));
-  stage.style.setProperty("width", baseW + "px", "important");
-  await new Promise(r => setTimeout(r, 30));
+  // Exact v97 spacious HD widths — crisp, aligned, zero squishing or text collision!
+  const baseW = isCert ? 1400 : (isPoster ? 900 : (isIndiv ? 1040 : (isMonthly ? 1180 : 1680)));
   const measuredW = isCert ? 1400 : Math.max(baseW, Math.ceil(stage.scrollWidth));
   if (!isCert && measuredW > baseW) {
     stage.style.setProperty("width", measuredW + "px", "important");
@@ -28427,7 +28858,7 @@ function populateCertJuzOptions(selectedJuzName = "") {
   const sel = document.getElementById("certJuzSelect");
   if (!sel) return;
   sel.innerHTML = [...JUZ_PAGES].reverse().map(j =>
-    `<option value="${escapeHtml(j.name)}" ${j.name === selectedJuzName ? "selected" : ""}>${escapeHtml(j.name)} (${j.pages} ص)</option>`
+    `<option value="${escapeHtml(j.name)}" ${j.name === selectedJuzName ? "selected" : ""}>${escapeHtml(formatJuzLabel(j))}</option>`
   ).join("");
   if (selectedJuzName && Array.from(sel.options).some(o => o.value === selectedJuzName)) {
     sel.value = selectedJuzName;
@@ -28962,17 +29393,35 @@ async function exportDailyExcelStyled() {
     const xlRashTag = xlRashidiPgs > 0 ? `  |  صفحات الرشيدي: ${formatNum(xlRashidiPgs)}` : "";
 
     const logoId = wb.addImage({ base64: bm.logoB64, extension: bm.logoExt });
-    const totalCols = ptsOn ? 14 : 13;
+    const xlHwModeInfo = getSessionHomeworkMode(s, h);
+    const xlHwIsReview = xlHwModeInfo.hwMode === "review";
+    const totalCols = (ptsOn ? 14 : 13) - (xlHwIsReview ? 1 : 0);
 
     if (!isSat) {
-      ws.columns = ptsOn
-        ? [{ width: 4.5 }, { width: 22 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 7 }, { width: 15 }, { width: 15 }, { width: 11 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 42 }]
-        : [{ width: 4.5 }, { width: 23 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 12 }, { width: 15 }, { width: 15 }, { width: 12 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 44 }];
+      if (xlHwIsReview) {
+        ws.columns = ptsOn
+          ? [{ width: 4.5 }, { width: 22 }, { width: 17 }, { width: 9 }, { width: 9 }, { width: 11 }, { width: 7 }, { width: 15 }, { width: 15 }, { width: 11 }, { width: 18 }, { width: 18 }, { width: 40 }]
+          : [{ width: 4.5 }, { width: 23 }, { width: 17 }, { width: 9 }, { width: 9 }, { width: 12 }, { width: 15 }, { width: 15 }, { width: 12 }, { width: 19 }, { width: 19 }, { width: 42 }];
+      } else {
+        ws.columns = ptsOn
+          ? [{ width: 4.5 }, { width: 22 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 7 }, { width: 15 }, { width: 15 }, { width: 11 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 42 }]
+          : [{ width: 4.5 }, { width: 23 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 12 }, { width: 15 }, { width: 15 }, { width: 12 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 44 }];
+      }
     } else {
-      ws.columns = ptsOn
-        ? [{ width: 4.5 }, { width: 22 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 17 }, { width: 17 }, { width: 12 }, { width: 7 }, { width: 18 }, { width: 10 }, { width: 10 }, { width: 38 }]
-        : [{ width: 4.5 }, { width: 23 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 17 }, { width: 17 }, { width: 12.5 }, { width: 18 }, { width: 10 }, { width: 10 }, { width: 40 }];
+      if (xlHwIsReview) {
+        ws.columns = ptsOn
+          ? [{ width: 4.5 }, { width: 22 }, { width: 17 }, { width: 9 }, { width: 9 }, { width: 11 }, { width: 16 }, { width: 16 }, { width: 12 }, { width: 7 }, { width: 18 }, { width: 18 }, { width: 38 }]
+          : [{ width: 4.5 }, { width: 23 }, { width: 17 }, { width: 9 }, { width: 9 }, { width: 11 }, { width: 16 }, { width: 16 }, { width: 12 }, { width: 19 }, { width: 19 }, { width: 40 }];
+      } else {
+        ws.columns = ptsOn
+          ? [{ width: 4.5 }, { width: 22 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 17 }, { width: 17 }, { width: 12 }, { width: 7 }, { width: 18 }, { width: 10 }, { width: 10 }, { width: 38 }]
+          : [{ width: 4.5 }, { width: 23 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 17 }, { width: 17 }, { width: 12.5 }, { width: 18 }, { width: 10 }, { width: 10 }, { width: 40 }];
+      }
     }
+
+    const colLetter = n => String.fromCharCode(64 + n);
+    const lastColL = colLetter(totalCols);
+    const titleEndL = colLetter(Math.max(6, totalCols - 2));
 
     // Dynamic Official Header (Rows 1-5)
     ws.getRow(1).height = 10; ws.getRow(2).height = 22; ws.getRow(3).height = 18; ws.getRow(4).height = 20; ws.getRow(5).height = 10;
@@ -28983,7 +29432,7 @@ async function exportDailyExcelStyled() {
     styleCell(ws.getCell("A3"), { fontColor: "FF000000", bold: true, size: 10.5, border: false });
     styleCell(ws.getCell("A4"), { fontColor: "FF000000", bold: true, size: 10.5, border: false });
 
-    ws.mergeCells(ptsOn ? "C2:L3" : "C2:K3");
+    ws.mergeCells(`C2:${titleEndL}3`);
     ws.getCell("C2").value = isSat
       ? `ورقـة المراجعة الأسبوعية لحلقة ${bm.name}`
       : `ورقـة التسميـــع اليومي لحلقة ${bm.name}`;
@@ -28993,11 +29442,12 @@ async function exportDailyExcelStyled() {
     ws.getCell("C4").value = `يوم : ${s.dayName}   ${s.hijriDate}`;
     styleCell(ws.getCell("C4"), { fontColor: "FF000000", bold: true, size: 11, border: false });
 
-    ws.mergeCells(ptsOn ? "H4:L4" : "G4:K4");
-    ws.getCell(ptsOn ? "H4" : "G4").value = `الغياب: المبرر: ${excused}   /   غير المبرر: ${absent}`;
-    styleCell(ws.getCell(ptsOn ? "H4" : "G4"), { fontColor: "FF000000", bold: true, size: 11, border: false });
+    const absStartL = ptsOn ? "H" : "G";
+    ws.mergeCells(`${absStartL}4:${titleEndL}4`);
+    ws.getCell(`${absStartL}4`).value = `الغياب: المبرر: ${excused}   /   غير المبرر: ${absent}`;
+    styleCell(ws.getCell(`${absStartL}4`), { fontColor: "FF000000", bold: true, size: 11, border: false });
 
-    ws.addImage(logoId, { tl: { col: ptsOn ? 12.15 : 11.15, row: 0.7 }, ext: { width: 196, height: 66 } });
+    ws.addImage(logoId, { tl: { col: totalCols - 1.85, row: 0.7 }, ext: { width: 196, height: 66 } });
 
     ws.getRow(6).height = 23; ws.getRow(7).height = 22;
 
@@ -29007,41 +29457,50 @@ async function exportDailyExcelStyled() {
       ws.mergeCells("C6:F6"); ws.getCell("C6").value = "التسميع الجديد";
       ws.getCell("C7").value = "سورة"; ws.getCell("D7").value = "من الآية"; ws.getCell("E7").value = "إلى الآية"; ws.getCell("F7").value = "التقييم";
 
-      if (ptsOn) {
-        ws.mergeCells("G6:G7"); ws.getCell("G6").value = "النقاط";
-        ws.mergeCells("H6:J6"); ws.getCell("H6").value = "المراجعة";
-        ws.mergeCells("K6:M6"); ws.getCell("K6").value = "الواجب المنزلي";
-        ws.mergeCells("N6:N7"); ws.getCell("N6").value = "تنبيهات الحفظ والأداء";
-        ws.getCell("H7").value = "من"; ws.getCell("I7").value = "إلى"; ws.getCell("J7").value = "التقييم";
-        ws.getCell("K7").value = "السورة"; ws.getCell("L7").value = "من الآية"; ws.getCell("M7").value = "إلى الآية";
+      const revStart = ptsOn ? 8 : 7;
+      const revEnd = revStart + 2;
+      const hwStartCol = revEnd + 1;
+      const hwSpan = xlHwIsReview ? 2 : 3;
+      const hwEndCol = hwStartCol + hwSpan - 1;
+      const noteCol = totalCols;
+
+      if (ptsOn) { ws.mergeCells("G6:G7"); ws.getCell("G6").value = "النقاط"; }
+      ws.mergeCells(6, revStart, 6, revEnd); ws.getCell(6, revStart).value = "المراجعة";
+      ws.getCell(7, revStart).value = "من"; ws.getCell(7, revStart + 1).value = "إلى"; ws.getCell(7, revEnd).value = "التقييم";
+
+      ws.mergeCells(6, hwStartCol, 6, hwEndCol);
+      ws.getCell(6, hwStartCol).value = xlHwIsReview ? "الواجب المنزلي (مراجعة)" : "الواجب المنزلي";
+      if (xlHwIsReview) {
+        ws.getCell(7, hwStartCol).value = "الصغرى";
+        ws.getCell(7, hwStartCol + 1).value = "الكبرى";
       } else {
-        ws.mergeCells("G6:I6"); ws.getCell("G6").value = "المراجعة";
-        ws.mergeCells("J6:L6"); ws.getCell("J6").value = "الواجب المنزلي";
-        ws.mergeCells("M6:M7"); ws.getCell("M6").value = "تنبيهات الحفظ والأداء";
-        ws.getCell("G7").value = "من"; ws.getCell("H7").value = "إلى"; ws.getCell("I7").value = "التقييم";
-        ws.getCell("J7").value = "السورة"; ws.getCell("K7").value = "من الآية"; ws.getCell("L7").value = "إلى الآية";
+        ws.getCell(7, hwStartCol).value = "السورة";
+        ws.getCell(7, hwStartCol + 1).value = "من الآية";
+        ws.getCell(7, hwStartCol + 2).value = "إلى الآية";
       }
+      ws.mergeCells(6, noteCol, 7, noteCol); ws.getCell(6, noteCol).value = "تنبيهات الحفظ والأداء";
 
       styleCell(ws.getCell("A6"), { fill: "FFD9D9D9", fontColor: "FF000000", bold: true, size: 10 });
       styleCell(ws.getCell("B6"), { fill: "FFD0D7DE", fontColor: "FF000000", bold: true, size: 11 });
-      (ptsOn ? ["C6","D6","E6","F6","K6","L6","M6"] : ["C6","D6","E6","F6","J6","K6","L6"]).forEach(c => styleCell(ws.getCell(c), { fill: "FF33464F", fontColor: "FFFFFFFF", bold: true, size: 11 }));
+      for (let c = 3; c <= 6; c++) styleCell(ws.getCell(6, c), { fill: "FF33464F", fontColor: "FFFFFFFF", bold: true, size: 11 });
       if (ptsOn) styleCell(ws.getCell("G6"), { fill: "FFC00000", fontColor: "FFFFFFFF", bold: true, size: 10.5 });
-      (ptsOn ? ["H6","I6","J6"] : ["G6","H6","I6"]).forEach(c => styleCell(ws.getCell(c), { fill: "FFCAA642", fontColor: "FFFFFFFF", bold: true, size: 11 }));
-      styleCell(ws.getCell(ptsOn ? "N6" : "M6"), { fill: "FFD9D9D9", fontColor: "FF000000", bold: true, size: 11 });
+      for (let c = revStart; c <= revEnd; c++) styleCell(ws.getCell(6, c), { fill: "FFCAA642", fontColor: "FFFFFFFF", bold: true, size: 11 });
+      for (let c = hwStartCol; c <= hwEndCol; c++) styleCell(ws.getCell(6, c), { fill: "FF33464F", fontColor: "FFFFFFFF", bold: true, size: 11 });
+      styleCell(ws.getCell(6, noteCol), { fill: "FFD9D9D9", fontColor: "FF000000", bold: true, size: 11 });
 
-      (ptsOn ? ["C7","D7","E7","H7","I7","K7","L7","M7"] : ["C7","D7","E7","G7","H7","J7","K7","L7"]).forEach(c => styleCell(ws.getCell(c), { fill: "FFF2F2F2", fontColor: "FF000000", bold: true, size: 9.5 }));
+      for (let c = 3; c <= 5; c++) styleCell(ws.getCell(7, c), { fill: "FFF2F2F2", fontColor: "FF000000", bold: true, size: 9.5 });
       styleCell(ws.getCell("F7"), { fill: "FF33464F", fontColor: "FFFFFFFF", bold: true, size: 9.5 });
-      styleCell(ws.getCell(ptsOn ? "J7" : "I7"), { fill: "FFCAA642", fontColor: "FFFFFFFF", bold: true, size: 9.5 });
-      (ptsOn ? ["A7","B7","G7","N7"] : ["A7","B7","M7"]).forEach(c => { ws.getCell(c).border = THIN_BORDER; });
+      styleCell(ws.getCell(7, revStart), { fill: "FFF2F2F2", fontColor: "FF000000", bold: true, size: 9.5 });
+      styleCell(ws.getCell(7, revStart + 1), { fill: "FFF2F2F2", fontColor: "FF000000", bold: true, size: 9.5 });
+      styleCell(ws.getCell(7, revEnd), { fill: "FFCAA642", fontColor: "FFFFFFFF", bold: true, size: 9.5 });
+      for (let c = hwStartCol; c <= hwEndCol; c++) styleCell(ws.getCell(7, c), { fill: "FFF2F2F2", fontColor: "FF000000", bold: true, size: 9.5 });
+      [1, 2, ...(ptsOn ? [7] : []), noteCol].forEach(c => { ws.getCell(7, c).border = THIN_BORDER; });
 
-      const revEvalCol = ptsOn ? 10 : 9;
-      const hwStartCol = ptsOn ? 11 : 10;
-      const noteCol = totalCols;
+      const revEvalCol = revEnd;
 
       h.students.forEach((st, idx) => {
         const r = getStudentRecord(s, st.id);
         const isAbs = r.attendance.includes("غياب");
-        const hasSabr = Boolean(r.sabrJuz);
         const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
           ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
         const isRashidiRow = st.track === "rashidi";
@@ -29049,11 +29508,32 @@ async function exportDailyExcelStyled() {
         const recCols = isRashidiRow
           ? { surah: "الرشيدي", from: r.rashidiFrom ? `ص ${r.rashidiFrom}` : "", to: r.rashidiTo ? `ص ${r.rashidiTo}` : "", lines: 1 }
           : (_xlSabrObj
-            ? { surah: `جزء ${_xlSabrObj.shortName}`, from: SURAH_MAP[_xlSabrObj.startSurah]?.n || "", to: SURAH_MAP[_xlSabrObj.endSurah]?.n || "", lines: 1 }
+            ? { surah: formatJuzLabel(_xlSabrObj), from: SURAH_MAP[_xlSabrObj.startSurah]?.n || "", to: SURAH_MAP[_xlSabrObj.endSurah]?.n || "", lines: 1 }
             : formatSegmentsColumns(getSegments(r, "rec"), false));
-        const hwCols = isRashidiRow
-          ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "", lines: 1 }
-          : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, false) : formatSegmentsColumns(getSegments(r, "hw"), false));
+
+        let hwVals = [];
+        let hwLines = 1;
+        let hasHwSabr = false;
+        let hwCols = null;
+        if (xlHwIsReview) {
+          if (isRashidiRow) {
+            const rf = r.hwRashidiFrom || r.rashidiFrom || "";
+            const rt = r.hwRashidiTo || r.rashidiTo || rf;
+            hwVals = [rf ? `الرشيدي ص ${rf}${rt && rt != rf ? "–" + rt : ""}` : "", ""];
+          } else {
+            const revHw = getNextReviewHomeworkForStudent(h, s, st, r);
+            hwVals = [revHw.minText, revHw.majText];
+            hasHwSabr = Boolean(revHw.majText && revHw.majText.includes("سبر"));
+          }
+        } else {
+          hwCols = isRashidiRow
+            ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "", lines: 1 }
+            : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, false) : formatSegmentsColumns(getSegments(r, "hw"), false));
+          hwVals = [hwCols.surah, hwCols.from, hwCols.to];
+          hwLines = hwCols.lines || 1;
+          hasHwSabr = Boolean(r.hwSabrJuz);
+        }
+
         const isPendingSabrOnly = Boolean(r.recIsSabr && r.sabrJuz && !r.recEval && !isAbs);
         const isPendingNoEval = Boolean(!r.recEval && !isAbs && r.attendance === "لم يُسمّع");
         const compactDRevFrom = String(r.dRevFrom || "").replace(/^إعادة\s+/, "").replace(/\s*ص\s*\d+/g, "").trim();
@@ -29069,7 +29549,6 @@ async function exportDailyExcelStyled() {
         const evalSt = getEvalCellStyle(isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : ((r.recEval || "") + (_xlSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : ""))), isAbs);
         const cleanXlRev = hasIndepRevXl ? (r.dRevEval === "بانتظار التقييم" ? "" : (r.dRevEval || "")) : "";
         const revSt = getEvalCellStyle(cleanXlRev, false);
-        const hasHwSabr = Boolean(r.hwSabrJuz);
         const xlSabrNote = (!isRashidiRow && !isAbs && !isNoRecXl && !isPendingSabrOnly)
           ? buildDailySabrNoteBadge(r, false)
           : { hasBadge: false, isRep: false, plain: "" };
@@ -29087,10 +29566,11 @@ async function exportDailyExcelStyled() {
         const rIdx = 8 + idx;
         const row = ws.getRow(rIdx);
         row.values = ptsOn
-          ? [idx + 1, st.name, recCols.surah, recCols.from, recCols.to, evalSt.text, Number(r.points) || 0, dRevCols.from, dRevCols.to, revSt.text, hwCols.surah, hwCols.from, hwCols.to, cleanNote]
-          : [idx + 1, st.name, recCols.surah, recCols.from, recCols.to, evalSt.text, dRevCols.from, dRevCols.to, revSt.text, hwCols.surah, hwCols.from, hwCols.to, cleanNote];
-        const maxLines = Math.max(recCols.lines, hwCols.lines, dRevCols.lines);
+          ? [idx + 1, st.name, recCols.surah, recCols.from, recCols.to, evalSt.text, Number(r.points) || 0, dRevCols.from, dRevCols.to, revSt.text, ...hwVals, cleanNote]
+          : [idx + 1, st.name, recCols.surah, recCols.from, recCols.to, evalSt.text, dRevCols.from, dRevCols.to, revSt.text, ...hwVals, cleanNote];
+        const maxLines = Math.max(recCols.lines, dRevCols.lines, hwLines);
         row.height = Math.max(estimateRowHeight(cleanNote, 20, 48), maxLines * 15 + 6);
+
         const altAB = idx % 2 === 1 ? "FFF2F2F2" : "FFFFFFFF";
         const altBody = idx % 2 === 1 ? "FFFAFAFA" : "FFFFFFFF";
         for (let c = 1; c <= totalCols; c++) {
@@ -29101,18 +29581,16 @@ async function exportDailyExcelStyled() {
           if (ptsOn && c === 7) fill = "FFFDF2F2";
           if (c === 6 && evalSt.xlFill) { fill = evalSt.xlFill; fontColor = evalSt.xlFont; bold = true; }
           if (c === revEvalCol && revSt.xlFill) { fill = revSt.xlFill; fontColor = revSt.xlFont; bold = true; }
+          if (c === noteCol && xlSabrNote.hasBadge) { fill = xlSabrNote.isRep ? "FFFEF2F2" : "FFECFDF5"; }
           if (hasHwSabr && c >= hwStartCol && c < noteCol) { fill = "FFE8F5E9"; }
-          if (c === noteCol && xlSabrNote.hasBadge) {
-            fill = xlSabrNote.isRep ? "FFFEE2E2" : "FFD1FAE5";
-            fontColor = xlSabrNote.isRep ? "FF991B1B" : "FF064E3B";
-            bold = true;
-          }
           styleCell(row.getCell(c), { fill, fontColor, bold, size: sz, align: (c === 2 || c === noteCol) ? "right" : "center" });
         }
-        if (hasHwSabr) {
+        if (xlHwIsReview && isRashidiRow) {
+          ws.mergeCells(rIdx, hwStartCol, rIdx, hwStartCol + 1);
+        } else if (!xlHwIsReview && hasHwSabr && hwCols) {
           const c1 = hwStartCol + 1, c2 = hwStartCol + 2;
           ws.mergeCells(rIdx, c1, rIdx, c2);
-          row.getCell(c1).value = (hwCols.from === "جزء" && hwCols.to) ? `جزء ${hwCols.to}` : `${hwCols.from} ← ${hwCols.to}`;
+          row.getCell(c1).value = hwCols.to || hwCols.from;
         }
       });
 
@@ -29120,10 +29598,10 @@ async function exportDailyExcelStyled() {
       if (ptsOn) {
         ws.mergeCells(`A${footIdx}:F${footIdx}`); ws.getCell(`A${footIdx}`).value = "مجموع نقاط الحلقة اليوم";
         ws.getCell(`G${footIdx}`).value = { formula: `SUM(G8:G${footIdx - 1})`, result: totalPts };
-        ws.mergeCells(`H${footIdx}:N${footIdx}`);
+        ws.mergeCells(`H${footIdx}:${lastColL}${footIdx}`);
         ws.getCell(`H${footIdx}`).value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}  |  ${bm.branch}  |  صفحات الحفظ: ${formatNum(xlMemPgs)}${xlRashTag}  |  صفحات المراجعة: ${formatNum(xlRevPgs)}  |  حضور: ${presentCnt}  |  غياب: ${excused + absent}`;
       } else {
-        ws.mergeCells(`A${footIdx}:M${footIdx}`);
+        ws.mergeCells(`A${footIdx}:${lastColL}${footIdx}`);
         ws.getCell(`A${footIdx}`).value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}  |  ${bm.branch}  |  صفحات الحفظ: ${formatNum(xlMemPgs)}${xlRashTag}  |  صفحات المراجعة: ${formatNum(xlRevPgs)}  |  حضور: ${presentCnt}  |  غياب: ${excused + absent}`;
       }
       for (let c = 1; c <= totalCols; c++) styleCell(ws.getRow(footIdx).getCell(c), { fill: "FFE8EEF2", fontColor: "FF000000", bold: true, size: 10.5 });
@@ -29136,36 +29614,41 @@ async function exportDailyExcelStyled() {
       ws.getCell("C7").value = "سورة"; ws.getCell("D7").value = "من الآية"; ws.getCell("E7").value = "إلى الآية"; ws.getCell("F7").value = "التقييم";
       ws.getCell("G7").value = "من"; ws.getCell("H7").value = "إلى"; ws.getCell("I7").value = "التقييم";
 
-      if (ptsOn) {
-        ws.mergeCells("J6:J7"); ws.getCell("J6").value = "النقاط";
-        ws.mergeCells("K6:M6"); ws.getCell("K6").value = "الواجب المنزلي (مراجعة كبرى)";
-        ws.mergeCells("N6:N7"); ws.getCell("N6").value = "تنبيهات الحفظ والأداء";
-        ws.getCell("K7").value = "السورة"; ws.getCell("L7").value = "من الآية"; ws.getCell("M7").value = "إلى الآية";
+      const hwStartCol = ptsOn ? 11 : 10;
+      const hwSpan = xlHwIsReview ? 2 : 3;
+      const hwEndCol = hwStartCol + hwSpan - 1;
+      const noteCol = totalCols;
+
+      if (ptsOn) { ws.mergeCells("J6:J7"); ws.getCell("J6").value = "النقاط"; }
+      ws.mergeCells(6, hwStartCol, 6, hwEndCol);
+      ws.getCell(6, hwStartCol).value = xlHwIsReview ? "الواجب المنزلي (مراجعة)" : "الواجب المنزلي (التسميع)";
+      if (xlHwIsReview) {
+        ws.getCell(7, hwStartCol).value = "الصغرى";
+        ws.getCell(7, hwStartCol + 1).value = "الكبرى";
       } else {
-        ws.mergeCells("J6:L6"); ws.getCell("J6").value = "الواجب المنزلي (مراجعة كبرى)";
-        ws.mergeCells("M6:M7"); ws.getCell("M6").value = "تنبيهات الحفظ والأداء";
-        ws.getCell("J7").value = "السورة"; ws.getCell("K7").value = "من الآية"; ws.getCell("L7").value = "إلى الآية";
+        ws.getCell(7, hwStartCol).value = "السورة";
+        ws.getCell(7, hwStartCol + 1).value = "من الآية";
+        ws.getCell(7, hwStartCol + 2).value = "إلى الآية";
       }
+      ws.mergeCells(6, noteCol, 7, noteCol); ws.getCell(6, noteCol).value = "تنبيهات الحفظ والأداء";
 
       styleCell(ws.getCell("A6"), { fill: "FFD9D9D9", fontColor: "FF000000", bold: true, size: 10 });
       styleCell(ws.getCell("B6"), { fill: "FFD0D7DE", fontColor: "FF000000", bold: true, size: 11 });
-      (ptsOn ? ["C6","D6","E6","F6","K6","L6","M6"] : ["C6","D6","E6","F6","J6","K6","L6"]).forEach(c => styleCell(ws.getCell(c), { fill: "FF33464F", fontColor: "FFFFFFFF", bold: true, size: 11 }));
+      for (let c = 3; c <= 6; c++) styleCell(ws.getCell(6, c), { fill: "FF33464F", fontColor: "FFFFFFFF", bold: true, size: 11 });
       ["G6","H6","I6"].forEach(c => styleCell(ws.getCell(c), { fill: "FFCAA642", fontColor: "FFFFFFFF", bold: true, size: 11 }));
       if (ptsOn) styleCell(ws.getCell("J6"), { fill: "FFC00000", fontColor: "FFFFFFFF", bold: true, size: 10.5 });
-      styleCell(ws.getCell(ptsOn ? "N6" : "M6"), { fill: "FFD9D9D9", fontColor: "FF000000", bold: true, size: 11 });
+      for (let c = hwStartCol; c <= hwEndCol; c++) styleCell(ws.getCell(6, c), { fill: "FF33464F", fontColor: "FFFFFFFF", bold: true, size: 11 });
+      styleCell(ws.getCell(6, noteCol), { fill: "FFD9D9D9", fontColor: "FF000000", bold: true, size: 11 });
 
-      (ptsOn ? ["C7","D7","E7","G7","H7","K7","L7","M7"] : ["C7","D7","E7","G7","H7","J7","K7","L7"]).forEach(c => styleCell(ws.getCell(c), { fill: "FFF2F2F2", fontColor: "FF000000", bold: true, size: 9.5 }));
+      ["C7","D7","E7","G7","H7"].forEach(c => styleCell(ws.getCell(c), { fill: "FFF2F2F2", fontColor: "FF000000", bold: true, size: 9.5 }));
       styleCell(ws.getCell("F7"), { fill: "FF33464F", fontColor: "FFFFFFFF", bold: true, size: 9.5 });
       styleCell(ws.getCell("I7"), { fill: "FFCAA642", fontColor: "FFFFFFFF", bold: true, size: 9.5 });
-      (ptsOn ? ["A7","B7","J7","N7"] : ["A7","B7","M7"]).forEach(c => { ws.getCell(c).border = THIN_BORDER; });
-
-      const hwStartCol = ptsOn ? 11 : 10;
-      const noteCol = totalCols;
+      for (let c = hwStartCol; c <= hwEndCol; c++) styleCell(ws.getCell(7, c), { fill: "FFF2F2F2", fontColor: "FF000000", bold: true, size: 9.5 });
+      [1, 2, ...(ptsOn ? [10] : []), noteCol].forEach(c => { ws.getCell(7, c).border = THIN_BORDER; });
 
       h.students.forEach((st, idx) => {
         const r = getStudentRecord(s, st.id);
         const isAbs = r.attendance.includes("غياب");
-        const hasSabr = Boolean(r.sabrJuz);
         const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
           ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
         const isRashidiRow = st.track === "rashidi";
@@ -29180,23 +29663,40 @@ async function exportDailyExcelStyled() {
           : ((r.majIsPages || r.majSardLabel)
             ? { from: String(r.majFrom || ""), to: String(r.majTo || ""), lines: 1 }
             : formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, false));
-        const hwCols = isRashidiRow
-          ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "", lines: 1 }
-          : formatSatNextMajColumns(r, false);
+
+        let hwVals = [];
+        let hwLines = 1;
+        let hasHwSabr = false;
+        let hwCols = null;
+        if (xlHwIsReview) {
+          if (isRashidiRow) {
+            const rf = r.hwRashidiFrom || r.rashidiFrom || "";
+            const rt = r.hwRashidiTo || r.rashidiTo || rf;
+            hwVals = [rf ? `الرشيدي ص ${rf}${rt && rt != rf ? "–" + rt : ""}` : "", ""];
+          } else {
+            const revHw = getNextReviewHomeworkForStudent(h, s, st, r);
+            hwVals = [revHw.minText, revHw.majText];
+            hasHwSabr = Boolean(revHw.majText && revHw.majText.includes("سبر"));
+          }
+        } else {
+          hwCols = getNextRecitationHomeworkForStudent(h, s, st, r, false);
+          hwVals = [hwCols.surah, hwCols.from, hwCols.to];
+          hwLines = hwCols.lines || 1;
+          hasHwSabr = Boolean(hwCols.isSabr);
+        }
 
         const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
         const isNoRecXl = isPresentNoRecite(r.attendance);
         const minSt = getEvalCellStyle(isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : (isRashidiRow ? (r.recEval || "") : (r.minEval || ""))), isAbs);
         const majSt = getEvalCellStyle(isRashidiRow ? "" : (isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || ""))))), !isRashidiRow && isAbs);
-        const hasHwSabr = Boolean(r.nextMajSabrJuz || (r.sabrJuz && (r.majEval === "إعادة" || isAbs)));
         const cleanNote = stripMushafPageTokens(r.notes || "");
 
         const rIdx = 8 + idx;
         const row = ws.getRow(rIdx);
         row.values = ptsOn
-          ? [idx + 1, st.name, minCols.surah, minCols.from, minCols.to, minSt.text, majCols.from, majCols.to, majSt.text, Number(r.points) || 0, hwCols.surah, hwCols.from, hwCols.to, cleanNote]
-          : [idx + 1, st.name, minCols.surah, minCols.from, minCols.to, minSt.text, majCols.from, majCols.to, majSt.text, hwCols.surah, hwCols.from, hwCols.to, cleanNote];
-        const maxLines = Math.max(minCols.lines, majCols.lines, hwCols.lines);
+          ? [idx + 1, st.name, minCols.surah, minCols.from, minCols.to, minSt.text, majCols.from, majCols.to, majSt.text, Number(r.points) || 0, ...hwVals, cleanNote]
+          : [idx + 1, st.name, minCols.surah, minCols.from, minCols.to, minSt.text, majCols.from, majCols.to, majSt.text, ...hwVals, cleanNote];
+        const maxLines = Math.max(minCols.lines, majCols.lines, hwLines);
         row.height = Math.max(estimateRowHeight(cleanNote, 20, 44), maxLines * 15 + 6);
         const altAB = idx % 2 === 1 ? "FFF2F2F2" : "FFFFFFFF";
         const altBody = idx % 2 === 1 ? "FFFAFAFA" : "FFFFFFFF";
@@ -29211,10 +29711,12 @@ async function exportDailyExcelStyled() {
           if (hasHwSabr && c >= hwStartCol && c < noteCol) { fill = "FFE8F5E9"; }
           styleCell(row.getCell(c), { fill, fontColor, bold, size: sz, align: (c === 2 || c === noteCol) ? "right" : "center" });
         }
-        if (/[\u0600-\u06FF]{3,}/.test(String(hwCols.from || "")) || /[\u0600-\u06FF]{3,}/.test(String(hwCols.to || ""))) {
+        if (xlHwIsReview && isRashidiRow) {
+          ws.mergeCells(rIdx, hwStartCol, rIdx, hwStartCol + 1);
+        } else if (!xlHwIsReview && hwCols && (/[\u0600-\u06FF]{3,}/.test(String(hwCols.from || "")) || /[\u0600-\u06FF]{3,}/.test(String(hwCols.to || "")))) {
           const c1 = hwStartCol + 1, c2 = hwStartCol + 2;
           ws.mergeCells(rIdx, c1, rIdx, c2);
-          row.getCell(c1).value = (hwCols.from && hwCols.to && hwCols.from !== hwCols.to) ? `${hwCols.from} ← ${hwCols.to}` : (hwCols.from || hwCols.to);
+          row.getCell(c1).value = hwCols.from && hwCols.to && hwCols.from !== hwCols.to ? `${hwCols.from} ← ${hwCols.to}` : (hwCols.to || hwCols.from);
         }
       });
 
@@ -29222,14 +29724,14 @@ async function exportDailyExcelStyled() {
       if (ptsOn) {
         ws.mergeCells(`A${footIdx}:I${footIdx}`); ws.getCell(`A${footIdx}`).value = "مجموع نقاط الحلقة اليوم";
         ws.getCell(`J${footIdx}`).value = { formula: `SUM(J8:J${footIdx - 1})`, result: totalPts };
-        ws.mergeCells(`K${footIdx}:N${footIdx}`);
+        ws.mergeCells(`K${footIdx}:${lastColL}${footIdx}`);
         ws.getCell(`K${footIdx}`).value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}  |  ${bm.branch}  |  صفحات المراجعة: ${formatNum(xlRevPgs)}${xlRashTag}  |  حضور: ${presentCnt}  |  غياب: ${excused + absent}`;
       } else {
-        ws.mergeCells(`A${footIdx}:M${footIdx}`);
+        ws.mergeCells(`A${footIdx}:${lastColL}${footIdx}`);
         ws.getCell(`A${footIdx}`).value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}  |  ${bm.branch}  |  صفحات المراجعة: ${formatNum(xlRevPgs)}${xlRashTag}  |  حضور: ${presentCnt}  |  غياب: ${excused + absent}`;
       }
       for (let c = 1; c <= totalCols; c++) styleCell(ws.getRow(footIdx).getCell(c), { fill: "FFE8EEF2", fontColor: "FF000000", bold: true, size: 10.5 });
-      ws.getRow(footIdx).height = 24;
+      ws.getRow(footIdx).height = 24;      ws.getRow(footIdx).height = 24;
     }
 
     const buf = await wb.xlsx.writeBuffer();
@@ -30960,7 +31462,9 @@ function openModal(id) {
   if (!el) return;
   if (id !== "studentEvalSheet") closeRightDrawer();
   _modalZCounter = Math.min(245, Math.max(160, _modalZCounter + 1));
-  if (id !== "studentEvalSheet") el.style.zIndex = String(_modalZCounter);
+  if (id === "execPickerSheet") el.style.zIndex = "265";
+  else if (id === "makinDialogModal") el.style.zIndex = "280";
+  else if (id !== "studentEvalSheet") el.style.zIndex = String(_modalZCounter);
   el.classList.add("show");
   syncBodyScrollLock();
   try {
@@ -34704,7 +35208,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v99";
+const TIBYAN_APP_VERSION = "v101";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
