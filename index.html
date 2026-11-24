@@ -12062,12 +12062,18 @@ table.t-daily { min-width: 980px; table-layout: fixed; }
 
 
 /* ==================== MAKIN v100: SINGLE-LINE QUICK-STRIP (+½ ص BESIDE لم يُسمّع) & SMART CROSS-DAY HW ==================== */
+.quick-strip.has-qs-row-6 {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 4px !important;
+}
 .qs-row-6 {
-  display: grid;
-  grid-template-columns: 0.94fr 1.24fr 0.72fr 0.9fr 1.24fr 0.88fr;
-  gap: 4px;
-  width: 100%;
-  align-items: center;
+  display: grid !important;
+  grid-template-columns: 0.92fr 1.22fr 0.7fr 0.88fr 1.24fr 0.92fr !important;
+  gap: 4px !important;
+  width: 100% !important;
+  align-items: center !important;
 }
 .qs-row-6.cols-5 {
   grid-template-columns: 0.95fr 1.26fr 0.74fr 0.94fr 1.26fr;
@@ -12627,7 +12633,7 @@ table.t-daily { min-width: 980px; table-layout: fixed; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v100</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v101</span>
         </button>
       </div>
     </div>
@@ -14715,7 +14721,7 @@ function ensureRecordBonuses(r) {
 }
 
 function formatPointsBreakdownText(s, r, st) {
-  if (!s || !r || (r.attendance && r.attendance.includes("غياب"))) return "غائب: 0 نقطة";
+  if (!s || !r || (r.attendance && String(r.attendance || "").includes("غياب"))) return "غائب: 0 نقطة";
   const isPres = r.attendance === "حاضر" || r.attendance === "متأخر";
   if (!isPres && !r.recEval && !r.minEval && !r.majEval) return "لم يُقيّم بعد";
   const isRashidi = st?.track === "rashidi";
@@ -14916,7 +14922,7 @@ function computeStudentFocusReport(h, studentId, monthFilter = "ALL", explicitSe
   sessions.forEach(s => {
     const r = s?.records?.[studentId];
     if (!r) return;
-    if (r.attendance && r.attendance.includes("غياب")) { absentCount++; return; }
+    if (r.attendance && String(r.attendance || "").includes("غياب")) { absentCount++; return; }
     const hasEval = Boolean(r.recEval || r.minEval || r.majEval);
     if (hasEval) evalSessions++;
     if (r.recEval === "إعادة" || r.minEval === "إعادة" || r.majEval === "إعادة") repeatCount++;
@@ -15023,7 +15029,7 @@ function buildConciseRecNote(ev, opts = {}) {
 
 function computeRecordPoints(s, r, st) {
   if (!s || !r) return 0;
-  if (r.attendance && (r.attendance.includes("غياب") || r.attendance === "حضر ولم يُسمّع")) return 0;
+  if (r.attendance && (String(r.attendance || "").includes("غياب") || r.attendance === "حضر ولم يُسمّع")) return 0;
   const isRashidi = st?.track === "rashidi";
   const hasAnyEval = (s.type === "daily" || isRashidi)
     ? Boolean(r.recEval || r.sabrJuz || (r.dRevEval && r.dRevEval !== "تثبيت" && r.dRevEval !== "تثبيت حفظ"))
@@ -16277,7 +16283,7 @@ function getStudentMemorizedSegments(st, h) {
   sessions.forEach(s => {
     if (s.type !== "daily" || s.noClass) return;
     const r = s.records?.[st?.id];
-    if (!r || r.attendance.includes("غياب")) return;
+    if (!r || String(r.attendance || "").includes("غياب")) return;
     if (isPassedNewMemSabrForMonthly(s, r)) {
       const jObj = getJuzByName(r.sabrJuz);
       if (jObj) savedJuzSet.add(jObj.id);
@@ -16456,7 +16462,7 @@ function getStudentMonthlySabrProgress(st, h, monthLabel, juzId) {
     if (s.type !== "saturday" || s.noClass) return;
     if (monthLabel && getSessionReportMonth(s) !== monthLabel) return;
     const r = s.records?.[st.id];
-    if (!r || r.attendance.includes("غياب")) return;
+    if (!r || String(r.attendance || "").includes("غياب")) return;
     if (r.sabrJuz === juz.name) alreadySabr = true;
     if (r.majEval && r.majEval !== "إعادة") {
       donePages += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
@@ -16664,7 +16670,7 @@ function formatSatNextMajColumns(r, isHtml = true) {
   }
 
   // If next Saturday is a repeated Full-Juz Sabr => display clearly as Sabr Juz!
-  const repeatSabrName = r.nextMajSabrJuz || (r.sabrJuz && (r.majEval === "إعادة" || (r.attendance && r.attendance.includes("غياب"))) ? r.sabrJuz : "");
+  const repeatSabrName = r.nextMajSabrJuz || (r.sabrJuz && (r.majEval === "إعادة" || (r.attendance && String(r.attendance || "").includes("غياب"))) ? r.sabrJuz : "");
   if (repeatSabrName) {
     const jObj = getJuzByName(repeatSabrName);
     if (jObj) {
@@ -16985,7 +16991,7 @@ function setSabrScore(studentId, rawVal) {
 
   const juz = getJuzByName(r.sabrJuz);
   const dir = st.direction || h.defaultDir || "desc";
-  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) {
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || String(r.attendance || "").includes("غياب")) {
     r.attendance = "حاضر";
     ensureRecordBonuses(r);
   }
@@ -17071,7 +17077,7 @@ function renderSabrScoreBox(studentId, r, isSat = false) {
 // Gather ALL passed Sabr Juz records for a student across all sessions (for Profile + Hifz Certificates!)
 function isSabrEvaluatedAndPassed(s, r) {
   if (!s || !r || !r.sabrJuz) return false;
-  if (r.attendance && (r.attendance.includes("غياب") || r.attendance === "لم يُسمّع")) return false;
+  if (r.attendance && (String(r.attendance || "").includes("غياب") || r.attendance === "لم يُسمّع")) return false;
   const hasScore = r.sabrScore !== "" && r.sabrScore !== null && r.sabrScore !== undefined && !isNaN(Number(r.sabrScore));
   if (hasScore) {
     const scEv = evalFromSabrScore(r.sabrScore);
@@ -17297,7 +17303,7 @@ function loadState(uidOverride = null, opts = {}) {
                 repaired = true;
               }
               const hasActivity = Object.values(s.records || {}).some(r =>
-                r && (r.recEval || r.minEval || r.majEval || (r.attendance && r.attendance.includes("غياب")) || (Number(r.points) || 0) > 0)
+                r && (r.recEval || r.minEval || r.majEval || (r.attendance && String(r.attendance || "").includes("غياب")) || (Number(r.points) || 0) > 0)
               );
               if (seenDates[s.date]) {
                 if (!hasActivity) { repaired = true; return; }
@@ -17858,7 +17864,7 @@ function applyAutoEvalSilentFromCounters(studentId, kind) {
   const alrts = Math.max(0, Number(r[aKey]) || 0);
   const ev = evalFromErrorCount(errs, alrts, h);
 
-  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || String(r.attendance || "").includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
   const errTag = errs > 0 ? ` (${errorCountArabicText(errs)})` : "";
 
@@ -18443,7 +18449,7 @@ function applyPerPageAutoEval(studentId, kind, overrideOverallEv = null, trigger
   if (!pages || pages.length < 2) return;
   r[getPageEvalKey(kind)] = pages;
 
-  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || String(r.attendance || "").includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
 
   const totalErrs = pages.reduce((a, p) => a + (Number(p.errors) || 0), 0);
@@ -20573,7 +20579,7 @@ function getStudentCurrentPlaceSummary(st, h) {
   for (const s of sessions) {
     const r = s.records?.[st.id];
     if (!r) continue;
-    if (r.recEval && r.recEval !== "إعادة" && !r.attendance.includes("غياب")) {
+    if (r.recEval && r.recEval !== "إعادة" && !String(r.attendance || "").includes("غياب")) {
       if (r.hwSabrJuz) return `الواجب: سبر ${r.hwSabrJuz}`;
       const hwSegs = getSegments(r, "hw");
       if (hwSegs.length) return `واصل إلى: ${formatSegmentsInline(hwSegs)}`;
@@ -20832,7 +20838,7 @@ function openStudentProfile(studentId) {
     .slice(0, 6)
     .map(s => {
       const r = s.records[studentId];
-      const isAbs = r.attendance.includes("غياب");
+      const isAbs = String(r.attendance || "").includes("غياب");
       const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null) ? ` (${r.sabrScore}%)` : "";
       const detail = isAbs
         ? `<span class="badge ${r.attendance==='غياب مبرر'?'b-slate':'b-red'}">${r.attendance}</span>`
@@ -21118,7 +21124,7 @@ function buildStudentTodaySummaryWAText(st, s, h) {
   txt += `\n━━━━━━━━━━━━━\n`;
   if (!s || !r) {
     txt += `📖 *المطلوب حالياً:* ${getStudentCurrentPlaceSummary(st, h)}\n`;
-  } else if (r.attendance.includes("غياب")) {
+  } else if (String(r.attendance || "").includes("غياب")) {
     txt += `🚫 *الحالة:* ${r.attendance}\n`;
     const hw = st.track === "rashidi"
       ? (r.hwRashidiFrom ? `الرشيدي ص ${r.hwRashidiFrom}${r.hwRashidiTo && r.hwRashidiTo != r.hwRashidiFrom ? "–" + r.hwRashidiTo : ""}` : "")
@@ -21211,7 +21217,7 @@ function buildStudentDailyCardHtml(st, s, h) {
   const bm = getBrandMeta(h), gt = getGenderTerms(h);
   const r = s ? getStudentRecord(s, st.id) : createEmptyRecord();
   const ptsOn = isPointsEnabled(h);
-  const isAbs = r.attendance.includes("غياب");
+  const isAbs = String(r.attendance || "").includes("غياب");
   const isNoRec = isPresentNoRecite(r.attendance);
 
   let mainTitle = "تسميع اليوم", mainVal = "—", hwVal = getStudentCurrentPlaceSummary(st, h), evalTxt = "—", evCls = "ev-slate";
@@ -21792,13 +21798,13 @@ function saveStudentModal() {
     const curS = getCurrentSession();
     if (applyNow && curS && savedSt) {
       const r = getStudentRecord(curS, savedSt.id);
-      if (savedSt.track === "rashidi" && !r.recEval && !(r.attendance && r.attendance.includes("غياب"))) {
+      if (savedSt.track === "rashidi" && !r.recEval && !(r.attendance && String(r.attendance || "").includes("غياب"))) {
         r.rashidiFrom = rashidiPage;
         r.rashidiTo = Math.min(85, rashidiPage + Math.max(0, Math.ceil(rashidiPace) - 1));
         r.rashidiPages = rashidiPace;
         r.dRevSurahId = ""; r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevPages = 0; r.dRevExtras = [];
         r.sabrJuz = ""; r.recIsSabr = false; r.minText = ""; r.minEval = ""; r.majFrom = ""; r.majTo = ""; r.majEval = "";
-      } else if (curS.type === "daily" && !r.recEval && !(r.attendance && r.attendance.includes("غياب"))) {
+      } else if (curS.type === "daily" && !r.recEval && !(r.attendance && String(r.attendance || "").includes("غياب"))) {
         if (startSurahId && SURAH_MAP[Number(startSurahId)]) {
           const s0 = SURAH_MAP[Number(startSurahId)];
           const fA = Math.max(1, Math.min(s0.a, startFromAyah));
@@ -21813,7 +21819,7 @@ function saveStudentModal() {
           r.recPages = calcRangePages(r.recSurahId, r.recFrom, r.recTo);
           r.manualRec = true;
         }
-      } else if (curS.type === "saturday" && !r.majEval && !(r.attendance && r.attendance.includes("غياب"))) {
+      } else if (curS.type === "saturday" && !r.majEval && !(r.attendance && String(r.attendance || "").includes("غياب"))) {
         const cyc = getStudentActiveMajorCycle(savedSt, h, curS);
         const startP = revPage || cyc.cycleStart;
         const rng = buildMajorReviewRange(startP, revPace, cyc.cycleStart, cyc.cycleEnd);
@@ -21954,14 +21960,16 @@ function populateSessionSelectors() {
 }
 
 function selectSession(id) {
-  if (pruneEmptyGhostSessions(id)) saveState(true);
+  try { if (pruneEmptyGhostSessions(id)) saveState(true); } catch (e) { console.warn(e); }
   activeSessionId = id;
   openCardId = null;
   const cur = getCurrentSession();
-  if (cur?.type === "saturday") prefillSaturdayReviews(false, false);
-  else if (cur?.type === "daily") prefillDailyRecitation(false, false);
-  populateSessionSelectors();
-  renderSessionView();
+  try {
+    if (cur?.type === "saturday") prefillSaturdayReviews(false, false);
+    else if (cur?.type === "daily") prefillDailyRecitation(false, false);
+  } catch (e) { console.warn("Prefill on selectSession err:", e); }
+  try { populateSessionSelectors(); } catch (e) { console.warn(e); }
+  try { renderSessionView(); } catch (e) { console.warn(e); }
 }
 
 function toggleArchiveCurrentSession() {
@@ -22024,9 +22032,9 @@ function renderArchiveView() {
         const r = s.records?.[st.id];
         if (!r) return;
         if (isCountedPresent(r.attendance)) pres++;
-        else if (r.attendance.includes("غياب")) abs++;
+        else if (String(r.attendance || "").includes("غياب")) abs++;
         pts += Number(r.points) || 0;
-        const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
+        const isAbs = String(r.attendance || "").includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
         if (s.type === "daily") {
           if (!isAbs && r.recEval && r.recEval !== "إعادة") memPgs += Number(r.recPages) || calcRecordRecPages(r);
           if (!isAbs) revPgs += calcDailyReviewPages(r);
@@ -22500,9 +22508,21 @@ function createEmptyRecord() {
 }
 
 function getStudentRecord(session, studentId) {
-  if (!session.records) session.records = {};
-  if (!session.records[studentId]) session.records[studentId] = createEmptyRecord();
-  return session.records[studentId];
+  if (!session) return createEmptyRecord();
+  if (!session.records || typeof session.records !== "object") session.records = {};
+  let r = session.records[studentId];
+  if (!r || typeof r !== "object") {
+    r = createEmptyRecord();
+    session.records[studentId] = r;
+  } else {
+    if (typeof r.attendance !== "string" || !r.attendance) r.attendance = "لم يُسمّع";
+    if (!Array.isArray(r.recExtras)) r.recExtras = [];
+    if (!Array.isArray(r.hwExtras)) r.hwExtras = [];
+    if (!Array.isArray(r.minExtras)) r.minExtras = [];
+    if (!Array.isArray(r.dRevExtras)) r.dRevExtras = [];
+    if (!Array.isArray(r.majExtras)) r.majExtras = [];
+  }
+  return r;
 }
 
 function isStudentPending(s, r, st = null) {
@@ -22605,7 +22625,7 @@ function prefillDailyRecitation(notify = true, forceRefresh = false) {
 
   h.students.forEach(st => {
     const rec = getStudentRecord(cur, st.id);
-    const curIsAbsent = Boolean(rec.attendance && rec.attendance.includes("غياب"));
+    const curIsAbsent = Boolean(rec.attendance && String(rec.attendance || "").includes("غياب"));
     const curHasEval = Boolean(rec.recEval && String(rec.recEval).trim());
     // Never touch a student who is already evaluated or marked absent on THIS session!
     if (curHasEval || curIsAbsent) return;
@@ -22623,7 +22643,7 @@ function prefillDailyRecitation(notify = true, forceRefresh = false) {
       if (!pr) continue;
       const prevRecSegs = getSegments(pr, "rec");
       const hwSegs = getSegments(pr, "hw");
-      const isAbsent = Boolean(pr.attendance && pr.attendance.includes("غياب"));
+      const isAbsent = Boolean(pr.attendance && String(pr.attendance || "").includes("غياب"));
       const hasEval = Boolean(pr.recEval && String(pr.recEval).trim());
 
       // Case A: Student was NOT evaluated and NOT absent on that day -> SKIP ghost/unevaluated day completely!
@@ -22743,7 +22763,7 @@ function computeStudentMinorFromPrevDaily(h, cur, stId) {
   const srcDays = [];
   for (const ds of targetDaily) {
     const dr = ds.records?.[stId];
-    if (!dr || !dr.recEval || dr.attendance.includes("غياب") || dr.recEval === "إعادة" || dr.recIsSabr) continue;
+    if (!dr || !dr.recEval || String(dr.attendance || "").includes("غياب") || dr.recEval === "إعادة" || dr.recIsSabr) continue;
     const dSegs = getSegments(dr, "rec");
     if (!dSegs.length) continue;
     allSegs.push(...dSegs.map(x => ({ ...x })));
@@ -22809,14 +22829,14 @@ function prefillSaturdayReviews(notify = true, forceRefresh = false) {
   h.students.forEach(st => {
     const rec = getStudentRecord(cur, st.id);
     if (st.track === "rashidi") {
-      if (!rec.recEval && !(rec.attendance && rec.attendance.includes("غياب"))) {
+      if (!rec.recEval && !(rec.attendance && String(rec.attendance || "").includes("غياب"))) {
         if (prefillSingleRashidiStudent(h, cur, st, rec, forceRefresh)) filled++;
       }
       return;
     }
 
     // 1) Minor Review (Same Week ONLY — repeat in Minor NEVER carries over to next Saturday!)
-    const curIsAbs = Boolean(rec.attendance && rec.attendance.includes("غياب"));
+    const curIsAbs = Boolean(rec.attendance && String(rec.attendance || "").includes("غياب"));
     const shouldRefreshMin = !rec.minEval && !curIsAbs && (!rec.manualMin || forceRefresh);
     if (shouldRefreshMin) {
       if (forceRefresh) rec.manualMin = false;
@@ -22845,7 +22865,7 @@ function prefillSaturdayReviews(notify = true, forceRefresh = false) {
       for (const ps of prevSats) {
         const pr = ps.records?.[st.id];
         if (!pr) continue;
-        const isAbs = Boolean(pr.attendance && pr.attendance.includes("غياب"));
+        const isAbs = Boolean(pr.attendance && String(pr.attendance || "").includes("غياب"));
         const hasMajEval = Boolean(pr.majEval && String(pr.majEval).trim());
         if (!hasMajEval && !isAbs) continue;
 
@@ -23547,7 +23567,7 @@ function renderSessionView() {
     if (r.attendance === "غياب مبرر") excused++;
     else if (r.attendance === "غياب غير مبرر") absent++;
     totalPts += Number(r.points) || 0;
-    const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
+    const isAbs = String(r.attendance || "").includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
     if (st.track === "rashidi") {
       if (!isAbs && r.recEval && r.recEval !== "إعادة") totalMemPages += Number(r.rashidiPages) || 0;
     } else if (s.type === "daily") {
@@ -23645,7 +23665,7 @@ function getStudentPrevSessionHint(h, cur, stId, precomputedCandidates = null) {
   for (const ps of candidates) {
     const pr = ps.records?.[stId];
     if (!pr) continue;
-    const isAbs = Boolean(pr.attendance && pr.attendance.includes("غياب"));
+    const isAbs = Boolean(pr.attendance && String(pr.attendance || "").includes("غياب"));
     const hasEval = (isRash || cur.type === "daily") ? Boolean(pr.recEval) : Boolean(pr.minEval || pr.majEval);
     if (!hasEval && !isAbs) continue;
     const hadRepeat = (isRash || cur.type === "daily")
@@ -23726,7 +23746,7 @@ function buildSingleStudentCardHtml(h, s, item, _prePrevCandidates, _preRelevant
     </div>`;
   } else if (!isAbs && s.type === "daily" && (r.recSurahId || (r.recIsSabr && r.sabrJuz))) {
     const hwInline = r.hwSabrJuz ? `🎓 سبر ${formatJuzClean(r.hwSabrJuz)}` : formatSegmentsInline(getSegments(r, "hw"));
-    quickStrip = `<div class="quick-strip" onclick="event.stopPropagation()">
+    quickStrip = `<div class="quick-strip has-qs-row-6" onclick="event.stopPropagation()">
       <div class="qs-row-6 ${r.hwSabrJuz ? 'cols-5' : ''}">
         <button class="pill pill-sm ${r.recEval==='ممتاز'?'on-green':''}" onclick="setRecEval('${st.id}','ممتاز')">ممتاز</button>
         <button class="pill pill-sm ${r.recEval==='جيد جداً'?'on-blue':''}" onclick="setRecEval('${st.id}','جيد جداً')">جيد جداً</button>
@@ -23827,7 +23847,7 @@ function patchSingleStudentCard(studentId) {
   }
   const st = h.students[idx];
   const r = getStudentRecord(s, st.id);
-  const isAbs = r.attendance.includes("غياب");
+  const isAbs = String(r.attendance || "").includes("غياب");
   const isPend = isStudentPending(s, r, st);
   const isDone = isStudentFullyDone(s, st, r);
   const isOpen = openCardId === st.id;
@@ -23875,7 +23895,7 @@ function renderStudentCardsOnly() {
   const items = [];
   h.students.forEach((st, idx) => {
     const r = getStudentRecord(s, st.id);
-    const isAbs = r.attendance.includes("غياب");
+    const isAbs = String(r.attendance || "").includes("غياب");
     const isPend = isStudentPending(s, r, st);
     const isDone = isStudentFullyDone(s, st, r);
     const isOpen = openCardId === st.id;
@@ -24344,7 +24364,7 @@ function syncStudentEvalSheet() {
 
   const isRashidi = st.track === "rashidi";
   const trackTag = isRashidi ? "🔤 الرشيدي" : (s.type === "saturday" ? "📘 مراجعة" : "📖 تسميع");
-  const isAbsHdr = r.attendance.includes("غياب");
+  const isAbsHdr = String(r.attendance || "").includes("غياب");
   const isNoRecHdr = isPresentNoRecite(r.attendance);
   const curEvalBadgeTxt = isAbsHdr ? r.attendance : (isNoRecHdr ? "لم يُسمّع" : ((s.type === "daily" || isRashidi) ? (r.recEval || "") : (r.majEval || r.minEval || "")));
   const stChipCls = isAbsHdr || curEvalBadgeTxt === "إعادة" ? "bad" : (curEvalBadgeTxt ? "ok" : "warn");
@@ -24417,7 +24437,7 @@ function renderCardBody(s, st, r, idx) {
     <button type="button" class="btn btn-success btn-sm" style="padding:3px 9px; font-size:11px;" onclick="sendParentFollowupAlertWA('${st.id}','${_cardAttn.type}',${_cardAttn.count})">📲 واتساب ولي الأمر</button>
   </div>` : "";
 
-  const isAbsCard = r.attendance.includes("غياب");
+  const isAbsCard = String(r.attendance || "").includes("غياب");
   const isPresCard = r.attendance === "حاضر" || r.attendance === "متأخر";
   const adabOn = isPresCard ? (r.ptsAdab !== false) : true;
   const partOn = isPresCard ? (r.ptsParticip !== false) : true;
@@ -24919,7 +24939,7 @@ function stepPoints(studentId, delta) {
 function togglePointBonus(studentId, key) {
   captureUndoSnapshot(studentId);
   const h = getActiveHalaqa(), s = getCurrentSession(), st = h.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
-  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) {
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || String(r.attendance || "").includes("غياب")) {
     r.attendance = "حاضر";
   }
   ensureRecordBonuses(r);
@@ -25487,7 +25507,7 @@ function setRecEval(studentId, ev, errCount = null) {
     return;
   }
 
-  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || String(r.attendance || "").includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
   r.recEval = ev;
   // If per-page evaluations exist, adopt this button as the OVERALL grade while preserving repeated page(s) in notes!
@@ -25748,7 +25768,7 @@ function quickSatBothEval(studentId, ev) {
     showToast(`تم إلغاء تقييم ${st.name} ↩️`, { undo: true });
     return;
   }
-  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || String(r.attendance || "").includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
   r.minEval = ev;
   r.majEval = ev;
@@ -25927,7 +25947,7 @@ function setSatMinEval(studentId, ev, errCount = null) {
     return;
   }
 
-  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || String(r.attendance || "").includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
   if (Array.isArray(r.minPageEvals) && r.minPageEvals.length >= 2) { applyPerPageAutoEval(studentId, "min", ev, true); return; }
   r.minEval = ev;
@@ -25974,7 +25994,7 @@ function setSatMajEval(studentId, ev, errCount = null) {
     return;
   }
 
-  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || String(r.attendance || "").includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
   if (Array.isArray(r.majPageEvals) && r.majPageEvals.length >= 2) { applyPerPageAutoEval(studentId, "maj", ev, true); return; }
   r.majEval = ev;
@@ -26088,7 +26108,7 @@ function computeUpcomingMajorReviewForNextSat(h, nextIso, st, existingNext = nul
   for (const ps of prevSats) {
     const pr = ps.records?.[st.id];
     if (!pr) continue;
-    const isAbs = Boolean(pr.attendance && pr.attendance.includes("غياب"));
+    const isAbs = Boolean(pr.attendance && String(pr.attendance || "").includes("غياب"));
     const hasMajEval = Boolean(pr.majEval && String(pr.majEval).trim());
     if (!hasMajEval && !isAbs) continue;
     const majPassed = hasMajEval && pr.majEval !== "إعادة" && !isAbs;
@@ -26145,45 +26165,56 @@ function computeUpcomingMajorReviewForNextSat(h, nextIso, st, existingNext = nul
 }
 
 function computeUpcomingReviewHomework(h, s, st, r, nextCtx) {
-  if (!h || !s || !st || !nextCtx?.nextIso) return { isRashidi: false, minorText: "", majorText: "", isMajorSabr: false, combinedText: "" };
-  if (st.track === "rashidi") {
-    const f = r?.hwRashidiFrom || "";
-    const t = r?.hwRashidiTo || "";
-    const txt = f ? `الرشيدي ص ${f}${t && String(t) !== String(f) ? `–${t}` : ""}` : "";
-    return { isRashidi: true, text: txt, minorText: txt, majorText: "", isMajorSabr: false, combinedText: txt };
-  }
-
-  // 1) Minor Review: if next review session exists & manually edited, use it; else compute from week's passed daily recitations (including today if passed!)
-  let minorText = "";
-  const exRec = nextCtx.existingNext?.records?.[st.id];
-  if (exRec && exRec.manualMin) {
-    minorText = formatSegmentsInline(getSegments(exRec, "min")) || stripMushafPageTokens(exRec.minText || "");
-  } else {
-    const virtualSat = { id: "__virtual_next_rev__", date: nextCtx.nextIso, type: "saturday" };
-    const res = computeStudentMinorFromPrevDaily(h, virtualSat, st.id);
-    if (res && res.merged && res.merged.length) {
-      minorText = formatSegmentsInline(res.merged);
+  try {
+    if (!h || !s || !st || !nextCtx?.nextIso) return { isRashidi: false, minorText: "—", majorText: "—", isMajorSabr: false, combinedText: "—" };
+    if (st.track === "rashidi") {
+      const f = r?.hwRashidiFrom || "";
+      const t = r?.hwRashidiTo || "";
+      const txt = f ? `الرشيدي ص ${f}${t && String(t) !== String(f) ? `–${t}` : ""}` : "—";
+      return { isRashidi: true, text: txt, minorText: txt, majorText: "", isMajorSabr: false, combinedText: txt };
     }
+
+    // 1) Minor Review: if next review session exists & manually edited, use it; else compute from week's passed daily recitations (including today if passed!)
+    let minorText = "";
+    try {
+      const exRec = nextCtx.existingNext?.records?.[st.id];
+      if (exRec && exRec.manualMin) {
+        minorText = formatSegmentsInline(getSegments(exRec, "min")) || stripMushafPageTokens(exRec.minText || "");
+      } else {
+        const virtualSat = { id: "__virtual_next_rev__", date: nextCtx.nextIso, type: "saturday" };
+        const res = computeStudentMinorFromPrevDaily(h, virtualSat, st.id);
+        if (res && res.merged && res.merged.length) {
+          minorText = formatSegmentsInline(res.merged);
+        }
+      }
+    } catch (eMin) { console.warn("Minor preview err:", eMin); }
+    if (!minorText) minorText = "—";
+
+    // 2) Major Review for next Review day
+    let maj = { text: "—", isSabr: false };
+    try {
+      maj = computeUpcomingMajorReviewForNextSat(h, nextCtx.nextIso, st, nextCtx.existingNext) || { text: "—", isSabr: false };
+    } catch (eMaj) { console.warn("Major preview err:", eMaj); }
+    const majorText = (maj && maj.text && maj.text !== "—") ? maj.text : "—";
+
+    const parts = [];
+    if (minorText && minorText !== "—") parts.push(`صغرى: ${minorText}`);
+    if (majorText && majorText !== "—") parts.push(`كبرى: ${majorText}`);
+    return {
+      isRashidi: false,
+      minorText,
+      majorText,
+      isMajorSabr: Boolean(maj?.isSabr),
+      combinedText: parts.join(" | ") || "—"
+    };
+  } catch (eAll) {
+    console.warn("computeUpcomingReviewHomework err:", eAll);
+    return { isRashidi: false, minorText: "—", majorText: "—", isMajorSabr: false, combinedText: "—" };
   }
-  if (!minorText) minorText = "—";
-
-  // 2) Major Review for next Review day
-  const maj = computeUpcomingMajorReviewForNextSat(h, nextCtx.nextIso, st, nextCtx.existingNext);
-  const majorText = (maj && maj.text && maj.text !== "—") ? maj.text : "—";
-
-  const parts = [];
-  if (minorText && minorText !== "—") parts.push(`صغرى: ${minorText}`);
-  if (majorText && majorText !== "—") parts.push(`كبرى: ${majorText}`);
-  return {
-    isRashidi: false,
-    minorText,
-    majorText,
-    isMajorSabr: Boolean(maj?.isSabr),
-    combinedText: parts.join(" | ") || "—"
-  };
 }
 
 function computeUpcomingDailyHomeworkCols(h, s, st, r, nextCtx, isHtml = true) {
+  try {
   const esc = v => isHtml ? escapeHtml(String(v ?? "")) : String(v ?? "");
   if (!h || !st || !nextCtx?.nextIso) return { surah: "", from: "", to: "", lines: 1, isSabr: false, plainText: "" };
 
@@ -26198,7 +26229,7 @@ function computeUpcomingDailyHomeworkCols(h, s, st, r, nextCtx, isHtml = true) {
       for (const ps of prevAll) {
         const pr = ps.records?.[st.id];
         if (!pr) continue;
-        const isAbs = Boolean(pr.attendance && pr.attendance.includes("غياب"));
+        const isAbs = Boolean(pr.attendance && String(pr.attendance || "").includes("غياب"));
         const hasEv = Boolean(pr.recEval && String(pr.recEval).trim());
         if (!isAbs && !hasEv) continue;
         if (isAbs || pr.recEval === "إعادة") {
@@ -26243,7 +26274,7 @@ function computeUpcomingDailyHomeworkCols(h, s, st, r, nextCtx, isHtml = true) {
   for (const ps of prevDaily) {
     const pr = ps.records?.[st.id];
     if (!pr) continue;
-    const isAbs = Boolean(pr.attendance && pr.attendance.includes("غياب"));
+    const isAbs = Boolean(pr.attendance && String(pr.attendance || "").includes("غياب"));
     const hasEv = Boolean(pr.recEval && String(pr.recEval).trim());
     if (!hasEv && !isAbs) continue;
 
@@ -26296,6 +26327,10 @@ function computeUpcomingDailyHomeworkCols(h, s, st, r, nextCtx, isHtml = true) {
   }
 
   return { surah: "", from: "", to: "", lines: 1, isSabr: false, plainText: "" };
+  } catch (eDailyHw) {
+    console.warn("computeUpcomingDailyHomeworkCols err:", eDailyHw);
+    return { surah: "", from: "", to: "", lines: 1, isSabr: false, plainText: "" };
+  }
 }
 
 function getDailyFileName() {
@@ -26338,10 +26373,18 @@ function renderDailyReport() {
   const paper = document.getElementById("dailyReportPaper");
   const warnBox = document.getElementById("reportPendingWarning");
   const badgeEl = document.getElementById("reportTypeBadge");
-  if (!s) {
-    warnBox.innerHTML = "";
+  if (!paper) return;
+  if (typeof syncExecPickerTriggers === "function") { try { syncExecPickerTriggers(); } catch {} }
+  if (!h || !s) {
+    if (warnBox) warnBox.innerHTML = "";
     if (badgeEl) badgeEl.textContent = "";
     paper.innerHTML = `<div class="empty-state"><h3>لا توجد جلسة محددة</h3></div>`;
+    return;
+  }
+  if (s.noClass) {
+    if (warnBox) warnBox.innerHTML = `<span class="rep-ready-chip warn">🛑 يوم عطلة (بدون حلقة) — لا يوجد تقرير</span>`;
+    if (badgeEl) { badgeEl.textContent = "🛑 عطلة"; badgeEl.className = "badge b-muted"; }
+    paper.innerHTML = `<div class="empty-state"><h3>يوم ${escapeHtml(s.dayName)} (${escapeHtml(s.hijriDate)}) — بدون حلقة</h3><p>${escapeHtml(s.noClassReason || "هذا اليوم مُغلق كعطلة ولن يُحسب في التقارير.")}</p></div>`;
     return;
   }
   const bm = getBrandMeta(h);
@@ -26359,7 +26402,7 @@ function renderDailyReport() {
     if (r.attendance === "غياب مبرر") excused++;
     if (r.attendance === "غياب غير مبرر") absent++;
     totalPts += Number(r.points) || 0;
-    const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
+    const isAbs = String(r.attendance || "").includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
     if (!isAbs) {
       if (st.track === "rashidi") {
         if (r.recEval && r.recEval !== "إعادة") dayRashidiPgs += Number(r.rashidiPages) || 0;
@@ -26461,9 +26504,10 @@ function renderDailyReport() {
           ${hwSubHdrs}
         </tr>
       </thead><tbody>`;
-    h.students.forEach((st, idx) => {
+    (h.students || []).forEach((st, idx) => {
+      try {
       const r = getStudentRecord(s, st.id);
-      const isAbs = r.attendance.includes("غياب");
+      const isAbs = String(r.attendance || "").includes("غياب");
       const _recSabrObj = (r.recIsSabr && r.sabrJuz) ? getJuzByName(r.sabrJuz) : null;
       const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
         ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
@@ -26533,6 +26577,10 @@ function renderDailyReport() {
         ${hwCellsHtml}
         <td class="txt-right td-note ${noteCellCls}">${noteCellHtml}</td>
       </tr>`;
+      } catch (rowErr) {
+        console.warn("Daily report row error for student:", st?.name, rowErr);
+        tbl += `<tr><td>${idx + 1}</td><td class="txt-right td-name-col">${escapeHtml(st?.name || "")}</td><td colspan="${ptsOn ? 12 : 11}">—</td></tr>`;
+      }
     });
     const footHtml = ptsOn
       ? `<td colspan="6">مجموع نقاط الحلقة اليوم</td><td>${totalPts}</td>
@@ -26582,9 +26630,10 @@ function renderDailyReport() {
           <th class="th-sub">السورة</th><th class="th-sub">من</th><th class="th-sub">إلى</th>
         </tr>
       </thead><tbody>`;
-    h.students.forEach((st, idx) => {
+    (h.students || []).forEach((st, idx) => {
+      try {
       const r = getStudentRecord(s, st.id);
-      const isAbs = r.attendance.includes("غياب");
+      const isAbs = String(r.attendance || "").includes("غياب");
       const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
         ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
       const minSegs = getSegments(r, "min");
@@ -26622,6 +26671,10 @@ function renderDailyReport() {
         ${renderReportRangePairCells(hwCols.from, hwCols.to)}
         <td class="txt-right td-note">${escapeHtml(stripMushafPageTokens(r.notes || ""))}</td>
       </tr>`;
+      } catch (rowErr) {
+        console.warn("Sat report row error for student:", st?.name, rowErr);
+        tbl += `<tr><td>${idx + 1}</td><td class="txt-right td-name-col">${escapeHtml(st?.name || "")}</td><td colspan="${ptsOn ? 12 : 11}">—</td></tr>`;
+      }
     });
     const footHtml = ptsOn
       ? `<td colspan="9">مجموع نقاط الحلقة اليوم</td><td>${totalPts}</td>
@@ -26798,7 +26851,7 @@ function computeMonthlyData(monthFilter) {
         if (!sabrList.some(x => x.startsWith(r.sabrJuz))) sabrList.push(scLbl);
       }
 
-      const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
+      const isAbs = String(r.attendance || "").includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
       if (st.track === "rashidi") {
         if (!isAbs && r.recEval && r.recEval !== "إعادة") {
           const rf = parseArabicNum(r.rashidiFrom, 0), rt = parseArabicNum(r.rashidiTo, rf);
@@ -27844,7 +27897,7 @@ function computeStudentStatsForSessions(st, sessions, h, extraBase = null) {
         ? `${r.sabrJuz} (${Math.round(Number(r.sabrScore))}%)` : r.sabrJuz;
       if (!sabrList.some(x => x.startsWith(r.sabrJuz))) sabrList.push(scLbl);
     }
-    const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
+    const isAbs = String(r.attendance || "").includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
     if (!isAbs) {
       if (st.track === "rashidi") {
         if (r.recEval && r.recEval !== "إعادة") {
@@ -28588,7 +28641,7 @@ function renderIndivReportPaper() {
     if (!r) return;
     if (r.attendance === "لم يُسمّع" && !r.recEval && !r.minEval && !r.majEval) return;
     rowNo++;
-    const isAbs = r.attendance.includes("غياب");
+    const isAbs = String(r.attendance || "").includes("غياب");
     const typeTxt = s.type === "saturday" ? "مراجعة" : "تسميع";
     let portionTxt = "—", evalHtml = "";
 
@@ -29354,7 +29407,7 @@ async function exportDailyExcelStyled() {
       else if (r.attendance === "غياب غير مبرر") absent++;
       else if (isCountedPresent(r.attendance)) presentCnt++;
       totalPts += Number(r.points) || 0;
-      const isAbs = r.attendance.includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
+      const isAbs = String(r.attendance || "").includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
       if (!isAbs) {
         if (st.track === "rashidi") {
           if (r.recEval && r.recEval !== "إعادة") xlRashidiPgs += Number(r.rashidiPages) || 0;
@@ -29462,7 +29515,7 @@ async function exportDailyExcelStyled() {
 
       h.students.forEach((st, idx) => {
         const r = getStudentRecord(s, st.id);
-        const isAbs = r.attendance.includes("غياب");
+        const isAbs = String(r.attendance || "").includes("غياب");
         const hasSabr = Boolean(r.sabrJuz);
         const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
           ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
@@ -29601,7 +29654,7 @@ async function exportDailyExcelStyled() {
 
       h.students.forEach((st, idx) => {
         const r = getStudentRecord(s, st.id);
-        const isAbs = r.attendance.includes("غياب");
+        const isAbs = String(r.attendance || "").includes("غياب");
         const hasSabr = Boolean(r.sabrJuz);
         const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
           ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
@@ -29903,7 +29956,7 @@ function copyDailyWhatsApp() {
         : (r.recEval === "إعادة" || r.dRevEval === "إعادة");
       return { st, r, pts: Number(r.points) || 0, pgs: calcTodayPages(st, r), hasRep };
     })
-    .filter(x => !x.r.attendance.includes("غياب") && x.r.attendance !== "لم يُسمّع" && x.pts > 0)
+    .filter(x => !String(x.r.attendance || "").includes("غياب") && x.r.attendance !== "لم يُسمّع" && x.pts > 0)
     .sort((a, b) => (b.pts - a.pts) || (Number(a.hasRep) - Number(b.hasRep)) || (b.pgs - a.pgs));
   const top3 = scored.slice(0, 3);
 
@@ -29921,7 +29974,7 @@ function copyDailyWhatsApp() {
   h.students.forEach(st => {
     const r = getStudentRecord(s, st.id);
     if (isCountedPresent(r.attendance)) presentCnt++;
-    if (r.attendance.includes("غياب") || r.attendance === "لم يُسمّع") return;
+    if (String(r.attendance || "").includes("غياب") || r.attendance === "لم يُسمّع") return;
 
     if (isSat) {
       // Sabr passed on Saturday
@@ -32190,7 +32243,7 @@ function computeHalaqaSummaryForSupervisor(hData, monthLabel, supCustomProgs = [
         if (isCountedPresent(r.attendance)) presentSlots++;
       }
       totalPoints += Number(r.points) || 0;
-      const isAbs = r.attendance && (r.attendance.includes("غياب") || r.attendance === "لم يُسمّع");
+      const isAbs = r.attendance && (String(r.attendance || "").includes("غياب") || r.attendance === "لم يُسمّع");
       if (isAbs) return;
       if (st.track === "rashidi") {
         if (r.recEval && r.recEval !== "إعادة") rashidiPages += Number(r.rashidiPages) || 0;
@@ -33291,7 +33344,7 @@ function prefillSingleRashidiStudent(h, cur, st, rec, forceRefresh = false) {
   for (const ps of prevSessions) {
     const pr = ps.records?.[st.id];
     if (!pr) continue;
-    const isAbs = Boolean(pr.attendance && pr.attendance.includes("غياب"));
+    const isAbs = Boolean(pr.attendance && String(pr.attendance || "").includes("غياب"));
     const hasEv = Boolean(pr.recEval && String(pr.recEval).trim());
     if (!isAbs && !hasEv) continue;
 
@@ -33362,7 +33415,7 @@ function setRashidiEval(studentId, ev, errCount = null) {
     return;
   }
 
-  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || r.attendance.includes("غياب")) r.attendance = "حاضر";
+  if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || String(r.attendance || "").includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
   r.recEval = ev;
   removeStudentFromQueue(s, studentId);
@@ -34922,7 +34975,7 @@ function qaSetStatus(studentId, status) {
   if (status.includes("غياب") || status === "حضر ولم يُسمّع") {
     applyAbsenceCarryOver(s, st, r, status);
   } else {
-    if (r.attendance && (r.attendance.includes("غياب") || r.attendance === "حضر ولم يُسمّع")) {
+    if (r.attendance && (String(r.attendance || "").includes("غياب") || r.attendance === "حضر ولم يُسمّع")) {
       r.notes = "";
       if (st.track === "rashidi" && !r.recEval) { r.hwRashidiFrom = ""; r.hwRashidiTo = ""; }
       if (s.type === "daily" && !r.recEval) { r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = ""; }
@@ -34975,7 +35028,7 @@ function getStudentAttentionAlert(h, curSession, studentId, precomputedRelevant 
       if (s.id === curSession.id) continue;
       break;
     }
-    if (r.attendance.includes("غياب")) consecAbs++;
+    if (String(r.attendance || "").includes("غياب")) consecAbs++;
     else break;
   }
   if (consecAbs >= 2) {
@@ -35145,7 +35198,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v100";
+const TIBYAN_APP_VERSION = "v101";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
