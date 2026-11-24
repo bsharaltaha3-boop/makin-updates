@@ -11092,6 +11092,115 @@ table.t-daily td.td-rev-slim {
   min-width: 0 !important;
 }
 
+
+/* ==================== MAKIN v83: ZERO MID-WORD BREAKING IN REPORTS + POLISHED STATS PAGE ==================== */
+/* 1) Never split Arabic words character-by-character in Daily/Saturday tables (Preview + HD PNG/PDF!) */
+table.t-daily th,
+table.t-daily td {
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  word-wrap: normal !important;
+}
+table.t-daily td.td-note {
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+}
+table.t-daily td.td-span-range {
+  white-space: nowrap !important;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+}
+#hdExportStage table.t-daily td.td-span-range {
+  white-space: nowrap !important;
+  font-size: 12.5px !important;
+  font-weight: 800 !important;
+}
+
+/* 2) Stats Page Executive Alignment & Zero-Overflow Protection */
+.cmp-studio-card,
+.repeat-abs-card,
+.pts-cycle-banner,
+#view-stats .card {
+  overflow: hidden;
+  max-width: 100%;
+}
+.cmp-studio-card .sp-mode-tabs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.cmp-studio-card .sp-mode-tab {
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 8px 6px;
+  font-size: 12px;
+}
+.cmp-sum-pill {
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+  background: var(--bg);
+}
+.cmp-sum-pill:active { transform: scale(0.97); }
+.cmp-sum-pill.is-filter-on {
+  box-shadow: 0 0 0 2.5px #142a46;
+  border-color: #142a46;
+}
+[data-theme="dark"] .cmp-sum-pill.is-filter-on {
+  box-shadow: 0 0 0 2.5px #c8a14b;
+  border-color: #c8a14b;
+}
+.pts-cycle-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+.pts-cycle-banner > div:first-child {
+  min-width: 0;
+  flex: 1;
+}
+.pts-cycle-banner > div:last-child {
+  flex-shrink: 0;
+}
+.repeat-abs-card h4 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 8px;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.repeat-abs-card h4 > span {
+  min-width: 0;
+  flex: 1;
+  line-height: 1.35;
+}
+.repeat-abs-card h4 > button {
+  flex-shrink: 0;
+  padding: 5px 9px;
+  font-size: 11.5px;
+}
+.repeat-abs-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.repeat-abs-pills .pill {
+  font-size: 11.5px;
+  padding: 5px 9px;
+  border-radius: 9px;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -11601,7 +11710,7 @@ table.t-daily td.td-rev-slim {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v82</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v83</span>
         </button>
       </div>
     </div>
@@ -13266,6 +13375,8 @@ function stripMushafPageTokens(str) {
   return String(str ?? "")
     .replace(/\(\s*ص[\s\u00A0]*\d+\s*\)/g, "")
     .replace(/(^|[\s(←–\-:,])ص[\s\u00A0]*\d+(?=\s+[\u0600-\u06FF])/g, "$1")
+    .replace(/([\u0600-\u06FF][\u0600-\u06FF\s]{1,22}?)\s*←\s*\1(?=[\s.،؛:!؟)]|$)/g, "$1")
+    .replace(/\s+([.،؛:])/g, "$1")
     .replace(/\s{2,}/g, " ")
     .trim();
 }
@@ -23401,6 +23512,20 @@ function getCompactSabrCellText(sabrJuzName, scTag = "", isRepeat = false) {
   return `سبر ${shortN}${scTag}`;
 }
 
+function renderReportRangePairCells(fromHtml, toHtml) {
+  const fPlain = String(fromHtml || "").replace(/<[^>]+>/g, "").trim();
+  const tPlain = String(toHtml || "").replace(/<[^>]+>/g, "").trim();
+  const hasLongArabic = s => /[\u0600-\u06FF]{3,}/.test(s);
+  if (hasLongArabic(fPlain) || hasLongArabic(tPlain)) {
+    let combined = "";
+    if (fPlain === "جزء" && tPlain) combined = `جزء ${tPlain}`;
+    else if (fPlain && tPlain && fPlain !== tPlain) combined = `${fPlain} ← ${tPlain}`;
+    else combined = fPlain || tPlain;
+    return `<td colspan="2" class="td-span-range">${escapeHtml(combined)}</td>`;
+  }
+  return `<td>${fromHtml}</td><td>${toHtml}</td>`;
+}
+
 function renderDailyReport() {
   const h = getActiveHalaqa(), s = getCurrentSession();
   const paper = document.getElementById("dailyReportPaper");
@@ -23432,7 +23557,7 @@ function renderDailyReport() {
       if (st.track === "rashidi") {
         if (r.recEval && r.recEval !== "إعادة") dayRashidiPgs += Number(r.rashidiPages) || 0;
       } else if (s.type === "daily") {
-        if (r.recEval && r.recEval !== "إعادة") dayMemPgs += Number(r.recPages) || calcRecordRecPages(r);
+        if (r.recEval && r.recEval !== "إعادة" && !r.recIsSabr) dayMemPgs += Number(r.recPages) || calcRecordRecPages(r);
         dayRevPgs += calcDailyReviewPages(r);
       } else {
         if (r.minEval && r.minEval !== "إعادة") dayRevPgs += Number(r.minPages) || calcRecordMinPages(r);
@@ -23524,16 +23649,14 @@ function renderDailyReport() {
         <td>${idx + 1}</td>
         <td class="txt-right td-name-col">${escapeHtml(st.name)}</td>
         <td>${recCols.surah}</td>
-        <td>${recCols.from}</td>
-        <td>${recCols.to}</td>
+        ${renderReportRangePairCells(recCols.from, recCols.to)}
         <td class="${evalSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(evalSt.text)}</td>
         ${ptsOn ? `<td class="td-pts">${r.points || 0}</td>` : ''}
         <td class="td-rev-slim">${dRevCols.from}</td>
         <td class="td-rev-slim">${dRevCols.to}</td>
         <td class="${revSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(revSt.text)}</td>
         <td>${hwCols.surah}</td>
-        <td>${hwCols.from}</td>
-        <td>${hwCols.to}</td>
+        ${renderReportRangePairCells(hwCols.from, hwCols.to)}
         <td class="txt-right td-note">${escapeHtml(stripMushafPageTokens(r.notes || ""))}</td>
       </tr>`;
     });
@@ -23545,19 +23668,19 @@ function renderDailyReport() {
   } else {
     const colgroup = ptsOn
       ? `<colgroup>
-          <col style="width:2.5%"><col style="width:12.5%">
+          <col style="width:2.5%"><col style="width:12.0%">
           <col style="width:8.5%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.2%">
-          <col style="width:7.2%"><col style="width:7.2%"><col style="width:6.0%">
-          <col style="width:3.5%">
-          <col style="width:9.5%"><col style="width:3.5%"><col style="width:3.5%">
-          <col style="width:24.5%">
+          <col style="width:7.0%"><col style="width:7.0%"><col style="width:6.0%">
+          <col style="width:3.4%">
+          <col style="width:9.2%"><col style="width:4.3%"><col style="width:4.3%">
+          <col style="width:24.2%">
         </colgroup>`
       : `<colgroup>
-          <col style="width:2.5%"><col style="width:13.5%">
+          <col style="width:2.5%"><col style="width:13.0%">
           <col style="width:8.5%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.2%">
-          <col style="width:7.2%"><col style="width:7.2%"><col style="width:6.0%">
-          <col style="width:9.5%"><col style="width:3.5%"><col style="width:3.5%">
-          <col style="width:27.0%">
+          <col style="width:7.0%"><col style="width:7.0%"><col style="width:6.0%">
+          <col style="width:9.2%"><col style="width:4.3%"><col style="width:4.3%">
+          <col style="width:26.6%">
         </colgroup>`;
 
     tbl = `<table class="t-daily" id="dailyReportTable">${colgroup}
@@ -23596,23 +23719,22 @@ function renderDailyReport() {
         ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1 }
         : formatSatNextMajColumns(r, true);
       const minSt = getEvalCellStyle(isAbs ? _gtRep.absent : (isRashidiRow ? (r.recEval || "") : (r.minEval || "")), isAbs);
-      const majRaw = isRashidiRow ? "" : (isAbs ? "غائب" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || "")));
+      const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
+      const majRaw = isRashidiRow ? "" : (isAbs ? _gtRep.absent : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || ""))));
       const majSt = getEvalCellStyle(majRaw, !isRashidiRow && isAbs);
 
       tbl += `<tr>
         <td>${idx + 1}</td>
         <td class="txt-right td-name-col">${escapeHtml(st.name)}</td>
         <td>${minCols.surah}</td>
-        <td>${minCols.from}</td>
-        <td>${minCols.to}</td>
-        <td class="${minSt.cls}" style="font-weight:800;">${escapeHtml(minSt.text)}</td>
-        <td>${majCols.from}</td>
-        <td>${majCols.to}</td>
-        <td class="${majSt.cls}" style="font-weight:800;">${escapeHtml(majSt.text)}</td>
+        ${renderReportRangePairCells(minCols.from, minCols.to)}
+        <td class="${minSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(minSt.text)}</td>
+        <td class="td-rev-slim">${majCols.from}</td>
+        <td class="td-rev-slim">${majCols.to}</td>
+        <td class="${majSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(majSt.text)}</td>
         ${ptsOn ? `<td class="td-pts">${r.points || 0}</td>` : ''}
         <td>${hwCols.surah}</td>
-        <td>${hwCols.from}</td>
-        <td>${hwCols.to}</td>
+        ${renderReportRangePairCells(hwCols.from, hwCols.to)}
         <td class="txt-right td-note">${escapeHtml(stripMushafPageTokens(r.notes || ""))}</td>
       </tr>`;
     });
@@ -24190,11 +24312,11 @@ function renderStats() {
   const repeatAbsAlert = repeatAbsList.length ? `
     <div class="repeat-abs-card">
       <h4>
-        <span>⚠️ تنبيه الغياب المتكرر (3 أيام فأكثر — ${repeatAbsList.length} طالب)</span>
-        <button class="btn btn-danger btn-sm" onclick="copyRepeatedAbsenceWA()">💬 نسخ القائمة للواتساب</button>
+        <span>⚠️ غياب متكرر (3 أيام فأكثر — ${repeatAbsList.length})</span>
+        <button class="btn btn-danger btn-sm" onclick="copyRepeatedAbsenceWA()">💬 واتساب</button>
       </h4>
-      <div style="display:flex; flex-wrap:wrap; gap:6px;">
-        ${repeatAbsList.map(r => `<button type="button" class="pill pill-sm on-red" style="cursor:pointer;" onclick="openStudentProfile('${r.student.id}')">${escapeHtml(r.student.name)} (${r.totalAbsences} أيام)</button>`).join("")}
+      <div class="repeat-abs-pills">
+        ${repeatAbsList.map(r => `<button type="button" class="pill pill-sm on-red" style="cursor:pointer;" onclick="openStudentProfile('${r.student.id}')">${escapeHtml(r.student.name)} (${r.totalAbsences})</button>`).join("")}
       </div>
     </div>` : "";
 
@@ -24991,18 +25113,25 @@ function renderIndivComparisonHtml(cmp, ptsOn) {
   </div>`;
 }
 
-// ==================== STATS PROGRESS COMPARISON WIDGET (v80) ====================
+// ==================== STATS PROGRESS COMPARISON WIDGET (v83) ====================
 let _statsCmpMode = "weekly"; // "weekly" | "monthly"
 let _statsCmpPeriod = "";
+let _statsCmpFilter = "all"; // "all" | "up" | "flat" | "down"
 
 function setStatsCmpMode(mode) {
   _statsCmpMode = mode === "monthly" ? "monthly" : "weekly";
   _statsCmpPeriod = "";
+  _statsCmpFilter = "all";
   renderStatsComparisonCard();
 }
 
 function setStatsCmpPeriod(val) {
   _statsCmpPeriod = val;
+  renderStatsComparisonCard();
+}
+
+function setStatsCmpFilter(f) {
+  _statsCmpFilter = (_statsCmpFilter === f) ? "all" : f;
   renderStatsComparisonCard();
 }
 
@@ -25053,48 +25182,52 @@ function renderStatsComparisonCard() {
 
   const orderRank = v => v === "up" ? 0 : (v === "down" ? 1 : (v === "flat" ? 2 : 3));
   cmpRows.sort((a, b) => (orderRank(a.cmp.verdict) - orderRank(b.cmp.verdict)) || (b.cmp.dMem - a.cmp.dMem));
+  const filteredRows = (_statsCmpFilter === "all") ? cmpRows : cmpRows.filter(x => x.cmp.verdict === _statsCmpFilter);
 
   const listHtml = !hasPrevAny
     ? `<div style="text-align:center; padding:14px 8px; color:var(--ink-500); font-size:12.5px; font-weight:700;">لا توجد جلسات مسجّلة في الفترة السابقة للمقارنة بعد — ستظهر المقارنة تلقائياً فور تسجيل فترتين متتاليتين.</div>`
-    : `<div class="pts-rank-scroll" style="max-height:330px;">${cmpRows.map(({ st, cmp }) => {
-        const mD = formatCmpDeltaBadge(cmp.dMem, "ص");
-        const rD = formatCmpDeltaBadge(cmp.dRev, "ص");
-        const pD = formatCmpDeltaBadge(cmp.dPres, "حضور");
-        const bCls = cmp.verdict === "up" ? "b-green" : (cmp.verdict === "down" ? "b-red" : "b-slate");
-        const openCall = _statsCmpMode === "weekly"
-          ? `openIndivReportModal('${st.id}','','compare','${activeRef}','weekly')`
-          : `openIndivReportModal('${st.id}','${escapeHtml(activeRef)}','compare','','monthly')`;
-        return `<div class="cmp-stu-row ${cmp.verdict}">
-          <div class="cmp-stu-info">
-            <div class="cmp-stu-name">${escapeHtml(st.name)}</div>
-            <div class="cmp-stu-deltas">
-              <span>${cmp.isRashidi ? "رشيدي" : "حفظ"}: <b class="cc-delta ${mD.cls}">${mD.txt}</b></span>
-              ${!cmp.isRashidi ? `<span>مراجعة: <b class="cc-delta ${rD.cls}">${rD.txt}</b></span>` : ""}
-              <span><b class="cc-delta ${pD.cls}">${pD.txt}</b></span>
+    : (!filteredRows.length
+      ? `<div style="text-align:center; padding:12px 8px; color:var(--ink-500); font-size:12px; font-weight:700;">لا يوجد طلاب في هذا التصنيف حالياً.</div>`
+      : `<div class="pts-rank-scroll" style="max-height:310px;">${filteredRows.map(({ st, cmp }) => {
+          const mD = formatCmpDeltaBadge(cmp.dMem, "ص");
+          const rD = formatCmpDeltaBadge(cmp.dRev, "ص");
+          const pD = formatCmpDeltaBadge(cmp.dPres, "حضور");
+          const bCls = cmp.verdict === "up" ? "b-green" : (cmp.verdict === "down" ? "b-red" : "b-slate");
+          const openCall = _statsCmpMode === "weekly"
+            ? `openIndivReportModal('${st.id}','','compare','${activeRef}','weekly')`
+            : `openIndivReportModal('${st.id}','${escapeHtml(activeRef)}','compare','','monthly')`;
+          return `<div class="cmp-stu-row ${cmp.verdict}">
+            <div class="cmp-stu-info">
+              <div class="cmp-stu-name">${escapeHtml(st.name)}</div>
+              <div class="cmp-stu-deltas">
+                <span>${cmp.isRashidi ? "رشيدي" : "حفظ"}: <b class="cc-delta ${mD.cls}">${mD.txt}</b></span>
+                ${!cmp.isRashidi ? `<span>مراجعة: <b class="cc-delta ${rD.cls}">${rD.txt}</b></span>` : ""}
+                <span><b class="cc-delta ${pD.cls}">${pD.txt}</b></span>
+              </div>
             </div>
-          </div>
-          <div style="display:inline-flex; align-items:center; gap:5px; flex-shrink:0;">
-            <span class="badge ${bCls}">${cmp.verdict === "up" ? "📈 تقدّم" : (cmp.verdict === "down" ? "📉 تراجع" : "➖ ثابت")}</span>
-            <button type="button" class="btn btn-soft btn-sm" style="padding:4px 8px; font-size:11px;" onclick="${openCall}">📈 البطاقة</button>
-          </div>
-        </div>`;
-      }).join("")}</div>`;
+            <div style="display:inline-flex; align-items:center; gap:5px; flex-shrink:0;">
+              <span class="badge ${bCls}">${cmp.verdict === "up" ? "📈 تقدّم" : (cmp.verdict === "down" ? "📉 تراجع" : "➖ ثابت")}</span>
+              <button type="button" class="btn btn-soft btn-sm" style="padding:4px 8px; font-size:11px;" onclick="${openCall}">📈 البطاقة</button>
+            </div>
+          </div>`;
+        }).join("")}</div>`);
 
   host.innerHTML = `<div class="cmp-studio-card">
     <div class="card-title" style="margin-bottom:8px;">
-      <span>📈 مقارنة التقدّم والتراجع (مع الفترة السابقة)</span>
+      <span>📈 مقارنة التقدّم والتراجع</span>
+      ${_statsCmpFilter !== "all" ? `<button type="button" class="pp-mode-link" onclick="setStatsCmpFilter('all')">عرض الكل (${cmpRows.length})</button>` : `<span class="badge b-slate" style="font-size:10.5px;">مع الفترة السابقة</span>`}
     </div>
     <div class="sp-mode-tabs" style="margin-bottom:8px;">
-      <button type="button" class="sp-mode-tab ${_statsCmpMode === "weekly" ? "on" : ""}" onclick="setStatsCmpMode('weekly')">📆 أسبوع مقابل الأسبوع السابق</button>
-      <button type="button" class="sp-mode-tab ${_statsCmpMode === "monthly" ? "on" : ""}" onclick="setStatsCmpMode('monthly')">📅 شهر مقابل الشهر السابق</button>
+      <button type="button" class="sp-mode-tab ${_statsCmpMode === "weekly" ? "on" : ""}" onclick="setStatsCmpMode('weekly')">📆 مقارنة أسبوعية</button>
+      <button type="button" class="sp-mode-tab ${_statsCmpMode === "monthly" ? "on" : ""}" onclick="setStatsCmpMode('monthly')">📅 مقارنة شهرية</button>
     </div>
-    <div class="field" style="margin-bottom:4px;">
-      <select onchange="setStatsCmpPeriod(this.value)" style="padding:7px 10px; font-weight:800; font-size:12.5px;">${optsHtml}</select>
+    <div class="field" style="margin-bottom:6px;">
+      <select onchange="setStatsCmpPeriod(this.value)" style="padding:8px 10px; font-weight:800; font-size:12.5px; background:var(--bg);">${optsHtml}</select>
     </div>
     ${hasPrevAny ? `<div class="cmp-summary-3">
-      <div class="cmp-sum-pill up"><b>${upCnt}</b><span>📈 متقدمون</span></div>
-      <div class="cmp-sum-pill flat"><b>${flatCnt}</b><span>➖ ثابتون</span></div>
-      <div class="cmp-sum-pill down"><b>${downCnt}</b><span>📉 تراجع / متابعة</span></div>
+      <button type="button" class="cmp-sum-pill up ${_statsCmpFilter === "up" ? "is-filter-on" : ""}" onclick="setStatsCmpFilter('up')"><b>${upCnt}</b><span>📈 متقدمون</span></button>
+      <button type="button" class="cmp-sum-pill flat ${_statsCmpFilter === "flat" ? "is-filter-on" : ""}" onclick="setStatsCmpFilter('flat')"><b>${flatCnt}</b><span>➖ ثابتون</span></button>
+      <button type="button" class="cmp-sum-pill down ${_statsCmpFilter === "down" ? "is-filter-on" : ""}" onclick="setStatsCmpFilter('down')"><b>${downCnt}</b><span>📉 تراجع</span></button>
     </div>` : ""}
     ${listHtml}
   </div>`;
@@ -26192,7 +26325,7 @@ async function exportHighResPDF(paperId, filename) {
     const imgRatio = canvas.width / Math.max(1, canvas.height);
 
     // Smart A4 Orientation: Portrait for tall Monthly tables (much larger & sharper!), Landscape for wide Weekly/Daily & Certificates
-    const usePortrait = paperId === "indivReportCanvas" || paperId === "supTeacherCardCanvas" || paperId === "supBranchPosterCanvas" || ((paperId === "monthlyReportPaper" || paperId === "supBranchTablePaper") && imgRatio < 1.12);
+    const usePortrait = paperId === "indivReportCanvas" || paperId === "supTeacherCardCanvas" || paperId === "supBranchPosterCanvas" || paperId === "pointsTablePaper" || paperId === "pointsPodiumPaper" || ((paperId === "monthlyReportPaper" || paperId === "supBranchTablePaper") && imgRatio < 1.12);
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF({ orientation: usePortrait ? "portrait" : "landscape", unit: "mm", format: "a4", compress: true });
     const pageW = usePortrait ? 210 : 297;
@@ -26293,7 +26426,7 @@ async function exportDailyExcelStyled() {
         if (st.track === "rashidi") {
           if (r.recEval && r.recEval !== "إعادة") xlRashidiPgs += Number(r.rashidiPages) || 0;
         } else if (!isSat) {
-          if (r.recEval && r.recEval !== "إعادة") xlMemPgs += Number(r.recPages) || calcRecordRecPages(r);
+          if (r.recEval && r.recEval !== "إعادة" && !r.recIsSabr) xlMemPgs += Number(r.recPages) || calcRecordRecPages(r);
           xlRevPgs += calcDailyReviewPages(r);
         } else {
           if (r.minEval && r.minEval !== "إعادة") xlRevPgs += Number(r.minPages) || calcRecordMinPages(r);
@@ -26396,22 +26529,29 @@ async function exportDailyExcelStyled() {
         const hwCols = isRashidiRow
           ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "", lines: 1 }
           : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, false) : formatSegmentsColumns(getSegments(r, "hw"), false));
-        const dRevCols = isRashidiRow
+        const isPendingSabrOnly = Boolean(r.recIsSabr && r.sabrJuz && !r.recEval && !isAbs);
+        const isPendingNoEval = Boolean(!r.recEval && !isAbs && r.attendance === "لم يُسمّع");
+        const compactDRevFrom = String(r.dRevFrom || "").replace(/^إعادة\s+/, "").replace(/\s*ص\s*\d+/g, "").trim();
+        const compactDRevTo = String(r.dRevTo || "").replace(/^\(|\)$/g, "").trim();
+        const dRevCols = (isRashidiRow || isPendingSabrOnly || (isPendingNoEval && !r.dRevEval))
           ? { from: "", to: "", lines: 1 }
           : ((r.dRevIsPages || r.dRevSardLabel)
-            ? { from: String(r.dRevFrom || ""), to: String(r.dRevTo || ""), lines: 1 }
-            : formatReviewPairColumns(getSegments(r, "dRev"), r.dRevFrom, r.dRevTo, false));
+            ? { from: compactDRevFrom, to: compactDRevTo, lines: 1 }
+            : formatReviewPairColumns(getSegments(r, "dRev"), compactDRevFrom, compactDRevTo, false));
 
-        const evalSt = getEvalCellStyle(isAbs ? "غائب" : (r.recEval || "") + (_xlSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : ""), isAbs);
+        const evalSt = getEvalCellStyle(isAbs ? getGenderTerms(h).absent : (r.recEval || "") + (_xlSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : ""), isAbs);
         const cleanXlRev = (r.dRevEval === "بانتظار التقييم" && !r.sabrJuz) ? "" : (r.dRevEval || "");
-        const revSt = getEvalCellStyle(isRashidiRow ? "" : (r.sabrJuz ? `سبر ${r.sabrJuz}${scTag}` : cleanXlRev), false);
+        const revSt = getEvalCellStyle((isRashidiRow || isPendingSabrOnly) ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.recEval === "إعادة" || String(r.dRevEval || "").includes("إعادة")) : cleanXlRev), false);
+        const hasHwSabr = Boolean(r.hwSabrJuz);
+        const cleanNote = stripMushafPageTokens(r.notes || "");
 
-        const row = ws.getRow(8 + idx);
+        const rIdx = 8 + idx;
+        const row = ws.getRow(rIdx);
         row.values = ptsOn
-          ? [idx + 1, st.name, recCols.surah, recCols.from, recCols.to, evalSt.text, Number(r.points) || 0, dRevCols.from, dRevCols.to, revSt.text, hwCols.surah, hwCols.from, hwCols.to, stripMushafPageTokens(r.notes || "")]
-          : [idx + 1, st.name, recCols.surah, recCols.from, recCols.to, evalSt.text, dRevCols.from, dRevCols.to, revSt.text, hwCols.surah, hwCols.from, hwCols.to, stripMushafPageTokens(r.notes || "")];
+          ? [idx + 1, st.name, recCols.surah, recCols.from, recCols.to, evalSt.text, Number(r.points) || 0, dRevCols.from, dRevCols.to, revSt.text, hwCols.surah, hwCols.from, hwCols.to, cleanNote]
+          : [idx + 1, st.name, recCols.surah, recCols.from, recCols.to, evalSt.text, dRevCols.from, dRevCols.to, revSt.text, hwCols.surah, hwCols.from, hwCols.to, cleanNote];
         const maxLines = Math.max(recCols.lines, hwCols.lines, dRevCols.lines);
-        row.height = Math.max(estimateRowHeight(r.notes, 20, 48), maxLines * 15 + 6);
+        row.height = Math.max(estimateRowHeight(cleanNote, 20, 48), maxLines * 15 + 6);
         const altAB = idx % 2 === 1 ? "FFF2F2F2" : "FFFFFFFF";
         const altBody = idx % 2 === 1 ? "FFFAFAFA" : "FFFFFFFF";
         for (let c = 1; c <= totalCols; c++) {
@@ -26422,8 +26562,13 @@ async function exportDailyExcelStyled() {
           if (ptsOn && c === 7) fill = "FFFDF2F2";
           if (c === 6 && evalSt.xlFill) { fill = evalSt.xlFill; fontColor = evalSt.xlFont; bold = true; }
           if (c === revEvalCol && revSt.xlFill) { fill = revSt.xlFill; fontColor = revSt.xlFont; bold = true; }
-          if (hasSabr && c >= hwStartCol) { fill = "FFE8F5E9"; }
+          if (hasHwSabr && c >= hwStartCol && c < noteCol) { fill = "FFE8F5E9"; }
           styleCell(row.getCell(c), { fill, fontColor, bold, size: sz, align: (c === 2 || c === noteCol) ? "right" : "center" });
+        }
+        if (hasHwSabr) {
+          const c1 = hwStartCol + 1, c2 = hwStartCol + 2;
+          ws.mergeCells(rIdx, c1, rIdx, c2);
+          row.getCell(c1).value = (hwCols.from === "جزء" && hwCols.to) ? `جزء ${hwCols.to}` : `${hwCols.from} ← ${hwCols.to}`;
         }
       });
 
@@ -26495,15 +26640,19 @@ async function exportDailyExcelStyled() {
           ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "", lines: 1 }
           : formatSatNextMajColumns(r, false);
 
-        const minSt = getEvalCellStyle(isAbs ? "غائب" : (isRashidiRow ? (r.recEval || "") : (r.minEval || "")), isAbs);
-        const majSt = getEvalCellStyle(isRashidiRow ? "" : (isAbs ? "غائب" : (r.sabrJuz ? (r.majEval === "إعادة" ? `إعادة سبر${scTag}` : `سبر ${r.sabrJuz}${scTag}`) : (r.majEval || ""))), !isRashidiRow && isAbs);
+        const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
+        const minSt = getEvalCellStyle(isAbs ? getGenderTerms(h).absent : (isRashidiRow ? (r.recEval || "") : (r.minEval || "")), isAbs);
+        const majSt = getEvalCellStyle(isRashidiRow ? "" : (isAbs ? getGenderTerms(h).absent : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || "")))), !isRashidiRow && isAbs);
+        const hasHwSabr = Boolean(r.nextMajSabrJuz || (r.sabrJuz && (r.majEval === "إعادة" || isAbs)));
+        const cleanNote = stripMushafPageTokens(r.notes || "");
 
-        const row = ws.getRow(8 + idx);
+        const rIdx = 8 + idx;
+        const row = ws.getRow(rIdx);
         row.values = ptsOn
-          ? [idx + 1, st.name, minCols.surah, minCols.from, minCols.to, minSt.text, majCols.from, majCols.to, majSt.text, Number(r.points) || 0, hwCols.surah, hwCols.from, hwCols.to, stripMushafPageTokens(r.notes || "")]
-          : [idx + 1, st.name, minCols.surah, minCols.from, minCols.to, minSt.text, majCols.from, majCols.to, majSt.text, hwCols.surah, hwCols.from, hwCols.to, stripMushafPageTokens(r.notes || "")];
+          ? [idx + 1, st.name, minCols.surah, minCols.from, minCols.to, minSt.text, majCols.from, majCols.to, majSt.text, Number(r.points) || 0, hwCols.surah, hwCols.from, hwCols.to, cleanNote]
+          : [idx + 1, st.name, minCols.surah, minCols.from, minCols.to, minSt.text, majCols.from, majCols.to, majSt.text, hwCols.surah, hwCols.from, hwCols.to, cleanNote];
         const maxLines = Math.max(minCols.lines, majCols.lines, hwCols.lines);
-        row.height = Math.max(estimateRowHeight(r.notes, 20, 44), maxLines * 15 + 6);
+        row.height = Math.max(estimateRowHeight(cleanNote, 20, 44), maxLines * 15 + 6);
         const altAB = idx % 2 === 1 ? "FFF2F2F2" : "FFFFFFFF";
         const altBody = idx % 2 === 1 ? "FFFAFAFA" : "FFFFFFFF";
         for (let c = 1; c <= totalCols; c++) {
@@ -26514,8 +26663,13 @@ async function exportDailyExcelStyled() {
           if (ptsOn && c === 10) fill = "FFFDF2F2";
           if (c === 6 && minSt.xlFill) { fill = minSt.xlFill; fontColor = minSt.xlFont; bold = true; }
           if (c === 9 && majSt.xlFill) { fill = majSt.xlFill; fontColor = majSt.xlFont; bold = true; }
-          if (hasSabr && c >= hwStartCol) { fill = "FFE8F5E9"; }
+          if (hasHwSabr && c >= hwStartCol && c < noteCol) { fill = "FFE8F5E9"; }
           styleCell(row.getCell(c), { fill, fontColor, bold, size: sz, align: (c === 2 || c === noteCol) ? "right" : "center" });
+        }
+        if (/[\u0600-\u06FF]{3,}/.test(String(hwCols.from || "")) || /[\u0600-\u06FF]{3,}/.test(String(hwCols.to || ""))) {
+          const c1 = hwStartCol + 1, c2 = hwStartCol + 2;
+          ws.mergeCells(rIdx, c1, rIdx, c2);
+          row.getCell(c1).value = (hwCols.from && hwCols.to && hwCols.from !== hwCols.to) ? `${hwCols.from} ← ${hwCols.to}` : (hwCols.from || hwCols.to);
         }
       });
 
@@ -26657,7 +26811,8 @@ async function exportMonthlyExcelStyled() {
       const rowNum = dataStart + idx;
       const row = ws.getRow(rowNum);
       row.height = estimateRowHeight(r.customNote, 24, 34);
-      const vals = [idx + 1, r.student.name, r.fromMem, r.toMem, r.memPages, r.revPages, r.sabrList.join("، ") || "—", r.customNote || ""];
+      const pgVal = r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} (رشيدي)` : r.memPages;
+      const vals = [idx + 1, r.student.name, r.fromMem, r.toMem, pgVal, r.revPages, r.sabrList.join("، ") || "—", r.customNote || ""];
       const bg = idx % 2 === 1 ? "FFE7E4D9" : "FFFFFFFF";
       vals.forEach((v, ci) => {
         const col = 4 + ci;
@@ -26723,7 +26878,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v82 -->
+<!-- Makin App v83 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -29999,7 +30154,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v82";
+const TIBYAN_APP_VERSION = "v83";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
