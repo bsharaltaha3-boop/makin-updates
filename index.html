@@ -11555,73 +11555,189 @@ table.t-daily td.td-rev-slim,
 
 
 /* ==================== MAKIN v98: BALANCED REPORT PROPORTIONS, COMPACT TAJWEED DRAWER, STUDENT FOCUS & BRAND LOCK ==================== */
-/* 1) Balanced Medium Export Widths (Comfortable Reading on Phones & A4 — Zero Stretched Whitespace!) */
-.official-daily-wrap { min-width: 1020px; }
-table.t-daily { min-width: 1020px; table-layout: fixed; }
+/* 1) Balanced Medium Export Widths (v99 — Comfortable Proportions on Phones & A4, Zero Excessive Whitespace!) */
+.official-daily-wrap { min-width: 980px; }
+table.t-daily { min-width: 980px; table-layout: fixed; }
+.official-monthly-wrap { min-width: 820px; }
 
 #hdExportStage {
-  width: 1260px !important;
-  padding: 16px 18px !important;
+  width: 1100px !important;
+  padding: 14px 16px !important;
 }
 #hdExportStage.is-monthly-stage {
-  width: 1020px !important;
-  padding: 18px 20px !important;
+  width: 940px !important;
+  padding: 16px 18px !important;
 }
 #hdExportStage.is-indiv-stage {
-  width: 900px !important;
-  padding: 15px 17px !important;
+  width: 860px !important;
+  padding: 14px 16px !important;
 }
 #hdExportStage .official-daily-hdr-v20 {
-  margin-bottom: 7px !important;
-  padding-bottom: 7px !important;
-  grid-template-columns: 1.05fr 2.75fr 1.05fr !important;
+  margin-bottom: 6px !important;
+  padding-bottom: 6px !important;
+  grid-template-columns: 1.0fr 2.85fr 1.0fr !important;
+  gap: 8px !important;
 }
 #hdExportStage .odh-org-box {
-  font-size: 13.5px !important;
-  line-height: 1.5 !important;
+  font-size: 12.8px !important;
+  line-height: 1.48 !important;
 }
 #hdExportStage .odh-title-col h2 {
-  font-size: 22px !important;
-  margin-bottom: 6px !important;
+  font-size: 20px !important;
+  margin-bottom: 5px !important;
+}
+#hdExportStage .odh-meta-grid {
+  max-width: 560px !important;
+  gap: 8px !important;
 }
 #hdExportStage .odh-meta-cell {
-  font-size: 13.5px !important;
-  padding: 4px 10px !important;
+  font-size: 12.5px !important;
+  padding: 3.5px 8px !important;
 }
 #hdExportStage .odh-logo-col img {
-  height: 56px !important;
+  height: 50px !important;
 }
 #hdExportStage table.t-daily {
-  font-size: 13.5px !important;
+  font-size: 12.6px !important;
 }
 #hdExportStage table.t-daily th {
-  font-size: 13.5px !important;
-  padding: 5px 4px !important;
+  font-size: 12.6px !important;
+  padding: 4.5px 3px !important;
 }
 #hdExportStage table.t-daily th.th-sub {
-  font-size: 12px !important;
-  padding: 3.5px 3px !important;
+  font-size: 11.4px !important;
+  padding: 3px 2px !important;
 }
 #hdExportStage table.t-daily td {
-  padding: 4.5px 5px !important;
-  font-size: 13.2px !important;
+  padding: 4px 4px !important;
+  font-size: 12.2px !important;
   line-height: 1.28 !important;
 }
 #hdExportStage table.t-daily td.td-name-col {
-  font-size: 13.5px !important;
-  padding: 4.5px 6px !important;
+  font-size: 12.5px !important;
+  padding: 4px 5px !important;
 }
 #hdExportStage table.t-daily td.td-pts {
-  font-size: 14px !important;
+  font-size: 13px !important;
 }
 #hdExportStage table.t-daily td.td-note {
-  font-size: 12.2px !important;
-  padding: 4.5px 7px !important;
+  font-size: 11.6px !important;
+  padding: 4px 6px !important;
   line-height: 1.32 !important;
 }
 #hdExportStage table.t-daily tfoot td {
+  font-size: 12.2px !important;
+  padding: 5.5px 7px !important;
+}
+#hdExportStage.is-monthly-stage .om-banner {
+  padding: 11px 16px !important;
+  margin-bottom: 9px !important;
+}
+#hdExportStage.is-monthly-stage .om-banner img {
+  height: 50px !important;
+}
+#hdExportStage.is-monthly-stage .om-banner-title h2 {
+  font-size: 20px !important;
+}
+#hdExportStage.is-monthly-stage .om-banner-title p {
   font-size: 13px !important;
-  padding: 6px 8px !important;
+}
+#hdExportStage.is-monthly-stage .om-info-row {
+  font-size: 13px !important;
+  margin-bottom: 9px !important;
+}
+#hdExportStage.is-monthly-stage .om-info-cell {
+  padding: 6px 10px !important;
+}
+#hdExportStage.is-monthly-stage table.t-monthly {
+  font-size: 12.8px !important;
+}
+#hdExportStage.is-monthly-stage table.t-monthly th {
+  font-size: 12.5px !important;
+  padding: 6px 5px !important;
+}
+#hdExportStage.is-monthly-stage table.t-monthly td {
+  font-size: 12.5px !important;
+  padding: 5px 6px !important;
+}
+
+/* ==================== MAKIN v99: UNIVERSAL BUTTON & CHIP ZERO-OVERFLOW ARMOR ==================== */
+.sp-quick-span-row {
+  grid-template-columns: 0.92fr 0.88fr 1.05fr 1.08fr 1.07fr !important;
+  gap: 4px !important;
+}
+.sp-quick-span-row button {
+  font-size: 10.5px !important;
+  padding: 6px 2px !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+}
+.sp-preset-btn,
+.bonus-pill,
+.ob-pace-btn,
+.stm-choice-btn,
+.pp-rhw-btn,
+.mp-hchip,
+.mp-hchip span,
+.qa-fchip,
+.qa-btn,
+.cert-phrase-grid-3 .qn-chip,
+.es-hw-qbtn,
+.tj-opt-btn,
+.tj-sel-pill,
+.tj-toggle-btn,
+.eps-filter-btn,
+.ir-tabs-3 .sp-mode-tab,
+.ir-cmp-subbar button,
+.exec-tab-btn,
+.mode-sw-btn,
+.pace-seg button,
+.sabr-sc-chip,
+.sp-juz-pill,
+.ob-chip {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  box-sizing: border-box !important;
+}
+.pp-rhw-btn {
+  white-space: normal !important;
+  line-height: 1.3 !important;
+}
+.ob-pace-btn {
+  font-size: 11px !important;
+  padding: 7px 2px !important;
+}
+.mp-hchip span {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  font-size: 9.8px !important;
+}
+.pp-auto-saved-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1px solid rgba(22, 121, 76, 0.28);
+  white-space: nowrap;
+}
+@media (max-width: 400px) {
+  .sp-quick-span-row button { font-size: 10px !important; padding: 6px 1px !important; }
+  .sp-preset-grid-4 .sp-preset-btn { font-size: 10.5px !important; padding: 6px 2px !important; }
+  .exec-tab-btn { font-size: 11px !important; padding: 7px 3px !important; }
+  .ir-tabs-3 .sp-mode-tab { font-size: 11px !important; padding: 7px 2px !important; }
+  .es-hw-qbtn { font-size: 10.8px !important; padding: 7px 2px !important; }
 }
 
 /* 2) Compact 1-Line Tajweed Bar + Organized Collapsible Grid Drawer (Zero Eval Sheet Clutter!) */
@@ -12274,7 +12390,7 @@ table.t-daily { min-width: 1020px; table-layout: fixed; }
             <button type="button" class="ob-pace-btn" id="obPaceBtn1" onclick="setObRevPace(1)">1 صفحة</button>
             <button type="button" class="ob-pace-btn on" id="obPaceBtn2" onclick="setObRevPace(2)">صفحتان</button>
             <button type="button" class="ob-pace-btn" id="obPaceBtn3" onclick="setObRevPace(3)">3 صفحات</button>
-            <button type="button" class="ob-pace-btn" id="obPaceBtn5" onclick="setObRevPace(5)">5 ص (ربع)</button>
+            <button type="button" class="ob-pace-btn" id="obPaceBtn5" onclick="setObRevPace(5)">ربع (5 ص)</button>
           </div>
 
           <div style="font-size:12px; font-weight:800; color:var(--ink-700); margin-bottom:5px;">أيام الدوام المعتمدة (باقي الأيام تُلغى تلقائياً)</div>
@@ -12453,7 +12569,7 @@ table.t-daily { min-width: 1020px; table-layout: fixed; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v98</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v99</span>
         </button>
       </div>
     </div>
@@ -13687,9 +13803,9 @@ table.t-daily { min-width: 1020px; table-layout: fixed; }
     </div>
 
     <div class="ir-tabs-3">
-      <button type="button" class="sp-mode-tab on" id="irPeriodMonthlyBtn" onclick="setIndivReportPeriod('monthly')">📅 كشف شهري</button>
-      <button type="button" class="sp-mode-tab" id="irPeriodWeeklyBtn" onclick="setIndivReportPeriod('weekly')">📆 كشف أسبوعي</button>
-      <button type="button" class="sp-mode-tab" id="irPeriodCompareBtn" onclick="setIndivReportPeriod('compare')">📈 بطاقة المقارنة</button>
+      <button type="button" class="sp-mode-tab on" id="irPeriodMonthlyBtn" onclick="setIndivReportPeriod('monthly')">📅 شهري</button>
+      <button type="button" class="sp-mode-tab" id="irPeriodWeeklyBtn" onclick="setIndivReportPeriod('weekly')">📆 أسبوعي</button>
+      <button type="button" class="sp-mode-tab" id="irPeriodCompareBtn" onclick="setIndivReportPeriod('compare')">📈 المقارنة</button>
     </div>
 
     <div id="irCompareSubBar" class="ir-cmp-subbar" style="display:none;">
@@ -18057,8 +18173,24 @@ function togglePerPageEvalMode(studentId, kind, toMode) {
   renderStudentCardsOnly();
 }
 
-function selectPerPageTab(studentId, kind, idx) {
-  _activePageTabMap[`${studentId}_${kind}`] = idx;
+function selectPerPageTab(studentId, kind, idx, autoCommitPrev = false) {
+  const mapKey = `${studentId}_${kind}`;
+  const prevIdx = Number(_activePageTabMap[mapKey] || 0);
+  _activePageTabMap[mapKey] = idx;
+  if (autoCommitPrev) {
+    const h = getActiveHalaqa(), s = getCurrentSession();
+    const st = h?.students?.find(x => x.id === studentId);
+    if (h && s && st) {
+      const r = getStudentRecord(s, studentId);
+      const pages = getSyncedPageEvals(r, st, kind, h);
+      if (pages && pages[prevIdx] && !pages[prevIdx].touched) {
+        pages[prevIdx].touched = true;
+        r[getPageEvalKey(kind)] = pages;
+        applyPerPageAutoEval(studentId, kind, null, false);
+        return;
+      }
+    }
+  }
   if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
     syncStudentEvalSheet();
   }
@@ -18418,7 +18550,7 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
       <div class="pp-active-box">
         <div class="pp-active-top">
           <span style="min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">📖 صفحة ${activeIdx + 1}/${pages.length}: <b>${escapeHtml(curPg.label)}</b> (ص ${curPg.mushafPage})</span>
-          <button type="button" class="lms-btn accent" style="padding:2px 8px; font-size:10.5px;" onclick="selectPerPageTab('${studentId}','${kind}',${nextIdx})">التالية ←</button>
+          <button type="button" class="lms-btn accent" style="padding:2px 8px; font-size:10.5px;" onclick="selectPerPageTab('${studentId}','${kind}',${nextIdx},true)">التالية ←</button>
         </div>
         <div class="es-err-grid-2" style="margin-bottom:0;">
           <div class="es-err-cap" title="أخطاء هذه الصفحة فقط">
@@ -18442,12 +18574,11 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
       <div class="pp-overall-card">
         <div class="pp-ov-row1">
           <div class="pp-ov-info">
-            <div>📊 التقييم الإجمالي: <span class="badge ${ovCls}">${savedKindEval ? effectiveOv : `مقترح: ${effectiveOv}`}</span></div>
+            <div>📊 التقييم الإجمالي: <span class="badge ${ovCls}">${savedKindEval ? effectiveOv : "بانتظار التقييم"}</span></div>
             <small>أخطاء: ${totE} • تنبيه: ${totA} • مقبول: ${passedCnt}/${pages.length}${failed.length && effectiveOv !== "إعادة" ? " • الإعادة بالملاحظات" : ""}</small>
           </div>
           <div style="display:flex; gap:4px; align-items:center; flex-shrink:0;">
-            ${savedKindEval ? `<button type="button" class="lms-btn" style="padding:5px 7px; color:var(--red); border-color:rgba(185,34,34,0.28); background:var(--red-bg);" onclick="clearPerPageEvaluation('${studentId}','${kind}')" title="إلغاء التقييم بالكامل">✕ إلغاء</button>` : ""}
-            <button type="button" class="pp-ov-apply-btn" onclick="confirmPerPageOverallEval('${studentId}','${kind}')">✓ اعتماد</button>
+            ${savedKindEval ? `<span class="pp-auto-saved-pill">✓ تلقائي</span><button type="button" class="lms-btn" style="padding:4px 7px; color:var(--red); border-color:rgba(185,34,34,0.28); background:var(--red-bg);" onclick="clearPerPageEvaluation('${studentId}','${kind}')" title="إلغاء التقييم بالكامل">✕ إلغاء</button>` : ""}
           </div>
         </div>
         <div class="pp-ov-override-row">
@@ -18560,7 +18691,7 @@ function formatRecRange(surahId, fromA, toA, endSurahId) {
 function surahOptionsHtml(selectedId, placeholder = "-- اختر السورة --", direction = "desc") {
   let html = `<option value="">${placeholder}</option>`;
   const list = direction === "desc" ? [...SURAHS].reverse() : SURAHS;
-  for (const s of list) html += `<option value="${s.id}" ${Number(selectedId) === s.id ? "selected" : ""}>${s.n} (${s.a} آية)</option>`;
+  for (const s of list) html += `<option value="${s.id}" ${Number(selectedId) === s.id ? "selected" : ""}>${s.n}</option>`;
   return html;
 }
 
@@ -18984,11 +19115,7 @@ function getSurahPageSpan(surahId) {
 }
 
 function spPageSurahOptsHtml(selectedId) {
-  return SURAHS.map(s => {
-    const sp = getSurahPageSpan(s.id);
-    const pgLbl = sp.count === 1 ? "صفحة واحدة" : `${sp.count} ص`;
-    return `<option value="${s.id}" ${String(selectedId) === String(s.id) ? "selected" : ""}>${s.n} (${pgLbl})</option>`;
-  }).join("");
+  return SURAHS.map(s => `<option value="${s.id}" ${String(selectedId) === String(s.id) ? "selected" : ""}>${s.n}</option>`).join("");
 }
 
 function spSetPageNumMode(mode) {
@@ -19176,11 +19303,11 @@ function renderSpPagesBox() {
     </div>
 
     <div class="sp-quick-span-row">
-      <button type="button" class="hl" onclick="spSelectFullStartSurah()">السورة كاملة</button>
+      <button type="button" class="hl" onclick="spSelectFullStartSurah()">السورة</button>
       <button type="button" onclick="spApplyPageSpanPreset(2)">+2 ص</button>
-      <button type="button" onclick="spApplyPageSpanPreset(5)">+5 (ربع)</button>
-      <button type="button" onclick="spApplyPageSpanPreset(10)">+10 (نصف)</button>
-      <button type="button" onclick="spApplyPageSpanPreset(20)">+20 (جزء)</button>
+      <button type="button" onclick="spApplyPageSpanPreset(5)">+5 ربع</button>
+      <button type="button" onclick="spApplyPageSpanPreset(10)">+10 نصف</button>
+      <button type="button" onclick="spApplyPageSpanPreset(20)">+20 جزء</button>
     </div>`;
   syncSpPageInputsOnly();
 }
@@ -19565,10 +19692,10 @@ function renderSpAyahBox() {
 
   const presetsHtml = (!isShort && !isStartOnly) ? `
     <div class="sp-preset-grid-4">
-      <button type="button" class="sp-preset-btn accent" onclick="spApplyPreset('full')">كامل السورة</button>
+      <button type="button" class="sp-preset-btn accent" onclick="spApplyPreset('full')">السورة</button>
       <button type="button" class="sp-preset-btn" onclick="spApplyPreset('p05')">+½ ص</button>
       <button type="button" class="sp-preset-btn" onclick="spApplyPreset('p1')">+1 ص</button>
-      <button type="button" class="sp-preset-btn" onclick="spApplyPreset('toEnd')">لآخرها (${info.a})</button>
+      <button type="button" class="sp-preset-btn" onclick="spApplyPreset('toEnd')">آخرها (${info.a})</button>
     </div>
     ${info.l >= 2.2 ? `<div class="sp-preset-grid-4">
       <button type="button" class="sp-preset-btn accent" onclick="spApplyPreset('p2')">+2 ص</button>
@@ -21339,7 +21466,7 @@ function populateRevSurahPicker(selectedPage) {
   const curS = selectedPage ? getSurahAtPage(selectedPage) : null;
   let opts = `<option value="">-- اختر السورة (أو اكتب رقم الصفحة) --</option>`;
   SURAHS.forEach(s => {
-    opts += `<option value="${s.p}" ${curS && curS.id === s.id ? "selected" : ""}>${s.n} (ص ${s.p})</option>`;
+    opts += `<option value="${s.p}" ${curS && curS.id === s.id ? "selected" : ""}>${s.n}</option>`;
   });
   sel.innerHTML = opts;
 }
@@ -24329,9 +24456,9 @@ function renderCardBody(s, st, r, idx) {
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','hw')">إخفاء</button>
           </div>
           <div class="es-hw-quick-3 ${hasHwDot ? '' : 'cols-2'}">
-            <button type="button" class="es-hw-qbtn primary" onclick="openSurahPicker('${st.id}','hw')">✏️ واجب مخصص</button>
-            <button type="button" class="es-hw-qbtn sabr" onclick="toggleHwSabrManual('${st.id}')">${r.hwSabrJuz ? '↩️ إلغاء سبر' : '🎓 واجب سبر جزء'}</button>
-            ${hasHwDot ? `<button type="button" class="es-hw-qbtn danger" onclick="clearStudentHwManual('${st.id}')">🗑️ مسح الواجب</button>` : ''}
+            <button type="button" class="es-hw-qbtn primary" onclick="openSurahPicker('${st.id}','hw')">✏️ مخصص</button>
+            <button type="button" class="es-hw-qbtn sabr" onclick="toggleHwSabrManual('${st.id}')">${r.hwSabrJuz ? '↩️ إلغاء سبر' : '🎓 سبر جزء'}</button>
+            ${hasHwDot ? `<button type="button" class="es-hw-qbtn danger" onclick="clearStudentHwManual('${st.id}')">🗑️ مسح</button>` : ''}
           </div>
           <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:7px;">
             <button type="button" class="pill pill-sm on-blue" style="flex:1;" onclick="addExtraSurah('${st.id}','rec')">+ إضافة سورة ثانية للتسميع</button>
@@ -25905,21 +26032,25 @@ function renderDailyReport() {
 
   let tbl = "";
   if (s.type === "daily") {
+    const maxNameLen = Math.max(...(h.students || []).map(x => String(x.name || "").trim().length), 10);
+    const nameW = maxNameLen <= 14 ? 10.2 : (maxNameLen <= 18 ? 11.2 : (maxNameLen <= 22 ? 12.0 : 12.8));
+    const noteW_pts = +(100 - (2.5 + nameW + 8.2 + 3.2 + 3.2 + 5.8 + 3.8 + 6.4 + 6.4 + 5.6 + 8.2 + 3.2 + 3.2)).toFixed(1);
+    const noteW_no = +(100 - (2.5 + (nameW + 0.6) + 8.4 + 3.3 + 3.3 + 6.0 + 6.6 + 6.6 + 5.8 + 8.4 + 3.3 + 3.3)).toFixed(1);
     const colgroup = ptsOn
       ? `<colgroup>
-          <col style="width:2.6%"><col style="width:13.2%">
-          <col style="width:7.6%"><col style="width:3.4%"><col style="width:3.4%"><col style="width:5.8%">
+          <col style="width:2.5%"><col style="width:${nameW}%">
+          <col style="width:8.2%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.8%">
           <col style="width:3.8%">
           <col style="width:6.4%"><col style="width:6.4%"><col style="width:5.6%">
-          <col style="width:8.2%"><col style="width:3.8%"><col style="width:3.8%">
-          <col style="width:26.0%">
+          <col style="width:8.2%"><col style="width:3.2%"><col style="width:3.2%">
+          <col style="width:${noteW_pts}%">
         </colgroup>`
       : `<colgroup>
-          <col style="width:2.6%"><col style="width:14.0%">
-          <col style="width:7.8%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:6.0%">
+          <col style="width:2.5%"><col style="width:${(nameW + 0.6).toFixed(1)}%">
+          <col style="width:8.4%"><col style="width:3.3%"><col style="width:3.3%"><col style="width:6.0%">
           <col style="width:6.6%"><col style="width:6.6%"><col style="width:5.8%">
-          <col style="width:8.4%"><col style="width:3.9%"><col style="width:3.9%">
-          <col style="width:27.4%">
+          <col style="width:8.4%"><col style="width:3.3%"><col style="width:3.3%">
+          <col style="width:${noteW_no}%">
         </colgroup>`;
 
     tbl = `<table class="t-daily" id="dailyReportTable">${colgroup}
@@ -26007,21 +26138,25 @@ function renderDailyReport() {
       : `<td colspan="13" class="txt-right">${_gtRep.supervisorTitle}: ${escapeHtml(bm.sheikh)} | ${escapeHtml(bm.branch)} | صفحات الحفظ: ${formatNum(dayMemPgs)} ص${dayRashidiPgs > 0 ? ` | الرشيدي: ${formatNum(dayRashidiPgs)} ص` : ""} | صفحات المراجعة: ${formatNum(dayRevPgs)} ص | حضور: ${h.students.length - excused - absent - pendingCnt} | غياب: ${excused + absent}</td>`;
     tbl += `</tbody><tfoot><tr>${footHtml}</tr></tfoot></table>`;
   } else {
+    const maxNameLen = Math.max(...(h.students || []).map(x => String(x.name || "").trim().length), 10);
+    const nameW = maxNameLen <= 14 ? 10.2 : (maxNameLen <= 18 ? 11.2 : (maxNameLen <= 22 ? 12.0 : 12.8));
+    const noteW_pts = +(100 - (2.5 + nameW + 8.0 + 3.2 + 3.2 + 5.6 + 6.6 + 6.6 + 5.6 + 3.8 + 8.2 + 3.2 + 3.2)).toFixed(1);
+    const noteW_no = +(100 - (2.5 + (nameW + 0.6) + 8.2 + 3.3 + 3.3 + 5.8 + 6.8 + 6.8 + 5.8 + 8.4 + 3.3 + 3.3)).toFixed(1);
     const colgroup = ptsOn
       ? `<colgroup>
-          <col style="width:2.6%"><col style="width:13.2%">
-          <col style="width:7.4%"><col style="width:3.4%"><col style="width:3.4%"><col style="width:5.6%">
+          <col style="width:2.5%"><col style="width:${nameW}%">
+          <col style="width:8.0%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.6%">
           <col style="width:6.6%"><col style="width:6.6%"><col style="width:5.6%">
           <col style="width:3.8%">
-          <col style="width:8.2%"><col style="width:3.8%"><col style="width:3.8%">
-          <col style="width:26.0%">
+          <col style="width:8.2%"><col style="width:3.2%"><col style="width:3.2%">
+          <col style="width:${noteW_pts}%">
         </colgroup>`
       : `<colgroup>
-          <col style="width:2.6%"><col style="width:14.0%">
-          <col style="width:7.6%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:5.8%">
+          <col style="width:2.5%"><col style="width:${(nameW + 0.6).toFixed(1)}%">
+          <col style="width:8.2%"><col style="width:3.3%"><col style="width:3.3%"><col style="width:5.8%">
           <col style="width:6.8%"><col style="width:6.8%"><col style="width:5.8%">
-          <col style="width:8.4%"><col style="width:3.9%"><col style="width:3.9%">
-          <col style="width:27.4%">
+          <col style="width:8.4%"><col style="width:3.3%"><col style="width:3.3%">
+          <col style="width:${noteW_no}%">
         </colgroup>`;
 
     tbl = `<table class="t-daily" id="dailyReportTable">${colgroup}
@@ -26130,7 +26265,7 @@ function applyReportPreviewFit(which) {
   const content = paper.firstElementChild;
   if (!content) return;
   const availW = Math.max(240, shell.clientWidth - 16);
-  const naturalW = Math.max(content.scrollWidth || (isDaily ? 1040 : 860), isDaily ? 1040 : 860);
+  const naturalW = Math.max(content.scrollWidth || (isDaily ? 980 : 820), isDaily ? 980 : 820);
   if (availW >= naturalW) return;
 
   const scale = availW / naturalW;
@@ -26570,9 +26705,9 @@ function renderMonthlyReport() {
     </div>
     <table class="t-monthly" id="monthlyReportTable">
       <colgroup>
-        <col style="width:4%"><col style="width:19%">
-        <col style="width:13.5%"><col style="width:13.5%"><col style="width:8%">
-        <col style="width:9%"><col style="width:12%"><col style="width:21%">
+        <col style="width:3.8%"><col style="width:16.2%">
+        <col style="width:13.5%"><col style="width:13.5%"><col style="width:7.5%">
+        <col style="width:9.0%"><col style="width:11.5%"><col style="width:25.0%">
       </colgroup>
       <thead>
         <tr>
@@ -26776,8 +26911,10 @@ async function renderReportToHDCanvas(paperId) {
   if (document.fonts && document.fonts.ready) await document.fonts.ready;
   await new Promise(r => setTimeout(r, 160));
 
-  // Measure actual required width so NO column can EVER be clipped on left or right!
-  const baseW = isCert ? 1400 : (isPoster ? 900 : (isIndiv ? 1040 : (isMonthly ? 1180 : 1680)));
+  // v99: Balanced medium stage widths — crisp, readable, zero stretched empty whitespace!
+  const baseW = isCert ? 1400 : (isPoster ? 900 : (isIndiv ? 860 : (isMonthly ? 940 : 1100)));
+  stage.style.setProperty("width", baseW + "px", "important");
+  await new Promise(r => setTimeout(r, 30));
   const measuredW = isCert ? 1400 : Math.max(baseW, Math.ceil(stage.scrollWidth));
   if (!isCert && measuredW > baseW) {
     stage.style.setProperty("width", measuredW + "px", "important");
@@ -33301,7 +33438,7 @@ function renderMonthlyPlanModal() {
       <div class="mp-hero-chips">
         <button type="button" class="mp-hchip ${_mpFilterStatus==='all'?'on':''}" onclick="setMonthlyPlanFilter('all')"><b>${items.length}</b><span>الكل</span></button>
         <button type="button" class="mp-hchip ${_mpFilterStatus==='ok'?'on':''}" onclick="setMonthlyPlanFilter('ok')"><b>${okCnt}</b><span>✅ أتمّوا</span></button>
-        <button type="button" class="mp-hchip ${_mpFilterStatus==='ontrack'?'on':''}" onclick="setMonthlyPlanFilter('ontrack')"><b>${onTrackCnt}</b><span>🟢 على المسار</span></button>
+        <button type="button" class="mp-hchip ${_mpFilterStatus==='ontrack'?'on':''}" onclick="setMonthlyPlanFilter('ontrack')"><b>${onTrackCnt}</b><span>🟢 منتظم</span></button>
         <button type="button" class="mp-hchip ${_mpFilterStatus==='near'?'on':''}" onclick="setMonthlyPlanFilter('near')"><b>${nearCnt}</b><span>🟡 شدّة</span></button>
         <button type="button" class="mp-hchip ${_mpFilterStatus==='miss'?'on':''}" onclick="setMonthlyPlanFilter('miss')"><b>${missCnt}</b><span>🔴 متأخر</span></button>
       </div>
@@ -34567,7 +34704,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v98";
+const TIBYAN_APP_VERSION = "v99";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
