@@ -12,8 +12,7 @@
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&amp;family=Aref+Ruqaa:wght@700&amp;family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&amp;family=Aref+Ruqaa:wght@700&amp;family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&amp;family=Aref+Ruqaa:wght@700&amp;family=Cairo:wght@600;700;800;900&amp;family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js" defer></script>
@@ -10094,6 +10093,464 @@ table.t-points-all tfoot td {
 .pts-table-paper.theme-all table.t-points-all th.gold-th { background: #c8a14b; color: #1a0d18 !important; }
 .pts-table-paper.theme-all tfoot td { background: #f3e6ee; color: #3b1530; }
 
+
+/* ==================== MAKIN v78: CLEAN EVAL SHEET LAYOUT + AGENCY-GRADE EDITORIAL HONOR POSTERS ==================== */
+/* 1) Eval Sheet Polish — Zero Overflow Ever! */
+.es-err-grid-2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.es-err-cap {
+  min-width: 0;
+  overflow: hidden;
+  padding: 4px;
+  gap: 3px;
+}
+.es-cap-btn {
+  width: 26px;
+  height: 26px;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.es-cap-lbl {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 11.5px;
+  padding: 0 2px;
+}
+
+/* Clean 2-Row Balanced Recitation Strip inside Eval Sheet */
+.es-rec-box {
+  background: var(--brand-tint);
+  border: 1px solid var(--line);
+  border-right: 4px solid #142a46;
+  border-radius: 12px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+}
+[data-theme="dark"] .es-rec-box { border-right-color: #c8a14b; }
+.es-rec-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: pointer;
+  margin-bottom: 7px;
+}
+.es-rec-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink-900);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.es-rec-pg-badge {
+  background: var(--white);
+  border: 1px solid var(--line-strong);
+  color: var(--brand-slate);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 99px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.es-rec-actions-4 {
+  display: grid;
+  grid-template-columns: 1.25fr 0.85fr 0.85fr 1fr;
+  gap: 5px;
+}
+.es-rec-actions-4 .lms-btn {
+  width: 100%;
+  padding: 5px 4px;
+  font-size: 11.5px;
+  text-align: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+.es-hw-block {
+  padding-top: 8px;
+  margin-top: 2px;
+  border-top: 1px dashed var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.es-hw-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 12px;
+}
+.es-pace-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--ink-500);
+  font-weight: 700;
+}
+.pp-eval-wrap {
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  padding: 7px 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+/* 2) Agency-Grade Editorial Honor Posters (900px Portrait — Bold Cairo & Amiri Typography, Zero Clutter!) */
+.pts-podium-poster, .pts-podium-poster * {
+  letter-spacing: 0 !important;
+  font-kerning: none;
+  box-sizing: border-box;
+}
+.pts-podium-poster {
+  width: 900px !important;
+  min-width: 900px !important;
+  font-family: 'Cairo', 'Tajawal', Arial, sans-serif !important;
+  padding: 42px 44px 36px !important;
+  border-width: 8px !important;
+  border-style: solid !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 980px;
+}
+.ppp-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  gap: 24px;
+}
+
+/* Top Brand Bar (Clean Logo Right + Program/Branch Seal Left) */
+.ppp-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.16);
+}
+.ppp-logo-pill {
+  background: #ffffff;
+  padding: 10px 20px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+.ppp-logo-pill img { height: 50px; width: auto; max-width: 185px; object-fit: contain; display: block; }
+.ppp-org-seal {
+  text-align: left;
+}
+.ppp-org-seal small {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.78);
+}
+.ppp-org-seal b {
+  display: block;
+  font-size: 21px;
+  font-weight: 900;
+  color: #f4d98d;
+  line-height: 1.25;
+}
+
+/* Bold Editorial Hero Title Block */
+.ppp-hero-title {
+  text-align: center;
+  padding: 4px 10px 2px;
+}
+.ppp-orn-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+.ppp-orn-rule {
+  width: 120px;
+  height: 2px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, transparent, #e4c26b, transparent);
+}
+.ppp-kicker-v78 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #f4d98d;
+  letter-spacing: 0;
+}
+.ppp-hero-title h2 {
+  font-family: 'Amiri', 'Cairo', serif !important;
+  font-size: 62px !important;
+  font-weight: 700 !important;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.ppp-halaqa-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(244, 217, 141, 0.45);
+  border-radius: 99px;
+  padding: 7px 28px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+}
+.ppp-halaqa-pill .dot-sep {
+  color: #f4d98d;
+}
+.ppp-halaqa-pill .per-txt {
+  color: #f4d98d;
+  font-weight: 700;
+}
+
+/* Elevated Monumental 3-Winner Podium (Large Bold Typography + Custom SVG Medals!) */
+.ppp-podium-3 {
+  display: grid;
+  grid-template-columns: 1fr 1.16fr 1fr;
+  gap: 16px;
+  align-items: end;
+  margin: 6px 0 4px !important;
+}
+.ppp-pod-card {
+  border-radius: 22px !important;
+  padding: 24px 16px 26px !important;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 310px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.22);
+}
+.ppp-pod-card.first {
+  min-height: 365px;
+  padding: 28px 18px 30px !important;
+  border-width: 3px !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+}
+.ppp-medal-svg {
+  width: 68px;
+  height: 68px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ppp-pod-card.first .ppp-medal-svg {
+  width: 84px;
+  height: 84px;
+}
+.ppp-rank-lbl {
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  color: #f4d98d;
+  margin-bottom: 8px !important;
+}
+.ppp-pod-card.first .ppp-rank-lbl {
+  font-size: 20px !important;
+}
+.ppp-stu-name {
+  font-family: 'Cairo', 'Tajawal', sans-serif !important;
+  font-size: 27px !important;
+  font-weight: 900 !important;
+  color: #ffffff;
+  line-height: 1.32 !important;
+  margin-bottom: 14px !important;
+  word-break: break-word;
+}
+.ppp-pod-card.first .ppp-stu-name {
+  font-size: 33px !important;
+}
+.ppp-pts-badge {
+  display: inline-block;
+  font-size: 22px !important;
+  font-weight: 900 !important;
+  padding: 7px 22px !important;
+  border-radius: 99px;
+  line-height: 1.2;
+}
+.ppp-pod-card.first .ppp-pts-badge {
+  font-size: 26px !important;
+  padding: 9px 26px !important;
+}
+.ppp-sub-meta {
+  font-size: 15px !important;
+  color: rgba(255, 255, 255, 0.84) !important;
+  font-weight: 700 !important;
+  margin-top: 11px !important;
+  line-height: 1.35;
+}
+
+/* Ranks 4–10 Clean Wide Honor Rows */
+.ppp-rest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px !important;
+  margin-bottom: 4px !important;
+}
+.ppp-rest-row {
+  padding: 12px 16px !important;
+  border-radius: 14px !important;
+}
+.ppp-rest-pos {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 10px !important;
+  font-size: 17px !important;
+  font-weight: 900 !important;
+}
+.ppp-rest-name {
+  font-size: 20px !important;
+  font-weight: 800 !important;
+}
+.ppp-rest-pts {
+  font-size: 17px !important;
+  font-weight: 900 !important;
+  padding: 5px 15px !important;
+}
+
+/* Refined 2-Tier Editorial Footer */
+.ppp-footer-v78 {
+  text-align: center;
+  padding-top: 18px;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+.ppp-dua-line {
+  font-family: 'Amiri', 'Cairo', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #f4d98d;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.ppp-foot-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ===== 5 DISTINCT REFINED LUXURY THEMES ===== */
+/* 1) POINTS: Deep Royal Navy & Matte Champagne Gold */
+.pts-podium-poster.theme-points {
+  background: linear-gradient(160deg, #091a33 0%, #13325c 52%, #0a1f3d 100%);
+  border-color: #d4af5a;
+}
+/* 2) MEMORIZATION: Rich Quranic Emerald & Antique Gold */
+.pts-podium-poster.theme-mem {
+  background: linear-gradient(160deg, #06241b 0%, #0e4a38 52%, #072c21 100%);
+  border-color: #d8b458;
+}
+/* 3) REVIEW: Regal Deep Burgundy-Wine & Pearl Gold (Classy & Distinguished!) */
+.pts-podium-poster.theme-rev {
+  background: linear-gradient(160deg, #2b0f17 0%, #541d2c 52%, #33121c 100%) !important;
+  border-color: #e6be6c !important;
+}
+.pts-podium-poster.theme-rev .ppp-kicker-v78,
+.pts-podium-poster.theme-rev .ppp-dua-line,
+.pts-podium-poster.theme-rev .ppp-org-seal b,
+.pts-podium-poster.theme-rev .ppp-halaqa-pill .per-txt { color: #f6dba0 !important; }
+.pts-podium-poster.theme-rev .ppp-pod-card.first {
+  background: linear-gradient(180deg, rgba(230, 190, 108, 0.25) 0%, rgba(43, 15, 23, 0.78) 100%) !important;
+  border-color: #f6dba0 !important;
+}
+.pts-podium-poster.theme-rev .ppp-pts-badge { background: #e6be6c !important; color: #2b0f17 !important; }
+.pts-podium-poster.theme-rev .ppp-pod-card.first .ppp-pts-badge { background: #f8e2b0 !important; color: #2b0f17 !important; }
+.pts-podium-poster.theme-rev .ppp-rest-row { border-right-color: #e6be6c !important; border-color: rgba(246, 219, 160, 0.3) !important; }
+.pts-podium-poster.theme-rev .ppp-rest-pts { background: #f8e2b0 !important; color: #2b0f17 !important; }
+.pts-table-paper.theme-rev { border-color: #541d2c !important; }
+.pts-table-paper.theme-rev .ptp-hdr { border-bottom-color: #c89b44 !important; }
+.pts-table-paper.theme-rev .ptp-hdr-mid h2 { color: #471624 !important; }
+.pts-table-paper.theme-rev .ptp-meta-cell { border-right-color: #541d2c !important; background: #fbf4f6 !important; color: #471624 !important; }
+.pts-table-paper.theme-rev table.t-points-all th { background: #4b1826 !important; }
+.pts-table-paper.theme-rev table.t-points-all th.gold-th { background: #e0b660 !important; color: #2b0f17 !important; }
+.pts-table-paper.theme-rev table.t-points-all td.pts-col { color: #541d2c !important; }
+.pts-table-paper.theme-rev table.t-points-all tfoot td { background: #f4e6ea !important; color: #471624 !important; }
+
+/* 4) ATTENDANCE: Deep Petrol-Sapphire & Crisp Mint-Silver */
+.pts-podium-poster.theme-att {
+  background: linear-gradient(160deg, #07222f 0%, #0f465c 52%, #082c3d 100%) !important;
+  border-color: #6fe3d2 !important;
+}
+.pts-podium-poster.theme-att .ppp-kicker-v78,
+.pts-podium-poster.theme-att .ppp-dua-line,
+.pts-podium-poster.theme-att .ppp-org-seal b,
+.pts-podium-poster.theme-att .ppp-halaqa-pill .per-txt { color: #99f6e4 !important; }
+
+/* 5) MASTER ALL-IN-ONE: Bright Editorial Warm Ivory & Royal Navy Prestige (Completely Distinct!) */
+.pts-podium-poster.theme-all {
+  background: linear-gradient(180deg, #fcfaf4 0%, #f5efe2 100%) !important;
+  color: #0e2340 !important;
+  border-color: #0e2340 !important;
+}
+.pts-podium-poster.theme-all .ppp-top-bar { border-bottom-color: rgba(14, 35, 64, 0.16); }
+.pts-podium-poster.theme-all .ppp-org-seal small { color: #475569; }
+.pts-podium-poster.theme-all .ppp-org-seal b { color: #0e2340; }
+.pts-podium-poster.theme-all .ppp-kicker-v78 { color: #9a6e17; }
+.pts-podium-poster.theme-all .ppp-hero-title h2 { color: #0e2340; }
+.pts-podium-poster.theme-all .ppp-halaqa-pill {
+  background: #0e2340;
+  border-color: #c8a14b;
+  color: #ffffff;
+}
+.pts-podium-poster.theme-all .ppp-quad-card {
+  background: #ffffff;
+  border: 1.5px solid #d8ceb8;
+  box-shadow: 0 6px 20px rgba(14, 35, 64, 0.06);
+}
+.pts-podium-poster.theme-all .ppp-quad-hdr {
+  color: #0e2340;
+  border-bottom-color: #e5decb;
+  font-size: 21px;
+}
+.pts-podium-poster.theme-all .ppp-quad-item {
+  background: #f8f5ed;
+  padding: 10px 12px;
+}
+.pts-podium-poster.theme-all .ppp-quad-item.top {
+  background: #0e2340;
+  border-color: #c8a14b;
+}
+.pts-podium-poster.theme-all .ppp-quad-name {
+  color: #0e2340;
+  font-size: 19px;
+}
+.pts-podium-poster.theme-all .ppp-quad-item.top .ppp-quad-name { color: #ffffff; }
+.pts-podium-poster.theme-all .ppp-quad-val {
+  background: #e9dfc6;
+  color: #0e2340;
+  font-size: 15.5px;
+  padding: 4px 13px;
+}
+.pts-podium-poster.theme-all .ppp-quad-item.top .ppp-quad-val {
+  background: #f4d98d;
+  color: #0e2340;
+}
+.pts-podium-poster.theme-all .ppp-footer-v78 { border-top-color: #d6ccb4; }
+.pts-podium-poster.theme-all .ppp-dua-line { color: #8c6312; }
+.pts-podium-poster.theme-all .ppp-foot-meta { color: #0e2340; }
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -10599,7 +11056,7 @@ table.t-points-all tfoot td {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v77</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v78</span>
         </button>
       </div>
     </div>
@@ -12084,8 +12541,93 @@ const SURAH_MAP = {};
   });
 })();
 
+// Exact Madinah Mushaf (604-page Hafs) Page-Start Lookup Engine (v78)
+// Built-in verified exact Madinah Mushaf page-starts for Juz 27-30 + auto-cached full 604-page map from AlQuran Cloud API!
+const MUSHAF_604_CACHE_KEY = "makin_mushaf604_exact_v1";
+const BUILTIN_EXACT_PAGES = {
+  // Juz 27 (الذاريات - الحديد)
+  520: [51, 1],  521: [51, 7],  522: [51, 31], 523: [51, 52],
+  524: [52, 15], 525: [52, 32], 526: [53, 1],  527: [53, 27],
+  528: [53, 45], 529: [54, 7],  530: [54, 28], 531: [54, 50],
+  532: [55, 17], 533: [55, 41], 534: [55, 68], 535: [56, 17],
+  536: [56, 51], 537: [56, 77], 538: [57, 4],  539: [57, 12],
+  540: [57, 19], 541: [57, 25],
+  // Juz 28 (المجادلة - التحريم)
+  542: [58, 1],  543: [58, 7],  544: [58, 12], 545: [58, 22],
+  546: [59, 4],  547: [59, 10], 548: [59, 17], 549: [60, 1],
+  550: [60, 6],  551: [60, 12], 552: [61, 6],  553: [62, 1],
+  554: [62, 9],  555: [63, 5],  556: [64, 1],  557: [64, 10],
+  558: [65, 1],  559: [65, 6],  560: [66, 1],  561: [66, 8],
+  // Juz 29 (الملك - المرسلات)
+  562: [67, 1],  563: [67, 13], 564: [67, 27], 565: [68, 16],
+  566: [68, 43], 567: [69, 9],  568: [69, 35], 569: [70, 11],
+  570: [70, 40], 571: [71, 11], 572: [72, 1],  573: [72, 14],
+  574: [73, 1],  575: [73, 20], 576: [74, 18], 577: [74, 48],
+  578: [75, 20], 579: [76, 6],  580: [76, 26], 581: [77, 20],
+  // Juz 30 (النبأ - الناس)
+  582: [78, 1],  583: [78, 31], 584: [79, 16], 585: [80, 1],
+  586: [81, 1],  587: [82, 1],  588: [83, 7],  589: [83, 34],
+  590: [85, 1],  591: [86, 1],  592: [87, 16], 593: [89, 1],
+  594: [89, 24], 595: [91, 1],  596: [92, 15], 597: [95, 1],
+  598: [97, 1],  599: [98, 8],  600: [100, 9], 601: [103, 1],
+  602: [106, 1], 603: [109, 1], 604: [112, 1]
+};
+let MUSHAF_EXACT_604 = null; // 1-indexed array of 604 [surahId, ayahNum] pairs when loaded
+
+function loadCachedMushaf604() {
+  try {
+    const raw = localStorage.getItem(MUSHAF_604_CACHE_KEY);
+    if (!raw) return false;
+    const arr = JSON.parse(raw);
+    if (Array.isArray(arr) && arr.length === 604 && arr[0]?.[0] === 1 && arr[528]?.[0] === 54 && arr[528]?.[1] === 7 && arr[603]?.[0] === 112) {
+      MUSHAF_EXACT_604 = arr;
+      return true;
+    }
+  } catch (e) {}
+  return false;
+}
+loadCachedMushaf604();
+
+async function ensureExactMushaf604Data() {
+  if (MUSHAF_EXACT_604) return true;
+  if (loadCachedMushaf604()) return true;
+  try {
+    const res = await fetch("https://api.alquran.cloud/v1/meta", { cache: "force-cache" });
+    if (!res.ok) return false;
+    const json = await res.json();
+    const refs = json?.data?.pages?.references;
+    if (Array.isArray(refs) && refs.length === 604 && refs[0].surah === 1 && refs[528].surah === 54 && refs[528].ayah === 7 && refs[603].surah === 112) {
+      const compact = refs.map(x => [Number(x.surah), Number(x.ayah)]);
+      MUSHAF_EXACT_604 = compact;
+      try { localStorage.setItem(MUSHAF_604_CACHE_KEY, JSON.stringify(compact)); } catch (e) {}
+      if (openCardId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
+        syncStudentEvalSheet();
+      }
+      return true;
+    }
+  } catch (e) {}
+  return false;
+}
+
+function getExactPageStartPair(pageNum) {
+  const p = Math.max(1, Math.min(604, Math.round(Number(pageNum) || 1)));
+  if (MUSHAF_EXACT_604 && MUSHAF_EXACT_604[p - 1]) return MUSHAF_EXACT_604[p - 1];
+  if (BUILTIN_EXACT_PAGES[p]) return BUILTIN_EXACT_PAGES[p];
+  return null;
+}
+
+function prevSurahAyahPair(sId, ayahNum) {
+  if (ayahNum > 1) return [sId, ayahNum - 1];
+  if (sId > 1 && SURAH_MAP[sId - 1]) return [sId - 1, SURAH_MAP[sId - 1].a];
+  return [1, 1];
+}
+
 function getPageStartInfo(pageNum) {
   const p = Math.max(1, Math.min(604, Math.round(Number(pageNum) || 1)));
+  const pair = getExactPageStartPair(p);
+  if (pair && SURAH_MAP[pair[0]]) {
+    return { surah: SURAH_MAP[pair[0]], ayah: pair[1] };
+  }
   for (const s of SURAHS) {
     if (s.fe > p + 0.04 && s.fs < p + 0.99) {
       if (s.fs >= p - 0.04) return { surah: s, ayah: 1 };
@@ -12099,6 +12641,12 @@ function getPageStartInfo(pageNum) {
 
 function getPageEndInfo(pageNum) {
   const p = Math.max(1, Math.min(604, Math.round(Number(pageNum) || 1)));
+  if (p === 604) return { surah: SURAH_MAP[114], ayah: 6 };
+  const nextPair = getExactPageStartPair(p + 1);
+  if (nextPair && SURAH_MAP[nextPair[0]]) {
+    const [es, ea] = prevSurahAyahPair(nextPair[0], nextPair[1]);
+    return { surah: SURAH_MAP[es], ayah: ea };
+  }
   let found = SURAHS[0];
   for (const s of SURAHS) {
     if (s.fs < p + 0.96 && s.fe > p + 0.04) found = s;
@@ -12109,9 +12657,36 @@ function getPageEndInfo(pageNum) {
 }
 
 function getPageForSurahAyah(surahId, ayahNum) {
-  const s = SURAH_MAP[Number(surahId)];
+  const sid = Number(surahId);
+  const s = SURAH_MAP[sid];
   if (!s) return 1;
   const a = Math.max(1, Math.min(s.a, parseArabicNum(ayahNum, 1)));
+  const key = sid * 1000 + a;
+
+  // 1) Full exact 604-page binary search when loaded
+  if (MUSHAF_EXACT_604) {
+    let lo = 0, hi = 603, ans = 0;
+    while (lo <= hi) {
+      const mid = (lo + hi) >> 1;
+      const mk = MUSHAF_EXACT_604[mid][0] * 1000 + MUSHAF_EXACT_604[mid][1];
+      if (mk <= key) { ans = mid; lo = mid + 1; }
+      else hi = mid - 1;
+    }
+    return ans + 1;
+  }
+
+  // 2) Built-in exact lookup for Juz 27-30 (Surahs 51-114 -> pages 520-604)
+  if (sid >= 51) {
+    let ansP = 520;
+    for (let p = 520; p <= 604; p++) {
+      const pair = BUILTIN_EXACT_PAGES[p];
+      if (!pair) continue;
+      if (pair[0] * 1000 + pair[1] <= key) ansP = p;
+      else break;
+    }
+    return ansP;
+  }
+
   if (a <= 1) return Math.max(1, Math.min(604, Math.floor(s.fs)));
   const pos = s.fs + ((a - 0.5) / Math.max(1, s.a)) * s.l;
   return Math.max(1, Math.min(604, Math.floor(pos)));
@@ -15095,8 +15670,29 @@ function buildRecitationPageSlots(r, st, kind, h) {
       pushPage(mp, sInfo.id, pf, pt);
     }
   }
-  if (slots.length < 2 && totalEstPages < 1.55) return [];
-  return slots.slice(0, 6);
+  // Compute share of each page; merge tiny 1-2 ayah spillover edges (< 18% of a page) when total < 1.55 pages
+  if (totalEstPages < 1.45) return [];
+  // Drop/merge tiny edge spillover (e.g. 1 ayah at the very end/start of a page) into neighbor
+  if (slots.length > 2) {
+    const cleaned = [];
+    slots.forEach(sl => {
+      const pSt = getPageStartInfo(sl.mushafPage), pEn = getPageEndInfo(sl.mushafPage);
+      const pgAyahs = (pSt?.surah?.id === pEn?.surah?.id && pSt?.surah?.id === Number(sl.surahId))
+        ? Math.max(1, pEn.ayah - pSt.ayah + 1)
+        : Math.max(5, Math.round((SURAH_MAP[Number(sl.surahId)]?.a || 15) / Math.max(1, SURAH_MAP[Number(sl.surahId)]?.l || 1)));
+      const recAyahs = sl.to - sl.from + 1;
+      const frac = recAyahs / pgAyahs;
+      if (frac < 0.14 && cleaned.length > 0 && String(cleaned[cleaned.length - 1].surahId) === String(sl.surahId)) {
+        const prev = cleaned[cleaned.length - 1];
+        prev.to = Math.max(prev.to, sl.to);
+        prev.label = `${prev.surahName} (${prev.from}–${prev.to})`;
+      } else {
+        cleaned.push(sl);
+      }
+    });
+    return cleaned.slice(0, 5);
+  }
+  return slots.slice(0, 5);
 }
 
 function getSyncedPageEvals(r, st, kind, h) {
@@ -15342,12 +15938,12 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
       <div class="es-err-grid-2" style="margin-bottom:0;">
         <div class="es-err-cap" title="أخطاء الصفحة الحالية فقط">
           <button type="button" class="es-cap-btn plus-err" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'error',1)" aria-label="تسجيل خطأ">+</button>
-          <span class="es-cap-lbl" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'error',1)">أخطاء ص ${curPg.mushafPage}: <b>${curPg.errors}</b></span>
+          <span class="es-cap-lbl" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'error',1)">أخطاء: <b>${curPg.errors}</b></span>
           <button type="button" class="es-cap-btn" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'error',-1)" aria-label="إنقاص خطأ">−</button>
         </div>
         <div class="es-err-cap is-alert" title="تنبيهات الصفحة الحالية فقط">
           <button type="button" class="es-cap-btn plus-alrt" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'alert',1)" aria-label="تسجيل تنبيه">+</button>
-          <span class="es-cap-lbl" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'alert',1)">تنبيه ص ${curPg.mushafPage}: <b>${curPg.alerts}</b></span>
+          <span class="es-cap-lbl" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'alert',1)">تنبيه: <b>${curPg.alerts}</b></span>
           <button type="button" class="es-cap-btn" onclick="stepPageCounter('${studentId}','${kind}',${activeIdx},'alert',-1)" aria-label="إنقاص تنبيه">−</button>
         </div>
       </div>
@@ -16939,6 +17535,7 @@ function initApp() {
     // 2) Background boot: Service Worker + Firebase SDK + Real-Time Sync & Notifications
     setTimeout(async () => {
       registerTibyanServiceWorker();
+      ensureExactMushaf604Data();
       const ready = await ensureFirebaseReady(8000);
       if (ready && _fbAuth?.currentUser) {
         startLiveNotificationListeners();
@@ -20565,27 +21162,33 @@ function renderCardBody(s, st, r, idx) {
             <button type="button" class="btn btn-outline btn-sm" style="padding:2px 7px; font-size:11px;" onclick="onSabrJuzChange('${st.id}','')">إلغاء</button>
           </div>
         </div>` : ''}
-        <div class="live-mushaf-strip">
-          <div class="lms-info lms-tap-area" onclick="openSurahPicker('${st.id}','rec')" title="اضغط لتغيير السورة والآيات أو السبر">
-            <div class="lms-main">📖 ${escapeHtml(r.recIsSabr && r.sabrJuz ? `سبر ${r.sabrJuz} كاملاً` : recSummary)}</div>
-            <div class="lms-sub">${r.recIsSabr && r.sabrJuz ? `${formatNum(r.dRevPages || getJuzByName(r.sabrJuz)?.pages || 20)} ص • اضغط للتغيير` : `${formatNum(r.recPages || 0)} صفحة • اضغط للتغيير`}</div>
+        <div class="es-rec-box">
+          <div class="es-rec-top" onclick="openSurahPicker('${st.id}','rec')" title="اضغط لتغيير السورة والآيات أو السبر">
+            <div class="es-rec-title">📖 ${escapeHtml(r.recIsSabr && r.sabrJuz ? `سبر ${r.sabrJuz} كاملاً` : recSummary)}</div>
+            <span class="es-rec-pg-badge">${r.recIsSabr && r.sabrJuz ? `${formatNum(r.dRevPages || getJuzByName(r.sabrJuz)?.pages || 20)} ص` : `${formatNum(r.recPages || 0)} ص`}</span>
           </div>
-          <div class="lms-btns">
-            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','rec')">✏️ تغيير</button>
-            ${!(r.recIsSabr && r.sabrJuz) ? `
+          ${!(r.recIsSabr && r.sabrJuz) ? `
+            <div class="es-rec-actions-4">
+              <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','rec')">✏️ تغيير</button>
               <button type="button" class="lms-btn ltr-num" onclick="nudgeRecEndAyah('${st.id}', -1)" title="إنقاص آية">−1</button>
               <button type="button" class="lms-btn ltr-num" onclick="nudgeRecEndAyah('${st.id}', 1)" title="زيادة آية">+1</button>
               <button type="button" class="lms-btn" onclick="finishRecSurahQuick('${st.id}')">آخرها</button>
-            ` : ''}
-          </div>
+            </div>` : `
+            <button type="button" class="lms-btn accent" style="width:100%;" onclick="openSurahPicker('${st.id}','rec')">✏️ تغيير السبر أو السورة</button>`}
         </div>
         ${r.sabrJuz ? renderSabrScoreBox(st.id, r, false) : ''}
         ${!(r.recIsSabr && r.sabrJuz) ? renderErrorCounterBar(st.id, "rec", r.recErrors, r.recAlerts) : ''}
         <div class="es-eval-4" id="esEvalRow_rec">${makeSmartEvalBtns(r.recEval, "setRecEval", r.recErrors, r.recAlerts)}</div>
-        <div class="hw-clean-head" style="padding-top:6px; border-top:1px dashed var(--line); font-size:12px;">
-          <span class="lms-tap-area" onclick="openSurahPicker('${st.id}','hw')" title="اضغط لتغيير الواجب بسهولة">📝 <b>الواجب:</b> ${escapeHtml(hwPreview)} <span style="color:var(--blue); font-weight:800;">✏️</span></span>
-          <div class="pace-seg pace-6" title="مقدار الحفظ اليومي (حتى 5 صفحات)">
-            ${[0.5, 1, 2, 3, 4, 5].map(p => `<button type="button" class="${Number(st.pace||0.5)===p?'on':''}" onclick="setStudentPace('${st.id}',${p})">${p===0.5?'½':p}</button>`).join("")}
+        <div class="es-hw-block">
+          <div class="es-hw-row">
+            <span class="lms-tap-area" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" onclick="openSurahPicker('${st.id}','hw')" title="اضغط لتغيير الواجب">📝 <b>الواجب:</b> ${escapeHtml(hwPreview)}</span>
+            <button type="button" class="lms-btn accent" style="padding:2px 8px; font-size:11px;" onclick="openSurahPicker('${st.id}','hw')">✏️ تعديل</button>
+          </div>
+          <div class="es-pace-row">
+            <span>مقدار الحفظ اليومي:</span>
+            <div class="pace-seg pace-6" title="مقدار الحفظ اليومي (حتى 5 صفحات)">
+              ${[0.5, 1, 2, 3, 4, 5].map(p => `<button type="button" class="${Number(st.pace||0.5)===p?'on':''}" onclick="setStudentPace('${st.id}',${p})">${p===0.5?'½':p}</button>`).join("")}
+            </div>
           </div>
         </div>
       </div>
@@ -24704,7 +25307,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v77 -->
+<!-- Makin App v78 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -24955,14 +25558,46 @@ function setPointsPodiumLimit(lim) {
   renderPointsReportModal();
 }
 
+function formatPosterPages(n) {
+  const v = Math.round((Number(n) || 0) * 10) / 10;
+  if (v === 1) return "صفحة واحدة";
+  if (v === 2) return "صفحتان";
+  const str = Number.isInteger(v) ? String(v) : v.toFixed(1).replace(/\.0$/, "");
+  return `${str} ${v >= 3 && v <= 10 && Number.isInteger(v) ? "صفحات" : "صفحة"}`;
+}
+
 function getPointsPeriodLabel(h, m) {
   if (m === "POINTS_CYCLE") {
     const cyc = getPointsCycleStatus(h);
-    const name = cyc.pc.cycleName || "دورة النقاط الحالية";
-    if (cyc.startDate && cyc.endDate) return `${name} (${cyc.startDate} ← ${cyc.endDate})`;
-    return name;
+    return cyc.pc.cycleName || "الدورة الحالية";
   }
   return m === "ALL" ? "جميع الجلسات" : `شهر ${m} هـ`;
+}
+
+function getMedalSvgBadge(rank) {
+  if (rank === 1) {
+    return `<svg viewBox="0 0 84 84" width="84" height="84" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFF0B8"/><stop offset="50%" stop-color="#E4B84D"/><stop offset="100%" stop-color="#9E7119"/></linearGradient></defs>
+      <polygon points="42,3 52,14 67,11 70,26 81,36 74,49 77,64 62,67 52,79 38,73 24,79 14,67 3,59 9,45 3,31 16,24 22,10 36,13" fill="url(#g1)" opacity="0.28"/>
+      <circle cx="42" cy="42" r="34" fill="url(#g1)" stroke="#FFF4CC" stroke-width="2.5"/>
+      <circle cx="42" cy="42" r="27" fill="none" stroke="#7A530D" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="42" y="53" text-anchor="middle" font-family="Cairo, Tajawal, sans-serif" font-size="32" font-weight="900" fill="#1C1404">1</text>
+    </svg>`;
+  }
+  if (rank === 2) {
+    return `<svg viewBox="0 0 68 68" width="68" height="68" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F8FAFC"/><stop offset="55%" stop-color="#CBD5E1"/><stop offset="100%" stop-color="#64748B"/></linearGradient></defs>
+      <circle cx="34" cy="34" r="29" fill="url(#g2)" stroke="#FFFFFF" stroke-width="2"/>
+      <circle cx="34" cy="34" r="23" fill="none" stroke="#475569" stroke-width="1.3" stroke-dasharray="3 3"/>
+      <text x="34" y="43" text-anchor="middle" font-family="Cairo, Tajawal, sans-serif" font-size="25" font-weight="900" fill="#0F172A">2</text>
+    </svg>`;
+  }
+  return `<svg viewBox="0 0 68 68" width="68" height="68" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FDE3C8"/><stop offset="55%" stop-color="#D99455"/><stop offset="100%" stop-color="#8A4B18"/></linearGradient></defs>
+    <circle cx="34" cy="34" r="29" fill="url(#g3)" stroke="#FFF0DC" stroke-width="2"/>
+    <circle cx="34" cy="34" r="23" fill="none" stroke="#6E380E" stroke-width="1.3" stroke-dasharray="3 3"/>
+    <text x="34" y="43" text-anchor="middle" font-family="Cairo, Tajawal, sans-serif" font-size="25" font-weight="900" fill="#291203">3</text>
+  </svg>`;
 }
 
 function getStatsCatDataset(cat, rows, totals, h) {
@@ -24974,16 +25609,21 @@ function getStatsCatDataset(cat, rows, totals, h) {
     const earned = sorted.filter(r => score(r) > 0);
     return {
       key: "mem", themeCls: "theme-mem", filePrefix: "إنجاز_الحفظ_",
-      title: "📖 فرسان الحفظ والإتقان",
-      kicker: "✨ لوحة التميّز في حفظ كتاب الله ✨",
-      tableTitle: `📖 كشف إنجاز الحفظ — حلقة ${getBrandMeta(h).name}`,
+      title: "فرسان الحفظ والإتقان",
+      kicker: "لوحة التميّز في حفظ كتاب الله",
+      tableTitle: `كشف إنجاز الحفظ — حلقة ${getBrandMeta(h).name}`,
       scopeEarnedLbl: "من لديهم حفظ فقط",
-      dua: "«خيرُكم من تعلّم القرآن وعلّمه» — بارك الله في همم الحافظين",
-      valText: r => r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} ص رشيدي` : `${formatNum(r.memPages)} صفحة`,
-      subText: r => `${r.toMem && r.toMem !== "—" ? `واصل إلى: ${r.toMem}` : ""}${r.sabrCount > 0 ? ` • ${r.sabrCount} جزء مسبور` : ""}`,
+      dua: "«خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ»",
+      valText: r => r.student.track === "rashidi" ? `${formatPosterPages(r.rashidiPages)} رشيدي` : formatPosterPages(r.memPages),
+      subText: r => {
+        const parts = [];
+        if (r.toMem && r.toMem !== "—") parts.push(`وصل إلى: ${r.toMem}`);
+        if (r.sabrCount > 0) parts.push(`سبر ${r.sabrCount} جزء`);
+        return parts.join(" • ");
+      },
       kpis: [
-        ["إجمالي صفحات الحفظ", `${formatNum(totals.memPages)}${totals.rashidiPages > 0 ? " + " + formatNum(totals.rashidiPages) : ""} ص`],
-        ["أجزاء مسبورة", `${totals.sabrCount} جزء`],
+        ["صفحات الحفظ", `${formatPosterPages(totals.memPages + totals.rashidiPages)}`],
+        ["أجزاء مسبورة", `${totals.sabrCount}`],
         [`عدد ${gt.students}`, `${earned.length} من ${rows.length}`]
       ],
       sorted, earned, hasVal: r => score(r) > 0
@@ -24994,16 +25634,16 @@ function getStatsCatDataset(cat, rows, totals, h) {
     const earned = sorted.filter(r => (r.revPages || 0) > 0);
     return {
       key: "rev", themeCls: "theme-rev", filePrefix: "إنجاز_المراجعة_",
-      title: "🔄 أبطال المراجعة والتثبيت",
-      kicker: "✨ لوحة الإتقان والمراجعة المستمرة ✨",
-      tableTitle: `🔄 كشف إنجاز المراجعة — حلقة ${getBrandMeta(h).name}`,
+      title: "أبطال المراجعة والتثبيت",
+      kicker: "لوحة الإتقان والمراجعة المستمرة",
+      tableTitle: `كشف إنجاز المراجعة — حلقة ${getBrandMeta(h).name}`,
       scopeEarnedLbl: "من لديهم مراجعة فقط",
-      dua: "«تعاهدوا هذا القرآن» — زادكم الله ثباتاً ورسوخاً في كتابه",
-      valText: r => `${formatNum(r.revPages)} صفحة`,
-      subText: r => `${r.sabrCount > 0 ? `سبر ${r.sabrCount} جزء • ` : ""}حضور ${r.presentDays} جلسة`,
+      dua: "«تَعَاهَدُوا هَذَا الْقُرْآنَ» — زادكم الله ثباتاً ورسوخاً",
+      valText: r => formatPosterPages(r.revPages),
+      subText: r => r.sabrCount > 0 ? `سبر ${r.sabrCount} جزء • حضور ${r.presentDays} جلسات` : `حضور ${r.presentDays} جلسة`,
       kpis: [
-        ["إجمالي صفحات المراجعة", `${formatNum(totals.revPages)} ص`],
-        ["أجزاء مسبورة", `${totals.sabrCount} جزء`],
+        ["صفحات المراجعة", formatPosterPages(totals.revPages)],
+        ["أجزاء مسبورة", `${totals.sabrCount}`],
         [`عدد ${gt.students}`, `${earned.length} من ${rows.length}`]
       ],
       sorted, earned, hasVal: r => (r.revPages || 0) > 0
@@ -25017,15 +25657,15 @@ function getStatsCatDataset(cat, rows, totals, h) {
     const zeroAbs = earned.filter(r => r.totalAbsences === 0).length;
     return {
       key: "att", themeCls: "theme-att", filePrefix: "سجل_الحضور_",
-      title: "✅ أهل المواظبة والانضباط",
-      kicker: "✨ لوحة الالتزام والانضباط في الحضور ✨",
-      tableTitle: `✅ كشف المواظبة والحضور — حلقة ${getBrandMeta(h).name}`,
+      title: "أهل المواظبة والانضباط",
+      kicker: "لوحة الالتزام والمثابرة في الحضور",
+      tableTitle: `كشف المواظبة والحضور — حلقة ${getBrandMeta(h).name}`,
       scopeEarnedLbl: "الحاضرون فقط",
-      dua: "«أحبُّ الأعمال إلى الله أدومُها وإن قلّ» — بورك في انتظامكم",
-      valText: r => `${r.presentDays} جلسة (${attPct(r)}%)`,
-      subText: r => r.totalAbsences === 0 ? (r.lateDays === 0 ? "انضباط تام بدون غياب ولا تأخر ✨" : `بدون غياب • تأخر ${r.lateDays}`) : `غياب ${r.totalAbsences} (${r.excusedDays} مبرر)`,
+      dua: "«أَحَبُّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ»",
+      valText: r => `${r.presentDays} جلسة • ${attPct(r)}%`,
+      subText: r => r.totalAbsences === 0 ? (r.lateDays === 0 ? "انضباط تام بلا غياب" : `بلا غياب • تأخر ${r.lateDays}`) : `غياب ${r.totalAbsences}`,
       kpis: [
-        ["إجمالي الجلسات", `${totals.sessionsCount} جلسة`],
+        ["جلسات الفترة", `${totals.sessionsCount} جلسة`],
         ["متوسط الحضور", `${avgPct}%`],
         ["بلا أي غياب", `${zeroAbs} ${gt.student}`]
       ],
@@ -25037,17 +25677,17 @@ function getStatsCatDataset(cat, rows, totals, h) {
     const earned = sorted.filter(r => (r.totalPoints > 0 || r.memPages > 0 || r.revPages > 0 || r.presentDays > 0));
     return {
       key: "all", themeCls: "theme-all", filePrefix: "الشرف_الشامل_",
-      title: "👑 لوحة الشرف الشاملة",
-      kicker: "✨ متصدرو الحلقة في الحفظ والمراجعة والحضور والنقاط ✨",
-      tableTitle: `👑 الكشف الشامل لطلاب حلقة ${getBrandMeta(h).name}`,
+      title: "لوحة الشرف الشاملة",
+      kicker: "متصدرو الحلقة في جميع الميادين",
+      tableTitle: `الكشف الشامل لطلاب حلقة ${getBrandMeta(h).name}`,
       scopeEarnedLbl: "المشاركون فقط",
-      dua: "بارك الله في همم أهل القرآن وجعلهم من أهل الله وخاصته",
-      valText: r => `${formatNum(r.memPages)} حفظ • ${formatNum(r.revPages)} مراجعة`,
+      dua: "«وَفِي ذَٰلِكَ فَلْيَتَنَافَسِ الْمُتَنَافِسُونَ»",
+      valText: r => `${formatPosterPages(r.memPages)}`,
       subText: r => `حضور ${r.presentDays}`,
       kpis: [
-        ["صفحات الحفظ", `${formatNum(totals.memPages + totals.rashidiPages)} ص`],
-        ["صفحات المراجعة", `${formatNum(totals.revPages)} ص`],
-        ["الجلسات / الأجزاء", `${totals.sessionsCount} جلسة • ${totals.sabrCount} جزء`]
+        ["صفحات الحفظ", formatPosterPages(totals.memPages + totals.rashidiPages)],
+        ["صفحات المراجعة", formatPosterPages(totals.revPages)],
+        ["عدد الجلسات", `${totals.sessionsCount} جلسة`]
       ],
       sorted, earned, hasVal: r => (r.totalPoints > 0 || r.memPages > 0 || r.revPages > 0 || r.presentDays > 0)
     };
@@ -25057,13 +25697,18 @@ function getStatsCatDataset(cat, rows, totals, h) {
   const earned = sorted.filter(r => (r.totalPoints || 0) > 0);
   return {
     key: "points", themeCls: "theme-points", filePrefix: "نتائج_النقاط_",
-    title: "🏆 متصدرو النقاط والتحفيز",
-    kicker: "✨ لوحة الشرف ومتصدرو النقاط ✨",
-    tableTitle: `⭐ كشف نقاط ${gt.students} — حلقة ${getBrandMeta(h).name}`,
+    title: "متصدرو النقاط والتحفيز",
+    kicker: "لوحة الشرف والتميّز في برنامج النقاط",
+    tableTitle: `كشف نقاط ${gt.students} — حلقة ${getBrandMeta(h).name}`,
     scopeEarnedLbl: "الحاصلون على نقاط فقط",
-    dua: "«وفي ذلك فليتنافس المتنافسون» — بارك الله في همم أهل القرآن",
-    valText: r => `⭐ ${r.totalPoints} نقطة`,
-    subText: r => `${r.memPages > 0 ? `حفظ ${formatNum(r.memPages)} ص` : ""}${r.memPages > 0 && r.revPages > 0 ? " • " : ""}${r.revPages > 0 ? `مراجعة ${formatNum(r.revPages)} ص` : ""}`,
+    dua: "«وَفِي ذَٰلِكَ فَلْيَتَنَافَسِ الْمُتَنَافِسُونَ»",
+    valText: r => `${r.totalPoints} نقطة`,
+    subText: r => {
+      const p = [];
+      if (r.memPages > 0) p.push(`حفظ ${Math.round(r.memPages * 10) / 10} ص`);
+      if (r.revPages > 0) p.push(`مراجعة ${Math.round(r.revPages * 10) / 10} ص`);
+      return p.join(" • ");
+    },
     kpis: [
       ["مجموع النقاط", `${totals.totalPoints} نقطة`],
       ["الجلسات", `${totals.sessionsCount} جلسة`],
@@ -25075,43 +25720,42 @@ function getStatsCatDataset(cat, rows, totals, h) {
 
 function getPosterSvgDecor(cat) {
   if (cat === "mem") {
-    if (cat === "all") {
-    return `<svg class="ppp-bg-svg" viewBox="0 0 900 760" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="90" cy="80" r="220" fill="rgba(230,190,104,0.09)"/>
-      <circle cx="820" cy="680" r="240" fill="rgba(230,190,104,0.08)"/>
-      <circle cx="450" cy="380" r="300" fill="none" stroke="rgba(230,190,104,0.07)" stroke-width="2"/>
-      <rect x="16" y="16" width="868" height="728" rx="16" fill="none" stroke="rgba(230,190,104,0.28)" stroke-width="2"/>
-    </svg>`;
-  }
-  return `<svg class="ppp-bg-svg" viewBox="0 0 900 760" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="80" cy="70" r="190" fill="rgba(212,175,55,0.08)"/>
-      <circle cx="830" cy="690" r="240" fill="rgba(52,211,153,0.07)"/>
-      <path d="M450 28 C610 28 730 140 730 280 L730 740 L170 740 L170 280 C170 140 290 28 450 28 Z" fill="none" stroke="rgba(212,175,55,0.12)" stroke-width="2"/>
-      <rect x="18" y="18" width="864" height="724" rx="14" fill="none" stroke="rgba(212,175,55,0.22)" stroke-width="1.5"/>
+    return `<svg class="ppp-bg-svg" viewBox="0 0 900 1040" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="90" cy="110" r="240" fill="rgba(216,180,88,0.07)"/>
+      <circle cx="820" cy="940" r="260" fill="rgba(52,211,153,0.06)"/>
+      <path d="M450 38 C640 38 780 180 780 370 L780 1004 L120 1004 L120 370 C120 180 260 38 450 38 Z" fill="none" stroke="rgba(216,180,88,0.14)" stroke-width="2.5"/>
+      <rect x="20" y="20" width="860" height="1000" rx="18" fill="none" stroke="rgba(216,180,88,0.28)" stroke-width="2"/>
     </svg>`;
   }
   if (cat === "rev") {
-    return `<svg class="ppp-bg-svg" viewBox="0 0 900 760" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="450" cy="180" r="320" fill="none" stroke="rgba(234,179,73,0.09)" stroke-width="2"/>
-      <circle cx="450" cy="180" r="220" fill="none" stroke="rgba(234,179,73,0.07)" stroke-width="1.5"/>
-      <circle cx="840" cy="90" r="170" fill="rgba(253,224,138,0.07)"/>
-      <circle cx="60" cy="680" r="190" fill="rgba(234,179,73,0.08)"/>
-      <rect x="16" y="16" width="868" height="728" rx="16" fill="none" stroke="rgba(253,224,138,0.24)" stroke-width="1.5" stroke-dasharray="10 6"/>
+    return `<svg class="ppp-bg-svg" viewBox="0 0 900 1040" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="450" cy="310" r="340" fill="none" stroke="rgba(230,190,108,0.1)" stroke-width="2"/>
+      <circle cx="450" cy="310" r="245" fill="none" stroke="rgba(230,190,108,0.08)" stroke-width="1.5"/>
+      <circle cx="840" cy="120" r="190" fill="rgba(246,219,160,0.06)"/>
+      <circle cx="60" cy="920" r="210" fill="rgba(230,190,108,0.07)"/>
+      <rect x="20" y="20" width="860" height="1000" rx="18" fill="none" stroke="rgba(246,219,160,0.3)" stroke-width="2"/>
+      <rect x="30" y="30" width="840" height="980" rx="12" fill="none" stroke="rgba(246,219,160,0.14)" stroke-width="1"/>
     </svg>`;
   }
   if (cat === "att") {
-    return `<svg class="ppp-bg-svg" viewBox="0 0 900 760" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="820" cy="110" r="210" fill="rgba(94,234,212,0.08)"/>
-      <circle cx="90" cy="660" r="210" fill="rgba(56,189,248,0.08)"/>
-      <path d="M0 140 L900 140 M0 640 L900 640" stroke="rgba(153,246,228,0.09)" stroke-width="1.5"/>
-      <polygon points="450,26 474,50 450,74 426,50" fill="rgba(94,234,212,0.16)"/>
-      <rect x="18" y="18" width="864" height="724" rx="14" fill="none" stroke="rgba(94,234,212,0.24)" stroke-width="1.5"/>
+    return `<svg class="ppp-bg-svg" viewBox="0 0 900 1040" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="810" cy="140" r="230" fill="rgba(111,227,210,0.08)"/>
+      <circle cx="90" cy="910" r="220" fill="rgba(56,189,248,0.07)"/>
+      <rect x="20" y="20" width="860" height="1000" rx="18" fill="none" stroke="rgba(153,246,228,0.28)" stroke-width="2"/>
+      <line x1="20" y1="150" x2="880" y2="150" stroke="rgba(153,246,228,0.08)" stroke-width="1.5"/>
     </svg>`;
   }
-  return `<svg class="ppp-bg-svg" viewBox="0 0 900 760" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="110" cy="90" r="200" fill="rgba(200,161,75,0.09)"/>
-    <circle cx="810" cy="670" r="230" fill="rgba(200,161,75,0.08)"/>
-    <rect x="18" y="18" width="864" height="724" rx="14" fill="none" stroke="rgba(200,161,75,0.26)" stroke-width="1.5"/>
+  if (cat === "all") {
+    return `<svg class="ppp-bg-svg" viewBox="0 0 900 1040" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="860" height="1000" rx="16" fill="none" stroke="#c8a14b" stroke-width="2.5"/>
+      <rect x="30" y="30" width="840" height="980" rx="10" fill="none" stroke="rgba(14,35,64,0.15)" stroke-width="1.2"/>
+    </svg>`;
+  }
+  return `<svg class="ppp-bg-svg" viewBox="0 0 900 1040" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="110" cy="110" r="230" fill="rgba(212,175,90,0.08)"/>
+    <circle cx="810" cy="930" r="240" fill="rgba(212,175,90,0.07)"/>
+    <rect x="20" y="20" width="860" height="1000" rx="18" fill="none" stroke="rgba(212,175,90,0.3)" stroke-width="2"/>
+    <rect x="30" y="30" width="840" height="980" rx="12" fill="none" stroke="rgba(212,175,90,0.14)" stroke-width="1"/>
   </svg>`;
 }
 
@@ -25144,7 +25788,7 @@ function renderPointsReportModal() {
   const tOpts = document.getElementById("prTableOptsRow");
   const pOpts = document.getElementById("prPodiumOptsRow");
   if (tOpts) tOpts.style.display = _prMode === "table" ? "flex" : "none";
-  if (pOpts) pOpts.style.display = _prMode === "podium" ? "flex" : "none";
+  if (pOpts) pOpts.style.display = (_prMode === "podium" && _prCat !== "all") ? "flex" : "none";
 
   const scBtn = document.getElementById("prScopeEarnedBtn");
   if (scBtn) scBtn.textContent = ds.scopeEarnedLbl;
@@ -25160,60 +25804,56 @@ function renderPointsReportModal() {
       colgroup = ptsOn
         ? `<colgroup><col style="width:8%"><col style="width:32%"><col style="width:12%"><col style="width:14%"><col style="width:14%"><col style="width:10%"><col style="width:10%"></colgroup>`
         : `<colgroup><col style="width:9%"><col style="width:37%"><col style="width:13%"><col style="width:15%"><col style="width:15%"><col style="width:11%"></colgroup>`;
-      thead = `<tr><th>م</th><th>اسم ${gt.student}</th><th>الحضور</th><th>الحفظ (ص)</th><th>المراجعة (ص)</th><th>السبر</th>${ptsOn ? '<th class="gold-th">النقاط ⭐</th>' : ''}</tr>`;
+      thead = `<tr><th>م</th><th>اسم ${gt.student}</th><th>الحضور</th><th>الحفظ (ص)</th><th>المراجعة (ص)</th><th>السبر</th>${ptsOn ? '<th class="gold-th">النقاط</th>' : ''}</tr>`;
       tbody = list.length ? list.map((r, i) => {
         const trCls = i === 0 ? "rank-gold" : (i === 1 ? "rank-silver" : (i === 2 ? "rank-bronze" : ""));
-        return `<tr class="${trCls}"><td>${i < 3 ? ["🥇","🥈","🥉"][i] : (i+1)}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${r.presentDays}</td><td>${r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} رشيدي` : formatNum(r.memPages)}</td><td>${formatNum(r.revPages)}</td><td>${r.sabrCount || "—"}</td>${ptsOn ? `<td class="pts-col">${r.totalPoints}</td>` : ""}</tr>`;
+        return `<tr class="${trCls}"><td>${i + 1}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${r.presentDays}</td><td>${r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} رشيدي` : formatNum(r.memPages)}</td><td>${formatNum(r.revPages)}</td><td>${r.sabrCount || "—"}</td>${ptsOn ? `<td class="pts-col">${r.totalPoints}</td>` : ""}</tr>`;
       }).join("") : `<tr><td colspan="${ptsOn ? 7 : 6}" style="padding:18px; color:#64748b;">لا توجد بيانات في هذه الفترة بعد</td></tr>`;
       tfoot = `<tr><td colspan="2">المجموع العام (${list.length} ${gt.student})</td><td>${totals.sessionsCount} جلسة</td><td>${formatNum(totals.memPages + totals.rashidiPages)} ص</td><td>${formatNum(totals.revPages)} ص</td><td>${totals.sabrCount}</td>${ptsOn ? `<td>${totals.totalPoints}</td>` : ""}</tr>`;
     } else if (_prCat === "mem") {
       colgroup = `<colgroup><col style="width:9%"><col style="width:28%"><col style="width:17%"><col style="width:17%"><col style="width:13%"><col style="width:16%"></colgroup>`;
-      thead = `<tr><th>المركز</th><th>اسم ${gt.student}</th><th>من</th><th>إلى</th><th>الأجزاء المسبورة</th><th class="gold-th">صفحات الحفظ 📖</th></tr>`;
+      thead = `<tr><th>المركز</th><th>اسم ${gt.student}</th><th>من</th><th>إلى</th><th>الأجزاء المسبورة</th><th class="gold-th">صفحات الحفظ</th></tr>`;
       tbody = list.length ? list.map((r, i) => {
         const hasV = ds.hasVal(r);
         const trCls = hasV && i === 0 ? "rank-gold" : (hasV && i === 1 ? "rank-silver" : (hasV && i === 2 ? "rank-bronze" : ""));
-        const rk = hasV && i < 3 ? ["🥇 1", "🥈 2", "🥉 3"][i] : String(i + 1);
-        return `<tr class="${trCls}"><td>${rk}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${escapeHtml(r.fromMem)}</td><td>${escapeHtml(r.toMem)}</td><td>${escapeHtml(r.sabrList.join("، ") || "—")}</td><td class="pts-col">${r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} رشيدي` : formatNum(r.memPages)}</td></tr>`;
+        return `<tr class="${trCls}"><td>${i + 1}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${escapeHtml(r.fromMem)}</td><td>${escapeHtml(r.toMem)}</td><td>${escapeHtml(r.sabrList.join("، ") || "—")}</td><td class="pts-col">${r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} رشيدي` : formatNum(r.memPages)}</td></tr>`;
       }).join("") : `<tr><td colspan="6" style="padding:18px; color:#64748b;">لا توجد بيانات حفظ في هذه الفترة بعد</td></tr>`;
       tfoot = `<tr><td colspan="4">المجموع العام (${list.length} ${gt.student})</td><td>${totals.sabrCount} جزء</td><td>${formatNum(totals.memPages + totals.rashidiPages)} صفحة</td></tr>`;
     } else if (_prCat === "rev") {
       colgroup = `<colgroup><col style="width:10%"><col style="width:36%"><col style="width:15%"><col style="width:21%"><col style="width:18%"></colgroup>`;
-      thead = `<tr><th>المركز</th><th>اسم ${gt.student}</th><th>الحضور</th><th>الأجزاء المسبورة</th><th class="gold-th">صفحات المراجعة 🔄</th></tr>`;
+      thead = `<tr><th>المركز</th><th>اسم ${gt.student}</th><th>الحضور</th><th>الأجزاء المسبورة</th><th class="gold-th">صفحات المراجعة</th></tr>`;
       tbody = list.length ? list.map((r, i) => {
         const hasV = ds.hasVal(r);
         const trCls = hasV && i === 0 ? "rank-gold" : (hasV && i === 1 ? "rank-silver" : (hasV && i === 2 ? "rank-bronze" : ""));
-        const rk = hasV && i < 3 ? ["🥇 1", "🥈 2", "🥉 3"][i] : String(i + 1);
-        return `<tr class="${trCls}"><td>${rk}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${r.presentDays} جلسة</td><td>${escapeHtml(r.sabrList.join("، ") || "—")}</td><td class="pts-col">${formatNum(r.revPages)} ص</td></tr>`;
+        return `<tr class="${trCls}"><td>${i + 1}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${r.presentDays} جلسة</td><td>${escapeHtml(r.sabrList.join("، ") || "—")}</td><td class="pts-col">${formatNum(r.revPages)} ص</td></tr>`;
       }).join("") : `<tr><td colspan="5" style="padding:18px; color:#64748b;">لا توجد بيانات مراجعة في هذه الفترة بعد</td></tr>`;
       tfoot = `<tr><td colspan="2">المجموع العام (${list.length} ${gt.student})</td><td>${totals.sessionsCount} جلسة</td><td>${totals.sabrCount} جزء</td><td>${formatNum(totals.revPages)} صفحة</td></tr>`;
     } else if (_prCat === "att") {
       colgroup = `<colgroup><col style="width:10%"><col style="width:34%"><col style="width:13%"><col style="width:11%"><col style="width:16%"><col style="width:16%"></colgroup>`;
-      thead = `<tr><th>المركز</th><th>اسم ${gt.student}</th><th>الحضور</th><th>التأخر</th><th>الغياب</th><th class="gold-th">نسبة الالتزام ✅</th></tr>`;
+      thead = `<tr><th>المركز</th><th>اسم ${gt.student}</th><th>الحضور</th><th>التأخر</th><th>الغياب</th><th class="gold-th">نسبة الالتزام</th></tr>`;
       tbody = list.length ? list.map((r, i) => {
         const hasV = ds.hasVal(r);
         const trCls = hasV && i === 0 ? "rank-gold" : (hasV && i === 1 ? "rank-silver" : (hasV && i === 2 ? "rank-bronze" : ""));
-        const rk = hasV && i < 3 ? ["🥇 1", "🥈 2", "🥉 3"][i] : String(i + 1);
         const pct = ds.attPct(r);
-        const absTxt = r.totalAbsences === 0 ? "بدون غياب ✓" : `${r.totalAbsences} (${r.excusedDays} مبرر)`;
-        return `<tr class="${trCls}"><td>${rk}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${r.presentDays}</td><td>${r.lateDays}</td><td>${absTxt}</td><td class="pts-col">${pct}%</td></tr>`;
+        const absTxt = r.totalAbsences === 0 ? "بدون غياب" : `${r.totalAbsences} (${r.excusedDays} مبرر)`;
+        return `<tr class="${trCls}"><td>${i + 1}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${r.presentDays}</td><td>${r.lateDays}</td><td>${absTxt}</td><td class="pts-col">${pct}%</td></tr>`;
       }).join("") : `<tr><td colspan="6" style="padding:18px; color:#64748b;">لا توجد سجلات حضور في هذه الفترة بعد</td></tr>`;
       tfoot = `<tr><td colspan="2">الإجمالي (${list.length} ${gt.student})</td><td colspan="3">عدد جلسات الفترة: ${totals.sessionsCount} جلسة</td><td>${ds.kpis[1][1]}</td></tr>`;
     } else {
       const sumPts = list.reduce((a, b) => a + (b.totalPoints || 0), 0);
       colgroup = `<colgroup><col style="width:10%"><col style="width:36%"><col style="width:12%"><col style="width:14%"><col style="width:14%"><col style="width:14%"></colgroup>`;
-      thead = `<tr><th>المركز</th><th>اسم ${gt.student}</th><th>الحضور</th><th>الحفظ (ص)</th><th>المراجعة (ص)</th><th class="gold-th">النقاط ⭐</th></tr>`;
+      thead = `<tr><th>المركز</th><th>اسم ${gt.student}</th><th>الحضور</th><th>الحفظ (ص)</th><th>المراجعة (ص)</th><th class="gold-th">النقاط</th></tr>`;
       tbody = list.length ? list.map((r, i) => {
         const hasV = ds.hasVal(r);
         const trCls = hasV && i === 0 ? "rank-gold" : (hasV && i === 1 ? "rank-silver" : (hasV && i === 2 ? "rank-bronze" : ""));
-        const rk = hasV && i < 3 ? ["🥇 1", "🥈 2", "🥉 3"][i] : String(i + 1);
-        return `<tr class="${trCls}"><td>${rk}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${r.presentDays}</td><td>${r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} رشيدي` : formatNum(r.memPages)}</td><td>${formatNum(r.revPages)}</td><td class="pts-col">${r.totalPoints}</td></tr>`;
+        return `<tr class="${trCls}"><td>${i + 1}</td><td class="txt-right">${escapeHtml(r.student.name)}</td><td>${r.presentDays}</td><td>${r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} رشيدي` : formatNum(r.memPages)}</td><td>${formatNum(r.revPages)}</td><td class="pts-col">${r.totalPoints}</td></tr>`;
       }).join("") : `<tr><td colspan="6" style="padding:18px; color:#64748b;">لا يوجد طلاب حاصلون على نقاط في هذه الفترة بعد</td></tr>`;
       tfoot = `<tr><td colspan="2">المجموع العام (${list.length} ${gt.student})</td><td>${totals.sessionsCount} جلسة</td><td>${formatNum(totals.memPages)} ص</td><td>${formatNum(totals.revPages)} ص</td><td>${sumPts} نقطة</td></tr>`;
     }
 
     wrap.innerHTML = `<div class="pts-table-paper ${ds.themeCls}" id="pointsTablePaper">
       <div class="ptp-hdr">
-        <div style="font-size:12.5px; font-weight:800; color:#102a49; line-height:1.55;">
+        <div style="font-size:13px; font-weight:800; color:#102a49; line-height:1.55;">
           ${escapeHtml(bm.org)}<br>${escapeHtml(bm.branch)} • ${escapeHtml(bm.program)}
         </div>
         <div class="ptp-hdr-mid">
@@ -25228,58 +25868,64 @@ function renderPointsReportModal() {
         <div class="ptp-meta-cell">${ds.kpis[2][0]}: ${escapeHtml(ds.kpis[2][1])}</div>
       </div>
       <table class="t-points-all">${colgroup}<thead>${thead}</thead><tbody>${tbody}</tbody><tfoot>${tfoot}</tfoot></table>
-      <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700; color:#475569; padding-top:6px; border-top:1px solid #cbd5e1;">
+      <div style="display:flex; justify-content:space-between; font-size:12.5px; font-weight:700; color:#475569; padding-top:6px; border-top:1px solid #cbd5e1;">
         <span>${escapeHtml(bm.org)} — ${escapeHtml(bm.branch)}</span>
         <span>تاريخ الإصدار: ${escapeHtml(getExactHijriInfo(todayISO()).dateStr)}</span>
       </div>
     </div>`;
   } else if (_prCat === "all") {
-    if (pOpts) pOpts.style.display = "none";
     const dsMem = getStatsCatDataset("mem", rows, totals, h);
     const dsRev = getStatsCatDataset("rev", rows, totals, h);
     const dsAtt = getStatsCatDataset("att", rows, totals, h);
     const dsPts = getStatsCatDataset("points", rows, totals, h);
-    const medals = ["🥇", "🥈", "🥉"];
+    const rankTag = idx => ["الأول", "الثاني", "الثالث"][idx] || String(idx + 1);
     const quadBox = (cls, ttl, list, valFn) => `
       <div class="ppp-quad-card ${cls}">
         <div class="ppp-quad-hdr"><span>${ttl}</span></div>
         ${list.length ? list.slice(0, 3).map((r, idx) => `
           <div class="ppp-quad-item ${idx === 0 ? "top" : ""}">
-            <span class="ppp-quad-name">${medals[idx]} ${escapeHtml(r.student.name)}</span>
+            <span class="ppp-quad-name">${idx + 1}. ${escapeHtml(r.student.name)}</span>
             <span class="ppp-quad-val">${escapeHtml(valFn(r))}</span>
-          </div>`).join("") : `<div style="color:#cbd5e1; font-size:14px; text-align:center; padding:16px 0;">لا توجد بيانات بعد</div>`}
+          </div>`).join("") : `<div style="color:#64748b; font-size:15px; text-align:center; padding:18px 0;">لا توجد بيانات بعد</div>`}
       </div>`;
     const sabrTop = [...rows].filter(x => x.sabrCount > 0).sort((a, b) => b.sabrCount - a.sabrCount);
+
     wrap.innerHTML = `<div class="pts-podium-poster theme-all" id="pointsPodiumPaper">
       ${getPosterSvgDecor("all")}
       <div class="ppp-inner">
-        <div class="ppp-hdr">
+        <div class="ppp-top-bar">
           <div class="ppp-logo-pill"><img src="${bm.logoSrc}" alt="الشعار"></div>
-          <div class="ppp-title-mid">
-            <div class="ppp-kicker">${escapeHtml(ds.kicker)}</div>
-            <h2>لوحة الشرف الشاملة — حلقة ${escapeHtml(bm.name)}</h2>
-            <p>${escapeHtml(periodLbl)}</p>
-          </div>
-          <div class="ppp-branch-tag">
+          <div class="ppp-org-seal">
             <small>${escapeHtml(bm.program)}</small>
             <b>${escapeHtml(bm.branch)}</b>
           </div>
         </div>
-        <div class="ppp-summary-strip">
-          ${ds.kpis.map(([k, v]) => `<div class="ppp-sum-pill"><small>${escapeHtml(k)}</small><b>${escapeHtml(v)}</b></div>`).join("")}
+
+        <div class="ppp-hero-title">
+          <div class="ppp-orn-line"><span class="ppp-orn-rule"></span><span class="ppp-kicker-v78">${escapeHtml(ds.kicker)}</span><span class="ppp-orn-rule"></span></div>
+          <h2>${escapeHtml(ds.title)}</h2>
+          <div class="ppp-halaqa-pill">
+            <span>حلقة ${escapeHtml(bm.name)}</span>
+            <span class="dot-sep">•</span>
+            <span class="per-txt">${escapeHtml(periodLbl)}</span>
+          </div>
         </div>
+
         <div class="ppp-quad-grid">
-          ${quadBox("q-mem", "📖 أوائل الحفظ", dsMem.earned, dsMem.valText)}
-          ${quadBox("q-rev", "🔄 أوائل المراجعة", dsRev.earned, dsRev.valText)}
-          ${quadBox("q-att", "✅ أوائل الحضور", dsAtt.earned, dsAtt.valText)}
+          ${quadBox("q-mem", "أوائل الحفظ", dsMem.earned, dsMem.valText)}
+          ${quadBox("q-rev", "أوائل المراجعة", dsRev.earned, dsRev.valText)}
+          ${quadBox("q-att", "أوائل الحضور", dsAtt.earned, dsAtt.valText)}
           ${ptsOn
-            ? quadBox("q-pts", "⭐ أوائل النقاط", dsPts.earned, dsPts.valText)
-            : quadBox("q-pts", "🎓 أبطال السبر", sabrTop, r => `${r.sabrCount} جزء`)}
+            ? quadBox("q-pts", "أوائل النقاط", dsPts.earned, dsPts.valText)
+            : quadBox("q-pts", "أبطال السبر", sabrTop, r => `${r.sabrCount} جزء`)}
         </div>
-        <div class="ppp-footer">
-          <span>${gt.supervisorTitle}: ${escapeHtml(bm.sheikh)}</span>
-          <span style="color:#f4d98d;">${escapeHtml(ds.dua)}</span>
-          <span>${escapeHtml(bm.org)}</span>
+
+        <div class="ppp-footer-v78">
+          <div class="ppp-dua-line">${escapeHtml(ds.dua)}</div>
+          <div class="ppp-foot-meta">
+            <span>${gt.supervisorTitle}: ${escapeHtml(bm.sheikh)}</span>
+            <span>${escapeHtml(bm.org)}</span>
+          </div>
         </div>
       </div>
     </div>`;
@@ -25288,9 +25934,9 @@ function renderPointsReportModal() {
     const p1 = topList[0], p2 = topList[1], p3 = topList[2];
     const rest = topList.slice(3);
 
-    const podCard = (r, cls, medal, lbl) => r ? `
+    const podCard = (r, cls, rankNum, lbl) => r ? `
       <div class="ppp-pod-card ${cls}">
-        <div class="ppp-medal">${medal}</div>
+        <div class="ppp-medal-svg">${getMedalSvgBadge(rankNum)}</div>
         <div class="ppp-rank-lbl">${lbl}</div>
         <div class="ppp-stu-name">${escapeHtml(r.student.name)}</div>
         <div class="ppp-pts-badge">${escapeHtml(ds.valText(r))}</div>
@@ -25300,28 +25946,29 @@ function renderPointsReportModal() {
     wrap.innerHTML = `<div class="pts-podium-poster ${ds.themeCls}" id="pointsPodiumPaper">
       ${getPosterSvgDecor(_prCat)}
       <div class="ppp-inner">
-        <div class="ppp-hdr">
+        <div class="ppp-top-bar">
           <div class="ppp-logo-pill"><img src="${bm.logoSrc}" alt="الشعار"></div>
-          <div class="ppp-title-mid">
-            <div class="ppp-kicker">${escapeHtml(ds.kicker)}</div>
-            <h2>${escapeHtml(ds.title)} — حلقة ${escapeHtml(bm.name)}</h2>
-            <p>${escapeHtml(periodLbl)}</p>
-          </div>
-          <div class="ppp-branch-tag">
+          <div class="ppp-org-seal">
             <small>${escapeHtml(bm.program)}</small>
             <b>${escapeHtml(bm.branch)}</b>
           </div>
         </div>
 
-        <div class="ppp-summary-strip">
-          ${ds.kpis.map(([k, v]) => `<div class="ppp-sum-pill"><small>${escapeHtml(k)}</small><b>${escapeHtml(v)}</b></div>`).join("")}
+        <div class="ppp-hero-title">
+          <div class="ppp-orn-line"><span class="ppp-orn-rule"></span><span class="ppp-kicker-v78">${escapeHtml(ds.kicker)}</span><span class="ppp-orn-rule"></span></div>
+          <h2>${escapeHtml(ds.title)}</h2>
+          <div class="ppp-halaqa-pill">
+            <span>حلقة ${escapeHtml(bm.name)}</span>
+            <span class="dot-sep">•</span>
+            <span class="per-txt">${escapeHtml(periodLbl)}</span>
+          </div>
         </div>
 
         ${topList.length ? `
           <div class="ppp-podium-3">
-            ${podCard(p2, "second", "🥈", "المركز الثاني")}
-            ${podCard(p1, "first", "🥇", "المركز الأول")}
-            ${podCard(p3, "third", "🥉", "المركز الثالث")}
+            ${podCard(p2, "second", 2, "المركز الثاني")}
+            ${podCard(p1, "first", 1, "المركز الأول")}
+            ${podCard(p3, "third", 3, "المركز الثالث")}
           </div>
           ${rest.length ? `<div class="ppp-rest-grid">${rest.map((r, k) => `
             <div class="ppp-rest-row">
@@ -25331,12 +25978,14 @@ function renderPointsReportModal() {
               </div>
               <span class="ppp-rest-pts">${escapeHtml(ds.valText(r))}</span>
             </div>`).join("")}</div>` : ''}
-        ` : `<div style="text-align:center; padding:42px 16px; font-size:20px; color:#e2ecf6; font-weight:700;">لا يوجد طلاب مسجّلون في هذه الفئة خلال هذه الفترة بعد</div>`}
+        ` : `<div style="text-align:center; padding:60px 20px; font-size:24px; color:#e2ecf6; font-weight:800;">لا يوجد طلاب مسجّلون في هذه الفئة خلال هذه الفترة بعد</div>`}
 
-        <div class="ppp-footer">
-          <span>${gt.supervisorTitle}: ${escapeHtml(bm.sheikh)}</span>
-          <span style="opacity:0.95;">${escapeHtml(ds.dua)}</span>
-          <span>${escapeHtml(bm.org)}</span>
+        <div class="ppp-footer-v78">
+          <div class="ppp-dua-line">${escapeHtml(ds.dua)}</div>
+          <div class="ppp-foot-meta">
+            <span>${gt.supervisorTitle}: ${escapeHtml(bm.sheikh)}</span>
+            <span>${escapeHtml(bm.org)}</span>
+          </div>
         </div>
       </div>
     </div>`;
@@ -27932,7 +28581,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v77";
+const TIBYAN_APP_VERSION = "v78";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
