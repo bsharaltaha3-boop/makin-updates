@@ -6960,7 +6960,7 @@ table.t-indiv td.txt-right { text-align: right; }
 button, a, input, select, .st-head, .pdn-day-pill, .drawer-item {
   touch-action: manipulation;
 }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 
 /* Clean 2-Tab Auth Switcher & 2-Card Role + Gender Picker */
 .auth-tabs-2 {
@@ -11939,32 +11939,12 @@ table.t-daily td.td-norecite {
 
 
 /* ==================== MAKIN v88: COMPREHENSIVE UI STABILITY, SMOOTH TRANSITIONS & ZERO OVERFLOW ==================== */
-html, body {
-  max-width: 100%;
-  overflow-x: clip;
-}
-body.modal-open-lock {
-  overflow: hidden !important;
-  overscroll-behavior: none;
-}
-
-/* Smooth View & Modal Transitions */
-.view.active {
-  animation: viewFadeIn 0.16s ease-out;
-}
-@keyframes viewFadeIn {
-  from { opacity: 0.45; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* Ultra-smooth zero-lock native scrolling on Android WebView (v89) */
 .modal-backdrop {
   overscroll-behavior: contain;
 }
-.modal-backdrop.show .modal-box {
-  animation: modalPopIn 0.17s cubic-bezier(0.2, 0.9, 0.25, 1);
-}
-@keyframes modalPopIn {
-  from { opacity: 0.55; transform: translateY(10px) scale(0.985); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+.container {
+  overflow-x: hidden;
 }
 
 /* Password Eye Toggle */
@@ -12635,7 +12615,7 @@ body.modal-open-lock {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v88</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v89</span>
         </button>
       </div>
     </div>
@@ -23322,6 +23302,7 @@ function closeStudentEvalSheet(rerenderCards = true) {
   _lastEvalSheetStudentId = null;
   const sheet = document.getElementById("studentEvalSheet");
   if (sheet) sheet.classList.remove("show");
+  document.body.classList.remove("modal-open-lock");
   if (rerenderCards && shouldReorderAfterLeavingStudent(prevId)) {
     renderStudentCardsOnly();
   } else {
@@ -23332,7 +23313,7 @@ function closeStudentEvalSheet(rerenderCards = true) {
 function renderSessionPreservingScroll() {
   const prevY = window.scrollY;
   renderSessionView();
-  requestAnimationFrame(() => window.scrollTo(0, prevY));
+  window.scrollTo(0, prevY);
 }
 
 function toggleCard(studentId) {
@@ -28772,7 +28753,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v88 -->
+<!-- Makin App v89 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -30311,9 +30292,8 @@ function downloadBlob(blob, filename) {
 let _modalZCounter = 160;
 
 function syncBodyScrollLock() {
-  const anyModal = Boolean(document.querySelector(".modal-backdrop.show"));
-  const drawerOpen = Boolean(document.getElementById("rightDrawer")?.classList.contains("open"));
-  document.body.classList.toggle("modal-open-lock", anyModal || drawerOpen);
+  // Never lock document body overflow on Android WebView (prevents scroll freeze!)
+  document.body.classList.remove("modal-open-lock");
 }
 
 function closeAllModalsAndOverlays() {
@@ -30360,6 +30340,7 @@ function closeModal(id) {
   document.addEventListener("click", (e) => {
     const t = e.target;
     if (!t || !t.classList || !t.classList.contains("modal-backdrop") || !t.classList.contains("show")) return;
+    if (t.getAttribute("onclick")) return;
     if (t.id === "studentEvalSheet") { closeStudentEvalSheet(); return; }
     if (t.id === "supInspectModal") { closeSupInspectModal(); return; }
     if (t.id) closeModal(t.id);
@@ -32614,7 +32595,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v88";
+const TIBYAN_APP_VERSION = "v89";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
