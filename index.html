@@ -11553,6 +11553,397 @@ table.t-daily td.td-rev-slim,
   font-weight: 800;
 }
 
+
+/* ==================== MAKIN v98: BALANCED REPORT PROPORTIONS, COMPACT TAJWEED DRAWER, STUDENT FOCUS & BRAND LOCK ==================== */
+/* 1) Balanced Medium Export Widths (Comfortable Reading on Phones & A4 — Zero Stretched Whitespace!) */
+.official-daily-wrap { min-width: 1020px; }
+table.t-daily { min-width: 1020px; table-layout: fixed; }
+
+#hdExportStage {
+  width: 1260px !important;
+  padding: 16px 18px !important;
+}
+#hdExportStage.is-monthly-stage {
+  width: 1020px !important;
+  padding: 18px 20px !important;
+}
+#hdExportStage.is-indiv-stage {
+  width: 900px !important;
+  padding: 15px 17px !important;
+}
+#hdExportStage .official-daily-hdr-v20 {
+  margin-bottom: 7px !important;
+  padding-bottom: 7px !important;
+  grid-template-columns: 1.05fr 2.75fr 1.05fr !important;
+}
+#hdExportStage .odh-org-box {
+  font-size: 13.5px !important;
+  line-height: 1.5 !important;
+}
+#hdExportStage .odh-title-col h2 {
+  font-size: 22px !important;
+  margin-bottom: 6px !important;
+}
+#hdExportStage .odh-meta-cell {
+  font-size: 13.5px !important;
+  padding: 4px 10px !important;
+}
+#hdExportStage .odh-logo-col img {
+  height: 56px !important;
+}
+#hdExportStage table.t-daily {
+  font-size: 13.5px !important;
+}
+#hdExportStage table.t-daily th {
+  font-size: 13.5px !important;
+  padding: 5px 4px !important;
+}
+#hdExportStage table.t-daily th.th-sub {
+  font-size: 12px !important;
+  padding: 3.5px 3px !important;
+}
+#hdExportStage table.t-daily td {
+  padding: 4.5px 5px !important;
+  font-size: 13.2px !important;
+  line-height: 1.28 !important;
+}
+#hdExportStage table.t-daily td.td-name-col {
+  font-size: 13.5px !important;
+  padding: 4.5px 6px !important;
+}
+#hdExportStage table.t-daily td.td-pts {
+  font-size: 14px !important;
+}
+#hdExportStage table.t-daily td.td-note {
+  font-size: 12.2px !important;
+  padding: 4.5px 7px !important;
+  line-height: 1.32 !important;
+}
+#hdExportStage table.t-daily tfoot td {
+  font-size: 13px !important;
+  padding: 6px 8px !important;
+}
+
+/* 2) Compact 1-Line Tajweed Bar + Organized Collapsible Grid Drawer (Zero Eval Sheet Clutter!) */
+.tj-compact-wrap {
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+.tj-compact-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 5px 8px;
+}
+.tj-compact-bar.is-open {
+  border-color: #142a46;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background: var(--brand-tint);
+}
+[data-theme="dark"] .tj-compact-bar.is-open { border-color: #c8a14b; }
+.tj-selected-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+.tj-sel-pill {
+  border: none;
+  background: #142a46;
+  color: #f6dc93;
+  border-radius: 99px;
+  padding: 2px 8px;
+  font-size: 10.5px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+[data-theme="dark"] .tj-sel-pill { background: #c8a14b; color: #0f233c; }
+.tj-placeholder {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-500);
+}
+.tj-toggle-btn {
+  border: 1px solid var(--line-strong);
+  background: var(--white);
+  color: var(--brand-slate);
+  border-radius: 8px;
+  padding: 3.5px 9px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.tj-toggle-btn.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #ffffff;
+}
+[data-theme="dark"] .tj-toggle-btn.on { background: #c8a14b; border-color: #c8a14b; color: #0f233c; }
+
+.tj-drawer-panel {
+  background: var(--white);
+  border: 1px solid #142a46;
+  border-top: none;
+  border-radius: 0 0 11px 11px;
+  padding: 8px;
+  animation: obStepIn 0.14s ease;
+}
+[data-theme="dark"] .tj-drawer-panel { border-color: #c8a14b; }
+.tj-group-lbl {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--ink-500);
+  margin: 0 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tj-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4.5px;
+  margin-bottom: 7px;
+}
+.tj-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+}
+.tj-opt-btn {
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-700);
+  border-radius: 8px;
+  padding: 5.5px 4px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.12s ease;
+}
+.tj-opt-btn.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #f6dc93;
+  box-shadow: 0 2px 6px rgba(20, 42, 70, 0.2);
+}
+[data-theme="dark"] .tj-opt-btn.on { background: #c8a14b; border-color: #c8a14b; color: #0f233c; }
+
+/* 3) Student Monthly Focus & Tajweed Compass Card (Profile + Individual Report) */
+.st-focus-card {
+  background: var(--white);
+  border: 1.5px solid rgba(200, 161, 75, 0.45);
+  border-right: 4px solid #142a46;
+  border-radius: 12px;
+  padding: 10px 11px;
+  margin-bottom: 10px;
+}
+[data-theme="dark"] .st-focus-card { border-right-color: #c8a14b; }
+.st-focus-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 7px;
+}
+.st-focus-hdr h5 {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--brand-slate);
+}
+.st-focus-seg {
+  display: inline-flex;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 2px;
+  gap: 2px;
+}
+.st-focus-seg button {
+  border: none;
+  background: transparent;
+  color: var(--ink-700);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.st-focus-seg button.on { background: #142a46; color: #ffffff; }
+[data-theme="dark"] .st-focus-seg button.on { background: #c8a14b; color: #0f233c; }
+
+.st-focus-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+.st-fbar-row {
+  display: grid;
+  grid-template-columns: 118px 1fr auto;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+}
+.st-fbar-lbl {
+  font-weight: 800;
+  color: var(--ink-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.st-fbar-track {
+  height: 7px;
+  border-radius: 99px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.st-fbar-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #b85610 0%, #dc2626 100%);
+}
+.st-fbar-fill.mid { background: linear-gradient(90deg, #ca8a04 0%, #f59e0b 100%); }
+.st-fbar-fill.low { background: linear-gradient(90deg, #15629a 0%, #38bdf8 100%); }
+.st-fbar-cnt {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink-700);
+  white-space: nowrap;
+}
+.st-focus-summary {
+  background: var(--brand-tint);
+  border-right: 3.5px solid #c8a14b;
+  border-radius: 8px;
+  padding: 7px 9px;
+  font-size: 11.8px;
+  font-weight: 700;
+  color: var(--ink-900);
+  line-height: 1.55;
+}
+.st-focus-summary.is-ok {
+  background: var(--green-bg);
+  border-right-color: var(--green);
+  color: var(--green);
+}
+
+/* Printable Focus Box inside Individual Report Card */
+.ir-focus-box {
+  background: #fdf9ef;
+  border: 1.25px solid #e0c888;
+  border-right: 4px solid #142a46;
+  border-radius: 9px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #1e293b;
+  line-height: 1.6;
+}
+.ir-focus-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 5px 0 4px;
+}
+.ir-fpill {
+  display: inline-block;
+  background: #142a46;
+  color: #f6dc93;
+  border-radius: 99px;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* 4) Locked Institutional Identity Card & Founder License Studio */
+.locked-brand-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--bg);
+  border: 1.5px solid var(--line);
+  border-right: 4px solid #142a46;
+  border-radius: 11px;
+  padding: 8px 10px;
+  margin-bottom: 9px;
+}
+[data-theme="dark"] .locked-brand-card { border-right-color: #c8a14b; }
+.lbc-logo {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 4px 8px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.lbc-logo img { height: 24px; width: auto; max-width: 82px; object-fit: contain; display: block; }
+.lbc-info { min-width: 0; flex: 1; }
+.lbc-org { font-size: 12.5px; font-weight: 800; color: var(--ink-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lbc-sub { font-size: 10.5px; font-weight: 700; color: var(--ink-500); margin-top: 1px; }
+
+.own-lic-mode-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 9px;
+}
+.own-lic-btn {
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-700);
+  border-radius: 10px;
+  padding: 8px 6px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+}
+.own-lic-btn.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #f6dc93;
+}
+.own-logo-preview-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--bg);
+  border: 1px dashed var(--line-strong);
+  border-radius: 10px;
+  padding: 7px 10px;
+  margin-top: 6px;
+}
+.own-logo-preview-row img {
+  height: 34px;
+  max-width: 110px;
+  background: #ffffff;
+  padding: 3px 6px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  object-fit: contain;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -11718,11 +12109,10 @@ table.t-daily td.td-rev-slim,
               <input type="text" id="authSBranch" list="branchesList" placeholder="مثال: صرح إدلب">
             </div>
           </div>
-          <div class="ob-field">
-            <label>المؤسسة التعليمية</label>
-            <div class="ob-input-wrap">
-              <span class="ob-input-ico">🎓</span>
-              <input type="text" id="authSOrg" value="مؤسسة صروح مكين التعليمية">
+          <div class="locked-brand-card" style="margin-bottom:9px;">
+            <div class="lbc-info">
+              <div class="lbc-org">🔒 الهوية المؤسسية والشعار</div>
+              <div class="lbc-sub">تُعتمد تلقائياً من كود التفعيل الصادر عن مؤسس مكين (صرح مكين أو مؤسسة مرخّصة)</div>
             </div>
           </div>
           <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:7px; margin-bottom:12px;">
@@ -11843,16 +12233,13 @@ table.t-daily td.td-rev-slim,
             </div>
           </div>
 
-          <details class="ob-brand-drawer">
-            <summary>
-              <span>🏛️ تخصيص المؤسسة والبرنامج (الافتراضي: صروح مكين • تبيان)</span>
-              <span>▾</span>
-            </summary>
-            <div class="form-grid" style="margin-top:9px;">
-              <div class="field"><label>المؤسسة التعليمية</label><input type="text" id="obOrg" value="مؤسسة صروح مكين التعليمية" placeholder="اسم المؤسسة" oninput="updateOnboardingPreview()"></div>
-              <div class="field"><label>اسم البرنامج</label><input type="text" id="obProgram" value="برنامج تبيان" placeholder="مثال: برنامج تبيان" oninput="updateOnboardingPreview()"></div>
+          <div class="ob-field" style="margin-bottom:9px;">
+            <label><span>اسم البرنامج التعليمي</span><span style="font-size:10.5px; color:var(--ink-500);">قابل للتعديل</span></label>
+            <div class="ob-input-wrap">
+              <span class="ob-input-ico">📘</span>
+              <input type="text" id="obProgram" value="برنامج تبيان" placeholder="مثال: برنامج تبيان" oninput="updateOnboardingPreview()">
             </div>
-          </details>
+          </div>
 
           <div class="ob-live-card" id="obLiveIdentityPreview">
             <div>
@@ -12066,7 +12453,7 @@ table.t-daily td.td-rev-slim,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v97</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v98</span>
         </button>
       </div>
     </div>
@@ -12534,6 +12921,27 @@ table.t-daily td.td-rev-slim,
     <div class="mkd-footer">
       <button type="button" class="btn btn-outline" id="mkdCancelBtn" onclick="resolveMakinDialog(false)">إلغاء</button>
       <button type="button" class="btn btn-primary" id="mkdOkBtn" onclick="resolveMakinDialog(true)">تأكيد ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL: FOUNDER — EXTERNAL ORG BRAND LICENSE MANAGER (v98) ===== -->
+<div class="modal-backdrop exec-modal-backdrop" id="ownerBrandLicenseModal" style="z-index:160;" onclick="if(event.target===this) closeModal('ownerBrandLicenseModal')">
+  <div class="modal-box exec-modal-box" style="max-width:460px;">
+    <div class="exec-modal-hdr">
+      <div class="es-handle"></div>
+      <div class="exec-modal-hdr-row">
+        <div style="min-width:0; flex:1;">
+          <h3>🎨 الهوية والترخيص المؤسسي</h3>
+          <div class="exec-modal-sub" id="oblModalSub">تحكم المؤسس الحصري بالهوية والشعار</div>
+        </div>
+        <button type="button" class="exec-modal-close" onclick="closeModal('ownerBrandLicenseModal')" aria-label="إغلاق">×</button>
+      </div>
+    </div>
+    <div class="exec-modal-body" id="oblModalBody"></div>
+    <div class="exec-modal-footer">
+      <button type="button" class="btn btn-outline" onclick="closeModal('ownerBrandLicenseModal')">إلغاء</button>
+      <button type="button" class="btn es-btn-next" style="flex:1;" onclick="saveOwnerSupBrandLicense()">✓ حفظ واعتماد الترخيص سحابياً</button>
     </div>
   </div>
 </div>
@@ -13022,18 +13430,10 @@ table.t-daily td.td-rev-slim,
             <div class="field"><label>الصرح / المحافظة</label><input type="text" id="setBranch" list="branchesList" placeholder="مثال: صرح إدلب"></div>
             <div class="field"><label>اسم البرنامج</label><input type="text" id="setProgram" placeholder="مثال: برنامج تبيان"></div>
           </div>
-          <div class="field" style="margin-bottom:8px;">
-            <label>المؤسسة التعليمية</label>
-            <input type="text" id="setOrg">
-          </div>
-          <div class="exec-grid-2" style="margin-bottom:10px;">
+          <div id="setLockedBrandCard" class="locked-brand-card"></div>
+          <div class="exec-grid-2" style="margin-bottom:2px;">
             <div class="field"><label>نوع الحلقة</label><select id="setHalaqaGender"><option value="male">ذكور (الشيخ / الطالب)</option><option value="female">إناث (المعلمة / الطالبة)</option></select></div>
             <div class="field"><label>اتجاه الحفظ</label><select id="setDefaultDir"><option value="desc">من الناس ← البقرة</option><option value="asc">من البقرة ← الناس</option></select></div>
-          </div>
-          <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
-            <button type="button" class="btn btn-soft btn-sm" onclick="document.getElementById('setLogoFile').click()">🖼️ تغيير الشعار</button>
-            <button type="button" class="btn btn-outline btn-sm" id="btnResetLogo" onclick="resetCustomLogo()" style="display:none;">استعادة الشعار الرسمي</button>
-            <input type="file" id="setLogoFile" accept="image/png,image/jpeg,image/webp" style="display:none;" onchange="handleCustomLogoUpload(event)">
           </div>
         </div>
 
@@ -13625,20 +14025,79 @@ const LOGO_B64 = "iVBORw0KGgoAAAANSUhEUgAAAicAAAC6CAYAAAB1N+1pAABDtElEQVR42u2dd3
 const LOGO_SRC = "data:image/png;base64," + LOGO_B64;
 
 // Dynamic branding helpers — ANY change to Halaqa, Branch, Org, Program, or Logo propagates instantly to ALL reports, images, PDFs, Excel, and WhatsApp!
+const DEFAULT_MAKIN_ORG_NAME = "مؤسسة صروح مكين التعليمية";
+
+// Central Founder-Controlled Institutional Brand Resolver (v98)
+// Regular accounts ALWAYS use Makin org & logo unless granted an External Org License by the Founder!
+function getAuthorizedOrgBrand(supOverride = null) {
+  const defaultBrand = {
+    org: DEFAULT_MAKIN_ORG_NAME,
+    logoSrc: LOGO_SRC,
+    logoB64: LOGO_B64,
+    logoExt: "png",
+    isLicensedExternal: false
+  };
+
+  const buildFromLic = lic => {
+    if (!lic || !lic.orgName || !String(lic.orgName).trim()) return null;
+    const ext = lic.logoExt || "png";
+    const b64 = lic.logoB64 || "";
+    const src = b64 ? `data:image/${ext};base64,${b64}` : LOGO_SRC;
+    return {
+      org: String(lic.orgName).trim(),
+      logoSrc: src,
+      logoB64: b64 || LOGO_B64,
+      logoExt: b64 ? ext : "png",
+      isLicensedExternal: true
+    };
+  };
+
+  // 1) Explicit supervisor context (e.g., supervisor shell, supervisor reports, founder inspecting)
+  if (supOverride) {
+    if (supOverride.active === false) return defaultBrand;
+    return buildFromLic(supOverride.licensedOrg) || defaultBrand;
+  }
+
+  const u = typeof getCurrentAccountUser === "function" ? getCurrentAccountUser() : null;
+  if (!u) return defaultBrand;
+
+  // 2) Supervisor inspecting or viewing own account
+  if (u.role === "supervisor") {
+    if (u.active === false) return defaultBrand;
+    return buildFromLic(u.licensedOrg) || defaultBrand;
+  }
+
+  // 3) Teacher inherits approved supervisor's licensed external org automatically!
+  if (u.role === "teacher" && u.supervisorId && u.supervisorStatus === "approved") {
+    const sup = tibyanAccounts?.users?.[u.supervisorId];
+    if (sup) {
+      if (sup.active === false) return defaultBrand;
+      return buildFromLic(sup.licensedOrg) || defaultBrand;
+    }
+    // Offline fallback to last verified inherited license
+    if (u.inheritedBrand && u.inheritedBrand.orgName) {
+      return buildFromLic(u.inheritedBrand) || defaultBrand;
+    }
+  }
+
+  return defaultBrand;
+}
+
+// Dynamic branding helpers — Org & Logo are strictly Founder-authorized; Program, Branch, Halaqa, Sheikh remain editable!
 function getBrandMeta(h) {
   const hal = h || getActiveHalaqa() || {};
   const branch = (hal.branch || "صرح إدلب").trim();
-  let org = (hal.org || "مؤسسة صروح مكين التعليمية").trim();
-  const dashBranch = new RegExp(`\\s*[-–—]\\s*${branch.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`);
-  org = org.replace(dashBranch, "").trim() || "مؤسسة صروح مكين التعليمية";
+  const authBrand = getAuthorizedOrgBrand();
   return {
-    org, branch,
+    org: authBrand.org,
+    branch,
     program: (hal.program || "برنامج تبيان").trim(),
     name: (hal.name || "").trim(),
     sheikh: (hal.sheikh || "").trim(),
-    logoSrc: hal.customLogoSrc || LOGO_SRC,
-    logoB64: hal.customLogoB64 || LOGO_B64,
-    logoExt: hal.customLogoExt || "png"
+    logoSrc: authBrand.logoSrc,
+    logoB64: authBrand.logoB64,
+    logoExt: authBrand.logoExt,
+    isLicensedExternal: authBrand.isLicensedExternal
   };
 }
 
@@ -14136,7 +14595,37 @@ function formatPointsBreakdownText(s, r, st) {
 
 
 // ==================== v85: CONCISE NOTES, TAJWEED TAGS & PRESENT-NO-RECITE ENGINE ====================
-const TAJWEED_TAGS = ["مدود", "غنن", "قلقلة", "تشكيل", "أحكام", "مخارج", "وقف", "سرعة"];
+const TAJWEED_TAGS_CORE = ["المدود", "الغنن", "القلقلة", "التشكيل", "المخارج", "الوقف", "السرعة"];
+const TAJWEED_TAGS_RULES = ["أحكام النون", "أحكام الميم", "الأحرف اللثوية", "اللام الشمسية والقمرية"];
+const TAJWEED_TAGS = [...TAJWEED_TAGS_CORE, ...TAJWEED_TAGS_RULES];
+const LEGACY_TAJWEED_MAP = {
+  "مدود": "المدود",
+  "غنن": "الغنن",
+  "قلقلة": "القلقلة",
+  "تشكيل": "التشكيل",
+  "مخارج": "المخارج",
+  "وقف": "الوقف",
+  "سرعة": "السرعة"
+};
+let _evalTajweedOpen = false;
+let _profileFocusScope = "month";
+
+function normalizeTajweedTag(t) {
+  const s = String(t || "").trim();
+  if (!s || s === "أحكام") return "";
+  return LEGACY_TAJWEED_MAP[s] || s;
+}
+
+function getNormalizedTajweedTags(r) {
+  const raw = Array.isArray(r?.tajweedTags) ? r.tajweedTags : [];
+  const seen = new Set();
+  const out = [];
+  raw.forEach(t => {
+    const nt = normalizeTajweedTag(t);
+    if (nt && !seen.has(nt)) { seen.add(nt); out.push(nt); }
+  });
+  return out;
+}
 
 function isPresentNoRecite(att) {
   return att === "حضر ولم يُسمّع";
@@ -14147,7 +14636,7 @@ function isCountedPresent(att) {
 }
 
 function getTajweedSuffixFromRecord(r) {
-  const tags = Array.isArray(r?.tajweedTags) ? r.tajweedTags.filter(Boolean) : [];
+  const tags = getNormalizedTajweedTags(r);
   return tags.length ? ` ضعف في (${tags.join("، ")})` : "";
 }
 
@@ -14166,14 +14655,24 @@ function applyTajweedToNote(baseNote, r) {
   return clean ? `${clean}${tj}` : tj.trim();
 }
 
+function toggleTajweedDrawer() {
+  _evalTajweedOpen = !_evalTajweedOpen;
+  if (document.getElementById("studentEvalSheet")?.classList.contains("show")) {
+    syncStudentEvalSheet();
+  }
+}
+
 function toggleTajweedTag(studentId, tag) {
   const s = getCurrentSession();
   if (!s) return;
   const r = getStudentRecord(s, studentId);
-  if (!Array.isArray(r.tajweedTags)) r.tajweedTags = [];
-  const idx = r.tajweedTags.indexOf(tag);
-  if (idx >= 0) r.tajweedTags.splice(idx, 1);
-  else r.tajweedTags.push(tag);
+  const tags = getNormalizedTajweedTags(r);
+  const nt = normalizeTajweedTag(tag);
+  if (!nt) return;
+  const idx = tags.indexOf(nt);
+  if (idx >= 0) tags.splice(idx, 1);
+  else tags.push(nt);
+  r.tajweedTags = tags;
   r.notes = applyTajweedToNote(r.notes || "", r);
   openCardId = studentId;
   saveState();
@@ -14183,12 +14682,135 @@ function toggleTajweedTag(studentId, tag) {
   patchSingleStudentCard(studentId);
 }
 
+function clearStudentSessionTajweed(studentId) {
+  const s = getCurrentSession();
+  if (!s) return;
+  const r = getStudentRecord(s, studentId);
+  r.tajweedTags = [];
+  r.notes = applyTajweedToNote(r.notes || "", r);
+  saveState();
+  if (document.getElementById("studentEvalSheet")?.classList.contains("show")) {
+    syncStudentEvalSheet();
+  }
+  patchSingleStudentCard(studentId);
+}
+
 function renderTajweedTagsBar(studentId, r) {
-  const active = Array.isArray(r?.tajweedTags) ? r.tajweedTags : [];
-  return `<div class="tj-tags-bar">
-    <span class="tj-tag-lbl">🎙️ تجويد:</span>
-    ${TAJWEED_TAGS.map(t => `<button type="button" class="tj-chip ${active.includes(t) ? "on" : ""}" onclick="toggleTajweedTag('${studentId}','${t}')">${active.includes(t) ? "✓ " : ""}${t}</button>`).join("")}
+  const active = getNormalizedTajweedTags(r);
+  const pillsHtml = active.length
+    ? active.map(t => `<button type="button" class="tj-sel-pill" onclick="toggleTajweedTag('${studentId}','${t}')" title="اضغط للإزالة">${t} <span>×</span></button>`).join("")
+    : `<span class="tj-placeholder">لا توجد ملاحظات تجويد</span>`;
+
+  const drawerHtml = _evalTajweedOpen ? `
+    <div class="tj-drawer-panel">
+      <div class="tj-group-lbl">
+        <span>🎙️ الأداء والمخارج</span>
+        ${active.length ? `<button type="button" style="border:none; background:transparent; color:var(--red); font-size:10.5px; font-weight:800; cursor:pointer;" onclick="clearStudentSessionTajweed('${studentId}')">مسح الكل</button>` : ''}
+      </div>
+      <div class="tj-grid-3">
+        ${TAJWEED_TAGS_CORE.map(t => `<button type="button" class="tj-opt-btn ${active.includes(t) ? 'on' : ''}" onclick="toggleTajweedTag('${studentId}','${t}')">${active.includes(t) ? '✓ ' : ''}${t}</button>`).join("")}
+      </div>
+      <div class="tj-group-lbl" style="margin-top:4px;"><span>📖 الأحكام والصفات</span></div>
+      <div class="tj-grid-2">
+        ${TAJWEED_TAGS_RULES.map(t => `<button type="button" class="tj-opt-btn ${active.includes(t) ? 'on' : ''}" onclick="toggleTajweedTag('${studentId}','${t}')">${active.includes(t) ? '✓ ' : ''}${t}</button>`).join("")}
+      </div>
+    </div>` : "";
+
+  return `<div class="tj-compact-wrap">
+    <div class="tj-compact-bar ${_evalTajweedOpen ? 'is-open' : ''}">
+      <div class="tj-selected-strip">
+        <span class="tj-tag-lbl">🎙️ التجويد:</span>
+        ${pillsHtml}
+      </div>
+      <button type="button" class="tj-toggle-btn ${_evalTajweedOpen ? 'on' : ''}" onclick="toggleTajweedDrawer()">
+        ${_evalTajweedOpen ? 'إغلاق ▴' : (active.length ? `تعديل (${active.length}) ▾` : '+ تحديد ▾')}
+      </button>
+    </div>
+    ${drawerHtml}
   </div>`;
+}
+
+// ===== STUDENT MONTHLY & OVERALL TAJWEED & PERFORMANCE FOCUS ANALYZER (v98) =====
+function computeStudentFocusReport(h, studentId, monthFilter = "ALL", explicitSessions = null) {
+  const sessions = explicitSessions || (monthFilter && monthFilter !== "ALL"
+    ? (typeof getSessionsForMonthWithCarry === "function" ? getSessionsForMonthWithCarry(h, monthFilter) : (h.sessions || []).filter(s => s.hijriMonth === monthFilter))
+    : (h.sessions || []).filter(s => s && !s.noClass && isSessionHasRealActivity(s)));
+
+  const tagCounts = {};
+  let evalSessions = 0, repeatCount = 0, absentCount = 0, totalErrs = 0, totalAlerts = 0;
+
+  sessions.forEach(s => {
+    const r = s?.records?.[studentId];
+    if (!r) return;
+    if (r.attendance && r.attendance.includes("غياب")) { absentCount++; return; }
+    const hasEval = Boolean(r.recEval || r.minEval || r.majEval);
+    if (hasEval) evalSessions++;
+    if (r.recEval === "إعادة" || r.minEval === "إعادة" || r.majEval === "إعادة") repeatCount++;
+    totalErrs += (Number(r.recErrors) || 0) + (Number(r.minErrors) || 0) + (Number(r.majErrors) || 0);
+    totalAlerts += (Number(r.recAlerts) || 0) + (Number(r.minAlerts) || 0) + (Number(r.majAlerts) || 0);
+
+    getNormalizedTajweedTags(r).forEach(tag => {
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    });
+  });
+
+  const ranked = Object.entries(tagCounts)
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count);
+  const maxCnt = ranked.length ? ranked[0].count : 1;
+  ranked.forEach(x => { x.pct = Math.round((x.count / maxCnt) * 100); });
+
+  const top3 = ranked.slice(0, 3);
+  const parts = [];
+  if (top3.length) {
+    const topTxt = top3.map(x => `${x.tag} (${x.count === 1 ? 'مرة' : (x.count === 2 ? 'مرتان' : x.count + ' مرات')})`).join("، و");
+    parts.push(`أهم ما يُركَّز عليه: ${topTxt}.`);
+  }
+  if (repeatCount >= 2) {
+    parts.push(`تكرّرت الإعادة ${repeatCount === 2 ? 'مرتين' : repeatCount + ' مرات'}؛ يُنصح بزيادة التكرار السماعي قبل الجلسة.`);
+  }
+  if (absentCount >= 3) {
+    parts.push(`ملاحظة انضباط: تكرّر الغياب (${absentCount} أيام) ويُرجى المتابعة لثبات الحفظ.`);
+  }
+
+  let status = "ok";
+  let summary = "";
+  if (parts.length) {
+    status = (top3.length && top3[0].count >= 3) || repeatCount >= 3 ? "warn" : "mid";
+    summary = parts.join(" ");
+  } else if (evalSessions > 0) {
+    summary = "أداء تجويدي متقن ومنضبط دون ملاحظات ضعف متكررة — بارك الله في همته.";
+  } else {
+    summary = "لم تُسجّل ملاحظات تجويد في هذه الفترة بعد.";
+  }
+
+  return { ranked, top3, evalSessions, repeatCount, absentCount, totalErrs, totalAlerts, status, summary };
+}
+
+function setStudentProfileFocusScope(scope) {
+  _profileFocusScope = scope === "all" ? "all" : "month";
+  if (_activeProfileStudentId) openStudentProfile(_activeProfileStudentId);
+}
+
+function copyStudentFocusSummaryWA(studentId, monthFilter) {
+  const h = getActiveHalaqa(), bm = getBrandMeta(h);
+  const st = h?.students?.find(x => x.id === studentId);
+  if (!st) return;
+  const f = computeStudentFocusReport(h, studentId, _profileFocusScope === "all" ? "ALL" : monthFilter);
+  const periodLbl = _profileFocusScope === "all" ? "المتابعة الشاملة" : `شهر ${monthFilter} هـ`;
+  let txt = `السلام عليكم ورحمة الله وبركاته 🌿\n`;
+  txt += `*🎯 خلاصة التركيز والتجويد — ${st.name}*\n`;
+  txt += `🕌 حلقة ${bm.name} | 📅 ${periodLbl}\n━━━━━━━━━━━━━\n`;
+  if (f.ranked.length) {
+    txt += `*🎙️ أبرز نقاط التجويد للتركيز:*\n`;
+    f.ranked.slice(0, 5).forEach((x, i) => {
+      txt += `${i + 1}. *${x.tag}* (${x.count === 1 ? 'مرة واحدة' : (x.count === 2 ? 'مرتان' : x.count + ' مرات')})\n`;
+    });
+  }
+  txt += `\n💡 *التوصية:* ${f.summary}\n`;
+  txt += `━━━━━━━━━━━━━\n${getGenderTerms(h).supervisorTitle}: ${bm.sheikh} — ${bm.org}`;
+  if (navigator.clipboard?.writeText) navigator.clipboard.writeText(txt);
+  showToast("تم نسخ خلاصة التركيز والتجويد للواتساب 📋");
 }
 
 function buildConciseRecNote(ev, opts = {}) {
@@ -16383,6 +17005,7 @@ function resetRuntimeWorkspaceState() {
   openAdvCardId = null;
   evalSheetTool = "";
   evalBonusOpen = false;
+  _evalTajweedOpen = false;
   _lastEvalSheetStudentId = null;
   lastUndoSnapshot = null;
   currentSearch = "";
@@ -19606,7 +20229,7 @@ function createHalaqaFromOnboarding() {
   const sheikh = document.getElementById("obSheikh").value.trim();
   const halaqaName = document.getElementById("obHalaqa").value.trim();
   const branch = document.getElementById("obBranch").value.trim() || "صرح إدلب";
-  const org = document.getElementById("obOrg").value.trim() || "مؤسسة صروح مكين التعليمية";
+  const org = getAuthorizedOrgBrand().org;
   const program = document.getElementById("obProgram").value.trim() || "برنامج تبيان";
   const defaultDir = document.getElementById("obDefaultDir").value || "desc";
   const gender = document.getElementById("obGender")?.value || "male";
@@ -20087,6 +20710,34 @@ function openStudentProfile(studentId) {
       <button class="btn btn-soft btn-sm" onclick="shareStudentParentWA('${st.id}', '${escapeHtml(monthFilter)}', false)">📋 نسخ</button>
       <button class="btn btn-outline btn-sm" onclick="closeModal('studentProfileModal'); openEditStudentModal('${st.id}');">✏️</button>
     </div>
+    ${(() => {
+      const fScope = _profileFocusScope === "all" ? "ALL" : monthFilter;
+      const focus = computeStudentFocusReport(h, st.id, fScope);
+      const barsHtml = focus.ranked.length
+        ? `<div class="st-focus-bars">${focus.ranked.slice(0, 5).map((x, i) => {
+            const cls = i === 0 ? "" : (i === 1 ? "mid" : "low");
+            return `<div class="st-fbar-row">
+              <span class="st-fbar-lbl">${i + 1}. ${escapeHtml(x.tag)}</span>
+              <div class="st-fbar-track"><div class="st-fbar-fill ${cls}" style="width:${Math.max(18, x.pct)}%;"></div></div>
+              <span class="st-fbar-cnt">${x.count} ${x.count === 1 ? 'مرة' : 'مرات'}</span>
+            </div>`;
+          }).join("")}</div>`
+        : "";
+      return `<div class="st-focus-card">
+        <div class="st-focus-hdr">
+          <h5>🎯 بوصلة التركيز والتجويد</h5>
+          <div class="st-focus-seg">
+            <button type="button" class="${_profileFocusScope !== 'all' ? 'on' : ''}" onclick="setStudentProfileFocusScope('month')">هذا الشهر</button>
+            <button type="button" class="${_profileFocusScope === 'all' ? 'on' : ''}" onclick="setStudentProfileFocusScope('all')">الكل</button>
+          </div>
+        </div>
+        ${barsHtml}
+        <div class="st-focus-summary ${focus.status === 'ok' ? 'is-ok' : ''}">${escapeHtml(focus.summary)}</div>
+        ${focus.ranked.length ? `<div style="display:flex; justify-content:flex-end; margin-top:6px;">
+          <button type="button" class="btn btn-soft btn-sm" style="padding:3px 9px; font-size:11px;" onclick="copyStudentFocusSummaryWA('${st.id}','${escapeHtml(monthFilter)}')">📋 نسخ التوصية للواتساب</button>
+        </div>` : ""}
+      </div>`;
+    })()}
     ${sabrCertsHtml}
     <div class="panel-block" style="margin-bottom:0;">
       <div class="panel-label" style="margin-bottom:4px;">آخر الجلسات المسجّلة</div>
@@ -25256,19 +25907,19 @@ function renderDailyReport() {
   if (s.type === "daily") {
     const colgroup = ptsOn
       ? `<colgroup>
-          <col style="width:2.5%"><col style="width:11.5%">
-          <col style="width:8.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:5.5%">
-          <col style="width:3.5%">
-          <col style="width:6.5%"><col style="width:6.5%"><col style="width:6.5%">
-          <col style="width:9.5%"><col style="width:4.5%"><col style="width:4.5%">
-          <col style="width:23.5%">
+          <col style="width:2.6%"><col style="width:13.2%">
+          <col style="width:7.6%"><col style="width:3.4%"><col style="width:3.4%"><col style="width:5.8%">
+          <col style="width:3.8%">
+          <col style="width:6.4%"><col style="width:6.4%"><col style="width:5.6%">
+          <col style="width:8.2%"><col style="width:3.8%"><col style="width:3.8%">
+          <col style="width:26.0%">
         </colgroup>`
       : `<colgroup>
-          <col style="width:2.5%"><col style="width:12.5%">
-          <col style="width:8.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:5.5%">
-          <col style="width:6.5%"><col style="width:6.5%"><col style="width:6.5%">
-          <col style="width:9.5%"><col style="width:4.5%"><col style="width:4.5%">
-          <col style="width:26%">
+          <col style="width:2.6%"><col style="width:14.0%">
+          <col style="width:7.8%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:6.0%">
+          <col style="width:6.6%"><col style="width:6.6%"><col style="width:5.8%">
+          <col style="width:8.4%"><col style="width:3.9%"><col style="width:3.9%">
+          <col style="width:27.4%">
         </colgroup>`;
 
     tbl = `<table class="t-daily" id="dailyReportTable">${colgroup}
@@ -25358,19 +26009,19 @@ function renderDailyReport() {
   } else {
     const colgroup = ptsOn
       ? `<colgroup>
-          <col style="width:2.5%"><col style="width:12.0%">
-          <col style="width:8.5%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.2%">
-          <col style="width:7.0%"><col style="width:7.0%"><col style="width:6.0%">
-          <col style="width:3.4%">
-          <col style="width:9.2%"><col style="width:4.3%"><col style="width:4.3%">
-          <col style="width:24.2%">
+          <col style="width:2.6%"><col style="width:13.2%">
+          <col style="width:7.4%"><col style="width:3.4%"><col style="width:3.4%"><col style="width:5.6%">
+          <col style="width:6.6%"><col style="width:6.6%"><col style="width:5.6%">
+          <col style="width:3.8%">
+          <col style="width:8.2%"><col style="width:3.8%"><col style="width:3.8%">
+          <col style="width:26.0%">
         </colgroup>`
       : `<colgroup>
-          <col style="width:2.5%"><col style="width:13.0%">
-          <col style="width:8.5%"><col style="width:3.2%"><col style="width:3.2%"><col style="width:5.2%">
-          <col style="width:7.0%"><col style="width:7.0%"><col style="width:6.0%">
-          <col style="width:9.2%"><col style="width:4.3%"><col style="width:4.3%">
-          <col style="width:26.6%">
+          <col style="width:2.6%"><col style="width:14.0%">
+          <col style="width:7.6%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:5.8%">
+          <col style="width:6.8%"><col style="width:6.8%"><col style="width:5.8%">
+          <col style="width:8.4%"><col style="width:3.9%"><col style="width:3.9%">
+          <col style="width:27.4%">
         </colgroup>`;
 
     tbl = `<table class="t-daily" id="dailyReportTable">${colgroup}
@@ -27498,6 +28149,15 @@ function renderIndivReportPaper() {
         <tbody>${logRowsHtml}</tbody>
       </table>
 
+      ${(() => {
+        const irFocus = computeStudentFocusReport(h, st.id, isWeekly ? "ALL" : monthLabel, periodSessions);
+        if (!irFocus.ranked.length && irFocus.repeatCount < 2) return "";
+        return `<div class="ir-focus-box">
+          <b>🎯 أولويات التركيز التجويدي والأداء (${isWeekly ? "هذا الأسبوع" : "خلاصة الشهر"}):</b>
+          ${irFocus.ranked.length ? `<div class="ir-focus-pills">${irFocus.ranked.slice(0, 4).map(x => `<span class="ir-fpill">${escapeHtml(x.tag)} (${x.count})</span>`).join("")}</div>` : ""}
+          <div>${escapeHtml(irFocus.summary)}</div>
+        </div>`;
+      })()}
       <div id="irCanvasNoteBox" class="ir-note-box" style="${sheikhNote ? "" : "display:none;"}"><b>📝 توصية ${getGenderTerms(h).supervisorTitle} لولي الأمر:</b> ${escapeHtml(sheikhNote)}</div>
 
       <div class="ir-footer">
@@ -29408,9 +30068,17 @@ function openSettingsModal() {
   const bm = getBrandMeta(h);
   document.getElementById("setSheikh").value = bm.sheikh;
   document.getElementById("setHalaqa").value = bm.name;
-  document.getElementById("setOrg").value = bm.org;
   document.getElementById("setBranch").value = bm.branch;
   document.getElementById("setProgram").value = bm.program;
+  const lbc = document.getElementById("setLockedBrandCard");
+  if (lbc) {
+    lbc.innerHTML = `
+      <div class="lbc-logo"><img src="${bm.logoSrc}" alt="شعار المؤسسة"></div>
+      <div class="lbc-info">
+        <div class="lbc-org">${escapeHtml(bm.org)}</div>
+        <div class="lbc-sub">${bm.isLicensedExternal ? "✨ هوية مؤسسة مرخّصة من المؤسس" : "🔒 الهوية والشعار الرسميان لمنصة مكين"}</div>
+      </div>`;
+  }
   if (document.getElementById("setHalaqaGender")) document.getElementById("setHalaqaGender").value = h.gender || "male";
   document.getElementById("setDefaultDir").value = h.defaultDir || "desc";
   document.getElementById("setHijriOffset").value = String(typeof h.hijriOffset === "number" ? h.hijriOffset : 1);
@@ -29420,7 +30088,6 @@ function openSettingsModal() {
   document.getElementById("setRoomCode").value = h.roomCode || "";
   const autoCb = document.getElementById("setCloudAutoSync");
   if (autoCb) autoCb.checked = cloudAutoSync;
-  document.getElementById("btnResetLogo").style.display = h.customLogoB64 ? "inline-flex" : "none";
 
   document.getElementById("halaqatSwitcherList").innerHTML = Object.values(appState.halaqat).map(item => `
     <div style="display:flex; align-items:center; justify-content:space-between; padding:7px 10px; border:1px solid var(--line); border-radius:8px; margin-bottom:6px;">
@@ -29490,34 +30157,11 @@ function quickAddStudentFromSettings() {
   showToast(`تمت إضافة الطالب "${name}" إلى الحلقة ✓`);
 }
 
-function handleCustomLogoUpload(ev) {
-  const file = ev.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    const dataUrl = reader.result;
-    const match = String(dataUrl).match(/^data:image\/(png|jpeg|jpg|webp);base64,(.+)$/i);
-    if (!match) { showToast("صيغة الصورة غير مدعومة"); return; }
-    const h = getActiveHalaqa();
-    h.customLogoSrc = dataUrl;
-    h.customLogoB64 = match[2];
-    h.customLogoExt = match[1].toLowerCase() === "jpg" ? "jpeg" : (match[1].toLowerCase() === "webp" ? "png" : match[1].toLowerCase());
-    saveState();
-    refreshAllBrandingViews();
-    document.getElementById("btnResetLogo").style.display = "inline-flex";
-    showToast("تم تحديث الشعار تلقائياً في التطبيق والملفات والصور 🖼️");
-  };
-  reader.readAsDataURL(file);
-  ev.target.value = "";
+function handleCustomLogoUpload() {
+  showToast("🔒 تعديل الشعار محصور بمؤسس المنصة من لوحة المؤسس");
 }
-
 function resetCustomLogo() {
-  const h = getActiveHalaqa();
-  delete h.customLogoSrc; delete h.customLogoB64; delete h.customLogoExt;
-  saveState();
-  refreshAllBrandingViews();
-  document.getElementById("btnResetLogo").style.display = "none";
-  showToast("تمت استعادة الشعار الرسمي");
+  showToast("🔒 الهوية والشعار يُداران تلقائياً من المؤسس");
 }
 
 function refreshAllBrandingViews() {
@@ -29533,7 +30177,7 @@ function saveHalaqaSettings() {
   const h = getActiveHalaqa();
   h.sheikh = document.getElementById("setSheikh").value.trim() || h.sheikh;
   h.name = document.getElementById("setHalaqa").value.trim() || h.name;
-  h.org = document.getElementById("setOrg").value.trim() || h.org;
+  h.org = getAuthorizedOrgBrand().org;
   h.branch = document.getElementById("setBranch").value.trim() || h.branch;
   h.program = document.getElementById("setProgram").value.trim() || h.program;
   if (document.getElementById("setHalaqaGender")) h.gender = document.getElementById("setHalaqaGender").value || "male";
@@ -31018,8 +31662,11 @@ function renderSupervisorShell() {
   if (!isUserSupervisorCapable(sup)) return;
   const supTitle = sup.gender === "female" ? "المشرفة" : "المشرف";
   document.title = `لوحة ${supTitle} | ${sup.branchName}`;
+  const supBrand = getAuthorizedOrgBrand(sup);
+  const supLogoEl = document.getElementById("supHdrLogoImg");
+  if (supLogoEl) supLogoEl.src = supBrand.logoSrc;
   document.getElementById("supHdrBranchName").textContent = sup.branchName;
-  document.getElementById("supHdrNameSub").textContent = `${supTitle}: ${sup.name}`;
+  document.getElementById("supHdrNameSub").textContent = `${supTitle}: ${sup.name} • ${supBrand.org}`;
   if (!_supSelectedMonth) _supSelectedMonth = getExactHijriInfo(todayISO()).monthLabel;
   switchSupTab(_activeSupTab || "overview");
   updateNotifToggleUI();
@@ -31167,6 +31814,7 @@ async function supHandleJoinDecision(linkKey, decision) {
     if (tibyanAccounts.users[tid]) {
       tibyanAccounts.users[tid].supervisorStatus = "approved";
       tibyanAccounts.users[tid].supervisorBranchName = sup.branchName;
+      tibyanAccounts.users[tid].inheritedBrand = (sup.licensedOrg && sup.licensedOrg.orgName) ? sup.licensedOrg : null;
       await platformCloudPut(`users/${tid}`, tibyanAccounts.users[tid]);
     }
     await platformCloudPut(`links/${sup.id}/${linkKey}`, lnk);
@@ -31199,6 +31847,7 @@ async function supRemoveTeacher(linkKey) {
     tibyanAccounts.users[tid].supervisorStatus = "none";
     tibyanAccounts.users[tid].supervisorName = "";
     tibyanAccounts.users[tid].supervisorBranchName = "";
+    tibyanAccounts.users[tid].inheritedBrand = null;
     await platformCloudPut(`users/${tid}`, tibyanAccounts.users[tid]);
   }
   saveAccountsState();
@@ -31413,14 +32062,15 @@ function renderSupTeacherCardPaper() {
     ...(sup.customPrograms || []).map(cp => ({ name: `${cp.icon || '📘'} ${cp.title}`, val: `${st.customCounts[cp.key] || 0} ${cp.unit || 'درس'}` }))
   ];
 
+  const supBr = getAuthorizedOrgBrand(sup);
   wrap.innerHTML = `<div class="ir-paper" id="supTeacherCardCanvas">
     <div class="ir-header">
-      <div class="ir-org">${escapeHtml(sup.orgName || 'مؤسسة صروح مكين التعليمية')}<br>${escapeHtml(sup.branchName)} • ${escapeHtml(sup.programName || 'برنامج تبيان')}</div>
+      <div class="ir-org">${escapeHtml(supBr.org)}<br>${escapeHtml(sup.branchName)} • ${escapeHtml(sup.programName || 'برنامج تبيان')}</div>
       <div class="ir-title-box">
         <h2>الكشف الشهري لإنجاز المعلم</h2>
         <p>عن شهر ${escapeHtml(_supTCardMonth)} هـ</p>
       </div>
-      <img src="${LOGO_SRC}" alt="الشعار">
+      <img src="${supBr.logoSrc}" alt="الشعار">
     </div>
 
     <div class="ir-info-bar">
@@ -31575,10 +32225,10 @@ function renderSupBranchReportTab() {
             <div class="bp-upper-inner">
               <div class="bp-hdr-row">
                 <div class="bp-hdr-brand">
-                  <div class="bp-logo-card"><img src="${LOGO_SRC}" alt="الشعار"></div>
+                  <div class="bp-logo-card"><img src="${getAuthorizedOrgBrand(sup).logoSrc}" alt="الشعار"></div>
                 </div>
                 <div class="bp-hdr-title-block">
-                  <div class="bp-hdr-kicker">${escapeHtml(sup.orgName || 'مؤسسة صروح مكين التعليمية')}</div>
+                  <div class="bp-hdr-kicker">${escapeHtml(getAuthorizedOrgBrand(sup).org)}</div>
                   <h2>التقرير العام للحلقات</h2>
                   <div class="bp-month-ribbon">${escapeHtml(periodLabel)}</div>
                 </div>
@@ -31675,7 +32325,7 @@ function renderSupBranchReportTab() {
             <div class="bp-footer">
               <span>إشراف: ${escapeHtml(sup.name)}</span>
               <span class="bp-footer-tag">${escapeHtml(sup.programName || 'برنامج تبيان')} • <b>${escapeHtml(sup.branchName)}</b></span>
-              <span>${escapeHtml(sup.orgName || 'مؤسسة صروح مكين التعليمية')}</span>
+              <span>${escapeHtml(getAuthorizedOrgBrand(sup).org)}</span>
             </div>
           </div>
         </div>
@@ -31686,10 +32336,10 @@ function renderSupBranchReportTab() {
     <div style="overflow-x:auto; background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px;">
       <div id="supBranchTablePaper" class="official-monthly-wrap" style="min-width:920px;">
         <div class="om-banner">
-          <img src="${LOGO_SRC}" alt="الشعار">
+          <img src="${getAuthorizedOrgBrand(sup).logoSrc}" alt="الشعار">
           <div class="om-banner-title">
             <h2>التقرير الشهري العام لحلقات ${escapeHtml(sup.branchName)}</h2>
-            <p>${escapeHtml(sup.orgName || 'مؤسسة صروح مكين التعليمية')} • ${escapeHtml(periodLabel)}</p>
+            <p>${escapeHtml(getAuthorizedOrgBrand(sup).org)} • ${escapeHtml(periodLabel)}</p>
           </div>
           <div style="font-size:12.5px; font-weight:800; text-align:left;">المشرف: ${escapeHtml(sup.name)}<br>الحلقات: ${rows.length}</div>
         </div>
@@ -31792,7 +32442,7 @@ function copySupBranchGeneralWA() {
     totSt += st.studentsCount; totMem += st.memPages; totRev += st.revPages; totSabr += st.sabrCount;
     totIst += st.istihdaCount; totHad += st.hadithCount; totAct += st.actCount;
   });
-  const txt = `*📊 التقرير العام لصرح ${sup.branchName}*\n🏛️ ${sup.orgName || 'مؤسسة صروح مكين التعليمية'}\n📅 الفترة: ${_supSelectedMonth === 'all' ? 'شامل' : 'شهر ' + _supSelectedMonth + ' هـ'}\n\n🕌 عدد الحلقات: *${approved.length}*\n👥 إجمالي الطلاب: *${totSt}*\n📖 صفحات الحفظ: *${formatNum(totMem)}*\n📘 صفحات المراجعة: *${formatNum(totRev)}*\n🎓 الأجزاء المسبورة: *${totSabr}*\n🌿 دروس استهداء: *${totIst}* | 📜 الحديث: *${totHad}* | ⚽ النشاطات: *${totAct}*\n\nالحمد لله الذي بنعمته تتم الصالحات ✨`;
+  const txt = `*📊 التقرير العام لصرح ${sup.branchName}*\n🏛️ ${getAuthorizedOrgBrand(sup).org}\n📅 الفترة: ${_supSelectedMonth === 'all' ? 'شامل' : 'شهر ' + _supSelectedMonth + ' هـ'}\n\n🕌 عدد الحلقات: *${approved.length}*\n👥 إجمالي الطلاب: *${totSt}*\n📖 صفحات الحفظ: *${formatNum(totMem)}*\n📘 صفحات المراجعة: *${formatNum(totRev)}*\n🎓 الأجزاء المسبورة: *${totSabr}*\n🌿 دروس استهداء: *${totIst}* | 📜 الحديث: *${totHad}* | ⚽ النشاطات: *${totAct}*\n\nالحمد لله الذي بنعمته تتم الصالحات ✨`;
   if (navigator.clipboard?.writeText) navigator.clipboard.writeText(txt);
   showToast("تم نسخ التقرير العام للصرح للواتساب 💬");
 }
@@ -33496,8 +34146,13 @@ function runSilentDataSanitizer() {
               if (cleaned !== r.notes) { r.notes = cleaned; repaired = true; }
             }
           }
-          // 3) Guarantee active tajweedTags are reflected in r.notes
+          // 3) Upgrade legacy indefinite tajweedTags to v98 definite-article tags & sync r.notes
           if (Array.isArray(r.tajweedTags) && r.tajweedTags.length) {
+            const norm = getNormalizedTajweedTags(r);
+            if (JSON.stringify(norm) !== JSON.stringify(r.tajweedTags)) {
+              r.tajweedTags = norm;
+              repaired = true;
+            }
             const synced = applyTajweedToNote(r.notes || "", r);
             if (synced !== (r.notes || "")) { r.notes = synced; repaired = true; }
           }
@@ -33821,7 +34476,7 @@ async function exportSupBranchExcelStyled() {
 
   try {
     const wb = new ExcelJS.Workbook();
-    wb.creator = `${sup.orgName || 'مؤسسة صروح مكين التعليمية'} — ${sup.branchName}`;
+    wb.creator = `${getAuthorizedOrgBrand(sup).org} — ${sup.branchName}`;
     wb.created = new Date();
     const ws = wb.addWorksheet("التقرير العام للصرح", {
       views: [{ rightToLeft: true, showGridLines: true }],
@@ -33839,7 +34494,7 @@ async function exportSupBranchExcelStyled() {
 
     // Title Banner Rows
     ws.mergeCells(1, 1, 1, colCount);
-    ws.getCell(1, 1).value = `التقرير العام لحلقات ${sup.branchName} — ${sup.orgName || 'مؤسسة صروح مكين التعليمية'}`;
+    ws.getCell(1, 1).value = `التقرير العام لحلقات ${sup.branchName} — ${getAuthorizedOrgBrand(sup).org}`;
     styleCell(ws.getCell(1, 1), { fill: "FF102A49", fontColor: "FFFFFFFF", bold: true, size: 14, border: false });
     ws.getRow(1).height = 28;
 
@@ -33912,7 +34567,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v97";
+const TIBYAN_APP_VERSION = "v98";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -34196,6 +34851,17 @@ async function hydrateSignedInFirebaseUser(fbUser) {
           if (merged) {
             try { localStorage.setItem(getStorageKeyForUid(fbUser.uid), JSON.stringify(appState)); } catch {}
             if (typeof idbPutState === "function") idbPutState(fbUser.uid, appState).catch(() => {});
+          }
+        }
+        if (profile.supervisorId) {
+          const remoteSup = await fbDbGet(`users/${profile.supervisorId}`);
+          if (remoteSup && remoteSup.id) {
+            tibyanAccounts.users[profile.supervisorId] = remoteSup;
+            profile.inheritedBrand = (profile.supervisorStatus === "approved" && remoteSup.active !== false && remoteSup.licensedOrg?.orgName)
+              ? remoteSup.licensedOrg : null;
+            tibyanAccounts.users[fbUser.uid] = profile;
+            saveAccountsState();
+            merged = true;
           }
         }
         // Flush ONLY this account's own local offline edits!
@@ -34522,7 +35188,7 @@ async function handleRegisterSupervisor() {
   const inviteCode = rawCode.toUpperCase();
   const name = (document.getElementById("authSName")?.value || "").trim();
   const branchName = (document.getElementById("authSBranch")?.value || "").trim();
-  const orgName = (document.getElementById("authSOrg")?.value || "").trim() || "مؤسسة صروح مكين التعليمية";
+  let orgName = DEFAULT_MAKIN_ORG_NAME;
   const email = normalizeEmail(document.getElementById("authSEmail")?.value);
   const pass = document.getElementById("authSPass")?.value || "";
   const gender = document.getElementById("authSignupGender")?.value === "female" ? "female" : "male";
@@ -34565,6 +35231,14 @@ async function handleRegisterSupervisor() {
 
     const supCode = generateStrongSupervisorCode();
     const finalBranch = (usedInvite && inviteObj.branchHint) ? inviteObj.branchHint : branchName;
+    const licensedOrg = (usedInvite && inviteObj.licensedOrg && inviteObj.licensedOrg.orgName)
+      ? {
+          orgName: String(inviteObj.licensedOrg.orgName).trim(),
+          logoB64: inviteObj.licensedOrg.logoB64 || "",
+          logoExt: inviteObj.licensedOrg.logoExt || "png"
+        }
+      : null;
+    orgName = licensedOrg ? licensedOrg.orgName : DEFAULT_MAKIN_ORG_NAME;
     const supUser = {
       id: fbUser.uid,
       role: isClaimingOwner ? "owner" : "supervisor",
@@ -34573,6 +35247,7 @@ async function handleRegisterSupervisor() {
       name,
       branchName: finalBranch,
       orgName,
+      licensedOrg,
       programName: "برنامج تبيان",
       email,
       supervisorCode: supCode,
@@ -34687,9 +35362,10 @@ async function supSaveProfile() {
   if (!sup) return;
   const name = (document.getElementById("supEditName")?.value || "").trim();
   const branchName = (document.getElementById("supEditBranch")?.value || "").trim();
-  const orgName = (document.getElementById("supEditOrg")?.value || "").trim();
+  const programName = (document.getElementById("supEditProgram")?.value || "").trim() || "برنامج تبيان";
   if (!name || !branchName) { showToast("أدخل اسم المشرف واسم الصرح"); return; }
-  sup.name = name; sup.branchName = branchName; sup.orgName = orgName || "مؤسسة صروح مكين التعليمية";
+  sup.name = name; sup.branchName = branchName; sup.programName = programName;
+  sup.orgName = getAuthorizedOrgBrand(sup).org;
   saveAccountsState();
   await fbDbSet(`users/${sup.id}`, sup);
   if (sup.supervisorCode) {
@@ -34731,7 +35407,12 @@ async function refreshTeacherSupervisorNotifications(showAlert = false) {
     if (remoteProfile && remoteProfile.id) {
       tibyanAccounts.users[u.id] = Object.assign(u, remoteProfile);
     }
-    if (remoteSup && remoteSup.id) tibyanAccounts.users[u.supervisorId] = remoteSup;
+    if (remoteSup && remoteSup.id) {
+      tibyanAccounts.users[u.supervisorId] = remoteSup;
+      u.inheritedBrand = (u.supervisorStatus === "approved" && remoteSup.active !== false && remoteSup.licensedOrg?.orgName)
+        ? remoteSup.licensedOrg : null;
+      if (typeof renderHeader === "function") renderHeader();
+    }
     if (Array.isArray(remoteMsgs)) tibyanAccounts.messages[u.supervisorId] = remoteMsgs;
 
     // Fetch each of this teacher's halaqa links under this supervisor
@@ -34837,8 +35518,12 @@ function renderOwnerDashboardTab() {
         <div class="sup-t-stat"><span>الحفظ</span><b>${formatNum(memP)} ص</b></div>
         <div class="sup-t-stat"><span>الرشيدي</span><b>${formatNum(rashP)} ص</b></div>
       </div>
-      ${!isSelf ? `<div style="display:flex; justify-content:flex-end; gap:6px;">
-        <button type="button" class="btn ${isActive ? 'btn-danger' : 'btn-success'} btn-sm" onclick="ownerToggleSupervisorStatus('${sp.id}', ${!isActive})">${isActive ? '⏸️ إيقاف مؤقت' : '▶️ إعادة تفعيل'}</button>
+      ${!isSelf ? `<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+        <span class="badge ${sp.licensedOrg?.orgName ? 'b-blue' : 'b-slate'}" style="font-size:10.5px;">${sp.licensedOrg?.orgName ? `✨ مرخّص: ${escapeHtml(sp.licensedOrg.orgName)}` : '🏛️ هوية مكين'}</span>
+        <div style="display:flex; gap:5px;">
+          <button type="button" class="btn btn-soft btn-sm" onclick="openOwnerBrandLicenseModal('${sp.id}')">🎨 الهوية والترخيص</button>
+          <button type="button" class="btn ${isActive ? 'btn-danger' : 'btn-success'} btn-sm" onclick="ownerToggleSupervisorStatus('${sp.id}', ${!isActive})">${isActive ? '⏸️ إيقاف' : '▶️ تفعيل'}</button>
+        </div>
       </div>` : ''}
     </div>`;
   }).join("");
@@ -34866,6 +35551,59 @@ async function ownerToggleSupervisorStatus(supUid, nextActive) {
   showToast(nextActive ? "تم تفعيل حساب المشرف ✓" : "تم إيقاف حساب المشرف مؤقتاً");
 }
 
+let _ownInvMode = "makin";
+let _ownInvLogoDraft = { b64: "", ext: "png" };
+let _oblTargetSupId = "";
+let _oblMode = "makin";
+let _oblLogoDraft = { b64: "", ext: "png" };
+
+function compressOrgLogoFile(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("read error"));
+    reader.onload = () => {
+      const img = new Image();
+      img.onerror = () => reject(new Error("img error"));
+      img.onload = () => {
+        const maxW = 280, maxH = 120;
+        const scale = Math.min(1, maxW / img.width, maxH / img.height);
+        const w = Math.max(1, Math.round(img.width * scale));
+        const h = Math.max(1, Math.round(img.height * scale));
+        const cv = document.createElement("canvas");
+        cv.width = w; cv.height = h;
+        const ctx = cv.getContext("2d");
+        ctx.clearRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0, w, h);
+        const pngUrl = cv.toDataURL("image/png");
+        const b64 = pngUrl.includes(",") ? pngUrl.split(",")[1] : pngUrl;
+        resolve({ b64, ext: "png", src: pngUrl });
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function setOwnInviteBrandMode(mode) {
+  _ownInvMode = mode === "external" ? "external" : "makin";
+  renderOwnerInvitesTab();
+}
+
+async function handleOwnInviteLogoPick(ev) {
+  const f = ev.target?.files?.[0];
+  if (!f) return;
+  try {
+    const res = await compressOrgLogoFile(f);
+    _ownInvLogoDraft = { b64: res.b64, ext: res.ext };
+    renderOwnerInvitesTab();
+    showToast("✓ تم تجهيز وضغط شعار المؤسسة المرخّصة");
+  } catch {
+    showToast("⚠️ تعذّر قراءة صورة الشعار");
+  } finally {
+    ev.target.value = "";
+  }
+}
+
 function renderOwnerInvitesTab() {
   const wrap = document.getElementById("owner-view-invites");
   if (!wrap) return;
@@ -34873,23 +35611,42 @@ function renderOwnerInvitesTab() {
     .map(([code, obj]) => ({ code, ...obj }))
     .sort((a, b) => (b.createdAt || "").localeCompare(a.createdAt || ""));
 
+  const extFieldsHtml = _ownInvMode === "external" ? `
+    <div style="background:var(--brand-tint); border:1px solid var(--line); border-right:3.5px solid #c8a14b; border-radius:11px; padding:9px 10px; margin-bottom:9px;">
+      <div class="field" style="margin-bottom:7px;">
+        <label>اسم المؤسسة الخارجية المرخّصة *</label>
+        <input type="text" id="ownNewInviteOrg" placeholder="مثال: مؤسسة الفجر القرآنية">
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
+        <button type="button" class="btn btn-soft btn-sm" onclick="document.getElementById('ownInvLogoFile').click()">🖼️ ${_ownInvLogoDraft.b64 ? "تغيير الشعار" : "رفع شعار المؤسسة"}</button>
+        ${_ownInvLogoDraft.b64 ? `<button type="button" class="btn btn-outline btn-sm" onclick="_ownInvLogoDraft={b64:'',ext:'png'}; renderOwnerInvitesTab();">إزالة الشعار</button>` : `<span style="font-size:11px; color:var(--ink-500);">اختياري (يُضغط تلقائياً)</span>`}
+        <input type="file" id="ownInvLogoFile" accept="image/png,image/jpeg,image/webp" style="display:none;" onchange="handleOwnInviteLogoPick(event)">
+      </div>
+      ${_ownInvLogoDraft.b64 ? `<div class="own-logo-preview-row"><img src="data:image/${_ownInvLogoDraft.ext};base64,${_ownInvLogoDraft.b64}" alt="معاينة الشعار"><span style="font-size:11.5px; font-weight:700; color:var(--green);">✓ الشعار جاهز وسيُقفل تلقائياً على حساب المشرف ومعلميه</span></div>` : ""}
+    </div>` : "";
+
   wrap.innerHTML = `
     <div class="card">
-      <div class="card-title">🗝️ إصدار كود تفعيل مشرف صرح جديد (لمرة واحدة)</div>
+      <div class="card-title">🗝️ إصدار كود تفعيل مشرف جديد (لمرة واحدة)</div>
+      <div class="own-lic-mode-2">
+        <button type="button" class="own-lic-btn ${_ownInvMode === 'makin' ? 'on' : ''}" onclick="setOwnInviteBrandMode('makin')">🏛️ صرح تابع لمكين</button>
+        <button type="button" class="own-lic-btn ${_ownInvMode === 'external' ? 'on' : ''}" onclick="setOwnInviteBrandMode('external')">✨ ترخيص مؤسسة خارجية</button>
+      </div>
+      ${extFieldsHtml}
       <div class="form-grid" style="grid-template-columns:1.6fr 1fr; margin-bottom:9px; align-items:end;">
-        <div class="field"><label>اسم الصرح المخصّص (اختياري)</label><input type="text" id="ownNewInviteBranch" list="branchesList" placeholder="مثال: صرح حماة / صرح تبيان المغلق 1"></div>
+        <div class="field"><label>اسم الصرح / الفرع المخصّص (اختياري)</label><input type="text" id="ownNewInviteBranch" list="branchesList" placeholder="مثال: صرح حماة / فرع الشمال"></div>
         <button type="button" class="btn btn-primary" onclick="ownerGenerateInviteCode()">✨ توليد كود تفعيل</button>
       </div>
-      <div style="font-size:11.5px; color:var(--ink-500);">* الكود يُستخدم مرة واحدة فقط لإنشاء حساب مشرف واحد ثم يُغلق تلقائياً.</div>
+      <div style="font-size:11.5px; color:var(--ink-500);">* الكود يُستخدم مرة واحدة فقط. عند اختيار «مؤسسة خارجية» يرث المشرف ومعلموه اسم المؤسسة وشعارها تلقائياً وبشكل مقفول.</div>
     </div>
 
     <div class="card">
-      <div class="card-title">🔐 كلمة سر التفعيل العامة (الاحتياطية)</div>
+      <div class="card-title">🔐 كلمة سر التفعيل العامة (الاحتياطية — لمكين فقط)</div>
       <div style="display:flex; gap:7px; align-items:center;">
         <input type="text" id="ownMasterKeyInp" value="${escapeHtml(_ownerDataCache.masterKey || '')}" dir="ltr" style="flex:1; padding:8px 10px; border:1px solid var(--line-strong); border-radius:8px; font-family:monospace; font-weight:800; text-align:right;">
         <button type="button" class="btn btn-soft btn-sm" onclick="ownerSaveMasterKey()">✓ تحديث</button>
       </div>
-      <div style="font-size:11px; color:var(--ink-500); margin-top:5px;">* يمكنك تغييرها في أي وقت أو جعلها معقدة جداً والاعتماد فقط على أكواد الدعوة الفردية أعلاه.</div>
+      <div style="font-size:11px; color:var(--ink-500); margin-top:5px;">* مخصّصة لصروح مكين فقط ولا تمنح ترخيص مؤسسة خارجية.</div>
     </div>
 
     <div style="font-size:13.5px; font-weight:800; color:var(--brand-slate); margin-bottom:7px;">📋 سجل أكواد التفعيل (${invList.length})</div>
@@ -34898,6 +35655,7 @@ function renderOwnerInvitesTab() {
         <div>
           <span class="invite-code-mono">${escapeHtml(inv.code)}</span>
           ${inv.branchHint ? `<span class="badge b-slate" style="margin-right:6px;">${escapeHtml(inv.branchHint)}</span>` : ''}
+          ${inv.licensedOrg?.orgName ? `<span class="badge b-blue" style="margin-right:4px;">✨ ${escapeHtml(inv.licensedOrg.orgName)}</span>` : ''}
           <div style="font-size:11px; color:var(--ink-500); margin-top:4px;">
             ${inv.usedBy ? `✅ استُخدم بواسطة: <b>${escapeHtml(inv.usedByName || inv.usedByEmail || '')}</b>` : '🟢 متاح للاستخدام لمرة واحدة'}
           </div>
@@ -34911,20 +35669,112 @@ function renderOwnerInvitesTab() {
   `;
 }
 
+function openOwnerBrandLicenseModal(supUid) {
+  const sp = _ownerDataCache.users?.[supUid];
+  if (!sp) return;
+  _oblTargetSupId = supUid;
+  const hasExt = Boolean(sp.licensedOrg && sp.licensedOrg.orgName);
+  _oblMode = hasExt ? "external" : "makin";
+  _oblLogoDraft = {
+    b64: sp.licensedOrg?.logoB64 || "",
+    ext: sp.licensedOrg?.logoExt || "png"
+  };
+  const sub = document.getElementById("oblModalSub");
+  if (sub) sub.textContent = `${sp.name} — ${sp.branchName}`;
+  renderOwnerBrandLicenseModalBody(sp.licensedOrg?.orgName || "");
+  openModal("ownerBrandLicenseModal");
+}
+
+function renderOwnerBrandLicenseModalBody(orgNameSeed = null) {
+  const body = document.getElementById("oblModalBody");
+  if (!body) return;
+  const curInput = document.getElementById("oblOrgNameInput")?.value;
+  const orgVal = orgNameSeed !== null ? orgNameSeed : (curInput || "");
+  body.innerHTML = `
+    <div class="own-lic-mode-2">
+      <button type="button" class="own-lic-btn ${_oblMode === 'makin' ? 'on' : ''}" onclick="_oblMode='makin'; renderOwnerBrandLicenseModalBody();">🏛️ هوية مكين الرسمية</button>
+      <button type="button" class="own-lic-btn ${_oblMode === 'external' ? 'on' : ''}" onclick="_oblMode='external'; renderOwnerBrandLicenseModalBody();">✨ ترخيص مؤسسة خارجية</button>
+    </div>
+    ${_oblMode === "external" ? `
+      <div class="exec-card">
+        <div class="field" style="margin-bottom:9px;">
+          <label>اسم المؤسسة الخارجية المرخّصة *</label>
+          <input type="text" id="oblOrgNameInput" value="${escapeHtml(orgVal)}" placeholder="اكتب اسم المؤسسة المرخّصة...">
+        </div>
+        <div style="display:flex; align-items:center; gap:7px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-soft btn-sm" onclick="document.getElementById('oblLogoFile').click()">🖼️ ${_oblLogoDraft.b64 ? "تغيير الشعار" : "رفع شعار المؤسسة"}</button>
+          ${_oblLogoDraft.b64 ? `<button type="button" class="btn btn-outline btn-sm" onclick="_oblLogoDraft={b64:'',ext:'png'}; renderOwnerBrandLicenseModalBody();">إزالة الشعار</button>` : ""}
+          <input type="file" id="oblLogoFile" accept="image/png,image/jpeg,image/webp" style="display:none;" onchange="handleOblLogoPick(event)">
+        </div>
+        ${_oblLogoDraft.b64 ? `<div class="own-logo-preview-row"><img src="data:image/${_oblLogoDraft.ext};base64,${_oblLogoDraft.b64}" alt="الشعار"><span style="font-size:11.5px; font-weight:700; color:var(--green);">✓ سيظهر هذا الشعار في جميع تقارير المشرف ومعلميه</span></div>` : `<div style="font-size:11px; color:var(--ink-500); margin-top:6px;">إذا لم ترفع شعاراً سيظهر الشعار الافتراضي مع اسم المؤسسة الجديدة.</div>`}
+      </div>` : `
+      <div class="locked-brand-card">
+        <div class="lbc-logo"><img src="${LOGO_SRC}" alt="مكين"></div>
+        <div class="lbc-info">
+          <div class="lbc-org">${DEFAULT_MAKIN_ORG_NAME}</div>
+          <div class="lbc-sub">سيعود حساب المشرف وجميع معلميه لهوية وشعار مكين الرسميين.</div>
+        </div>
+      </div>`}
+  `;
+}
+
+async function handleOblLogoPick(ev) {
+  const f = ev.target?.files?.[0];
+  if (!f) return;
+  try {
+    const res = await compressOrgLogoFile(f);
+    _oblLogoDraft = { b64: res.b64, ext: res.ext };
+    renderOwnerBrandLicenseModalBody();
+    showToast("✓ تم تجهيز الشعار بنجاح");
+  } catch {
+    showToast("⚠️ تعذّر قراءة صورة الشعار");
+  } finally {
+    ev.target.value = "";
+  }
+}
+
+async function saveOwnerSupBrandLicense() {
+  const sp = _ownerDataCache.users?.[_oblTargetSupId];
+  if (!sp) return;
+  let licensedOrg = null;
+  if (_oblMode === "external") {
+    const orgName = (document.getElementById("oblOrgNameInput")?.value || "").trim();
+    if (!orgName) { showToast("أدخل اسم المؤسسة الخارجية أولاً"); return; }
+    licensedOrg = { orgName, logoB64: _oblLogoDraft.b64 || "", logoExt: _oblLogoDraft.ext || "png" };
+  }
+  sp.licensedOrg = licensedOrg;
+  sp.orgName = licensedOrg ? licensedOrg.orgName : DEFAULT_MAKIN_ORG_NAME;
+  await fbDbSet(`users/${sp.id}/licensedOrg`, licensedOrg);
+  await fbDbSet(`users/${sp.id}/orgName`, sp.orgName);
+  if (sp.supervisorCode) {
+    await fbDbSet(`supervisor_codes/${sp.supervisorCode}/orgName`, sp.orgName);
+  }
+  closeModal("ownerBrandLicenseModal");
+  renderOwnerDashboardTab();
+  showToast(licensedOrg ? `✨ تم اعتماد ترخيص «${licensedOrg.orgName}» سحابياً ✓` : "🏛️ تمت إعادة المشرف لهوية مكين الرسمية ✓");
+}
+
 function copyTextQuick(txt, msg) {
   if (navigator.clipboard?.writeText) navigator.clipboard.writeText(txt);
   showToast(msg || "تم النسخ ✓");
 }
 
 async function ownerGenerateInviteCode() {
+  let licensedOrg = null;
+  if (_ownInvMode === "external") {
+    const orgName = (document.getElementById("ownNewInviteOrg")?.value || "").trim();
+    if (!orgName) { showToast("أدخل اسم المؤسسة الخارجية المرخّصة أولاً"); return; }
+    licensedOrg = { orgName, logoB64: _ownInvLogoDraft.b64 || "", logoExt: _ownInvLogoDraft.ext || "png" };
+  }
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   const part = n => Array.from({ length: n }, () => chars[Math.floor(Math.random() * chars.length)]).join("");
   const code = `MK-${part(4)}-${part(4)}`;
   const branchHint = (document.getElementById("ownNewInviteBranch")?.value || "").trim();
-  const obj = { code, branchHint, createdAt: new Date().toISOString() };
+  const obj = { code, branchHint, licensedOrg, createdAt: new Date().toISOString() };
   await fbDbSet(`supervisor_invites/${code}`, obj);
   _ownerDataCache.invites[code] = obj;
-  copyTextQuick(code, `✨ تم توليد ونسخ كود التفعيل: ${code}`);
+  _ownInvLogoDraft = { b64: "", ext: "png" };
+  copyTextQuick(code, licensedOrg ? `✨ تم إصدار ونسخ كود ترخيص «${licensedOrg.orgName}»: ${code}` : `✨ تم توليد ونسخ كود التفعيل: ${code}`);
   renderOwnerInvitesTab();
 }
 
@@ -35015,10 +35865,17 @@ function renderSupProfileTab() {
 
     <div class="card">
       <div class="card-title">🏛️ بيانات المشرف والصرح</div>
+      <div class="locked-brand-card">
+        <div class="lbc-logo"><img src="${getAuthorizedOrgBrand(sup).logoSrc}" alt="الشعار"></div>
+        <div class="lbc-info">
+          <div class="lbc-org">${escapeHtml(getAuthorizedOrgBrand(sup).org)}</div>
+          <div class="lbc-sub">${getAuthorizedOrgBrand(sup).isLicensedExternal ? "✨ ترخيص مؤسسة خارجية معتمد من المؤسس" : "🔒 الهوية الرسمية لمؤسسة صروح مكين"}</div>
+        </div>
+      </div>
       <div class="form-grid" style="margin-bottom:10px;">
         <div class="field"><label>اسم المشرف</label><input type="text" id="supEditName" value="${escapeHtml(sup.name)}"></div>
         <div class="field"><label>اسم الصرح</label><input type="text" id="supEditBranch" value="${escapeHtml(sup.branchName)}"></div>
-        <div class="field"><label>المؤسسة التعليمية</label><input type="text" id="supEditOrg" value="${escapeHtml(sup.orgName || 'مؤسسة صروح مكين التعليمية')}"></div>
+        <div class="field"><label>اسم البرنامج التعليمي</label><input type="text" id="supEditProgram" value="${escapeHtml(sup.programName || 'برنامج تبيان')}"></div>
         <div class="field"><label>البريد الإلكتروني</label><input type="email" value="${escapeHtml(sup.email)}" disabled style="opacity:0.7;"></div>
       </div>
       <button type="button" class="btn btn-primary btn-sm" onclick="supSaveProfile()">✓ حفظ بيانات الصرح والمشرف</button>
@@ -36256,5 +37113,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v97 -->
+<!-- Makin App v98 -->
 </html>
