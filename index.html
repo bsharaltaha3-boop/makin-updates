@@ -1772,7 +1772,8 @@ table.t-monthly tfoot tr.tm-summary-sub td { background: #e7e4d9; color: #000000
 }
 .odh-meta-grid {
   display: grid;
-  grid-template-columns: 1.12fr 1.18fr 1fr;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
   gap: 8px;
   align-items: center;
 }
@@ -8855,7 +8856,30 @@ table.t-daily td.td-rev-slim {
   color: var(--ink-500);
 }
 .pdn-day-pill.is-locked .pdn-dp-name { opacity: 0.85; }
+.pdn-day-pill.is-done-day {
+  border-color: rgba(22, 121, 76, 0.42);
+  background: linear-gradient(180deg, var(--white) 0%, var(--green-bg) 100%);
+}
 .pdn-day-pill.is-done-day .pdn-dp-dot { background: #16a34a; }
+.pdn-done-chk {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #16a34a;
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 900;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.pdn-day-pill.sel-daily .pdn-done-chk,
+.pdn-day-pill.sel-sat .pdn-done-chk {
+  background: #86efac;
+  color: #0f233c;
+}
 .seq-lock-card {
   background: var(--white);
   border: 1.5px dashed var(--line-strong);
@@ -11260,7 +11284,7 @@ table.t-daily td.td-rev-slim,
 
 /* Executive Picker Bottom Sheet */
 #execPickerSheet {
-  z-index: 165;
+  z-index: 190;
 }
 .eps-filter-bar {
   display: grid;
@@ -11452,7 +11476,7 @@ table.t-daily td.td-rev-slim,
 
 /* Custom Branded Confirm & Prompt Dialog (Replaces ALL native browser confirm/prompt!) */
 #makinDialogModal {
-  z-index: 360 !important;
+  z-index: 255 !important;
   background: rgba(10, 24, 42, 0.68) !important;
   align-items: center !important;
   justify-content: center !important;
@@ -11588,7 +11612,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
   margin-bottom: 6px !important;
 }
 #hdExportStage .odh-meta-grid {
-  max-width: 860px !important;
+  max-width: 920px !important;
   gap: 10px !important;
 }
 #hdExportStage .odh-meta-cell {
@@ -12741,7 +12765,10 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
           </div>
           <div class="rep-sup-bar" id="dailySupUploadWrap">
             <div id="dailyUnsyncStatus" style="flex:1; min-width:0; display:flex; align-items:center; gap:5px; flex-wrap:wrap;"></div>
-            <button type="button" class="rep-sup-btn" onclick="uploadTeacherReportsToSupervisor('daily')">☁️ رفع للمشرف</button>
+            <div style="display:flex; gap:6px; align-items:center; flex-shrink:0;">
+              <button type="button" class="btn btn-soft btn-sm" style="padding:7px 10px;" onclick="openSessionLessonsModal()">📚 دروس اليوم</button>
+              <button type="button" class="rep-sup-btn" onclick="uploadTeacherReportsToSupervisor('daily')">☁️ رفع للمشرف</button>
+            </div>
           </div>
         </div>
         <div class="rep-preview-bar no-print">
@@ -13323,6 +13350,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
         <div id="stmQuranPathSec" class="exec-card">
           <div class="exec-card-ttl">
             <span>🧭 مسار الحفظ المعتمد</span>
+
           </div>
           <div class="path-preset-grid-3">
             <button type="button" class="path-preset-card row-style on" id="stmPath_desc_desc" onclick="selectStPathPreset('desc','juz_desc')">
@@ -13837,6 +13865,28 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
 </div>
 
 <!-- ===== MODAL: DAY OPTIONS SHEET (v21) ===== -->
+
+<!-- ===== MODAL: SESSION LESSONS & ACTIVITIES (v104: استهداء • حديث • نشاطات) ===== -->
+<div class="modal-backdrop exec-modal-backdrop" id="sessionLessonsModal" onclick="if(event.target===this) closeModal('sessionLessonsModal')">
+  <div class="modal-box exec-modal-box" style="max-width:480px;">
+    <div class="exec-modal-hdr">
+      <div class="es-handle"></div>
+      <div class="exec-modal-hdr-row">
+        <div style="min-width:0; flex:1;">
+          <h3 id="slModalTitle">📚 دروس ونشاطات الجلسة</h3>
+          <div class="exec-modal-sub">تظهر تلقائياً في أسفل التقرير اليومي وفي بطاقة متابعة ولي الأمر</div>
+        </div>
+        <button type="button" class="exec-modal-close" onclick="closeModal('sessionLessonsModal')" aria-label="إغلاق">×</button>
+      </div>
+    </div>
+    <div class="exec-modal-body" id="slModalBody"></div>
+    <div class="exec-modal-footer">
+      <button type="button" class="btn btn-outline" onclick="clearSessionLessonsForm()">مسح</button>
+      <button type="button" class="btn es-btn-next" style="flex:1;" onclick="saveSessionLessonsModal()">✓ حفظ الدروس والنشاطات</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-backdrop" id="dayOptionsModal">
   <div class="modal-box" style="max-width:440px;">
     <div class="modal-header">
@@ -13844,56 +13894,6 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
       <button class="close-x" onclick="closeModal('dayOptionsModal')">×</button>
     </div>
     <div id="dayOptModalBody"></div>
-  </div>
-</div>
-
-<!-- ===== MODAL: SESSION LESSONS & ACTIVITIES (استهداء • حديث • نشاطات — v104) ===== -->
-<div class="modal-backdrop exec-modal-backdrop" id="sessionLessonsModal" onclick="if(event.target===this) closeModal('sessionLessonsModal')">
-  <div class="modal-box exec-modal-box" style="max-width:490px;">
-    <div class="exec-modal-hdr">
-      <div class="es-handle"></div>
-      <div class="exec-modal-hdr-row">
-        <div style="min-width:0; flex:1;">
-          <h3>📚 دروس ونشاطات الجلسة</h3>
-          <div class="exec-modal-sub" id="slModalSub">تظهر في أسفل التقرير اليومي وبطاقة متابعة ولي الأمر</div>
-        </div>
-        <button type="button" class="exec-modal-close" onclick="closeModal('sessionLessonsModal')" aria-label="إغلاق">×</button>
-      </div>
-    </div>
-    <div class="exec-modal-body" id="slModalBody">
-      <div class="exec-card">
-        <div class="field" style="margin-bottom:9px;">
-          <label style="display:flex; justify-content:space-between; align-items:center;">
-            <span>🌿 درس استهداء اليوم</span>
-            <button type="button" class="pp-mode-link" onclick="autoFillSessionLessonFromProg('istihda')">⚡ جلب من البرنامج</button>
-          </label>
-          <input type="text" id="slIstihdaInput" placeholder="مثال: درس بر الوالدين / الدرس الخامس">
-        </div>
-        <div class="field" style="margin-bottom:9px;">
-          <label style="display:flex; justify-content:space-between; align-items:center;">
-            <span>📜 درس الحديث اليوم</span>
-            <button type="button" class="pp-mode-link" onclick="autoFillSessionLessonFromProg('hadith')">⚡ جلب من البرنامج</button>
-          </label>
-          <input type="text" id="slHadithInput" placeholder="مثال: الأربعون النووية — الحديث الثالث">
-        </div>
-        <div class="field" style="margin-bottom:9px;">
-          <label style="display:flex; justify-content:space-between; align-items:center;">
-            <span>⚽ نشاط / فقرة اليوم</span>
-            <button type="button" class="pp-mode-link" onclick="autoFillSessionLessonFromProg('activities')">⚡ جلب من البرنامج</button>
-          </label>
-          <input type="text" id="slActivityInput" placeholder="مثال: مسابقة ثقافية / مباراة كرة قدم">
-        </div>
-        <div class="field" style="margin-bottom:0;">
-          <label>📝 درس أو ملاحظة إضافية للحلقة (اختياري)</label>
-          <input type="text" id="slOtherInput" placeholder="مثال: تذكير بآداب المسجد أو موعد الاختبار...">
-        </div>
-      </div>
-      <div id="slAutoProgLogHint" style="font-size:11.5px; color:var(--ink-500); font-weight:700; padding:0 4px;"></div>
-    </div>
-    <div class="exec-modal-footer">
-      <button type="button" class="btn btn-outline" onclick="clearSessionLessonsFields()">مسح</button>
-      <button type="button" class="btn es-btn-next" style="flex:1;" onclick="saveSessionLessonsModal()">✓ حفظ وإظهار بالتقرير</button>
-    </div>
   </div>
 </div>
 
@@ -14654,39 +14654,57 @@ const JUZ_NAMES = Array.from({ length: 30 }, (_, i) => `الجزء ${i + 1}`);
 function formatJuzClean(nameStr) {
   const s = String(nameStr || "").trim();
   if (!s) return "";
-  const m = s.match(/الجزء\s*(\d{1,2})/);
+  const m = s.match(/(?:الجزء|جزء)\s*(\d{1,2})/);
   if (m) return `الجزء ${Number(m[1])}`;
+  if (typeof JUZ_LEGACY_ORDINALS !== "undefined") {
+    for (let id = 1; id <= 30; id++) {
+      const leg = JUZ_LEGACY_ORDINALS[id];
+      if (leg && (s === leg || s === `الجزء ${leg}` || s === `جزء ${leg}` || s.includes(`(${leg})`))) {
+        return `الجزء ${id}`;
+      }
+    }
+  }
   return s.replace(/\s*\([^)]*\)/g, "").trim();
 }
+function formatJuzCompactLabel(juzOrName) {
+  const jObj = (juzOrName && typeof juzOrName === "object" && juzOrName.id) ? juzOrName : getJuzByName(juzOrName);
+  if (!jObj) return formatJuzClean(juzOrName);
+  return jObj.id >= 28 ? `جزء ${jObj.shortName}` : `الجزء ${jObj.id}`;
+}
 
+const JUZ_LEGACY_ORDINALS = [
+  "", "الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس", "السابع", "الثامن", "التاسع", "العاشر",
+  "الحادي عشر", "الثاني عشر", "الثالث عشر", "الرابع عشر", "الخامس عشر", "السادس عشر", "السابع عشر", "الثامن عشر", "التاسع عشر", "العشرون",
+  "الحادي والعشرون", "الثاني والعشرون", "الثالث والعشرون", "الرابع والعشرون", "الخامس والعشرون", "حم", "الذاريات", "قد سمع", "تبارك", "عمّ"
+];
 const JUZ_PAGES = [
-  { id: 1,  startPage: 1,   endPage: 21,  pages: 21, startSurah: 1,  startAyah: 1,   endSurah: 2,   endAyah: 141, shortName: "الأول", name: JUZ_NAMES[0] },
-  { id: 2,  startPage: 22,  endPage: 41,  pages: 20, startSurah: 2,  startAyah: 142, endSurah: 2,   endAyah: 252, shortName: "الثاني", name: JUZ_NAMES[1] },
-  { id: 3,  startPage: 42,  endPage: 61,  pages: 20, startSurah: 2,  startAyah: 253, endSurah: 3,   endAyah: 92,  shortName: "الثالث", name: JUZ_NAMES[2] },
-  { id: 4,  startPage: 62,  endPage: 81,  pages: 20, startSurah: 3,  startAyah: 93,  endSurah: 4,   endAyah: 23,  shortName: "الرابع", name: JUZ_NAMES[3] },
-  { id: 5,  startPage: 82,  endPage: 101, pages: 20, startSurah: 4,  startAyah: 24,  endSurah: 4,   endAyah: 147, shortName: "الخامس", name: JUZ_NAMES[4] },
-  { id: 6,  startPage: 102, endPage: 121, pages: 20, startSurah: 4,  startAyah: 148, endSurah: 5,   endAyah: 81,  shortName: "السادس", name: JUZ_NAMES[5] },
-  { id: 7,  startPage: 122, endPage: 141, pages: 20, startSurah: 5,  startAyah: 82,  endSurah: 6,   endAyah: 110, shortName: "السابع", name: JUZ_NAMES[6] },
-  { id: 8,  startPage: 142, endPage: 161, pages: 20, startSurah: 6,  startAyah: 111, endSurah: 7,   endAyah: 87,  shortName: "الثامن", name: JUZ_NAMES[7] },
-  { id: 9,  startPage: 162, endPage: 181, pages: 20, startSurah: 7,  startAyah: 88,  endSurah: 8,   endAyah: 40,  shortName: "التاسع", name: JUZ_NAMES[8] },
-  { id: 10, startPage: 182, endPage: 201, pages: 20, startSurah: 8,  startAyah: 41,  endSurah: 9,   endAyah: 92,  shortName: "العاشر", name: JUZ_NAMES[9] },
-  { id: 11, startPage: 202, endPage: 221, pages: 20, startSurah: 9,  startAyah: 93,  endSurah: 11,  endAyah: 5,   shortName: "الحادي عشر", name: JUZ_NAMES[10] },
-  { id: 12, startPage: 222, endPage: 241, pages: 20, startSurah: 11, startAyah: 6,   endSurah: 12,  endAyah: 52,  shortName: "الثاني عشر", name: JUZ_NAMES[11] },
-  { id: 13, startPage: 242, endPage: 261, pages: 20, startSurah: 12, startAyah: 53,  endSurah: 14,  endAyah: 52,  shortName: "الثالث عشر", name: JUZ_NAMES[12] },
-  { id: 14, startPage: 262, endPage: 281, pages: 20, startSurah: 15, startAyah: 1,   endSurah: 16,  endAyah: 128, shortName: "الرابع عشر", name: JUZ_NAMES[13] },
-  { id: 15, startPage: 282, endPage: 301, pages: 20, startSurah: 17, startAyah: 1,   endSurah: 18,  endAyah: 74,  shortName: "الخامس عشر", name: JUZ_NAMES[14] },
-  { id: 16, startPage: 302, endPage: 321, pages: 20, startSurah: 18, startAyah: 75,  endSurah: 20,  endAyah: 135, shortName: "السادس عشر", name: JUZ_NAMES[15] },
-  { id: 17, startPage: 322, endPage: 341, pages: 20, startSurah: 21, startAyah: 1,   endSurah: 22,  endAyah: 78,  shortName: "السابع عشر", name: JUZ_NAMES[16] },
-  { id: 18, startPage: 342, endPage: 361, pages: 20, startSurah: 23, startAyah: 1,   endSurah: 25,  endAyah: 20,  shortName: "الثامن عشر", name: JUZ_NAMES[17] },
-  { id: 19, startPage: 362, endPage: 381, pages: 20, startSurah: 25, startAyah: 21,  endSurah: 27,  endAyah: 55,  shortName: "التاسع عشر", name: JUZ_NAMES[18] },
-  { id: 20, startPage: 382, endPage: 401, pages: 20, startSurah: 27, startAyah: 56,  endSurah: 29,  endAyah: 45,  shortName: "العشرون", name: JUZ_NAMES[19] },
-  { id: 21, startPage: 402, endPage: 421, pages: 20, startSurah: 29, startAyah: 46,  endSurah: 33,  endAyah: 30,  shortName: "الحادي والعشرون", name: JUZ_NAMES[20] },
-  { id: 22, startPage: 422, endPage: 441, pages: 20, startSurah: 33, startAyah: 31,  endSurah: 36,  endAyah: 27,  shortName: "الثاني والعشرون", name: JUZ_NAMES[21] },
-  { id: 23, startPage: 442, endPage: 461, pages: 20, startSurah: 36, startAyah: 28,  endSurah: 39,  endAyah: 31,  shortName: "الثالث والعشرون", name: JUZ_NAMES[22] },
-  { id: 24, startPage: 462, endPage: 481, pages: 20, startSurah: 39, startAyah: 32,  endSurah: 41,  endAyah: 46,  shortName: "الرابع والعشرون", name: JUZ_NAMES[23] },
-  { id: 25, startPage: 482, endPage: 501, pages: 20, startSurah: 41, startAyah: 47,  endSurah: 45,  endAyah: 37,  shortName: "الخامس والعشرون", name: JUZ_NAMES[24] },
-  { id: 26, startPage: 502, endPage: 521, pages: 20, startSurah: 46, startAyah: 1,   endSurah: 51,  endAyah: 30,  shortName: "حم", name: JUZ_NAMES[25] },
-  { id: 27, startPage: 522, endPage: 541, pages: 20, startSurah: 51, startAyah: 31,  endSurah: 57,  endAyah: 29,  shortName: "الذاريات", name: JUZ_NAMES[26] },
+  { id: 1,  startPage: 1,   endPage: 21,  pages: 21, startSurah: 1,  startAyah: 1,   endSurah: 2,   endAyah: 141, shortName: "1", name: JUZ_NAMES[0] },
+  { id: 2,  startPage: 22,  endPage: 41,  pages: 20, startSurah: 2,  startAyah: 142, endSurah: 2,   endAyah: 252, shortName: "2", name: JUZ_NAMES[1] },
+  { id: 3,  startPage: 42,  endPage: 61,  pages: 20, startSurah: 2,  startAyah: 253, endSurah: 3,   endAyah: 92,  shortName: "3", name: JUZ_NAMES[2] },
+  { id: 4,  startPage: 62,  endPage: 81,  pages: 20, startSurah: 3,  startAyah: 93,  endSurah: 4,   endAyah: 23,  shortName: "4", name: JUZ_NAMES[3] },
+  { id: 5,  startPage: 82,  endPage: 101, pages: 20, startSurah: 4,  startAyah: 24,  endSurah: 4,   endAyah: 147, shortName: "5", name: JUZ_NAMES[4] },
+  { id: 6,  startPage: 102, endPage: 121, pages: 20, startSurah: 4,  startAyah: 148, endSurah: 5,   endAyah: 81,  shortName: "6", name: JUZ_NAMES[5] },
+  { id: 7,  startPage: 122, endPage: 141, pages: 20, startSurah: 5,  startAyah: 82,  endSurah: 6,   endAyah: 110, shortName: "7", name: JUZ_NAMES[6] },
+  { id: 8,  startPage: 142, endPage: 161, pages: 20, startSurah: 6,  startAyah: 111, endSurah: 7,   endAyah: 87,  shortName: "8", name: JUZ_NAMES[7] },
+  { id: 9,  startPage: 162, endPage: 181, pages: 20, startSurah: 7,  startAyah: 88,  endSurah: 8,   endAyah: 40,  shortName: "9", name: JUZ_NAMES[8] },
+  { id: 10, startPage: 182, endPage: 201, pages: 20, startSurah: 8,  startAyah: 41,  endSurah: 9,   endAyah: 92,  shortName: "10", name: JUZ_NAMES[9] },
+  { id: 11, startPage: 202, endPage: 221, pages: 20, startSurah: 9,  startAyah: 93,  endSurah: 11,  endAyah: 5,   shortName: "11", name: JUZ_NAMES[10] },
+  { id: 12, startPage: 222, endPage: 241, pages: 20, startSurah: 11, startAyah: 6,   endSurah: 12,  endAyah: 52,  shortName: "12", name: JUZ_NAMES[11] },
+  { id: 13, startPage: 242, endPage: 261, pages: 20, startSurah: 12, startAyah: 53,  endSurah: 14,  endAyah: 52,  shortName: "13", name: JUZ_NAMES[12] },
+  { id: 14, startPage: 262, endPage: 281, pages: 20, startSurah: 15, startAyah: 1,   endSurah: 16,  endAyah: 128, shortName: "14", name: JUZ_NAMES[13] },
+  { id: 15, startPage: 282, endPage: 301, pages: 20, startSurah: 17, startAyah: 1,   endSurah: 18,  endAyah: 74,  shortName: "15", name: JUZ_NAMES[14] },
+  { id: 16, startPage: 302, endPage: 321, pages: 20, startSurah: 18, startAyah: 75,  endSurah: 20,  endAyah: 135, shortName: "16", name: JUZ_NAMES[15] },
+  { id: 17, startPage: 322, endPage: 341, pages: 20, startSurah: 21, startAyah: 1,   endSurah: 22,  endAyah: 78,  shortName: "17", name: JUZ_NAMES[16] },
+  { id: 18, startPage: 342, endPage: 361, pages: 20, startSurah: 23, startAyah: 1,   endSurah: 25,  endAyah: 20,  shortName: "18", name: JUZ_NAMES[17] },
+  { id: 19, startPage: 362, endPage: 381, pages: 20, startSurah: 25, startAyah: 21,  endSurah: 27,  endAyah: 55,  shortName: "19", name: JUZ_NAMES[18] },
+  { id: 20, startPage: 382, endPage: 401, pages: 20, startSurah: 27, startAyah: 56,  endSurah: 29,  endAyah: 45,  shortName: "20", name: JUZ_NAMES[19] },
+  { id: 21, startPage: 402, endPage: 421, pages: 20, startSurah: 29, startAyah: 46,  endSurah: 33,  endAyah: 30,  shortName: "21", name: JUZ_NAMES[20] },
+  { id: 22, startPage: 422, endPage: 441, pages: 20, startSurah: 33, startAyah: 31,  endSurah: 36,  endAyah: 27,  shortName: "22", name: JUZ_NAMES[21] },
+  { id: 23, startPage: 442, endPage: 461, pages: 20, startSurah: 36, startAyah: 28,  endSurah: 39,  endAyah: 31,  shortName: "23", name: JUZ_NAMES[22] },
+  { id: 24, startPage: 462, endPage: 481, pages: 20, startSurah: 39, startAyah: 32,  endSurah: 41,  endAyah: 46,  shortName: "24", name: JUZ_NAMES[23] },
+  { id: 25, startPage: 482, endPage: 501, pages: 20, startSurah: 41, startAyah: 47,  endSurah: 45,  endAyah: 37,  shortName: "25", name: JUZ_NAMES[24] },
+  { id: 26, startPage: 502, endPage: 521, pages: 20, startSurah: 46, startAyah: 1,   endSurah: 51,  endAyah: 30,  shortName: "26", name: JUZ_NAMES[25] },
+  { id: 27, startPage: 522, endPage: 541, pages: 20, startSurah: 51, startAyah: 31,  endSurah: 57,  endAyah: 29,  shortName: "27", name: JUZ_NAMES[26] },
   { id: 28, startPage: 542, endPage: 561, pages: 20, startSurah: 58, startAyah: 1,   endSurah: 66,  endAyah: 12,  shortName: "قد سمع", name: JUZ_NAMES[27] },
   { id: 29, startPage: 562, endPage: 581, pages: 20, startSurah: 67, startAyah: 1,   endSurah: 77,  endAyah: 50,  shortName: "تبارك", name: JUZ_NAMES[28] },
   { id: 30, startPage: 582, endPage: 604, pages: 23, startSurah: 78, startAyah: 1,   endSurah: 114, endAyah: 6,   shortName: "عمّ", name: JUZ_NAMES[29] }
@@ -14710,7 +14728,10 @@ function getJuzByName(nameStr) {
     if (JUZ_PAGE_MAP[id]) return JUZ_PAGE_MAP[id];
   }
   const clean = formatJuzClean(raw);
-  return JUZ_PAGES.find(j => j.name === clean || j.shortName === raw || raw.includes(`(${j.shortName})`)) || null;
+  return JUZ_PAGES.find(j => {
+    const leg = JUZ_LEGACY_ORDINALS[j.id] || "";
+    return j.name === clean || j.shortName === raw || (leg && (raw === leg || raw.includes(leg))) || raw.includes(`(${j.shortName})`);
+  }) || null;
 }
 
 // Detects if reciting `segs` in `direction` just completed a full Juz!
@@ -14742,24 +14763,11 @@ function detectCompletedJuz(segs, direction = "desc") {
   return null;
 }
 
-function getJuzReportTag(juzOrName) {
-  const j = (juzOrName && typeof juzOrName === "object" && juzOrName.id) ? juzOrName : getJuzByName(juzOrName);
-  if (!j) return formatJuzClean(juzOrName);
-  return j.id >= 26 ? `جزء ${j.shortName}` : `الجزء ${j.id}`;
-}
-
-function getJuzReportShortToken(juzOrName) {
-  const j = (juzOrName && typeof juzOrName === "object" && juzOrName.id) ? juzOrName : getJuzByName(juzOrName);
-  if (!j) return formatJuzClean(juzOrName);
-  return j.id >= 26 ? j.shortName : `الجزء ${j.id}`;
-}
-
 function formatHwSabrColumns(sabrJuzName, isHtml = true) {
   const j = getJuzByName(sabrJuzName);
+  const shortLbl = j ? j.shortName : String(sabrJuzName || "").replace(/^الجزء\s*\d+\s*/, "").replace(/[()]/g, "").trim();
   const esc = v => isHtml ? escapeHtml(v) : v;
-  if (!j) return { surah: esc("سبر"), from: esc(formatJuzClean(sabrJuzName)), to: "", lines: 1 };
-  if (j.id >= 26) return { surah: esc("سبر"), from: esc("جزء"), to: esc(j.shortName), lines: 1 };
-  return { surah: esc("سبر"), from: esc(`الجزء ${j.id}`), to: "", lines: 1 };
+  return { surah: esc("سبر"), from: esc("جزء"), to: esc(shortLbl || sabrJuzName), lines: 1 };
 }
 
 // Exact Halqa Points Rules (v28):
@@ -15830,7 +15838,7 @@ function buildDailySabrNoteBadge(r, isHtml = true) {
   const sEv = getDailySabrEval(r);
   if (!sEv) return { hasBadge: false, isRep: false, html: "", plain: "" };
   const jObj = getJuzByName(r.sabrJuz);
-  const shortN = jObj ? getJuzReportShortToken(jObj) : formatJuzClean(r.sabrJuz);
+  const shortN = jObj ? (jObj.id >= 28 ? jObj.shortName : `الجزء ${jObj.id}`) : formatJuzClean(r.sabrJuz);
   const hasSc = r.sabrScore !== "" && r.sabrScore !== null && r.sabrScore !== undefined && !isNaN(Number(r.sabrScore));
   const scNum = hasSc ? Math.round(Number(r.sabrScore)) : "";
   const isRep = sEv === "إعادة";
@@ -16750,7 +16758,7 @@ function formatSatNextMajColumns(r, isHtml = true) {
     if (jObj) {
       const s1 = SURAH_MAP[jObj.startSurah], s2 = SURAH_MAP[jObj.endSurah];
       return {
-        surah: esc(`سبر ${getJuzReportShortToken(jObj)}`),
+        surah: esc(`سبر ${jObj.id >= 28 ? jObj.shortName : "الجزء " + jObj.id}`),
         from: esc(formatSurahAyahPoint(s1, jObj.startAyah, false)),
         to: esc(formatSurahAyahPoint(s2, jObj.endAyah, true)),
         lines: 1
@@ -18279,8 +18287,8 @@ function getSyncedPageEvals(r, st, kind, h) {
 }
 
 function shouldUsePerPageMode(r, st, kind, h) {
-  if (kind !== "rec" && kind !== "min") return false;
   if (!r || !st || st.track === "rashidi") return false;
+  if (kind !== "rec" && kind !== "min") return false;
   if (kind === "rec" && r.recIsSabr && r.sabrJuz) return false;
   const slots = buildRecitationPageSlots(r, st, kind, h);
   if (slots.length < 2 || slots.length > 50) return false;
@@ -18871,14 +18879,13 @@ function formatSardJuzInfo(juzIds) {
   if (!ids.length) return { ids: [], label: "", shortNames: "", fromCol: "", toCol: "", totalPages: 0 };
   const objs = ids.map(id => JUZ_PAGE_MAP[id]);
   const totalPages = objs.reduce((acc, j) => acc + (j.pages || 20), 0);
-  const shortNames = objs.map(j => getJuzReportShortToken(j)).join(" + ");
+  const shortNames = objs.map(j => j.shortName).join(" + ");
   if (objs.length === 1) {
-    const tag1 = getJuzReportTag(objs[0]);
     return {
       ids,
-      label: `سرد ${tag1}`,
-      shortNames: getJuzReportShortToken(objs[0]),
-      fromCol: `سرد ${tag1}`,
+      label: `سرد جزء ${objs[0].shortName}`,
+      shortNames: objs[0].shortName,
+      fromCol: `سرد جزء ${objs[0].shortName}`,
       toCol: "كاملاً",
       totalPages
     };
@@ -20006,7 +20013,7 @@ function applySurahPicker(quickEval = null) {
         r.nextMajStartSurahId = String(jObj.startSurah); r.nextMajStartAyah = jObj.startAyah;
         r.nextMajEndSurahId = String(jObj.endSurah); r.nextMajEndAyah = jObj.endAyah;
         r.nextMajStartPage = jObj.startPage; r.nextMajEndPage = jObj.endPage;
-        r.nextMajTitle = `سبر ${getJuzReportShortToken(jObj)}`;
+        r.nextMajTitle = `سبر ${jObj.shortName}`;
         r.nextMajFrom = formatSurahAyahPoint(s1, jObj.startAyah, false);
         r.nextMajTo = formatSurahAyahPoint(s2, jObj.endAyah, true);
       }
@@ -21242,8 +21249,8 @@ function buildStudentTodaySummaryWAText(st, s, h) {
     }
     if (ptsOn) txt += `⭐ *النقاط:* ${r.points || 0}\n`;
   }
-  const _waLessons = getSessionLessonsText(s, true);
-  if (_waLessons) txt += `📚 *دروس ونشاطات اليوم:* ${_waLessons}\n`;
+  const _waLessons = getSessionLessonsList(s);
+  if (_waLessons.length) txt += `📚 *دروس ونشاطات اليوم:* ${_waLessons.map(it => `${it.ico} ${it.label}: ${it.text}`).join(" | ")}\n`;
   if (r?.notes && String(r.notes).trim()) txt += `💬 *ملاحظة:* ${stripMushafPageTokens(r.notes)}\n`;
   txt += `━━━━━━━━━━━━━\n*${gt.supervisorTitle}: ${bm.sheikh}*`;
   return txt;
@@ -21296,111 +21303,68 @@ function buildStudentDailyCardHtml(st, s, h) {
   const ptsOn = isPointsEnabled(h);
   const isAbs = String(r.attendance || "").includes("غياب");
   const isNoRec = isPresentNoRecite(r.attendance);
-  const isSatQuran = Boolean(s && s.type === "saturday" && st.track !== "rashidi" && !isAbs && !isNoRec);
-
-  const evalBadgeHtml = (ev) => {
-    if (!ev) return "";
-    const bg = ev === "ممتاز" ? "#16794c" : (ev === "إعادة" ? "#b92222" : "#15629a");
-    return ` <span style="display:inline-block; background:${bg}; color:#ffffff; border-radius:99px; padding:2px 10px; font-size:13px; font-weight:800; margin-right:6px; vertical-align:middle;">${escapeHtml(ev)}</span>`;
-  };
+  const isSatReview = Boolean(s && s.type === "saturday" && st.track !== "rashidi" && !isAbs && !isNoRec);
 
   let mainTitle = "تسميع اليوم", mainVal = "—", hwVal = getStudentCurrentPlaceSummary(st, h), evalTxt = "—", evCls = "ev-slate";
-  let gridHtml = "";
+  let satMinVal = "—", satMajVal = "—", satMinEv = "", satMajEv = "";
 
   if (isAbs) {
     evalTxt = r.attendance; evCls = "ev-red";
-    if (st.track === "rashidi") {
-      hwVal = r.hwRashidiFrom ? `الرشيدي ص ${r.hwRashidiFrom}${r.hwRashidiTo && r.hwRashidiTo != r.hwRashidiFrom ? "–" + r.hwRashidiTo : ""}` : hwVal;
-    } else if (s?.type === "daily") {
-      hwVal = r.hwSabrJuz ? `سبر ${getJuzReportTag(r.hwSabrJuz)}` : (formatSegmentsInline(getSegments(r, "hw")) || hwVal);
-    } else {
-      hwVal = r.nextMajSabrJuz ? `سبر ${getJuzReportTag(r.nextMajSabrJuz)}` : (formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) || hwVal);
-    }
-    gridHtml = `<div class="sdc-grid">
-      <div class="sdc-tile"><span>📋 حالة اليوم</span><b>${escapeHtml(r.attendance)}</b></div>
-      <div class="sdc-tile gold"><span>📝 الواجب القادم</span><b>${escapeHtml(hwVal)}</b></div>
-    </div>`;
   } else if (isNoRec) {
     evalTxt = "حضر ولم يُسمّع"; evCls = "ev-slate";
-    if (s?.type === "daily") {
-      hwVal = r.hwSabrJuz ? `سبر ${getJuzReportTag(r.hwSabrJuz)}` : (formatSegmentsInline(getSegments(r, "hw")) || hwVal);
-    } else {
-      hwVal = r.nextMajSabrJuz ? `سبر ${getJuzReportTag(r.nextMajSabrJuz)}` : (formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) || hwVal);
-    }
-    gridHtml = `<div class="sdc-grid">
-      <div class="sdc-tile"><span>📋 حالة اليوم</span><b>حضر الجلسة ولم يُسمّع</b></div>
-      <div class="sdc-tile gold"><span>📝 الواجب القادم</span><b>${escapeHtml(hwVal)}</b></div>
-    </div>`;
   } else if (st.track === "rashidi") {
     mainTitle = "القاعدة الرشيدية";
     mainVal = `ص ${r.rashidiFrom || st.rashidiPage || 1}${r.rashidiTo && r.rashidiTo != r.rashidiFrom ? "–" + r.rashidiTo : ""}`;
     hwVal = r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}${r.hwRashidiTo && r.hwRashidiTo != r.hwRashidiFrom ? "–" + r.hwRashidiTo : ""}` : hwVal;
     evalTxt = r.recEval || "—";
     evCls = evalTxt === "ممتاز" ? "" : (evalTxt === "إعادة" ? "ev-red" : "ev-blue");
-    gridHtml = `<div class="sdc-grid">
-      <div class="sdc-tile"><span>🔤 ${mainTitle}</span><b>${escapeHtml(mainVal)}</b></div>
-      <div class="sdc-tile gold"><span>📝 الواجب القادم</span><b>${escapeHtml(hwVal)}</b></div>
-    </div>`;
   } else if (s?.type === "daily") {
-    mainVal = (r.recIsSabr && r.sabrJuz) ? `سبر ${getJuzReportTag(r.sabrJuz)}` : (formatSegmentsInline(getSegments(r, "rec")) || "—");
+    mainVal = (r.recIsSabr && r.sabrJuz) ? `سبر ${formatJuzCompactLabel(r.sabrJuz)}` : (formatSegmentsInline(getSegments(r, "rec")) || "—");
     const nCtx = getNextClassDayContext(s, h);
-    let hwTitle = "الواجب القادم";
     if (nCtx.nextType === "saturday") {
-      hwTitle = `واجب مراجعة ${nCtx.nextDayName}`;
       hwVal = computeUpcomingReviewHomework(h, s, st, r, nCtx).combinedText || "—";
     } else {
-      hwVal = r.hwSabrJuz ? `سبر ${getJuzReportTag(r.hwSabrJuz)}` : (formatSegmentsInline(getSegments(r, "hw")) || hwVal);
+      hwVal = r.hwSabrJuz ? `سبر ${formatJuzCompactLabel(r.hwSabrJuz)}` : (formatSegmentsInline(getSegments(r, "hw")) || hwVal);
     }
     evalTxt = r.recEval || "—";
     evCls = evalTxt === "ممتاز" ? "" : (evalTxt === "إعادة" ? "ev-red" : "ev-blue");
-    gridHtml = `<div class="sdc-grid">
-      <div class="sdc-tile"><span>📖 ${mainTitle}</span><b>${escapeHtml(mainVal)}</b></div>
-      <div class="sdc-tile gold"><span>📝 ${escapeHtml(hwTitle)}</span><b>${escapeHtml(hwVal)}</b></div>
-    </div>`;
-  } else if (isSatQuran) {
-    // Item 10: Show BOTH Minor Review AND Major Review clearly with separate evaluations!
-    const minT = formatSegmentsInline(getSegments(r, "min")) || stripMushafPageTokens(r.minText || "") || "—";
-    const majT = r.sabrJuz ? `سبر ${getJuzReportTag(r.sabrJuz)}` : (formatMajStripDisplay(r.majFrom, r.majTo) || "—");
-    const minEv = r.minEval || "";
-    const majEv = r.majEval || "";
+  } else {
+    satMinVal = formatSegmentsInline(getSegments(r, "min")) || stripMushafPageTokens(r.minText || "") || "—";
+    satMajVal = r.sabrJuz ? `سبر ${formatJuzCompactLabel(r.sabrJuz)}` : (formatMajStripDisplay(r.majFrom, r.majTo) || "—");
+    satMinEv = r.minEval || "";
+    satMajEv = r.majEval || "";
     const nCtx = s ? getNextClassDayContext(s, h) : null;
-    let hwTitle = "الواجب القادم";
     if (nCtx && nCtx.nextType === "daily") {
-      hwTitle = `واجب تسميع ${nCtx.nextDayName}`;
       hwVal = computeUpcomingDailyHomeworkCols(h, s, st, r, nCtx, false).plainText || "—";
     } else {
-      hwVal = r.nextMajSabrJuz ? `سبر ${getJuzReportTag(r.nextMajSabrJuz)}` : (formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) || "—");
+      hwVal = r.nextMajSabrJuz ? `سبر ${formatJuzCompactLabel(r.nextMajSabrJuz)}` : (formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) || "—");
     }
-    if (minEv && majEv) {
-      evalTxt = minEv === majEv ? minEv : `صغرى: ${minEv} • كبرى: ${majEv}`;
-      evCls = (minEv === "إعادة" || majEv === "إعادة") ? "ev-red" : ((minEv === "ممتاز" && majEv === "ممتاز") ? "" : "ev-blue");
+    if (satMinEv && satMajEv && satMinEv !== satMajEv) {
+      evalTxt = `صغرى: ${satMinEv} • كبرى: ${satMajEv}`;
     } else {
-      evalTxt = majEv || minEv || "—";
-      evCls = evalTxt === "ممتاز" ? "" : (evalTxt === "إعادة" ? "ev-red" : "ev-blue");
+      evalTxt = satMajEv || satMinEv || "—";
     }
-    gridHtml = `<div class="sdc-grid">
-      <div class="sdc-tile" style="border-top-color:#16794c;">
-        <span>📗 المراجعة الصغرى${evalBadgeHtml(minEv)}</span>
-        <b>${escapeHtml(minT)}</b>
-      </div>
-      <div class="sdc-tile" style="border-top-color:#142a46;">
-        <span>📘 المراجعة الكبرى${evalBadgeHtml(majEv)}</span>
-        <b>${escapeHtml(majT)}</b>
-      </div>
-    </div>
-    <div class="sdc-tile gold" style="margin-bottom:12px;">
-      <span>📝 ${escapeHtml(hwTitle)}</span>
-      <b>${escapeHtml(hwVal)}</b>
-    </div>`;
+    const worstRep = satMinEv === "إعادة" || satMajEv === "إعادة";
+    const bothEx = (!satMinEv || satMinEv === "ممتاز") && (!satMajEv || satMajEv === "ممتاز") && (satMinEv || satMajEv);
+    evCls = worstRep ? "ev-red" : (bothEx ? "" : "ev-blue");
   }
 
-  const lessonParts = getSessionLessonsSummaryParts(s);
-  const lessonsBoxHtml = lessonParts.length
+  const tilesHtml = isSatReview
+    ? `<div class="sdc-grid">
+        <div class="sdc-tile"><span>📗 المراجعة الصغرى${satMinEv ? ` (${escapeHtml(satMinEv)})` : ""}</span><b>${escapeHtml(satMinVal)}</b></div>
+        <div class="sdc-tile"><span>📘 المراجعة الكبرى${satMajEv ? ` (${escapeHtml(satMajEv)})` : ""}</span><b>${escapeHtml(satMajVal)}</b></div>
+      </div>
+      <div class="sdc-tile gold" style="margin-bottom:12px;"><span>📝 الواجب القادم</span><b>${escapeHtml(hwVal)}</b></div>`
+    : `<div class="sdc-grid">
+        <div class="sdc-tile"><span>📖 ${mainTitle}</span><b>${escapeHtml(mainVal)}</b></div>
+        <div class="sdc-tile gold"><span>📝 الواجب القادم</span><b>${escapeHtml(hwVal)}</b></div>
+      </div>`;
+
+  const dayLessonsItems = getSessionLessonsList(s);
+  const lessonsHtml = dayLessonsItems.length
     ? `<div class="sdc-tile" style="border-top-color:#16794c; background:#f2fbf6; margin-bottom:12px;">
         <span>📚 دروس ونشاطات اليوم</span>
-        <div style="font-size:15px; font-weight:800; color:#0f2542; line-height:1.55;">
-          ${lessonParts.map(p => `<div>${p.icon} <b>${escapeHtml(p.label)}:</b> ${escapeHtml(p.text)}</div>`).join("")}
-        </div>
+        <b style="font-size:15px;">${dayLessonsItems.map(it => `${it.ico} ${escapeHtml(it.label)}: ${escapeHtml(it.text)}`).join(" &nbsp;•&nbsp; ")}</b>
       </div>`
     : "";
 
@@ -21421,8 +21385,8 @@ function buildStudentDailyCardHtml(st, s, h) {
         </div>
         <div class="sdc-ev-pill ${evCls}">${escapeHtml(evalTxt)}</div>
       </div>
-      ${gridHtml}
-      ${lessonsBoxHtml}
+      ${tilesHtml}
+      ${lessonsHtml}
       ${r.notes ? `<div class="sdc-note">💬 <b>ملاحظة ${gt.supervisorTitle}:</b> ${escapeHtml(stripMushafPageTokens(r.notes))}</div>` : ""}
       <div class="sdc-foot">
         <span>${gt.supervisorTitle}: ${escapeHtml(bm.sheikh)}</span>
@@ -21689,16 +21653,16 @@ function setStModalChoice(kind, val) {
   updateStudentModalPreview();
 }
 
-function populateRevSurahPicker(selectedPage) {
+function populateRevSurahPicker(selectedPage, preferredSurahId = 0) {
   const sel = document.getElementById("stRevSurahPick");
   if (!sel) return;
-  const curS = selectedPage ? getSurahAtPage(selectedPage) : null;
-  let opts = `<option value="">-- اختر السورة (أو اكتب رقم الصفحة) --</option>`;
+  const curS = preferredSurahId ? SURAH_MAP[Number(preferredSurahId)] : (selectedPage ? getSurahAtPage(selectedPage) : null);
+  let opts = `<option value="">-- اختر السورة (أو اكتب الصفحة) --</option>`;
   SURAHS.forEach(s => {
-    opts += `<option value="${s.id}" ${curS && curS.id === s.id ? "selected" : ""}>${s.n} (ص ${s.p})</option>`;
+    const optVal = `${s.id}:${s.p}`;
+    opts += `<option value="${optVal}" ${curS && curS.id === s.id ? "selected" : ""}>${s.n} (ص ${s.p})</option>`;
   });
   sel.innerHTML = opts;
-  if (curS) sel.value = String(curS.id);
   if (typeof sel._epSyncLabel === "function") sel._epSyncLabel();
 }
 
@@ -21710,18 +21674,25 @@ function onStModalSurahChange() {
     const dir = document.getElementById("stDirectionInput").value || "desc";
     const autoPg = dir === "asc" ? 2 : SURAH_MAP[Number(sid)].p;
     revInp.value = autoPg;
-    populateRevSurahPicker(autoPg);
+    populateRevSurahPicker(autoPg, dir === "asc" ? 2 : Number(sid));
   }
   updateStudentModalPreview();
 }
 
-function onStModalRevSurahPick(sidVal) {
-  const sid = parseArabicNum(sidVal, 0);
-  const sObj = SURAH_MAP[sid];
-  const p = sObj ? sObj.p : (sid >= 1 && sid <= 604 ? sid : 0);
+function onStModalRevSurahPick(val) {
+  const raw = String(val || "").trim();
+  let p = 0;
+  if (raw.includes(":")) {
+    const parts = raw.split(":");
+    p = parseArabicNum(parts[1], 0) || (SURAH_MAP[Number(parts[0])]?.p || 0);
+  } else {
+    p = parseArabicNum(raw, 0);
+  }
   if (p >= 1 && p <= 604) {
     document.getElementById("stRevPageInput").value = p;
   }
+  const sel = document.getElementById("stRevSurahPick");
+  if (sel && typeof sel._epSyncLabel === "function") sel._epSyncLabel();
   updateStudentModalPreview();
 }
 
@@ -21838,7 +21809,7 @@ function openAddStudentModal() {
   syncStModalButtons();
   updateStudentModalPreview();
   openModal("studentModal");
-  if (typeof enhanceAllVisibleSelects === "function") enhanceAllVisibleSelects(document.getElementById("studentModal"));
+  if (typeof enhanceAllVisibleSelects === "function") { try { enhanceAllVisibleSelects(document.getElementById("studentModal")); } catch {} }
 }
 
 function openEditStudentModal(id) {
@@ -21890,7 +21861,7 @@ function openEditStudentModal(id) {
   syncStModalButtons();
   updateStudentModalPreview();
   openModal("studentModal");
-  if (typeof enhanceAllVisibleSelects === "function") enhanceAllVisibleSelects(document.getElementById("studentModal"));
+  if (typeof enhanceAllVisibleSelects === "function") { try { enhanceAllVisibleSelects(document.getElementById("studentModal")); } catch {} }
 }
 
 function saveStudentModal() {
@@ -22254,20 +22225,128 @@ async function deleteSessionById(id) {
   showToast("تم حذف الجلسة");
 }
 
-function deleteCurrentSession() {
+
+// ==================== v104: SESSION LESSONS & ACTIVITIES ENGINE (استهداء • حديث • نشاطات) ====================
+function getSessionDayLessonsObj(s) {
+  if (!s) return { istihda: "", hadith: "", activities: "", extra: "" };
+  const dl = (s.dayLessons && typeof s.dayLessons === "object") ? s.dayLessons : {};
+  return {
+    istihda: String(dl.istihda || "").trim(),
+    hadith: String(dl.hadith || "").trim(),
+    activities: String(dl.activities || "").trim(),
+    extra: String(dl.extra || "").trim()
+  };
+}
+
+function getSessionLessonsList(s) {
+  const dl = getSessionDayLessonsObj(s);
+  const out = [];
+  if (dl.istihda) out.push({ key: "istihda", ico: "🌿", label: "استهداء", text: dl.istihda });
+  if (dl.hadith) out.push({ key: "hadith", ico: "📜", label: "الحديث", text: dl.hadith });
+  if (dl.activities) out.push({ key: "activities", ico: "⚽", label: "النشاطات", text: dl.activities });
+  if (dl.extra) out.push({ key: "extra", ico: "📚", label: "درس", text: dl.extra });
+  return out;
+}
+
+function formatSessionLessonsFooter(s, withIcons = true) {
+  const items = getSessionLessonsList(s);
+  if (!items.length) return "—";
+  return items.map(it => `${withIcons ? it.ico + " " : ""}${it.label}: ${it.text}`).join("  |  ");
+}
+
+function logProgramStepToCurrentSession(progKey, itemTitle, curNum, unitLbl, noteTxt = "") {
   const s = getCurrentSession();
-  if (s) deleteSessionById(s.id);
+  if (!s || s.noClass) return;
+  if (!s.dayLessons || typeof s.dayLessons !== "object") s.dayLessons = { istihda: "", hadith: "", activities: "", extra: "" };
+  const val = `${itemTitle}${curNum > 0 ? ` (${unitLbl} ${curNum})` : ""}${noteTxt ? ` — ${noteTxt}` : ""}`;
+  if (progKey === "istihda" || progKey === "hadith" || progKey === "activities") {
+    s.dayLessons[progKey] = val;
+  } else {
+    s.dayLessons.extra = val;
+  }
+}
+
+function openSessionLessonsModal() {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s) { showToast("اختر جلسة أولاً"); return; }
+  const progs = ensureHalaqaPrograms(h);
+  const dl = getSessionDayLessonsObj(s);
+  const tEl = document.getElementById("slModalTitle");
+  if (tEl) tEl.textContent = `📚 دروس ونشاطات ${s.dayName} (${s.hijriDate})`;
+
+  const makeQuickChips = (progKey, targetInpId) => {
+    const items = progs?.[progKey]?.items || [];
+    const unit = PROG_META[progKey]?.unit || "درس";
+    if (!items.length) return "";
+    return `<div class="quick-note-chips" style="margin-top:5px;">${items.map(it => {
+      const nextN = Math.min(Number(it.total) || 999, (Number(it.current) || 0) + 1);
+      const txtCur = `${it.title}${it.current > 0 ? ` (${unit} ${it.current})` : ""}`;
+      const txtNext = `${it.title} (${unit} ${nextN})`;
+      return `<button type="button" class="qn-chip" onclick="document.getElementById('${targetInpId}').value=this.dataset.v" data-v="${escapeHtml(txtCur)}">📘 ${escapeHtml(txtCur)}</button>`
+        + (nextN !== Number(it.current) ? `<button type="button" class="qn-chip" onclick="document.getElementById('${targetInpId}').value=this.dataset.v" data-v="${escapeHtml(txtNext)}">➕ ${escapeHtml(unit)} ${nextN}</button>` : "");
+    }).join("")}</div>`;
+  };
+
+  const body = document.getElementById("slModalBody");
+  if (body) {
+    body.innerHTML = `
+      <div class="exec-card">
+        <div class="field" style="margin-bottom:10px;">
+          <label>🌿 درس استهداء (تربوي / إيماني)</label>
+          <input type="text" id="slIstihdaInput" value="${escapeHtml(dl.istihda)}" placeholder="مثال: درس بر الوالدين / الدرس الخامس">
+          ${makeQuickChips("istihda", "slIstihdaInput")}
+        </div>
+        <div class="field" style="margin-bottom:10px;">
+          <label>📜 درس الحديث النبوي</label>
+          <input type="text" id="slHadithInput" value="${escapeHtml(dl.hadith)}" placeholder="مثال: الحديث الرابع من الأربعين النووية">
+          ${makeQuickChips("hadith", "slHadithInput")}
+        </div>
+        <div class="field" style="margin-bottom:10px;">
+          <label>⚽ نشاطات / مسابقات</label>
+          <input type="text" id="slActivitiesInput" value="${escapeHtml(dl.activities)}" placeholder="مثال: مسابقة ثقافية / مباراة كرة قدم">
+          ${makeQuickChips("activities", "slActivitiesInput")}
+        </div>
+        <div class="field" style="margin-bottom:0;">
+          <label>📚 دروس أو فقرات إضافية (اختياري)</label>
+          <input type="text" id="slExtraInput" value="${escapeHtml(dl.extra)}" placeholder="مثال: فقه الصلاة / سيرة نبوية">
+        </div>
+      </div>`;
+  }
+  openModal("sessionLessonsModal");
+}
+
+function clearSessionLessonsForm() {
+  ["slIstihdaInput", "slHadithInput", "slActivitiesInput", "slExtraInput"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "";
+  });
+}
+
+function saveSessionLessonsModal() {
+  const s = getCurrentSession();
+  if (!s) return;
+  s.dayLessons = {
+    istihda: (document.getElementById("slIstihdaInput")?.value || "").trim(),
+    hadith: (document.getElementById("slHadithInput")?.value || "").trim(),
+    activities: (document.getElementById("slActivitiesInput")?.value || "").trim(),
+    extra: (document.getElementById("slExtraInput")?.value || "").trim()
+  };
+  saveState();
+  closeModal("sessionLessonsModal");
+  if (document.getElementById("view-reports")?.classList.contains("active")) renderDailyReport();
+  renderSessionView();
+  showToast("✓ تم حفظ دروس ونشاطات الجلسة وإدراجها في التقرير والبطاقات");
 }
 
 async function resetCurrentSessionEvaluations() {
   const h = getActiveHalaqa(), s = getCurrentSession();
   if (!h || !s) return;
   const ok = await makinConfirm(
-    `هل تريد إزالة جميع التقييمات والحضور والغياب والنقاط والملاحظات عن جميع طلاب جلسة «${s.dayName} ${s.hijriDate}» وإعادتها كأنها لم تبدأ بعد؟\n(سيُعاد تعبئة الواجبات الأولية تلقائياً ولن تُحذف الجلسة).`,
-    { title: "🔄 تصفير تقييمات الجلسة", danger: true, okText: "تصفير الآن" }
+    `هل تريد إزالة التقييم والحضور والنقاط عن جميع طلاب جلسة ${s.dayName} (${s.hijriDate})؟\n\nستعود الجلسة فارغة كأنك لم تبدأ بها بعد مع إعادة تعبئة الواجبات تلقائياً.`,
+    { title: "🔄 إزالة تقييم جميع الطلاب", danger: true, okText: "نعم، تصفير الجلسة" }
   );
   if (!ok) return;
-  if (typeof pushUndoSnapshot === "function") pushUndoSnapshot("تصفير تقييمات الجلسة");
+  pushUndoSnapshot("تصفير تقييمات الجلسة");
   s.records = {};
   s.queue = [];
   s.finalized = false;
@@ -22277,7 +22356,12 @@ async function resetCurrentSessionEvaluations() {
   saveState();
   renderSessionView();
   if (document.getElementById("view-reports")?.classList.contains("active")) renderDailyReport();
-  showToast("تم إزالة تقييم جميع الطلاب وإعادة الجلسة للبداية ✓", { undo: true });
+  showToast("✓ تم مسح تقييم جميع الطلاب وإعادة تعبئة الجلسة من جديد", { undo: true });
+}
+
+function deleteCurrentSession() {
+  const s = getCurrentSession();
+  if (s) deleteSessionById(s.id);
 }
 
 // ==================== FLEXIBLE 7-DAY SCHEDULE + RECITATION / REVIEW CHOICE ====================
@@ -22495,6 +22579,33 @@ function installRealTimeDateSyncWatcher() {
   });
   window.addEventListener("focus", () => checkRealTimeDateRollover(true));
   setInterval(() => checkRealTimeDateRollover(true), 60000);
+}
+
+
+async function onNavDayPillClick(iso) {
+  const h = getActiveHalaqa();
+  if (!h || !iso) return;
+  const cur = getCurrentSession();
+  if (cur && cur.date === iso) {
+    weekCalendarExpanded = false;
+    calendarMonthShift = 0;
+    renderTodayBanner();
+    return;
+  }
+  const tod = todayISO();
+  const sess = (h.sessions || []).find(s => s && s.date === iso);
+  const isCompletedOrPast = Boolean(sess && !sess.noClass && (isSessionFinishedForUnlock(sess, h) || (iso < tod && isSessionHasRealActivity(sess))));
+  if (isCompletedOrPast) {
+    const hj = getExactHijriInfo(iso);
+    const ok = await makinConfirm(
+      `تم الانتهاء من جلسة ${sess.dayName || hj.dayName} (${sess.hijriDate || hj.formatted}) مسبقاً.\nهل تود التعديل عليها؟`,
+      { title: "✓ يوم مكتمل مسبقاً", okText: "نعم، التعديل عليها", cancelText: "إلغاء" }
+    );
+    if (!ok) return;
+  }
+  weekCalendarExpanded = false;
+  calendarMonthShift = 0;
+  openOrCreateByISO(iso);
 }
 
 function openOrCreateByISO(iso) {
@@ -22796,16 +22907,15 @@ function prefillDailyRecitation(notify = true, forceRefresh = false) {
   h.students.forEach(st => {
     const rec = getStudentRecord(cur, st.id);
     const curIsAbsent = Boolean(rec.attendance && String(rec.attendance || "").includes("غياب"));
-    const curIsNoRec = isPresentNoRecite(rec.attendance);
     const curHasEval = Boolean(rec.recEval && String(rec.recEval).trim());
-    // If already evaluated on THIS session and forceRefresh requested, ensure their homework is populated if missing!
+    // If already evaluated on THIS session and forceRefresh requested, fill missing homework only (never overwrite their evaluation!)
     if (curHasEval) {
-      if (forceRefresh && st.track !== "rashidi" && !rec.hwSurahId && !rec.hwSabrJuz) {
+      if (forceRefresh && st.track !== "rashidi" && !rec.hwSurahId && !rec.hwSabrJuz && !rec.recIsSabr) {
         if (recomputeAutoDailyHomework(st, rec, h)) filled++;
       }
       return;
     }
-    if (curIsAbsent || curIsNoRec) return;
+    if (curIsAbsent) return;
     if (st.track === "rashidi") {
       if (prefillSingleRashidiStudent(h, cur, st, rec, forceRefresh)) filled++;
       return;
@@ -22824,12 +22934,12 @@ function prefillDailyRecitation(notify = true, forceRefresh = false) {
       const isNoRecPrev = isPresentNoRecite(pr.attendance);
       const hasEval = Boolean(pr.recEval && String(pr.recEval).trim());
 
-      // Case A: Student was NOT evaluated, NOT absent, and NOT present-no-recite -> SKIP ghost/unevaluated day!
+      // Case A: Student was NOT evaluated and NOT absent/no-recite on that day -> SKIP ghost/unevaluated day completely!
       if (!hasEval && !isAbsent && !isNoRecPrev) {
         continue;
       }
 
-      // Case B: Student was Absent, Present-No-Recite, OR got إعادة -> Keep exact same assignment (NEVER advance!).
+      // Case B: Student was Absent OR Present-No-Recite OR got إعادة -> Keep exact same assignment (NEVER advance!).
       if (isAbsent || isNoRecPrev || pr.recEval === "إعادة") {
         const keepSegs = hwSegs.length ? hwSegs : prevRecSegs;
         if (keepSegs.length) {
@@ -22856,7 +22966,7 @@ function prefillDailyRecitation(notify = true, forceRefresh = false) {
           rec.dRevSurahId = ""; rec.dRevExtras = [];
           rec.dRevFrom = SURAH_MAP[jObj.startSurah]?.n || "";
           rec.dRevTo = SURAH_MAP[jObj.endSurah]?.n || "";
-          rec.dRevEval = `سبر ${getJuzReportTag(jObj)}`;
+          rec.dRevEval = `سبر جزء ${jObj.shortName}`;
           rec.dRevPages = jObj.pages;
         }
         if (!lastSrcSessionLabel) lastSrcSessionLabel = `${ps.dayName} ${ps.hijriDate}`;
@@ -22889,7 +22999,7 @@ function prefillDailyRecitation(notify = true, forceRefresh = false) {
         }
       }
     }
-    if (!found && (forceRefresh || !rec.recSurahId) && st.startSurahId && SURAH_MAP[Number(st.startSurahId)]) {
+    if (!found && !rec.recSurahId && st.startSurahId && SURAH_MAP[Number(st.startSurahId)]) {
       const s0 = SURAH_MAP[Number(st.startSurahId)];
       const pace = st.pace || 0.5;
       const fA = Math.max(1, Math.min(s0.a, parseArabicNum(st.startFromAyah, 1)));
@@ -23122,13 +23232,10 @@ function prefillSaturdayReviews(notify = true, forceRefresh = false) {
         rec.majFrom = rng.fromLabel; rec.majTo = rng.toLabel; rec.majPages = rng.pages;
       }
       filled++;
-    } else if (forceRefresh && rec.majEval && !rec.nextMajFrom && !rec.nextMajSabrJuz) {
-      applyNextMajorReview(st, rec, rec.majEval !== "إعادة");
-      filled++;
     }
   });
   saveState();
-  if (notify) { renderSessionView(); showToast(filled ? `تم تحديث وتعبئة المراجعة لـ ${filled} طالب ✓` : "جميع الطلاب محدّثون وجاهزون ✓"); }
+  if (notify) { renderSessionView(); showToast(filled ? "تم تحديث الصغرى والكبرى تلقائياً ✓" : "جميع الطلاب جاهزون"); }
 }
 
 // ==================== AUTO-ABSENCE MODAL ====================
@@ -23492,11 +23599,11 @@ function openDayOptionsModal() {
 
     ${!isNC ? `
       <button type="button" class="day-opt-btn" onclick="closeModal('dayOptionsModal'); openSessionLessonsModal();">
-        <span>📚 دروس ونشاطات اليوم (استهداء • حديث • نشاط)</span>
-        <span>‹</span>
+        <span>📚 دروس ونشاطات الجلسة (استهداء • حديث • نشاطات)</span>
+        <span>${getSessionLessonsList(s).length ? '✓' : '+'}</span>
       </button>
-      <button type="button" class="day-opt-btn" style="color:var(--orange); border-color:rgba(184,86,16,0.32); background:var(--orange-bg);" onclick="closeModal('dayOptionsModal'); resetCurrentSessionEvaluations();">
-        <span>🔄 إزالة تقييم جميع الطلاب (تصفير الجلسة)</span>
+      <button type="button" class="day-opt-btn" style="color:var(--orange); border-color:rgba(184,86,16,0.3); background:var(--orange-bg);" onclick="closeModal('dayOptionsModal'); resetCurrentSessionEvaluations();">
+        <span>🔄 إزالة تقييم جميع الطلاب (البدء من جديد)</span>
         <span>↺</span>
       </button>
     ` : ''}
@@ -23610,12 +23717,14 @@ function renderTodayBanner() {
     const ncCls = isNoClass ? "is-nc" : "";
     const isLocked = isDateSequentiallyLocked(d.iso, h);
     const lockCls = isLocked ? "is-locked" : "";
+    const isCompletedDay = Boolean(sess && !isNoClass && (isSessionFinishedForUnlock(sess, h) || (d.iso < tod && hasActivity)));
+    const doneCls = isCompletedDay ? "is-done-day" : "";
     const shortName = activeClassDows.length <= 4 ? d.hj.dayName : d.hj.dayName.replace(/^ال/, "");
     const mShort = (HIJRI_MONTHS[d.hj.month] || "").split(" ")[0];
     const numLabel = compactNum ? `${d.hj.day} ${mShort}` : (activeClassDows.length <= 4 ? `${d.hj.day} ${mShort}` : `${d.hj.day}`);
 
-    return `<button type="button" class="pdn-day-pill ${todayCls} ${dataCls} ${ncCls} ${lockCls} ${selCls}" onclick="weekCalendarExpanded=false; calendarMonthShift=0; openOrCreateByISO('${d.iso}');" title="${isLocked ? 'مقفول حتى إتمام اليوم الحالي' : escapeHtml(d.hj.fullText)}">
-      <span class="pdn-dp-name">${isLocked ? '🔒 ' : ''}${escapeHtml(shortName)}${!isLocked && isRevDay ? ' <span style="font-size:10px;">📘</span>' : ''}</span>
+    return `<button type="button" class="pdn-day-pill ${todayCls} ${dataCls} ${ncCls} ${lockCls} ${doneCls} ${selCls}" onclick="onNavDayPillClick('${d.iso}');" title="${isLocked ? 'مقفول حتى إتمام اليوم الحالي' : (isCompletedDay ? 'يوم مكتمل — اضغط للتعديل' : escapeHtml(d.hj.fullText))}">
+      <span class="pdn-dp-name">${isLocked ? '🔒 ' : ''}${isCompletedDay ? '<span class="pdn-done-chk" aria-label="مكتمل">✓</span> ' : ''}${escapeHtml(shortName)}${!isLocked && isRevDay ? ' <span style="font-size:10px;">📘</span>' : ''}</span>
       <span class="pdn-dp-num">${escapeHtml(numLabel)}</span>
       <span class="pdn-dp-dot"></span>
     </button>`;
@@ -23778,8 +23887,10 @@ function renderSessionView() {
   const donePct = totalSt > 0 ? Math.round((doneCnt / totalSt) * 100) : 0;
   const pgSummary = s.type === "daily" ? `${formatNum(totalMemPages)} ص` : `${formatNum(totalRevPages)} ص`;
 
-  const refreshHwFn = s.type === "saturday" ? "prefillSaturdayReviews(true, true)" : "prefillDailyRecitation(true, true)";
-  const actionBtns = `<button class="btn btn-soft btn-sm" style="padding:5px 8px;" onclick="${refreshHwFn}" title="تحديث وتعبئة واجبات الجلسة">↻ الواجبات</button><button class="btn btn-soft btn-sm" style="padding:5px 8px;" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">⚡ تفقد</button>` + (pendingCnt > 0
+  const _hasDayLessons = getSessionLessonsList(s).length > 0;
+  const actionBtns = `<button class="btn btn-soft btn-sm" style="padding:5px 8px;" onclick="${s.type === 'saturday' ? 'prefillSaturdayReviews(true, true)' : 'prefillDailyRecitation(true, true)'}" title="تحديث وتعبئة الواجبات تلقائياً">🔄 واجبات</button>
+    <button class="btn ${_hasDayLessons ? 'btn-success' : 'btn-outline'} btn-sm" style="padding:5px 8px;" onclick="openSessionLessonsModal()" title="تسجيل دروس استهداء والحديث والنشاطات لهذا اليوم">📚${_hasDayLessons ? ' ✓' : ''}</button>
+    <button class="btn btn-soft btn-sm" style="padding:5px 9px;" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">⚡ تفقد</button>` + (pendingCnt > 0
     ? `<button class="btn btn-primary btn-sm" style="padding:5px 8px;" onclick="openNextPendingStudent()" title="فتح المتبقي التالي">⏭️</button>
        <button class="btn btn-warn btn-sm" style="padding:5px 9px;" onclick="openAutoAbsentModal()">غياب (${pendingCnt})</button>`
     : `<button class="btn btn-success btn-sm" style="padding:5px 10px;" onclick="currentReportSubtab='daily'; switchTab('reports')">📄 التقرير</button>`);
@@ -23967,7 +24078,7 @@ function buildSingleStudentCardHtml(h, s, item, _prePrevCandidates, _preRelevant
         <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
         ${minDiffHint}
       </div>
-      ${(r.nextMajSabrJuz || r.nextMajFrom) ? `<span style="font-size:11px; color:var(--ink-500);">القادم: <b>${escapeHtml(r.nextMajSabrJuz ? `🎓 سبر ${getJuzReportShortToken(r.nextMajSabrJuz)}` : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo))}</b></span>` : ''}
+      ${(r.nextMajSabrJuz || r.nextMajFrom) ? `<span style="font-size:11px; color:var(--ink-500);">القادم: <b>${escapeHtml(r.nextMajSabrJuz ? `🎓 سبر ${getJuzByName(r.nextMajSabrJuz)?.shortName || r.nextMajSabrJuz}` : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo))}</b></span>` : ''}
     </div>`;
   }
 
@@ -25065,7 +25176,7 @@ function renderCardBody(s, st, r, idx) {
       </div>` : ''}
       <div class="es-tools-4">
         <button type="button" class="es-tool-btn ${evalSheetTool==='manual'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','manual')">
-          <span class="et-ico">📖</span><span class="et-lbl">الصفحات</span>
+          <span class="et-ico">📘</span><span class="et-lbl">مراجعة</span>
         </button>
         <button type="button" class="es-tool-btn ${evalSheetTool==='sabr'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','sabr')">
           ${hasSabrDot ? '<span class="es-tool-dot"></span>' : ''}
@@ -25539,7 +25650,7 @@ function applyNextMajorReview(st, r, passed) {
     r.nextMajEndAyah = rng.endAyah;
     r.nextMajStartPage = rng.startPage;
     r.nextMajEndPage = rng.endPage;
-    r.nextMajTitle = sabrCarryName ? `سبر ${getJuzReportShortToken(sabrCarryName)}` : rng.surahLabel;
+    r.nextMajTitle = sabrCarryName ? `سبر ${getJuzByName(sabrCarryName)?.shortName || sabrCarryName}` : rng.surahLabel;
     r.nextMajFrom = rng.fromLabel;
     r.nextMajTo = rng.toLabel;
   };
@@ -26275,7 +26386,7 @@ function computeUpcomingMajorReviewForNextSat(h, nextIso, st, existingNext = nul
   if (exRec) {
     if (exRec.sabrJuz) {
       const jObj = getJuzByName(exRec.sabrJuz);
-      return { text: `سبر ${jObj ? getJuzReportShortToken(jObj) : formatJuzClean(exRec.sabrJuz)}`, isSabr: true };
+      return { text: `سبر ${jObj ? (jObj.id >= 28 ? jObj.shortName : "الجزء " + jObj.id) : formatJuzClean(exRec.sabrJuz)}`, isSabr: true };
     }
     if (exRec.majSardLabel) return { text: String(exRec.majSardLabel).trim(), isSabr: false };
     if (exRec.majIsPages && exRec.majFrom) {
@@ -26309,7 +26420,7 @@ function computeUpcomingMajorReviewForNextSat(h, nextIso, st, existingNext = nul
     const carrySabrName = (!majPassed && pr.sabrJuz) ? pr.sabrJuz : (pr.nextMajSabrJuz || "");
     if (carrySabrName) {
       const jObj = getJuzByName(carrySabrName);
-      return { text: `سبر ${jObj ? getJuzReportShortToken(jObj) : formatJuzClean(carrySabrName)}`, isSabr: true };
+      return { text: `سبر ${jObj ? (jObj.id >= 28 ? jObj.shortName : "الجزء " + jObj.id) : formatJuzClean(carrySabrName)}`, isSabr: true };
     }
     if (Array.isArray(pr.nextMajSardJuzIds) && pr.nextMajSardJuzIds.length) {
       const si = formatSardJuzInfo(pr.nextMajSardJuzIds);
@@ -26543,8 +26654,8 @@ function getCompactSabrCellText(sabrJuzName, scTag = "", isRepeat = false) {
   if (!sabrJuzName) return "";
   if (isRepeat) return `إعادة سبر${scTag}`;
   const jObj = getJuzByName(sabrJuzName);
-  const shortN = jObj ? getJuzReportShortToken(jObj) : formatJuzClean(sabrJuzName);
-  return `سبر ${shortN}${scTag}`;
+  const lbl = jObj ? (jObj.id >= 28 ? jObj.shortName : `الجزء ${jObj.id}`) : formatJuzClean(sabrJuzName);
+  return `سبر ${lbl}${scTag}`;
 }
 
 function renderReportRangePairCells(fromHtml, toHtml) {
@@ -26559,6 +26670,25 @@ function renderReportRangePairCells(fromHtml, toHtml) {
     return `<td colspan="2" class="td-span-range">${escapeHtml(combined)}</td>`;
   }
   return `<td>${fromHtml}</td><td>${toHtml}</td>`;
+}
+
+
+function buildScaledDailyColgroup(baseCols, noteW) {
+  const otherSum = baseCols.reduce((a, b) => a + b, 0);
+  const avail = Math.max(60, 100 - noteW);
+  const scaled = baseCols.map(w => +((w / otherSum) * avail).toFixed(2));
+  const used = scaled.reduce((a, b) => a + b, 0);
+  const finalNoteW = Math.max(9.5, +(100 - used).toFixed(2));
+  return `<colgroup>${scaled.map(w => `<col style="width:${w}%">`).join("")}<col style="width:${finalNoteW}%"></colgroup>`;
+}
+function computeDynamicNoteWidthPct(maxNoteChars) {
+  const n = Number(maxNoteChars) || 0;
+  if (n <= 0) return 10.5;
+  if (n <= 18) return 13.5;
+  if (n <= 36) return 17.0;
+  if (n <= 62) return 20.5;
+  if (n <= 95) return 23.5;
+  return 26.5;
 }
 
 function renderDailyReport() {
@@ -26618,69 +26748,44 @@ function renderDailyReport() {
       ? `<span class="smart-hw-hint">✨ الواجب المنزلي تلقائي لتسميع ${escapeHtml(nextCtx.nextDayName)}</span>`
       : "");
 
-  const lessonsTxt = getSessionLessonsText(s, false);
-  const lessonsFootTxt = lessonsTxt ? `📚 الدروس والنشاطات: ${lessonsTxt}` : `📚 الدروس والنشاطات: —`;
-  const lessonsBtnHtml = `<button type="button" class="btn btn-soft btn-sm" style="padding:4px 9px; font-size:11.5px;" onclick="openSessionLessonsModal()">${lessonsTxt ? "✏️ تعديل الدروس" : "+ دروس ونشاطات"}</button>`;
-
-  warnBox.innerHTML = `<div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px; width:100%;">
-      ${pendingCnt > 0
-        ? `<span class="rep-ready-chip warn">⚠️ متبقٍ ${pendingCnt} طالب غير مقيّم</span>
-           <div style="display:flex; gap:5px; flex-wrap:wrap;">${lessonsBtnHtml}<button class="btn btn-warn btn-sm" onclick="openAutoAbsentModal()">✓ اعتماد الغياب</button></div>`
-        : `<span class="rep-ready-chip ok">✓ جميع الطلاب (${h.students.length}) مكتملون</span>${lessonsBtnHtml}`}
-    </div>` + (smartHwBadge ? `<div style="width:100%; margin-top:4px;">${smartHwBadge}</div>` : "");
-
-  // Dynamic tight Notes column width matching actual content length (Item 2 — never excessively wide!)
-  const calcTightNotePct = (maxLen) => {
-    if (maxLen <= 0) return 10.5;
-    if (maxLen <= 18) return 13.0;
-    if (maxLen <= 34) return 16.0;
-    if (maxLen <= 54) return 19.5;
-    if (maxLen <= 80) return 22.5;
-    return 25.5;
-  };
-  const buildTightColgroup = (otherCols, notePct) => {
-    const restTarget = 100 - notePct;
-    const sumOther = otherCols.reduce((a, b) => a + b, 0) || 1;
-    const scaled = otherCols.map(w => +((w / sumOther) * restTarget).toFixed(2));
-    const diff = +(restTarget - scaled.reduce((a, b) => a + b, 0)).toFixed(2);
-    if (scaled.length > 1) scaled[1] = +(scaled[1] + diff).toFixed(2);
-    return `<colgroup>${scaled.map(w => `<col style="width:${w}%">`).join("")}<col style="width:${notePct.toFixed(1)}%"></colgroup>`;
-  };
-  let maxNoteChars = 0;
-  (h.students || []).forEach(st => {
-    const r = getStudentRecord(s, st.id);
-    const isAbsN = String(r.attendance || "").includes("غياب");
-    const isNoRecN = isPresentNoRecite(r.attendance);
-    const isRashN = st.track === "rashidi";
-    let plainN = stripMushafPageTokens(r.notes || "");
-    if (s.type === "daily" && !isRashN && !isAbsN && !isNoRecN) {
-      const sInfo = buildDailySabrNoteBadge(r, false);
-      const baseN = sInfo.hasBadge ? stripRedundantSabrNoteText(plainN) : (!r.hwSabrJuz ? stripStaleHwSabrPrepText(plainN) : plainN);
-      const restN = applyTajweedToNote(baseN, r);
-      plainN = sInfo.hasBadge ? (restN ? `${sInfo.plain} ${restN}` : sInfo.plain) : restN;
-    }
-    if (plainN.length > maxNoteChars) maxNoteChars = plainN.length;
-  });
-  const dynNoteW = calcTightNotePct(maxNoteChars);
+  warnBox.innerHTML = (pendingCnt > 0 ? `
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px; width:100%;">
+      <span class="rep-ready-chip warn">⚠️ متبقٍ ${pendingCnt} طالب غير مقيّم</span>
+      <button class="btn btn-warn btn-sm" onclick="openAutoAbsentModal()">✓ اعتماد الغياب الآن</button>
+    </div>` : `<span class="rep-ready-chip ok">✓ جميع الطلاب (${h.students.length}) مكتملون والتقرير جاهز للتصدير</span>`) + (smartHwBadge ? `<div style="width:100%; margin-top:4px;">${smartHwBadge}</div>` : "");
 
   const title = s.type === "saturday"
     ? `ورقـة المراجعة الأسبوعية لحلقة ${escapeHtml(bm.name)}`
     : `ورقـة التسميـــع اليومي لحلقة ${escapeHtml(bm.name)}`;
 
   let tbl = "";
+  const dayLessonsFooterTxt = formatSessionLessonsFooter(s, true);
   if (s.type === "daily") {
     const maxNameLen = Math.max(...(h.students || []).map(x => String(x.name || "").trim().length), 10);
-    const nameW = maxNameLen <= 14 ? 10.6 : (maxNameLen <= 18 ? 11.6 : (maxNameLen <= 22 ? 12.4 : 13.2));
-    let colgroup = "";
-    if (dailyNextIsReview) {
-      colgroup = ptsOn
-        ? buildTightColgroup([2.4, nameW, 8.6, 3.0, 3.0, 5.4, 3.6, 5.8, 5.8, 5.2, 11.4, 5.8, 5.8], dynNoteW)
-        : buildTightColgroup([2.4, nameW + 0.5, 8.8, 3.1, 3.1, 5.6, 6.0, 6.0, 5.4, 11.8, 6.0, 6.0], dynNoteW);
-    } else {
-      colgroup = ptsOn
-        ? buildTightColgroup([2.5, nameW, 8.6, 3.3, 3.3, 6.0, 3.9, 6.8, 6.8, 5.8, 8.6, 3.3, 3.3], dynNoteW)
-        : buildTightColgroup([2.5, nameW + 0.6, 8.8, 3.4, 3.4, 6.2, 7.0, 7.0, 6.0, 8.8, 3.4, 3.4], dynNoteW);
-    }
+    const nameW = maxNameLen <= 14 ? 10.6 : (maxNameLen <= 18 ? 11.6 : (maxNameLen <= 22 ? 12.6 : 13.4));
+    let maxDailyNoteLen = 0;
+    (h.students || []).forEach(st => {
+      try {
+        const r = getStudentRecord(s, st.id);
+        const isAbs = String(r.attendance || "").includes("غياب");
+        const isNoRec = isPresentNoRecite(r.attendance);
+        const isRash = st.track === "rashidi";
+        const sb = (!isRash && !isAbs && !isNoRec && !(r.recIsSabr && r.sabrJuz && !r.recEval)) ? buildDailySabrNoteBadge(r, false) : { hasBadge: false, plain: "" };
+        const rawN = stripMushafPageTokens(r.notes || "");
+        const baseN = sb.hasBadge ? stripRedundantSabrNoteText(rawN) : (!r.hwSabrJuz ? stripStaleHwSabrPrepText(rawN) : rawN);
+        const fullN = (sb.hasBadge ? (sb.plain + " ") : "") + ((!isRash && !isAbs && !isNoRec) ? applyTajweedToNote(baseN, r) : baseN);
+        if (fullN.trim().length > maxDailyNoteLen) maxDailyNoteLen = fullN.trim().length;
+      } catch {}
+    });
+    const dynNoteW = computeDynamicNoteWidthPct(maxDailyNoteLen);
+    const baseCols = dailyNextIsReview
+      ? (ptsOn
+        ? [2.3, nameW, 8.6, 3.0, 3.0, 5.4, 3.5, 5.8, 5.8, 5.0, 11.4, 5.8, 5.8]
+        : [2.3, nameW + 0.5, 8.8, 3.1, 3.1, 5.6, 6.0, 6.0, 5.2, 11.8, 6.0, 6.0])
+      : (ptsOn
+        ? [2.5, nameW, 8.5, 3.3, 3.3, 5.8, 3.8, 6.6, 6.6, 5.6, 8.5, 3.3, 3.3]
+        : [2.5, nameW + 0.6, 8.7, 3.4, 3.4, 6.0, 6.8, 6.8, 5.8, 8.7, 3.4, 3.4]);
+    const colgroup = buildScaledDailyColgroup(baseCols, dynNoteW);
 
     const hwGroupHdr = dailyNextIsReview
       ? `الواجب المنزلي (مراجعة ${escapeHtml(nextCtx.nextDayName)})`
@@ -26717,7 +26822,7 @@ function renderDailyReport() {
       const recCols = isRashidiRow
         ? { surah: "الرشيدي", from: escapeHtml(r.rashidiFrom ? `ص ${r.rashidiFrom}` : ""), to: escapeHtml(r.rashidiTo ? `ص ${r.rashidiTo}` : ""), lines: 1 }
         : (_recSabrObj
-          ? { surah: escapeHtml(getJuzReportTag(_recSabrObj)), from: escapeHtml(SURAH_MAP[_recSabrObj.startSurah]?.n || ""), to: escapeHtml(SURAH_MAP[_recSabrObj.endSurah]?.n || ""), lines: 1 }
+          ? { surah: escapeHtml(formatJuzCompactLabel(_recSabrObj)), from: escapeHtml(SURAH_MAP[_recSabrObj.startSurah]?.n || ""), to: escapeHtml(SURAH_MAP[_recSabrObj.endSurah]?.n || ""), lines: 1 }
           : formatSegmentsColumns(getSegments(r, "rec"), true));
 
       let hwCellsHtml = "";
@@ -26786,15 +26891,25 @@ function renderDailyReport() {
     });
     const footHtml = ptsOn
       ? `<td colspan="6">مجموع نقاط الحلقة اليوم</td><td>${totalPts}</td>
-         <td colspan="7" class="txt-right">${escapeHtml(lessonsFootTxt)}</td>`
-      : `<td colspan="13" class="txt-right">${escapeHtml(lessonsFootTxt)}</td>`;
+         <td colspan="7" class="txt-right">📚 الدروس والنشاطات: ${escapeHtml(dayLessonsFooterTxt)}</td>`
+      : `<td colspan="13" class="txt-right">📚 الدروس والنشاطات: ${escapeHtml(dayLessonsFooterTxt)}</td>`;
     tbl += `</tbody><tfoot><tr>${footHtml}</tr></tfoot></table>`;
   } else {
     const maxNameLen = Math.max(...(h.students || []).map(x => String(x.name || "").trim().length), 10);
-    const nameW = maxNameLen <= 14 ? 10.6 : (maxNameLen <= 18 ? 11.6 : (maxNameLen <= 22 ? 12.4 : 13.2));
-    const colgroup = ptsOn
-      ? buildTightColgroup([2.5, nameW, 8.6, 3.3, 3.3, 5.8, 7.0, 7.0, 5.8, 3.9, 8.6, 3.3, 3.3], dynNoteW)
-      : buildTightColgroup([2.5, nameW + 0.6, 8.8, 3.4, 3.4, 6.0, 7.2, 7.2, 6.0, 8.8, 3.4, 3.4], dynNoteW);
+    const nameW = maxNameLen <= 14 ? 10.6 : (maxNameLen <= 18 ? 11.6 : (maxNameLen <= 22 ? 12.6 : 13.4));
+    let maxSatNoteLen = 0;
+    (h.students || []).forEach(st => {
+      try {
+        const r = getStudentRecord(s, st.id);
+        const len = stripMushafPageTokens(r.notes || "").trim().length;
+        if (len > maxSatNoteLen) maxSatNoteLen = len;
+      } catch {}
+    });
+    const dynNoteW = computeDynamicNoteWidthPct(maxSatNoteLen);
+    const baseCols = ptsOn
+      ? [2.5, nameW, 8.2, 3.2, 3.2, 5.6, 6.8, 6.8, 5.6, 3.8, 8.4, 3.3, 3.3]
+      : [2.5, nameW + 0.6, 8.4, 3.3, 3.3, 5.8, 7.0, 7.0, 5.8, 8.6, 3.4, 3.4];
+    const colgroup = buildScaledDailyColgroup(baseCols, dynNoteW);
 
     const satHwHdr = satNextIsDaily
       ? `الواجب المنزلي (تسميع ${escapeHtml(nextCtx.nextDayName)})`
@@ -26865,8 +26980,8 @@ function renderDailyReport() {
     });
     const footHtml = ptsOn
       ? `<td colspan="9">مجموع نقاط الحلقة اليوم</td><td>${totalPts}</td>
-         <td colspan="4" class="txt-right">${escapeHtml(lessonsFootTxt)}</td>`
-      : `<td colspan="13" class="txt-right">${escapeHtml(lessonsFootTxt)}</td>`;
+         <td colspan="4" class="txt-right">📚 الدروس والنشاطات: ${escapeHtml(dayLessonsFooterTxt)}</td>`
+      : `<td colspan="13" class="txt-right">📚 الدروس والنشاطات: ${escapeHtml(dayLessonsFooterTxt)}</td>`;
     tbl += `</tbody><tfoot><tr>${footHtml}</tr></tfoot></table>`;
   }
 
@@ -27576,10 +27691,10 @@ async function renderReportToHDCanvas(paperId) {
   const targetW = measuredW;
   const targetH = isCert ? 990 : Math.ceil(stage.scrollHeight);
 
-  // v104: Ultra-HD razor-sharp resolution (~350 DPI on A4) for crystal-clear zoomable PNG & PDF reports!
+  // v104 Ultra-Crisp HD Export (~300 DPI+ sharp Arabic typography on phones & A4 print)
   const maxDim = Math.max(targetW, targetH);
   const idealScale = (isMonthly || isIndiv) ? 3.0 : (isCert ? 2.8 : 3.0);
-  const safeScale = Math.min(idealScale, Math.max(2.2, Math.floor((5600 / maxDim) * 10) / 10));
+  const safeScale = Math.min(idealScale, Math.max(2.2, Math.floor((5400 / maxDim) * 10) / 10));
 
   // v93 CRITICAL ANDROID RTL FIX: Isolate #hdExportStage at (0,0) as static block inside cloned iframe
   // so position:fixed + left:-99999px + RTL viewport NEVER crops left/right edges!
@@ -28015,6 +28130,7 @@ function saveProgItem(progKey) {
     showToast("تم حفظ التعديل ✓");
   } else {
     list.push({ id: uid("pg"), title, author, total, current, notes });
+    if (current > 0 || progKey === "activities") logProgramStepToCurrentSession(progKey, title, current, PROG_META[progKey]?.unit || "درس", notes);
     showToast(`✓ تمت الإضافة بنجاح`);
   }
   saveState();
@@ -28027,107 +28143,13 @@ function editProgItem(itemId) {
   renderProgramsModalBody();
 }
 
-function getSessionLessonsData(s) {
-  const ls = (s && s.lessons && typeof s.lessons === "object") ? s.lessons : {};
-  return {
-    istihda: String(ls.istihda || "").trim(),
-    hadith: String(ls.hadith || "").trim(),
-    activity: String(ls.activity || "").trim(),
-    other: String(ls.other || "").trim()
-  };
-}
-
-function getSessionLessonsSummaryParts(s) {
-  const d = getSessionLessonsData(s);
-  const parts = [];
-  if (d.istihda) parts.push({ key: "istihda", icon: "🌿", label: "استهداء", text: d.istihda });
-  if (d.hadith) parts.push({ key: "hadith", icon: "📜", label: "حديث", text: d.hadith });
-  if (d.activity) parts.push({ key: "activity", icon: "⚽", label: "نشاط", text: d.activity });
-  if (d.other) parts.push({ key: "other", icon: "📌", label: "فقرة", text: d.other });
-  return parts;
-}
-
-function getSessionLessonsText(s, withIcons = false) {
-  const parts = getSessionLessonsSummaryParts(s);
-  if (!parts.length) return "";
-  return parts.map(p => withIcons ? `${p.icon} ${p.label}: ${p.text}` : `${p.label}: ${p.text}`).join("  |  ");
-}
-
-function recordProgramProgressOnCurrentSession(progKey, it) {
-  const s = getCurrentSession();
-  if (!s || s.noClass || !it) return;
-  if (!s.lessons || typeof s.lessons !== "object") s.lessons = {};
-  const meta = PROG_META[progKey];
-  const unit = meta?.unit || "درس";
-  const summary = `${it.title}${it.current ? ` (${unit} ${it.current})` : ""}${it.notes ? ` — ${it.notes}` : ""}`;
-  if (progKey === "istihda") s.lessons.istihda = summary;
-  else if (progKey === "hadith") s.lessons.hadith = summary;
-  else if (progKey === "activities") s.lessons.activity = summary;
-  else s.lessons.other = summary;
-}
-
-function openSessionLessonsModal() {
-  const s = getCurrentSession();
-  if (!s) { showToast("افتح جلسة أولاً"); return; }
-  const d = getSessionLessonsData(s);
-  const sub = document.getElementById("slModalSub");
-  if (sub) sub.textContent = `جلسة ${s.dayName} (${s.hijriDate}) — تظهر في أسفل التقرير وبطاقة المتابعة`;
-  const i1 = document.getElementById("slIstihdaInput"); if (i1) i1.value = d.istihda;
-  const i2 = document.getElementById("slHadithInput"); if (i2) i2.value = d.hadith;
-  const i3 = document.getElementById("slActivityInput"); if (i3) i3.value = d.activity;
-  const i4 = document.getElementById("slOtherInput"); if (i4) i4.value = d.other;
-  const hint = document.getElementById("slAutoProgLogHint");
-  if (hint) hint.textContent = "💡 عند الضغط على (+1 درس/حديث/نشاط) من قائمة البرامج المصاحبة يُضاف الدرس هنا تلقائياً أيضاً.";
-  openModal("sessionLessonsModal");
-}
-
-function autoFillSessionLessonFromProg(progKey) {
-  const progs = ensureHalaqaPrograms();
-  const items = progs?.[progKey]?.items || [];
-  if (!items.length) {
-    showToast("لا توجد كتب مضافة في هذا البرنامج بعد — أضفها من القائمة الجانبية أولاً");
-    return;
-  }
-  const it = items[items.length - 1];
-  const meta = PROG_META[progKey];
-  const unit = meta?.unit || "درس";
-  const val = `${it.title}${it.current ? ` (${unit} ${it.current})` : ""}${it.notes ? ` — ${it.notes}` : ""}`;
-  const targetId = progKey === "istihda" ? "slIstihdaInput" : (progKey === "hadith" ? "slHadithInput" : "slActivityInput");
-  const inp = document.getElementById(targetId);
-  if (inp) inp.value = val;
-  showToast(`✓ تم جلب «${it.title}»`);
-}
-
-function clearSessionLessonsFields() {
-  ["slIstihdaInput", "slHadithInput", "slActivityInput", "slOtherInput"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = "";
-  });
-}
-
-function saveSessionLessonsModal() {
-  const s = getCurrentSession();
-  if (!s) return;
-  s.lessons = {
-    istihda: (document.getElementById("slIstihdaInput")?.value || "").trim(),
-    hadith: (document.getElementById("slHadithInput")?.value || "").trim(),
-    activity: (document.getElementById("slActivityInput")?.value || "").trim(),
-    other: (document.getElementById("slOtherInput")?.value || "").trim()
-  };
-  saveState();
-  closeModal("sessionLessonsModal");
-  if (document.getElementById("view-reports")?.classList.contains("active")) renderDailyReport();
-  renderSessionView();
-  showToast("تم حفظ دروس ونشاطات الجلسة ✓");
-}
-
 function stepProgItemProgress(progKey, itemId, delta) {
   const progs = ensureHalaqaPrograms();
   const it = progs?.[progKey]?.items?.find(x => x.id === itemId);
   if (!it) return;
   const total = Math.max(1, Number(it.total) || 1);
   it.current = Math.max(0, Math.min(total, (Number(it.current) || 0) + delta));
-  if (delta > 0) recordProgramProgressOnCurrentSession(progKey, it);
+  if (delta > 0) logProgramStepToCurrentSession(progKey, it.title, it.current, PROG_META[progKey]?.unit || "درس", it.notes || "");
   saveState();
   renderProgramsModalBody();
 }
@@ -28955,7 +28977,7 @@ function renderIndivReportPaper() {
       evalHtml = `<td class="${evSt.cls}">${escapeHtml(evSt.text || "—")}</td>`;
     } else {
       const minTxt = formatSegmentsInline(getSegments(r, "min")) || stripMushafPageTokens(r.minText || "");
-      const majTxt = r.sabrJuz ? `سبر ${getJuzReportShortToken(r.sabrJuz)}` : formatMajStripDisplay(r.majFrom, r.majTo);
+      const majTxt = r.sabrJuz ? `سبر ${getJuzByName(r.sabrJuz)?.shortName || r.sabrJuz}` : formatMajStripDisplay(r.majFrom, r.majTo);
       const parts = [];
       if (minTxt) parts.push(`صغرى: ${minTxt}`);
       if (majTxt && majTxt !== "—") parts.push(`كبرى: ${majTxt}`);
@@ -29724,31 +29746,24 @@ async function exportDailyExcelStyled() {
     const xlDailyNextIsReview = !isSat && xlNextCtx.nextType === "saturday";
     const xlSatNextIsDaily = isSat && xlNextCtx.nextType === "daily";
 
-    let xlMaxNoteLen = 0;
-    (h.students || []).forEach(st => {
-      const r = getStudentRecord(s, st.id);
-      const t = stripMushafPageTokens(r.notes || "");
-      if (t.length > xlMaxNoteLen) xlMaxNoteLen = t.length;
-    });
-    const xlNoteW = xlMaxNoteLen === 0 ? 16 : (xlMaxNoteLen <= 20 ? 20 : (xlMaxNoteLen <= 40 ? 26 : (xlMaxNoteLen <= 65 ? 32 : 36)));
-    const xlLessonsTxt = getSessionLessonsText(s, false);
-    const xlLessonsFoot = xlLessonsTxt ? `الدروس والنشاطات: ${xlLessonsTxt}` : `الدروس والنشاطات: —`;
-
     if (!isSat) {
       ws.columns = xlDailyNextIsReview
         ? (ptsOn
-          ? [{ width: 4.5 }, { width: 22 }, { width: 18 }, { width: 8.5 }, { width: 8.5 }, { width: 11 }, { width: 7 }, { width: 14 }, { width: 14 }, { width: 10.5 }, { width: 22 }, { width: 11.5 }, { width: 11.5 }, { width: xlNoteW }]
-          : [{ width: 4.5 }, { width: 23 }, { width: 18 }, { width: 8.5 }, { width: 8.5 }, { width: 11.5 }, { width: 14 }, { width: 14 }, { width: 11 }, { width: 23 }, { width: 12 }, { width: 12 }, { width: xlNoteW }])
+          ? [{ width: 4.5 }, { width: 22 }, { width: 18 }, { width: 8.5 }, { width: 8.5 }, { width: 11 }, { width: 7 }, { width: 14 }, { width: 14 }, { width: 10.5 }, { width: 22 }, { width: 11.5 }, { width: 11.5 }, { width: 38 }]
+          : [{ width: 4.5 }, { width: 23 }, { width: 18 }, { width: 8.5 }, { width: 8.5 }, { width: 11.5 }, { width: 14 }, { width: 14 }, { width: 11 }, { width: 23 }, { width: 12 }, { width: 12 }, { width: 40 }])
         : (ptsOn
-          ? [{ width: 4.5 }, { width: 22 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 7 }, { width: 15 }, { width: 15 }, { width: 11 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: xlNoteW }]
-          : [{ width: 4.5 }, { width: 23 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 12 }, { width: 15 }, { width: 15 }, { width: 12 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: xlNoteW }]);
+          ? [{ width: 4.5 }, { width: 22 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 7 }, { width: 15 }, { width: 15 }, { width: 11 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 42 }]
+          : [{ width: 4.5 }, { width: 23 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 12 }, { width: 15 }, { width: 15 }, { width: 12 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 44 }]);
     } else {
       ws.columns = ptsOn
-        ? [{ width: 4.5 }, { width: 22 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 17 }, { width: 17 }, { width: 12 }, { width: 7 }, { width: 18 }, { width: 10 }, { width: 10 }, { width: xlNoteW }]
-        : [{ width: 4.5 }, { width: 23 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 17 }, { width: 17 }, { width: 12.5 }, { width: 18 }, { width: 10 }, { width: 10 }, { width: xlNoteW }];
+        ? [{ width: 4.5 }, { width: 22 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 17 }, { width: 17 }, { width: 12 }, { width: 7 }, { width: 18 }, { width: 10 }, { width: 10 }, { width: 38 }]
+        : [{ width: 4.5 }, { width: 23 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 17 }, { width: 17 }, { width: 12.5 }, { width: 18 }, { width: 10 }, { width: 10 }, { width: 40 }];
     }
+    const maxXlNoteChars = Math.max(0, ...h.students.map(st => stripMushafPageTokens(getStudentRecord(s, st.id).notes || "").trim().length));
+    const dynXlNoteW = maxXlNoteChars === 0 ? 18 : Math.min(42, Math.max(20, Math.round(maxXlNoteChars * 0.52 + 8)));
+    if (ws.columns && ws.columns.length) ws.columns[ws.columns.length - 1].width = dynXlNoteW;
 
-    // Dynamic Official Header (Rows 1-5) — Supervisor moved next to Date & Absence!
+    // Dynamic Official Header (Rows 1-5)
     ws.getRow(1).height = 10; ws.getRow(2).height = 22; ws.getRow(3).height = 18; ws.getRow(4).height = 20; ws.getRow(5).height = 10;
     ws.mergeCells("A2:B2"); ws.getCell("A2").value = bm.org;
     ws.mergeCells("A3:B3"); ws.getCell("A3").value = bm.branch;
@@ -29767,13 +29782,13 @@ async function exportDailyExcelStyled() {
     ws.getCell("C4").value = `يوم : ${s.dayName}   ${s.hijriDate}`;
     styleCell(ws.getCell("C4"), { fontColor: "FF000000", bold: true, size: 10.5, border: false });
 
-    ws.mergeCells(ptsOn ? "F4:I4" : "F4:H4");
-    ws.getCell("F4").value = `الغياب: المبرر: ${excused} / غير المبرر: ${absent}`;
+    ws.mergeCells("F4:I4");
+    ws.getCell("F4").value = `الغياب: المبرر: ${excused}   /   غير المبرر: ${absent}`;
     styleCell(ws.getCell("F4"), { fontColor: "FF000000", bold: true, size: 10.5, border: false });
 
-    ws.mergeCells(ptsOn ? "J4:L4" : "I4:K4");
-    ws.getCell(ptsOn ? "J4" : "I4").value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}`;
-    styleCell(ws.getCell(ptsOn ? "J4" : "I4"), { fontColor: "FF000000", bold: true, size: 10.5, border: false });
+    ws.mergeCells(ptsOn ? "J4:L4" : "J4:K4");
+    ws.getCell("J4").value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}`;
+    styleCell(ws.getCell("J4"), { fontColor: "FF000000", bold: true, size: 10.5, border: false });
 
     ws.addImage(logoId, { tl: { col: ptsOn ? 12.15 : 11.15, row: 0.7 }, ext: { width: 196, height: 66 } });
 
@@ -29838,7 +29853,7 @@ async function exportDailyExcelStyled() {
         const recCols = isRashidiRow
           ? { surah: "الرشيدي", from: r.rashidiFrom ? `ص ${r.rashidiFrom}` : "", to: r.rashidiTo ? `ص ${r.rashidiTo}` : "", lines: 1 }
           : (_xlSabrObj
-            ? { surah: getJuzReportTag(_xlSabrObj), from: SURAH_MAP[_xlSabrObj.startSurah]?.n || "", to: SURAH_MAP[_xlSabrObj.endSurah]?.n || "", lines: 1 }
+            ? { surah: formatJuzCompactLabel(_xlSabrObj), from: SURAH_MAP[_xlSabrObj.startSurah]?.n || "", to: SURAH_MAP[_xlSabrObj.endSurah]?.n || "", lines: 1 }
             : formatSegmentsColumns(getSegments(r, "rec"), false));
         const xlRevHw = xlDailyNextIsReview ? computeUpcomingReviewHomework(h, s, st, r, xlNextCtx) : null;
         const hwCols = xlDailyNextIsReview
@@ -29920,6 +29935,7 @@ async function exportDailyExcelStyled() {
       });
 
       const footIdx = 8 + h.students.length;
+      const xlLessonsFoot = `الدروس والنشاطات: ${formatSessionLessonsFooter(s, false)}`;
       if (ptsOn) {
         ws.mergeCells(`A${footIdx}:F${footIdx}`); ws.getCell(`A${footIdx}`).value = "مجموع نقاط الحلقة اليوم";
         ws.getCell(`G${footIdx}`).value = { formula: `SUM(G8:G${footIdx - 1})`, result: totalPts };
@@ -30027,6 +30043,7 @@ async function exportDailyExcelStyled() {
       });
 
       const footIdx = 8 + h.students.length;
+      const xlLessonsFoot = `الدروس والنشاطات: ${formatSessionLessonsFooter(s, false)}`;
       if (ptsOn) {
         ws.mergeCells(`A${footIdx}:I${footIdx}`); ws.getCell(`A${footIdx}`).value = "مجموع نقاط الحلقة اليوم";
         ws.getCell(`J${footIdx}`).value = { formula: `SUM(J8:J${footIdx - 1})`, result: totalPts };
@@ -31772,13 +31789,13 @@ function openModal(id) {
   if (!el) return;
   if (id !== "studentEvalSheet") closeRightDrawer();
   if (id !== "studentEvalSheet") {
-    let maxOpenZ = 168;
+    let topZ = 160;
     document.querySelectorAll(".modal-backdrop.show").forEach(m => {
       if (m.id === id || m.id === "makinDialogModal") return;
-      const z = parseInt(m.style.zIndex || getComputedStyle(m).zIndex, 10) || 100;
-      if (z > maxOpenZ && z < 340) maxOpenZ = z;
+      const z = parseInt(getComputedStyle(m).zIndex, 10) || parseInt(m.style.zIndex, 10) || 100;
+      if (z > topZ && z < 248) topZ = z;
     });
-    _modalZCounter = Math.min(340, maxOpenZ + 2);
+    _modalZCounter = Math.min(250, Math.max(162, topZ + 2));
     el.style.zIndex = String(_modalZCounter);
   }
   el.classList.add("show");
@@ -35050,12 +35067,9 @@ function enhanceSingleNativeSelect(sel) {
     sel._epSyncLabel = () => {
       if (!trig || !trig.isConnected) return;
       const opt = sel.options && sel.selectedIndex >= 0 ? sel.options[sel.selectedIndex] : null;
-      const lbl = String((opt ? opt.textContent : "") || sel.options?.[0]?.textContent || "اختر...").trim();
-      const isDis = Boolean(sel.disabled);
-      if (trig.dataset.epLastLbl === lbl && trig.disabled === isDis) return;
-      trig.dataset.epLastLbl = lbl;
-      trig.innerHTML = `<span class="ept-left"><span class="ept-txt"><span class="ept-main">${escapeHtml(lbl)}</span></span></span><span class="ept-right"><span class="ept-chev">▾</span></span>`;
-      trig.disabled = isDis;
+      const lbl = (opt ? opt.textContent : "") || sel.options?.[0]?.textContent || "اختر...";
+      trig.innerHTML = `<span class="ept-left"><span class="ept-txt"><span class="ept-main">${escapeHtml(String(lbl).trim())}</span></span></span><span class="ept-right"><span class="ept-chev">▾</span></span>`;
+      trig.disabled = Boolean(sel.disabled);
     };
   }
   if (typeof sel._epSyncLabel === "function") sel._epSyncLabel();
@@ -35063,7 +35077,7 @@ function enhanceSingleNativeSelect(sel) {
 
 function enhanceAllVisibleSelects(root = document) {
   try {
-    (root || document).querySelectorAll("select").forEach(enhanceSingleNativeSelect);
+    root.querySelectorAll("select").forEach(enhanceSingleNativeSelect);
   } catch {}
 }
 
@@ -35071,25 +35085,21 @@ function startUniversalSelectEnhancer() {
   installSelectValueHookOnce();
   enhanceAllVisibleSelects(document);
   if (_epSelectObserver) return;
-  _epSelectObserver = new MutationObserver((mutations) => {
-    let needsScan = false;
-    for (let i = 0; i < mutations.length; i++) {
-      const m = mutations[i];
-      if (m.target && m.target.tagName === "SELECT") { needsScan = true; break; }
-      for (let j = 0; j < m.addedNodes.length; j++) {
-        const nd = m.addedNodes[j];
-        if (nd && nd.nodeType === 1) {
-          if (nd.tagName === "SELECT" || nd.tagName === "OPTION" || (nd.querySelector && nd.querySelector("select"))) {
-            needsScan = true;
-            break;
-          }
+  _epSelectObserver = new MutationObserver((muts) => {
+    let hasSelect = false;
+    for (let i = 0; i < muts.length; i++) {
+      const added = muts[i].addedNodes;
+      for (let j = 0; j < added.length; j++) {
+        const nd = added[j];
+        if (nd && nd.nodeType === 1 && (nd.tagName === "SELECT" || (nd.querySelector && nd.querySelector("select:not([data-ep-bound='1'])")))) {
+          hasSelect = true; break;
         }
       }
-      if (needsScan) break;
+      if (hasSelect) break;
     }
-    if (!needsScan) return;
+    if (!hasSelect) return;
     clearTimeout(_epEnhanceTimer);
-    _epEnhanceTimer = setTimeout(() => enhanceAllVisibleSelects(document), 50);
+    _epEnhanceTimer = setTimeout(() => enhanceAllVisibleSelects(document), 45);
   });
   _epSelectObserver.observe(document.body, { childList: true, subtree: true });
 }
