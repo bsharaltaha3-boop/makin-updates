@@ -13196,6 +13196,211 @@ details.stm-opt-drawer[open] > summary {
   #btnCloudQuick::after { content: "☁️"; font-size: 13px; line-height: 1; }
 }
 
+
+/* ==================== MAKIN v121: EXECUTIVE SESSION VIEW & CIRCLED AYAH MULTI-SURAH CELLS ==================== */
+/* 1) Circled Ayah Number Badge for Daily & Weekly Reports ONLY (Mushaf-style, html2canvas-safe) */
+.ayah-circ {
+  display: inline-block;
+  min-width: 19px;
+  height: 19px;
+  line-height: 17px;
+  padding: 0 4px;
+  border: 1.35px solid #142a46;
+  border-radius: 999px;
+  background: #eef4fa;
+  color: #142a46;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 2px;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+table.t-daily td.td-span-3 {
+  white-space: nowrap !important;
+  font-weight: 800;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+#hdExportStage .ayah-circ {
+  min-width: 22px !important;
+  height: 22px !important;
+  line-height: 20px !important;
+  padding: 0 4.5px !important;
+  border: 1.5px solid #142a46 !important;
+  font-size: 12.2px !important;
+  font-weight: 800 !important;
+  margin: 0 2.5px !important;
+  word-spacing: 0 !important;
+}
+#hdExportStage table.t-daily td.td-span-3 {
+  white-space: nowrap !important;
+  font-size: 13.4px !important;
+}
+
+/* 2) Founder Compact Gold Crown Button in Header (Replaces tall top bar, saves ~42px!) */
+.hdr-owner-btn {
+  background: linear-gradient(135deg, #d4af37 0%, #b88f28 100%);
+  color: #102540;
+  border: 1px solid rgba(255, 245, 200, 0.55);
+  height: 32px;
+  min-width: 32px;
+  padding: 0 8px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+  flex-shrink: 0;
+}
+.hdr-owner-btn:active { transform: scale(0.95); }
+@media (max-width: 520px) {
+  .hdr-owner-btn .txt { display: none; }
+  .hdr-owner-btn { padding: 0; width: 32px; }
+  .brand-logo-pill { height: 28px !important; padding: 2px 5px !important; }
+  .brand-logo-pill img { height: 17px !important; }
+  .header-actions { gap: 4px !important; }
+}
+
+/* 3) Fix Contrast Bug on Selected Completed Day Pill + Cleaner Compact Navigator */
+.pro-day-nav {
+  padding: 7px 9px 8px !important;
+  margin-bottom: 7px !important;
+}
+.pdn-top {
+  margin-bottom: 6px !important;
+}
+.pdn-day-pill {
+  padding: 5.5px 3px 5px !important;
+}
+.pdn-day-pill.is-done-day.sel-daily,
+.pdn-day-pill.sel-daily {
+  background: linear-gradient(135deg, #142a46 0%, #20426b 100%) !important;
+  border-color: #142a46 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(20, 42, 70, 0.28) !important;
+}
+.pdn-day-pill.is-done-day.sel-sat,
+.pdn-day-pill.sel-sat {
+  background: linear-gradient(135deg, #9d771e 0%, #c2962e 100%) !important;
+  border-color: #9d771e !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(157, 119, 30, 0.3) !important;
+}
+.pdn-day-pill.sel-daily .pdn-dp-name,
+.pdn-day-pill.sel-daily .pdn-dp-num,
+.pdn-day-pill.sel-sat .pdn-dp-name,
+.pdn-day-pill.sel-sat .pdn-dp-num {
+  color: #ffffff !important;
+}
+.pdn-day-pill.is-done-day .pdn-dp-dot {
+  display: none !important;
+}
+[data-theme="dark"] .pdn-day-pill.is-done-day:not(.sel-daily):not(.sel-sat) {
+  background: linear-gradient(180deg, #19242c 0%, #123125 100%) !important;
+  border-color: rgba(52, 211, 153, 0.38) !important;
+}
+
+/* 4) Ultra-Clean Session Status Bar (Slimmer when all done, no redundant Report button!) */
+.slim-status-bar {
+  padding: 7px 9px 9px !important;
+  gap: 6px !important;
+  margin-bottom: 6px !important;
+}
+.ssb-complete-tag {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--green);
+  white-space: nowrap;
+}
+
+/* 5) Always-Visible Search Box + Sticky Sleek Search & Filter Panel */
+.session-search-panel {
+  position: sticky;
+  top: 49px;
+  z-index: 25;
+  background: var(--bg);
+  padding: 3px 0 6px;
+  margin-bottom: 5px !important;
+  gap: 5px !important;
+}
+.session-search-panel .modern-search-box input {
+  height: 36px !important;
+  font-size: 13px !important;
+  border-radius: 11px !important;
+}
+.session-search-panel .session-filter-seg {
+  padding: 3px !important;
+  border-radius: 11px !important;
+}
+.session-search-panel .sfs-btn {
+  padding: 5.5px 4px !important;
+  font-size: 11.8px !important;
+}
+
+/* 6) Redesigned Calm, Compact Student Cards (Zero Duplication, Grade-Colored Borders!) */
+.st-card {
+  margin-bottom: 6.5px !important;
+  border-radius: 12px !important;
+}
+.st-card.st-ev-ex { border-right-color: #16794c !important; }
+.st-card.st-ev-vg { border-right-color: #15629a !important; }
+.st-card.st-ev-gd { border-right-color: #ca8a04 !important; }
+.st-card.st-ev-rep { border-right-color: #d97706 !important; }
+.st-card.st-norecite { border-right-color: #64748b !important; }
+.st-card.st-absent { border-right-color: #dc2626 !important; }
+.st-card.st-excused { border-right-color: #6b7d8a !important; }
+
+.st-card.is-compact-done .st-head {
+  padding: 8px 10px 8px !important;
+}
+.st-head {
+  padding: 8px 10px !important;
+}
+.st-sub-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5px;
+  margin-top: 2px;
+}
+.st-sub-line {
+  font-size: 11.2px;
+  color: var(--ink-500);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.32;
+}
+.st-sub-line.hw-line {
+  color: var(--ink-700);
+}
+.st-sub-line.hw-line b {
+  color: var(--brand-slate);
+  font-weight: 700;
+}
+[data-theme="dark"] .st-sub-line.hw-line b {
+  color: #e2edf8;
+}
+.b-amber {
+  background: #fef9c3;
+  color: #854d0e;
+}
+[data-theme="dark"] .b-amber {
+  background: #3b2f10;
+  color: #fde047;
+}
+
+/* Fix +½ ص button natural Arabic RTL direction (never reversed ص ½+!) */
+.qs-row-6 .quick-step-btn {
+  direction: rtl !important;
+  unicode-bidi: isolate !important;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -13592,6 +13797,7 @@ details.stm-opt-drawer[open] > summary {
         </div>
       </div>
       <div class="header-actions">
+        <button type="button" class="hdr-owner-btn" id="btnOwnerReturnHdr" onclick="switchOwnerWorkspace('owner')" style="display:none;" title="العودة للوحة المؤسس">👑 <span class="txt">المؤسس</span></button>
         <button type="button" class="hdr-bell-btn" id="btnTeacherMsgBell" onclick="openTeacherMessagesModal()" style="display:none;" title="رسائل وتنبيهات المشرف">
           <span>🔔</span><span class="hdr-bell-badge" id="hdrUnreadMsgBadge" style="display:none;">0</span>
         </button>
@@ -13705,7 +13911,7 @@ details.stm-opt-drawer[open] > summary {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v120</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v121</span>
         </button>
       </div>
     </div>
@@ -13928,6 +14134,7 @@ details.stm-opt-drawer[open] > summary {
         </div>
       </div>
       <div class="header-actions">
+        <button type="button" class="hdr-owner-btn" id="btnOwnerReturnSupHdr" onclick="switchOwnerWorkspace('owner')" style="display:none;" title="العودة للوحة المؤسس">👑 <span class="txt">المؤسس</span></button>
         <button type="button" class="hdr-btn" id="supNotifBtn" onclick="openNotifCenterModal()" title="مركز الإشعارات والصوت">🔔</button>
         <button type="button" class="hdr-btn" onclick="refreshSupervisorData(true)" title="تحديث بيانات المعلمين">🔄 <span class="txt">تحديث</span></button>
         <button type="button" class="hdr-btn" onclick="toggleTheme()" title="الوضع الليلي">🌙</button>
@@ -17343,13 +17550,17 @@ function isConsecutiveSurahRun(segs) {
   return true;
 }
 
+function formatCircledAyahBadge(num, isHtml = true) {
+  return isHtml ? `<span class="ayah-circ">${num}</span>` : `(${num})`;
+}
+
 function formatSegmentsColumns(segs, isHtml = true) {
-  if (!segs || !segs.length) return { surah: "", from: "", to: "", lines: 1 };
+  if (!segs || !segs.length) return { surah: "", from: "", to: "", lines: 1, merged3: false, mergedHtml: "", mergedText: "" };
   const esc = v => isHtml ? escapeHtml(String(v ?? "")) : String(v ?? "");
 
   const first = segs[0], last = segs[segs.length - 1];
   const s1 = SURAH_MAP[Number(first.surahId)], s2 = SURAH_MAP[Number(last.surahId)];
-  if (!s1) return { surah: "", from: "", to: "", lines: 1 };
+  if (!s1) return { surah: "", from: "", to: "", lines: 1, merged3: false, mergedHtml: "", mergedText: "" };
 
   const endS = s2 || s1;
   const fNum = Math.max(1, Math.min(s1.a, parseArabicNum(first.from, 1)));
@@ -17358,20 +17569,66 @@ function formatSegmentsColumns(segs, isHtml = true) {
   const toCell = tNum >= endS.a ? (fNum > 1 ? SURAH_END_TOKEN : "") : String(tNum);
 
   if (segs.length === 1 || (s2 && s1.id === s2.id)) {
-    return { surah: esc(s1.n), from: esc(fromCell), to: esc(toCell), lines: 1 };
+    return { surah: esc(s1.n), from: esc(fromCell), to: esc(toCell), lines: 1, merged3: false, mergedHtml: "", mergedText: "" };
   }
 
   if (s2) {
-    const sep = isConsecutiveSurahRun(segs)
-      ? (isHtml ? ` <span class="rep-arrow-sep">←</span> ` : ` ← `)
-      : (isHtml ? ` <span class="rep-arrow-sep">+</span> ` : ` + `);
-    const surahLbl = isConsecutiveSurahRun(segs)
+    const isConsec = isConsecutiveSurahRun(segs);
+    const sepHtml = isConsec ? ` <span class="rep-arrow-sep">←</span> ` : ` <span class="rep-arrow-sep">+</span> `;
+    const sepTxt = isConsec ? ` ← ` : ` + `;
+    const sep = isHtml ? sepHtml : sepTxt;
+    const surahLbl = isConsec
       ? `${esc(s1.n)}${sep}${esc(s2.n)}`
       : segs.map(x => esc(SURAH_MAP[Number(x.surahId)]?.n || "")).filter(Boolean).join(sep);
-    return { surah: surahLbl, from: esc(fromCell), to: esc(toCell), lines: 1 };
+
+    // Multi-surah with ayah numbers (e.g. الفجر 17 ← الغاشية 11): merge all 3 cells with crisp circled ayah badges!
+    const hasMidAyah = (fNum > 1) || (tNum < endS.a) || !isConsec;
+    let mergedHtml = "", mergedText = "";
+    if (hasMidAyah) {
+      if (isConsec) {
+        const p1Html = fNum > 1 ? `${escapeHtml(s1.n)} ${formatCircledAyahBadge(fNum, true)}` : escapeHtml(s1.n);
+        const p2Html = tNum < endS.a ? `${escapeHtml(endS.n)} ${formatCircledAyahBadge(tNum, true)}` : escapeHtml(endS.n);
+        const p1Txt = fNum > 1 ? `${s1.n} (${fNum})` : s1.n;
+        const p2Txt = tNum < endS.a ? `${endS.n} (${tNum})` : endS.n;
+        mergedHtml = `${p1Html}${sepHtml}${p2Html}`;
+        mergedText = `${p1Txt}${sepTxt}${p2Txt}`;
+      } else {
+        const htmlParts = [], txtParts = [];
+        segs.forEach(seg => {
+          const si = SURAH_MAP[Number(seg.surahId)];
+          if (!si) return;
+          const sf = Math.max(1, Math.min(si.a, parseArabicNum(seg.from, 1)));
+          const st = Math.max(sf, Math.min(si.a, parseArabicNum(seg.to, si.a)));
+          if (sf <= 1 && st >= si.a) {
+            htmlParts.push(escapeHtml(si.n));
+            txtParts.push(si.n);
+          } else if (sf <= 1) {
+            htmlParts.push(`${escapeHtml(si.n)} (إلى ${formatCircledAyahBadge(st, true)})`);
+            txtParts.push(`${si.n} (إلى ${st})`);
+          } else if (st >= si.a) {
+            htmlParts.push(`${escapeHtml(si.n)} (${formatCircledAyahBadge(sf, true)}–${SURAH_END_TOKEN})`);
+            txtParts.push(`${si.n} (${sf}–${SURAH_END_TOKEN})`);
+          } else {
+            htmlParts.push(`${escapeHtml(si.n)} (${formatCircledAyahBadge(sf, true)}–${formatCircledAyahBadge(st, true)})`);
+            txtParts.push(`${si.n} (${sf}–${st})`);
+          }
+        });
+        mergedHtml = htmlParts.join(sepHtml);
+        mergedText = txtParts.join(sepTxt);
+      }
+    }
+    return {
+      surah: surahLbl,
+      from: esc(fromCell),
+      to: esc(toCell),
+      lines: 1,
+      merged3: hasMidAyah,
+      mergedHtml,
+      mergedText
+    };
   }
 
-  return { surah: esc(s1.n), from: esc(fromCell), to: esc(toCell), lines: 1 };
+  return { surah: esc(s1.n), from: esc(fromCell), to: esc(toCell), lines: 1, merged3: false, mergedHtml: "", mergedText: "" };
 }
 
 function upgradeLegacyPagePair(fromStr, toStr) {
@@ -21899,13 +22156,14 @@ function routeAppByCurrentUser() {
   const isOwner = Boolean(curUser && (curUser.role === "owner" || (tibyanAccounts.ownerUid && curUser.id === tibyanAccounts.ownerUid)));
   const effView = isOwner ? (_ownerWorkspaceMode || "owner") : (curUser?.role || "guest");
 
-  // Show/hide Owner Quick Return Bar when Founder previews Teacher/Supervisor views
+  // Show/hide compact Founder Crown button inside header (saves full top bar height!)
   const qBar = document.getElementById("ownerQuickReturnBar");
-  if (qBar) {
-    qBar.style.display = (isOwner && effView !== "owner") ? "flex" : "none";
-    const lbl = document.getElementById("ownerPreviewRoleLbl");
-    if (lbl) lbl.textContent = effView === "supervisor" ? "مشرف صرح" : "معلم حلقة";
-  }
+  if (qBar) qBar.style.display = "none";
+  const showOwnerRet = Boolean(isOwner && effView !== "owner");
+  const hdrOwnerBtn = document.getElementById("btnOwnerReturnHdr");
+  if (hdrOwnerBtn) hdrOwnerBtn.style.display = (showOwnerRet && effView !== "supervisor") ? "inline-flex" : "none";
+  const supOwnerBtn = document.getElementById("btnOwnerReturnSupHdr");
+  if (supOwnerBtn) supOwnerBtn.style.display = (showOwnerRet && effView === "supervisor") ? "inline-flex" : "none";
 
   // Case 0: Owner / Founder Control Panel
   if (isOwner && effView === "owner") {
@@ -25229,10 +25487,10 @@ function renderTodayBanner() {
     dateMain = `${archTag}${cur.dayName}، ${curHj.day} ${mName}`;
     const isTodaySess = cur.date === tod;
     const todHj = getExactHijriInfo(tod);
-    const todShort = `${todHj.dayName} ${todHj.day} ${HIJRI_MONTHS[todHj.month] || ""}`;
+    const todShort = `${todHj.day} ${HIJRI_MONTHS[todHj.month] || ""}`;
     dateSub = isTodaySess
-      ? `اليوم الفعلي (${curHj.year} هـ) • اضغط للتقويم`
-      : `اليوم: ${todShort} • اضغط للتقويم`;
+      ? `${curHj.year} هـ • اليوم`
+      : `تاريخ اليوم: ${todShort}`;
     if (cur.noClass) { modeLbl = "🚫 عطلة"; modeCls = "is-nc"; }
     else if (cur.type === "saturday") { modeLbl = "📘 مراجعة"; modeCls = "is-sat"; }
     else { modeLbl = "📖 تسميع"; modeCls = ""; }
@@ -25263,7 +25521,7 @@ function renderTodayBanner() {
     return `<button type="button" class="pdn-day-pill ${todayCls} ${dataCls} ${ncCls} ${lockCls} ${doneCls} ${selCls}" onclick="onNavDayPillClick('${d.iso}');" title="${isLocked ? 'مقفول حتى إتمام اليوم الحالي' : (isCompletedDay ? 'يوم مكتمل — اضغط للتعديل' : escapeHtml(d.hj.fullText))}">
       <span class="pdn-dp-name">${isLocked ? '🔒 ' : ''}${isCompletedDay ? '<span class="pdn-done-chk" aria-label="مكتمل">✓</span> ' : ''}${escapeHtml(shortName)}${!isLocked && isRevDay ? ' <span style="font-size:10px;">📘</span>' : ''}</span>
       <span class="pdn-dp-num">${escapeHtml(numLabel)}</span>
-      <span class="pdn-dp-dot"></span>
+      ${!isCompletedDay ? '<span class="pdn-dp-dot"></span>' : ''}
     </button>`;
   };
 
@@ -25505,22 +25763,35 @@ function getStudentPrevSessionHint(h, cur, stId, precomputedCandidates = null) {
 function buildSingleStudentCardHtml(h, s, item, _prePrevCandidates, _preRelevantAttn) {
   const { st, idx, r, isAbs, isPend, isDone, isOpen, qPos } = item;
   const isNoRec = isPresentNoRecite(r.attendance);
+  const isRashidi = st.track === "rashidi";
+  const mainEvalForBorder = (s.type === "daily" || isRashidi) ? (r.recEval || "") : (r.majEval || r.minEval || "");
+  const evalBorderCls = mainEvalForBorder === "ممتاز" ? "st-ev-ex"
+    : mainEvalForBorder === "جيد جداً" ? "st-ev-vg"
+    : mainEvalForBorder === "جيد" ? "st-ev-gd"
+    : mainEvalForBorder === "إعادة" ? "st-ev-rep" : "st-done";
   const stClass = isAbs ? (r.attendance === "غياب مبرر" ? "st-excused" : "st-absent")
     : isNoRec ? "st-norecite"
     : !isDone ? (isPend ? "st-pending" : "st-late")
-    : r.attendance === "متأخر" ? "st-late" : "st-done";
+    : evalBorderCls;
   const hint = getStudentPrevSessionHint(h, s, st.id, _prePrevCandidates);
 
   const nameLen = st.name.trim().length;
   const nameSizeCls = nameLen > 16 ? "name-long" : (nameLen > 12 ? "name-med" : "");
 
   const dRevPg = (s.type === "daily" && !isAbs) ? calcDailyReviewPages(r) : 0;
-  const isRashidi = st.track === "rashidi";
-  const subText = isRashidi
-    ? `الرشيدي: ص ${r.rashidiFrom || st.rashidiPage || 1}${r.rashidiTo && Number(r.rashidiTo) !== Number(r.rashidiFrom || st.rashidiPage || 1) ? '–' + r.rashidiTo : ''} (${formatNum(r.rashidiPages || st.rashidiPace || 1)} ص)`
+  const recSubText = isRashidi
+    ? `الرشيدي: ص ${r.rashidiFrom || st.rashidiPage || 1}${r.rashidiTo && Number(r.rashidiTo) !== Number(r.rashidiFrom || st.rashidiPage || 1) ? '–' + r.rashidiTo : ''}`
     : (s.type === "daily"
-      ? [formatSegmentsInline(getSegments(r, "rec")), dRevPg > 0 ? `مراجعة: ${formatNum(dRevPg)} ص` : ""].filter(Boolean).join(" • ")
+      ? [r.recIsSabr && r.sabrJuz ? `🎓 سبر ${formatJuzClean(r.sabrJuz)}` : formatSegmentsInline(getSegments(r, "rec")), dRevPg > 0 ? `مراجعة ${formatNum(dRevPg)} ص` : ""].filter(Boolean).join(" • ")
       : [r.minText ? `صغرى: ${r.minText}` : "", r.majFrom ? `كبرى: ${formatMajStripDisplay(r.majFrom, r.majTo)}` : ""].filter(Boolean).join(" • "));
+
+  const hwSubText = isRashidi
+    ? (r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}${r.hwRashidiTo && Number(r.hwRashidiTo) !== Number(r.hwRashidiFrom) ? '–' + r.hwRashidiTo : ''}` : "")
+    : (s.type === "daily"
+      ? (r.hwSabrJuz ? `🎓 سبر ${formatJuzClean(r.hwSabrJuz)}` : formatSegmentsInline(getSegments(r, "hw")))
+      : (r.manualSatHw
+        ? (r.hwSabrJuz ? `🎓 سبر ${formatJuzClean(r.hwSabrJuz)}` : formatSegmentsInline(getSegments(r, "hw")))
+        : (r.nextMajSabrJuz ? `🎓 سبر ${getJuzByName(r.nextMajSabrJuz)?.shortName || r.nextMajSabrJuz}` : (r.nextMajFrom ? formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) : ""))));
 
   const attn = getStudentAttentionAlert(h, s, st.id, _preRelevantAttn);
   let memTag = isRashidi ? `<span class="attn-tag rashidi">🔤 رشيدي</span>` : "";
@@ -25534,10 +25805,10 @@ function buildSingleStudentCardHtml(h, s, item, _prePrevCandidates, _preRelevant
 
   let statusBadge = "";
   if (isAbs) statusBadge = `<span class="badge ${r.attendance==='غياب مبرر'?'b-slate':'b-red'}">${r.attendance==='غياب مبرر'?'مبرر':'غياب'}</span>`;
-  else if (isNoRec) statusBadge = `<span class="badge b-slate">حضر • لم يُسمّع</span>`;
-  else if (isPend) statusBadge = `<span class="badge b-muted">بانتظار</span>`;
+  else if (isNoRec) statusBadge = `<span class="badge b-slate">لم يُسمّع</span>`;
+  else if (isPend) statusBadge = "";
   else if (s.type === "daily" || isRashidi) {
-    const ec = r.recEval === "ممتاز" ? "b-green" : r.recEval === "إعادة" ? "b-red" : "b-blue";
+    const ec = r.recEval === "ممتاز" ? "b-green" : r.recEval === "إعادة" ? "b-red" : (r.recEval === "جيد" ? "b-amber" : "b-blue");
     statusBadge = `<span class="badge ${ec}">${r.recEval}</span>`;
   } else if (!isDone) {
     statusBadge = r.minEval && !r.majEval
@@ -25545,7 +25816,7 @@ function buildSingleStudentCardHtml(h, s, item, _prePrevCandidates, _preRelevant
       : `<span class="badge b-orange">بقي الصغرى</span>`;
   } else {
     const satEv = r.majEval || r.minEval || "";
-    const secCls = satEv === "ممتاز" ? "b-green" : satEv === "إعادة" ? "b-red" : "b-blue";
+    const secCls = satEv === "ممتاز" ? "b-green" : satEv === "إعادة" ? "b-red" : (satEv === "جيد" ? "b-amber" : "b-blue");
     statusBadge = `<span class="badge ${secCls}">${escapeHtml(satEv)}</span>`;
   }
   const lateTag = r.attendance === "متأخر" ? `<span class="badge b-orange">متأخر</span>` : "";
@@ -25557,66 +25828,70 @@ function buildSingleStudentCardHtml(h, s, item, _prePrevCandidates, _preRelevant
     ? `<button type="button" class="queue-hand-btn ${qPos >= 0 ? 'in-q' : ''}" onclick="event.stopPropagation(); toggleStudentQueue('${st.id}');" title="${qPos >= 0 ? 'اضغط لتأجيل دوره لآخر الطابور' : 'إضافة لدور التسميع بالترتيب'}">✋${qPos >= 0 ? ` ${qPos + 1}` : ''}</button>`
     : "";
 
+  // Show 1-tap quick-eval strip ONLY for pending / not-yet-completed students (eliminates duplication & doubles visible students!)
   let quickStrip = "";
-  if (!isAbs && isRashidi) {
-    const hwR = r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}${r.hwRashidiTo && Number(r.hwRashidiTo) !== Number(r.hwRashidiFrom) ? '–' + r.hwRashidiTo : ''}` : "";
-    quickStrip = `<div class="quick-strip" onclick="event.stopPropagation()">
-      <div class="pill-group">
-        <button class="pill pill-sm ${r.recEval==='ممتاز'?'on-green':''}" onclick="setRashidiEval('${st.id}','ممتاز')">ممتاز</button>
-        <button class="pill pill-sm ${r.recEval==='جيد جداً'?'on-blue':''}" onclick="setRashidiEval('${st.id}','جيد جداً')">جيد جداً</button>
-        <button class="pill pill-sm ${r.recEval==='جيد'?'on-blue':''}" onclick="setRashidiEval('${st.id}','جيد')">جيد</button>
-        <button class="pill pill-sm ${r.recEval==='إعادة'?'on-red':''}" onclick="setRashidiEval('${st.id}','إعادة')">إعادة</button>
-        <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
-      </div>
-      ${hwR ? `<span style="font-size:11px; color:var(--ink-500);">الواجب: <b>${escapeHtml(hwR)}</b></span>` : ''}
-    </div>`;
-  } else if (!isAbs && s.type === "daily" && (r.recSurahId || (r.recIsSabr && r.sabrJuz))) {
-    const hwInline = r.hwSabrJuz ? `🎓 سبر ${formatJuzClean(r.hwSabrJuz)}` : formatSegmentsInline(getSegments(r, "hw"));
-    quickStrip = `<div class="quick-strip has-qs-row-6" onclick="event.stopPropagation()">
-      <div class="qs-row-6 ${r.hwSabrJuz ? 'cols-5' : ''}">
-        <button class="pill pill-sm ${r.recEval==='ممتاز'?'on-green':''}" onclick="setRecEval('${st.id}','ممتاز')">ممتاز</button>
-        <button class="pill pill-sm ${r.recEval==='جيد جداً'?'on-blue':''}" onclick="setRecEval('${st.id}','جيد جداً')">جيد جداً</button>
-        <button class="pill pill-sm ${r.recEval==='جيد'?'on-blue':''}" onclick="setRecEval('${st.id}','جيد')">جيد</button>
-        <button class="pill pill-sm ${r.recEval==='إعادة'?'on-red':''}" onclick="setRecEval('${st.id}','إعادة')">إعادة</button>
-        <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
-        ${!r.hwSabrJuz ? `<button type="button" class="quick-step-btn" onclick="quickNextAyahStep('${st.id}')" title="إضافة نصف صفحة على الواجب الحالي">+½ ص</button>` : ""}
-      </div>
-      ${hwInline ? `<div class="qs-hw-sub">الواجب: <b>${escapeHtml(hwInline)}</b></div>` : ''}
-    </div>`;
-  } else if (!isAbs && s.type === "saturday") {
-    const isDiffSat = Boolean(r.minEval && r.majEval && r.minEval !== r.majEval);
-    const satMainEv = r.majEval || r.minEval || "";
-    const qsFn = isDiffSat ? "setSatMajEval" : "quickSatBothEval";
-    const minDiffHint = isDiffSat
-      ? `<span class="badge ${r.minEval==='ممتاز'?'b-green':(r.minEval==='إعادة'?'b-red':'b-blue')}" style="font-size:10px; padding:1px 6px;">صغرى: ${escapeHtml(r.minEval)}</span>`
-      : "";
-    quickStrip = `<div class="quick-strip sat-quick" onclick="event.stopPropagation()">
-      <div class="pill-group" style="align-items:center;">
-        <span style="font-size:10.5px; font-weight:800; color:var(--ink-500);" title="تقييم سريع (يعتمد الكبرى على البطاقة)">${isDiffSat ? 'كبرى:' : 'معاً:'}</span>
-        <button class="pill pill-sm ${satMainEv==='ممتاز'?'on-green':''}" onclick="${qsFn}('${st.id}','ممتاز')">ممتاز</button>
-        <button class="pill pill-sm ${satMainEv==='جيد جداً'?'on-blue':''}" onclick="${qsFn}('${st.id}','جيد جداً')">جيد جداً</button>
-        <button class="pill pill-sm ${satMainEv==='جيد'?'on-blue':''}" onclick="${qsFn}('${st.id}','جيد')">جيد</button>
-        <button class="pill pill-sm ${satMainEv==='إعادة'?'on-red':''}" onclick="${qsFn}('${st.id}','إعادة')">إعادة</button>
-        <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
-        ${minDiffHint}
-      </div>
-      ${r.manualSatHw ? `<span style="font-size:11px; color:var(--blue); font-weight:700;">✏️ تسميع قادم: <b>${escapeHtml(r.hwSabrJuz ? `🎓 سبر ${formatJuzClean(r.hwSabrJuz)}` : formatSegmentsInline(getSegments(r, "hw")))}</b></span>` : ((r.nextMajSabrJuz || r.nextMajFrom) ? `<span style="font-size:11px; color:var(--ink-500);">القادم: <b>${escapeHtml(r.nextMajSabrJuz ? `🎓 سبر ${getJuzByName(r.nextMajSabrJuz)?.shortName || r.nextMajSabrJuz}` : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo))}</b></span>` : '')}
-    </div>`;
+  if (!isDone && !isAbs) {
+    if (isRashidi) {
+      quickStrip = `<div class="quick-strip" onclick="event.stopPropagation()">
+        <div class="pill-group">
+          <button class="pill pill-sm ${r.recEval==='ممتاز'?'on-green':''}" onclick="setRashidiEval('${st.id}','ممتاز')">ممتاز</button>
+          <button class="pill pill-sm ${r.recEval==='جيد جداً'?'on-blue':''}" onclick="setRashidiEval('${st.id}','جيد جداً')">جيد جداً</button>
+          <button class="pill pill-sm ${r.recEval==='جيد'?'on-blue':''}" onclick="setRashidiEval('${st.id}','جيد')">جيد</button>
+          <button class="pill pill-sm ${r.recEval==='إعادة'?'on-red':''}" onclick="setRashidiEval('${st.id}','إعادة')">إعادة</button>
+          <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
+        </div>
+      </div>`;
+    } else if (s.type === "daily" && (r.recSurahId || (r.recIsSabr && r.sabrJuz))) {
+      quickStrip = `<div class="quick-strip has-qs-row-6" onclick="event.stopPropagation()">
+        <div class="qs-row-6 ${r.hwSabrJuz ? 'cols-5' : ''}">
+          <button class="pill pill-sm ${r.recEval==='ممتاز'?'on-green':''}" onclick="setRecEval('${st.id}','ممتاز')">ممتاز</button>
+          <button class="pill pill-sm ${r.recEval==='جيد جداً'?'on-blue':''}" onclick="setRecEval('${st.id}','جيد جداً')">جيد جداً</button>
+          <button class="pill pill-sm ${r.recEval==='جيد'?'on-blue':''}" onclick="setRecEval('${st.id}','جيد')">جيد</button>
+          <button class="pill pill-sm ${r.recEval==='إعادة'?'on-red':''}" onclick="setRecEval('${st.id}','إعادة')">إعادة</button>
+          <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
+          ${!r.hwSabrJuz ? `<button type="button" class="quick-step-btn" onclick="quickNextAyahStep('${st.id}')" title="إضافة نصف صفحة على الواجب الحالي"><span dir="ltr">+½</span> ص</button>` : ""}
+        </div>
+      </div>`;
+    } else if (s.type === "saturday") {
+      const isDiffSat = Boolean(r.minEval && r.majEval && r.minEval !== r.majEval);
+      const satMainEv = r.majEval || r.minEval || "";
+      const qsFn = isDiffSat ? "setSatMajEval" : "quickSatBothEval";
+      const minDiffHint = isDiffSat
+        ? `<span class="badge ${r.minEval==='ممتاز'?'b-green':(r.minEval==='إعادة'?'b-red':'b-blue')}" style="font-size:10px; padding:1px 6px;">صغرى: ${escapeHtml(r.minEval)}</span>`
+        : "";
+      quickStrip = `<div class="quick-strip sat-quick" onclick="event.stopPropagation()">
+        <div class="pill-group" style="align-items:center;">
+          <span style="font-size:10.5px; font-weight:800; color:var(--ink-500);" title="تقييم سريع">${isDiffSat ? 'كبرى:' : 'معاً:'}</span>
+          <button class="pill pill-sm ${satMainEv==='ممتاز'?'on-green':''}" onclick="${qsFn}('${st.id}','ممتاز')">ممتاز</button>
+          <button class="pill pill-sm ${satMainEv==='جيد جداً'?'on-blue':''}" onclick="${qsFn}('${st.id}','جيد جداً')">جيد جداً</button>
+          <button class="pill pill-sm ${satMainEv==='جيد'?'on-blue':''}" onclick="${qsFn}('${st.id}','جيد')">جيد</button>
+          <button class="pill pill-sm ${satMainEv==='إعادة'?'on-red':''}" onclick="${qsFn}('${st.id}','إعادة')">إعادة</button>
+          <button class="pill pill-sm ${isNoRec?'on-norecite':''}" onclick="setAttendance('${st.id}','حضر ولم يُسمّع')" title="حضر ولم يُسمّع">لم يُسمّع</button>
+          ${minDiffHint}
+        </div>
+      </div>`;
+    }
   }
 
-  return `<div class="st-card ${stClass} ${qPos >= 0 ? 'in-queue' : ''} ${isOpen ? 'eval-active' : ''}" id="card_${st.id}" data-st-name="${escapeHtml(normalizeSearchArabic(st.name))}" data-is-done="${isDone ? '1' : '0'}" data-is-abs="${isAbs ? '1' : '0'}">
+  const subLinesHtml = (recSubText || (!isAbs && hwSubText))
+    ? `<div class="st-sub-lines">
+        ${recSubText ? `<div class="st-sub-line">📖 ${escapeHtml(recSubText)}</div>` : ''}
+        ${!isAbs && hwSubText ? `<div class="st-sub-line hw-line">📌 ${s.type === "saturday" && !r.manualSatHw ? 'القادم:' : 'الواجب:'} <b>${escapeHtml(hwSubText)}</b></div>` : ''}
+      </div>`
+    : '';
+
+  return `<div class="st-card ${stClass} ${isDone ? 'is-compact-done' : ''} ${qPos >= 0 ? 'in-queue' : ''} ${isOpen ? 'eval-active' : ''}" id="card_${st.id}" data-st-name="${escapeHtml(normalizeSearchArabic(st.name))}" data-is-done="${isDone ? '1' : '0'}" data-is-abs="${isAbs ? '1' : '0'}">
     <div class="st-head" onclick="toggleCard('${st.id}')">
       <div class="st-title-wrap">
         <span class="st-num">${idx + 1}</span>
         <div class="st-name-box">
           <div class="st-name ${nameSizeCls}">${escapeHtml(st.name)}${memTag}</div>
-          ${subText ? `<div class="st-sub-range">${escapeHtml(subText)}</div>` : ''}
+          ${subLinesHtml}
         </div>
       </div>
       <div class="badges-wrap">
         ${waQuickBtn}${queueBtn}${lateTag}${statusBadge}
         ${isPointsEnabled(h) ? `<span class="badge b-slate st-pts-badge">⭐ ${r.points || 0}</span>` : ''}
-        <span style="color:var(--ink-500); font-size:11px;">‹</span>
       </div>
     </div>
     ${quickStrip}
@@ -25629,7 +25904,7 @@ function buildSessionStatusBarHtml(s, doneCnt, totalSt, absCnt, pendingCnt, done
   const primaryActs = pendingCnt > 0
     ? `<button type="button" class="btn btn-primary btn-sm" onclick="openNextPendingStudent()" title="فتح المتبقي التالي">⏭️ التالي</button>
        <button type="button" class="btn btn-warn btn-sm" onclick="openAutoAbsentModal()">غياب (${pendingCnt})</button>`
-    : `<button type="button" class="btn btn-success btn-sm" onclick="currentReportSubtab='daily'; switchTab('reports')">📄 التقرير</button>`;
+    : `<span class="ssb-complete-tag">✨ اكتملت الجلسة</span>`;
   const prefillCall = s.type === "saturday" ? "prefillSaturdayReviews(true, true)" : "prefillDailyRecitation(true, true)";
   return `
     <div class="ssb-row-top">
@@ -25641,7 +25916,7 @@ function buildSessionStatusBarHtml(s, doneCnt, totalSt, absCnt, pendingCnt, done
     </div>
     <div class="ssb-tools-3">
       <button type="button" class="ssb-tool-btn" onclick="${prefillCall}" title="تحديث وتعبئة الواجبات تلقائياً">🔄 الواجبات</button>
-      <button type="button" class="ssb-tool-btn ${hasDL ? 'is-done' : ''}" onclick="openSessionLessonsModal()" title="تسجيل دروس استهداء والحديث والنشاطات">📚 دروس اليوم${hasDL ? ' ✓' : ''}</button>
+      <button type="button" class="ssb-tool-btn ${hasDL ? 'is-done' : ''}" onclick="openSessionLessonsModal()" title="تسجيل دروس استهداء والحديث والنشاطات">📚 الدروس${hasDL ? ' ✓' : ''}</button>
       <button type="button" class="ssb-tool-btn" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">⚡ تفقد</button>
     </div>
     <div class="ssb-prog-line"><div class="ssb-prog-fill" style="width:${donePct}%;"></div></div>`;
@@ -28630,6 +28905,13 @@ function renderReportRangePairCells(fromHtml, toHtml) {
   return `<td>${fromHtml}</td><td>${toHtml}</td>`;
 }
 
+function renderReport3Cells(cols, extraCls = "") {
+  if (cols && cols.merged3 && cols.mergedHtml) {
+    return `<td colspan="3" class="td-span-3 ${extraCls}">${cols.mergedHtml}</td>`;
+  }
+  return `<td${extraCls ? ` class="${extraCls}"` : ''}>${cols?.surah || ""}</td>${renderReportRangePairCells(cols?.from || "", cols?.to || "")}`;
+}
+
 
 function maxPlainLineLen(htmlOrText) {
   const raw = String(htmlOrText || "")
@@ -28821,10 +29103,13 @@ function renderDailyReport() {
             ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1 }
             : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, true) : formatSegmentsColumns(getSegments(r, "hw"), true));
           stdHwByStudent.set(st.id, hwCols);
-          const sL = maxPlainLineLen(hwCols.surah);
+          const sL = maxPlainLineLen(hwCols.merged3 ? hwCols.mergedText : hwCols.surah);
           const fPlain = String(hwCols.from || "").replace(/<[^>]+>/g, "").trim();
           const tPlain = String(hwCols.to || "").replace(/<[^>]+>/g, "").trim();
-          if (sL > hwMaxSurahLen) hwMaxSurahLen = sL;
+          if (hwCols.merged3) {
+            if (Math.ceil(sL * 0.65) > hwMaxSurahLen) hwMaxSurahLen = Math.ceil(sL * 0.65);
+            if (Math.ceil(sL * 0.5) > hwMaxSpanLen) hwMaxSpanLen = Math.ceil(sL * 0.5);
+          } else if (sL > hwMaxSurahLen) hwMaxSurahLen = sL;
           if ((/[؀-ۿ]{3,}/.test(fPlain) && !isSurahEndToken(fPlain)) || (/[؀-ۿ]{3,}/.test(tPlain) && !isSurahEndToken(tPlain))) {
             const comb = (fPlain === "جزء" && tPlain) ? `جزء ${tPlain}` : ((fPlain && tPlain && fPlain !== tPlain) ? `${fPlain} ← ${tPlain}` : (fPlain || tPlain));
             if (comb.length > hwMaxSpanLen) hwMaxSpanLen = comb.length;
@@ -28895,7 +29180,7 @@ function renderDailyReport() {
         const hwCols = stdHwByStudent.get(st.id) || (isRashidiRow
           ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1 }
           : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, true) : formatSegmentsColumns(getSegments(r, "hw"), true)));
-        hwCellsHtml = `<td>${hwCols.surah}</td>${renderReportRangePairCells(hwCols.from, hwCols.to)}`;
+        hwCellsHtml = renderReport3Cells(hwCols);
       }
 
       const isPendingSabrOnly = Boolean(r.recIsSabr && r.sabrJuz && !r.recEval && !isAbs);
@@ -28932,8 +29217,7 @@ function renderDailyReport() {
       tbl += `<tr>
         <td>${idx + 1}</td>
         <td class="txt-right td-name-col">${escapeHtml(st.name)}</td>
-        <td>${recCols.surah}</td>
-        ${renderReportRangePairCells(recCols.from, recCols.to)}
+        ${renderReport3Cells(recCols)}
         <td class="${evalSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(evalSt.text)}</td>
         ${ptsOn ? `<td class="td-pts">${r.points || 0}</td>` : ''}
         <td class="td-rev-slim">${dRevCols.from}</td>
@@ -28970,10 +29254,13 @@ function renderDailyReport() {
             ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1, isSabr: false }
             : formatSatNextMajColumns(r, true));
         satHwByStudent.set(st.id, hc);
-        const sL = maxPlainLineLen(hc.surah);
+        const sL = maxPlainLineLen(hc.merged3 ? hc.mergedText : hc.surah);
         const fPlain = String(hc.from || "").replace(/<[^>]+>/g, "").trim();
         const tPlain = String(hc.to || "").replace(/<[^>]+>/g, "").trim();
-        if (sL > satHwSurahLen) satHwSurahLen = sL;
+        if (hc.merged3) {
+          if (Math.ceil(sL * 0.65) > satHwSurahLen) satHwSurahLen = Math.ceil(sL * 0.65);
+          if (Math.ceil(sL * 0.5) > satHwSpanLen) satHwSpanLen = Math.ceil(sL * 0.5);
+        } else if (sL > satHwSurahLen) satHwSurahLen = sL;
         if ((/[؀-ۿ]{3,}/.test(fPlain) && !isSurahEndToken(fPlain)) || (/[؀-ۿ]{3,}/.test(tPlain) && !isSurahEndToken(tPlain))) {
           const comb = (fPlain === "جزء" && tPlain) ? `جزء ${tPlain}` : ((fPlain && tPlain && fPlain !== tPlain) ? `${fPlain} ← ${tPlain}` : (fPlain || tPlain));
           if (comb.length > satHwSpanLen) satHwSpanLen = comb.length;
@@ -29042,15 +29329,13 @@ function renderDailyReport() {
       tbl += `<tr>
         <td>${idx + 1}</td>
         <td class="txt-right td-name-col">${escapeHtml(st.name)}</td>
-        <td>${minCols.surah}</td>
-        ${renderReportRangePairCells(minCols.from, minCols.to)}
+        ${renderReport3Cells(minCols)}
         <td class="${minSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(minSt.text)}</td>
         <td class="td-rev-slim">${majCols.from}</td>
         <td class="td-rev-slim">${majCols.to}</td>
         <td class="${majSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(majSt.text)}</td>
         ${ptsOn ? `<td class="td-pts">${r.points || 0}</td>` : ''}
-        <td class="${hwCols.isSabr ? 'td-sabr' : ''}">${hwCols.surah}</td>
-        ${renderReportRangePairCells(hwCols.from, hwCols.to)}
+        ${renderReport3Cells(hwCols, hwCols.isSabr ? 'td-sabr' : '')}
         <td class="txt-right td-note">${escapeHtml(stripMushafPageTokens(r.notes || ""))}</td>
       </tr>`;
       } catch (rowErr) {
@@ -32280,6 +32565,10 @@ async function exportDailyExcelStyled() {
           }
           styleCell(row.getCell(c), { fill, fontColor, bold, size: sz, align: (c === 2 || c === noteCol) ? "right" : "center" });
         }
+        if (recCols.merged3 && recCols.mergedText) {
+          ws.mergeCells(rIdx, 3, rIdx, 5);
+          row.getCell(3).value = recCols.mergedText;
+        }
         if (xlDailyNextIsReview) {
           if (xlRevHw?.isRashidi) {
             ws.mergeCells(rIdx, hwStartCol, rIdx, hwStartCol + 2);
@@ -32292,6 +32581,9 @@ async function exportDailyExcelStyled() {
           const c1 = hwStartCol + 1, c2 = hwStartCol + 2;
           ws.mergeCells(rIdx, c1, rIdx, c2);
           row.getCell(c1).value = (hwCols.from === "جزء" && hwCols.to) ? `جزء ${hwCols.to}` : `${hwCols.from} ← ${hwCols.to}`;
+        } else if (hwCols.merged3 && hwCols.mergedText) {
+          ws.mergeCells(rIdx, hwStartCol, rIdx, hwStartCol + 2);
+          row.getCell(hwStartCol).value = hwCols.mergedText;
         }
       });
 
@@ -32396,7 +32688,14 @@ async function exportDailyExcelStyled() {
           if (hasHwSabr && c >= hwStartCol && c < noteCol) { fill = "FFE8F5E9"; }
           styleCell(row.getCell(c), { fill, fontColor, bold, size: sz, align: (c === 2 || c === noteCol) ? "right" : "center" });
         }
-        if (/[\u0600-\u06FF]{3,}/.test(String(hwCols.from || "")) || /[\u0600-\u06FF]{3,}/.test(String(hwCols.to || ""))) {
+        if (minCols.merged3 && minCols.mergedText) {
+          ws.mergeCells(rIdx, 3, rIdx, 5);
+          row.getCell(3).value = minCols.mergedText;
+        }
+        if (hwCols.merged3 && hwCols.mergedText) {
+          ws.mergeCells(rIdx, hwStartCol, rIdx, hwStartCol + 2);
+          row.getCell(hwStartCol).value = hwCols.mergedText;
+        } else if ((/[\u0600-\u06FF]{3,}/.test(String(hwCols.from || "")) && !isSurahEndToken(hwCols.from)) || (/[\u0600-\u06FF]{3,}/.test(String(hwCols.to || "")) && !isSurahEndToken(hwCols.to))) {
           const c1 = hwStartCol + 1, c2 = hwStartCol + 2;
           ws.mergeCells(rIdx, c1, rIdx, c2);
           row.getCell(c1).value = (hwCols.from === "جزء" && hwCols.to) ? `جزء ${hwCols.to}` : ((hwCols.from && hwCols.to && hwCols.from !== hwCols.to) ? `${hwCols.from} ← ${hwCols.to}` : (hwCols.from || hwCols.to));
@@ -32609,7 +32908,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v120 -->
+<!-- Makin App v121 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -37995,7 +38294,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v120";
+const TIBYAN_APP_VERSION = "v121";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
