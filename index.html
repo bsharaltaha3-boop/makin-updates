@@ -13291,7 +13291,7 @@ details.stm-opt-drawer[open] > summary {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v115</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v116</span>
         </button>
       </div>
     </div>
@@ -13333,7 +13333,7 @@ details.stm-opt-drawer[open] > summary {
             <button type="button" class="pill pill-sm" id="arcTypeDaily" onclick="setArchiveTypeFilter('daily')">📖 التسميع</button>
             <button type="button" class="pill pill-sm" id="arcTypeSat" onclick="setArchiveTypeFilter('saturday')">📘 المراجعة</button>
           </div>
-          <button type="button" class="btn btn-soft btn-sm" style="padding:4px 9px; font-size:11.5px;" onclick="openYearArchiveModal()">📦 أرشيف السنوات</button>
+          <span class="badge b-green" style="font-size:10.5px;">✓ حفظ تلقائي كامل</span>
         </div>
       </div>
       <div id="archiveListWrap"></div>
@@ -18422,16 +18422,17 @@ async function hydrateStateFromIndexedDB(uidOverride = null) {
     if (idbCount > 0) {
       const locTs = getAppStateLatestModifiedIso(appState);
       const idbTs = getAppStateLatestModifiedIso(idbData) || rec.updatedAt || "";
-      // Hydrate if localStorage was empty/evicted OR IndexedDB holds strictly newer data (e.g. after QuotaExceeded!)
-      if (locCount === 0 || (idbTs && (!locTs || idbTs > locTs))) {
+      const wasHotMirror = Boolean(appState?._isHotMirror);
+      const locSessTotal = Object.values(appState?.halaqat || {}).reduce((a, x) => a + (x?.sessions?.length || 0), 0);
+      const idbSessTotal = Object.values(idbData?.halaqat || {}).reduce((a, x) => a + (x?.sessions?.length || 0), 0);
+      // Hydrate if localStorage was empty/evicted, was a 95-day hot mirror, OR IndexedDB holds strictly newer/more complete data!
+      if (locCount === 0 || wasHotMirror || idbSessTotal > locSessTotal || (idbTs && (!locTs || idbTs > locTs))) {
         appState = idbData;
+        delete appState._isHotMirror;
         if (!appState.activeHalaqaId || !appState.halaqat[appState.activeHalaqaId]) {
           appState.activeHalaqaId = Object.keys(appState.halaqat)[0] || null;
         }
-        try {
-          localStorage.setItem(scopedKey, JSON.stringify(appState));
-          _localStorageQuotaReached = false;
-        } catch { _localStorageQuotaReached = true; }
+        try { writeFastBootMirror(scopedKey, appState, JSON.stringify(appState)); } catch {}
         if (typeof routeAppByCurrentUser === "function") routeAppByCurrentUser();
         return true;
       }
@@ -18497,6 +18498,49 @@ function formatByteSizeArabic(bytes) {
 
 
 let _debouncedSaveTimer = null;
+// Silent Hot-Window Mirror for localStorage (keeps latest 95 days in fast-boot cache while IndexedDB stores 100% forever!)
+function buildHotLocalStorageMirror(stateObj) {
+  try {
+    const dt = new Date();
+    dt.setDate(dt.getDate() - 95);
+    const cutIso = dateToISO(dt);
+    const slimHals = {};
+    Object.entries(stateObj?.halaqat || {}).forEach(([hid, h]) => {
+      if (!h) return;
+      const allS = Array.isArray(h.sessions) ? h.sessions : [];
+      const hotS = allS.filter(s => s && (!s.date || s.date >= cutIso || s.id === activeSessionId));
+      slimHals[hid] = { ...h, sessions: hotS.length ? hotS : allS.slice(0, 18) };
+    });
+    return JSON.stringify({
+      activeHalaqaId: stateObj?.activeHalaqaId || null,
+      halaqat: slimHals,
+      _isHotMirror: true,
+      _fullUpdatedAt: getAppStateLatestModifiedIso(stateObj) || new Date().toISOString()
+    });
+  } catch { return ""; }
+}
+
+function writeFastBootMirror(scopedKey, stateObj, serialized) {
+  const HOT_MIRROR_THRESHOLD = 1600000; // ~3.2 MB UTF-16 -> switch silently to 95-day fast-boot mirror!
+  if (serialized.length <= HOT_MIRROR_THRESHOLD) {
+    try {
+      localStorage.setItem(scopedKey, serialized);
+      _localStorageQuotaReached = false;
+      return true;
+    } catch {}
+  }
+  const hotJson = buildHotLocalStorageMirror(stateObj);
+  if (hotJson) {
+    try {
+      localStorage.setItem(scopedKey, hotJson);
+      _localStorageQuotaReached = false;
+      return true;
+    } catch {}
+  }
+  _localStorageQuotaReached = true;
+  return false;
+}
+
 function saveState(skipCloud = false) {
   if (_debouncedSaveTimer) { clearTimeout(_debouncedSaveTimer); _debouncedSaveTimer = null; }
   _stateMutationSeq++;
@@ -18511,22 +18555,15 @@ function saveState(skipCloud = false) {
   }
   const scopedKey = getStorageKeyForUid();
   let serialized = "";
-  try { serialized = JSON.stringify(appState); } catch {}
+  try {
+    if (appState._isHotMirror) delete appState._isHotMirror;
+    serialized = JSON.stringify(appState);
+  } catch {}
   if (serialized) {
-    // 1) Primary High-Capacity IndexedDB Vault (virtually unlimited — never loses data!)
+    // 1) Primary High-Capacity IndexedDB Vault (100% full history forever — zero manual archiving!)
     queueIdbStateSave(scopedKey, appState, serialized);
-    // 2) Fast-Boot localStorage Mirror with Quota Protection
-    try {
-      localStorage.setItem(scopedKey, serialized);
-      _localStorageQuotaReached = false;
-    } catch (err) {
-      _localStorageQuotaReached = true;
-      console.warn("localStorage quota full — safely persisted in IndexedDB:", err);
-      if (!window._quotaWarnShownOnce) {
-        window._quotaWarnShownOnce = true;
-        showToast("💾 ذاكرة البدء السريع ممتلئة — تم الحفظ بأمان في IndexedDB (يُنصح بأرشفة الجلسات القديمة)");
-      }
-    }
+    // 2) Silent Fast-Boot localStorage Mirror (auto-trims to 95-day hot window only if needed — zero quota alerts!)
+    writeFastBootMirror(scopedKey, appState, serialized);
   }
   if (typeof updateUnsyncedIndicators === "function") updateUnsyncedIndicators();
   if (!skipCloud) {
@@ -18539,8 +18576,24 @@ function saveStateDebounced(delayMs = 350) {
   clearTimeout(_debouncedSaveTimer);
   _debouncedSaveTimer = setTimeout(() => { _debouncedSaveTimer = null; saveState(); }, delayMs);
 }
-window.addEventListener("pagehide", () => { if (_debouncedSaveTimer) saveState(); if (_idbWriteQueued) flushIdbStateSaveQueue(); });
-document.addEventListener("visibilitychange", () => { if (document.hidden && _debouncedSaveTimer) saveState(); });
+window.addEventListener("pagehide", () => {
+  if (_debouncedSaveTimer) saveState();
+  if (_idbWriteQueued) flushIdbStateSaveQueue();
+  if (typeof isCloudSyncDirty === "function" && isCloudSyncDirty() && navigator.onLine && typeof syncCentralCloudNow === "function") {
+    syncCentralCloudNow(false);
+  }
+});
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    if (_debouncedSaveTimer) saveState();
+    if (_idbWriteQueued) flushIdbStateSaveQueue();
+    if (typeof isCloudSyncDirty === "function" && isCloudSyncDirty() && navigator.onLine && typeof syncCentralCloudNow === "function") {
+      syncCentralCloudNow(false);
+    }
+  } else if (typeof onAppReturnToForegroundPoll === "function") {
+    onAppReturnToForegroundPoll();
+  }
+});
 let _supervisorInspectHalaqa = null;
 function getActiveHalaqa() { if (_supervisorInspectHalaqa) return _supervisorInspectHalaqa; return appState.activeHalaqaId ? (appState.halaqat[appState.activeHalaqaId] || null) : null; }
 function uid(prefix = "id") { return prefix + "_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 7); }
@@ -32052,7 +32105,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v115 -->
+<!-- Makin App v116 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -33069,10 +33122,8 @@ async function renderTechHardeningCard() {
   const wasAdvOpen = Boolean(host.querySelector(".th-adv-drawer")?.open);
 
   host.innerHTML = `
-    ${_localStorageQuotaReached ? `<div class="quota-warn-banner">⚠️ ذاكرة البدء السريع ممتلئة؛ بياناتك محفوظة بأمان تام. يُنصح بأرشفة الجلسات القديمة عبر «أرشيف السنوات» أدناه لتسريع الإقلاع.</div>` : ""}
-
     <div class="th-ready-summary ${readyCnt === 4 ? "" : "warn"}">
-      <span>${readyCnt === 4 ? "✅ التطبيق جاهز للعمل والتصدير داخل المسجد بدون إنترنت" : "📡 بعض محركات التصدير بدون إنترنت تحتاج تجهيزاً"}</span>
+      <span>${readyCnt === 4 ? "✅ الحفظ التلقائي والتصدير بدون إنترنت مفعّلان بالكامل (لا حاجة لأرشفة يدوية)" : "📡 بعض محركات التصدير بدون إنترنت تحتاج تجهيزاً"}</span>
     </div>
 
     ${readyCnt < 4 ? `
@@ -33081,10 +33132,7 @@ async function renderTechHardeningCard() {
       </button>
     ` : ""}
 
-    <div class="th-actions-2">
-      <button type="button" class="btn btn-soft btn-sm" onclick="closeModal('settingsModal'); openYearArchiveModal();">📦 أرشيف السنوات (${myArchives.length})</button>
-      <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('settingsModal'); openAutoSnapshotsModal();">🔄 لقطات الاستعادة (${mySnaps.length})</button>
-    </div>
+    <button type="button" class="btn btn-outline btn-sm" style="width:100%;" onclick="closeModal('settingsModal'); openAutoSnapshotsModal();">🔄 لقطات الاستعادة التلقائية (${mySnaps.length})</button>
 
     <details class="th-adv-drawer" ${wasAdvOpen ? "open" : ""}>
       <summary>
@@ -33129,6 +33177,7 @@ async function renderTechHardeningCard() {
       <button type="button" class="btn ${readyCnt === 4 ? "btn-soft" : "btn-primary"} btn-sm" style="width:100%;" ${_offlinePrecacheBusy ? "disabled" : ""} onclick="precacheOfflineExportSuite(true)">
         ${_offlinePrecacheBusy ? "⏳ جاري التحميل والتخزين المحلي..." : (readyCnt === 4 ? "🔄 تحديث محركات العمل بدون إنترنت" : "⚡ تجهيز التصدير بدون إنترنت الآن")}
       </button>
+      ${myArchives.length > 0 ? `<button type="button" class="btn btn-outline btn-sm" style="width:100%; margin-top:6px;" onclick="closeModal('settingsModal'); openYearArchiveModal();">📦 أرشيفات سابقة محفوظة (${myArchives.length})</button>` : ""}
     </details>
   `;
 }
@@ -37411,7 +37460,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v115";
+const TIBYAN_APP_VERSION = "v116";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -37520,6 +37569,8 @@ function initCentralFirebaseSDK() {
     }
     _fbAuth = firebase.auth();
     _fbDb = firebase.database();
+    // v116 Spark Free-Tier Booster: start RTDB in goOffline() mode so idle apps hold 0 concurrent sockets!
+    try { _fbDb.goOffline(); _fbDbIsOnline = false; } catch {}
 
     if (!_fbAuthListenerAttached) {
       _fbAuthListenerAttached = true;
@@ -37535,6 +37586,33 @@ function initCentralFirebaseSDK() {
   }
 }
 
+let _fbDbActiveOps = 0;
+let _fbDbIdleTimer = null;
+let _fbDbIsOnline = false;
+
+async function runWithFbDbOnline(opFn) {
+  if (!_fbDb) return null;
+  clearTimeout(_fbDbIdleTimer);
+  _fbDbIdleTimer = null;
+  _fbDbActiveOps++;
+  if (!_fbDbIsOnline) {
+    try { _fbDb.goOnline(); _fbDbIsOnline = true; } catch {}
+  }
+  try {
+    return await opFn();
+  } finally {
+    _fbDbActiveOps = Math.max(0, _fbDbActiveOps - 1);
+    if (_fbDbActiveOps === 0) {
+      clearTimeout(_fbDbIdleTimer);
+      _fbDbIdleTimer = setTimeout(() => {
+        if (_fbDb && _fbDbActiveOps === 0 && _activeFbListeners.length === 0) {
+          try { _fbDb.goOffline(); _fbDbIsOnline = false; } catch {}
+        }
+      }, 4500);
+    }
+  }
+}
+
 function isCentralCloudReady() {
   return Boolean(_fbAuth && _fbDb && typeof firebase !== "undefined");
 }
@@ -37546,8 +37624,10 @@ function getPlatformCloudUrl() {
 async function fbDbGet(path) {
   if (!_fbDb) return null;
   try {
-    const snap = await _fbDb.ref(path).once("value");
-    return snap.exists() ? snap.val() : null;
+    return await runWithFbDbOnline(async () => {
+      const snap = await _fbDb.ref(path).once("value");
+      return snap.exists() ? snap.val() : null;
+    });
   } catch (e) {
     console.warn("fbDbGet error on", path, e?.message || e);
     return null;
@@ -37557,9 +37637,11 @@ async function fbDbGet(path) {
 async function fbDbSet(path, val) {
   if (!_fbDb) return false;
   try {
-    if (val === null || val === undefined) await _fbDb.ref(path).remove();
-    else await _fbDb.ref(path).set(val);
-    return true;
+    return Boolean(await runWithFbDbOnline(async () => {
+      if (val === null || val === undefined) await _fbDb.ref(path).remove();
+      else await _fbDb.ref(path).set(val);
+      return true;
+    }));
   } catch (e) {
     console.warn("fbDbSet error on", path, e?.message || e);
     return false;
@@ -37569,8 +37651,10 @@ async function fbDbSet(path, val) {
 async function fbDbUpdate(path, patchObj) {
   if (!_fbDb || !patchObj || typeof patchObj !== "object") return false;
   try {
-    await _fbDb.ref(path).update(patchObj);
-    return true;
+    return Boolean(await runWithFbDbOnline(async () => {
+      await _fbDb.ref(path).update(patchObj);
+      return true;
+    }));
   } catch (e) {
     console.warn("fbDbUpdate error on", path, e?.message || e);
     return false;
@@ -37668,12 +37752,46 @@ async function hydrateSignedInFirebaseUser(fbUser) {
         merged = true;
       }
 
-      // 1) Auto-Restore ALL Teacher Halaqat, Students, Sessions & Reports on ANY device!
+      // 1) Smart Ultra-Light Restore via _syncMeta Pre-Check (0 KB download when local is already up to date!)
       if (isUserTeacherCapable(profile)) {
-        const remoteHals = await fbDbGet(`teacher_halaqat/${fbUser.uid}`);
+        let remoteHals = null;
+        const syncMeta = await fbDbGet(`teacher_halaqat/${fbUser.uid}/_syncMeta`);
+        const metaHals = (syncMeta && typeof syncMeta.halaqat === "object" && syncMeta.halaqat) ? syncMeta.halaqat : null;
+
+        if (metaHals && Object.keys(metaHals).length) {
+          const changedHids = [];
+          Object.entries(metaHals).forEach(([hid, remMod]) => {
+            const loc = appState.halaqat?.[hid];
+            if (!loc || (remMod && remMod > (loc.lastModifiedAt || ""))) {
+              changedHids.push(hid);
+            } else if (typeof snapshotSyncedHalaqaHashes === "function") {
+              snapshotSyncedHalaqaHashes(hid, buildCleanHalaqaForCloud(loc));
+            }
+          });
+          if (changedHids.length > 0) {
+            remoteHals = {};
+            const fetchedList = await Promise.all(changedHids.map(hid => fbDbGet(`teacher_halaqat/${fbUser.uid}/${hid}`)));
+            changedHids.forEach((hid, i) => { if (fetchedList[i]) remoteHals[hid] = fetchedList[i]; });
+          } else {
+            remoteHals = {}; // Already 100% up-to-date locally -> 0 KB downloaded!
+          }
+        } else {
+          // Legacy account migrating to v116 _syncMeta: one-time fetch then populate _syncMeta automatically
+          remoteHals = await fbDbGet(`teacher_halaqat/${fbUser.uid}`);
+          if (remoteHals && typeof remoteHals === "object") {
+            const initMeta = { updatedAt: new Date().toISOString(), halaqat: {} };
+            Object.entries(remoteHals).forEach(([hid, hObj]) => {
+              if (hid !== "_syncMeta" && hObj && hObj.id) initMeta.halaqat[hid] = hObj.lastModifiedAt || initMeta.updatedAt;
+            });
+            if (Object.keys(initMeta.halaqat).length) {
+              fbDbSet(`teacher_halaqat/${fbUser.uid}/_syncMeta`, initMeta).catch(() => {});
+            }
+          }
+        }
+
         if (remoteHals && typeof remoteHals === "object" && Object.keys(remoteHals).length) {
           Object.entries(remoteHals).forEach(([hid, hObj]) => {
-            if (!hObj || !hObj.id) return;
+            if (hid === "_syncMeta" || !hObj || !hObj.id) return;
             const loc = appState.halaqat[hid];
             if (!loc) {
               appState.halaqat[hid] = hObj;
@@ -37685,7 +37803,7 @@ async function hydrateSignedInFirebaseUser(fbUser) {
               merged = true;
             }
             if (typeof snapshotSyncedHalaqaHashes === "function" && appState.halaqat[hid]) {
-              snapshotSyncedHalaqaHashes(hid, appState.halaqat[hid]);
+              snapshotSyncedHalaqaHashes(hid, buildCleanHalaqaForCloud(appState.halaqat[hid]));
             }
           });
           if (!appState.activeHalaqaId && Object.keys(appState.halaqat).length) {
@@ -37693,8 +37811,12 @@ async function hydrateSignedInFirebaseUser(fbUser) {
             merged = true;
           }
           if (merged) {
-            try { localStorage.setItem(getStorageKeyForUid(fbUser.uid), JSON.stringify(appState)); } catch {}
-            if (typeof idbPutState === "function") idbPutState(fbUser.uid, appState).catch(() => {});
+            try {
+              const sKey = getStorageKeyForUid(fbUser.uid);
+              const ser = JSON.stringify(appState);
+              writeFastBootMirror(sKey, appState, ser);
+              queueIdbStateSave(sKey, appState, ser);
+            } catch {}
           }
         }
         if (profile.supervisorId) {
@@ -37709,7 +37831,8 @@ async function hydrateSignedInFirebaseUser(fbUser) {
           }
         }
         // Flush ONLY this account's own local offline edits!
-        if (_activeStorageUid === fbUser.uid && (isCloudSyncDirty() || (!remoteHals && Object.keys(appState.halaqat || {}).length))) {
+        const hasCloudHals = Boolean(metaHals && Object.keys(metaHals).length) || Boolean(remoteHals && Object.keys(remoteHals).some(k => k !== "_syncMeta"));
+        if (_activeStorageUid === fbUser.uid && (isCloudSyncDirty() || (!hasCloudHals && Object.keys(appState.halaqat || {}).length))) {
           syncCentralCloudNow(false);
         }
       }
@@ -37812,9 +37935,10 @@ function scheduleTeacherPrivateCloudBackup(immediate = false) {
     return;
   }
   clearTimeout(_teacherBackupTimer);
+  // v116: Instant local save + smart 25s cloud batching (flushes immediately on app hide/close or tapping cloud icon!)
   _teacherBackupTimer = setTimeout(() => {
     syncCentralCloudNow(false);
-  }, immediate ? 150 : 1800);
+  }, immediate ? 150 : 25000);
 }
 
 // ===== REAL FIREBASE AUTH: LOGIN, FORGOT PASSWORD, TEACHER SIGNUP, SUPERVISOR SIGNUP =====
@@ -39143,7 +39267,11 @@ async function fireTibyanNotification(dedupKey, title, body, iconEmoji = "🔔",
   }
 }
 
+let _notifPollTimer = null;
+let _notifPollState = { uid: "", initAnn: true, initMsgs: true, initLinks: true, prevUploadMap: {}, lastPollAt: 0 };
+
 function stopLiveNotificationListeners() {
+  if (_notifPollTimer) { clearInterval(_notifPollTimer); _notifPollTimer = null; }
   _activeFbListeners.forEach(({ ref, ev, cb }) => {
     try { ref.off(ev, cb); } catch {}
   });
@@ -39157,52 +39285,50 @@ function attachFbListener(path, ev, cb) {
   _activeFbListeners.push({ ref, ev, cb });
 }
 
-function startLiveNotificationListeners() {
-  stopLiveNotificationListeners();
-  if (!_fbDb || !_fbAuth?.currentUser) return;
+async function pollLiveNotificationsOnce(forceInitial = false) {
+  if (!navigator.onLine || !_fbDb || !_fbAuth?.currentUser) return;
   const u = getCurrentAccountUser();
   if (!u) return;
-
-  // 1) Global Founder Announcement Live Listener (All Users)
-  let initAnn = true;
-  attachFbListener("config/announcement", "value", snap => {
-    const ann = snap.val();
+  if (_notifPollState.uid !== u.id) {
+    _notifPollState = { uid: u.id, initAnn: true, initMsgs: true, initLinks: true, prevUploadMap: {}, lastPollAt: 0 };
+  }
+  _notifPollState.lastPollAt = Date.now();
+  try {
+    // 1) Global Founder Announcement Check
+    const ann = await fbDbGet("config/announcement");
     renderGlobalAnnouncement(ann, null);
-    if (initAnn) { initAnn = false; return; }
-    if (ann && ann.active && ann.body) {
+    if (forceInitial || _notifPollState.initAnn) {
+      _notifPollState.initAnn = false;
+    } else if (ann && ann.active && ann.body) {
       fireTibyanNotification(`ann_${ann.updatedAt || ann.body.slice(0, 20)}`, `📢 ${ann.title || "تنبيه من الإدارة"}`, ann.body, "📢");
     }
-  });
 
-  // 2) Teacher Live Listeners (Supervisor Messages + Join Approval)
-  if (isUserTeacherCapable(u) && u.supervisorId) {
-    let initMsgs = true;
-    attachFbListener(`messages/${u.supervisorId}`, "value", snap => {
-      const val = snap.val();
-      const arr = Array.isArray(val) ? val : [];
+    // 2) Teacher Notifications (Supervisor Messages + Join Approval)
+    if (isUserTeacherCapable(u) && u.supervisorId) {
+      const [msgVal, supStatus] = await Promise.all([
+        fbDbGet(`messages/${u.supervisorId}`),
+        u.supervisorStatus !== "approved" ? fbDbGet(`users/${u.id}/supervisorStatus`) : Promise.resolve(u.supervisorStatus)
+      ]);
+      const arr = Array.isArray(msgVal) ? msgVal : [];
       tibyanAccounts.messages[u.supervisorId] = arr;
       saveAccountsState();
       updateTeacherAccountDrawerUI();
-      if (initMsgs) { initMsgs = false; return; }
-
-      const myUnread = arr.filter(m => m && (m.toTeacherId === "all" || m.toTeacherId === u.id) && !(m.readBy && m.readBy[u.id]));
-      if (myUnread.length) {
-        const latest = myUnread[0];
-        fireTibyanNotification(
-          `msg_${latest.id || latest.sentAt}`,
-          `📩 رسالة من المشرف: ${latest.title || "تنبيه"}`,
-          String(latest.body || "").slice(0, 120),
-          "📩",
-          () => openTeacherMessagesModal()
-        );
+      if (forceInitial || _notifPollState.initMsgs) {
+        _notifPollState.initMsgs = false;
+      } else {
+        const myUnread = arr.filter(m => m && (m.toTeacherId === "all" || m.toTeacherId === u.id) && !(m.readBy && m.readBy[u.id]));
+        if (myUnread.length) {
+          const latest = myUnread[0];
+          fireTibyanNotification(
+            `msg_${latest.id || latest.sentAt}`,
+            `📩 رسالة من المشرف: ${latest.title || "تنبيه"}`,
+            String(latest.body || "").slice(0, 120),
+            "📩",
+            () => openTeacherMessagesModal()
+          );
+        }
       }
-    });
-
-    let initProfile = true;
-    attachFbListener(`users/${u.id}/supervisorStatus`, "value", snap => {
-      const st = snap.val();
-      if (initProfile) { initProfile = false; return; }
-      if (st === "approved" && u.supervisorStatus !== "approved") {
+      if (supStatus === "approved" && u.supervisorStatus !== "approved") {
         u.supervisorStatus = "approved";
         saveAccountsState();
         updateTeacherAccountDrawerUI();
@@ -39214,61 +39340,78 @@ function startLiveNotificationListeners() {
           () => openTeacherAccountModal()
         );
       }
-    });
-  }
+    }
 
-  // 3) Supervisor / Owner Live Listeners (New Teacher Join Requests + New Uploaded Reports)
-  if (isUserSupervisorCapable(u)) {
-    let initLinks = true;
-    const prevUploadMap = {};
-    attachFbListener(`links/${u.id}`, "value", snap => {
-      const linksObj = snap.val() || {};
+    // 3) Supervisor / Owner Notifications (New Join Requests + New Uploaded Reports)
+    if (isUserSupervisorCapable(u)) {
+      const linksObj = (await fbDbGet(`links/${u.id}`)) || {};
       tibyanAccounts.links[u.id] = linksObj;
       saveAccountsState();
-
-      if (initLinks) {
+      if (forceInitial || _notifPollState.initLinks) {
         Object.entries(linksObj).forEach(([k, v]) => {
-          if (v) prevUploadMap[k] = { status: v.status, lastUploadAt: v.lastUploadAt || "" };
+          if (v) _notifPollState.prevUploadMap[k] = { status: v.status, lastUploadAt: v.lastUploadAt || "" };
         });
-        initLinks = false;
-        return;
-      }
-
-      Object.entries(linksObj).forEach(([k, v]) => {
-        if (!v) return;
-        const prev = prevUploadMap[k];
-        if (!prev && v.status === "pending") {
-          fireTibyanNotification(
-            `join_${k}_${v.requestedAt || ""}`,
-            "🔔 طلب انضمام معلم جديد",
-            `${v.teacherName || "معلم"} (حلقة ${v.halaqaName || "—"}) يطلب الانضمام إلى ${u.branchName || "صرحك"}.`,
-            "🏛️",
-            () => {
-              if (u.role === "owner") switchOwnerWorkspace("supervisor");
-              switchSupTab("overview");
-            }
-          );
-        } else if (v.status === "approved" && v.lastUploadAt && (!prev || prev.lastUploadAt !== v.lastUploadAt)) {
-          fireTibyanNotification(
-            `rep_${k}_${v.lastUploadAt}`,
-            "☁️ تم رفع تقرير حلقة جديد",
-            `قام ${v.teacherName || "المعلم"} بتحديث تقارير «حلقة ${v.halaqaName || "—"}» الآن.`,
-            "📄",
-            () => {
-              if (u.role === "owner") switchOwnerWorkspace("supervisor");
-              openSupInspectModal(k);
-            }
-          );
+        _notifPollState.initLinks = false;
+      } else {
+        Object.entries(linksObj).forEach(([k, v]) => {
+          if (!v) return;
+          const prev = _notifPollState.prevUploadMap[k];
+          if (!prev && v.status === "pending") {
+            fireTibyanNotification(
+              `join_${k}_${v.requestedAt || ""}`,
+              "🔔 طلب انضمام معلم جديد",
+              `${v.teacherName || "معلم"} (حلقة ${v.halaqaName || "—"}) يطلب الانضمام إلى ${u.branchName || "صرحك"}.`,
+              "🏛️",
+              () => {
+                if (u.role === "owner") switchOwnerWorkspace("supervisor");
+                switchSupTab("overview");
+              }
+            );
+          } else if (v.status === "approved" && v.lastUploadAt && (!prev || prev.lastUploadAt !== v.lastUploadAt)) {
+            fireTibyanNotification(
+              `rep_${k}_${v.lastUploadAt}`,
+              "☁️ تم رفع تقرير حلقة جديد",
+              `قام ${v.teacherName || "المعلم"} بتحديث تقارير «حلقة ${v.halaqaName || "—"}» الآن.`,
+              "📄",
+              () => {
+                if (u.role === "owner") switchOwnerWorkspace("supervisor");
+                openSupInspectModal(k);
+              }
+            );
+          }
+          _notifPollState.prevUploadMap[k] = { status: v.status, lastUploadAt: v.lastUploadAt || "" };
+        });
+        if (document.getElementById("supervisorShell")?.style.display !== "none" && !document.querySelector(".modal-backdrop.show")) {
+          renderSupervisorShell();
         }
-        prevUploadMap[k] = { status: v.status, lastUploadAt: v.lastUploadAt || "" };
-      });
-
-      // Refresh supervisor UI silently if currently visible
-      if (document.getElementById("supervisorShell")?.style.display !== "none" && !document.querySelector(".modal-backdrop.show")) {
-        renderSupervisorShell();
       }
-    });
+    }
+  } catch (e) {
+    console.warn("Notif poll skipped:", e?.message || e);
   }
+}
+
+function onAppReturnToForegroundPoll() {
+  if (!navigator.onLine || !_fbAuth?.currentUser) return;
+  const elapsed = Date.now() - (_notifPollState.lastPollAt || 0);
+  if (elapsed >= 90000) {
+    pollLiveNotificationsOnce(false);
+  }
+}
+
+function startLiveNotificationListeners() {
+  stopLiveNotificationListeners();
+  if (!_fbDb || !_fbAuth?.currentUser) return;
+  const u = getCurrentAccountUser();
+  if (!u) return;
+  // v116 Zero-Persistent-Socket Poller: connects briefly only to check updates, then goOffline() automatically!
+  pollLiveNotificationsOnce(true);
+  const intervalMs = isUserSupervisorCapable(u) ? 150000 : 300000; // 2.5 min for Supervisor, 5 min for Teacher
+  _notifPollTimer = setInterval(() => {
+    if (document.visibilityState === "visible" && navigator.onLine) {
+      pollLiveNotificationsOnce(false);
+    }
+  }, intervalMs);
 }
 
 // ==================== AUTOMATIC 10:00 AM CLASS-DAY REMINDER & WHATSAPP ENGINE (v64) ====================
@@ -39781,10 +39924,54 @@ function updateCentralCloudIndicatorUI(overrideState = null) {
 let _cloudSyncPendingResync = false;
 let _lastSyncedCloudHashes = {};
 
+// v116: Strip safe empty/default fields before cloud upload (cuts Firebase storage & bandwidth by ~55%, 100% lossless!)
+const CLOUD_SAFE_ZERO_FIELDS = new Set([
+  "recPages", "recErrors", "recAlerts", "dRevPages",
+  "minPages", "minErrors", "minAlerts", "majPages", "majErrors", "majAlerts", "points"
+]);
+const CLOUD_SAFE_FALSE_FIELDS = new Set([
+  "twoSurahs", "minTwoSurahs", "rabt", "recIsSabr", "dRevIsPages", "minIsPages", "majIsPages",
+  "ptsForgotSheet", "recRepeatHwOnly", "manualSatHw"
+]);
+const CLOUD_KEEP_EXPLICIT_BOOLS = new Set(["ptsAdab", "ptsParticip", "ptsEarly"]);
+
+function compactRecordForCloud(rec) {
+  if (!rec || typeof rec !== "object") return rec;
+  const out = {};
+  Object.keys(rec).forEach(k => {
+    const v = rec[k];
+    if (v === undefined || v === null) return;
+    if (CLOUD_KEEP_EXPLICIT_BOOLS.has(k)) { out[k] = v; return; }
+    if (v === "") return;
+    if (Array.isArray(v) && v.length === 0) return;
+    if (v === 0 && CLOUD_SAFE_ZERO_FIELDS.has(k)) return;
+    if (v === false && CLOUD_SAFE_FALSE_FIELDS.has(k)) return;
+    if (k === "attendance" && v === "لم يُسمّع") return;
+    out[k] = v;
+  });
+  return out;
+}
+
 function buildCleanHalaqaForCloud(h) {
   const copy = JSON.parse(JSON.stringify(h));
   delete copy.customLogoSrc;
   delete copy.customLogoB64;
+  if (Array.isArray(copy.sessions)) {
+    const cutDt = new Date();
+    cutDt.setDate(cutDt.getDate() - 3);
+    const ghostCutIso = dateToISO(cutDt);
+    copy.sessions = copy.sessions
+      .filter(s => s && (isSessionHasRealActivity(s) || !s.date || s.date >= ghostCutIso || s.id === activeSessionId))
+      .map(s => {
+        if (!s || !s.records || typeof s.records !== "object") return s;
+        const compactRecs = {};
+        Object.keys(s.records).forEach(sid => {
+          const cr = compactRecordForCloud(s.records[sid]);
+          if (cr && Object.keys(cr).length > 0) compactRecs[sid] = cr;
+        });
+        return { ...s, records: compactRecs };
+      });
+  }
   return copy;
 }
 
@@ -39836,13 +40023,15 @@ async function syncCentralCloudNow(showFeedback = false) {
       const localHals = appState.halaqat || {};
       const localHids = Object.keys(localHals);
 
-      // Remove deleted halaqat from cloud if any
+      // Remove deleted halaqat from cloud if any (never touch _syncMeta!)
       for (const prevHid of Object.keys(_lastSyncedCloudHashes)) {
+        if (prevHid === "_syncMeta") continue;
         if (!localHals[prevHid]) {
           await fbDbSet(`teacher_halaqat/${fbUser.uid}/${prevHid}`, null);
           delete _lastSyncedCloudHashes[prevHid];
         }
       }
+      const metaHalsPayload = {};
 
       for (const hid of localHids) {
         const h = localHals[hid];
@@ -39898,8 +40087,16 @@ async function syncCentralCloudNow(showFeedback = false) {
           hOk = await fbDbSet(basePath, cleanCopy);
         }
 
-        if (hOk) snapshotSyncedHalaqaHashes(hid, cleanCopy);
-        else ok = false;
+        if (hOk) {
+          snapshotSyncedHalaqaHashes(hid, cleanCopy);
+          metaHalsPayload[hid] = cleanCopy.lastModifiedAt || new Date().toISOString();
+        } else ok = false;
+      }
+      if (ok && Object.keys(metaHalsPayload).length) {
+        await fbDbSet(`teacher_halaqat/${fbUser.uid}/_syncMeta`, {
+          updatedAt: new Date().toISOString(),
+          halaqat: metaHalsPayload
+        });
       }
     }
 
