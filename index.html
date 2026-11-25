@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>مكين | إدارة الحلقات القرآنية</title>
+<title>صروح مكين | إدارة الحلقات القرآنية</title>
 <meta name="theme-color" content="#192c56" id="metaThemeColor">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="مكين">
+<meta name="apple-mobile-web-app-title" content="صروح مكين">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -6554,7 +6554,7 @@ html { scroll-behavior: auto; }
 
 /* ==================== MAKIN v68: MODERN EXECUTIVE UI (SETTINGS, DRAWER, REPORTS, STUDENT PLAN) & 60FPS ==================== */
 .right-drawer { will-change: transform; contain: layout style; }
-.es-box { will-change: transform; contain: layout style; }
+.es-box { will-change: auto; }
 .drawer-backdrop { background: rgba(11, 24, 40, 0.56); }
 .eval-sheet-backdrop { background: rgba(11, 24, 40, 0.62) !important; }
 .ikhlas-overlay { background: rgba(14, 26, 40, 0.62); }
@@ -6973,6 +6973,7 @@ html { scroll-behavior: auto; }
 /* Executive Redesign of surahPickerModal (v72 — Zero Clutter, Zero Scroll Ayah Tuning) */
 #surahPickerModal {
   background: rgba(11, 24, 40, 0.62) !important;
+  z-index: 215 !important;
 }
 #surahPickerModal .sp-sheet-box {
   background: var(--bg);
@@ -10197,7 +10198,7 @@ table.t-daily td.td-norecite {
   font-weight: 700 !important;
   font-size: 12.5px !important;
   line-height: 1.38 !important;
-  z-index: 260 !important;
+  z-index: 265 !important;
   box-shadow: 0 8px 24px rgba(8, 20, 36, 0.34) !important;
   align-items: center !important;
   justify-content: space-between !important;
@@ -11284,7 +11285,7 @@ table.t-daily td.td-rev-slim,
 
 /* Executive Picker Bottom Sheet */
 #execPickerSheet {
-  z-index: 190;
+  z-index: 235 !important;
 }
 .eps-filter-bar {
   display: grid;
@@ -12159,6 +12160,32 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
   border: 1px solid rgba(21, 98, 154, 0.22);
 }
 
+
+/* ==================== MAKIN v106: DIRECT WHATSAPP IMAGE SHARE CTA & FULL-WIDTH CARD EXPORT ==================== */
+.rep-wa-direct-btn {
+  width: 100%;
+  border: none;
+  background: linear-gradient(135deg, #128c4e 0%, #16a34a 100%);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-bottom: 9px;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.24);
+  transition: transform 0.08s ease, filter 0.14s ease;
+}
+.rep-wa-direct-btn:active { transform: scale(0.985); filter: brightness(0.95); }
+#hdExportStage.is-indiv-stage .st-daily-card-canvas {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -12183,10 +12210,10 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
   </div>
   <div class="lnb-body">
     <div class="lnb-meta-row">
-      <span class="lnb-app-lbl">تطبيق مكين</span>
+      <span class="lnb-app-lbl">صروح مكين</span>
       <span id="lnbTime">الآن</span>
     </div>
-    <div class="lnb-title" id="lnbTitle">إشعار من مكين</div>
+    <div class="lnb-title" id="lnbTitle">إشعار من صروح مكين</div>
     <div class="lnb-text" id="lnbText">...</div>
   </div>
   <button type="button" class="lnb-close" onclick="event.stopPropagation(); hideLiveNotifBanner();" title="إغلاق">×</button>
@@ -12211,7 +12238,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
         <button type="button" class="ob-util-btn" onclick="toggleTheme()">🌙 المظهر</button>
       </div>
       <div class="welcome-logo-box"><img id="authLogoImg" alt="شعار تبيان"></div>
-      <h1>منصّة مكين لإدارة الحلقات</h1>
+      <h1>منصّة صروح مكين لإدارة الحلقات</h1>
       <p>دخول فوري • مزامنة تلقائية لحسابك • تقارير رسمية مطابقة</p>
       <div class="welcome-hijri-pill" id="authTodayHijri">...</div>
     </div>
@@ -12339,7 +12366,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
       </div>
 
       <div style="margin-top:11px; text-align:center;">
-        <span class="auth-cloud-pill" id="authCloudStatusBadge">☁️ متصل بسيرفر مكين — الحفظ التلقائي نشط</span>
+        <span class="auth-cloud-pill" id="authCloudStatusBadge">☁️ متصل بسيرفر صروح مكين — الحفظ التلقائي نشط</span>
       </div>
     </div>
   </div>
@@ -12354,7 +12381,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
         <button type="button" class="ob-util-btn" onclick="toggleTheme()" title="تبديل المظهر">🌙 المظهر</button>
       </div>
       <div class="welcome-logo-box"><img id="obLogoImg" alt="شعار تبيان"></div>
-      <h1>منصّة مكين لإدارة الحلقات</h1>
+      <h1>منصّة صروح مكين لإدارة الحلقات</h1>
       <p>التسميع التلقائي • الأرشيف • تقارير PDF وصور وإكسل مطابقة 100%</p>
       <div class="welcome-hijri-pill" id="obTodayHijri">...</div>
     </div>
@@ -12571,7 +12598,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
     <div class="drawer-hero">
       <button type="button" class="drawer-close-btn" onclick="closeRightDrawer()" aria-label="إغلاق">×</button>
       <div class="drawer-hero-top">
-        <div class="brand-logo-pill" style="display:inline-flex; height:34px; padding:4px 10px;"><img id="drawerLogoImg" alt="مكين" style="height:22px;"></div>
+        <div class="brand-logo-pill" style="display:inline-flex; height:34px; padding:4px 10px;"><img id="drawerLogoImg" alt="صروح مكين" style="height:22px;"></div>
       </div>
       <div class="drawer-hero-title" id="drawerHalaqaName">حلقة ...</div>
       <div class="drawer-hero-sub" id="drawerSheikhInfo">...</div>
@@ -12668,7 +12695,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v104</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v106</span>
         </button>
       </div>
     </div>
@@ -12759,10 +12786,11 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
           <div id="reportPendingWarning" class="rep-status-line"></div>
           <div class="rep-dock-4">
             <button type="button" class="rep-dock-btn pdf" onclick="exportHighResPDF('dailyReportPaper', getDailyFileName())"><span class="rd-ico">📑</span><span class="rd-lbl">PDF رسمي</span></button>
-            <button type="button" class="rep-dock-btn png" onclick="exportHighResPNG('dailyReportPaper', getDailyFileName())"><span class="rd-ico">📸</span><span class="rd-lbl">صورة HD</span></button>
+            <button type="button" class="rep-dock-btn png" onclick="exportHighResPNG('dailyReportPaper', getDailyFileName())"><span class="rd-ico">📸</span><span class="rd-lbl">حفظ صورة</span></button>
             <button type="button" class="rep-dock-btn xls" onclick="exportDailyExcelStyled()"><span class="rd-ico">📥</span><span class="rd-lbl">Excel</span></button>
-            <button type="button" class="rep-dock-btn wa" onclick="copyDailyWhatsApp()"><span class="rd-ico">💬</span><span class="rd-lbl">واتساب</span></button>
+            <button type="button" class="rep-dock-btn wa" onclick="copyDailyWhatsApp()"><span class="rd-ico">📝</span><span class="rd-lbl">نسخ نص</span></button>
           </div>
+          <button type="button" class="rep-wa-direct-btn" onclick="shareDailyReportImageToWhatsApp()">📲 إرسال صورة تقرير اليوم للواتساب مباشرة</button>
           <div class="rep-sup-bar" id="dailySupUploadWrap">
             <div id="dailyUnsyncStatus" style="flex:1; min-width:0; display:flex; align-items:center; gap:5px; flex-wrap:wrap;"></div>
             <div style="display:flex; gap:6px; align-items:center; flex-shrink:0;">
@@ -12793,10 +12821,11 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
           </div>
           <div class="rep-dock-4">
             <button type="button" class="rep-dock-btn pdf" onclick="exportHighResPDF('monthlyReportPaper', getMonthlyFileName())"><span class="rd-ico">📑</span><span class="rd-lbl">PDF رسمي</span></button>
-            <button type="button" class="rep-dock-btn png" onclick="exportHighResPNG('monthlyReportPaper', getMonthlyFileName())"><span class="rd-ico">📸</span><span class="rd-lbl">صورة HD</span></button>
+            <button type="button" class="rep-dock-btn png" onclick="exportHighResPNG('monthlyReportPaper', getMonthlyFileName())"><span class="rd-ico">📸</span><span class="rd-lbl">حفظ صورة</span></button>
             <button type="button" class="rep-dock-btn xls" onclick="exportMonthlyExcelStyled()"><span class="rd-ico">📥</span><span class="rd-lbl">Excel</span></button>
-            <button type="button" class="rep-dock-btn wa" onclick="copyMonthlyWhatsApp()"><span class="rd-ico">💬</span><span class="rd-lbl">واتساب</span></button>
+            <button type="button" class="rep-dock-btn wa" onclick="copyMonthlyWhatsApp()"><span class="rd-ico">📝</span><span class="rd-lbl">نسخ نص</span></button>
           </div>
+          <button type="button" class="rep-wa-direct-btn" onclick="shareMonthlyReportImageToWhatsApp()">📲 إرسال صورة التقرير الشهري للواتساب مباشرة</button>
           <div class="rep-sup-bar" id="monthlySupUploadWrap">
             <div id="monthlyUnsyncStatus" style="flex:1; min-width:0; display:flex; align-items:center; gap:5px; flex-wrap:wrap;"></div>
             <button type="button" class="rep-sup-btn" onclick="uploadTeacherReportsToSupervisor('monthly')">☁️ رفع الشهري للمشرف</button>
@@ -12921,7 +12950,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
       <div class="brand">
         <div class="brand-logo-pill"><img id="ownerHdrLogoImg" alt="تبيان"></div>
         <div style="min-width:0;">
-          <div class="brand-title">👑 لوحة المؤسس — مكين</div>
+          <div class="brand-title">👑 لوحة المؤسس — صروح مكين</div>
           <div class="brand-sub" id="ownerHdrSub">التحكم المركزي بالصروح والمشرفين</div>
         </div>
       </div>
@@ -13093,52 +13122,6 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
       <button type="button" class="btn btn-soft btn-sm" style="flex:1;" onclick="exportMonthlyPlanHD('png')">📸 صورة HD</button>
       <button type="button" class="btn btn-primary btn-sm" style="flex:1;" onclick="exportMonthlyPlanHD('pdf')">📑 PDF</button>
       <button type="button" class="btn btn-success btn-sm" style="flex:1;" onclick="copyMonthlyPlanWA()">💬 واتساب</button>
-    </div>
-  </div>
-</div>
-
-<!-- ===== MODAL: EXECUTIVE BOTTOM-SHEET PICKER (v96) ===== -->
-<div class="modal-backdrop exec-modal-backdrop" id="execPickerSheet" onclick="if(event.target===this) closeModal('execPickerSheet')">
-  <div class="modal-box exec-modal-box" style="max-height:84vh;">
-    <div class="exec-modal-hdr">
-      <div class="es-handle"></div>
-      <div class="exec-modal-hdr-row">
-        <div style="min-width:0; flex:1;">
-          <h3 id="epsTitle">اختيار</h3>
-          <div class="exec-modal-sub" id="epsSub">اختر من القائمة أدناه</div>
-        </div>
-        <button type="button" class="exec-modal-close" onclick="closeModal('execPickerSheet')" aria-label="إغلاق">×</button>
-      </div>
-    </div>
-    <div id="epsFilterBar" class="eps-filter-bar" style="display:none;"></div>
-    <div id="epsSearchWrap" class="eps-search-wrap" style="display:none;">
-      <div class="qa-search-row">
-        <span class="qa-search-ico">🔍</span>
-        <input type="text" id="epsSearchInput" placeholder="ابحث في القائمة..." oninput="onEpsSearchInput(this.value)">
-        <button type="button" id="epsSearchClr" class="qa-search-clr" style="display:none;" onclick="onEpsSearchInput('')">×</button>
-      </div>
-    </div>
-    <div class="exec-modal-body" id="epsBody"></div>
-  </div>
-</div>
-
-<!-- ===== MODAL: EXECUTIVE CONFIRM & PROMPT DIALOG (v97 — REPLACES ALL BROWSER POPUPS) ===== -->
-<div class="modal-backdrop" id="makinDialogModal" onclick="if(event.target===this) resolveMakinDialog(false)">
-  <div class="mkd-box">
-    <div class="mkd-hdr" id="mkdHdr">
-      <h4 id="mkdTitle">تأكيد الإجراء</h4>
-      <button type="button" class="exec-modal-close" style="width:28px; height:28px; font-size:16px;" onclick="resolveMakinDialog(false)" aria-label="إغلاق">×</button>
-    </div>
-    <div class="mkd-body">
-      <div class="mkd-msg" id="mkdMsg"></div>
-      <div id="mkdPromptWrap" style="display:none;">
-        <input type="text" id="mkdInput" class="mkd-input" onkeydown="if(event.key==='Enter') resolveMakinDialog(true)">
-        <div id="mkdPresets" class="mkd-presets" style="display:none;"></div>
-      </div>
-    </div>
-    <div class="mkd-footer">
-      <button type="button" class="btn btn-outline" id="mkdCancelBtn" onclick="resolveMakinDialog(false)">إلغاء</button>
-      <button type="button" class="btn btn-primary" id="mkdOkBtn" onclick="resolveMakinDialog(true)">تأكيد ✓</button>
     </div>
   </div>
 </div>
@@ -13974,9 +13957,10 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
     <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:space-between; align-items:center;">
       <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('indivReportModal')">إغلاق</button>
       <div style="display:flex; gap:6px; flex-wrap:wrap;">
-        <button type="button" class="btn btn-success btn-sm" onclick="shareIndivReportParentWA()">📲 واتساب ولي الأمر</button>
-        <button type="button" class="btn btn-soft btn-sm" onclick="exportIndivReportPDF()">📑 حفظ PDF</button>
-        <button type="button" class="btn btn-primary btn-sm" onclick="exportIndivReportPNG()">📸 حفظ صورة HD</button>
+        <button type="button" class="btn btn-success btn-sm" onclick="shareIndivReportImageToWhatsApp()">📲 إرسال صورة للواتساب</button>
+        <button type="button" class="btn btn-soft btn-sm" onclick="shareIndivReportParentWA()">💬 نص واتساب</button>
+        <button type="button" class="btn btn-soft btn-sm" onclick="exportIndivReportPDF()">📑 PDF</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="exportIndivReportPNG()">📸 حفظ</button>
       </div>
     </div>
   </div>
@@ -14071,95 +14055,12 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
     </div>
 
     <!-- Clean 2x2 Action Buttons Grid (Never Wraps Awkwardly!) -->
+    <button type="button" class="rep-wa-direct-btn" style="margin-bottom:8px;" onclick="shareCertificateToWhatsApp()">📲 إرسال الشهادة للواتساب مباشرة</button>
     <div class="cert-actions-grid">
       <button type="button" class="btn btn-primary" onclick="exportCertificatePNG()">📸 حفظ صورة HD</button>
       <button type="button" class="btn btn-soft" onclick="exportCertificatePDF()">📑 حفظ PDF</button>
       <button type="button" class="btn btn-outline" onclick="printCertificateClean()">🖨️ طباعة مباشرة</button>
       <button type="button" class="btn btn-outline" onclick="closeModal('certModal')">إغلاق</button>
-    </div>
-  </div>
-</div>
-
-<!-- ===== MODAL: MODERN PRO SURAH, AYAH & SABR JUZ SHEET (v35) ===== -->
-<div class="modal-backdrop" id="surahPickerModal" style="z-index:130;" onclick="if(event.target===this) closeModal('surahPickerModal')">
-  <div class="sp-sheet-box">
-    <div class="sp-exec-hdr">
-      <div class="sp-sheet-handle"></div>
-      <div class="sp-exec-hdr-row">
-        <div class="sp-exec-hdr-titles">
-          <h3 id="spModalTitle">📖 اختيار السورة والآيات</h3>
-          <div class="sp-exec-hdr-sub" id="spModalSub">اضبط الآيات أو غيّر السورة بسهولة</div>
-        </div>
-        <button type="button" class="sp-exec-close" onclick="closeModal('surahPickerModal')" aria-label="إغلاق">×</button>
-      </div>
-    </div>
-
-    <div class="sp-sheet-body">
-      <!-- Mode Switcher: 2-Tab for Memorization/HW, 3-Tab for Reviews (سورة وصفحات | سرد جزء | سبر) -->
-      <div id="spModeTabs" class="sp-mode-tabs">
-        <button type="button" class="sp-mode-tab on" id="spTabSurah" onclick="spSetMode('surah')"><span class="sp-mt-ico">📖</span><span class="sp-mt-lbl" id="spTabSurahLbl">سورة وآيات</span></button>
-        <button type="button" class="sp-mode-tab" id="spTabSard" style="display:none;" onclick="spSetMode('sard')"><span class="sp-mt-ico">📚</span><span class="sp-mt-lbl">سرد جزء</span></button>
-        <button type="button" class="sp-mode-tab" id="spTabSabr" onclick="spSetMode('sabr')"><span class="sp-mt-ico">🎓</span><span class="sp-mt-lbl" id="spTabSabrLbl">سبر جزء</span></button>
-      </div>
-
-      <!-- Panel A: Unified Surah + Ayahs OR Surah + Mushaf Pages Range -->
-      <div id="spSurahModePanel">
-        <div id="spSegBar" class="sp-seg-bar"></div>
-        <div id="spActiveSurahCard"></div>
-
-        <!-- Collapsible Surah Browser Drawer -->
-        <div id="spBrowserDrawer" class="sp-browser-drawer" style="display:none;">
-          <div class="sp-search-row">
-            <div class="sp-browser-search-wrap">
-              <span class="sp-s-ico">🔍</span>
-              <input type="text" id="spSearchInput" autocomplete="off" placeholder="ابحث باسم السورة..." oninput="onSpSearchInput(this.value)">
-              <button type="button" id="spSearchClearBtn" class="sp-s-clr" style="display:none;" onclick="clearSpSearch()" aria-label="مسح البحث">×</button>
-            </div>
-            <button type="button" class="sp-tool-btn" id="spDirToggleBtn" onclick="spToggleDirection()" title="تبديل ترتيب السور">⬆️ عمّ</button>
-          </div>
-          <div id="spJuzStrip" class="sp-juz-strip"></div>
-          <div id="spSurahGrid" class="sp-surah-grid" style="margin-bottom:0;"></div>
-        </div>
-
-        <!-- Review Sub-Unit Switcher (بالآيات vs من صفحة إلى صفحة) -->
-        <div id="spReviewUnitToggle" class="sp-unit-toggle" style="display:none;">
-          <button type="button" class="sp-unit-btn on" id="spUnitPageBtn" onclick="spSetReviewUnit('page')">📄 بالصفحات</button>
-          <button type="button" class="sp-unit-btn" id="spUnitAyahBtn" onclick="spSetReviewUnit('ayah')">🔢 بالآيات</button>
-        </div>
-
-        <div id="spAyahBox" class="sp-ayah-box"></div>
-        <div id="spPagesBox" style="display:none;"></div>
-      </div>
-
-      <!-- Panel C: Full Juz Sard Selection (سرد جزء مراجعة — غير السبر) -->
-      <div id="spSardModePanel" style="display:none;">
-        <div class="sp-sard-hint">📚 <b>سرد مراجعة (غير السبر):</b> اختر جزءاً كاملاً أو أكثر — تُحتسب صفحاته في المراجعة فقط ولا يُسجّل سبر اختبار رسمي ولا يدخل الأجزاء المسبورة بالشهري.</div>
-        <div id="spSardGrid" class="sp-sabr-grid"></div>
-      </div>
-
-      <!-- Panel D: Full Juz Sabr Selection -->
-      <div id="spSabrModePanel" style="display:none;">
-        <div id="spSabrHint" class="sp-sabr-hint"></div>
-        <div id="spSabrScoreWrap" style="display:none; margin-bottom:8px;"></div>
-        <div id="spSabrGrid" class="sp-sabr-grid"></div>
-      </div>
-    </div>
-
-    <div class="sp-sheet-footer">
-      <div id="spPreviewStrip" class="sp-preview-strip"></div>
-      <div id="spQuickEvalWrap" class="sp-quick-eval-wrap" style="display:none;">
-        <div class="sp-quick-eval-lbl">⚡ حفظ وتقييم فوري بضغطة واحدة:</div>
-        <div class="sp-quick-eval-4">
-          <button type="button" class="sp-qe-btn qe-ex" onclick="applySurahPicker('ممتاز')">ممتاز</button>
-          <button type="button" class="sp-qe-btn qe-vg" onclick="applySurahPicker('جيد جداً')">جيد جداً</button>
-          <button type="button" class="sp-qe-btn qe-gd" onclick="applySurahPicker('جيد')">جيد</button>
-          <button type="button" class="sp-qe-btn qe-rp" onclick="applySurahPicker('إعادة')">إعادة</button>
-        </div>
-      </div>
-      <div class="sp-footer-actions">
-        <button type="button" class="btn btn-danger btn-sm" id="spClearBtn" style="height:40px; padding:0 13px; border-radius:11px;" onclick="clearSurahPickerSelection()">🗑️ مسح</button>
-        <button type="button" class="sp-apply-btn" onclick="applySurahPicker()">✓ اعتماد وتطبيق</button>
-      </div>
     </div>
   </div>
 </div>
@@ -14253,6 +14154,137 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
       <button type="button" class="btn btn-soft" onclick="exportPointsReportPDF()">📑 حفظ ملف PDF</button>
       <button type="button" class="btn btn-success" onclick="copyCurrentStatsCategoryWA()">💬 نسخ للواتساب</button>
       <button type="button" class="btn btn-outline" onclick="closeModal('pointsReportModal')">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== MODAL: MODERN PRO SURAH, AYAH & SABR JUZ SHEET (v35) ===== -->
+<div class="modal-backdrop" id="surahPickerModal" onclick="if(event.target===this) closeModal('surahPickerModal')">
+  <div class="sp-sheet-box">
+    <div class="sp-exec-hdr">
+      <div class="sp-sheet-handle"></div>
+      <div class="sp-exec-hdr-row">
+        <div class="sp-exec-hdr-titles">
+          <h3 id="spModalTitle">📖 اختيار السورة والآيات</h3>
+          <div class="sp-exec-hdr-sub" id="spModalSub">اضبط الآيات أو غيّر السورة بسهولة</div>
+        </div>
+        <button type="button" class="sp-exec-close" onclick="closeModal('surahPickerModal')" aria-label="إغلاق">×</button>
+      </div>
+    </div>
+
+    <div class="sp-sheet-body">
+      <!-- Mode Switcher: 2-Tab for Memorization/HW, 3-Tab for Reviews (سورة وصفحات | سرد جزء | سبر) -->
+      <div id="spModeTabs" class="sp-mode-tabs">
+        <button type="button" class="sp-mode-tab on" id="spTabSurah" onclick="spSetMode('surah')"><span class="sp-mt-ico">📖</span><span class="sp-mt-lbl" id="spTabSurahLbl">سورة وآيات</span></button>
+        <button type="button" class="sp-mode-tab" id="spTabSard" style="display:none;" onclick="spSetMode('sard')"><span class="sp-mt-ico">📚</span><span class="sp-mt-lbl">سرد جزء</span></button>
+        <button type="button" class="sp-mode-tab" id="spTabSabr" onclick="spSetMode('sabr')"><span class="sp-mt-ico">🎓</span><span class="sp-mt-lbl" id="spTabSabrLbl">سبر جزء</span></button>
+      </div>
+
+      <!-- Panel A: Unified Surah + Ayahs OR Surah + Mushaf Pages Range -->
+      <div id="spSurahModePanel">
+        <div id="spSegBar" class="sp-seg-bar"></div>
+        <div id="spActiveSurahCard"></div>
+
+        <!-- Collapsible Surah Browser Drawer -->
+        <div id="spBrowserDrawer" class="sp-browser-drawer" style="display:none;">
+          <div class="sp-search-row">
+            <div class="sp-browser-search-wrap">
+              <span class="sp-s-ico">🔍</span>
+              <input type="text" id="spSearchInput" autocomplete="off" placeholder="ابحث باسم السورة..." oninput="onSpSearchInput(this.value)">
+              <button type="button" id="spSearchClearBtn" class="sp-s-clr" style="display:none;" onclick="clearSpSearch()" aria-label="مسح البحث">×</button>
+            </div>
+            <button type="button" class="sp-tool-btn" id="spDirToggleBtn" onclick="spToggleDirection()" title="تبديل ترتيب السور">⬆️ عمّ</button>
+          </div>
+          <div id="spJuzStrip" class="sp-juz-strip"></div>
+          <div id="spSurahGrid" class="sp-surah-grid" style="margin-bottom:0;"></div>
+        </div>
+
+        <!-- Review Sub-Unit Switcher (بالآيات vs من صفحة إلى صفحة) -->
+        <div id="spReviewUnitToggle" class="sp-unit-toggle" style="display:none;">
+          <button type="button" class="sp-unit-btn on" id="spUnitPageBtn" onclick="spSetReviewUnit('page')">📄 بالصفحات</button>
+          <button type="button" class="sp-unit-btn" id="spUnitAyahBtn" onclick="spSetReviewUnit('ayah')">🔢 بالآيات</button>
+        </div>
+
+        <div id="spAyahBox" class="sp-ayah-box"></div>
+        <div id="spPagesBox" style="display:none;"></div>
+      </div>
+
+      <!-- Panel C: Full Juz Sard Selection (سرد جزء مراجعة — غير السبر) -->
+      <div id="spSardModePanel" style="display:none;">
+        <div class="sp-sard-hint">📚 <b>سرد مراجعة (غير السبر):</b> اختر جزءاً كاملاً أو أكثر — تُحتسب صفحاته في المراجعة فقط ولا يُسجّل سبر اختبار رسمي ولا يدخل الأجزاء المسبورة بالشهري.</div>
+        <div id="spSardGrid" class="sp-sabr-grid"></div>
+      </div>
+
+      <!-- Panel D: Full Juz Sabr Selection -->
+      <div id="spSabrModePanel" style="display:none;">
+        <div id="spSabrHint" class="sp-sabr-hint"></div>
+        <div id="spSabrScoreWrap" style="display:none; margin-bottom:8px;"></div>
+        <div id="spSabrGrid" class="sp-sabr-grid"></div>
+      </div>
+    </div>
+
+    <div class="sp-sheet-footer">
+      <div id="spPreviewStrip" class="sp-preview-strip"></div>
+      <div id="spQuickEvalWrap" class="sp-quick-eval-wrap" style="display:none;">
+        <div class="sp-quick-eval-lbl">⚡ حفظ وتقييم فوري بضغطة واحدة:</div>
+        <div class="sp-quick-eval-4">
+          <button type="button" class="sp-qe-btn qe-ex" onclick="applySurahPicker('ممتاز')">ممتاز</button>
+          <button type="button" class="sp-qe-btn qe-vg" onclick="applySurahPicker('جيد جداً')">جيد جداً</button>
+          <button type="button" class="sp-qe-btn qe-gd" onclick="applySurahPicker('جيد')">جيد</button>
+          <button type="button" class="sp-qe-btn qe-rp" onclick="applySurahPicker('إعادة')">إعادة</button>
+        </div>
+      </div>
+      <div class="sp-footer-actions">
+        <button type="button" class="btn btn-danger btn-sm" id="spClearBtn" style="height:40px; padding:0 13px; border-radius:11px;" onclick="clearSurahPickerSelection()">🗑️ مسح</button>
+        <button type="button" class="sp-apply-btn" onclick="applySurahPicker()">✓ اعتماد وتطبيق</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL: EXECUTIVE BOTTOM-SHEET PICKER (v96) ===== -->
+<div class="modal-backdrop exec-modal-backdrop" id="execPickerSheet" onclick="if(event.target===this) closeModal('execPickerSheet')">
+  <div class="modal-box exec-modal-box" style="max-height:84vh;">
+    <div class="exec-modal-hdr">
+      <div class="es-handle"></div>
+      <div class="exec-modal-hdr-row">
+        <div style="min-width:0; flex:1;">
+          <h3 id="epsTitle">اختيار</h3>
+          <div class="exec-modal-sub" id="epsSub">اختر من القائمة أدناه</div>
+        </div>
+        <button type="button" class="exec-modal-close" onclick="closeModal('execPickerSheet')" aria-label="إغلاق">×</button>
+      </div>
+    </div>
+    <div id="epsFilterBar" class="eps-filter-bar" style="display:none;"></div>
+    <div id="epsSearchWrap" class="eps-search-wrap" style="display:none;">
+      <div class="qa-search-row">
+        <span class="qa-search-ico">🔍</span>
+        <input type="text" id="epsSearchInput" placeholder="ابحث في القائمة..." oninput="onEpsSearchInput(this.value)">
+        <button type="button" id="epsSearchClr" class="qa-search-clr" style="display:none;" onclick="onEpsSearchInput('')">×</button>
+      </div>
+    </div>
+    <div class="exec-modal-body" id="epsBody"></div>
+  </div>
+</div>
+
+<!-- ===== MODAL: EXECUTIVE CONFIRM & PROMPT DIALOG (v97 — REPLACES ALL BROWSER POPUPS) ===== -->
+<div class="modal-backdrop" id="makinDialogModal" onclick="if(event.target===this) resolveMakinDialog(false)">
+  <div class="mkd-box">
+    <div class="mkd-hdr" id="mkdHdr">
+      <h4 id="mkdTitle">تأكيد الإجراء</h4>
+      <button type="button" class="exec-modal-close" style="width:28px; height:28px; font-size:16px;" onclick="resolveMakinDialog(false)" aria-label="إغلاق">×</button>
+    </div>
+    <div class="mkd-body">
+      <div class="mkd-msg" id="mkdMsg"></div>
+      <div id="mkdPromptWrap" style="display:none;">
+        <input type="text" id="mkdInput" class="mkd-input" onkeydown="if(event.key==='Enter') resolveMakinDialog(true)">
+        <div id="mkdPresets" class="mkd-presets" style="display:none;"></div>
+      </div>
+    </div>
+    <div class="mkd-footer">
+      <button type="button" class="btn btn-outline" id="mkdCancelBtn" onclick="resolveMakinDialog(false)">إلغاء</button>
+      <button type="button" class="btn btn-primary" id="mkdOkBtn" onclick="resolveMakinDialog(true)">تأكيد ✓</button>
     </div>
   </div>
 </div>
@@ -19435,7 +19467,7 @@ function renderSpPagesBox() {
     <div class="sp-rev-card">
       <div class="sp-rev-row1">
         <span class="sp-rev-lbl">▶️ من:</span>
-        <select id="spPageFromSurahSel" class="sp-rev-sel" onchange="spOnPageSurahPick('from', this.value)">${spPageSurahOptsHtml(spState.pageFromSurahId)}</select>
+        <select id="spPageFromSurahSel" aria-label="سورة البداية (من)" class="sp-rev-sel" onchange="spOnPageSurahPick('from', this.value)">${spPageSurahOptsHtml(spState.pageFromSurahId)}</select>
       </div>
       ${renderSpPageControlRow("from", sum.rel1, sum.sp1, sum.p1)}
     </div>
@@ -19443,7 +19475,7 @@ function renderSpPagesBox() {
     <div class="sp-rev-card is-end">
       <div class="sp-rev-row1">
         <span class="sp-rev-lbl">⏹️ إلى:</span>
-        <select id="spPageToSurahSel" class="sp-rev-sel" onchange="spOnPageSurahPick('to', this.value)">${spPageSurahOptsHtml(spState.pageToSurahId)}</select>
+        <select id="spPageToSurahSel" aria-label="سورة النهاية (إلى)" class="sp-rev-sel" onchange="spOnPageSurahPick('to', this.value)">${spPageSurahOptsHtml(spState.pageToSurahId)}</select>
       </div>
       ${renderSpPageControlRow("to", sum.rel2, sum.sp2, sum.p2)}
     </div>
@@ -19455,6 +19487,7 @@ function renderSpPagesBox() {
       <button type="button" onclick="spApplyPageSpanPreset(10)">+10 نصف</button>
       <button type="button" onclick="spApplyPageSpanPreset(20)">+20 جزء</button>
     </div>`;
+  if (typeof enhanceAllVisibleSelects === "function") enhanceAllVisibleSelects(box);
   syncSpPageInputsOnly();
 }
 
@@ -21400,9 +21433,9 @@ async function waHubSendImage(kind) {
   const h = getActiveHalaqa(), s = getCurrentSession();
   const st = h?.students.find(x => x.id === _waHubStudentId);
   if (!st || !h) return;
+  const phone = _waHubAutoOpenChat ? getCleanStudentPhone(st) : "";
 
   if (kind === "todayCard") {
-    showToast("📸 جاري تجهيز صورة بطاقة اليوم بأعلى دقة...");
     let host = document.getElementById("waTempDailyCardHost");
     if (!host) {
       host = document.createElement("div");
@@ -21412,27 +21445,19 @@ async function waHubSendImage(kind) {
     }
     host.innerHTML = buildStudentDailyCardHtml(st, s, h);
     const fname = `بطاقة_اليوم_${cleanFilePart(st.name)}_${todayISO()}`;
-    await exportHighResPNG("waTempDailyCard", fname);
+    const caption = `السلام عليكم ورحمة الله وبركاته 🌿\nمرفق بطاقة متابعة جلسة اليوم للـ${getGenderTerms(h).student} *${st.name}* 📸`;
+    await shareReportImageToWhatsApp("waTempDailyCard", fname, caption, phone);
     host.innerHTML = "";
-    if (_waHubAutoOpenChat) {
-      setTimeout(() => {
-        openWhatsAppToStudentNumber(st, `السلام عليكم ورحمة الله وبركاته 🌿\nمرفق بطاقة متابعة جلسة اليوم للـ${getGenderTerms(h).student} *${st.name}* 📸`);
-      }, 650);
-    }
     return;
   }
 
   closeModal("studentWaHubModal");
   const mode = kind === "weekly" ? "weekly" : (kind === "compare" ? "compare" : "monthly");
   openIndivReportModal(st.id, "", mode, "", "weekly");
-  await new Promise(r => setTimeout(r, 140));
-  await exportIndivReportPNG();
-  if (_waHubAutoOpenChat) {
-    const lbl = mode === "weekly" ? "الكشف الأسبوعي" : (mode === "compare" ? "بطاقة المقارنة" : "الكشف الشهري");
-    setTimeout(() => {
-      openWhatsAppToStudentNumber(st, `السلام عليكم ورحمة الله وبركاته 🌿\nمرفق ${lbl} للـ${getGenderTerms(h).student} *${st.name}* 📸`);
-    }, 700);
-  }
+  await new Promise(r => setTimeout(r, 180));
+  const lbl = mode === "weekly" ? "الكشف الأسبوعي" : (mode === "compare" ? "بطاقة المقارنة" : "الكشف الشهري");
+  const caption = `السلام عليكم ورحمة الله وبركاته 🌿\nمرفق ${lbl} للـ${getGenderTerms(h).student} *${st.name}* 📸`;
+  await shareReportImageToWhatsApp("indivReportCanvas", getIndivReportFileName(), caption, phone);
 }
 
 
@@ -23598,6 +23623,10 @@ function openDayOptionsModal() {
     </button>
 
     ${!isNC ? `
+      <button type="button" class="day-opt-btn" style="color:var(--green); border-color:rgba(22,121,76,0.32); background:var(--green-bg);" onclick="closeModal('dayOptionsModal'); quickShareTodayReportFromSession();">
+        <span>📲 إرسال صورة تقرير اليوم للواتساب مباشرة</span>
+        <span>↗</span>
+      </button>
       <button type="button" class="day-opt-btn" onclick="closeModal('dayOptionsModal'); openSessionLessonsModal();">
         <span>📚 دروس ونشاطات الجلسة (استهداء • حديث • نشاطات)</span>
         <span>${getSessionLessonsList(s).length ? '✓' : '+'}</span>
@@ -24117,7 +24146,10 @@ function updateSessionStatusBarOnly() {
   const remCnt = Math.max(0, totalSt - doneCnt);
   const absCnt = excused + absent;
   const donePct = totalSt > 0 ? Math.round((doneCnt / totalSt) * 100) : 0;
-  const actionBtns = `<button class="btn btn-soft btn-sm" style="padding:5px 9px;" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">⚡ تفقد</button>` + (pendingCnt > 0
+  const _hasDL = getSessionLessonsList(s).length > 0;
+  const actionBtns = `<button class="btn btn-soft btn-sm" style="padding:5px 8px;" onclick="${s.type === 'saturday' ? 'prefillSaturdayReviews(true, true)' : 'prefillDailyRecitation(true, true)'}" title="تحديث وتعبئة الواجبات تلقائياً">🔄 واجبات</button>
+    <button class="btn ${_hasDL ? 'btn-success' : 'btn-outline'} btn-sm" style="padding:5px 8px;" onclick="openSessionLessonsModal()" title="تسجيل دروس استهداء والحديث والنشاطات لهذا اليوم">📚${_hasDL ? ' ✓' : ''}</button>
+    <button class="btn btn-soft btn-sm" style="padding:5px 9px;" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">⚡ تفقد</button>` + (pendingCnt > 0
     ? `<button class="btn btn-primary btn-sm" style="padding:5px 8px;" onclick="openNextPendingStudent()" title="فتح المتبقي التالي">⏭️</button>
        <button class="btn btn-warn btn-sm" style="padding:5px 9px;" onclick="openAutoAbsentModal()">غياب (${pendingCnt})</button>`
     : `<button class="btn btn-success btn-sm" style="padding:5px 10px;" onclick="currentReportSubtab='daily'; switchTab('reports')">📄 التقرير</button>`);
@@ -24703,6 +24735,7 @@ function syncStudentEvalSheet() {
   `;
 
   bodyEl.innerHTML = renderCardBody(s, st, r, idx);
+  if (typeof enhanceAllVisibleSelects === "function") enhanceAllVisibleSelects(bodyEl);
 
   const hasPrev = idx > 0;
   const hasNext = idx + 1 < h.students.length;
@@ -29588,6 +29621,122 @@ function printCertificateClean() {
   setTimeout(() => window.print(), 120);
 }
 
+
+// ==================== v106: DIRECT IMAGE-TO-WHATSAPP SHARE ENGINE ====================
+async function shareReportImageToWhatsApp(paperId, filename, caption = "", phone = "") {
+  showToast("📸 جاري تجهيز الصورة عالية الدقة للإرسال...");
+  try {
+    const canvas = await renderReportToHDCanvas(paperId);
+    const safeName = (filename || ("sorouh_makin_" + Date.now())).replace(/\.png$/i, "") + ".png";
+    const cleanPhone = String(phone || "").replace(/[^0-9]/g, "");
+    const cleanCaption = String(caption || "").trim();
+
+    // Best-effort copy caption to clipboard silently as backup
+    if (cleanCaption) {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(cleanCaption).catch(() => {});
+        }
+      } catch {}
+    }
+
+    // 1) Native Android Bridge (Direct WhatsApp Image + Caption + Optional Student Phone JID!)
+    if (window.MakinAndroid && typeof window.MakinAndroid.shareBase64File === "function") {
+      const dataUrl = canvas.toDataURL("image/png", 1.0);
+      const b64 = dataUrl.includes(",") ? dataUrl.split(",")[1] : dataUrl;
+      if (b64) {
+        window.MakinAndroid.shareBase64File(b64, safeName, "image/png", cleanCaption, cleanPhone);
+        showToast(cleanPhone ? "📲 جاري فتح واتساب الطالب مع الصورة مرفقة..." : "📲 جاري مشاركة الصورة إلى الواتساب...");
+        return { ok: true, method: "native" };
+      }
+    }
+
+    // 2) Web Share API Level 2 (Shares actual PNG File directly to WhatsApp on modern Android/Chrome/PWA!)
+    const blob = await new Promise(res => canvas.toBlob(res, "image/png", 1.0));
+    if (blob && typeof File !== "undefined" && navigator.share) {
+      try {
+        const file = new File([blob], safeName, { type: "image/png" });
+        const shareData = { files: [file], title: "صروح مكين" };
+        if (cleanCaption) shareData.text = cleanCaption;
+        if (!navigator.canShare || navigator.canShare({ files: [file] })) {
+          await navigator.share(shareData);
+          showToast("✓ تم فتح مشاركة الصورة بنجاح");
+          return { ok: true, method: "webshare" };
+        }
+      } catch (shareErr) {
+        if (shareErr && shareErr.name === "AbortError") {
+          return { ok: false, method: "cancelled" };
+        }
+        console.warn("Web Share fallback:", shareErr);
+      }
+    }
+
+    // 3) Fallback if running inside an older APK before installing the v106 APK update:
+    if (window.MakinAndroid && typeof window.MakinAndroid.saveBase64File === "function") {
+      const dataUrl = canvas.toDataURL("image/png", 1.0);
+      const b64 = dataUrl.includes(",") ? dataUrl.split(",")[1] : dataUrl;
+      if (b64) window.MakinAndroid.saveBase64File(b64, safeName, "image/png");
+    } else if (blob) {
+      await downloadBlob(blob, safeName);
+    }
+    showToast("📸 تم حفظ الصورة بالمعرض ونسخ النص — ثبّت APK صروح مكين الجديد لإرسال الصورة تلقائياً للواتساب");
+    return { ok: false, method: "saved_only" };
+  } catch (e) {
+    console.error("shareReportImageToWhatsApp error:", e);
+    showToast("تأكد من الاتصال بالإنترنت لتحميل محرك الصور عالية الدقة ثم حاول مجدداً");
+    return { ok: false, method: "error" };
+  }
+}
+
+async function shareDailyReportImageToWhatsApp() {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s) { showToast("اختر جلسة أولاً"); return; }
+  if (s.noClass) { showToast("هذا اليوم مُغلق (بدون حلقة) — لا يوجد تقرير للإرسال"); return; }
+  const paper = document.getElementById("dailyReportPaper");
+  if (!paper || !paper.innerHTML.trim()) renderDailyReport();
+  const caption = buildDailyWhatsAppText() || "";
+  await shareReportImageToWhatsApp("dailyReportPaper", getDailyFileName(), caption, "");
+}
+
+async function quickShareTodayReportFromSession() {
+  const s = getCurrentSession();
+  if (!s) { showToast("اختر جلسة أولاً"); return; }
+  if (s.noClass) { showToast("هذا اليوم عطلة (بدون حلقة)"); return; }
+  renderDailyReport();
+  await new Promise(r => setTimeout(r, 120));
+  await shareDailyReportImageToWhatsApp();
+}
+
+async function shareMonthlyReportImageToWhatsApp() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const paper = document.getElementById("monthlyReportPaper");
+  if (!paper || !paper.innerHTML.trim()) renderMonthlyReport();
+  const caption = buildMonthlyWhatsAppText() || "";
+  await shareReportImageToWhatsApp("monthlyReportPaper", getMonthlyFileName(), caption, "");
+}
+
+async function shareIndivReportImageToWhatsApp() {
+  const h = getActiveHalaqa();
+  const st = h?.students.find(x => x.id === _irStudentId);
+  if (!st || !h) return;
+  const useWeek = _irPeriodMode === "weekly" || (_irPeriodMode === "compare" && _irCmpBasis === "weekly");
+  const lbl = _irPeriodMode === "compare"
+    ? (useWeek ? "بطاقة المقارنة الأسبوعية" : "بطاقة المقارنة الشهرية")
+    : (useWeek ? "الكشف الأسبوعي" : "الكشف الشهري");
+  const caption = `السلام عليكم ورحمة الله وبركاته 🌿\nمرفق ${lbl} للـ${getGenderTerms(h).student} *${st.name}* 📸`;
+  await shareReportImageToWhatsApp("indivReportCanvas", getIndivReportFileName(), caption, getCleanStudentPhone(st));
+}
+
+async function shareCertificateToWhatsApp() {
+  const h = getActiveHalaqa();
+  const st = h?.students.find(x => x.id === _certStudentId);
+  if (!st || !h) return;
+  const titleTxt = (document.getElementById("certTitleInput")?.value || "شهادة تقدير").trim();
+  const caption = `السلام عليكم ورحمة الله وبركاته 🌿\nمبارك للـ${getGenderTerms(h).student} *${st.name}* — مرفق ${titleTxt} 🎓`;
+  await shareReportImageToWhatsApp("certPaperCanvas", getCertFileName(), caption, getCleanStudentPhone(st));
+}
+
 async function exportHighResPNG(paperId, filename) {
   showToast("جاري إنشاء الصورة الكاملة بأعلى دقة...");
   try {
@@ -30248,20 +30397,16 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v104 -->
+<!-- Makin App v106 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
 }
 
 // ==================== STRUCTURED 6-PART WHATSAPP PARENTS REPORT ====================
-function copyDailyWhatsApp() {
+function buildDailyWhatsAppText() {
   const h = getActiveHalaqa(), s = getCurrentSession();
-  if (!s) return;
-  if (s.noClass) {
-    showToast("هذا اليوم مُغلق (بدون حلقة) — لا يوجد تقرير للنسخ");
-    return;
-  }
+  if (!h || !s || s.noClass) return "";
 
   const isSat = s.type === "saturday";
   const lbl = isSat ? "تقرير المراجعة الأسبوعية" : "تقرير التسميع اليومي";
@@ -30421,13 +30566,24 @@ function copyDailyWhatsApp() {
   txt += `نتقدّم بجزيل الشكر والعرفان لأولياء الأمور الكرام على حسن متابعتهم واهتمامهم بتحفيظ أبنائهم وتعاونهم الدائم مع الحلقة؛ سائلين الله أن يبارك في أبنائنا، ويجعلهم من أهل القرآن وخاصته، وأن يكتب أجركم مضاعفاً.\n`;
   txt += `━━━━━━━━━━━━━━━━━━\n`;
   txt += `*${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}*`;
-
-  copyText(txt, "تم نسخ تقرير الواتساب المرتّب للأهالي بنجاح 💬");
+  return txt;
 }
 
-function copyMonthlyWhatsApp() {
+function copyDailyWhatsApp() {
+  const s = getCurrentSession();
+  if (!s) return;
+  if (s.noClass) {
+    showToast("هذا اليوم مُغلق (بدون حلقة) — لا يوجد تقرير للنسخ");
+    return;
+  }
+  const txt = buildDailyWhatsAppText();
+  if (txt) copyText(txt, "تم نسخ تقرير الواتساب المرتّب للأهالي بنجاح 💬");
+}
+
+function buildMonthlyWhatsAppText() {
   const h = getActiveHalaqa();
-  const m = document.getElementById("monthlyHijriFilter").value || "ALL";
+  if (!h) return "";
+  const m = document.getElementById("monthlyHijriFilter")?.value || "ALL";
   const { rows, totals } = computeMonthlyData(m);
   const bm = getBrandMeta(h);
   const monthTitle = m === "ALL" ? "جميع الجلسات" : `شهر ${m} هـ`;
@@ -30441,7 +30597,12 @@ function copyMonthlyWhatsApp() {
   });
   const rashSum = totals.rashidiPages > 0 ? ` | الرشيدي ${formatNum(totals.rashidiPages)} ص` : "";
   txt += `━━━━━━━━━━━━\n📊 *إنجاز الحلقة:* حفظ ${formatNum(totals.memPages)} ص${rashSum} | مراجعة ${formatNum(totals.revPages)} ص | سبر ${totals.sabrCount}${ptsOn ? ` | نقاط ${totals.totalPoints}` : ''}`;
-  copyText(txt, "تم نسخ التقرير الشهري للواتساب");
+  return txt;
+}
+
+function copyMonthlyWhatsApp() {
+  const txt = buildMonthlyWhatsAppText();
+  if (txt) copyText(txt, "تم نسخ التقرير الشهري للواتساب");
 }
 
 function copyPointsCycleLeaderboardDirect() {
@@ -31042,7 +31203,7 @@ function openSettingsModal() {
       <div class="lbc-logo"><img src="${bm.logoSrc}" alt="شعار المؤسسة"></div>
       <div class="lbc-info">
         <div class="lbc-org">${escapeHtml(bm.org)}</div>
-        <div class="lbc-sub">${bm.isLicensedExternal ? "✨ هوية مؤسسة مرخّصة من المؤسس" : "🔒 الهوية والشعار الرسميان لمنصة مكين"}</div>
+        <div class="lbc-sub">${bm.isLicensedExternal ? "✨ هوية مؤسسة مرخّصة من المؤسس" : "🔒 الهوية والشعار الرسميان لمنصة صروح مكين"}</div>
       </div>`;
   }
   if (document.getElementById("setHalaqaGender")) document.getElementById("setHalaqaGender").value = h.gender || "male";
@@ -31784,18 +31945,32 @@ function closeAllModalsAndOverlays() {
   syncBodyScrollLock();
 }
 
+function getEffectiveModalZ(el) {
+  if (!el) return 100;
+  const csZ = parseInt(getComputedStyle(el).zIndex, 10);
+  if (!isNaN(csZ) && csZ > 0) return csZ;
+  const stZ = parseInt(el.style.zIndex, 10);
+  return (!isNaN(stZ) && stZ > 0) ? stZ : 100;
+}
+
 function openModal(id) {
   const el = document.getElementById(id);
   if (!el) return;
   if (id !== "studentEvalSheet") closeRightDrawer();
-  if (id !== "studentEvalSheet") {
+  if (id === "makinDialogModal") {
+    el.style.setProperty("z-index", "255", "important");
+  } else if (id === "execPickerSheet") {
+    el.style.setProperty("z-index", "235", "important");
+  } else if (id === "surahPickerModal") {
+    el.style.setProperty("z-index", "215", "important");
+  } else if (id !== "studentEvalSheet") {
     let topZ = 160;
     document.querySelectorAll(".modal-backdrop.show").forEach(m => {
-      if (m.id === id || m.id === "makinDialogModal") return;
-      const z = parseInt(getComputedStyle(m).zIndex, 10) || parseInt(m.style.zIndex, 10) || 100;
-      if (z > topZ && z < 248) topZ = z;
+      if (m.id === id || m.id === "makinDialogModal" || m.id === "execPickerSheet" || m.id === "surahPickerModal") return;
+      const z = getEffectiveModalZ(m);
+      if (z > topZ && z < 200) topZ = z;
     });
-    _modalZCounter = Math.min(250, Math.max(162, topZ + 2));
+    _modalZCounter = Math.min(200, Math.max(162, topZ + 2));
     el.style.zIndex = String(_modalZCounter);
   }
   el.classList.add("show");
@@ -31834,7 +32009,7 @@ function closeModal(id) {
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
     const openModals = Array.from(document.querySelectorAll(".modal-backdrop.show"))
-      .sort((a, b) => (Number(b.style.zIndex) || 100) - (Number(a.style.zIndex) || 100));
+      .sort((a, b) => getEffectiveModalZ(b) - getEffectiveModalZ(a));
     if (openModals.length) {
       const top = openModals[0];
       if (top.id === "studentEvalSheet") closeStudentEvalSheet();
@@ -31847,7 +32022,7 @@ function closeModal(id) {
   window.addEventListener("popstate", () => {
     window._makinBackPushed = false;
     const openModals = Array.from(document.querySelectorAll(".modal-backdrop.show"))
-      .sort((a, b) => (Number(b.style.zIndex) || 100) - (Number(a.style.zIndex) || 100));
+      .sort((a, b) => getEffectiveModalZ(b) - getEffectiveModalZ(a));
     if (openModals.length) {
       const top = openModals[0];
       if (top.id === "studentEvalSheet") closeStudentEvalSheet();
@@ -34990,8 +35165,15 @@ function openNativeSelectAsExecPicker(sel) {
   if (subEl) subEl.textContent = totalOpts > 8 ? `اختر من ${totalOpts} خيار أو ابحث سريعاً` : "اختر من القائمة أدناه";
   if (searchWrap) searchWrap.style.display = totalOpts > 8 ? "block" : "none";
 
+  if (document.activeElement && typeof document.activeElement.blur === "function") {
+    try { document.activeElement.blur(); } catch {}
+  }
   renderNativeSelectIntoExecPicker();
   openModal("execPickerSheet");
+  requestAnimationFrame(() => {
+    const selItem = document.querySelector("#epsBody .eps-item.selected");
+    if (selItem) { try { selItem.scrollIntoView({ block: "center", behavior: "instant" }); } catch {} }
+  });
 }
 
 function renderNativeSelectIntoExecPicker() {
@@ -35061,7 +35243,7 @@ function enhanceSingleNativeSelect(sel) {
     trig = document.createElement("button");
     trig.type = "button";
     trig.className = "exec-picker-trigger ep-auto-trigger";
-    trig.onclick = () => openNativeSelectAsExecPicker(sel);
+    trig.onclick = (e) => { if (e) { e.preventDefault(); e.stopPropagation(); } openNativeSelectAsExecPicker(sel); };
     sel.insertAdjacentElement("afterend", trig);
     sel._epTrigger = trig;
     sel._epSyncLabel = () => {
@@ -35553,7 +35735,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v104";
+const TIBYAN_APP_VERSION = "v106";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -35586,7 +35768,7 @@ function triggerAppUpdateCheck() {
     showToast("🔍 جاري فحص وجود تحديثات جديدة...");
     try { window.MakinAndroid.checkForUpdateNow(); } catch {}
   } else {
-    showToast(`تطبيق مكين على الإصدار ${TIBYAN_APP_VERSION}`);
+    showToast(`تطبيق صروح مكين على الإصدار ${TIBYAN_APP_VERSION}`);
   }
 }
 
@@ -35596,7 +35778,7 @@ function upgradeNativeOtaBanner(el) {
   try {
     const rawHtml = el.innerHTML || "";
     const titleMatch = rawHtml.match(/✨[^<]+/);
-    const titleTxt = titleMatch ? titleMatch[0].trim() : "✨ يتوفر تحديث جديد لتطبيق مكين";
+    const titleTxt = titleMatch ? titleMatch[0].trim() : "✨ يتوفر تحديث جديد لتطبيق صروح مكين";
     const subMatch = rawHtml.match(/margin-top:2px;">([^<]+)<\/div>/);
     const subTxt = subMatch ? subMatch[1].trim() : "تم تنزيل التحديث وجاهز للتفعيل فوراً";
 
@@ -35604,7 +35786,7 @@ function upgradeNativeOtaBanner(el) {
     el.removeAttribute("style");
     el.innerHTML = `
       <div class="ota-dialog">
-        <div class="ota-badge">🔄 تحديث جاهز لتطبيق مكين</div>
+        <div class="ota-badge">🔄 تحديث جاهز لتطبيق صروح مكين</div>
         <div class="ota-title">${escapeHtml(titleTxt)}</div>
         <div class="ota-desc">${escapeHtml(subTxt)}</div>
         <div class="ota-btns">
@@ -35645,7 +35827,7 @@ function installMakinOtaBannerGuard() {
     const lastSeenVer = localStorage.getItem("makin_last_boot_ver") || "";
     if (lastSeenVer && lastSeenVer !== TIBYAN_APP_VERSION) {
       setTimeout(() => {
-        showToast(`✅ تم تحديث تطبيق مكين بنجاح إلى الإصدار ${TIBYAN_APP_VERSION}`);
+        showToast(`✅ تم تحديث تطبيق صروح مكين بنجاح إلى الإصدار ${TIBYAN_APP_VERSION}`);
       }, 900);
     }
     localStorage.setItem("makin_last_boot_ver", TIBYAN_APP_VERSION);
@@ -35984,7 +36166,7 @@ async function handleAuthLogin() {
   const pass = document.getElementById("authLoginPass")?.value || "";
   if (!email || !pass) { showToast("أدخل البريد الإلكتروني وكلمة السر"); return; }
 
-  if (!await ensureFirebaseReady(12000)) { showToast("تعذّر الاتصال بسيرفر مكين — تحقق من الإنترنت وحاول مجدداً"); return; }
+  if (!await ensureFirebaseReady(12000)) { showToast("تعذّر الاتصال بسيرفر صروح مكين — تحقق من الإنترنت وحاول مجدداً"); return; }
   setAuthBusy("btnAuthLoginSubmit", true, "🚀 دخول إلى حسابي");
   _isAuthFlowBusy = true;
   try {
@@ -36281,7 +36463,7 @@ async function handleRegisterSupervisor() {
 
     if (isClaimingOwner) {
       _ownerWorkspaceMode = "owner";
-      showToast("👑 مبارك! تم تفعيل حسابك كمؤسس لمنصة مكين بشكل دائم");
+      showToast("👑 مبارك! تم تفعيل حسابك كمؤسس لمنصة صروح مكين بشكل دائم");
     } else {
       showToast(`🏛️ أهلاً بك ${gender === 'female' ? 'مشرفة' : 'مشرف'} ${finalBranch}! كودك: ${supCode}`);
     }
@@ -36431,7 +36613,7 @@ function switchOwnerWorkspace(mode) {
 function renderOwnerShell() {
   const u = getCurrentAccountUser();
   if (!u) return;
-  document.title = "لوحة المؤسس | تطبيق مكين";
+  document.title = "لوحة المؤسس | صروح مكين";
   const sub = document.getElementById("ownerHdrSub");
   if (sub) sub.textContent = `المؤسس: ${u.name} • ${u.email}`;
   switchOwnerTab(_activeOwnerTab || "dashboard");
