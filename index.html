@@ -12457,6 +12457,40 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
   unicode-bidi: isolate;
 }
 
+
+/* ==================== MAKIN v112: ANTI-OVERLAP ARABIC RTL HD EXPORT ENGINE ==================== */
+#hdExportStage, #hdExportStage * {
+  letter-spacing: 0 !important;
+  font-kerning: none !important;
+  font-variant-ligatures: normal !important;
+  font-feature-settings: "kern" 0 !important;
+  -webkit-font-feature-settings: "kern" 0 !important;
+}
+#hdExportStage:not(.is-cert-stage):not(.is-poster-stage),
+#hdExportStage:not(.is-cert-stage):not(.is-poster-stage) * {
+  word-spacing: 0.12em !important;
+}
+#hdExportStage.is-cert-stage, #hdExportStage.is-cert-stage *,
+#hdExportStage.is-poster-stage, #hdExportStage.is-poster-stage * {
+  word-spacing: 0.05em !important;
+}
+#hdExportStage .odh-title-col h2,
+#hdExportStage .odh-org-box,
+#hdExportStage .odh-meta-cell,
+#hdExportStage table.t-daily th,
+#hdExportStage table.t-daily td,
+#hdExportStage table.t-daily td.td-name-col,
+#hdExportStage table.t-daily td.td-pts,
+#hdExportStage table.t-daily tfoot td,
+#hdExportStage table.t-monthly th,
+#hdExportStage table.t-monthly td {
+  font-weight: 700 !important;
+}
+#hdExportStage .odh-title-col h2 {
+  line-height: 1.35 !important;
+  padding: 2px 6px !important;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -12966,7 +13000,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v111</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v112</span>
         </button>
       </div>
     </div>
@@ -27368,9 +27402,16 @@ function computeDynamicHw3Cols(mode, metrics) {
     : 0;
   const numFromW = metrics.maxFromLen <= 2 ? 2.6 : (metrics.maxFromLen <= 4 ? 3.1 : computeDynamicHwSubWidthPct(metrics.maxFromLen, 3.1, 6.4));
   const numToW = metrics.maxToLen <= 2 ? 2.6 : (metrics.maxToLen <= 4 ? 3.1 : computeDynamicHwSubWidthPct(metrics.maxToLen, 3.1, 6.4));
-  const pairW = Math.max(numFromW + numToW, spanW);
+  let pairW = Math.max(numFromW + numToW, spanW);
+  let adjSurahW = surahW;
+  const minTotalHw = metrics.longHdr ? 13.8 : 11.4;
+  if (adjSurahW + pairW < minTotalHw) {
+    const extra = minTotalHw - (adjSurahW + pairW);
+    adjSurahW = +(adjSurahW + extra * 0.6).toFixed(2);
+    pairW = +(pairW + extra * 0.4).toFixed(2);
+  }
   const halfPair = +(pairW / 2).toFixed(2);
-  return [surahW, halfPair, halfPair];
+  return [adjSurahW, halfPair, halfPair];
 }
 
 function buildScaledDailyColgroup(fixedCols, hwCols, noteW) {
@@ -27484,8 +27525,8 @@ function renderDailyReport() {
   }
 
   const title = s.type === "saturday"
-    ? `ورقـة المراجعة الأسبوعية لحلقة ${escapeHtml(bm.name)}`
-    : `ورقـة التسميـــع اليومي لحلقة ${escapeHtml(bm.name)}`;
+    ? `ورقة المراجعة الأسبوعية لحلقة ${escapeHtml(bm.name)}`
+    : `ورقة التسميع اليومي لحلقة ${escapeHtml(bm.name)}`;
 
   let tbl = "";
   const dayLessonsFooterTxt = formatSessionLessonsFooter(s, true);
@@ -27689,7 +27730,7 @@ function renderDailyReport() {
       } catch {}
     });
     const dynNoteW = computeDynamicNoteWidthPct(maxSatNoteLen);
-    const dynSatHwCols = computeDynamicHw3Cols("standard", { maxSurahLen: satHwSurahLen, maxFromLen: satHwFromLen, maxToLen: satHwToLen, maxSpanLen: satHwSpanLen });
+    const dynSatHwCols = computeDynamicHw3Cols("standard", { maxSurahLen: satHwSurahLen, maxFromLen: satHwFromLen, maxToLen: satHwToLen, maxSpanLen: satHwSpanLen, longHdr: true });
     const fixedSatCols = ptsOn
       ? [2.5, nameW, 8.2, 3.2, 3.2, 5.6, 6.8, 6.8, 5.6, 3.8]
       : [2.5, nameW + 0.6, 8.4, 3.3, 3.3, 5.8, 7.0, 7.0, 5.8];
@@ -28461,9 +28502,61 @@ async function renderReportToHDCanvas(paperId) {
 
   stage.appendChild(clone);
 
-  // Wait for Google Fonts & embedded images to settle
-  if (document.fonts && document.fonts.ready) await document.fonts.ready;
-  await new Promise(r => setTimeout(r, 160));
+  // Wait for Google Fonts & embedded images to settle (with safe offline timeout)
+  if (document.fonts) {
+    try {
+      await Promise.race([
+        Promise.all([
+          document.fonts.ready,
+          document.fonts.load ? document.fonts.load('700 24px "Tajawal"', "ورقة المراجعة الأسبوعية").catch(() => {}) : Promise.resolve(),
+          document.fonts.load ? document.fonts.load('700 24px "Cairo"', "لوحة الشرف").catch(() => {}) : Promise.resolve()
+        ]),
+        new Promise(r => setTimeout(r, 380))
+      ]);
+    } catch {}
+  }
+  await new Promise(r => setTimeout(r, 140));
+
+  // v112: Pre-calibrate DOM vs Canvas font width so Arabic words NEVER collide or overlap on any Android WebView!
+  const probeTextLong = "ورقة المراجعة الأسبوعية لحلقة عثمان بن عفان";
+  const probeTextWord = "الأسبوعية";
+  const probeCanvas = document.createElement("canvas");
+  const probeCtx = probeCanvas.getContext("2d");
+  const measureDomVsCanvas = (docObj, fontStack, weight = 700, sizePx = 24) => {
+    try {
+      const sp = docObj.createElement("span");
+      sp.textContent = probeTextLong;
+      sp.style.cssText = `position:fixed;left:-9999px;top:0;visibility:hidden;white-space:nowrap;font-family:${fontStack};font-weight:${weight};font-size:${sizePx}px;letter-spacing:0;word-spacing:0;font-kerning:none;font-variant-ligatures:normal;-webkit-text-size-adjust:100%;text-size-adjust:100%;direction:rtl;`;
+      docObj.body.appendChild(sp);
+      const domLong = sp.getBoundingClientRect().width || 1;
+      sp.textContent = probeTextWord;
+      const domWord = sp.getBoundingClientRect().width || 1;
+      sp.remove();
+      probeCtx.font = `${weight} ${sizePx}px ${fontStack}`;
+      const cvsLong = probeCtx.measureText(probeTextLong).width || domLong;
+      const cvsWord = probeCtx.measureText(probeTextWord).width || domWord;
+      const rLong = cvsLong / domLong;
+      const rWord = cvsWord / domWord;
+      return { ratio: Math.max(rLong, rWord), err: Math.max(Math.abs(rLong - 1), Math.abs(rWord - 1)) };
+    } catch {
+      return { ratio: 1, err: 0 };
+    }
+  };
+
+  let chosenExportFont = '"Tajawal", Arial, sans-serif';
+  let exportFillRatio = 1.0;
+  if (!isCert && !isPoster) {
+    const fontCands = ['"Tajawal", Arial, sans-serif', '"Cairo", Arial, sans-serif', 'Arial, sans-serif', 'sans-serif'];
+    let bestCand = fontCands[0], bestRes = { ratio: 1, err: 99 };
+    for (const fc of fontCands) {
+      const res = measureDomVsCanvas(document, fc, 700, 24);
+      if (res.err <= 0.035) { bestCand = fc; bestRes = res; break; }
+      if (res.err < bestRes.err) { bestCand = fc; bestRes = res; }
+    }
+    chosenExportFont = bestCand;
+    exportFillRatio = bestRes.ratio;
+    stage.style.setProperty("font-family", chosenExportFont, "important");
+  }
 
   // v102: True Wide A4 Landscape (1620px) for Daily & Weekly Review reports so rows stay crisp single-line & landscape!
   const baseW = isCert ? 1400 : (isPoster ? 900 : (isIndiv ? 880 : (isMonthly ? 1380 : 1620)));
@@ -28500,53 +28593,106 @@ async function renderReportToHDCanvas(paperId) {
   const minFloorScale = deviceCanvasCap <= 4096 ? 2.0 : 2.2;
   const safeScale = Math.min(idealScale, Math.max(minFloorScale, Math.floor((deviceCanvasCap / maxDim) * 10) / 10));
 
-  // v93 CRITICAL ANDROID RTL FIX: Isolate #hdExportStage at (0,0) as static block inside cloned iframe
-  // so position:fixed + left:-99999px + RTL viewport NEVER crops left/right edges!
-  const canvas = await html2canvas(stage, {
-    scale: safeScale,
-    x: 0,
-    y: 0,
-    width: targetW,
-    height: targetH,
-    windowWidth: targetW,
-    windowHeight: targetH,
-    scrollX: 0,
-    scrollY: 0,
-    backgroundColor: "#ffffff",
-    useCORS: true,
-    logging: false,
-    onclone: (clonedDoc) => {
-      clonedDoc.documentElement.style.setProperty("margin", "0", "important");
-      clonedDoc.documentElement.style.setProperty("padding", "0", "important");
-      clonedDoc.documentElement.style.setProperty("width", targetW + "px", "important");
-      clonedDoc.documentElement.style.setProperty("overflow", "visible", "important");
-      clonedDoc.body.style.setProperty("margin", "0", "important");
-      clonedDoc.body.style.setProperty("padding", "0", "important");
-      clonedDoc.body.style.setProperty("width", targetW + "px", "important");
-      clonedDoc.body.style.setProperty("min-width", targetW + "px", "important");
-      clonedDoc.body.style.setProperty("overflow", "visible", "important");
-      clonedDoc.body.style.setProperty("background", "#ffffff", "important");
-      Array.from(clonedDoc.body.children).forEach(ch => {
-        if (ch.id !== "hdExportStage") ch.style.setProperty("display", "none", "important");
-      });
-      const cStage = clonedDoc.getElementById("hdExportStage");
-      if (cStage) {
-        cStage.style.setProperty("position", "static", "important");
-        cStage.style.setProperty("left", "0", "important");
-        cStage.style.setProperty("right", "auto", "important");
-        cStage.style.setProperty("top", "0", "important");
-        cStage.style.setProperty("margin", "0", "important");
-        cStage.style.setProperty("width", targetW + "px", "important");
-        cStage.style.setProperty("max-width", targetW + "px", "important");
-        cStage.style.setProperty("overflow", "visible", "important");
-        cStage.style.setProperty("z-index", "1", "important");
+  // v112 CRITICAL ARABIC ANTI-OVERLAP GUARD:
+  // 1) Calibrate inside clonedDoc iframe itself (catches iframe font-loading mismatch & Android textZoom).
+  // 2) If Canvas2D STILL draws Arabic wider than DOM (>4%), compensate ctx.font size by 1/ratio cleanly during html2canvas only!
+  let activeFillRatio = exportFillRatio;
+  const origFillText = CanvasRenderingContext2D.prototype.fillText;
+  let patchedFillText = false;
+  let canvas = null;
+  try {
+    canvas = await html2canvas(stage, {
+      scale: safeScale,
+      x: 0,
+      y: 0,
+      width: targetW,
+      height: targetH,
+      windowWidth: targetW,
+      windowHeight: targetH,
+      scrollX: 0,
+      scrollY: 0,
+      backgroundColor: "#ffffff",
+      useCORS: true,
+      logging: false,
+      onclone: (clonedDoc) => {
+        clonedDoc.documentElement.style.setProperty("margin", "0", "important");
+        clonedDoc.documentElement.style.setProperty("padding", "0", "important");
+        clonedDoc.documentElement.style.setProperty("width", targetW + "px", "important");
+        clonedDoc.documentElement.style.setProperty("overflow", "visible", "important");
+        clonedDoc.body.style.setProperty("margin", "0", "important");
+        clonedDoc.body.style.setProperty("padding", "0", "important");
+        clonedDoc.body.style.setProperty("width", targetW + "px", "important");
+        clonedDoc.body.style.setProperty("min-width", targetW + "px", "important");
+        clonedDoc.body.style.setProperty("overflow", "visible", "important");
+        clonedDoc.body.style.setProperty("background", "#ffffff", "important");
+        Array.from(clonedDoc.body.children).forEach(ch => {
+          if (ch.id !== "hdExportStage") ch.style.setProperty("display", "none", "important");
+        });
+        const cStage = clonedDoc.getElementById("hdExportStage");
+        if (cStage) {
+          cStage.style.setProperty("position", "static", "important");
+          cStage.style.setProperty("left", "0", "important");
+          cStage.style.setProperty("right", "auto", "important");
+          cStage.style.setProperty("top", "0", "important");
+          cStage.style.setProperty("margin", "0", "important");
+          cStage.style.setProperty("width", targetW + "px", "important");
+          cStage.style.setProperty("max-width", targetW + "px", "important");
+          cStage.style.setProperty("overflow", "visible", "important");
+          cStage.style.setProperty("z-index", "1", "important");
+          if (!isCert && !isPoster) {
+            // Re-verify directly inside clonedDoc iframe! If iframe lacks Tajawal or disagrees with main Canvas, pick exact match!
+            let clonedFont = chosenExportFont;
+            let bestCloned = measureDomVsCanvas(clonedDoc, clonedFont, 700, 24);
+            if (bestCloned.err > 0.04) {
+              for (const fc of ['Arial, sans-serif', 'sans-serif']) {
+                const alt = measureDomVsCanvas(clonedDoc, fc, 700, 24);
+                if (alt.err < bestCloned.err) {
+                  clonedFont = fc;
+                  bestCloned = alt;
+                }
+              }
+            }
+            activeFillRatio = bestCloned.ratio;
+            const fixStyle = clonedDoc.createElement("style");
+            fixStyle.textContent = `#hdExportStage, #hdExportStage * { font-family: ${clonedFont} !important; letter-spacing: 0 !important; font-kerning: none !important; word-spacing: 0.12em !important; }`;
+            clonedDoc.head.appendChild(fixStyle);
+          } else {
+            const certProbe = measureDomVsCanvas(clonedDoc, '"Tajawal", Arial, sans-serif', 700, 24);
+            activeFillRatio = certProbe.ratio;
+          }
+          // Activate exact Arabic fillText width guard if Canvas still renders wider than DOM (>4%)
+          if (activeFillRatio > 1.04 && activeFillRatio < 1.8 && !patchedFillText) {
+            patchedFillText = true;
+            const compFactor = 1 / activeFillRatio;
+            CanvasRenderingContext2D.prototype.fillText = function(text, x, y, maxWidth) {
+              const str = String(text ?? "");
+              if (str && /[\u0600-\u06FF]/.test(str)) {
+                const prevFont = this.font;
+                const mSz = prevFont.match(/(\d+(?:\.\d+)?)px/);
+                if (mSz) {
+                  const origPx = parseFloat(mSz[1]);
+                  const adjPx = Math.max(8, +(origPx * compFactor).toFixed(2));
+                  this.font = prevFont.replace(mSz[0], adjPx + "px");
+                  try {
+                    return maxWidth !== undefined ? origFillText.call(this, str, x, y, maxWidth) : origFillText.call(this, str, x, y);
+                  } finally {
+                    this.font = prevFont;
+                  }
+                }
+              }
+              return maxWidth !== undefined ? origFillText.call(this, text, x, y, maxWidth) : origFillText.call(this, text, x, y);
+            };
+          }
+        }
       }
-    }
-  });
-
-  stage.innerHTML = "";
-  stage.style.removeProperty("width");
-  stage.classList.remove("is-cert-stage", "is-monthly-stage", "is-indiv-stage", "is-poster-stage");
+    });
+  } finally {
+    if (patchedFillText) CanvasRenderingContext2D.prototype.fillText = origFillText;
+    stage.innerHTML = "";
+    stage.style.removeProperty("width");
+    stage.style.removeProperty("font-family");
+    stage.classList.remove("is-cert-stage", "is-monthly-stage", "is-indiv-stage", "is-poster-stage");
+  }
   return canvas;
 }
 
@@ -30734,8 +30880,8 @@ async function exportDailyExcelStyled() {
 
     ws.mergeCells(ptsOn ? "C2:L3" : "C2:K3");
     ws.getCell("C2").value = isSat
-      ? `ورقـة المراجعة الأسبوعية لحلقة ${bm.name}`
-      : `ورقـة التسميـــع اليومي لحلقة ${bm.name}`;
+      ? `ورقة المراجعة الأسبوعية لحلقة ${bm.name}`
+      : `ورقة التسميع اليومي لحلقة ${bm.name}`;
     styleCell(ws.getCell("C2"), { fontColor: "FF000000", bold: true, size: 15, border: false });
 
     ws.mergeCells("C4:E4");
@@ -31208,7 +31354,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v111 -->
+<!-- Makin App v112 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -36567,7 +36713,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v111";
+const TIBYAN_APP_VERSION = "v112";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
