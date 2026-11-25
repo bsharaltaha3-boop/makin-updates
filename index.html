@@ -12186,6 +12186,189 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
   min-width: 0 !important;
 }
 
+
+/* ==================== MAKIN v107: POLISHED 2-ROW SESSION STATUS BAR & SYMMETRICAL REPORT STUDIO CARD ==================== */
+.slim-status-bar {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 7px !important;
+  padding: 9px 10px 11px !important;
+  border-radius: 14px !important;
+}
+.ssb-row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+}
+.ssb-row-top .ssb-info {
+  flex-wrap: nowrap;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.ssb-primary-acts {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.ssb-primary-acts .btn {
+  padding: 5px 9px;
+  font-size: 11.5px;
+  border-radius: 9px;
+  height: 30px;
+}
+.ssb-tools-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  width: 100%;
+}
+.ssb-tool-btn {
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--brand-slate);
+  border-radius: 9px;
+  padding: 6.5px 4px;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  white-space: nowrap;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: transform 0.08s ease, background 0.14s ease;
+}
+.ssb-tool-btn:active { transform: scale(0.96); background: var(--brand-tint); }
+.ssb-tool-btn.is-done {
+  background: var(--green-bg);
+  border-color: rgba(22, 121, 76, 0.35);
+  color: var(--green);
+}
+@media (max-width: 370px) {
+  .ssb-tool-btn { font-size: 10.8px; padding: 6px 2px; gap: 3px; }
+  .ssb-chip { font-size: 11px; padding: 3px 6px; }
+}
+
+/* Report Studio Card Symmetrical Alignment */
+.rep-status-line {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  margin-bottom: 9px;
+}
+.rep-status-line:empty {
+  display: none;
+  margin-bottom: 0;
+}
+.rep-warn-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 9px;
+  border-radius: 10px;
+  background: var(--orange-bg);
+  border: 1px solid rgba(184, 86, 16, 0.25);
+  color: var(--orange);
+  font-size: 11.8px;
+  font-weight: 800;
+}
+.rep-warn-strip.ok {
+  background: var(--green-bg);
+  border-color: rgba(22, 121, 76, 0.26);
+  color: var(--green);
+  justify-content: center;
+  padding: 7px 10px;
+}
+.rep-warn-strip .rws-txt {
+  min-width: 0;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rep-warn-strip .btn {
+  flex-shrink: 0;
+  padding: 5px 10px;
+  font-size: 11.5px;
+  border-radius: 8px;
+}
+.smart-hw-hint {
+  display: flex !important;
+  width: 100% !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5.5px 10px !important;
+  border-radius: 9px !important;
+  font-size: 11.2px !important;
+  line-height: 1.35;
+}
+.rep-sup-bar {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 7px !important;
+  padding-top: 9px !important;
+  border-top: 1px dashed var(--line);
+}
+.rep-unsync-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.rep-unsync-slot:empty {
+  display: none !important;
+}
+.rep-sup-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  width: 100%;
+}
+.rep-sup-grid-2 .btn,
+.rep-sup-grid-2 .rep-sup-btn {
+  width: 100%;
+  height: 38px;
+  padding: 0 10px !important;
+  border-radius: 10px;
+  font-size: 12.2px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.rep-lessons-btn {
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--brand-slate);
+  cursor: pointer;
+}
+.rep-lessons-btn.has-data {
+  background: var(--green-bg);
+  border-color: rgba(22, 121, 76, 0.35);
+  color: var(--green);
+}
+.rep-sup-btn.full-w {
+  width: 100%;
+  height: 38px;
+  justify-content: center;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -12695,7 +12878,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v106</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v107</span>
         </button>
       </div>
     </div>
@@ -12792,9 +12975,9 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
           </div>
           <button type="button" class="rep-wa-direct-btn" onclick="shareDailyReportImageToWhatsApp()">📲 إرسال صورة تقرير اليوم للواتساب مباشرة</button>
           <div class="rep-sup-bar" id="dailySupUploadWrap">
-            <div id="dailyUnsyncStatus" style="flex:1; min-width:0; display:flex; align-items:center; gap:5px; flex-wrap:wrap;"></div>
-            <div style="display:flex; gap:6px; align-items:center; flex-shrink:0;">
-              <button type="button" class="btn btn-soft btn-sm" style="padding:7px 10px;" onclick="openSessionLessonsModal()">📚 دروس اليوم</button>
+            <div id="dailyUnsyncStatus" class="rep-unsync-slot"></div>
+            <div class="rep-sup-grid-2">
+              <button type="button" id="btnDailyReportLessons" class="btn rep-lessons-btn" onclick="openSessionLessonsModal()">📚 دروس اليوم</button>
               <button type="button" class="rep-sup-btn" onclick="uploadTeacherReportsToSupervisor('daily')">☁️ رفع للمشرف</button>
             </div>
           </div>
@@ -12827,8 +13010,8 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
           </div>
           <button type="button" class="rep-wa-direct-btn" onclick="shareMonthlyReportImageToWhatsApp()">📲 إرسال صورة التقرير الشهري للواتساب مباشرة</button>
           <div class="rep-sup-bar" id="monthlySupUploadWrap">
-            <div id="monthlyUnsyncStatus" style="flex:1; min-width:0; display:flex; align-items:center; gap:5px; flex-wrap:wrap;"></div>
-            <button type="button" class="rep-sup-btn" onclick="uploadTeacherReportsToSupervisor('monthly')">☁️ رفع الشهري للمشرف</button>
+            <div id="monthlyUnsyncStatus" class="rep-unsync-slot"></div>
+            <button type="button" class="rep-sup-btn full-w" onclick="uploadTeacherReportsToSupervisor('monthly')">☁️ رفع الشهري للمشرف</button>
           </div>
           <details class="rep-month-extra-drawer">
             <summary>
@@ -23916,22 +24099,7 @@ function renderSessionView() {
   const donePct = totalSt > 0 ? Math.round((doneCnt / totalSt) * 100) : 0;
   const pgSummary = s.type === "daily" ? `${formatNum(totalMemPages)} ص` : `${formatNum(totalRevPages)} ص`;
 
-  const _hasDayLessons = getSessionLessonsList(s).length > 0;
-  const actionBtns = `<button class="btn btn-soft btn-sm" style="padding:5px 8px;" onclick="${s.type === 'saturday' ? 'prefillSaturdayReviews(true, true)' : 'prefillDailyRecitation(true, true)'}" title="تحديث وتعبئة الواجبات تلقائياً">🔄 واجبات</button>
-    <button class="btn ${_hasDayLessons ? 'btn-success' : 'btn-outline'} btn-sm" style="padding:5px 8px;" onclick="openSessionLessonsModal()" title="تسجيل دروس استهداء والحديث والنشاطات لهذا اليوم">📚${_hasDayLessons ? ' ✓' : ''}</button>
-    <button class="btn btn-soft btn-sm" style="padding:5px 9px;" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">⚡ تفقد</button>` + (pendingCnt > 0
-    ? `<button class="btn btn-primary btn-sm" style="padding:5px 8px;" onclick="openNextPendingStudent()" title="فتح المتبقي التالي">⏭️</button>
-       <button class="btn btn-warn btn-sm" style="padding:5px 9px;" onclick="openAutoAbsentModal()">غياب (${pendingCnt})</button>`
-    : `<button class="btn btn-success btn-sm" style="padding:5px 10px;" onclick="currentReportSubtab='daily'; switchTab('reports')">📄 التقرير</button>`);
-
-  const statusHtml = `
-    <div class="ssb-info">
-      <span class="ssb-chip ok">✅ <b>${doneCnt}/${totalSt}</b></span>
-      <span class="ssb-chip">غياب <b>${absCnt}</b></span>
-    </div>
-    <div class="ssb-actions">${actionBtns}</div>
-    <div class="ssb-prog-line"><div class="ssb-prog-fill" style="width:${donePct}%;"></div></div>
-  `;
+  const statusHtml = buildSessionStatusBarHtml(s, doneCnt, totalSt, absCnt, pendingCnt, donePct);
 
   let shell = document.getElementById("sessionToolbarShell");
   if (!shell || !container.contains(shell)) {
@@ -24130,6 +24298,30 @@ function buildSingleStudentCardHtml(h, s, item, _prePrevCandidates, _preRelevant
   </div>`;
 }
 
+
+function buildSessionStatusBarHtml(s, doneCnt, totalSt, absCnt, pendingCnt, donePct) {
+  const hasDL = getSessionLessonsList(s).length > 0;
+  const primaryActs = pendingCnt > 0
+    ? `<button type="button" class="btn btn-primary btn-sm" onclick="openNextPendingStudent()" title="فتح المتبقي التالي">⏭️ التالي</button>
+       <button type="button" class="btn btn-warn btn-sm" onclick="openAutoAbsentModal()">غياب (${pendingCnt})</button>`
+    : `<button type="button" class="btn btn-success btn-sm" onclick="currentReportSubtab='daily'; switchTab('reports')">📄 التقرير</button>`;
+  const prefillCall = s.type === "saturday" ? "prefillSaturdayReviews(true, true)" : "prefillDailyRecitation(true, true)";
+  return `
+    <div class="ssb-row-top">
+      <div class="ssb-info">
+        <span class="ssb-chip ok">✅ <b>${doneCnt}/${totalSt}</b></span>
+        <span class="ssb-chip">غياب <b>${absCnt}</b></span>
+      </div>
+      <div class="ssb-primary-acts">${primaryActs}</div>
+    </div>
+    <div class="ssb-tools-3">
+      <button type="button" class="ssb-tool-btn" onclick="${prefillCall}" title="تحديث وتعبئة الواجبات تلقائياً">🔄 الواجبات</button>
+      <button type="button" class="ssb-tool-btn ${hasDL ? 'is-done' : ''}" onclick="openSessionLessonsModal()" title="تسجيل دروس استهداء والحديث والنشاطات">📚 دروس اليوم${hasDL ? ' ✓' : ''}</button>
+      <button type="button" class="ssb-tool-btn" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">⚡ تفقد</button>
+    </div>
+    <div class="ssb-prog-line"><div class="ssb-prog-fill" style="width:${donePct}%;"></div></div>`;
+}
+
 function updateSessionStatusBarOnly() {
   const h = getActiveHalaqa(), s = getCurrentSession();
   const sb = document.getElementById("sessionStatusBar");
@@ -24146,20 +24338,7 @@ function updateSessionStatusBarOnly() {
   const remCnt = Math.max(0, totalSt - doneCnt);
   const absCnt = excused + absent;
   const donePct = totalSt > 0 ? Math.round((doneCnt / totalSt) * 100) : 0;
-  const _hasDL = getSessionLessonsList(s).length > 0;
-  const actionBtns = `<button class="btn btn-soft btn-sm" style="padding:5px 8px;" onclick="${s.type === 'saturday' ? 'prefillSaturdayReviews(true, true)' : 'prefillDailyRecitation(true, true)'}" title="تحديث وتعبئة الواجبات تلقائياً">🔄 واجبات</button>
-    <button class="btn ${_hasDL ? 'btn-success' : 'btn-outline'} btn-sm" style="padding:5px 8px;" onclick="openSessionLessonsModal()" title="تسجيل دروس استهداء والحديث والنشاطات لهذا اليوم">📚${_hasDL ? ' ✓' : ''}</button>
-    <button class="btn btn-soft btn-sm" style="padding:5px 9px;" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">⚡ تفقد</button>` + (pendingCnt > 0
-    ? `<button class="btn btn-primary btn-sm" style="padding:5px 8px;" onclick="openNextPendingStudent()" title="فتح المتبقي التالي">⏭️</button>
-       <button class="btn btn-warn btn-sm" style="padding:5px 9px;" onclick="openAutoAbsentModal()">غياب (${pendingCnt})</button>`
-    : `<button class="btn btn-success btn-sm" style="padding:5px 10px;" onclick="currentReportSubtab='daily'; switchTab('reports')">📄 التقرير</button>`);
-  sb.innerHTML = `
-    <div class="ssb-info">
-      <span class="ssb-chip ok">✅ <b>${doneCnt}/${totalSt}</b></span>
-      <span class="ssb-chip">غياب <b>${absCnt}</b></span>
-    </div>
-    <div class="ssb-actions">${actionBtns}</div>
-    <div class="ssb-prog-line"><div class="ssb-prog-fill" style="width:${donePct}%;"></div></div>`;
+  sb.innerHTML = buildSessionStatusBarHtml(s, doneCnt, totalSt, absCnt, pendingCnt, donePct);
   const cAll = document.getElementById("sfsCntAll");
   const cPend = document.getElementById("sfsCntPend");
   const cAbs = document.getElementById("sfsCntAbs");
@@ -26782,10 +26961,16 @@ function renderDailyReport() {
       : "");
 
   warnBox.innerHTML = (pendingCnt > 0 ? `
-    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px; width:100%;">
-      <span class="rep-ready-chip warn">⚠️ متبقٍ ${pendingCnt} طالب غير مقيّم</span>
-      <button class="btn btn-warn btn-sm" onclick="openAutoAbsentModal()">✓ اعتماد الغياب الآن</button>
-    </div>` : `<span class="rep-ready-chip ok">✓ جميع الطلاب (${h.students.length}) مكتملون والتقرير جاهز للتصدير</span>`) + (smartHwBadge ? `<div style="width:100%; margin-top:4px;">${smartHwBadge}</div>` : "");
+    <div class="rep-warn-strip">
+      <span class="rws-txt">⚠️ متبقٍ ${pendingCnt} غير مقيّم</span>
+      <button type="button" class="btn btn-warn btn-sm" onclick="openAutoAbsentModal()">✓ اعتماد الغياب</button>
+    </div>` : `<div class="rep-warn-strip ok">✓ جميع الطلاب (${h.students.length}) مكتملون والتقرير جاهز للتصدير</div>`) + (smartHwBadge ? smartHwBadge : "");
+  const repLessonsBtn = document.getElementById("btnDailyReportLessons");
+  if (repLessonsBtn) {
+    const _hasL = getSessionLessonsList(s).length > 0;
+    repLessonsBtn.classList.toggle("has-data", _hasL);
+    repLessonsBtn.textContent = _hasL ? "📚 دروس اليوم ✓" : "📚 دروس اليوم";
+  }
 
   const title = s.type === "saturday"
     ? `ورقـة المراجعة الأسبوعية لحلقة ${escapeHtml(bm.name)}`
@@ -30397,7 +30582,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v106 -->
+<!-- Makin App v107 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -35735,7 +35920,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v106";
+const TIBYAN_APP_VERSION = "v107";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
