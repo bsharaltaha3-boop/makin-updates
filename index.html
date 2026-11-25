@@ -12491,6 +12491,112 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
   padding: 2px 6px !important;
 }
 
+
+/* ==================== MAKIN v114: FORGOT SHEET BUTTON + RELIABLE POINTS BAR + 2x2 BONUS GRID ==================== */
+.pts-bonus-row.grid-2x2 {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+}
+.pts-bonus-row.grid-2x2 .bonus-pill {
+  padding: 8px 6px !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  border-radius: 9px !important;
+}
+.bonus-pill.is-forgot {
+  border-color: rgba(185, 34, 34, 0.32);
+  color: var(--red);
+  background: var(--bg);
+}
+.bonus-pill.is-forgot.on-red {
+  background: var(--red) !important;
+  border-color: var(--red) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(185, 34, 34, 0.28);
+}
+.bonus-pill.is-dimmed {
+  opacity: 0.45;
+}
+.es-pts-btn {
+  min-height: 24px !important;
+  padding: 2px 9px !important;
+  flex-shrink: 0 !important;
+}
+.es-pts-btn.is-forgot {
+  background: rgba(220, 38, 38, 0.3) !important;
+  border-color: rgba(252, 165, 165, 0.65) !important;
+  color: #fecaca !important;
+}
+.es-pts-bar-v114 {
+  width: 100%;
+  min-height: 38px;
+  border: 1.5px solid var(--line-strong);
+  background: var(--white);
+  color: var(--ink-900);
+  border-radius: 12px;
+  padding: 7px 11px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: pointer;
+  text-align: right;
+  box-shadow: 0 1px 5px rgba(16, 42, 73, 0.04);
+  transition: border-color 0.14s ease, background 0.14s ease;
+}
+.es-pts-bar-v114:active { transform: scale(0.99); }
+.es-pts-bar-v114.is-open {
+  border-color: #c8a14b;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-bottom: 0;
+  background: var(--brand-tint);
+}
+.es-pts-bar-v114.is-forgot {
+  border-color: rgba(185, 34, 34, 0.45);
+  background: var(--red-bg);
+}
+.es-pts-bar-l {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  flex: 1;
+}
+.es-pts-bar-val {
+  background: #142a46;
+  color: #f6dc93;
+  padding: 2px 9px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+[data-theme="dark"] .es-pts-bar-val { background: #c8a14b; color: #0f233c; }
+.es-pts-bar-v114.is-forgot .es-pts-bar-val {
+  background: var(--red);
+  color: #ffffff;
+}
+.es-pts-bar-sub {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-700);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.es-pts-bar-v114.is-forgot .es-pts-bar-sub { color: var(--red); font-weight: 800; }
+.es-pts-bar-r {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--brand-slate);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -13000,7 +13106,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v113</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v114</span>
         </button>
       </div>
     </div>
@@ -14773,8 +14879,8 @@ const SURAH_MAP = {};
 // Built-in verified exact Madinah Mushaf page-starts for Juz 27-30 + auto-cached full 604-page map from AlQuran Cloud API!
 const MUSHAF_604_CACHE_KEY = "makin_mushaf604_exact_v1";
 const BUILTIN_EXACT_PAGES = {
-  // Juz 27 (الذاريات - الحديد)
-  520: [51, 1],  521: [51, 7],  522: [51, 31], 523: [51, 52],
+  // Qaf end + Juz 27 (الذاريات - الحديد) — Exact King Fahd Madinah Mushaf
+  518: [50, 1],  519: [50, 16], 520: [50, 36], 521: [51, 7],  522: [51, 31], 523: [51, 52],
   524: [52, 15], 525: [52, 32], 526: [53, 1],  527: [53, 27],
   528: [53, 45], 529: [54, 7],  530: [54, 28], 531: [54, 50],
   532: [55, 17], 533: [55, 41], 534: [55, 68], 535: [56, 17],
@@ -14809,6 +14915,7 @@ function loadCachedMushaf604() {
     const arr = JSON.parse(raw);
     if (Array.isArray(arr) && arr.length === 604 && arr[0]?.[0] === 1 && arr[528]?.[0] === 54 && arr[528]?.[1] === 7 && arr[603]?.[0] === 112) {
       MUSHAF_EXACT_604 = arr;
+      if (typeof syncSurahLengthsFromExact604 === "function") syncSurahLengthsFromExact604();
       return true;
     }
   } catch (e) {}
@@ -14834,6 +14941,7 @@ async function ensureExactMushaf604Data() {
         const arr = JSON.parse(idbRec.code);
         if (Array.isArray(arr) && arr.length === 604 && arr[0]?.[0] === 1 && arr[528]?.[0] === 54 && arr[528]?.[1] === 7 && arr[603]?.[0] === 112) {
           MUSHAF_EXACT_604 = arr;
+          if (typeof syncSurahLengthsFromExact604 === "function") syncSurahLengthsFromExact604();
           try { localStorage.setItem(MUSHAF_604_CACHE_KEY, idbRec.code); } catch {}
           return true;
         }
@@ -14849,6 +14957,7 @@ async function ensureExactMushaf604Data() {
       const compact = refs.map(x => [Number(x.surah), Number(x.ayah)]);
       const jsonStr = JSON.stringify(compact);
       MUSHAF_EXACT_604 = compact;
+      if (typeof syncSurahLengthsFromExact604 === "function") syncSurahLengthsFromExact604();
       try { localStorage.setItem(MUSHAF_604_CACHE_KEY, jsonStr); } catch (e) {}
       if (typeof idbPut === "function") {
         await idbPut(IDB_STORE_LIBS, { key: "mushaf604", code: jsonStr, savedAt: new Date().toISOString(), byteSize: jsonStr.length * 2 });
@@ -14928,10 +15037,10 @@ function getPageForSurahAyah(surahId, ayahNum) {
     return ans + 1;
   }
 
-  // 2) Built-in exact lookup for Juz 27-30 (Surahs 51-114 -> pages 520-604)
-  if (sid >= 51) {
-    let ansP = 520;
-    for (let p = 520; p <= 604; p++) {
+  // 2) Built-in exact lookup for Qaf + Juz 27-30 (Surahs 50-114 -> pages 518-604)
+  if (sid >= 50) {
+    let ansP = 518;
+    for (let p = 518; p <= 604; p++) {
       const pair = BUILTIN_EXACT_PAGES[p];
       if (!pair) continue;
       if (pair[0] * 1000 + pair[1] <= key) ansP = p;
@@ -15009,12 +15118,114 @@ function stripMushafPageTokens(str) {
     .trim();
 }
 
+// ==================== MAKIN v114: EXACT KING FAHD MADINAH MUSHAF (604-PAGE) CALCULATION ENGINE ====================
+function hasExactMadinahPage(pageNum) {
+  const p = Math.round(Number(pageNum) || 0);
+  if (p < 1 || p > 604) return false;
+  if (!getExactPageStartPair(p)) return false;
+  return p === 604 || Boolean(getExactPageStartPair(p + 1));
+}
+
+function countAyahsInclusiveBetween(s1, a1, s2, a2) {
+  const k1 = s1 * 1000 + a1, k2 = s2 * 1000 + a2;
+  if (k2 < k1) return 0;
+  if (s1 === s2) return Math.max(1, a2 - a1 + 1);
+  let cnt = Math.max(0, (SURAH_MAP[s1]?.a || a1) - a1 + 1);
+  for (let sid = s1 + 1; sid < s2; sid++) cnt += (SURAH_MAP[sid]?.a || 0);
+  cnt += Math.max(0, a2);
+  return Math.max(1, cnt);
+}
+
+function getExactPageBoundsPair(pageNum) {
+  const p = Math.max(1, Math.min(604, Math.round(Number(pageNum) || 1)));
+  const st = getExactPageStartPair(p);
+  if (!st) return null;
+  if (p === 604) return { stS: st[0], stA: st[1], enS: 114, enA: 6 };
+  const nxt = getExactPageStartPair(p + 1);
+  if (!nxt) return null;
+  const [enS, enA] = prevSurahAyahPair(nxt[0], nxt[1]);
+  return { stS: st[0], stA: st[1], enS, enA };
+}
+
 function getMushafPos(surahId, ayahNum, isEnd = false) {
-  const s = SURAH_MAP[Number(surahId)];
+  const sid = Number(surahId);
+  const s = SURAH_MAP[sid];
   if (!s) return 1.0;
   const a = Math.max(1, Math.min(s.a, parseArabicNum(ayahNum, isEnd ? s.a : 1)));
+  const p = getPageForSurahAyah(sid, a);
+  const pb = getExactPageBoundsPair(p);
+  if (pb) {
+    const totalOnPage = countAyahsInclusiveBetween(pb.stS, pb.stA, pb.enS, pb.enA);
+    const idxOnPage = Math.max(0, Math.min(totalOnPage - 1, countAyahsInclusiveBetween(pb.stS, pb.stA, sid, a) - 1));
+    const frac = isEnd ? ((idxOnPage + 1) / totalOnPage) : (idxOnPage / totalOnPage);
+    return p + frac;
+  }
   const frac = isEnd ? (a / Math.max(1, s.a)) : ((a - 1) / Math.max(1, s.a));
   return s.fs + frac * s.l;
+}
+
+function syncSurahLengthsFromExact604() {
+  if (!MUSHAF_EXACT_604) return;
+  SURAHS.forEach(s => {
+    const p1 = getMushafPos(s.id, 1, false);
+    const p2 = getMushafPos(s.id, s.a, true);
+    if (p2 > p1) {
+      s.p = Math.floor(p1);
+      s.fs = p1;
+      s.fe = p2;
+      s.l = Math.max(0.15, Math.round((p2 - p1) * 100) / 100);
+    }
+  });
+}
+
+// Finds the exact ending Ayah inside `surahId` starting from `fromAyah` to cover `addPages` of Madinah Mushaf!
+function getEndAyahByExactMushafPages(surahId, fromAyah, addPages = 0.5) {
+  const s = SURAH_MAP[Number(surahId)];
+  if (!s) return 1;
+  const f = Math.max(1, Math.min(s.a, parseArabicNum(fromAyah, 1)));
+  const add = Math.max(0.2, Number(addPages) || 0.5);
+  const startPos = getMushafPos(s.id, f, false);
+  const endSurahPos = getMushafPos(s.id, s.a, true);
+  if (endSurahPos - startPos <= add * 1.15) return s.a;
+
+  const targetPos = startPos + add;
+  const pStart = Math.floor(startPos);
+  const startOffset = startPos - pStart;
+  const isWholePages = Math.abs(add - Math.round(add)) < 0.05;
+
+  // If teacher asks for whole page(s) starting at the top of a Madinah Mushaf page, snap cleanly to exact page end!
+  if (isWholePages && startOffset <= 0.08) {
+    const targetEndPage = Math.min(604, pStart + Math.round(add) - 1);
+    const pb = getExactPageBoundsPair(targetEndPage);
+    if (pb) {
+      if (pb.enS === s.id) return Math.max(f, Math.min(s.a, pb.enA));
+      if (pb.enS > s.id) return s.a;
+    }
+  }
+
+  // Binary search inside [f .. s.a] for the ayah whose end position is closest to targetPos
+  let lo = f, hi = s.a, bestA = f, bestDiff = 9999;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    const posE = getMushafPos(s.id, mid, true);
+    const diff = Math.abs(posE - targetPos);
+    if (diff < bestDiff) { bestDiff = diff; bestA = mid; }
+    if (posE < targetPos) lo = mid + 1;
+    else hi = mid - 1;
+  }
+  // Check neighbors around bestA for exact snap
+  for (let cand = Math.max(f, bestA - 2); cand <= Math.min(s.a, bestA + 2); cand++) {
+    const posE = getMushafPos(s.id, cand, true);
+    const diff = Math.abs(posE - targetPos);
+    if (diff < bestDiff) { bestDiff = diff; bestA = cand; }
+  }
+  // If bestA lands within 1-2 ayahs of a page boundary on a >=0.5p chunk, prefer exact Madinah page boundary cleanly
+  const bp = getPageForSurahAyah(s.id, bestA);
+  const bpb = getExactPageBoundsPair(bp);
+  if (bpb && bpb.enS === s.id && Math.abs(targetPos - (bp + 1)) <= 0.09) {
+    bestA = Math.max(f, Math.min(s.a, bpb.enA));
+  }
+  return Math.max(f, Math.min(s.a, bestA));
 }
 
 function getNextSurahAyahForward(surahId, ayahNum) {
@@ -15026,6 +15237,7 @@ function getNextSurahAyahForward(surahId, ayahNum) {
   return null;
 }
 
+if (MUSHAF_EXACT_604) syncSurahLengthsFromExact604();
 const ARABIC_DAYS = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
 const DAY_NAME_TO_DOW = { "الأحد": 0, "الاثنين": 1, "الثلاثاء": 2, "الأربعاء": 3, "الخميس": 4, "الجمعة": 5, "السبت": 6 };
 const HIJRI_MONTHS = ["", "محرم", "صفر", "ربيع الأول", "ربيع الآخر", "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"];
@@ -15184,6 +15396,7 @@ function ensureRecordBonuses(r) {
 
 function formatPointsBreakdownText(s, r, st) {
   if (!s || !r || (r.attendance && String(r.attendance || "").includes("غياب"))) return "غائب: 0 نقطة";
+  if (r.ptsForgotSheet) return "📄 نسي إحضار ورقة النقاط — 0 نقطة (لا تُحتسب أي نقاط اليوم)";
   const isPres = r.attendance === "حاضر" || r.attendance === "متأخر";
   if (!isPres && !r.recEval && !r.minEval && !r.majEval) return "لم يُقيّم بعد";
   const isRashidi = st?.track === "rashidi";
@@ -15492,6 +15705,7 @@ function buildConciseRecNote(ev, opts = {}) {
 
 function computeRecordPoints(s, r, st) {
   if (!s || !r) return 0;
+  if (r.ptsForgotSheet) return 0;
   if (r.attendance && (String(r.attendance || "").includes("غياب") || r.attendance === "حضر ولم يُسمّع")) return 0;
   const isRashidi = st?.track === "rashidi";
   const hasAnyEval = (s.type === "daily" || isRashidi)
@@ -16124,14 +16338,21 @@ function calcRangePages(surahId, fromAyah, toAyah, endSurahId = null) {
     const s2 = SURAH_MAP[Number(endSurahId)];
     if (!s2) return 0;
     const t2 = Math.max(1, Math.min(s2.a, parseArabicNum(toAyah, s2.a)));
-    let total = ((s1.a - f1 + 1) / s1.a) * s1.l;
-    const step = s2.id > s1.id ? 1 : -1;
-    for (let id = s1.id + step; id !== s2.id; id += step) total += SURAH_MAP[id].l;
-    total += (t2 / s2.a) * s2.l;
+    if (s2.id > s1.id) {
+      const diff = getMushafPos(s2.id, t2, true) - getMushafPos(s1.id, f1, false);
+      return Math.max(0.1, Math.round(diff * 100) / 100);
+    }
+    let total = Math.max(0, getMushafPos(s1.id, s1.a, true) - getMushafPos(s1.id, f1, false));
+    for (let id = s1.id - 1; id > s2.id; id--) {
+      const si = SURAH_MAP[id];
+      if (si) total += Math.max(0, getMushafPos(si.id, si.a, true) - getMushafPos(si.id, 1, false));
+    }
+    total += Math.max(0, getMushafPos(s2.id, t2, true) - getMushafPos(s2.id, 1, false));
     return Math.max(0.1, Math.round(total * 100) / 100);
   }
   const t1 = Math.max(f1, Math.min(s1.a, parseArabicNum(toAyah, s1.a)));
-  return Math.max(0.1, Math.round((((t1 - f1 + 1) / s1.a) * s1.l) * 100) / 100);
+  const diff = getMushafPos(s1.id, t1, true) - getMushafPos(s1.id, f1, false);
+  return Math.max(0.1, Math.round(diff * 100) / 100);
 }
 
 function calcSmartPagesFromInputs(surahId, fromAyah, toAyah, endSurahId, fallbackText) {
@@ -16680,10 +16901,8 @@ function computeNextHomework(surahId, fromAyah, toAyah, endSurahId, direction = 
 
   while (curSid && SURAH_MAP[curSid] && remPages > 0.15 && segs.length < 15) {
     const s = SURAH_MAP[curSid];
-    const remAyahs = s.a - curFrom + 1;
-    const ayahsPerPage = s.a / Math.max(0.2, s.l);
-    const remSurahPages = remAyahs / ayahsPerPage;
-    if (remSurahPages <= remPages * 1.25 || (segs.length === 0 && remSurahPages <= pace * 1.35)) {
+    const remSurahPages = calcRangePages(s.id, curFrom, s.a);
+    if (remSurahPages <= remPages * 1.2 || (segs.length === 0 && remSurahPages <= pace * 1.25)) {
       segs.push({ surahId: String(s.id), from: curFrom, to: s.a });
       remPages -= remSurahPages;
       curSid = getNextId(curSid);
@@ -16691,8 +16910,7 @@ function computeNextHomework(surahId, fromAyah, toAyah, endSurahId, direction = 
       // If remaining budget is small (< 35% of pace), stop cleanly at Surah boundary
       if (remPages < Math.min(0.4, pace * 0.35)) break;
     } else {
-      const targetAyahs = Math.max(3, Math.round(remPages * ayahsPerPage));
-      const nextTo = Math.min(s.a, curFrom + targetAyahs - 1);
+      const nextTo = getEndAyahByExactMushafPages(s.id, curFrom, remPages);
       segs.push({ surahId: String(s.id), from: curFrom, to: nextTo });
       break;
     }
@@ -18726,6 +18944,120 @@ function getSyncedPageEvals(r, st, kind, h) {
   });
 }
 
+// ==================== MAKIN v114: PRESERVE EXISTING PAGE EVALUATIONS WHEN EXTENDING RECITATION ====================
+function captureRecEvalStateBeforeRangeChange(h, st, r) {
+  if (!h || !st || !r) return null;
+  const prevSegs = getSegments(r, "rec");
+  const prevSlots = buildRecitationPageSlots(r, st, "rec", h);
+  const existingPages = Array.isArray(r.recPageEvals) && r.recPageEvals.length >= 2
+    ? JSON.parse(JSON.stringify(r.recPageEvals))
+    : null;
+  const prevFirstPage = prevSegs.length ? getPageForSurahAyah(prevSegs[0].surahId, prevSegs[0].from) : 0;
+  const prevLastPage = prevSegs.length ? getPageForSurahAyah(prevSegs[prevSegs.length - 1].surahId, prevSegs[prevSegs.length - 1].to) : 0;
+  return {
+    hadEval: Boolean(r.recEval),
+    prevRecEval: r.recEval || "",
+    hadErrors: Math.max(0, Number(r.recErrors) || 0),
+    hadAlerts: Math.max(0, Number(r.recAlerts) || 0),
+    hadPageEvals: existingPages,
+    prevSlotsLen: prevSlots.length,
+    prevFirstPage,
+    prevLastPage,
+    prevOverallOverride: r.recOverallOverride || ""
+  };
+}
+
+function reconcileRecEvalAfterRangeChange(h, s, st, r, snap, skipAutoApply = false) {
+  if (!h || !s || !st || !r || !snap) return;
+  const newSlots = buildRecitationPageSlots(r, st, "rec", h);
+  const hasAnyPriorGrading = Boolean(snap.hadEval || snap.hadErrors > 0 || snap.hadAlerts > 0 || (snap.hadPageEvals && snap.hadPageEvals.some(p => p.touched || p.manualEval || p.errors > 0 || p.alerts > 0)));
+
+  if (newSlots.length >= 2) {
+    const prevByPage = new Map();
+    if (snap.hadPageEvals) {
+      snap.hadPageEvals.forEach(p => { if (p && p.mushafPage) prevByPage.set(Number(p.mushafPage), p); });
+    }
+    let firstNewUntouchedIdx = -1;
+    const merged = newSlots.map((slot, i) => {
+      const mp = Number(slot.mushafPage);
+      const saved = prevByPage.get(mp);
+      if (saved) {
+        return {
+          ...slot,
+          idx: i + 1,
+          errors: Math.max(0, Number(saved.errors) || 0),
+          alerts: Math.max(0, Number(saved.alerts) || 0),
+          manualEval: saved.manualEval ? String(saved.manualEval) : "",
+          touched: Boolean(saved.touched),
+          eval: saved.manualEval || evalFromErrorCount(saved.errors || 0, saved.alerts || 0, h)
+        };
+      }
+      // Single-page -> Multi-page expansion! Carry the already-graded page's grade, errors & alerts onto its page slot!
+      const wasInPrevSingle = !snap.hadPageEvals && hasAnyPriorGrading && snap.prevLastPage > 0 && mp >= snap.prevFirstPage && mp <= snap.prevLastPage;
+      if (wasInPrevSingle) {
+        return {
+          ...slot,
+          idx: i + 1,
+          errors: snap.hadErrors,
+          alerts: snap.hadAlerts,
+          manualEval: snap.prevRecEval,
+          touched: true,
+          eval: snap.prevRecEval || evalFromErrorCount(snap.hadErrors, snap.hadAlerts, h)
+        };
+      }
+      if (firstNewUntouchedIdx === -1) firstNewUntouchedIdx = i;
+      return {
+        ...slot,
+        idx: i + 1,
+        errors: 0,
+        alerts: 0,
+        manualEval: "",
+        touched: false,
+        eval: evalFromErrorCount(0, 0, h)
+      };
+    });
+
+    r.recPageEvals = merged;
+    r.recOverallOverride = "";
+    if (hasAnyPriorGrading) {
+      // Force multi-page mode open so teacher sees previous page preserved & can grade the newly added page immediately!
+      r.recPageMode = "multi";
+    }
+    if (firstNewUntouchedIdx >= 0) {
+      _activePageTabMap[`${st.id}_rec`] = firstNewUntouchedIdx;
+    } else {
+      const curTab = Number(_activePageTabMap[`${st.id}_rec`] || 0);
+      _activePageTabMap[`${st.id}_rec`] = Math.min(merged.length - 1, Math.max(0, curTab));
+    }
+
+    if (!skipAutoApply && hasAnyPriorGrading && snap.hadEval) {
+      // Update overall grade, points & next homework without wiping any page!
+      const totalErrs = merged.reduce((a, p) => a + (Number(p.errors) || 0), 0);
+      const totalAlrts = merged.reduce((a, p) => a + (Number(p.alerts) || 0), 0);
+      const gradedPages = merged.filter(p => p.touched || p.manualEval || p.errors > 0 || p.alerts > 0);
+      const { overallEv } = computePerPageOverallGrade(gradedPages.length ? gradedPages : merged);
+      r.recErrors = totalErrs;
+      r.recAlerts = totalAlrts;
+      r.recEval = overallEv;
+      r.points = computeRecordPoints(s, r, st);
+      recomputeAutoDailyHomework(st, r, h);
+    }
+  } else {
+    // Still single-page (or reduced back to 1 page): preserve single-page eval/errors/alerts!
+    if (snap.hadPageEvals && snap.hadPageEvals.length) {
+      const p0 = snap.hadPageEvals[0];
+      r.recErrors = Math.max(0, Number(p0.errors) || 0);
+      r.recAlerts = Math.max(0, Number(p0.alerts) || 0);
+      if (snap.hadEval) r.recEval = p0.eval || snap.prevRecEval;
+    }
+    r.recPageEvals = null;
+    if (!skipAutoApply && r.recEval) {
+      r.points = computeRecordPoints(s, r, st);
+      recomputeAutoDailyHomework(st, r, h);
+    }
+  }
+}
+
 function shouldUsePerPageMode(r, st, kind, h) {
   if (!r || !st || st.track === "rashidi") return false;
   if (kind !== "rec" && kind !== "min") return false;
@@ -18824,7 +19156,7 @@ function clearPerPageEvaluation(studentId, kind) {
   if (kind === "rec") {
     r.recEval = "";
     r.points = 0;
-    r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined;
+    r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined; r.ptsForgotSheet = false;
     r.recErrors = 0; r.recAlerts = 0; r.recPageEvals = null; r.recOverallOverride = ""; r.recRepeatHwOnly = false;
     r.rabt = false;
     r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = "";
@@ -18838,7 +19170,7 @@ function clearPerPageEvaluation(studentId, kind) {
     r.minErrors = 0; r.minAlerts = 0; r.minPageEvals = null; r.minOverallOverride = "";
     if (!r.majEval) {
       if (r.attendance === "حاضر") r.attendance = "لم يُسمّع";
-      r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined;
+      r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined; r.ptsForgotSheet = false;
       r.notes = "";
     } else {
       r.notes = buildSaturdayAutoNote(st, r, null, r.majErrors || null, false);
@@ -18850,7 +19182,7 @@ function clearPerPageEvaluation(studentId, kind) {
     r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
     if (!r.minEval) {
       if (r.attendance === "حاضر") r.attendance = "لم يُسمّع";
-      r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined;
+      r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined; r.ptsForgotSheet = false;
       r.notes = "";
     } else {
       r.notes = buildSaturdayAutoNote(st, r, r.minErrors || null, null, false);
@@ -20256,12 +20588,10 @@ function spApplyPreset(mode) {
   } else if (mode === "half2") {
     seg.from = Math.min(info.a, Math.ceil(info.a / 2) + 1); seg.to = info.a;
   } else if (mode === "p05") {
-    const chunk = Math.max(3, Math.round(0.5 * ayahsPerPage));
-    seg.to = Math.min(info.a, seg.from + chunk - 1);
+    seg.to = getEndAyahByExactMushafPages(info.id, seg.from, 0.5);
   } else if (mode === "p1" || mode === "p2" || mode === "p3" || mode === "p4" || mode === "p5") {
     const mult = Number(mode.slice(1)) || 1;
-    const chunk = Math.max(5, Math.round(mult * ayahsPerPage));
-    seg.to = Math.min(info.a, seg.from + chunk - 1);
+    seg.to = getEndAyahByExactMushafPages(info.id, seg.from, mult);
   } else if (mode === "toEnd") {
     seg.to = info.a;
   }
@@ -20629,23 +20959,14 @@ function applySurahPicker(quickEval = null) {
   const first = validSegs[0], rest = validSegs.slice(1).map(x => ({ ...x }));
 
   if (k === "rec") {
+    const _recSnap = captureRecEvalStateBeforeRangeChange(h, st, r);
     r.recIsSabr = false;
     r.recSurahId = first.surahId; r.recFrom = first.from; r.recTo = first.to;
     r.recEndSurahId = ""; r.twoSurahs = false;
     r.recExtras = rest;
     r.manualRec = true;
-    r.recPageEvals = null;
-    r.recOverallOverride = "";
-    _activePageTabMap[`${st.id}_rec`] = 0;
     r.recPages = calcSegmentsPages(validSegs);
-    if (r.recEval && !quickEval) {
-      r.points = computeRecordPoints(s, r, st);
-      if (r.recEval !== "إعادة") {
-        const last = validSegs[validSegs.length - 1];
-        const nxt = computeNextHomework(last.surahId, last.from, last.to, "", st.direction || h.defaultDir, st.pace || 0.5);
-        if (nxt) Object.assign(r, nxt);
-      }
-    }
+    reconcileRecEvalAfterRangeChange(h, s, st, r, _recSnap, Boolean(quickEval));
   } else if (k === "hw") {
     r.hwSabrJuz = "";
     r.hwSurahId = first.surahId; r.hwFrom = first.from; r.hwTo = first.to;
@@ -23459,6 +23780,21 @@ function prefillDailyRecitation(notify = true, forceRefresh = false) {
 
       // Case B: Student was Absent OR Present-No-Recite OR got إعادة -> Keep exact same assignment (NEVER advance!).
       if (isAbsent || isNoRecPrev || pr.recEval === "إعادة") {
+        const carrySabr = (pr.recIsSabr && pr.sabrJuz) ? pr.sabrJuz : (pr.hwSabrJuz || "");
+        if (carrySabr) {
+          const jObj = getJuzByName(carrySabr);
+          rec.recSurahId = ""; rec.recFrom = ""; rec.recTo = ""; rec.recExtras = []; rec.recPages = 0;
+          rec.recIsSabr = true; rec.sabrJuz = carrySabr;
+          if (jObj) {
+            rec.dRevSurahId = ""; rec.dRevExtras = [];
+            rec.dRevFrom = SURAH_MAP[jObj.startSurah]?.n || "";
+            rec.dRevTo = SURAH_MAP[jObj.endSurah]?.n || "";
+            rec.dRevEval = `سبر جزء ${jObj.shortName}`;
+            rec.dRevPages = jObj.pages;
+          }
+          if (!lastSrcSessionLabel) lastSrcSessionLabel = `${ps.dayName} ${ps.hijriDate}`;
+          found = true; filled++; break;
+        }
         const keepSegs = hwSegs.length ? hwSegs : prevRecSegs;
         if (keepSegs.length) {
           rec.recSurahId = keepSegs[0].surahId;
@@ -23678,16 +24014,21 @@ function applyAbsenceCarryOver(s, st, r, status) {
   r.attendance = status;
   if (st?.id) removeStudentFromQueue(s, st.id);
   r.points = 0;
-  r.ptsAdab = false; r.ptsParticip = false; r.ptsEarly = false;
+  r.ptsAdab = false; r.ptsParticip = false; r.ptsEarly = false; r.ptsForgotSheet = false;
   const _prevSabr = r.sabrJuz || "";
-  r.recEval = ""; r.minEval = ""; r.majEval = ""; r.sabrJuz = ""; r.recIsSabr = false;
+  const _wasRecSabr = Boolean(r.recIsSabr && _prevSabr);
+  r.recEval = ""; r.minEval = ""; r.majEval = "";
   r.recErrors = 0; r.minErrors = 0; r.majErrors = 0;
   r.recAlerts = 0; r.minAlerts = 0; r.majAlerts = 0;
+  r.recPageEvals = null; r.minPageEvals = null; r.majPageEvals = null;
+  r.recOverallOverride = ""; r.minOverallOverride = ""; r.majOverallOverride = "";
   r.rabt = false;
   r.dRevSurahId = ""; r.dRevFromAyah = ""; r.dRevToAyah = ""; r.dRevExtras = [];
   r.dRevIsPages = false; r.dRevPageFrom = ""; r.dRevPageTo = ""; r.dRevSardJuzIds = []; r.dRevSardLabel = "";
   r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevPages = 0;
+
   if (st?.track === "rashidi") {
+    r.sabrJuz = ""; r.recIsSabr = false;
     const rf = parseArabicNum(r.rashidiFrom, st.rashidiPage || 1);
     const rt = parseArabicNum(r.rashidiTo, rf);
     r.rashidiFrom = rf;
@@ -23695,18 +24036,32 @@ function applyAbsenceCarryOver(s, st, r, status) {
     r.hwRashidiFrom = rf;
     r.hwRashidiTo = rt;
   } else if (s.type === "daily") {
-    const rs = getSegments(r, "rec");
-    if (rs.length) {
-      r.hwSurahId = rs[0].surahId; r.hwEndSurahId = ""; r.hwFrom = rs[0].from; r.hwTo = rs[0].to;
-      r.hwExtras = rs.slice(1).map(x => ({ ...x }));
+    if (_wasRecSabr) {
+      // Preserve Sabr assignment & carry it over to next homework!
+      r.recIsSabr = true;
+      r.sabrJuz = _prevSabr;
+      r.hwSabrJuz = _prevSabr;
+      r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
+    } else {
+      r.sabrJuz = ""; r.recIsSabr = false;
+      r.hwSabrJuz = "";
+      const rs = getSegments(r, "rec");
+      if (rs.length) {
+        r.hwSurahId = rs[0].surahId; r.hwEndSurahId = ""; r.hwFrom = rs[0].from; r.hwTo = rs[0].to;
+        r.hwExtras = rs.slice(1).map(x => ({ ...x }));
+      }
     }
   } else if (s.type === "saturday" && (r.majStartPage || _prevSabr)) {
+    r.recIsSabr = false;
     if (_prevSabr) r.sabrJuz = _prevSabr;
     if (st) applyNextMajorReview(st, r, false);
-    if (_prevSabr) r.sabrJuz = "";
+    if (status !== "حضر ولم يُسمّع" && _prevSabr) r.sabrJuz = "";
+  } else {
+    r.sabrJuz = ""; r.recIsSabr = false;
   }
+
   if (status === "حضر ولم يُسمّع") {
-    r.notes = applyTajweedToNote("حضر ولم يُسمّع اليوم.", r);
+    r.notes = applyTajweedToNote("حضر ولم يُسمّع — يُرحّل نفس الواجب للجلسة القادمة.", r);
   } else {
     r.notes = status === "غياب مبرر" ? "غياب مبرر." : "غياب غير مبرر، يُرجى الالتزام.";
   }
@@ -24594,8 +24949,9 @@ function patchSingleStudentCard(studentId) {
   const isOpen = openCardId === st.id;
   const wasDone = cardEl.dataset.isDone === "1";
 
-  // If autoSinkDone is active and the card is closed and changed completion state, reorder full list cleanly
-  if (autoSinkDone && !isOpen && wasDone !== isDone) {
+  const wasAbs = cardEl.dataset.isAbs === "1";
+  // Reorder immediately if absent state changed OR if autoSinkDone moved a closed card across completion boundary
+  if (wasAbs !== isAbs || (autoSinkDone && !isOpen && wasDone !== isDone)) {
     updateSessionStatusBarOnly();
     renderStudentCardsOnly();
     return;
@@ -24653,25 +25009,35 @@ function renderStudentCardsOnly() {
   let ordered = [];
   let doneSplitIndex = -1;
 
+  let splitLabel = "";
   if (useSink) {
-    const activeItems = items.filter(x => !x.isDone || x.isOpen);
+    const activeItems = items.filter(x => !x.isAbs && (!x.isDone || x.isOpen));
     const queuedActive = activeItems.filter(x => x.qPos >= 0).sort((a, b) => a.qPos - b.qPos);
     const otherActive = activeItems.filter(x => x.qPos === -1);
-    const finished = items.filter(x => x.isDone && !x.isOpen);
+    const doneNonAbs = items.filter(x => !x.isAbs && x.isDone && !x.isOpen);
+    const absItems = items.filter(x => x.isAbs);
+    const finished = [...doneNonAbs, ...absItems];
     ordered = [...queuedActive, ...otherActive, ...finished];
     if (finished.length > 0 && (queuedActive.length + otherActive.length) > 0) {
       doneSplitIndex = queuedActive.length + otherActive.length;
+      splitLabel = `✓ المُنجَزون والغياب (${finished.length})`;
     }
   } else {
-    const queuedPend = items.filter(x => x.qPos >= 0).sort((a, b) => a.qPos - b.qPos);
-    const rest = items.filter(x => x.qPos === -1);
-    ordered = [...queuedPend, ...rest];
+    const nonAbs = items.filter(x => !x.isAbs);
+    const absItems = items.filter(x => x.isAbs);
+    const queuedPend = nonAbs.filter(x => x.qPos >= 0).sort((a, b) => a.qPos - b.qPos);
+    const rest = nonAbs.filter(x => x.qPos === -1);
+    ordered = [...queuedPend, ...rest, ...absItems];
+    if (absItems.length > 0 && (queuedPend.length + rest.length) > 0) {
+      doneSplitIndex = queuedPend.length + rest.length;
+      splitLabel = `🚫 الغياب (${absItems.length})`;
+    }
   }
 
   let out = "";
   ordered.forEach((item, pos) => {
     if (pos === doneSplitIndex) {
-      out += `<div class="done-section-divider"><span>✓ المُنجَزون والغياب (${ordered.length - doneSplitIndex})</span></div>`;
+      out += `<div class="done-section-divider"><span>${splitLabel || `✓ المُنجَزون والغياب (${ordered.length - doneSplitIndex})`}</span></div>`;
     }
     out += buildSingleStudentCardHtml(h, s, item, _prePrevCandidates, _preRelevantAttn);
   });
@@ -24799,18 +25165,102 @@ function toggleCard(studentId) {
   }
 }
 
+let _evalNavHistory = [];
+let _evalNavHistSessionId = "";
+
+function pushEvalNavHistory(s, studentId) {
+  if (!s || !studentId) return;
+  if (_evalNavHistSessionId !== s.id) {
+    _evalNavHistory = [];
+    _evalNavHistSessionId = s.id;
+  }
+  if (_evalNavHistory[_evalNavHistory.length - 1] !== studentId) {
+    _evalNavHistory.push(studentId);
+    if (_evalNavHistory.length > 40) _evalNavHistory.shift();
+  }
+}
+
+function getEvalActiveNavList(h, s) {
+  if (!h || !s) return [];
+  const queue = Array.isArray(s.queue) ? s.queue : [];
+  const isAbsRec = r => Boolean(r && String(r.attendance || "").includes("غياب"));
+  const nonAbs = (h.students || []).filter(st => !isAbsRec(getStudentRecord(s, st.id)));
+  const queued = [];
+  const queuedSet = new Set();
+  queue.forEach(qid => {
+    const st = nonAbs.find(x => x.id === qid);
+    if (st && !queuedSet.has(st.id) && !isStudentFullyDone(s, st, getStudentRecord(s, st.id))) {
+      queued.push(st);
+      queuedSet.add(st.id);
+    }
+  });
+  const pendRest = nonAbs.filter(st => !queuedSet.has(st.id) && !isStudentFullyDone(s, st, getStudentRecord(s, st.id)));
+  const doneRest = nonAbs.filter(st => !queuedSet.has(st.id) && isStudentFullyDone(s, st, getStudentRecord(s, st.id)));
+  return { queued, pendRest, doneRest, allNonAbs: [...queued, ...pendRest, ...doneRest] };
+}
+
+function getNextEvalTargetStudent(h, s, currentId) {
+  const { queued, pendRest, doneRest, allNonAbs } = getEvalActiveNavList(h, s);
+  if (!allNonAbs.length) return null;
+
+  // 1) ALWAYS follow Hand-Queue (✋) order first!
+  if (queued.length) {
+    const qIdx = queued.findIndex(x => x.id === currentId);
+    if (qIdx >= 0) {
+      if (qIdx + 1 < queued.length) return queued[qIdx + 1];
+      // End of hand queue -> continue to first remaining pending student
+      if (pendRest.length) return pendRest[0];
+      return null;
+    }
+    // Current student was just evaluated (popped from queue!) -> immediately open next student in hand queue!
+    return queued[0];
+  }
+
+  // 2) No hand-queue items left -> follow pending students (skipping absent!), then remaining non-absent
+  const activePos = allNonAbs.findIndex(x => x.id === currentId);
+  if (pendRest.length) {
+    const pIdx = pendRest.findIndex(x => x.id === currentId);
+    if (pIdx >= 0) {
+      if (pIdx + 1 < pendRest.length) return pendRest[pIdx + 1];
+      return pendRest.length > 1 ? pendRest[0] : null;
+    }
+    return pendRest[0];
+  }
+  if (activePos >= 0 && activePos + 1 < allNonAbs.length) return allNonAbs[activePos + 1];
+  return null;
+}
+
+function getPrevEvalTargetStudent(h, s, currentId) {
+  const { allNonAbs } = getEvalActiveNavList(h, s);
+  const nonAbsSet = new Set(allNonAbs.map(x => x.id));
+  if (_evalNavHistSessionId === s?.id && _evalNavHistory.length) {
+    for (let i = _evalNavHistory.length - 1; i >= 0; i--) {
+      const hid = _evalNavHistory[i];
+      if (hid !== currentId && nonAbsSet.has(hid)) {
+        return { st: allNonAbs.find(x => x.id === hid), fromHistoryIdx: i };
+      }
+    }
+  }
+  const pos = allNonAbs.findIndex(x => x.id === currentId);
+  if (pos > 0) return { st: allNonAbs[pos - 1], fromHistoryIdx: -1 };
+  return null;
+}
+
 function openPrevStudent(currentIdx) {
   cancelAutoAdvance(false);
-  const h = getActiveHalaqa();
-  if (!h || !h.students.length || currentIdx <= 0) return;
-  const prevId = openCardId;
-  const prevSt = h.students[currentIdx - 1];
-  if (!prevSt) return;
-  openCardId = prevSt.id;
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s || !h.students.length) return;
+  const curId = openCardId || h.students[currentIdx]?.id || "";
+  const prevInfo = getPrevEvalTargetStudent(h, s, curId);
+  if (!prevInfo?.st) { showToast("هذا هو الطالب الأول في القائمة"); return; }
+  if (prevInfo.fromHistoryIdx >= 0) {
+    _evalNavHistory = _evalNavHistory.slice(0, prevInfo.fromHistoryIdx);
+  }
+  openCardId = prevInfo.st.id;
   openAdvCardId = null;
   evalSheetTool = "";
   evalBonusOpen = false;
-  if (prevId && shouldReorderAfterLeavingStudent(prevId)) {
+  if (curId && shouldReorderAfterLeavingStudent(curId)) {
     renderStudentCardsOnly();
   } else {
     highlightActiveEvalCardInList();
@@ -24820,45 +25270,59 @@ function openPrevStudent(currentIdx) {
 
 function openNextStudent(currentIdx) {
   cancelAutoAdvance(false);
-  const h = getActiveHalaqa();
-  if (!h || !h.students.length) return;
-  const prevId = openCardId;
-  const next = h.students[currentIdx + 1];
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s || !h.students.length) return;
+  const prevId = openCardId || h.students[currentIdx]?.id || "";
+  const next = getNextEvalTargetStudent(h, s, prevId);
+  if (prevId && next && prevId !== next.id) pushEvalNavHistory(s, prevId);
   openCardId = next ? next.id : null;
   openAdvCardId = null;
   evalSheetTool = "";
   evalBonusOpen = false;
+  if (!next) {
+    closeStudentEvalSheet(true);
+    showToast("أحسنت! وصلت لآخر طالب في الدور 🎉");
+    return;
+  }
   if (prevId && shouldReorderAfterLeavingStudent(prevId)) {
     renderStudentCardsOnly();
   } else {
     highlightActiveEvalCardInList();
     syncStudentEvalSheet();
   }
-  if (!next) showToast("وصلت لآخر طالب في الحلقة");
 }
 
 function openNextPendingStudent(fromIdx = -1) {
   cancelAutoAdvance(false);
   const h = getActiveHalaqa(), s = getCurrentSession();
   if (!h || !s || !h.students.length) return;
-  const prevId = openCardId;
-  const total = h.students.length;
-  for (let step = 1; step <= total; step++) {
-    const idx = (fromIdx + step) % total;
-    const st = h.students[idx];
-    if (!isStudentFullyDone(s, st, getStudentRecord(s, st.id))) {
-      openCardId = st.id;
-      openAdvCardId = null;
-      evalSheetTool = "";
-      evalBonusOpen = false;
-      if (prevId && prevId !== st.id && shouldReorderAfterLeavingStudent(prevId)) {
-        renderStudentCardsOnly();
-      } else {
-        highlightActiveEvalCardInList();
-        syncStudentEvalSheet();
-      }
-      return;
+  const prevId = openCardId || (fromIdx >= 0 ? h.students[fromIdx]?.id : "") || "";
+  const { queued, pendRest } = getEvalActiveNavList(h, s);
+  let target = null;
+  if (queued.length) {
+    const qPos = queued.findIndex(x => x.id === prevId);
+    target = (qPos >= 0 && qPos + 1 < queued.length) ? queued[qPos + 1] : (queued.find(x => x.id !== prevId) || (pendRest[0] || queued[0]));
+  } else if (pendRest.length) {
+    const pPos = pendRest.findIndex(x => x.id === prevId);
+    target = (pPos >= 0) ? pendRest[(pPos + 1) % pendRest.length] : pendRest[0];
+  }
+  if (target && target.id !== prevId) {
+    if (prevId) pushEvalNavHistory(s, prevId);
+    openCardId = target.id;
+    openAdvCardId = null;
+    evalSheetTool = "";
+    evalBonusOpen = false;
+    if (prevId && shouldReorderAfterLeavingStudent(prevId)) {
+      renderStudentCardsOnly();
+    } else {
+      highlightActiveEvalCardInList();
+      syncStudentEvalSheet();
     }
+    return;
+  }
+  if (target && target.id === prevId) {
+    showToast("هذا هو الطالب المتبقي الوحيد حالياً");
+    return;
   }
   closeStudentEvalSheet(true);
   showToast("أحسنت! جميع الطلاب مُنجزون في هذه الجلسة 🎉");
@@ -24960,6 +25424,8 @@ function renderExtraSurahRowsHtml(studentId, extras, kind, dir, isRev = false) {
 
 function nudgeRecEndAyah(studentId, delta) {
   const h = getActiveHalaqa(), s = getCurrentSession(), r = getStudentRecord(s, studentId);
+  const _stN = h?.students.find(x => x.id === studentId);
+  const _recSnap = captureRecEvalStateBeforeRangeChange(h, _stN, r);
   const extras = Array.isArray(r.recExtras) ? r.recExtras : [];
   if (extras.length) {
     const lastSeg = extras[extras.length - 1];
@@ -24976,13 +25442,8 @@ function nudgeRecEndAyah(studentId, delta) {
     r.recTo = Math.max(f, Math.min(info.a, cur + delta));
   }
   r.manualRec = true;
-  if (Array.isArray(r.recPageEvals)) r.recPageEvals = null;
   r.recPages = calcSegmentsPages(getSegments(r, "rec"));
-  const _stN = h?.students.find(x => x.id === studentId);
-  if (r.recEval) {
-    r.points = computeRecordPoints(s, r, _stN);
-    recomputeAutoDailyHomework(_stN, r, h);
-  }
+  reconcileRecEvalAfterRangeChange(h, s, _stN, r, _recSnap, false);
   saveStateDebounced(260);
   syncStudentEvalSheet();
   const cardSub = document.querySelector(`#card_${studentId} .st-sub-range`);
@@ -24991,6 +25452,8 @@ function nudgeRecEndAyah(studentId, delta) {
 
 function finishRecSurahQuick(studentId) {
   const h = getActiveHalaqa(), s = getCurrentSession(), r = getStudentRecord(s, studentId);
+  const _stN = h?.students.find(x => x.id === studentId);
+  const _recSnap = captureRecEvalStateBeforeRangeChange(h, _stN, r);
   const extras = Array.isArray(r.recExtras) ? r.recExtras : [];
   let targetInfo = null;
   if (extras.length) {
@@ -25003,13 +25466,8 @@ function finishRecSurahQuick(studentId) {
   }
   if (!targetInfo) { showToast("اختر سورة أولاً"); return; }
   r.manualRec = true;
-  if (Array.isArray(r.recPageEvals)) r.recPageEvals = null;
   r.recPages = calcSegmentsPages(getSegments(r, "rec"));
-  const _stN = h?.students.find(x => x.id === studentId);
-  if (r.recEval) {
-    r.points = computeRecordPoints(s, r, _stN);
-    recomputeAutoDailyHomework(_stN, r, h);
-  }
+  reconcileRecEvalAfterRangeChange(h, s, _stN, r, _recSnap, false);
   saveState();
   syncStudentEvalSheet();
   const cardSub = document.querySelector(`#card_${studentId} .st-sub-range`);
@@ -25111,7 +25569,7 @@ function syncStudentEvalSheet() {
   const stChipCls = isAbsHdr || curEvalBadgeTxt === "إعادة" ? "bad" : (curEvalBadgeTxt ? "ok" : "warn");
   const statusChipHtml = `<span class="es-status-chip ${stChipCls}">${escapeHtml(curEvalBadgeTxt || "بانتظار")}</span>`;
   const ptsPill = (isPointsEnabled(h) && !isAbsHdr && !isNoRecHdr)
-    ? `<button type="button" class="es-pts-btn ${evalBonusOpen ? "open" : ""}" id="esHeaderPtsBadge" onclick="toggleEvalBonusDrawer('${st.id}')" title="اضغط لتعديل السلوك والنقاط">⭐ ${r.points || 0} ▾</button>`
+    ? `<button type="button" class="es-pts-btn ${evalBonusOpen ? "open" : ""} ${r.ptsForgotSheet ? "is-forgot" : ""}" id="esHeaderPtsBadge" onclick="toggleEvalBonusDrawer('${st.id}')" title="اضغط لتعديل السلوك والنقاط">${r.ptsForgotSheet ? "📄 0" : `⭐ ${r.points || 0}`} ▾</button>`
     : (isPointsEnabled(h) ? `<span class="es-pts-pill" id="esHeaderPtsBadge">⭐ ${r.points || 0}</span>` : "");
   const _curGoalM = getSessionReportMonth(s);
   const _stGoalObj = typeof getStudentMonthlyGoalQuick === "function" ? getStudentMonthlyGoalQuick(st, h, _curGoalM) : null;
@@ -25142,15 +25600,18 @@ function syncStudentEvalSheet() {
   bodyEl.innerHTML = renderCardBody(s, st, r, idx);
   if (typeof enhanceAllVisibleSelects === "function") enhanceAllVisibleSelects(bodyEl);
 
-  const hasPrev = idx > 0;
-  const hasNext = idx + 1 < h.students.length;
-  const pendingRemCnt = h.students.filter(x => !isStudentFullyDone(s, x, getStudentRecord(s, x.id))).length;
+  const hasPrev = Boolean(getPrevEvalTargetStudent(h, s, st.id));
+  const nextTargetSt = getNextEvalTargetStudent(h, s, st.id);
+  const hasNext = Boolean(nextTargetSt);
+  const _navLists = getEvalActiveNavList(h, s);
+  const pendingRemCnt = _navLists.queued.length + _navLists.pendRest.length;
+  const nextIsQueued = Boolean(nextTargetSt && _navLists.queued.some(x => x.id === nextTargetSt.id));
   footEl.innerHTML = `
     <div id="esAutoAdvSlot"></div>
     <div class="es-footer-row v73-nav">
       <button type="button" class="btn btn-outline es-btn-prev" onclick="openPrevStudent(${idx})" ${hasPrev ? '' : 'disabled'}>→ السابق</button>
       <button type="button" class="btn btn-soft" onclick="openNextPendingStudent(${idx})">⏭️ المتبقي${pendingRemCnt > 0 ? ` <span class="es-pend-badge">${pendingRemCnt}</span>` : ''}</button>
-      <button type="button" class="btn es-btn-next" onclick="openNextStudent(${idx})">${hasNext ? 'التالي ←' : 'إنهاء ✓'}</button>
+      <button type="button" class="btn es-btn-next" onclick="openNextStudent(${idx})">${hasNext ? (nextIsQueued ? 'التالي ✋ ←' : 'التالي ←') : 'إنهاء ✓'}</button>
     </div>
   `;
 
@@ -25187,21 +25648,27 @@ function renderCardBody(s, st, r, idx) {
   const bonusSum = (adabOn ? BONUS_ADAB : 0) + (partOn ? BONUS_PARTICIP : 0) + (earlyOn ? BONUS_EARLY : 0);
   const bonusActiveWords = [adabOn ? "أدب" : "", partOn ? "مشاركة" : "", earlyOn ? "مبكر" : ""].filter(Boolean).join(" • ") || "بدون إضافي";
 
-  const bonusSectionHtml = (!isAbsCard && isPointsEnabled(h) && evalBonusOpen) ? `
-      <div class="es-bonus-drawer" style="border-top:1px solid #c8a14b; border-radius:12px;">
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:7px;">
-          <span style="font-size:12px; font-weight:800; color:var(--brand-slate);">⭐ السلوك والنقاط (+${bonusSum})</span>
-          <button type="button" class="lms-btn" onclick="toggleEvalBonusDrawer('${st.id}')">إغلاق ✕</button>
-        </div>
-        <div class="pts-bonus-row" style="margin-bottom:8px;">
-          <button type="button" class="bonus-pill ${adabOn ? 'on' : ''}" onclick="togglePointBonus('${st.id}','ptsAdab')">${adabOn ? '✓ ' : ''}أدب +5</button>
-          <button type="button" class="bonus-pill ${partOn ? 'on' : ''}" onclick="togglePointBonus('${st.id}','ptsParticip')">${partOn ? '✓ ' : ''}مشاركة +5</button>
-          <button type="button" class="bonus-pill ${earlyOn ? 'on' : ''}" onclick="togglePointBonus('${st.id}','ptsEarly')">${earlyOn ? '✓ ' : ''}مبكر +5</button>
+  const forgotSheetOn = Boolean(r.ptsForgotSheet);
+  const bonusSectionHtml = (!isAbsCard && isPointsEnabled(h)) ? `
+      <button type="button" class="es-pts-bar-v114 ${evalBonusOpen ? 'is-open' : ''} ${forgotSheetOn ? 'is-forgot' : ''}" onclick="toggleEvalBonusDrawer('${st.id}')">
+        <span class="es-pts-bar-l">
+          <span class="es-pts-bar-val">${forgotSheetOn ? '📄 0 نقطة' : `⭐ ${r.points || 0} نقطة`}</span>
+          <span class="es-pts-bar-sub">${forgotSheetOn ? 'نسي إحضار ورقة النقاط' : escapeHtml(bonusActiveWords)}</span>
+        </span>
+        <span class="es-pts-bar-r">${evalBonusOpen ? 'إخفاء ▴' : 'النقاط والسلوك ▾'}</span>
+      </button>
+      ${evalBonusOpen ? `
+      <div class="es-bonus-drawer" style="margin-bottom:8px;">
+        <div class="pts-bonus-row grid-2x2" style="margin-bottom:8px;">
+          <button type="button" class="bonus-pill ${adabOn && !forgotSheetOn ? 'on' : ''} ${forgotSheetOn ? 'is-dimmed' : ''}" onclick="togglePointBonus('${st.id}','ptsAdab')">${adabOn && !forgotSheetOn ? '✓ ' : ''}أدب +5</button>
+          <button type="button" class="bonus-pill ${partOn && !forgotSheetOn ? 'on' : ''} ${forgotSheetOn ? 'is-dimmed' : ''}" onclick="togglePointBonus('${st.id}','ptsParticip')">${partOn && !forgotSheetOn ? '✓ ' : ''}مشاركة +5</button>
+          <button type="button" class="bonus-pill ${earlyOn && !forgotSheetOn ? 'on' : ''} ${forgotSheetOn ? 'is-dimmed' : ''}" onclick="togglePointBonus('${st.id}','ptsEarly')">${earlyOn && !forgotSheetOn ? '✓ ' : ''}مبكر +5</button>
+          <button type="button" class="bonus-pill is-forgot ${forgotSheetOn ? 'on-red' : ''}" onclick="togglePointBonus('${st.id}','ptsForgotSheet')">${forgotSheetOn ? '✓ ' : ''}📄 نسي الورقة (0)</button>
         </div>
         <div class="pts-breakdown-hint">${escapeHtml(formatPointsBreakdownText(s, r, st))}</div>
         <div class="pts-row" style="margin-bottom:0;">
           <div class="pts-stepper-v29">
-            <span style="font-size:12px; font-weight:700; color:var(--brand-slate);">النقاط:</span>
+            <span style="font-size:12px; font-weight:700; color:var(--brand-slate);">تعديل يدوي:</span>
             <button type="button" onclick="stepPoints('${st.id}', -5)">−5</button>
             <button type="button" onclick="stepPoints('${st.id}', -1)">−1</button>
             <input type="number" min="0" max="200" value="${r.points || 0}" oninput="onManualPointsInput('${st.id}', this.value)">
@@ -25209,7 +25676,7 @@ function renderCardBody(s, st, r, idx) {
             <button type="button" onclick="stepPoints('${st.id}', 5)">+5</button>
           </div>
         </div>
-      </div>
+      </div>` : ''}
   ` : "";
 
   const dirToggleBtn = `<button type="button" class="pill pill-sm" onclick="setStudentDirection('${st.id}','${dir==='desc'?'asc':'desc'}')">${dir==='desc'?'⇅ الناس←البقرة':'⇅ البقرة←الناس'}</button>`;
@@ -25668,6 +26135,7 @@ function onManualPointsInput(studentId, val) {
   if (!s) return;
   const r = getStudentRecord(s, studentId);
   r.points = Math.max(0, parseArabicNum(val, 0));
+  if (r.points > 0 && r.ptsForgotSheet) r.ptsForgotSheet = false;
   saveState();
   if (!isPointsEnabled()) return;
   const card = document.getElementById("card_" + studentId);
@@ -25675,12 +26143,15 @@ function onManualPointsInput(studentId, val) {
   if (badge) badge.textContent = `⭐ ${r.points}`;
   const hdrPts = document.getElementById("esHeaderPtsBadge");
   if (hdrPts && openCardId === studentId) hdrPts.textContent = `⭐ ${r.points} ▾`;
+  const barPts = document.querySelector("#studentEvalSheet .es-pts-bar-val");
+  if (barPts && openCardId === studentId) barPts.textContent = `⭐ ${r.points} نقطة`;
 }
 function stepPoints(studentId, delta) {
   const s = getCurrentSession();
   if (!s) return;
   const r = getStudentRecord(s, studentId);
   r.points = Math.max(0, (Number(r.points) || 0) + delta);
+  if (r.points > 0 && r.ptsForgotSheet) r.ptsForgotSheet = false;
   openCardId = studentId;
   evalBonusOpen = true;
   saveStateDebounced(220);
@@ -25688,6 +26159,8 @@ function stepPoints(studentId, delta) {
   if (inp) inp.value = String(r.points);
   const hdrPts = document.getElementById("esHeaderPtsBadge");
   if (hdrPts) hdrPts.textContent = `⭐ ${r.points} ▾`;
+  const barPts = document.querySelector("#studentEvalSheet .es-pts-bar-val");
+  if (barPts) barPts.textContent = `⭐ ${r.points} نقطة`;
   const cardBadge = document.querySelector(`#card_${studentId} .st-head .badges-wrap .st-pts-badge`);
   if (cardBadge) cardBadge.textContent = `⭐ ${r.points}`;
 }
@@ -25695,6 +26168,14 @@ function stepPoints(studentId, delta) {
 function togglePointBonus(studentId, key) {
   captureUndoSnapshot(studentId);
   const h = getActiveHalaqa(), s = getCurrentSession(), st = h.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
+  if (key === "ptsForgotSheet") {
+    r.ptsForgotSheet = !r.ptsForgotSheet;
+    r.points = computeRecordPoints(s, r, st);
+    openCardId = studentId;
+    saveState(); renderSessionPreservingScroll();
+    showToast(r.ptsForgotSheet ? `📄 ${st.name}: نسي الورقة — النقاط 0 اليوم` : `✓ تم إلغاء «نسي الورقة» (${r.points} نقطة)`, { undo: true });
+    return;
+  }
   if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || String(r.attendance || "").includes("غياب")) {
     r.attendance = "حاضر";
   }
@@ -26181,7 +26662,7 @@ function setAttendance(studentId, status) {
   const h = getActiveHalaqa(), s = getCurrentSession(), st = h.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
   if (r.attendance === status) {
     r.attendance = "لم يُسمّع";
-    r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined;
+    r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined; r.ptsForgotSheet = false;
     if (status.includes("غياب") || status === "حضر ولم يُسمّع") {
       r.notes = "";
       if (st?.track === "rashidi" && !r.recEval) {
@@ -26201,6 +26682,18 @@ function setAttendance(studentId, status) {
   }
   if (status.includes("غياب") || status === "حضر ولم يُسمّع") {
     applyAbsenceCarryOver(s, st, r, status);
+    saveState();
+    if (status.includes("غياب")) {
+      if (openCardId === studentId) closeStudentEvalSheet(false);
+      renderSessionView();
+      showToast(`🚫 ${st.name}: ${status} — نُقل لقسم الغياب في الأسفل`, { undo: true });
+      return;
+    }
+    // "حضر ولم يُسمّع" -> behaves like Repeat labeled "لم يُسمّع": keeps today's assignment & carries it over to next HW!
+    renderSessionPreservingScroll();
+    const hwCarryTxt = r.hwSabrJuz ? `سبر ${formatJuzClean(r.hwSabrJuz)}` : formatSegmentsInline(getSegments(r, "hw"));
+    showToast(`📋 ${st.name}: لم يُسمّع${hwCarryTxt ? ` • ترحيل الواجب: ${hwCarryTxt}` : ""}`, { undo: true });
+    return;
   } else {
     r.attendance = status;
     if (typeof r.ptsAdab !== "boolean") r.ptsAdab = true;
@@ -26231,11 +26724,12 @@ function onRecSurahChange(studentId, surahId) {
 }
 
 function onRecRangeChange(studentId, field, val) {
-  const s = getCurrentSession(), r = getStudentRecord(s, studentId);
+  const h = getActiveHalaqa(), s = getCurrentSession(), st = h?.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
+  const _recSnap = captureRecEvalStateBeforeRangeChange(h, st, r);
   r[field] = (field === "recFrom" || field === "recTo") ? parseArabicNum(val, "") : val;
   r.manualRec = true;
   r.recPages = calcSegmentsPages(getSegments(r, "rec"));
-  if (r.recEval) r.points = computeRecordPoints(s, r, getActiveHalaqa().students.find(x => x.id === studentId));
+  reconcileRecEvalAfterRangeChange(h, s, st, r, _recSnap, false);
   openCardId = studentId; openAdvCardId = studentId;
   saveState(); renderSessionPreservingScroll();
 }
@@ -26248,7 +26742,7 @@ function setRecEval(studentId, ev, errCount = null) {
   if (errCount === null && r.recEval === ev) {
     r.recEval = "";
     r.points = 0;
-    r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined;
+    r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined; r.ptsForgotSheet = false;
     r.recErrors = 0; r.recAlerts = 0; r.recPageEvals = null; r.recRepeatHwOnly = false;
     r.rabt = false;
     r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = "";
@@ -26365,27 +26859,9 @@ function advanceAfterEval(studentId, ev) {
 
   if (!handsFreeFlow || ev === "إعادة" || !wasOpen) return false;
 
-  // Find next pending target before scheduling the smooth wait
-  let nextId = null;
-  if (Array.isArray(s.queue) && s.queue.length) {
-    nextId = s.queue.find(qid => {
-      const qSt = h.students.find(x => x.id === qid);
-      return qid !== studentId && qSt && !isStudentFullyDone(s, qSt, getStudentRecord(s, qid));
-    }) || null;
-  }
-  if (!nextId) {
-    const curIdx = h.students.findIndex(x => x.id === studentId);
-    if (curIdx !== -1) {
-      const total = h.students.length;
-      for (let step = 1; step <= total; step++) {
-        const nxt = h.students[(curIdx + step) % total];
-        if (!isStudentFullyDone(s, nxt, getStudentRecord(s, nxt.id))) {
-          nextId = nxt.id;
-          break;
-        }
-      }
-    }
-  }
+  // Find next pending target strictly following Hand-Queue (✋) first and skipping all absent students
+  const _nxtAutoSt = getNextEvalTargetStudent(h, s, studentId);
+  const nextId = (_nxtAutoSt && !isStudentFullyDone(s, _nxtAutoSt, getStudentRecord(s, _nxtAutoSt.id))) ? _nxtAutoSt.id : null;
 
   _autoAdvStudentId = studentId;
   const advSlot = document.getElementById("esAutoAdvSlot");
@@ -26406,6 +26882,7 @@ function advanceAfterEval(studentId, ev) {
     _autoAdvTimer = null;
     _autoAdvStudentId = null;
     if (!stillOpen) return;
+    if (nextId && nextId !== studentId) pushEvalNavHistory(s, studentId);
     openCardId = nextId;
     openAdvCardId = null;
     evalSheetTool = "";
@@ -26430,14 +26907,10 @@ function extendSegmentsByHalfPage(segs, direction = "desc", addPages = 0.5) {
   let remToAdd = Math.max(0.25, Number(addPages) || 0.5);
 
   if (last.to < sLast.a) {
-    const ayahsPerPage = sLast.a / Math.max(0.2, sLast.l);
-    const targetAyahs = Math.max(3, Math.round(remToAdd * ayahsPerPage));
-    const remAyahs = sLast.a - last.to;
-    if (remAyahs <= targetAyahs * 1.25) {
-      const addedPg = calcRangePages(sLast.id, last.to + 1, sLast.a);
+    const remSurahPg = calcRangePages(sLast.id, last.to + 1, sLast.a);
+    if (remSurahPg <= remToAdd * 1.18) {
       last.to = sLast.a;
-      remToAdd = Math.max(0, remToAdd - addedPg);
-      // If only a tiny sliver (< 0.25 page) remained in this surah, continue smoothly into the next surah
+      remToAdd = Math.max(0, remToAdd - remSurahPg);
       if (remToAdd >= 0.25) {
         const spill = computeNextHomework(sLast.id, last.from, sLast.a, "", direction, remToAdd);
         if (spill && spill.hwSurahId) {
@@ -26447,7 +26920,7 @@ function extendSegmentsByHalfPage(segs, direction = "desc", addPages = 0.5) {
       }
       return out;
     } else {
-      last.to = Math.min(sLast.a, last.to + targetAyahs);
+      last.to = getEndAyahByExactMushafPages(sLast.id, last.to + 1, remToAdd);
       return out;
     }
   }
@@ -26493,6 +26966,7 @@ function quickNextAyahStep(studentId) {
   // Otherwise (before evaluation): ADD +½ page onto today's assigned recitation without changing its start!
   const recSegs = getSegments(r, "rec");
   if (!recSegs.length) { showToast("اختر سورة للطالب أولاً"); return; }
+  const _recSnap = captureRecEvalStateBeforeRangeChange(h, st, r);
   const extendedRec = extendSegmentsByHalfPage(recSegs, dir, 0.5);
   if (!extendedRec) { showToast("بلغ الطالب نهاية المصحف في هذا الاتجاه"); return; }
   r.recSurahId = extendedRec[0].surahId;
@@ -26502,9 +26976,7 @@ function quickNextAyahStep(studentId) {
   r.recExtras = extendedRec.slice(1);
   r.recPages = calcSegmentsPages(extendedRec);
   r.manualRec = true;
-  if (r.recEval) {
-    r.points = computeRecordPoints(s, r, st);
-  }
+  reconcileRecEvalAfterRangeChange(h, s, st, r, _recSnap, false);
   saveState();
   renderSessionPreservingScroll();
   showToast(`➕ أُضيفت ½ صفحة على واجب ${st.name}: ${formatSegmentsInline(extendedRec)} (${formatNum(r.recPages)} ص)`, { undo: true });
@@ -26516,7 +26988,7 @@ function quickSatBothEval(studentId, ev) {
   if (r.minEval === ev && r.majEval === ev) {
     r.minEval = ""; r.majEval = "";
     r.minErrors = 0; r.majErrors = 0;
-    r.points = 0; r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined;
+    r.points = 0; r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined; r.ptsForgotSheet = false;
     r.notes = "";
     r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
     if (r.attendance === "حاضر") r.attendance = "لم يُسمّع";
@@ -26691,7 +27163,7 @@ function setSatMinEval(studentId, ev, errCount = null) {
     r.minErrors = 0; r.minAlerts = 0;
     if (!r.majEval) {
       if (r.attendance === "حاضر") r.attendance = "لم يُسمّع";
-      r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined;
+      r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined; r.ptsForgotSheet = false;
       r.notes = "";
     } else {
       r.notes = buildSaturdayAutoNote(st, r, null, r.majErrors || null, false);
@@ -26738,7 +27210,7 @@ function setSatMajEval(studentId, ev, errCount = null) {
     r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
     if (!r.minEval) {
       if (r.attendance === "حاضر") r.attendance = "لم يُسمّع";
-      r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined;
+      r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined; r.ptsForgotSheet = false;
       r.notes = "";
     } else {
       r.notes = buildSaturdayAutoNote(st, r, r.minErrors || null, null, false);
@@ -27248,9 +27720,10 @@ function computeUpcomingDailyHomeworkCols(h, s, st, r, nextCtx, isHtml = true) {
         const pr = ps.records?.[st.id];
         if (!pr) continue;
         const isAbs = Boolean(pr.attendance && String(pr.attendance || "").includes("غياب"));
+        const isNoRec = isPresentNoRecite(pr.attendance);
         const hasEv = Boolean(pr.recEval && String(pr.recEval).trim());
-        if (!isAbs && !hasEv) continue;
-        if (isAbs || pr.recEval === "إعادة") {
+        if (!isAbs && !isNoRec && !hasEv) continue;
+        if (isAbs || isNoRec || pr.recEval === "إعادة") {
           nf = parseArabicNum(pr.rashidiFrom, st.rashidiPage || 1);
           nt = parseArabicNum(pr.rashidiTo, nf);
         } else {
@@ -27306,13 +27779,14 @@ function computeUpcomingDailyHomeworkCols(h, s, st, r, nextCtx, isHtml = true) {
     const pr = ps.records?.[st.id];
     if (!pr) continue;
     const isAbs = Boolean(pr.attendance && String(pr.attendance || "").includes("غياب"));
+    const isNoRec = isPresentNoRecite(pr.attendance);
     const hasEv = Boolean(pr.recEval && String(pr.recEval).trim());
-    if (!hasEv && !isAbs) continue;
+    if (!hasEv && !isAbs && !isNoRec) continue;
 
     const prevRecSegs = getSegments(pr, "rec");
     const hwSegs = getSegments(pr, "hw");
 
-    if (isAbs || pr.recEval === "إعادة") {
+    if (isAbs || isNoRec || pr.recEval === "إعادة") {
       if (pr.recIsSabr && pr.sabrJuz) {
         const sc = formatHwSabrColumns(pr.sabrJuz, isHtml);
         return { ...sc, isSabr: true, plainText: `سبر ${formatJuzClean(pr.sabrJuz)}` };
@@ -31384,7 +31858,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v113 -->
+<!-- Makin App v114 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -36743,7 +37217,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v113";
+const TIBYAN_APP_VERSION = "v114";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
