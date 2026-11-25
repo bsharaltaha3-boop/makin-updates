@@ -12597,6 +12597,191 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
   flex-shrink: 0;
 }
 
+
+/* ==================== MAKIN v115: STREAMLINED ZERO-CLUTTER EVAL SHEET, BALANCED TAJWEED & COMPACT STUDENT PLAN ==================== */
+/* 5-Action Recitation Row (تعديل | +½ ص | -1 | +1 | آخرها) */
+.es-rec-actions-5 {
+  display: grid;
+  grid-template-columns: 1.15fr 1.05fr 0.72fr 0.72fr 0.92fr;
+  gap: 4px;
+}
+.es-rec-actions-5 .lms-btn {
+  width: 100%;
+  padding: 5.5px 2px !important;
+  font-size: 11px !important;
+  text-align: center;
+  justify-content: center;
+  border-radius: 8px !important;
+  white-space: nowrap;
+}
+.es-rec-actions-5 .lms-btn.plus-half {
+  background: var(--green-bg);
+  color: var(--green);
+  border-color: rgba(22, 121, 76, 0.32);
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+@media (max-width: 375px) {
+  .es-rec-actions-5 .lms-btn { font-size: 10.2px !important; padding: 5px 1px !important; }
+}
+
+/* 3-Tab Spacious Tool Dock for Daily Sessions (مراجعة | سبر | ملاحظة) */
+.es-tools-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 7px;
+}
+.es-tools-3 .es-tool-btn {
+  padding: 8px 4px 7px !important;
+  border-radius: 12px !important;
+}
+
+/* Compact 1-Line Notices for Absent / Present-No-Recite */
+.es-norecite-notice.slim-v115,
+.es-abs-notice.slim-v115 {
+  padding: 5.5px 10px !important;
+  margin-bottom: 7px !important;
+  font-size: 11.2px !important;
+  line-height: 1.35 !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+/* Balanced 12-Col Tajweed Grid (4 items on row 1, 3 items full-width on row 2 — ZERO orphan gaps!) */
+.tj-grid-balanced {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 4.5px;
+  margin-bottom: 7px;
+}
+.tj-grid-balanced .tj-opt-btn { grid-column: span 3; }
+.tj-grid-balanced .tj-opt-btn:nth-child(n+5) { grid-column: span 4; }
+
+/* Balanced Sabr Quick Chips Grid (auto fits 2 or 3 evenly — ZERO empty slot!) */
+.es-sabr-quick-grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+.es-sabr-quick-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+.es-sabr-more-btn {
+  width: 100%;
+  border: 1.5px dashed var(--line-strong);
+  background: var(--bg);
+  color: var(--brand-slate);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.es-sabr-more-btn:active { background: var(--brand-tint); }
+
+/* Compact Review Tool Panel inside Eval Sheet */
+.es-tool-panel.compact-v115 {
+  padding: 8px 9px !important;
+}
+.es-tool-panel.compact-v115 .es-tool-panel-hdr {
+  margin-bottom: 6px !important;
+  padding-bottom: 5px !important;
+}
+.es-tool-panel.compact-v115 .adv-row-card {
+  padding: 6px 9px !important;
+  margin-bottom: 6px !important;
+}
+.es-tool-panel.compact-v115 .es-rev-eval-5 {
+  margin-bottom: 6px !important;
+}
+
+/* Merged Surah Picker Header Action (+ سورة button inline when 1 segment!) */
+.sp-add-inline-btn {
+  border: 1px solid rgba(21, 98, 154, 0.3);
+  background: var(--blue-bg);
+  color: var(--blue);
+  border-radius: 99px;
+  padding: 4px 8px;
+  font-size: 10.5px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.sp-add-inline-btn:active { transform: scale(0.95); }
+
+/* Compact Optional Info Drawer & Symmetric Path/Pace Layout in Student Modal */
+details.stm-opt-drawer {
+  background: var(--bg);
+  border: 1px dashed var(--line-strong);
+  border-radius: 11px;
+  padding: 8px 10px;
+  margin-top: 8px;
+}
+details.stm-opt-drawer > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--brand-slate);
+  user-select: none;
+}
+details.stm-opt-drawer > summary::-webkit-details-marker { display: none; }
+details.stm-opt-drawer[open] > summary {
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--line);
+}
+#studentModal .path-preset-grid-3 {
+  gap: 5px;
+  margin-bottom: 8px;
+}
+#studentModal .path-preset-card.row-style {
+  padding: 7px 9px;
+  gap: 8px;
+}
+#studentModal .path-preset-card.row-style .ppc-ico {
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+}
+#studentModal .path-preset-card.row-style b { font-size: 11.8px; }
+#studentModal .path-preset-card.row-style span { font-size: 10px; }
+.stm-mem-juz-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 7px 10px;
+  margin-bottom: 8px;
+}
+.stm-mem-juz-row label {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ink-700);
+  margin: 0 !important;
+  flex: 1;
+}
+.stm-mem-juz-row label small {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ink-500);
+}
+.stm-mem-juz-row input {
+  width: 92px !important;
+  text-align: center;
+  font-weight: 800;
+  padding: 6px 8px !important;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -13106,7 +13291,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v114</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v115</span>
         </button>
       </div>
     </div>
@@ -13670,38 +13855,42 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
     </div>
 
     <div class="exec-modal-body">
-      <!-- TAB 1: PERSONAL & PARENT INFO -->
+      <!-- TAB 1: PERSONAL & PARENT INFO (v115 Streamlined) -->
       <div class="stm-pane active" id="stmPane_info">
         <div class="exec-card">
-          <div class="exec-card-ttl"><span>👤 البطاقة التعريفية للطالب</span></div>
-          <div class="field" style="margin-bottom:8px;">
+          <div class="exec-card-ttl"><span>👤 البيانات الأساسية للطالب</span></div>
+          <div class="field" style="margin-bottom:9px;">
             <label>الاسم الثلاثي للطالب *</label>
             <input type="text" id="stNameInput" placeholder="اكتب الاسم الثلاثي كاملاً...">
           </div>
-          <div class="exec-grid-2" style="margin-bottom:8px;">
-            <div class="field">
-              <label>العمر (بالسنوات)</label>
-              <input type="number" id="stAgeInput" min="4" max="80" placeholder="مثال: 13">
-            </div>
-            <div class="field">
-              <label>الصف الدراسي</label>
-              <input type="text" id="stGradeInput" placeholder="مثال: السابع">
-            </div>
+          <div class="field" style="margin-bottom:2px;">
+            <label>واتساب ولي الأمر (لإرسال التقارير والشهادات)</label>
+            <input type="tel" id="stPhoneInput" placeholder="9639XXXXXXXX" dir="ltr" style="text-align:right;">
           </div>
-          <div class="exec-grid-2" style="margin-bottom:8px;">
-            <div class="field">
-              <label>ولي الأمر (اختياري)</label>
+          <details id="stmOptInfoDrawer" class="stm-opt-drawer">
+            <summary>
+              <span>➕ بيانات إضافية اختيارية (العمر • الصف • ولي الأمر • ملاحظات)</span>
+              <span>▾</span>
+            </summary>
+            <div class="exec-grid-2" style="margin-bottom:8px;">
+              <div class="field">
+                <label>العمر (بالسنوات)</label>
+                <input type="number" id="stAgeInput" min="4" max="80" placeholder="مثال: 13">
+              </div>
+              <div class="field">
+                <label>الصف الدراسي</label>
+                <input type="text" id="stGradeInput" placeholder="مثال: السابع">
+              </div>
+            </div>
+            <div class="field" style="margin-bottom:8px;">
+              <label>اسم ولي الأمر</label>
               <input type="text" id="stParentNameInput" placeholder="مثال: أبو خالد">
             </div>
-            <div class="field">
-              <label>واتساب ولي الأمر</label>
-              <input type="tel" id="stPhoneInput" placeholder="9639XXXXXXXX" dir="ltr" style="text-align:right;">
+            <div class="field" style="margin-bottom:0;">
+              <label>ملاحظات تربوية أو خاصة</label>
+              <textarea id="stBioNotesInput" rows="2" placeholder="مثال: متقن للتجويد، يحتاج تشجيعاً مستمراً..."></textarea>
             </div>
-          </div>
-          <div class="field" style="margin-bottom:0;">
-            <label>ملاحظات تربوية أو خاصة (اختياري)</label>
-            <textarea id="stBioNotesInput" rows="2" placeholder="مثال: متقن للتجويد، يحتاج تشجيعاً مستمراً..."></textarea>
-          </div>
+          </details>
         </div>
       </div>
 
@@ -13775,25 +13964,23 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
             <div class="field num-cell"><label>من آية</label><input type="text" inputmode="numeric" id="stStartAyahInput" value="1" placeholder="1" oninput="updateStudentModalPreview()"></div>
           </div>
 
-          <div class="form-grid" style="grid-template-columns:1.6fr 1fr; margin-bottom:8px; align-items:end;">
-            <div>
-              <label style="display:block; font-size:11.5px; font-weight:700; color:var(--ink-700); margin-bottom:4px;">مقدار الحفظ اليومي (حتى 5 صفحات)</label>
-              <div class="stm-choice-row cols-4" style="margin-bottom:5px;">
-                <button type="button" class="stm-choice-btn on-green" id="stmPace_05" onclick="setStModalChoice('pace',0.5)">½ ص</button>
-                <button type="button" class="stm-choice-btn" id="stmPace_1" onclick="setStModalChoice('pace',1)">1 ص</button>
-                <button type="button" class="stm-choice-btn" id="stmPace_15" onclick="setStModalChoice('pace',1.5)">1.5 ص</button>
-                <button type="button" class="stm-choice-btn" id="stmPace_2" onclick="setStModalChoice('pace',2)">2 ص</button>
-              </div>
-              <div class="stm-choice-row" style="grid-template-columns:repeat(3,minmax(0,1fr)); margin-bottom:0;">
-                <button type="button" class="stm-choice-btn" id="stmPace_3" onclick="setStModalChoice('pace',3)">3 صفحات</button>
-                <button type="button" class="stm-choice-btn" id="stmPace_4" onclick="setStModalChoice('pace',4)">4 صفحات</button>
-                <button type="button" class="stm-choice-btn" id="stmPace_5" onclick="setStModalChoice('pace',5)">5 صفحات</button>
-              </div>
+          <div style="margin-bottom:8px;">
+            <label style="display:block; font-size:11.5px; font-weight:800; color:var(--ink-700); margin-bottom:5px;">مقدار الحفظ اليومي (حتى 5 صفحات)</label>
+            <div class="stm-choice-row cols-4" style="margin-bottom:5px;">
+              <button type="button" class="stm-choice-btn on-green" id="stmPace_05" onclick="setStModalChoice('pace',0.5)">½ ص</button>
+              <button type="button" class="stm-choice-btn" id="stmPace_1" onclick="setStModalChoice('pace',1)">1 ص</button>
+              <button type="button" class="stm-choice-btn" id="stmPace_15" onclick="setStModalChoice('pace',1.5)">1.5 ص</button>
+              <button type="button" class="stm-choice-btn" id="stmPace_2" onclick="setStModalChoice('pace',2)">2 ص</button>
             </div>
-            <div class="field">
-              <label>المحفوظ (أجزاء)</label>
-              <input type="number" id="stMemJuzInput" min="0" max="30" step="0.5" placeholder="تلقائي" oninput="updateStudentModalPreview()">
+            <div class="stm-choice-row" style="grid-template-columns:repeat(3,minmax(0,1fr)); margin-bottom:0;">
+              <button type="button" class="stm-choice-btn" id="stmPace_3" onclick="setStModalChoice('pace',3)">3 صفحات</button>
+              <button type="button" class="stm-choice-btn" id="stmPace_4" onclick="setStModalChoice('pace',4)">4 صفحات</button>
+              <button type="button" class="stm-choice-btn" id="stmPace_5" onclick="setStModalChoice('pace',5)">5 صفحات</button>
             </div>
+          </div>
+          <div class="stm-mem-juz-row field">
+            <label>📚 إجمالي المحفوظ (أجزاء)<small>اتركه فارغاً ليُحسب تلقائياً من السور والأجزاء</small></label>
+            <input type="number" id="stMemJuzInput" min="0" max="30" step="0.5" placeholder="تلقائي" oninput="updateStudentModalPreview()">
           </div>
 
           <div style="background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:8px 9px;">
@@ -15562,7 +15749,7 @@ function renderTajweedTagsBar(studentId, r) {
         <span>🎙️ الأداء والمخارج</span>
         ${active.length ? `<button type="button" style="border:none; background:transparent; color:var(--red); font-size:10.5px; font-weight:800; cursor:pointer;" onclick="clearStudentSessionTajweed('${studentId}')">مسح الكل</button>` : ''}
       </div>
-      <div class="tj-grid-3">
+      <div class="tj-grid-balanced">
         ${TAJWEED_TAGS_CORE.map(t => `<button type="button" class="tj-opt-btn ${active.includes(t) ? 'on' : ''}" onclick="toggleTajweedTag('${studentId}','${t}')">${active.includes(t) ? '✓ ' : ''}${t}</button>`).join("")}
       </div>
       <div class="tj-group-lbl" style="margin-top:4px;"><span>📖 الأحكام والصفات</span></div>
@@ -19672,7 +19859,7 @@ function formatSardJuzInfo(juzIds) {
   };
 }
 
-function openSurahPicker(studentId, kind) {
+function openSurahPicker(studentId, kind, forceMode = "") {
   const h = getActiveHalaqa(), s = getCurrentSession();
   const st = h?.students.find(x => x.id === studentId);
   if (!st || !s) return;
@@ -19827,7 +20014,7 @@ function openSurahPicker(studentId, kind) {
   spState = {
     studentId,
     kind,
-    mode: initMode,
+    mode: (forceMode === "sabr" && spCanUseSabr(kind)) ? "sabr" : ((forceMode === "sard" && spIsReviewKind(kind)) ? "sard" : initMode),
     reviewUnit,
     pageNumMode: "surah",
     dir: (kind === "maj" || kind === "nextMaj") ? "asc" : dir,
@@ -20295,6 +20482,7 @@ function renderSpActiveSurahCard() {
   const info = SURAH_MAP[Number(seg?.surahId)];
   const juzObj = info ? getJuzAtPage(info.p) : null;
   const openCls = spState.browserOpen ? "browser-open" : "";
+  const showInlineAdd = spState.kind !== "studentStart" && spState.segs.length <= 1;
   host.innerHTML = `<div class="sp-active-surah-card ${openCls}">
     <button type="button" class="sp-surah-step-btn" onclick="spJumpSurah(-1)" title="السورة السابقة">›</button>
     <button type="button" class="sp-surah-hero-mid" onclick="toggleSpBrowser()">
@@ -20302,8 +20490,9 @@ function renderSpActiveSurahCard() {
         <div class="sp-sh-name">${info ? `📖 سورة ${escapeHtml(info.n)}` : "اختر سورة..."}</div>
         <div class="sp-sh-meta">${info ? `${info.a} آية • ص ${Math.floor(info.fs)}${Math.floor(info.fe - 0.01) > Math.floor(info.fs) ? "–" + Math.floor(info.fe - 0.01) : ""} • ${juzObj ? `جزء ${escapeHtml(juzObj.shortName)}` : ""}` : "اضغط لاختيار سورة من المصحف"}</div>
       </div>
-      <span class="sp-sh-chg-pill">${spState.browserOpen ? "إغلاق ▲" : "تغيير السورة ▾"}</span>
+      <span class="sp-sh-chg-pill">${spState.browserOpen ? "إغلاق ▲" : "تغيير ▾"}</span>
     </button>
+    ${showInlineAdd ? `<button type="button" class="sp-add-inline-btn" onclick="spAddSeg()" title="إضافة سورة ثانية">+ سورة</button>` : ""}
     <button type="button" class="sp-surah-step-btn" onclick="spJumpSurah(1)" title="السورة التالية">‹</button>
   </div>`;
 }
@@ -20408,10 +20597,12 @@ function spPickSabrJuz(juzId) {
 function renderSpSegBar() {
   const bar = document.getElementById("spSegBar");
   if (!bar) return;
-  if (spState.kind === "studentStart") {
+  if (spState.kind === "studentStart" || spState.segs.length <= 1) {
     bar.innerHTML = "";
+    bar.style.display = "none";
     return;
   }
+  bar.style.display = "flex";
   let html = spState.segs.map((seg, idx) => {
     const info = SURAH_MAP[Number(seg.surahId)];
     const lbl = info
@@ -20512,8 +20703,7 @@ function spDefaultEndAyahForSurah(info, kind) {
     const pace = Math.max(0.5, Math.min(5, Number(st?.pace) || 1));
     // For long surahs (> 1.4x daily pace and > 1.5 pages), default to student's daily pace instead of entire 15-page surah!
     if (info.l > Math.max(1.5, pace * 1.4)) {
-      const ayahsPerPage = info.a / Math.max(0.25, info.l);
-      return Math.max(3, Math.min(info.a, Math.round(pace * ayahsPerPage)));
+      return getEndAyahByExactMushafPages(info.id, 1, pace);
     }
   }
   return info.a;
@@ -22600,6 +22790,7 @@ function openAddStudentModal() {
   if (applyWrap) applyWrap.style.display = getCurrentSession() ? "inline-flex" : "none";
   const applyCb = document.getElementById("stApplyToSessionCheck");
   if (applyCb) applyCb.checked = true;
+  const _optDr = document.getElementById("stmOptInfoDrawer"); if (_optDr) _optDr.open = false;
   setStudentModalTab("info");
   syncStModalButtons();
   updateStudentModalPreview();
@@ -22652,6 +22843,7 @@ function openEditStudentModal(id) {
   if (applyWrap) applyWrap.style.display = curS ? "inline-flex" : "none";
   const applyCb = document.getElementById("stApplyToSessionCheck");
   if (applyCb) applyCb.checked = true;
+  const _optDrE = document.getElementById("stmOptInfoDrawer"); if (_optDrE) _optDrE.open = Boolean(st.age || st.schoolGrade || st.parentName || st.bioNotes);
   setStudentModalTab("info");
   syncStModalButtons();
   updateStudentModalPreview();
@@ -25059,6 +25251,11 @@ function setAdvTab(studentId, tabKey) {
 
 function toggleEvalSheetTool(studentId, toolKey) {
   cancelAutoAdvance(false);
+  const _curS = getCurrentSession();
+  if (toolKey === "hw" && _curS?.type === "daily") {
+    openSurahPicker(studentId, "hw");
+    return;
+  }
   openCardId = studentId;
   evalSheetTool = (evalSheetTool === toolKey) ? "" : toolKey;
   syncStudentEvalSheet();
@@ -25475,6 +25672,35 @@ function finishRecSurahQuick(studentId) {
   showToast(`تم ضبط النهاية إلى آخر سورة ${targetInfo.n} (آية ${targetInfo.a}) ✓`);
 }
 
+function extendRecTodayQuick(studentId, addPages = 0.5) {
+  captureUndoSnapshot(studentId);
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  const st = h?.students?.find(x => x.id === studentId);
+  const r = s ? getStudentRecord(s, studentId) : null;
+  if (!h || !s || !st || !r) return;
+  const recSegs = getSegments(r, "rec");
+  if (!recSegs.length) {
+    openSurahPicker(studentId, "rec");
+    return;
+  }
+  const _recSnap = captureRecEvalStateBeforeRangeChange(h, st, r);
+  const dir = st.direction || h.defaultDir || "desc";
+  const extendedRec = extendSegmentsByHalfPage(recSegs, dir, addPages);
+  if (!extendedRec) { showToast("بلغ الطالب نهاية المصحف في هذا الاتجاه"); return; }
+  r.recSurahId = extendedRec[0].surahId;
+  r.recFrom = extendedRec[0].from;
+  r.recTo = extendedRec[0].to;
+  r.recEndSurahId = "";
+  r.recExtras = extendedRec.slice(1);
+  r.recPages = calcSegmentsPages(extendedRec);
+  r.manualRec = true;
+  reconcileRecEvalAfterRangeChange(h, s, st, r, _recSnap, false);
+  saveState();
+  syncStudentEvalSheet();
+  patchSingleStudentCard(studentId);
+  showToast(`➕ زيدت ½ صفحة على تسميع اليوم: ${formatSegmentsInline(extendedRec)} (${formatNum(r.recPages)} ص)`, { undo: true });
+}
+
 function nudgeMinEndAyah(studentId, delta) {
   const s = getCurrentSession(), r = getStudentRecord(s, studentId);
   const extras = Array.isArray(r.minExtras) ? r.minExtras : [];
@@ -25755,42 +25981,15 @@ function renderCardBody(s, st, r, idx) {
     const hasNotesDot = Boolean(String(r.notes || "").trim());
 
     let toolPanelHtml = "";
-    if (evalSheetTool === "hw") {
-      toolPanelHtml = `
-        <div class="es-tool-panel">
-          <div class="es-tool-panel-hdr">
-            <span>📝 خيارات الواجب والتسميع</span>
-            <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','hw')">إخفاء</button>
-          </div>
-          <div class="es-hw-quick-3 ${hasHwDot ? '' : 'cols-2'}">
-            <button type="button" class="es-hw-qbtn primary" onclick="openSurahPicker('${st.id}','hw')">✏️ مخصص</button>
-            <button type="button" class="es-hw-qbtn sabr" onclick="toggleHwSabrManual('${st.id}')">${r.hwSabrJuz ? '↩️ إلغاء سبر' : '🎓 سبر جزء'}</button>
-            ${hasHwDot ? `<button type="button" class="es-hw-qbtn danger" onclick="clearStudentHwManual('${st.id}')">🗑️ مسح</button>` : ''}
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:7px;">
-            <button type="button" class="pill pill-sm on-blue" style="flex:1;" onclick="addExtraSurah('${st.id}','rec')">+ إضافة سورة ثانية للتسميع</button>
-            ${dirToggleBtn}
-          </div>
-          ${recExtras.length ? renderExtraSurahRowsHtml(st.id, recExtras, "rec", dir, false) : ''}
-          <details class="es-manual-rec-drawer">
-            <summary><span>🔧 تعديل أرقام الآيات والصفحات يدوياً</span><span>▾</span></summary>
-            <div class="surah-clean-grid" style="margin-top:8px; margin-bottom:2px;">
-              <div class="field surah-main-cell"><label>السورة</label><select onchange="onRecSurahChange('${st.id}', this.value)">${surahOptionsHtml(r.recSurahId, "-- اختر السورة --", dir)}</select></div>
-              <div class="field num-cell"><label>من</label><input type="text" inputmode="numeric" value="${r.recFrom || ''}" placeholder="1" onchange="onRecRangeChange('${st.id}','recFrom',this.value)"></div>
-              <div class="field num-cell"><label>إلى</label><input type="text" inputmode="numeric" value="${r.recTo || ''}" placeholder="${maxA1}" onchange="onRecRangeChange('${st.id}','recTo',this.value)"></div>
-              <div class="field num-cell"><label>صفحات</label><input type="text" inputmode="decimal" value="${formatNum(r.recPages || 0)}" onchange="updateRecField('${st.id}','recPages',parseArabicNum(this.value,0),true)"></div>
-            </div>
-          </details>
-        </div>`;
-    } else if (evalSheetTool === "rev") {
+    if (evalSheetTool === "rev") {
       const hasRevVal = Boolean(r.dRevFrom || r.dRevSurahId || dRevExtras.length || Number(r.dRevPages) > 0);
       toolPanelHtml = `
-        <div class="es-tool-panel">
+        <div class="es-tool-panel compact-v115">
           <div class="es-tool-panel-hdr">
             <span>📘 مراجعة اليوم والربط</span>
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','rev')">إخفاء</button>
           </div>
-          <div class="adv-row-card" style="margin-bottom:8px;">
+          <div class="adv-row-card">
             <div class="arc-l">
               <div class="arc-t">مقطع المراجعة (${formatNum(calcPureDailyReviewPages(r))} ص)</div>
               <div class="arc-v">${escapeHtml(!hasIndependentDailyReview(r) ? "لم يُحدد مقطع بعد" : (r.dRevSardLabel ? `📚 ${r.dRevSardLabel}` : (r.dRevIsPages && r.dRevFrom ? `📄 ${r.dRevFrom === r.dRevTo ? r.dRevFrom : r.dRevFrom + " ← " + r.dRevTo}` : (formatSegmentsInline(getSegments(r, "dRev")) || (r.dRevFrom ? `${r.dRevFrom}${r.dRevTo ? " ← " + r.dRevTo : ""}` : "لم يُحدد مقطع بعد")))))}</div>
@@ -25804,8 +26003,7 @@ function renderCardBody(s, st, r, idx) {
             ${["ممتاز", "جيد جداً", "جيد", "تثبيت", "إعادة"].map(ev => {
               const cls = ev === "ممتاز" ? "on-green" : ev === "إعادة" ? "on-red" : ev === "تثبيت" ? "on-orange" : "on-blue";
               const isOn = r.dRevEval === ev || (ev === "تثبيت" && r.dRevEval === "تثبيت حفظ");
-              const lbl = ev === "جيد جداً" ? "جيد جداً" : ev;
-              return `<button type="button" class="pill ${isOn?cls:''}" onclick="setDailyRevEval('${st.id}','${ev}')">${lbl}</button>`;
+              return `<button type="button" class="pill ${isOn?cls:''}" onclick="setDailyRevEval('${st.id}','${ev}')">${ev}</button>`;
             }).join("")}
           </div>
           <button type="button" class="es-rabt-toggle-card ${r.rabt ? 'on' : ''}" onclick="updateRecField('${st.id}','rabt',${!r.rabt},true)">
@@ -25823,25 +26021,24 @@ function renderCardBody(s, st, r, idx) {
         dir === "desc" ? Math.max(1, _nearJuz.id - 1) : Math.min(30, _nearJuz.id + 1)
       ])).slice(0, 3);
       toolPanelHtml = `
-        <div class="es-tool-panel">
+        <div class="es-tool-panel compact-v115">
           <div class="es-tool-panel-hdr">
             <span>🎓 سبر جزء جديد (يدخل الشهري بعد النجاح)</span>
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','sabr')">إخفاء</button>
           </div>
-          <div style="font-size:11px; font-weight:700; color:var(--ink-500); margin-bottom:5px;">اختيار سريع للأجزاء القريبة من حفظ الطالب:</div>
-          <div class="es-sabr-quick-grid">
+          <div class="es-sabr-quick-grid ${_suggIds.length === 2 ? 'cols-2' : 'cols-3'}">
             ${_suggIds.map(jid => {
               const j = JUZ_PAGE_MAP[jid];
               const isSel = r.sabrJuz === j.name;
               return `<button type="button" class="es-sabr-qchip ${isSel ? 'on' : ''}" onclick="onSabrJuzChange('${st.id}','${isSel ? '' : escapeHtml(j.name)}')"><b>جزء ${j.shortName}</b><small>الجزء ${j.id}</small></button>`;
             }).join("")}
           </div>
-          <div class="field" style="margin-bottom:${r.sabrJuz ? '8px' : '0'};">
-            <select style="padding:7px 10px; font-size:12.5px; font-weight:700;" onchange="onSabrJuzChange('${st.id}',this.value)">${juzOptionsHtml(r.sabrJuz)}</select>
-          </div>
+          <button type="button" class="es-sabr-more-btn" style="margin-bottom:${r.sabrJuz ? '8px' : '0'};" onclick="openSurahPicker('${st.id}','rec','sabr')">
+            <span>🎓 ${r.sabrJuz ? `المحدد: ${escapeHtml(formatJuzClean(r.sabrJuz))} — تغيير الجزء` : 'اختيار أي جزء آخر من الـ 30 جزءاً'}</span>
+          </button>
           ${r.sabrJuz ? `
             <div style="display:flex; gap:6px; flex-wrap:wrap;">
-              ${r.recEval !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="flex:1;" onclick="openSabrHifzCertificate('${st.id}')">🎓 إصدار شهادة حفظ الجزء</button>` : ''}
+              ${getDailySabrEval(r) !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="flex:1;" onclick="openSabrHifzCertificate('${st.id}')">🎓 إصدار شهادة حفظ الجزء</button>` : ''}
               <button type="button" class="btn btn-outline btn-sm" onclick="onSabrJuzChange('${st.id}','')">↩️ إلغاء السبر</button>
             </div>
           ` : ''}
@@ -25875,8 +26072,9 @@ function renderCardBody(s, st, r, idx) {
             <span class="es-rec-pg-badge">${r.recIsSabr && r.sabrJuz ? `${formatNum(r.dRevPages || getJuzByName(r.sabrJuz)?.pages || 20)} ص` : `${formatNum(r.recPages || 0)} ص`}</span>
           </div>
           ${!(r.recIsSabr && r.sabrJuz) ? `
-            <div class="es-rec-actions-4">
-              <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','rec')">✏️ تغيير</button>
+            <div class="es-rec-actions-5">
+              <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','rec')">✏️ تعديل</button>
+              <button type="button" class="lms-btn plus-half" onclick="extendRecTodayQuick('${st.id}', 0.5)" title="زيادة نصف صفحة على تسميع اليوم">+½ ص</button>
               <button type="button" class="lms-btn ltr-num" onclick="nudgeRecEndAyah('${st.id}', -1)" title="إنقاص آية">−1</button>
               <button type="button" class="lms-btn ltr-num" onclick="nudgeRecEndAyah('${st.id}', 1)" title="زيادة آية">+1</button>
               <button type="button" class="lms-btn" onclick="finishRecSurahQuick('${st.id}')">آخرها</button>
@@ -25905,7 +26103,7 @@ function renderCardBody(s, st, r, idx) {
         <span class="es-note-preview-txt">💬 ${escapeHtml(stripMushafPageTokens(r.notes))}</span>
         <span style="font-size:10.5px; font-weight:800; opacity:0.75; white-space:nowrap;">تعديل ✏️</span>
       </div>` : ''}
-      <div class="es-tools-4">
+      <div class="es-tools-3">
         <button type="button" class="es-tool-btn ${evalSheetTool==='rev'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','rev')">
           ${hasRevDot ? '<span class="es-tool-dot"></span>' : ''}
           <span class="et-ico">📘</span><span class="et-lbl">مراجعة</span>
@@ -25913,10 +26111,6 @@ function renderCardBody(s, st, r, idx) {
         <button type="button" class="es-tool-btn ${evalSheetTool==='sabr'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','sabr')">
           ${hasSabrDot ? '<span class="es-tool-dot"></span>' : ''}
           <span class="et-ico">🎓</span><span class="et-lbl">سبر</span>
-        </button>
-        <button type="button" class="es-tool-btn ${evalSheetTool==='hw'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','hw')">
-          ${hasHwDot ? '<span class="es-tool-dot"></span>' : ''}
-          <span class="et-ico">📝</span><span class="et-lbl">واجب</span>
         </button>
         <button type="button" class="es-tool-btn ${evalSheetTool==='notes'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','notes')">
           ${hasNotesDot ? '<span class="es-tool-dot"></span>' : ''}
@@ -26116,8 +26310,8 @@ function renderCardBody(s, st, r, idx) {
 
   const isNoRecCard = isPresentNoRecite(r.attendance);
   const absNoticeHtml = isAbsCard
-    ? `<div class="es-abs-notice">🚫 مسجّل ${escapeHtml(r.attendance)} — الواجب مُرحّل للجلسة القادمة (اضغط على التقييم لإلغاء الغياب تلقائياً)</div>`
-    : (isNoRecCard ? `<div class="es-norecite-notice">📋 مسجّل: <b>حضر ولم يُسمّع</b> — يُحتسب حاضراً ويُرحّل واجبه للجلسة القادمة</div>` : "");
+    ? `<div class="es-abs-notice slim-v115"><span>🚫 <b>${escapeHtml(r.attendance)}</b> — الواجب مُرحّل للجلسة القادمة</span></div>`
+    : (isNoRecCard ? `<div class="es-norecite-notice slim-v115"><span>📋 <b>لم يُسمّع</b> — يُحتسب حاضراً ويُرحّل واجبه للجلسة القادمة</span></div>` : "");
   return `${_attnBannerHtml}<div class="es-att-shell"><div class="es-att-5">${attBtns}</div></div>${absNoticeHtml}${!isNoRecCard ? bonusSectionHtml : ""}${bodyCore}`;
 }
 
@@ -31858,7 +32052,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v114 -->
+<!-- Makin App v115 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -37217,7 +37411,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v114";
+const TIBYAN_APP_VERSION = "v115";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
