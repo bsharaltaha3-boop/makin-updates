@@ -13000,7 +13000,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v112</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v113</span>
         </button>
       </div>
     </div>
@@ -18211,10 +18211,25 @@ function captureUndoSnapshot(studentId) {
   const s = getCurrentSession();
   if (!s || !studentId) return;
   lastUndoSnapshot = {
+    type: "student",
     sessionId: s.id,
     studentId,
     prevRecord: JSON.parse(JSON.stringify(getStudentRecord(s, studentId))),
     prevQueue: Array.isArray(s.queue) ? [...s.queue] : [],
+    prevOpenCardId: openCardId
+  };
+}
+
+function captureSessionUndoSnapshot(label = "") {
+  const s = getCurrentSession();
+  if (!s) return;
+  lastUndoSnapshot = {
+    type: "sessionReset",
+    label,
+    sessionId: s.id,
+    prevRecords: JSON.parse(JSON.stringify(s.records || {})),
+    prevQueue: Array.isArray(s.queue) ? [...s.queue] : [],
+    prevFinalized: Boolean(s.finalized),
     prevOpenCardId: openCardId
   };
 }
@@ -18224,6 +18239,19 @@ function performLastUndo() {
   const h = getActiveHalaqa();
   const s = h?.sessions.find(x => x.id === lastUndoSnapshot.sessionId);
   if (!s) { lastUndoSnapshot = null; return; }
+  if (lastUndoSnapshot.type === "sessionReset") {
+    s.records = JSON.parse(JSON.stringify(lastUndoSnapshot.prevRecords || {}));
+    s.queue = Array.isArray(lastUndoSnapshot.prevQueue) ? [...lastUndoSnapshot.prevQueue] : [];
+    s.finalized = Boolean(lastUndoSnapshot.prevFinalized);
+    activeSessionId = s.id;
+    openCardId = lastUndoSnapshot.prevOpenCardId || null;
+    lastUndoSnapshot = null;
+    saveState();
+    renderSessionView();
+    if (document.getElementById("view-reports")?.classList.contains("active")) renderDailyReport();
+    showToast("تمت استعادة تقييمات الجلسة بالكامل ↩️");
+    return;
+  }
   if (!s.records) s.records = {};
   s.records[lastUndoSnapshot.studentId] = lastUndoSnapshot.prevRecord;
   s.queue = lastUndoSnapshot.prevQueue;
@@ -18249,7 +18277,8 @@ function showToast(msg, opts = null) {
   el.innerHTML = `<span class="toast-msg">${escapeHtml(msg)}</span>` + (canUndo ? `<button type="button" class="toast-undo-btn" onclick="event.stopPropagation(); performLastUndo();">↩️ تراجع</button>` : "");
   el.classList.add("show");
   clearTimeout(window._toastTimer);
-  window._toastTimer = setTimeout(() => el.classList.remove("show"), canUndo ? 2600 : 1900);
+  const _undoMs = (canUndo && lastUndoSnapshot?.type === "sessionReset") ? 4500 : (canUndo ? 2600 : 1900);
+  window._toastTimer = setTimeout(() => el.classList.remove("show"), _undoMs);
 }
 
 // CUSTOMIZABLE SHEIKH GRADING RULES (v74: Direct Per-Grade Errors & Alerts Matrix)
@@ -22791,11 +22820,12 @@ async function resetCurrentSessionEvaluations() {
     { title: "🔄 إزالة تقييم جميع الطلاب", danger: true, okText: "نعم، تصفير الجلسة" }
   );
   if (!ok) return;
-  pushUndoSnapshot("تصفير تقييمات الجلسة");
+  captureSessionUndoSnapshot("تصفير تقييمات الجلسة");
   s.records = {};
   s.queue = [];
   s.finalized = false;
   openCardId = null;
+  closeModal("studentEvalSheet");
   if (s.type === "saturday") prefillSaturdayReviews(false, true);
   else prefillDailyRecitation(false, true);
   saveState();
@@ -31354,7 +31384,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v112 -->
+<!-- Makin App v113 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -36713,7 +36743,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v112";
+const TIBYAN_APP_VERSION = "v113";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
