@@ -12376,6 +12376,87 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
   text-size-adjust: 100% !important;
 }
 
+
+/* ==================== MAKIN v111: CLEAN COLLAPSIBLE TECH DETAILS & ZERO-WRAP PILLS ==================== */
+.th-ready-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--green-bg);
+  border: 1px solid rgba(22, 121, 76, 0.25);
+  color: var(--green);
+  font-size: 11.8px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  line-height: 1.45;
+}
+.th-ready-summary.warn {
+  background: var(--orange-bg);
+  border-color: rgba(184, 86, 16, 0.28);
+  color: var(--orange);
+}
+.th-adv-drawer {
+  margin-top: 9px;
+  border-top: 1px dashed var(--line);
+  padding-top: 8px;
+}
+.th-adv-drawer > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.8px;
+  font-weight: 800;
+  color: var(--ink-500);
+  padding: 4px 2px;
+  user-select: none;
+}
+.th-adv-drawer > summary::-webkit-details-marker { display: none; }
+.th-adv-drawer[open] > summary { color: var(--brand-slate); margin-bottom: 8px; }
+.th-adv-chev { transition: transform 0.16s ease; display: inline-block; }
+.th-adv-drawer[open] .th-adv-chev { transform: rotate(180deg); }
+.th-eng-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--brand-slate);
+  margin-bottom: 6px;
+}
+.th-ltr-size {
+  direction: ltr;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.th-off-pill > span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.th-off-pill > span:last-child {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.th-meter-top > span:first-child {
+  min-width: 0;
+  flex: 1;
+}
+.th-meter-top > span:last-child {
+  white-space: nowrap;
+  flex-shrink: 0;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -12885,7 +12966,7 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v110</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v111</span>
         </button>
       </div>
     </div>
@@ -14001,8 +14082,8 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
 
         <div class="exec-card">
           <div class="exec-card-ttl">
-            <span>🛡️ التحصين التقني والعمل بدون إنترنت</span>
-            <span class="badge b-green" id="thDbStatusBadge" style="font-size:10px;">IndexedDB نشطة ✓</span>
+            <span>🛡️ العمل بدون إنترنت والأرشيف</span>
+            <span class="badge b-green" id="thDbStatusBadge" style="font-size:10.5px; flex-shrink:0;">جاهز بدون نت ✓</span>
           </div>
           <div id="techHardeningHost"></div>
         </div>
@@ -31127,7 +31208,7 @@ function fallbackStyledXls(paperId, filename) {
   const clone = el.cloneNode(true);
   clone.querySelectorAll("input").forEach(inp => { const sp = document.createElement("span"); sp.textContent = inp.value; inp.replaceWith(sp); });
   const html = `<html dir="rtl"><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial;}th,td{border:1px solid #000000;padding:6px;text-align:center;color:#000000;font-weight:bold;}</style></head><body>${clone.innerHTML}</body>
-<!-- Makin App v110 -->
+<!-- Makin App v111 -->
 </html>`;
   downloadBlob(new Blob(["\ufeff" + html], { type: "application/vnd.ms-excel" }), filename + ".xls");
   showToast("تم تصدير الملف بصيغة إكسل");
@@ -32137,53 +32218,74 @@ async function renderTechHardeningCard() {
   const offlineBytes = (libH2c?.byteSize || 0) + (libPdf?.byteSize || 0) + (libXls?.byteSize || 0) + (libMushaf?.byteSize || 0);
 
   if (badge) {
-    badge.className = "badge " + (_makinIdbAvailable ? "b-green" : "b-orange");
-    badge.textContent = _makinIdbAvailable ? "IndexedDB نشطة ✓" : "تخزين محلي أساسي";
+    badge.className = "badge " + (readyCnt === 4 ? "b-green" : "b-orange");
+    badge.textContent = readyCnt === 4 ? "جاهز بدون نت ✓" : `تجهيز (${readyCnt}/4)`;
   }
 
+  const wasAdvOpen = Boolean(host.querySelector(".th-adv-drawer")?.open);
+
   host.innerHTML = `
-    ${_localStorageQuotaReached ? `<div class="quota-warn-banner">⚠️ ذاكرة البدء السريع ممتلئة؛ بياناتك محفوظة بأمان تام في <b>IndexedDB</b>. يُنصح بأرشفة الجلسات القديمة عبر «أرشيف السنوات» أدناه لتسريع الإقلاع.</div>` : ""}
-    <div class="th-grid-3">
-      <div class="th-stat-tile ok">
-        <div class="tsv">${formatByteSizeArabic(stateBytes)}</div>
-        <div class="tsl">حجم بياناتك النشطة</div>
-      </div>
-      <div class="th-stat-tile ${readyCnt === 4 ? "ok" : "warn"}">
-        <div class="tsv">${readyCnt} / 4</div>
-        <div class="tsl">جاهزية بدون إنترنت</div>
-      </div>
-      <div class="th-stat-tile">
-        <div class="tsv">${allSessCnt} جلسة</div>
-        <div class="tsl">${myArchives.length} أرشيف سنوي</div>
-      </div>
+    ${_localStorageQuotaReached ? `<div class="quota-warn-banner">⚠️ ذاكرة البدء السريع ممتلئة؛ بياناتك محفوظة بأمان تام. يُنصح بأرشفة الجلسات القديمة عبر «أرشيف السنوات» أدناه لتسريع الإقلاع.</div>` : ""}
+
+    <div class="th-ready-summary ${readyCnt === 4 ? "" : "warn"}">
+      <span>${readyCnt === 4 ? "✅ التطبيق جاهز للعمل والتصدير داخل المسجد بدون إنترنت" : "📡 بعض محركات التصدير بدون إنترنت تحتاج تجهيزاً"}</span>
     </div>
 
-    <div class="th-meter-wrap">
-      <div class="th-meter-top">
-        <span>⚡ امتلاء ذاكرة البدء السريع (الحماية المزدوجة: IndexedDB)</span>
-        <span>${lsPct}%</span>
-      </div>
-      <div class="th-meter-track"><div class="th-meter-fill ${meterCls}" style="width:${Math.max(3, lsPct)}%;"></div></div>
-    </div>
-
-    <div style="font-size:11.5px; font-weight:800; color:var(--brand-slate); margin-bottom:5px;">
-      📡 محركات التصدير والعمل داخل المسجد بدون إنترنت ${offlineBytes > 0 ? `<small style="color:var(--ink-500); font-weight:600;">(${formatByteSizeArabic(offlineBytes)})</small>` : ""}:
-    </div>
-    <div class="th-offline-list">
-      <div class="th-off-pill ${hasH2c ? "ready" : ""}"><span>📸 الصور HD</span><span>${hasH2c ? "جاهز ✓" : "غير محمّل"}</span></div>
-      <div class="th-off-pill ${hasPdf ? "ready" : ""}"><span>📑 ملفات PDF</span><span>${hasPdf ? "جاهز ✓" : "غير محمّل"}</span></div>
-      <div class="th-off-pill ${hasXls ? "ready" : ""}"><span>📥 ملفات Excel</span><span>${hasXls ? "جاهز ✓" : "غير محمّل"}</span></div>
-      <div class="th-off-pill ${hasMushaf ? "ready" : ""}"><span>📖 فهرس المصحف</span><span>${hasMushaf ? "جاهز ✓" : "غير محمّل"}</span></div>
-    </div>
-
-    <button type="button" class="btn ${readyCnt === 4 ? "btn-soft" : "btn-primary"} btn-sm" style="width:100%; margin-bottom:8px;" ${_offlinePrecacheBusy ? "disabled" : ""} onclick="precacheOfflineExportSuite(true)">
-      ${_offlinePrecacheBusy ? "⏳ جاري التحميل والتخزين المحلي..." : (readyCnt === 4 ? "✓ جميع المحركات جاهزة بدون إنترنت (تحديث)" : "⚡ تجهيز التصدير بدون إنترنت الآن")}
-    </button>
+    ${readyCnt < 4 ? `
+      <button type="button" class="btn btn-primary btn-sm" style="width:100%; margin-bottom:8px;" ${_offlinePrecacheBusy ? "disabled" : ""} onclick="precacheOfflineExportSuite(true)">
+        ${_offlinePrecacheBusy ? "⏳ جاري التحميل والتخزين المحلي..." : "⚡ تجهيز العمل والتصدير بدون إنترنت الآن"}
+      </button>
+    ` : ""}
 
     <div class="th-actions-2">
       <button type="button" class="btn btn-soft btn-sm" onclick="closeModal('settingsModal'); openYearArchiveModal();">📦 أرشيف السنوات (${myArchives.length})</button>
       <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('settingsModal'); openAutoSnapshotsModal();">🔄 لقطات الاستعادة (${mySnaps.length})</button>
     </div>
+
+    <details class="th-adv-drawer" ${wasAdvOpen ? "open" : ""}>
+      <summary>
+        <span>⚙️ تفاصيل تقنية متقدمة (التخزين والمحركات)</span>
+        <span class="th-adv-chev">▾</span>
+      </summary>
+
+      <div class="th-grid-3">
+        <div class="th-stat-tile ok">
+          <div class="tsv th-ltr-size">${formatByteSizeArabic(stateBytes)}</div>
+          <div class="tsl">حجم البيانات</div>
+        </div>
+        <div class="th-stat-tile ${readyCnt === 4 ? "ok" : "warn"}">
+          <div class="tsv th-ltr-size">${readyCnt} / 4</div>
+          <div class="tsl">بدون إنترنت</div>
+        </div>
+        <div class="th-stat-tile">
+          <div class="tsv">${allSessCnt} جلسة</div>
+          <div class="tsl">${myArchives.length} أرشيف سنوي</div>
+        </div>
+      </div>
+
+      <div class="th-meter-wrap">
+        <div class="th-meter-top">
+          <span>⚡ ذاكرة البدء السريع (${_makinIdbAvailable ? "حماية IndexedDB ✓" : "تخزين أساسي"})</span>
+          <span>${lsPct}%</span>
+        </div>
+        <div class="th-meter-track"><div class="th-meter-fill ${meterCls}" style="width:${Math.max(3, lsPct)}%;"></div></div>
+      </div>
+
+      <div class="th-eng-hdr">
+        <span>📡 محركات العمل بدون إنترنت</span>
+        ${offlineBytes > 0 ? `<span class="th-ltr-size" style="font-size:11px; color:var(--ink-500); font-weight:700;">${formatByteSizeArabic(offlineBytes)}</span>` : ""}
+      </div>
+      <div class="th-offline-list">
+        <div class="th-off-pill ${hasH2c ? "ready" : ""}"><span>📸 الصور HD</span><span>${hasH2c ? "جاهز ✓" : "غير محمّل"}</span></div>
+        <div class="th-off-pill ${hasPdf ? "ready" : ""}"><span>📑 ملفات PDF</span><span>${hasPdf ? "جاهز ✓" : "غير محمّل"}</span></div>
+        <div class="th-off-pill ${hasXls ? "ready" : ""}"><span>📥 ملفات Excel</span><span>${hasXls ? "جاهز ✓" : "غير محمّل"}</span></div>
+        <div class="th-off-pill ${hasMushaf ? "ready" : ""}"><span>📖 فهرس المصحف</span><span>${hasMushaf ? "جاهز ✓" : "غير محمّل"}</span></div>
+      </div>
+
+      <button type="button" class="btn ${readyCnt === 4 ? "btn-soft" : "btn-primary"} btn-sm" style="width:100%;" ${_offlinePrecacheBusy ? "disabled" : ""} onclick="precacheOfflineExportSuite(true)">
+        ${_offlinePrecacheBusy ? "⏳ جاري التحميل والتخزين المحلي..." : (readyCnt === 4 ? "🔄 تحديث محركات العمل بدون إنترنت" : "⚡ تجهيز التصدير بدون إنترنت الآن")}
+      </button>
+    </details>
   `;
 }
 
@@ -36465,7 +36567,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v110";
+const TIBYAN_APP_VERSION = "v111";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
