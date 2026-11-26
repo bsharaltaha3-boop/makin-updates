@@ -14854,6 +14854,51 @@ table.t-daily td.td-sard,
   font-size: 12.5px;
 }
 
+
+/* ==================== MAKIN v140: MAJOR REVIEW DIRECTION & PATH ENGINE UI ==================== */
+.hs-rev-mode-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.hs-rev-mode-grid .hs-choice-card {
+  padding: 8px 8px;
+}
+.hs-rev-mode-grid .hs-choice-card b {
+  font-size: 11.6px;
+}
+.hs-rev-mode-grid .hs-choice-card span {
+  font-size: 10.2px;
+  line-height: 1.38;
+}
+.stm-rev-mode-box {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 9px;
+  margin-bottom: 9px;
+}
+.stm-rev-mode-box label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--ink-700);
+  margin-bottom: 5px;
+}
+.stm-rev-dir-pill {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 99px;
+  background: var(--blue-bg);
+  color: var(--blue);
+  white-space: nowrap;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -15380,7 +15425,7 @@ table.t-daily td.td-sard,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v139</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v140</span>
         </button>
       </div>
     </div>
@@ -16131,6 +16176,22 @@ table.t-daily td.td-sard,
           <div class="exec-card-ttl">
             <span>📘 خطة المراجعة الكبرى (حتى 5 أجزاء)</span>
             <button type="button" class="btn btn-soft btn-sm" style="padding:3px 8px; font-size:11px;" onclick="autoMatchRevPageToMem()">⚡ ضبط تلقائي</button>
+          </div>
+          <input type="hidden" id="stRevSurahIdInput" value="">
+          <div class="stm-rev-mode-box">
+            <label>
+              <span>🧭 اتجاه ومسار المراجعة الكبرى</span>
+              <span class="stm-rev-dir-pill" id="stRevModeResolvedBadge">تلقائي</span>
+            </label>
+            <select id="stRevModeSelect" onchange="onStModalRevModeChange(this.value)" style="width:100%; padding:7px 9px; border-radius:9px; border:1px solid var(--line-strong); background:var(--white); color:var(--ink-900); font-size:12px; font-weight:700;">
+              <option value="inherit">🏛️ اتباع إعدادات الحلقة (الافتراضي)</option>
+              <option value="follow_mem">🔄 نفس مسار الحفظ (الناس←البقرة: من آخر الجزء، البقرة←الناس: من أوله)</option>
+              <option value="desc_juz_desc">⬆️ من آخر الجزء لأوله دائماً (صعوداً نحو البقرة)</option>
+              <option value="asc_juz_asc">⬇️ من أول الجزء لآخره دائماً (ترتيب المصحف)</option>
+              <option value="asc_juz_desc">📚 أجزاء من الأخير للأول (وكل جزء من أوله لآخره)</option>
+              <option value="desc_juz_asc">📚 أجزاء من الأول للأخير (وكل جزء من آخره لأوله)</option>
+              <option value="opposite_mem">🔀 عكس مسار الحفظ</option>
+            </select>
           </div>
           <label style="display:block; font-size:11.5px; font-weight:700; color:var(--ink-700); margin-bottom:4px;">مقدار المراجعة الكبرى الأسبوعية:</label>
           <div class="stm-choice-row cols-5">
@@ -19604,6 +19665,122 @@ function getStudentMemorizedSegments(st, h, forMajorReview = false) {
   }));
 }
 
+const MAJOR_REV_MODE_LIST = [
+  { key: "follow_mem", shortLabel: "🔄 نفس مسار الحفظ (تلقائي)", desc: "الناس←البقرة: من آخر الجزء لأوله • البقرة←الناس: من أول الجزء لآخره" },
+  { key: "desc_juz_desc", shortLabel: "⬆️ من آخر الجزء لأوله (صعوداً)", desc: "يبدأ من آخر سورة في المحفوظ ويصعد نحو البقرة (المرسلات ← الملك)" },
+  { key: "asc_juz_asc", shortLabel: "⬇️ من أول الجزء لآخره (المصحف)", desc: "يبدأ من أول سورة في المحفوظ ويمشي بترتيب المصحف (الملك ← الناس)" },
+  { key: "asc_juz_desc", shortLabel: "📚 أجزاء من الأخير (أول←آخر)", desc: "يراجع عمّ (النبأ←الناس) ثم تبارك (الملك←المرسلات) ثم قد سمع..." },
+  { key: "desc_juz_asc", shortLabel: "📚 أجزاء من الأول (آخر←أول)", desc: "يراجع الجزء 1 من آخره لأوله ثم الجزء 2 من آخره لأوله..." },
+  { key: "opposite_mem", shortLabel: "🔀 عكس مسار الحفظ", desc: "من يحفظ من الناس يراجع بترتيب المصحف، ومن يحفظ من البقرة يراجع صعوداً" }
+];
+
+function getMajorRevModeLabel(modeKey) {
+  const m = MAJOR_REV_MODE_LIST.find(x => x.key === modeKey);
+  return m ? m.shortLabel : MAJOR_REV_MODE_LIST[0].shortLabel;
+}
+
+function resolveStudentMajorRevSpec(st, h, modeOverride = "") {
+  const rawMode = (modeOverride && modeOverride !== "inherit")
+    ? modeOverride
+    : ((st?.revMode && st.revMode !== "inherit") ? st.revMode : (h?.majorRevMode || "follow_mem"));
+  const memDir = (st?.direction || h?.defaultDir || "desc") === "asc" ? "asc" : "desc";
+  const memJuzOrder = getStudentJuzOrder(st, h);
+
+  let surahDir = memDir;
+  let juzOrder = memJuzOrder;
+
+  if (rawMode === "desc_juz_desc") { surahDir = "desc"; juzOrder = "juz_desc"; }
+  else if (rawMode === "asc_juz_asc") { surahDir = "asc"; juzOrder = "juz_asc"; }
+  else if (rawMode === "asc_juz_desc") { surahDir = "asc"; juzOrder = "juz_desc"; }
+  else if (rawMode === "desc_juz_asc") { surahDir = "desc"; juzOrder = "juz_asc"; }
+  else if (rawMode === "opposite_mem") {
+    surahDir = memDir === "asc" ? "desc" : "asc";
+    juzOrder = memJuzOrder === "juz_asc" ? "juz_desc" : "juz_asc";
+  }
+
+  const isMixedJuz = (surahDir === "asc" && juzOrder === "juz_desc") || (surahDir === "desc" && juzOrder === "juz_asc");
+  let resolvedLabel = "⬆️ من آخر الجزء لأوله (صعوداً)";
+  if (surahDir === "asc" && juzOrder === "juz_asc") resolvedLabel = "⬇️ من أول الجزء لآخره (المصحف)";
+  else if (surahDir === "asc" && juzOrder === "juz_desc") resolvedLabel = "📚 أجزاء من الأخير (كل جزء من أوله)";
+  else if (surahDir === "desc" && juzOrder === "juz_asc") resolvedLabel = "📚 أجزاء من الأول (كل جزء من آخره)";
+
+  return { mode: rawMode, surahDir, juzOrder, isMixedJuz, resolvedLabel };
+}
+
+function normalizeRevSpecArg(revSpecOrDir, bounds) {
+  if (revSpecOrDir && typeof revSpecOrDir === "object" && revSpecOrDir.surahDir) return revSpecOrDir;
+  if (revSpecOrDir === "asc") return { mode: "asc_juz_asc", surahDir: "asc", juzOrder: "juz_asc", isMixedJuz: false, resolvedLabel: "⬇️ من أول الجزء لآخره" };
+  if (revSpecOrDir === "desc") return { mode: "desc_juz_desc", surahDir: "desc", juzOrder: "juz_desc", isMixedJuz: false, resolvedLabel: "⬆️ من آخر الجزء لأوله" };
+  if (bounds?.revSpec?.surahDir) return bounds.revSpec;
+  const fallbackDir = bounds?.isAscMem === false ? "desc" : "asc";
+  return { mode: fallbackDir === "asc" ? "asc_juz_asc" : "desc_juz_desc", surahDir: fallbackDir, juzOrder: fallbackDir === "asc" ? "juz_asc" : "juz_desc", isMixedJuz: false };
+}
+
+function getOrderedRevSegments(bounds, revSpec, sabrJuz = null) {
+  if (sabrJuz) {
+    return [{
+      juzId: sabrJuz.id,
+      startSurahId: sabrJuz.startSurah, startAyah: sabrJuz.startAyah || 1,
+      endSurahId: sabrJuz.endSurah, endAyah: sabrJuz.endAyah || (SURAH_MAP[sabrJuz.endSurah]?.a || 1),
+      startPage: sabrJuz.startPage, endPage: sabrJuz.endPage
+    }];
+  }
+  const baseSegs = (Array.isArray(bounds?.segments) && bounds.segments.length)
+    ? bounds.segments
+    : [{
+        startSurahId: bounds?.startSurahId || 78, startAyah: bounds?.startAyah || 1,
+        endSurahId: bounds?.endSurahId || 114, endAyah: bounds?.endAyah || 6,
+        startPage: bounds?.startPage || 582, endPage: bounds?.endPage || 604
+      }];
+
+  if (!revSpec?.isMixedJuz) {
+    return revSpec?.juzOrder === "juz_desc" ? [...baseSegs].reverse() : [...baseSegs];
+  }
+
+  // Split continuous bounds into exact per-Juz sub-segments so mixed paths step cleanly Juz-by-Juz!
+  const juzSegs = [];
+  JUZ_PAGES.forEach(j => {
+    const jStartPos = getMushafPos(j.startSurah, j.startAyah || 1, false);
+    const jEndPos = getMushafPos(j.endSurah, j.endAyah || (SURAH_MAP[j.endSurah]?.a || 1), true);
+    baseSegs.forEach(sg => {
+      const sStartPos = getMushafPos(sg.startSurahId, sg.startAyah || 1, false);
+      const sEndPos = getMushafPos(sg.endSurahId, sg.endAyah || (SURAH_MAP[sg.endSurahId]?.a || 1), true);
+      if (sEndPos <= jStartPos + 0.05 || sStartPos >= jEndPos - 0.05) return;
+      const useSegStart = sStartPos > jStartPos + 0.02;
+      const useSegEnd = sEndPos < jEndPos - 0.02;
+      const stId = useSegStart ? sg.startSurahId : j.startSurah;
+      const stA = useSegStart ? (sg.startAyah || 1) : (j.startAyah || 1);
+      const enId = useSegEnd ? sg.endSurahId : j.endSurah;
+      const enA = useSegEnd ? (sg.endAyah || (SURAH_MAP[enId]?.a || 1)) : (j.endAyah || (SURAH_MAP[enId]?.a || 1));
+      if (getMushafPos(enId, enA, true) <= getMushafPos(stId, stA, false)) return;
+      juzSegs.push({
+        juzId: j.id,
+        startSurahId: stId, startAyah: stA,
+        endSurahId: enId, endAyah: enA,
+        startPage: Math.max(1, Math.min(604, getPageForSurahAyah(stId, stA))),
+        endPage: Math.max(1, Math.min(604, getPageForSurahAyah(enId, enA)))
+      });
+    });
+  });
+
+  if (!juzSegs.length) {
+    return revSpec.juzOrder === "juz_desc" ? [...baseSegs].reverse() : [...baseSegs];
+  }
+  juzSegs.sort((a, b) => revSpec.juzOrder === "juz_desc" ? (b.juzId - a.juzId) : (a.juzId - b.juzId));
+  return juzSegs;
+}
+
+function getRevSegmentEntryPoint(seg, revSpec) {
+  if (!seg) return { surahId: 78, ayah: 1 };
+  if (revSpec?.surahDir === "desc") {
+    return {
+      surahId: seg.endSurahId,
+      ayah: (seg.startSurahId === seg.endSurahId) ? (seg.startAyah || 1) : 1
+    };
+  }
+  return { surahId: seg.startSurahId, ayah: seg.startAyah || 1 };
+}
+
 function getStudentRevCycleBounds(st, h) {
   const dir = st?.direction || h?.defaultDir || "desc";
   const isSeniorsSystem = h?.majorRevSystem === "seniors";
@@ -19617,6 +19794,7 @@ function getStudentRevCycleBounds(st, h) {
   });
   const explicitJuz = parseArabicNum(st?.memorizedJuz, 0);
   const juzCount = explicitJuz > 0 ? explicitJuz : Math.round((totalPages / 20) * 10) / 10;
+  const revSpec = resolveStudentMajorRevSpec(st, h);
   return {
     startPage: first.startPage,
     endPage: last.endPage,
@@ -19628,7 +19806,8 @@ function getStudentRevCycleBounds(st, h) {
     hasMajorRange,
     isSeniorsSystem,
     juzCount,
-    isAscMem: dir === "asc"
+    isAscMem: dir === "asc",
+    revSpec
   };
 }
 
@@ -19705,40 +19884,37 @@ function formatMajorRangeObject(s1, a1, s2, a2, p1, p2, actualPages, nextStartPa
   };
 }
 
-function buildMajorReviewFromPoint(startSurahId, startAyah, pagesCount, bounds, sabrJuz = null, revDir = null) {
-  const effectiveDir = revDir || (bounds?.isAscMem === false ? "desc" : "asc");
-  const allSegs = sabrJuz
-    ? [{ startSurahId: sabrJuz.startSurah, startAyah: sabrJuz.startAyah, endSurahId: sabrJuz.endSurah, endAyah: sabrJuz.endAyah, startPage: sabrJuz.startPage, endPage: sabrJuz.endPage }]
-    : (Array.isArray(bounds?.segments) && bounds.segments.length ? bounds.segments : [{
-        startSurahId: bounds?.startSurahId || 78, startAyah: bounds?.startAyah || 1,
-        endSurahId: bounds?.endSurahId || 114, endAyah: bounds?.endAyah || 6,
-        startPage: bounds?.startPage || 582, endPage: bounds?.endPage || 604
-      }]);
+function buildMajorReviewFromPoint(startSurahId, startAyah, pagesCount, bounds, sabrJuz = null, revSpecOrDir = null) {
+  const revSpec = normalizeRevSpecArg(revSpecOrDir, bounds);
+  const effectiveDir = revSpec.surahDir;
+  const orderedSegs = getOrderedRevSegments(bounds, revSpec, sabrJuz);
 
-  let segIdx = effectiveDir === "desc" ? (allSegs.length - 1) : 0;
+  let segIdx = 0;
   let reqS = SURAH_MAP[Number(startSurahId)];
   if (reqS) {
     const reqPos = getMushafPos(reqS.id, parseArabicNum(startAyah, 1), false);
-    const foundIdx = allSegs.findIndex(sg =>
+    const foundIdx = orderedSegs.findIndex(sg =>
       reqPos >= getMushafPos(sg.startSurahId, sg.startAyah, false) - 0.03 &&
       reqPos <= getMushafPos(sg.endSurahId, sg.endAyah, true) + 0.03
     );
     if (foundIdx >= 0) segIdx = foundIdx;
   }
 
-  const activeSeg = allSegs[segIdx];
-  const bStartId = activeSeg.startSurahId, bStartA = activeSeg.startAyah;
-  const bEndId = activeSeg.endSurahId, bEndA = activeSeg.endAyah;
+  const activeSeg = orderedSegs[segIdx];
+  const bStartId = activeSeg.startSurahId, bStartA = activeSeg.startAyah || 1;
+  const bEndId = activeSeg.endSurahId, bEndA = activeSeg.endAyah || (SURAH_MAP[bEndId]?.a || 1);
   const cStartPg = activeSeg.startPage, cEndPg = activeSeg.endPage;
   const pace = Math.max(0.5, Number(pagesCount) || 2);
 
-  // ===== v130: DESCENDING SURAH-ORDER MAJOR REVIEW (الناس -> النبأ، المرسلات -> الملك، داخل كل سورة من الآية 1 إلى آخرها!) =====
+  // ===== DESCENDING SURAH-ORDER MAJOR REVIEW (الناس -> النبأ، المرسلات -> الملك، داخل كل سورة من الآية 1 إلى آخرها!) =====
   if (effectiveDir === "desc") {
     let s1 = SURAH_MAP[Number(startSurahId)] || SURAH_MAP[bEndId];
     let a1 = Math.max(1, Math.min(s1.a, parseArabicNum(startAyah, 1)));
     if (s1.id < bStartId || s1.id > bEndId) {
       s1 = SURAH_MAP[bEndId];
-      a1 = 1;
+      a1 = (bStartId === bEndId) ? bStartA : 1;
+    } else if (s1.id === bStartId && bStartId === bEndId && a1 < bStartA) {
+      a1 = bStartA;
     }
     let curSid = s1.id;
     let curFrom = a1;
@@ -19748,6 +19924,8 @@ function buildMajorReviewFromPoint(startSurahId, startAyah, pagesCount, bounds, 
     for (let step = 0; step < 120 && curSid >= bStartId; step++) {
       const sObj = SURAH_MAP[curSid];
       if (!sObj) break;
+      const minAForSurah = (curSid === bStartId && bStartId === bEndId) ? bStartA : 1;
+      if (curFrom < minAForSurah) curFrom = minAForSurah;
       const maxAForSurah = (curSid === bEndId) ? Math.min(sObj.a, bEndA || sObj.a) : sObj.a;
       const remSurahPg = calcRangePages(sObj.id, curFrom, maxAForSurah);
       if (remSurahPg <= remPages + 0.18 || (curSid === bStartId && remSurahPg <= remPages * 1.25)) {
@@ -19759,13 +19937,13 @@ function buildMajorReviewFromPoint(startSurahId, startAyah, pagesCount, bounds, 
           break;
         }
         curSid--;
-        curFrom = 1;
+        curFrom = (curSid === bStartId && bStartId === bEndId) ? bStartA : 1;
         if (remPages <= 0.16) break;
       } else {
         const endA = getEndAyahByExactMushafPages(sObj.id, curFrom, remPages);
         s2 = sObj;
         a2 = Math.min(maxAForSurah, Math.max(curFrom, endA));
-        if (sObj.a - a2 <= 2) a2 = maxAForSurah;
+        if (maxAForSurah - a2 <= 2) a2 = maxAForSurah;
         if (curSid <= bStartId && a2 >= maxAForSurah) segFinished = true;
         break;
       }
@@ -19774,17 +19952,19 @@ function buildMajorReviewFromPoint(startSurahId, startAyah, pagesCount, bounds, 
     const actualPages = Math.max(0.25, calcRangePages(s1.id, a1, a2, s2.id));
     const p1 = getPageForSurahAyah(s1.id, a1);
     const p2 = getPageForSurahAyah(s2.id, a2);
-    const wrapped = segFinished && segIdx === 0;
-    const nextSeg = segFinished ? allSegs[(segIdx - 1 + allSegs.length) % allSegs.length] : null;
+    const wrapped = segFinished && segIdx === orderedSegs.length - 1;
+    const nextSeg = segFinished ? orderedSegs[(segIdx + 1) % orderedSegs.length] : null;
+    const nextPt = nextSeg ? getRevSegmentEntryPoint(nextSeg, revSpec) : null;
     const nextStartPage = nextSeg ? nextSeg.endPage : Math.max(cStartPg, p2);
     const obj = formatMajorRangeObject(s1, a1, s2, a2, p1, p2, actualPages, nextStartPage, wrapped, cStartPg, cEndPg);
     obj.segIdx = segIdx;
     obj.segFinished = segFinished;
-    obj.nextSegStart = nextSeg ? { surahId: nextSeg.endSurahId, ayah: 1 } : null;
+    obj.nextSegStart = nextPt;
+    obj.revSpec = revSpec;
     return obj;
   }
 
-  // ===== ASCENDING SURAH-ORDER MAJOR REVIEW (البقرة -> الناس) =====
+  // ===== ASCENDING SURAH-ORDER MAJOR REVIEW (البقرة -> الناس / داخل كل جزء من أوله لآخره) =====
   const minPos = getMushafPos(bStartId, bStartA, false);
   const maxPos = getMushafPos(bEndId, bEndA, true);
 
@@ -19832,14 +20012,16 @@ function buildMajorReviewFromPoint(startSurahId, startAyah, pagesCount, bounds, 
   const actualPages = Math.max(0.25, Math.round((endPos - startPos) * 100) / 100);
   const p1 = getPageForSurahAyah(s1.id, a1);
   const p2 = getPageForSurahAyah(s2.id, a2);
-  const wrapped = segFinished && segIdx === allSegs.length - 1;
-  const nextSeg = segFinished ? allSegs[(segIdx + 1) % allSegs.length] : null;
+  const wrapped = segFinished && segIdx === orderedSegs.length - 1;
+  const nextSeg = segFinished ? orderedSegs[(segIdx + 1) % orderedSegs.length] : null;
+  const nextPt = nextSeg ? getRevSegmentEntryPoint(nextSeg, revSpec) : null;
   const nextStartPage = nextSeg ? nextSeg.startPage : Math.min(cEndPg, p2 + 1);
 
   const obj = formatMajorRangeObject(s1, a1, s2, a2, p1, p2, actualPages, nextStartPage, wrapped, cStartPg, cEndPg);
   obj.segIdx = segIdx;
   obj.segFinished = segFinished;
-  obj.nextSegStart = nextSeg ? { surahId: nextSeg.startSurahId, ayah: nextSeg.startAyah } : null;
+  obj.nextSegStart = nextPt;
+  obj.revSpec = revSpec;
   return obj;
 }
 
@@ -19865,14 +20047,20 @@ function buildMajorReviewRange(startPage, pagesCount, cycleStart = 582, cycleEnd
 
 function getMajorReviewStartEndPoints(r, st, h, s) {
   const cyc = getStudentActiveMajorCycle(st, h, s);
+  const revSpec = resolveStudentMajorRevSpec(st, h);
   const sardIds = extractSardJuzIds(r?.majSardJuzIds, r?.majSardLabel, r?.majFrom, r?.majTo);
   if (sardIds.length) {
     const firstJ = JUZ_PAGE_MAP[sardIds[0]], lastJ = JUZ_PAGE_MAP[sardIds[sardIds.length - 1]];
     if (firstJ && lastJ) {
-      return {
-        startSurahId: firstJ.startSurah, startAyah: firstJ.startAyah || 1,
-        endSurahId: lastJ.endSurah, endAyah: lastJ.endAyah || (SURAH_MAP[lastJ.endSurah]?.a || 1)
-      };
+      if (revSpec.juzOrder === "juz_desc") {
+        // Finished Juzs descending -> latest completed Juz is firstJ (lowest ID, e.g. Juz 29 in [29,30])
+        return revSpec.surahDir === "desc"
+          ? { startSurahId: lastJ.endSurah, startAyah: 1, endSurahId: firstJ.startSurah, endAyah: SURAH_MAP[firstJ.startSurah]?.a || 1 }
+          : { startSurahId: lastJ.startSurah, startAyah: lastJ.startAyah || 1, endSurahId: firstJ.endSurah, endAyah: firstJ.endAyah || (SURAH_MAP[firstJ.endSurah]?.a || 1) };
+      }
+      return revSpec.surahDir === "desc"
+        ? { startSurahId: firstJ.endSurah, startAyah: 1, endSurahId: lastJ.startSurah, endAyah: SURAH_MAP[lastJ.startSurah]?.a || 1 }
+        : { startSurahId: firstJ.startSurah, startAyah: firstJ.startAyah || 1, endSurahId: lastJ.endSurah, endAyah: lastJ.endAyah || (SURAH_MAP[lastJ.endSurah]?.a || 1) };
     }
   }
   const segs = getSegments(r, "maj");
@@ -19909,7 +20097,11 @@ function getMajorReviewStartEndPoints(r, st, h, s) {
     }
   }
   const revPace = Number(st?.revPace || (cyc.sabrJuz ? 5 : (h.defaultRevPace || 2)));
-  const rng = buildMajorReviewRange(r.majStartPage || cyc.cycleStart, r.majPages || revPace, cyc.cycleStart, cyc.cycleEnd);
+  const orderedSegs = getOrderedRevSegments(cyc.bounds, revSpec, cyc.sabrJuz);
+  const defPt = getRevSegmentEntryPoint(orderedSegs[0], revSpec);
+  const fbPg = parseArabicNum(r.majStartPage, 0);
+  const fbPi = fbPg >= 1 && fbPg <= 604 ? getPageStartInfo(fbPg) : null;
+  const rng = buildMajorReviewFromPoint(fbPi ? fbPi.surah.id : defPt.surahId, fbPi ? fbPi.ayah : defPt.ayah, r.majPages || revPace, cyc.bounds, cyc.sabrJuz, revSpec);
   return {
     startSurahId: Number(rng.startSurahId), startAyah: rng.startAyah,
     endSurahId: Number(rng.endSurahId), endAyah: rng.endAyah
@@ -25621,10 +25813,10 @@ function setStExtraEndJuzCount(count) {
 
 function selectStPathPreset(dir, juzOrder) {
   document.getElementById("stDirectionInput").value = dir;
-  document.getElementById("stJuzOrderInput").value = (dir === "asc" ? "juz_asc" : "juz_desc");
   document.getElementById("stJuzOrderInput").value = juzOrder;
   const curSid = document.getElementById("stStartSurahInput").value;
   document.getElementById("stStartSurahInput").innerHTML = surahOptionsHtml(curSid, "-- اختر السورة التي يبدأ بها --", dir);
+  populateRevSurahPicker(parseArabicNum(document.getElementById("stRevPageInput")?.value, 0), Number(document.getElementById("stRevSurahIdInput")?.value || 0));
   syncStModalButtons();
   updateStudentModalPreview();
 }
@@ -25804,12 +25996,22 @@ function setStModalChoice(kind, val) {
   updateStudentModalPreview();
 }
 
+function getStModalResolvedRevSpec() {
+  const h = getActiveHalaqa();
+  const dir = document.getElementById("stDirectionInput")?.value || h?.defaultDir || "desc";
+  const jo = document.getElementById("stJuzOrderInput")?.value || (dir === "asc" ? "juz_asc" : "juz_desc");
+  const modeVal = document.getElementById("stRevModeSelect")?.value || "inherit";
+  return resolveStudentMajorRevSpec({ direction: dir, juzOrder: jo, revMode: modeVal }, h);
+}
+
 function populateRevSurahPicker(selectedPage, preferredSurahId = 0) {
   const sel = document.getElementById("stRevSurahPick");
   if (!sel) return;
+  const revSpec = getStModalResolvedRevSpec();
   const curS = preferredSurahId ? SURAH_MAP[Number(preferredSurahId)] : (selectedPage ? getSurahAtPage(selectedPage) : null);
-  let opts = `<option value="">-- اختر السورة (أو اكتب الصفحة) --</option>`;
-  SURAHS.forEach(s => {
+  const list = revSpec.surahDir === "desc" ? [...SURAHS].reverse() : SURAHS;
+  let opts = `<option value="">-- تلقائي حسب مسار المراجعة --</option>`;
+  list.forEach(s => {
     const optVal = `${s.id}:${s.p}`;
     opts += `<option value="${optVal}" ${curS && curS.id === s.id ? "selected" : ""}>${s.n} (ص ${s.p})</option>`;
   });
@@ -25817,31 +26019,47 @@ function populateRevSurahPicker(selectedPage, preferredSurahId = 0) {
   if (typeof sel._epSyncLabel === "function") sel._epSyncLabel();
 }
 
+function onStModalRevModeChange(val) {
+  const curSid = Number(document.getElementById("stRevSurahIdInput")?.value || 0);
+  const curPg = parseArabicNum(document.getElementById("stRevPageInput")?.value, 0);
+  populateRevSurahPicker(curPg, curSid);
+  updateStudentModalPreview();
+}
+
 function onStModalSurahChange() {
   document.getElementById("stStartAyahInput").value = "1";
   const sid = document.getElementById("stStartSurahInput").value;
   const revInp = document.getElementById("stRevPageInput");
   if (sid && SURAH_MAP[Number(sid)] && !revInp.value) {
-    const dir = document.getElementById("stDirectionInput").value || "desc";
-    const autoPg = dir === "asc" ? 2 : SURAH_MAP[Number(sid)].p;
-    revInp.value = autoPg;
-    populateRevSurahPicker(autoPg, dir === "asc" ? 2 : Number(sid));
+    const revSpec = getStModalResolvedRevSpec();
+    const autoS = revSpec.surahDir === "desc" ? SURAH_MAP[114] : (revSpec.juzOrder === "juz_desc" ? SURAH_MAP[78] : SURAH_MAP[2]);
+    revInp.value = autoS.p;
+    if (document.getElementById("stRevSurahIdInput")) document.getElementById("stRevSurahIdInput").value = String(autoS.id);
+    populateRevSurahPicker(autoS.p, autoS.id);
   }
   updateStudentModalPreview();
 }
 
 function onStModalRevSurahPick(val) {
   const raw = String(val || "").trim();
-  let p = 0;
+  const sidInp = document.getElementById("stRevSurahIdInput");
+  if (!raw) {
+    document.getElementById("stRevPageInput").value = "";
+    if (sidInp) sidInp.value = "";
+    updateStudentModalPreview();
+    return;
+  }
+  let p = 0, pickedSid = 0;
   if (raw.includes(":")) {
     const parts = raw.split(":");
-    p = parseArabicNum(parts[1], 0) || (SURAH_MAP[Number(parts[0])]?.p || 0);
+    pickedSid = Number(parts[0]) || 0;
+    p = parseArabicNum(parts[1], 0) || (SURAH_MAP[pickedSid]?.p || 0);
   } else {
     p = parseArabicNum(raw, 0);
+    pickedSid = p ? getSurahAtPage(p).id : 0;
   }
-  if (p >= 1 && p <= 604) {
-    document.getElementById("stRevPageInput").value = p;
-  }
+  if (p >= 1 && p <= 604) document.getElementById("stRevPageInput").value = p;
+  if (sidInp) sidInp.value = pickedSid ? String(pickedSid) : "";
   const sel = document.getElementById("stRevSurahPick");
   if (sel && typeof sel._epSyncLabel === "function") sel._epSyncLabel();
   updateStudentModalPreview();
@@ -25849,23 +26067,44 @@ function onStModalRevSurahPick(val) {
 
 function onStModalRevPageTyped(pgVal) {
   const p = parseArabicNum(pgVal, 0);
-  if (p >= 1 && p <= 604) populateRevSurahPicker(p);
+  const sidInp = document.getElementById("stRevSurahIdInput");
+  if (p >= 1 && p <= 604) {
+    const sAt = getSurahAtPage(p);
+    if (sidInp) sidInp.value = sAt ? String(sAt.id) : "";
+    populateRevSurahPicker(p, sAt?.id || 0);
+  } else {
+    if (sidInp) sidInp.value = "";
+    populateRevSurahPicker(0, 0);
+  }
   updateStudentModalPreview();
 }
 
 function autoMatchRevPageToMem() {
-  const dir = document.getElementById("stDirectionInput").value || "desc";
-  const sid = document.getElementById("stStartSurahInput").value;
-  const pg = dir === "asc" ? 2 : (sid && SURAH_MAP[Number(sid)] ? SURAH_MAP[Number(sid)].p : 582);
-  document.getElementById("stRevPageInput").value = pg;
-  populateRevSurahPicker(pg);
+  const h = getActiveHalaqa();
+  const dir = document.getElementById("stDirectionInput")?.value || "desc";
+  const jo = document.getElementById("stJuzOrderInput")?.value || (dir === "asc" ? "juz_asc" : "juz_desc");
+  const modeVal = document.getElementById("stRevModeSelect")?.value || "inherit";
+  const startSurahId = document.getElementById("stStartSurahInput")?.value || "";
+  const extraMemJuzIds = parseExtraMemJuzStr(document.getElementById("stExtraMemJuzInput")?.value);
+  const editId = (document.getElementById("stEditId")?.value || "").trim();
+  const existingSt = editId ? h?.students.find(x => x.id === editId) : null;
+  const tempSt = { ...(existingSt || {}), direction: dir, juzOrder: jo, revMode: modeVal, startSurahId, extraMemJuzIds };
+  const bounds = getStudentRevCycleBounds(tempSt, h);
+  const revSpec = resolveStudentMajorRevSpec(tempSt, h);
+  const ordered = getOrderedRevSegments(bounds, revSpec, null);
+  const entry = getRevSegmentEntryPoint(ordered[0], revSpec);
+  const sObj = SURAH_MAP[entry.surahId] || SURAH_MAP[revSpec.surahDir === "desc" ? 114 : 2];
+  document.getElementById("stRevPageInput").value = sObj.p;
+  if (document.getElementById("stRevSurahIdInput")) document.getElementById("stRevSurahIdInput").value = String(sObj.id);
+  populateRevSurahPicker(sObj.p, sObj.id);
   updateStudentModalPreview();
-  showToast(`تم ضبط بداية المراجعة الكبرى على ${getSurahAtPage(pg).n} (ص ${pg}) ✓`);
+  showToast(`تم ضبط بداية الكبرى على ${sObj.n} (ص ${sObj.p}) — ${revSpec.resolvedLabel} ✓`);
 }
 
 function updateStudentModalPreview() {
   const box = document.getElementById("stModalLivePreview");
   const revHint = document.getElementById("stRevPageLiveHint");
+  const modeBadge = document.getElementById("stRevModeResolvedBadge");
   if (!box) return;
 
   const track = document.getElementById("stTrackInput")?.value || "quran";
@@ -25880,6 +26119,7 @@ function updateStudentModalPreview() {
     return;
   }
 
+  const h = getActiveHalaqa();
   const dir = document.getElementById("stDirectionInput")?.value || "desc";
   const jo = document.getElementById("stJuzOrderInput")?.value || (dir === "asc" ? "juz_asc" : "juz_desc");
   const pace = Number(document.getElementById("stPaceInput")?.value) || 0.5;
@@ -25888,6 +26128,8 @@ function updateStudentModalPreview() {
   const sid = document.getElementById("stStartSurahInput")?.value || "";
   const sInfo = sid ? SURAH_MAP[Number(sid)] : null;
   const fromA = sInfo ? Math.max(1, Math.min(sInfo.a, parseArabicNum(document.getElementById("stStartAyahInput")?.value, 1))) : 1;
+  const revSpec = getStModalResolvedRevSpec();
+  if (modeBadge) modeBadge.textContent = revSpec.resolvedLabel;
 
   let firstHwTxt = "يُحدّد عند اختيار السورة";
   if (sInfo) {
@@ -25898,22 +26140,34 @@ function updateStudentModalPreview() {
     firstHwTxt = `${sInfo.n} (${fromA}–${toA}) • ${formatNum(calcRangePages(sInfo.id, fromA, toA))} صفحة`;
   }
 
-  const pathTxt = getStudentPathLabel({ direction: dir, juzOrder: jo }, getActiveHalaqa());
+  const pathTxt = getStudentPathLabel({ direction: dir, juzOrder: jo }, h);
 
   box.innerHTML = `
-    <div>🧭 <b>المسار:</b> ${escapeHtml(pathTxt)}</div>
+    <div>🧭 <b>مسار الحفظ:</b> ${escapeHtml(pathTxt)}</div>
     <div>🎯 <b>مقطع البداية:</b> ${escapeHtml(firstHwTxt)}</div>
-    <div>📘 <b>المراجعة:</b> كبرى ${escapeHtml(formatRevPaceLabel(revPace))} • صغرى (${minWks === 2 ? 'آخر أسبوعين' : 'الأسبوع الأخير'})</div>
+    <div>📘 <b>المراجعة:</b> كبرى ${escapeHtml(formatRevPaceLabel(revPace))} (${escapeHtml(revSpec.resolvedLabel)}) • صغرى (${minWks === 2 ? 'آخر أسبوعين' : 'الأسبوع الأخير'})</div>
   `;
 
   if (revHint) {
     const rp = parseArabicNum(document.getElementById("stRevPageInput")?.value, 0);
-    if (rp >= 1 && rp <= 604) {
-      const pEnd = Math.min(604, rp + revPace - 1);
-      const s1 = getSurahAtPage(rp), s2 = getSurahAtPage(pEnd);
-      revHint.innerHTML = `📌 بداية المراجعة الكبرى: من <b>${escapeHtml(s1.n)}</b> إلى <b>${escapeHtml(s2.n)}</b> (${escapeHtml(formatRevPaceLabel(revPace))})`;
+    const explicitSid = Number(document.getElementById("stRevSurahIdInput")?.value || 0);
+    const startS = (explicitSid && SURAH_MAP[explicitSid]) ? SURAH_MAP[explicitSid] : (rp >= 1 && rp <= 604 ? getSurahAtPage(rp) : null);
+    if (startS) {
+      const fullMushafBounds = {
+        startSurahId: 2, startAyah: 1, endSurahId: 114, endAyah: 6,
+        startPage: 2, endPage: 604,
+        segments: [{ startSurahId: 2, startAyah: 1, endSurahId: 114, endAyah: 6, startPage: 2, endPage: 604 }],
+        revSpec
+      };
+      const previewRng = buildMajorReviewFromPoint(startS.id, 1, revPace, fullMushafBounds, null, revSpec);
+      const s1 = SURAH_MAP[Number(previewRng.startSurahId)] || startS;
+      const s2 = SURAH_MAP[Number(previewRng.endSurahId)] || startS;
+      const spanTxt = s1.id === s2.id
+        ? `سورة <b>${escapeHtml(s1.n)}</b> (${previewRng.startAyah}–${previewRng.endAyah})`
+        : `من <b>${escapeHtml(s1.n)}</b> إلى <b>${escapeHtml(s2.n)}</b>`;
+      revHint.innerHTML = `📌 بداية المراجعة الكبرى: ${spanTxt} (${escapeHtml(formatRevPaceLabel(revPace))}) • <span style="color:var(--blue);">${escapeHtml(revSpec.resolvedLabel)}</span>`;
     } else {
-      revHint.innerHTML = `تلقائي: تدور المراجعة الكبرى (${escapeHtml(formatRevPaceLabel(revPace))}) على جميع محفوظ الطالب فقط.`;
+      revHint.innerHTML = `تلقائي (${escapeHtml(revSpec.resolvedLabel)}): تدور المراجعة الكبرى (${escapeHtml(formatRevPaceLabel(revPace))}) على جميع محفوظ الطالب فقط.`;
     }
   }
 }
@@ -25947,6 +26201,8 @@ function openAddStudentModal() {
   if (document.getElementById("stRashidiPaceInput")) document.getElementById("stRashidiPaceInput").value = "1";
   document.getElementById("stStartAyahInput").value = "1";
   document.getElementById("stRevPageInput").value = "";
+  if (document.getElementById("stRevSurahIdInput")) document.getElementById("stRevSurahIdInput").value = "";
+  if (document.getElementById("stRevModeSelect")) document.getElementById("stRevModeSelect").value = "inherit";
   document.getElementById("stMemJuzInput").value = "";
   document.getElementById("stExtraMemJuzInput").value = "";
   document.getElementById("stPhoneInput").value = "";
@@ -25998,13 +26254,19 @@ function openEditStudentModal(id) {
   if (document.getElementById("stRashidiPageInput")) document.getElementById("stRashidiPageInput").value = String(st.rashidiPage || 1);
   if (document.getElementById("stRashidiPaceInput")) document.getElementById("stRashidiPaceInput").value = String(st.rashidiPace || 1);
   document.getElementById("stStartAyahInput").value = String(suggestedAyah);
-  const revPg = st.revPage || (curR?.majStartPage) || bounds.startPage || "";
+  if (document.getElementById("stRevModeSelect")) document.getElementById("stRevModeSelect").value = st.revMode || "inherit";
+  const editRevSpec = resolveStudentMajorRevSpec(st, h);
+  const editOrderedSegs = getOrderedRevSegments(bounds, editRevSpec, null);
+  const editDefEntry = getRevSegmentEntryPoint(editOrderedSegs[0], editRevSpec);
+  const revSid = Number(st.revStartSurahId || curR?.majStartSurahId || 0) || (st.revPage ? getSurahAtPage(st.revPage).id : (editDefEntry.surahId || 0));
+  const revPg = st.revPage || (curR?.majStartPage) || (revSid && SURAH_MAP[revSid] ? SURAH_MAP[revSid].p : bounds.startPage) || "";
   document.getElementById("stRevPageInput").value = revPg;
+  if (document.getElementById("stRevSurahIdInput")) document.getElementById("stRevSurahIdInput").value = revSid ? String(revSid) : "";
   document.getElementById("stMemJuzInput").value = st.memorizedJuz || "";
   document.getElementById("stExtraMemJuzInput").value = getStudentExtraEndJuzIds(st).join(",");
   document.getElementById("stPhoneInput").value = st.phone || "";
   document.getElementById("stStartSurahInput").innerHTML = surahOptionsHtml(suggestedSid, "-- اختر السورة التي يبدأ بها --", dir);
-  populateRevSurahPicker(revPg);
+  populateRevSurahPicker(revPg, revSid);
   const applyWrap = document.getElementById("stApplyToSessionWrap");
   if (applyWrap) applyWrap.style.display = curS ? "inline-flex" : "none";
   const applyCb = document.getElementById("stApplyToSessionCheck");
@@ -26047,6 +26309,8 @@ function saveStudentModal() {
     const startSurahId = document.getElementById("stStartSurahInput")?.value || "";
     const startFromAyah = startSurahId ? Math.max(1, parseArabicNum(document.getElementById("stStartAyahInput")?.value, 1)) : 1;
     const revPage = document.getElementById("stRevPageInput")?.value ? Math.max(1, Math.min(604, Number(document.getElementById("stRevPageInput").value))) : "";
+    const revStartSurahId = (document.getElementById("stRevSurahIdInput")?.value || "").trim();
+    const revMode = document.getElementById("stRevModeSelect")?.value || "inherit";
     const memorizedJuz = document.getElementById("stMemJuzInput")?.value ? parseArabicNum(document.getElementById("stMemJuzInput").value, 0) : "";
     const extraMemJuzIds = (typeof parseExtraMemJuzStr === "function") ? parseExtraMemJuzStr(document.getElementById("stExtraMemJuzInput")?.value) : [];
     const phone = toAsciiDigits(document.getElementById("stPhoneInput")?.value || "").replace(/[^0-9+]/g, "");
@@ -26060,11 +26324,11 @@ function saveStudentModal() {
     if (id) {
       savedSt = h.students.find(x => x.id === id);
       if (savedSt) {
-        Object.assign(savedSt, { name, age, schoolGrade, parentName, bioNotes, track, rashidiPage, rashidiPace, direction, juzOrder, schedule, pace, revPace, minorLookbackWeeks, startSurahId, startFromAyah, revPage, memorizedJuz, extraMemJuzIds, phone });
+        Object.assign(savedSt, { name, age, schoolGrade, parentName, bioNotes, track, rashidiPage, rashidiPace, direction, juzOrder, schedule, pace, revPace, minorLookbackWeeks, startSurahId, startFromAyah, revPage, revStartSurahId, revMode, memorizedJuz, extraMemJuzIds, phone });
       }
     }
     if (!savedSt) {
-      savedSt = { id: uid("st"), name, age, schoolGrade, parentName, bioNotes, track, rashidiPage, rashidiPace, direction, juzOrder, schedule, pace, revPace, minorLookbackWeeks, startSurahId, startFromAyah, revPage, memorizedJuz, extraMemJuzIds, phone };
+      savedSt = { id: uid("st"), name, age, schoolGrade, parentName, bioNotes, track, rashidiPage, rashidiPace, direction, juzOrder, schedule, pace, revPace, minorLookbackWeeks, startSurahId, startFromAyah, revPage, revStartSurahId, revMode, memorizedJuz, extraMemJuzIds, phone };
       h.students.push(savedSt);
     }
 
@@ -26092,13 +26356,29 @@ function saveStudentModal() {
           r.recPages = calcRangePages(r.recSurahId, r.recFrom, r.recTo);
           r.manualRec = true;
         }
+        if (!r.dRevEval && !r.manualDRev) {
+          const dPlan = computeSmartMajorReviewForDate(h, curS.date, savedSt, getSessionReportMonth(curS));
+          if (dPlan) applySmartMajorPlanToDailyRecord(r, dPlan);
+        }
       } else if (curS.type === "saturday" && !r.majEval && !(r.attendance && String(r.attendance || "").includes("غياب"))) {
         const cyc = getStudentActiveMajorCycle(savedSt, h, curS);
-        const startP = revPage || cyc.cycleStart;
-        const rng = buildMajorReviewRange(startP, revPace, cyc.cycleStart, cyc.cycleEnd);
-        r.majStartPage = rng.startPage;
-        r.majFrom = rng.fromLabel;
-        r.majTo = rng.toLabel;
+        const _rs = resolveStudentMajorRevSpec(savedSt, h);
+        const _ord = getOrderedRevSegments(cyc.bounds, _rs, cyc.sabrJuz);
+        const _defPt = getRevSegmentEntryPoint(_ord[0], _rs);
+        let stSid = Number(revStartSurahId || 0);
+        let stA = 1;
+        if (!stSid && revPage) {
+          const pi = getPageStartInfo(Number(revPage));
+          stSid = pi.surah.id;
+          stA = _rs.surahDir === "desc" ? 1 : pi.ayah;
+        }
+        if (!stSid || !SURAH_MAP[stSid]) { stSid = _defPt.surahId; stA = _defPt.ayah; }
+        const rng = buildMajorReviewFromPoint(stSid, stA, revPace, cyc.bounds, cyc.sabrJuz, _rs);
+        r.majExtras = []; r.majIsPages = false; r.majSardJuzIds = []; r.majSardLabel = "";
+        r.majStartSurahId = rng.startSurahId; r.majStartAyah = rng.startAyah;
+        r.majEndSurahId = rng.endSurahId; r.majEndAyah = rng.endAyah;
+        r.majStartPage = rng.startPage; r.majEndPage = rng.endPage;
+        r.majFrom = rng.fromLabel; r.majTo = rng.toLabel;
         r.majPages = rng.pages;
         if (!r.minEval) { const mRes = computeStudentMinorFromPrevDaily(h, curS, savedSt.id); if (mRes) applyStudentMinorAuto(r, mRes); }
       }
@@ -29469,10 +29749,13 @@ function renderCardBody(s, st, r, idx) {
 
     const cycStart = sabrProg ? sabrProg.juz.startPage : bounds.startPage;
     const cycEnd = sabrProg ? sabrProg.juz.endPage : bounds.endPage;
-    let effStartPg = parseArabicNum(r.majStartPage, 0) || parseArabicNum(st.revPage, 0) || cycStart;
-    if (effStartPg < cycStart || effStartPg > cycEnd) effStartPg = cycStart;
+    const _satRevSpec = resolveStudentMajorRevSpec(st, h);
+    const _satDefEntry = getRevSegmentEntryPoint(getOrderedRevSegments(bounds, _satRevSpec, sabrProg ? sabrProg.juz : null)[0], _satRevSpec);
+    let effStartPg = parseArabicNum(r.majStartPage, 0) || parseArabicNum(st.revPage, 0) || (_satRevSpec.surahDir === "desc" ? cycEnd : cycStart);
+    if (effStartPg < cycStart || effStartPg > cycEnd) effStartPg = _satRevSpec.surahDir === "desc" ? cycEnd : cycStart;
     const effMajPages = parseArabicNum(r.majPages, 0) || revPace;
-    const autoMajRng = buildMajorReviewRange(effStartPg, effMajPages, cycStart, cycEnd);
+    const _fbSid = Number(r.majStartSurahId || st.revStartSurahId || 0) || (parseArabicNum(r.majStartPage, 0) ? getPageStartInfo(effStartPg).surah.id : _satDefEntry.surahId);
+    const autoMajRng = buildMajorReviewFromPoint(_fbSid, _satRevSpec.surahDir === "desc" ? 1 : _satDefEntry.ayah, effMajPages, bounds, sabrProg ? sabrProg.juz : null, _satRevSpec);
     const displayMajFrom = (r.majSardLabel || r.majIsPages)
       ? (r.majFrom || "")
       : (r.majFrom ? r.majFrom.replace(/\n/g, " + ") : autoMajRng.fromLabel);
@@ -30022,8 +30305,13 @@ function onStudentMonthlySabrJuzChange(studentId, juzIdVal) {
     const juz = JUZ_PAGE_MAP[jid];
     const r = getStudentRecord(s, studentId);
     if (!r.majStartPage || r.majStartPage < juz.startPage || r.majStartPage > juz.endPage) {
-      const rng = buildMajorReviewRange(juz.startPage, 5, juz.startPage, juz.endPage);
-      r.majStartPage = rng.startPage; r.majFrom = rng.fromLabel; r.majTo = rng.toLabel; r.majPages = rng.pages;
+      const _rs = resolveStudentMajorRevSpec(st, h);
+      const _ent = getRevSegmentEntryPoint({ startSurahId: juz.startSurah, startAyah: juz.startAyah || 1, endSurahId: juz.endSurah, endAyah: juz.endAyah }, _rs);
+      const rng = buildMajorReviewFromPoint(_ent.surahId, _ent.ayah, 5, getStudentRevCycleBounds(st, h), juz, _rs);
+      r.majStartSurahId = rng.startSurahId; r.majStartAyah = rng.startAyah;
+      r.majEndSurahId = rng.endSurahId; r.majEndAyah = rng.endAyah;
+      r.majStartPage = rng.startPage; r.majEndPage = rng.endPage;
+      r.majFrom = rng.fromLabel; r.majTo = rng.toLabel; r.majPages = rng.pages;
       st.revPage = rng.startPage;
       if (r.majEval) applyNextMajorReview(st, r, isMajorPassEval(r.majEval));
     }
@@ -30077,9 +30365,13 @@ function onMajStartPageChange(studentId, pageVal) {
 function onMajPagesChange(studentId, pagesVal) {
   const h = getActiveHalaqa(), s = getCurrentSession(), st = h.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
   r.majPages = parseArabicNum(pagesVal, 0);
-  if (!r.majExtras?.length && r.majStartPage && r.majPages > 0) {
+  if (!r.majExtras?.length && (r.majStartSurahId || r.majStartPage) && r.majPages > 0) {
     const cyc = getStudentActiveMajorCycle(st, h, s);
-    const rng = buildMajorReviewRange(r.majStartPage, r.majPages, cyc.cycleStart, cyc.cycleEnd);
+    const pts = getMajorReviewStartEndPoints(r, st, h, s);
+    const rng = buildMajorReviewFromPoint(pts.startSurahId, pts.startAyah, r.majPages, cyc.bounds, cyc.sabrJuz);
+    r.majStartSurahId = rng.startSurahId; r.majStartAyah = rng.startAyah;
+    r.majEndSurahId = rng.endSurahId; r.majEndAyah = rng.endAyah;
+    r.majStartPage = rng.startPage; r.majEndPage = rng.endPage;
     r.majFrom = rng.fromLabel; r.majTo = rng.toLabel;
     if (r.majEval) applyNextMajorReview(st, r, isMajorPassEval(r.majEval));
   }
@@ -30093,7 +30385,11 @@ function onNextMajStartPageEdit(studentId, pageVal) {
   if (p >= 1 && p <= 604) {
     const cyc = getStudentActiveMajorCycle(st, h, s);
     const revPace = Number(st?.revPace || (cyc.sabrJuz ? 5 : (h.defaultRevPace || 2)));
-    const nxtRng = buildMajorReviewRange(p, revPace, cyc.cycleStart, cyc.cycleEnd);
+    const pi = getPageStartInfo(p);
+    const _rs = resolveStudentMajorRevSpec(st, h);
+    const nxtRng = buildMajorReviewFromPoint(pi.surah.id, _rs.surahDir === "desc" ? 1 : pi.ayah, revPace, cyc.bounds, cyc.sabrJuz, _rs);
+    r.nextMajStartSurahId = nxtRng.startSurahId; r.nextMajStartAyah = nxtRng.startAyah;
+    r.nextMajEndSurahId = nxtRng.endSurahId; r.nextMajEndAyah = nxtRng.endAyah;
     r.nextMajStartPage = nxtRng.startPage;
     r.nextMajEndPage = nxtRng.endPage;
     r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = true;
@@ -30204,20 +30500,23 @@ function applyNextMajorReviewCore(st, r, passed, h, s) {
     return;
   }
 
-  const revDir = (st?.direction || h?.defaultDir || "desc") === "asc" ? "asc" : "desc";
+  const revSpec = resolveStudentMajorRevSpec(st, h);
   if (r.sabrJuz) {
     const juz = getJuzByName(r.sabrJuz);
     const normalPace = Number(st?.revPace || h.defaultRevPace || 2);
-    const afterJuz = juz
-      ? (revDir === "desc" ? getNextSurahAyahByRevDir(juz.startSurah, SURAH_MAP[juz.startSurah]?.a || 1, "desc") : getNextSurahAyahForward(juz.endSurah, juz.endAyah))
-      : null;
-    const startId = afterJuz ? afterJuz.surahId : (revDir === "desc" ? bounds.endSurahId : bounds.startSurahId);
-    const startA = afterJuz ? afterJuz.ayah : (revDir === "desc" ? 1 : bounds.startAyah);
-    assignNextRange(buildMajorReviewFromPoint(startId, startA, normalPace, bounds, null, revDir), "");
+    if (juz) {
+      const endPt = revSpec.surahDir === "desc"
+        ? { surahId: juz.startSurah, ayah: SURAH_MAP[juz.startSurah]?.a || 1 }
+        : { surahId: juz.endSurah, ayah: juz.endAyah };
+      assignNextRange(advanceMajorRangeFromEndPoint(endPt.surahId, endPt.ayah, normalPace, bounds, null, revSpec), "");
+    } else {
+      const entry = getRevSegmentEntryPoint(getOrderedRevSegments(bounds, revSpec, null)[0], revSpec);
+      assignNextRange(buildMajorReviewFromPoint(entry.surahId, entry.ayah, normalPace, bounds, null, revSpec), "");
+    }
     return;
   }
 
-  assignNextRange(advanceMajorRangeFromEndPoint(curPts.endSurahId, curPts.endAyah, revPace, bounds, cyc.sabrJuz, revDir), "");
+  assignNextRange(advanceMajorRangeFromEndPoint(curPts.endSurahId, curPts.endAyah, revPace, bounds, cyc.sabrJuz, revSpec), "");
 }
 
 function setAttendance(studentId, status) {
@@ -30909,20 +31208,30 @@ function getNextClassDayContext(s, h) {
 }
 
 // ==================== MAKIN v110: DAILY REVIEW (MON/WED) -> SATURDAY MAJOR REVIEW CONTINUITY + MANUAL SAT->MON HW ====================
-function getDailyReviewEndPoint(pr) {
+function getDailyReviewEndPoint(pr, revSpec = null) {
   if (!pr || !hasIndependentDailyReview(pr)) return null;
+  const isDescSurah = revSpec?.surahDir === "desc";
+  const isDescJuz = revSpec?.juzOrder === "juz_desc";
   // 0) Carried-over Sabr Juz inside Daily Review
   if (pr.dRevSabrJuz) {
     const jObj = getJuzByName(pr.dRevSabrJuz);
-    if (jObj) return { endSurahId: jObj.endSurah, endAyah: jObj.endAyah };
+    if (jObj) {
+      return isDescSurah
+        ? { endSurahId: jObj.startSurah, endAyah: SURAH_MAP[jObj.startSurah]?.a || 1 }
+        : { endSurahId: jObj.endSurah, endAyah: jObj.endAyah };
+    }
   }
   // 1) Sard Juz (full juz review)
   const dRevSardIds = extractSardJuzIds(pr.dRevSardJuzIds, pr.dRevSardLabel, pr.dRevFrom, pr.dRevTo);
   if (dRevSardIds.length) {
     const ids = dRevSardIds;
     if (ids.length) {
-      const lastJ = JUZ_PAGE_MAP[ids[ids.length - 1]];
-      if (lastJ) return { endSurahId: lastJ.endSurah, endAyah: lastJ.endAyah };
+      const targetJ = isDescJuz ? JUZ_PAGE_MAP[ids[0]] : JUZ_PAGE_MAP[ids[ids.length - 1]];
+      if (targetJ) {
+        return isDescSurah
+          ? { endSurahId: targetJ.startSurah, endAyah: SURAH_MAP[targetJ.startSurah]?.a || 1 }
+          : { endSurahId: targetJ.endSurah, endAyah: targetJ.endAyah };
+      }
     }
   }
   // 2) Pages-based daily review
@@ -30979,74 +31288,83 @@ function getNextSurahAyahByRevDir(endSurahId, endAyah, revDir = "asc") {
   return s.id < 114 ? { surahId: s.id + 1, ayah: 1 } : null;
 }
 
-function advanceMajorRangeFromEndPoint(endSurahId, endAyah, revPace, bounds, sabrJuz = null, revDir = null) {
-  const effectiveDir = revDir || (bounds?.isAscMem === false ? "desc" : "asc");
-  const allSegs = Array.isArray(bounds?.segments) && bounds.segments.length ? bounds.segments : [bounds];
+function advanceMajorRangeFromEndPoint(endSurahId, endAyah, revPace, bounds, sabrJuz = null, revSpecOrDir = null) {
+  const revSpec = normalizeRevSpecArg(revSpecOrDir, bounds);
+  const effectiveDir = revSpec.surahDir;
+  const orderedSegs = getOrderedRevSegments(bounds, revSpec, null);
   const sEndObj = SURAH_MAP[Number(endSurahId)];
   const curAyah = sEndObj ? Math.max(1, Math.min(sEndObj.a, parseArabicNum(endAyah, sEndObj.a))) : 1;
 
   if (effectiveDir === "desc") {
     if (sabrJuz) {
-      const reachedEndOfJuz = (Number(endSurahId) <= sabrJuz.startSurah && curAyah >= (SURAH_MAP[sabrJuz.startSurah]?.a || 1));
+      const limA = (sabrJuz.startSurah === sabrJuz.endSurah) ? (sabrJuz.endAyah || (SURAH_MAP[sabrJuz.startSurah]?.a || 1)) : (SURAH_MAP[sabrJuz.startSurah]?.a || 1);
+      const reachedEndOfJuz = (Number(endSurahId) < sabrJuz.startSurah) || (Number(endSurahId) === sabrJuz.startSurah && curAyah >= limA);
       if (reachedEndOfJuz) {
-        const lastSg = allSegs[allSegs.length - 1];
-        return buildMajorReviewFromPoint(lastSg.endSurahId, 1, revPace, bounds, null, "desc");
+        const entry = getRevSegmentEntryPoint(orderedSegs[0], revSpec);
+        return buildMajorReviewFromPoint(entry.surahId, entry.ayah, revPace, bounds, null, revSpec);
       }
       const nxtPt = getNextSurahAyahByRevDir(endSurahId, curAyah, "desc");
-      return buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : sabrJuz.endSurah, nxtPt ? nxtPt.ayah : 1, revPace, bounds, sabrJuz, "desc");
+      return buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : sabrJuz.endSurah, nxtPt ? nxtPt.ayah : 1, revPace, bounds, sabrJuz, revSpec);
     }
     const curPos = getMushafPos(endSurahId, curAyah, true);
-    let curSegIdx = allSegs.findIndex(sg =>
+    let curSegIdx = orderedSegs.findIndex(sg =>
       curPos >= getMushafPos(sg.startSurahId, sg.startAyah, false) - 0.04 &&
       curPos <= getMushafPos(sg.endSurahId, sg.endAyah, true) + 0.04
     );
-    if (curSegIdx < 0) curSegIdx = allSegs.length - 1;
-    const curSeg = allSegs[curSegIdx];
-    const reachedSegMin = (Number(endSurahId) <= curSeg.startSurahId && curAyah >= (SURAH_MAP[curSeg.startSurahId]?.a || 1));
+    if (curSegIdx < 0) curSegIdx = 0;
+    const curSeg = orderedSegs[curSegIdx];
+    const segMinLimA = (curSeg.startSurahId === curSeg.endSurahId) ? (curSeg.endAyah || (SURAH_MAP[curSeg.startSurahId]?.a || 1)) : (SURAH_MAP[curSeg.startSurahId]?.a || 1);
+    const reachedSegMin = (Number(endSurahId) < curSeg.startSurahId) || (Number(endSurahId) === curSeg.startSurahId && curAyah >= segMinLimA);
     let nextStartId, nextStartA;
     if (reachedSegMin) {
-      const nextSeg = allSegs[(curSegIdx - 1 + allSegs.length) % allSegs.length];
-      nextStartId = nextSeg.endSurahId;
-      nextStartA = 1;
+      const nextSeg = orderedSegs[(curSegIdx + 1) % orderedSegs.length];
+      const entry = getRevSegmentEntryPoint(nextSeg, revSpec);
+      nextStartId = entry.surahId;
+      nextStartA = entry.ayah;
     } else {
       const nxtPt = getNextSurahAyahByRevDir(endSurahId, curAyah, "desc");
-      nextStartId = nxtPt ? nxtPt.surahId : curSeg.endSurahId;
-      nextStartA = nxtPt ? nxtPt.ayah : 1;
+      const entry = getRevSegmentEntryPoint(curSeg, revSpec);
+      nextStartId = nxtPt ? nxtPt.surahId : entry.surahId;
+      nextStartA = nxtPt ? nxtPt.ayah : entry.ayah;
     }
-    return buildMajorReviewFromPoint(nextStartId, nextStartA, revPace, bounds, null, "desc");
+    return buildMajorReviewFromPoint(nextStartId, nextStartA, revPace, bounds, null, revSpec);
   }
 
-  // Ascending (البقرة -> الناس)
+  // Ascending inside segment (handles both asc_juz_asc and asc_juz_desc seamlessly via orderedSegs!)
   const curEndPos = getMushafPos(endSurahId, curAyah, true);
   if (sabrJuz) {
     const limPos = getMushafPos(sabrJuz.endSurah, sabrJuz.endAyah, true);
     if (curEndPos >= limPos - 0.04) {
-      return buildMajorReviewFromPoint(bounds.startSurahId, bounds.startAyah, revPace, bounds, null, "asc");
+      const entry = getRevSegmentEntryPoint(orderedSegs[0], revSpec);
+      return buildMajorReviewFromPoint(entry.surahId, entry.ayah, revPace, bounds, null, revSpec);
     }
     const nxtPt = getNextSurahAyahForward(endSurahId, curAyah);
-    return buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : sabrJuz.startSurah, nxtPt ? nxtPt.ayah : sabrJuz.startAyah, revPace, bounds, sabrJuz, "asc");
+    return buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : sabrJuz.startSurah, nxtPt ? nxtPt.ayah : sabrJuz.startAyah, revPace, bounds, sabrJuz, revSpec);
   }
-  let curSegIdx = allSegs.findIndex(sg =>
+  let curSegIdx = orderedSegs.findIndex(sg =>
     curEndPos >= getMushafPos(sg.startSurahId, sg.startAyah, false) - 0.04 &&
     curEndPos <= getMushafPos(sg.endSurahId, sg.endAyah, true) + 0.04
   );
   if (curSegIdx < 0) {
     const nxtPt = getNextSurahAyahForward(endSurahId, curAyah);
-    return buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : allSegs[0].startSurahId, nxtPt ? nxtPt.ayah : allSegs[0].startAyah, revPace, bounds, null, "asc");
+    const entry = getRevSegmentEntryPoint(orderedSegs[0], revSpec);
+    return buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : entry.surahId, nxtPt ? nxtPt.ayah : entry.ayah, revPace, bounds, null, revSpec);
   }
-  const curSeg = allSegs[curSegIdx];
+  const curSeg = orderedSegs[curSegIdx];
   const curSegEndPos = getMushafPos(curSeg.endSurahId, curSeg.endAyah, true);
   let nextStartId, nextStartA;
   if (curEndPos >= curSegEndPos - 0.04) {
-    const nextSeg = allSegs[(curSegIdx + 1) % allSegs.length];
-    nextStartId = nextSeg.startSurahId;
-    nextStartA = nextSeg.startAyah;
+    const nextSeg = orderedSegs[(curSegIdx + 1) % orderedSegs.length];
+    const entry = getRevSegmentEntryPoint(nextSeg, revSpec);
+    nextStartId = entry.surahId;
+    nextStartA = entry.ayah;
   } else {
     const nxtPt = getNextSurahAyahForward(endSurahId, curAyah);
-    nextStartId = nxtPt ? nxtPt.surahId : allSegs[0].startSurahId;
-    nextStartA = nxtPt ? nxtPt.ayah : allSegs[0].startAyah;
+    const entry = getRevSegmentEntryPoint(orderedSegs[0], revSpec);
+    nextStartId = nxtPt ? nxtPt.surahId : entry.surahId;
+    nextStartA = nxtPt ? nxtPt.ayah : entry.ayah;
   }
-  return buildMajorReviewFromPoint(nextStartId, nextStartA, revPace, bounds, null, "asc");
+  return buildMajorReviewFromPoint(nextStartId, nextStartA, revPace, bounds, null, revSpec);
 }
 
 // ==================== MAKIN v128: UNIFIED CONTINUOUS MAJOR REVIEW CHAIN (SAT <-> MON <-> WED <-> SAT) ====================
@@ -31163,18 +31481,20 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
       const passed = !isAbs && !isNoRec && isMajorPassEval(ev);
       if (passed) {
         // Student PASSED review on Mon/Wed (ممتاز / جيد جداً) -> ADVANCE to NEW review assignment!
+        const _revSpec = resolveStudentMajorRevSpec(st, h);
         if (pr.dRevSabrJuz) {
           const jObj = getJuzByName(pr.dRevSabrJuz);
           if (jObj) {
-            const afterJ = getNextSurahAyahForward(jObj.endSurah, jObj.endAyah);
-            const rng = buildMajorReviewFromPoint(afterJ ? afterJ.surahId : bounds.startSurahId, afterJ ? afterJ.ayah : bounds.startAyah, Number(st.revPace || h.defaultRevPace || 2), bounds, null);
+            const jEnd = _revSpec.surahDir === "desc"
+              ? { surahId: jObj.startSurah, ayah: SURAH_MAP[jObj.startSurah]?.a || 1 }
+              : { surahId: jObj.endSurah, ayah: jObj.endAyah };
+            const rng = advanceMajorRangeFromEndPoint(jEnd.surahId, jEnd.ayah, Number(st.revPace || h.defaultRevPace || 2), bounds, null, _revSpec);
             return { kind: "range", rng, source: "dailyRev", sourceDayName: ps.dayName || "" };
           }
         }
-        const endPt = getDailyReviewEndPoint(pr);
+        const endPt = getDailyReviewEndPoint(pr, _revSpec);
         if (endPt) {
-          const _rDir = (st?.direction || h?.defaultDir || "desc") === "asc" ? "asc" : "desc";
-          const rng = advanceMajorRangeFromEndPoint(endPt.endSurahId, endPt.endAyah, revPace, bounds, sabrJuz, _rDir);
+          const rng = advanceMajorRangeFromEndPoint(endPt.endSurahId, endPt.endAyah, revPace, bounds, sabrJuz, _revSpec);
           if (rng) return { kind: "range", rng, source: "dailyRev", sourceDayName: ps.dayName || "" };
         }
         continue;
@@ -31250,8 +31570,8 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
         return { kind: "range", rng, source: "prevSat" };
       }
       const prevPts = getMajorReviewStartEndPoints(pr, st, h, ps);
-      const _rDir = (st?.direction || h?.defaultDir || "desc") === "asc" ? "asc" : "desc";
-      const rng = advanceMajorRangeFromEndPoint(prevPts.endSurahId, prevPts.endAyah, revPace, bounds, sabrJuz, _rDir);
+      const _revSpecSat = resolveStudentMajorRevSpec(st, h);
+      const rng = advanceMajorRangeFromEndPoint(prevPts.endSurahId, prevPts.endAyah, revPace, bounds, sabrJuz, _revSpecSat);
       return { kind: "range", rng, source: "prevSat" };
     }
   }
@@ -31259,21 +31579,24 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
   // Fallback: if an earlier Saturday had an assignment that was left completely unevaluated (e.g. first Saturday) -> carry it over!
   if (fallbackSatPlan) return fallbackSatPlan;
 
-  // Initial Major Review fallback for brand new student (respects student's memorization path: الناس->البقرة or البقرة->الناس!)
-  const revDir = (st?.direction || h?.defaultDir || "desc") === "asc" ? "asc" : "desc";
-  let initSurahId, initAyah;
-  if (revDir === "desc") {
-    initSurahId = sabrJuz ? sabrJuz.endSurah : bounds.endSurahId;
-    initAyah = 1;
-  } else {
-    initSurahId = sabrJuz ? sabrJuz.startSurah : bounds.startSurahId;
-    initAyah = sabrJuz ? sabrJuz.startAyah : bounds.startAyah;
-    if (!sabrJuz && st.revPage && Number(st.revPage) >= bounds.startPage && Number(st.revPage) <= bounds.endPage) {
+  // Initial Major Review fallback: respects Halaqa/Student revSpec AND explicit start Surah/Page in ALL directions!
+  const revSpec = resolveStudentMajorRevSpec(st, h);
+  const orderedSegs = getOrderedRevSegments(bounds, revSpec, sabrJuz);
+  const defaultEntry = getRevSegmentEntryPoint(orderedSegs[0], revSpec);
+  let initSurahId = defaultEntry.surahId;
+  let initAyah = defaultEntry.ayah;
+  if (!sabrJuz) {
+    const expSid = Number(st.revStartSurahId || 0);
+    if (expSid && SURAH_MAP[expSid] && expSid >= bounds.startSurahId && expSid <= bounds.endSurahId) {
+      initSurahId = expSid;
+      initAyah = 1;
+    } else if (st.revPage && Number(st.revPage) >= bounds.startPage && Number(st.revPage) <= bounds.endPage) {
       const pi = getPageStartInfo(Number(st.revPage));
-      initSurahId = pi.surah.id; initAyah = pi.ayah;
+      initSurahId = pi.surah.id;
+      initAyah = revSpec.surahDir === "desc" ? 1 : pi.ayah;
     }
   }
-  const rng = buildMajorReviewFromPoint(initSurahId, initAyah, revPace, bounds, sabrJuz, revDir);
+  const rng = buildMajorReviewFromPoint(initSurahId, initAyah, revPace, bounds, sabrJuz, revSpec);
   return { kind: "range", rng, source: "init" };
 }
 
@@ -41652,6 +41975,29 @@ function updateHalaqaRuleSetting(key, value) {
   } else if (key === "majorRevSystem") {
     h.majorRevSystem = value === "seniors" ? "seniors" : "juniors";
     if (document.getElementById("setMajorRevSystem")) document.getElementById("setMajorRevSystem").value = h.majorRevSystem;
+  } else if (key === "majorRevMode") {
+    const validKeys = MAJOR_REV_MODE_LIST.map(x => x.key);
+    h.majorRevMode = validKeys.includes(value) ? value : "follow_mem";
+    // Refresh unevaluated auto-assigned reviews on current session so the teacher sees the updated direction immediately!
+    const curS = getCurrentSession();
+    if (curS && !curS.noClass) {
+      (h.students || []).forEach(st => {
+        if (!st || st.track === "rashidi") return;
+        if (st.revMode && st.revMode !== "inherit") return;
+        const rec = curS.records?.[st.id];
+        if (!rec) return;
+        const isAbs = Boolean(rec.attendance && String(rec.attendance).includes("غياب"));
+        if (isAbs) return;
+        if (curS.type === "saturday" && !rec.majEval && !rec.manualMaj) {
+          const plan = computeSmartMajorReviewForDate(h, curS.date, st, getSessionReportMonth(curS));
+          if (plan) applySmartMajorPlanToSatRecord(rec, plan);
+        } else if (curS.type === "daily" && !rec.dRevEval && !rec.manualDRev && rec.dRevAuto) {
+          const plan = computeSmartMajorReviewForDate(h, curS.date, st, getSessionReportMonth(curS));
+          if (plan) applySmartMajorPlanToDailyRecord(rec, plan);
+        }
+      });
+    }
+    showToast(`✓ مسار المراجعة الكبرى: ${getMajorRevModeLabel(h.majorRevMode)}`);
   } else if (key === "majorGoodAsRepeat") {
     h.majorGoodAsRepeat = Boolean(value);
   } else if (key === "sardSabrAutoAdvance") {
@@ -41684,6 +42030,7 @@ function renderHalaqaSettingsModal() {
   const ovMode = getHalaqaOverallEvalMode(h);
   const ppAuto = h.perPageAutoEnabled !== false;
   const majSys = h.majorRevSystem === "seniors" ? "seniors" : "juniors";
+  const majRevMode = h.majorRevMode || "follow_mem";
   const goodAsRep = h.majorGoodAsRepeat !== false;
   const autoAdvJuz = Boolean(h.sardSabrAutoAdvance);
   const maxFails = Number(h.sardSabrMaxFails) || 3;
@@ -41734,6 +42081,19 @@ function renderHalaqaSettingsModal() {
           <b>🎓 نظام الكبار</b>
           <span>الكبرى للأجزاء المسبورة فقط؛ لا يدخل الجزء الجديد إلا بعد إتمام سرده وسبره بنجاح</span>
         </button>
+      </div>
+
+      <div style="font-size:11.8px; font-weight:800; color:var(--ink-700); margin:9px 0 6px;">🧭 اتجاه ومسار المراجعة الكبرى في الحلقة (كل الخيارات):</div>
+      <div class="hs-rev-mode-grid">
+        ${MAJOR_REV_MODE_LIST.map(m => `
+          <button type="button" class="hs-choice-card ${majRevMode === m.key ? 'on' : ''}" onclick="updateHalaqaRuleSetting('majorRevMode', '${m.key}')">
+            <b>${escapeHtml(m.shortLabel)}</b>
+            <span>${escapeHtml(m.desc)}</span>
+          </button>
+        `).join("")}
+      </div>
+      <div style="font-size:10.5px; color:var(--ink-500); font-weight:700; margin-bottom:9px; line-height:1.45;">
+        💡 يُطبّق هذا المسار تلقائياً على جميع طلاب الحلقة، ويمكنك تخصيص مسار مختلف لأي طالب بعينه من <b>تعديل الطالب ← المراجعة</b>.
       </div>
 
       <div style="font-size:11.8px; font-weight:800; color:var(--ink-700); margin:8px 0 6px;">⚖️ حكم تقييم «جيد» في المراجعة الكبرى:</div>
@@ -42233,7 +42593,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v139";
+const TIBYAN_APP_VERSION = "v140";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -45135,5 +45495,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v139 -->
+<!-- Makin App v140 -->
 </html>
