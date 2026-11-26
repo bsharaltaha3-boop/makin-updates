@@ -14403,7 +14403,7 @@ table.t-daily td.td-note {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v127</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v128</span>
         </button>
       </div>
     </div>
@@ -17733,7 +17733,8 @@ function calcMajorPagesFallback(r, st, h) {
 // ==================== MAKIN v93: INDEPENDENT SABR vs DAILY REVIEW (SARD) ENGINE ====================
 function hasIndependentDailyReview(r) {
   if (!r) return false;
-  if (Array.isArray(r.dRevSardJuzIds) && r.dRevSardJuzIds.length) return true;
+  if (r.dRevSabrJuz) return true;
+  if (extractSardJuzIds(r.dRevSardJuzIds, r.dRevSardLabel, r.dRevFrom, r.dRevTo).length) return true;
   if (r.dRevSardLabel || r.dRevIsPages || r.dRevSurahId || (Array.isArray(r.dRevExtras) && r.dRevExtras.length)) return true;
   const ev = String(r.dRevEval || "").trim();
   const isLegacySabrInDRev = Boolean(r.sabrJuz && (ev.includes("سبر") || ev === "بانتظار التقييم"));
@@ -17841,14 +17842,17 @@ function recomputeAutoDailyHomework(st, r, h) {
   return null;
 }
 
-function calcPureDailyReviewPages(r) {
+function calcDailyReviewAssignedPages(r) {
   if (!r || !hasIndependentDailyReview(r)) return 0;
-  if (r.dRevEval === "إعادة" || r.dRevEval === "تثبيت حفظ" || r.dRevEval === "تثبيت") return 0;
+  if (r.dRevSabrJuz) {
+    return getJuzByName(r.dRevSabrJuz)?.pages || 20;
+  }
+  const sardIds = extractSardJuzIds(r.dRevSardJuzIds, r.dRevSardLabel, r.dRevFrom, r.dRevTo);
+  if (sardIds.length) {
+    return formatSardJuzInfo(sardIds).totalPages;
+  }
   const explicit = parseArabicNum(r.dRevPages, 0);
   if (explicit > 0) return Math.round(explicit * 100) / 100;
-  if (Array.isArray(r.dRevSardJuzIds) && r.dRevSardJuzIds.length) {
-    return formatSardJuzInfo(r.dRevSardJuzIds).totalPages;
-  }
   const dSegs = getSegments(r, "dRev");
   if (dSegs.length) return calcSegmentsPages(dSegs);
   const fromTxt = String(r.dRevFrom || "").trim();
@@ -17869,13 +17873,23 @@ function calcPureDailyReviewPages(r) {
   return 0;
 }
 
+// v128 STRICT RULE: Review pages are ONLY counted in Monthly / Stats when evaluated as ممتاز or جيد جداً!
+// (جيد, إعادة, تثبيت, غياب, لم يُسمّع, or unevaluated => 0 pages!)
+function calcPureDailyReviewPages(r) {
+  if (!r || !hasIndependentDailyReview(r)) return 0;
+  if (r.attendance && (String(r.attendance).includes("غياب") || isPresentNoRecite(r.attendance))) return 0;
+  if (!isMajorPassEval(r.dRevEval)) return 0;
+  return calcDailyReviewAssignedPages(r);
+}
+
 function calcDailyReviewPages(r) {
   if (!r) return 0;
+  if (r.attendance && (String(r.attendance).includes("غياب") || isPresentNoRecite(r.attendance))) return 0;
   const pureRev = calcPureDailyReviewPages(r);
   let sabrPg = 0;
   if (r.sabrJuz) {
     const sEv = getDailySabrEval(r);
-    if (sEv && sEv !== "إعادة") {
+    if (isMajorPassEval(sEv)) {
       sabrPg = getJuzByName(r.sabrJuz)?.pages || 20;
     }
   }
@@ -18542,7 +18556,7 @@ function getStudentMonthlySabrProgress(st, h, monthLabel, juzId) {
     const r = s.records?.[st.id];
     if (!r || String(r.attendance || "").includes("غياب")) return;
     if (r.sabrJuz === juz.name) alreadySabr = true;
-    if (r.majEval && r.majEval !== "إعادة") {
+    if (!isPresentNoRecite(r.attendance) && isMajorPassEval(r.majEval)) {
       donePages += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
       satCount++;
     }
@@ -18683,6 +18697,16 @@ function buildMajorReviewRange(startPage, pagesCount, cycleStart = 582, cycleEnd
 
 function getMajorReviewStartEndPoints(r, st, h, s) {
   const cyc = getStudentActiveMajorCycle(st, h, s);
+  const sardIds = extractSardJuzIds(r?.majSardJuzIds, r?.majSardLabel, r?.majFrom, r?.majTo);
+  if (sardIds.length) {
+    const firstJ = JUZ_PAGE_MAP[sardIds[0]], lastJ = JUZ_PAGE_MAP[sardIds[sardIds.length - 1]];
+    if (firstJ && lastJ) {
+      return {
+        startSurahId: firstJ.startSurah, startAyah: firstJ.startAyah || 1,
+        endSurahId: lastJ.endSurah, endAyah: lastJ.endAyah || (SURAH_MAP[lastJ.endSurah]?.a || 1)
+      };
+    }
+  }
   const segs = getSegments(r, "maj");
   if (segs.length) {
     const first = segs[0], last = segs[segs.length - 1];
@@ -20117,7 +20141,7 @@ function applyAutoEvalSilentFromCounters(studentId, kind) {
     }
   } else {
     r.recEval = ev;
-    if (ev !== "جيد" && (r.dRevEval === "تثبيت" || r.dRevEval === "تثبيت حفظ") && !(Number(r.dRevPages) > 0)) {
+    if (ev !== "جيد" && (r.dRevEval === "تثبيت" || r.dRevEval === "تثبيت حفظ") && !r.dRevAuto && !(Number(r.dRevPages) > 0)) {
       r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = "";
     }
     const segs = getSegments(r, "rec");
@@ -20126,7 +20150,7 @@ function applyAutoEvalSilentFromCounters(studentId, kind) {
     if (segs.length) {
       completedJuz = recomputeAutoDailyHomework(st, r, h);
       if (ev !== "إعادة") {
-        if (ev === "جيد" && !r.dRevEval) {
+        if (ev === "جيد" && !r.dRevEval && !hasIndependentDailyReview(r)) {
           const s0 = SURAH_MAP[Number(segs[0].surahId)];
           if (segs.length === 1 && s0 && isShortFullSurah(s0, segs[0].from, segs[0].to)) {
             r.dRevFrom = s0.n; r.dRevTo = "";
@@ -20824,18 +20848,20 @@ function applyPerPageAutoEval(studentId, kind, overrideOverallEv = null, trigger
           const nxt = computeNextHomework(last.surahId, last.from, last.to, "", dir, st?.pace || 0.5);
           if (nxt) Object.assign(r, nxt);
         }
-        r.dRevIsPages = false;
-        r.dRevFrom = `${failed[0].surahName} ${failed[0].from}`;
-        const lastFail = failed[failed.length - 1];
-        r.dRevTo = lastFail.surahId === failed[0].surahId
-          ? String(lastFail.to)
-          : `${lastFail.surahName} ${lastFail.to}`;
-        r.dRevEval = "إعادة";
-        r.dRevPages = 0;
+        if (!r.dRevEval && !r.dRevAuto && !r.manualDRev && !hasIndependentDailyReview(r)) {
+          r.dRevIsPages = false;
+          r.dRevFrom = `${failed[0].surahName} ${failed[0].from}`;
+          const lastFail = failed[failed.length - 1];
+          r.dRevTo = lastFail.surahId === failed[0].surahId
+            ? String(lastFail.to)
+            : `${lastFail.surahName} ${lastFail.to}`;
+          r.dRevEval = "إعادة";
+          r.dRevPages = 0;
+        }
       }
       r.notes = applyTajweedToNote(buildConciseRecNote(overallEv, { repeatPagesTxt: repeatShort }), r);
     } else {
-      if (r.dRevEval === "إعادة" && !(Number(r.dRevPages) > 0)) {
+      if (r.dRevEval === "إعادة" && !r.dRevAuto && !r.manualDRev && !(Number(r.dRevPages) > 0)) {
         r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevIsPages = false;
       }
       const completedJuz = recomputeAutoDailyHomework(st, r, h);
@@ -21166,18 +21192,30 @@ function syncUpcomingSaturdayMajorForStudent(h, fromSession, studentId) {
   if (!h || !fromSession || !fromSession.date || !studentId) return;
   const st = (h.students || []).find(x => x.id === studentId);
   if (!st || st.track === "rashidi") return;
-  const nextSat = (h.sessions || [])
-    .filter(x => x && x.type === "saturday" && !x.noClass && x.date && x.date > fromSession.date)
-    .sort((a, b) => (a.date || "").localeCompare(b.date || ""))[0];
-  if (!nextSat) return;
-  const exRec = getStudentRecord(nextSat, studentId);
-  const exIsAbs = Boolean(exRec.attendance && String(exRec.attendance || "").includes("غياب"));
-  const exIsNoRec = isPresentNoRecite(exRec.attendance);
-  if (exRec.majEval || exIsAbs || exIsNoRec) return;
-  const plan = computeSmartMajorReviewForDate(h, nextSat.date, st, getSessionReportMonth(nextSat));
-  if (plan) {
-    exRec.manualMaj = false;
-    applySmartMajorPlanToSatRecord(exRec, plan);
+  const futureSessions = (h.sessions || [])
+    .filter(x => x && !x.noClass && x.date && x.date > fromSession.date)
+    .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+  for (const fs of futureSessions) {
+    const exRec = getStudentRecord(fs, studentId);
+    const exIsAbs = Boolean(exRec.attendance && String(exRec.attendance || "").includes("غياب"));
+    const exIsNoRec = isPresentNoRecite(exRec.attendance);
+    if (fs.type === "saturday") {
+      if (exRec.majEval || exIsAbs || exIsNoRec) break;
+      const plan = computeSmartMajorReviewForDate(h, fs.date, st, getSessionReportMonth(fs));
+      if (plan) {
+        exRec.manualMaj = false;
+        applySmartMajorPlanToSatRecord(exRec, plan);
+      }
+    } else if (fs.type === "daily") {
+      if (exIsAbs || exIsNoRec) continue;
+      if (exRec.dRevEval && exRec.dRevEval !== "تثبيت" && exRec.dRevEval !== "تثبيت حفظ") {
+        if (isMajorPassEval(exRec.dRevEval)) break;
+        continue;
+      }
+      if (exRec.manualDRev) break;
+      const plan = computeSmartMajorReviewForDate(h, fs.date, st, getSessionReportMonth(fs));
+      if (plan) applySmartMajorPlanToDailyRecord(exRec, plan);
+    }
   }
 }
 
@@ -22406,9 +22444,11 @@ function applySurahPicker(quickEval = null) {
       // Keep r.sabrJuz independent from Daily Review / Sard (v93)
       r.dRevIsPages = true; r.dRevPageFrom = p1; r.dRevPageTo = p2;
       r.dRevPageFromSurahId = s1 ? String(s1.id) : ""; r.dRevPageToSurahId = s2 ? String(s2.id) : "";
+      r.dRevSabrJuz = ""; r.dRevAuto = false; r.manualDRev = true;
       r.dRevFrom = fromCol; r.dRevTo = toCol; r.dRevPages = pCount;
       if (!r.dRevEval && !quickEval) r.dRevEval = "ممتاز";
       r.points = computeRecordPoints(s, r, st);
+      syncUpcomingSaturdayMajorForStudent(h, s, st.id);
     } else if (k === "min") {
       r.minSurahId = ""; r.minEndSurahId = ""; r.minExtras = []; r.minSardJuzIds = [];
       r.minIsPages = true; r.minPageFrom = p1; r.minPageTo = p2;
@@ -22456,9 +22496,11 @@ function applySurahPicker(quickEval = null) {
       r.dRevSurahId = ""; r.dRevFromAyah = ""; r.dRevToAyah = ""; r.dRevExtras = []; r.dRevIsPages = false;
       // Keep r.sabrJuz independent from Daily Review / Sard (v93)
       r.dRevSardJuzIds = [...info.ids]; r.dRevSardLabel = info.label;
+      r.dRevSabrJuz = ""; r.dRevAuto = false; r.manualDRev = true;
       r.dRevFrom = info.fromCol; r.dRevTo = info.toCol; r.dRevPages = info.totalPages;
       if (!r.dRevEval && !quickEval) r.dRevEval = "ممتاز";
       r.points = computeRecordPoints(s, r, st);
+      syncUpcomingSaturdayMajorForStudent(h, s, st.id);
     } else if (k === "min") {
       r.minSurahId = ""; r.minEndSurahId = ""; r.minExtras = []; r.minIsPages = false;
       r.minSardJuzIds = [...info.ids];
@@ -22545,6 +22587,7 @@ function applySurahPicker(quickEval = null) {
   } else if (k === "dRev") {
     r.dRevIsPages = false; r.dRevSardJuzIds = []; r.dRevSardLabel = "";
     // Keep r.sabrJuz independent from Daily Review / Sard (v93)
+    r.dRevSabrJuz = ""; r.dRevAuto = false; r.manualDRev = true;
     r.dRevSurahId = first.surahId; r.dRevFromAyah = first.from; r.dRevToAyah = first.to;
     r.dRevExtras = rest;
     if (!r.dRevEval && !quickEval) r.dRevEval = "ممتاز";
@@ -22987,6 +23030,7 @@ function switchTab(tab) {
   if (tab === "reports") {
     const curS = getCurrentSession();
     if (curS?.type === "saturday") prefillSaturdayReviews(false, false);
+    else if (curS?.type === "daily") prefillDailyRecitation(false, false);
     populateSessionSelectors();
     populateMonthFilters();
     switchReportSubtab("daily");
@@ -24502,8 +24546,10 @@ function renderArchiveView() {
           if (!isAbs && r.recEval && r.recEval !== "إعادة") memPgs += Number(r.recPages) || calcRecordRecPages(r);
           if (!isAbs) revPgs += calcDailyReviewPages(r);
         } else if (!isAbs) {
-          if (r.minEval && r.minEval !== "إعادة") revPgs += Number(r.minPages) || calcRecordMinPages(r);
-          if (r.majEval && r.majEval !== "إعادة") revPgs += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+          if (!isPresentNoRecite(r.attendance)) {
+            if (isMajorPassEval(r.minEval)) revPgs += Number(r.minPages) || calcRecordMinPages(r);
+            if (isMajorPassEval(r.majEval)) revPgs += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+          }
         }
       });
       const typeBadge = s.noClass ? `<span class="badge b-muted">بدون حلقة</span>` : (s.type === "saturday" ? `<span class="badge b-orange">مراجعة</span>` : `<span class="badge b-slate">تسميع</span>`);
@@ -25248,10 +25294,26 @@ function prefillDailyRecitation(notify = true, forceRefresh = false) {
   let filled = 0;
   let lastSrcSessionLabel = "";
 
+  const curMonth = getSessionReportMonth(cur);
   h.students.forEach(st => {
     const rec = getStudentRecord(cur, st.id);
     const curIsAbsent = Boolean(rec.attendance && String(rec.attendance || "").includes("غياب"));
+    const curIsNoRec = isPresentNoRecite(rec.attendance);
     const curHasEval = Boolean(rec.recEval && String(rec.recEval).trim());
+
+    // v128: Auto-prefill Continuous Major Review into Daily Review (dRev) on Mon/Wed!
+    // (Runs even if New Memorization is already evaluated, as long as dRev itself is not yet evaluated/manual!)
+    if (st.track !== "rashidi" && !curIsAbsent && !curIsNoRec) {
+      const hasGradedDRev = Boolean(rec.dRevEval && String(rec.dRevEval).trim() && rec.dRevEval !== "بانتظار التقييم");
+      if (!hasGradedDRev && (!rec.manualDRev || forceRefresh)) {
+        if (forceRefresh) rec.manualDRev = false;
+        const revPlan = computeSmartMajorReviewForDate(h, cur.date, st, curMonth);
+        if (revPlan && applySmartMajorPlanToDailyRecord(rec, revPlan)) {
+          filled++;
+        }
+      }
+    }
+
     // If already evaluated on THIS session and forceRefresh requested, fill missing homework only (never overwrite their evaluation!)
     if (curHasEval) {
       if (forceRefresh && st.track !== "rashidi" && !rec.hwSurahId && !rec.hwSabrJuz && !rec.recIsSabr) {
@@ -25582,6 +25644,7 @@ function applyAbsenceCarryOver(s, st, r, status) {
   r.rabt = false;
   r.dRevSurahId = ""; r.dRevFromAyah = ""; r.dRevToAyah = ""; r.dRevExtras = [];
   r.dRevIsPages = false; r.dRevPageFrom = ""; r.dRevPageTo = ""; r.dRevSardJuzIds = []; r.dRevSardLabel = "";
+  r.dRevSabrJuz = ""; r.dRevAuto = false; r.manualDRev = false;
   r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevPages = 0;
 
   if (st?.track === "rashidi") {
@@ -25608,7 +25671,7 @@ function applyAbsenceCarryOver(s, st, r, status) {
         r.hwExtras = rs.slice(1).map(x => ({ ...x }));
       }
     }
-  } else if (s.type === "saturday" && (r.majStartPage || r.majFrom || r.majStartSurahId || (Array.isArray(r.majSardJuzIds) && r.majSardJuzIds.length) || _prevSabr)) {
+  } else if (s.type === "saturday" && (r.majStartPage || r.majFrom || r.majStartSurahId || extractSardJuzIds(r.majSardJuzIds, r.majSardLabel, r.majFrom, r.majTo).length || _prevSabr)) {
     r.recIsSabr = false;
     if (_prevSabr) r.sabrJuz = _prevSabr;
     if (st) applyNextMajorReview(st, r, false);
@@ -25623,6 +25686,7 @@ function applyAbsenceCarryOver(s, st, r, status) {
   } else {
     r.notes = status === "غياب مبرر" ? "غياب مبرر." : "غياب غير مبرر، يُرجى الالتزام.";
   }
+  if (st?.id) syncUpcomingSaturdayMajorForStudent(getActiveHalaqa(), s, st.id);
 }
 
 function openAutoAbsentModal() {
@@ -26226,8 +26290,10 @@ function renderSessionView() {
       if (!isAbs && r.recEval && r.recEval !== "إعادة") totalMemPages += Number(r.recPages) || calcRecordRecPages(r);
       if (!isAbs) totalRevPages += calcDailyReviewPages(r);
     } else if (!isAbs) {
-      if (r.minEval && r.minEval !== "إعادة") totalRevPages += Number(r.minPages) || calcRecordMinPages(r);
-      if (r.majEval && r.majEval !== "إعادة") totalRevPages += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+      if (!isPresentNoRecite(r.attendance)) {
+        if (isMajorPassEval(r.minEval)) totalRevPages += Number(r.minPages) || calcRecordMinPages(r);
+        if (isMajorPassEval(r.majEval)) totalRevPages += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+      }
     }
   });
 
@@ -27366,13 +27432,24 @@ function renderCardBody(s, st, r, idx) {
     const recSummary = formatSegmentsInline(getSegments(r, "rec")) || "اضغط لاختيار السورة والآيات";
 
     const hasHwDot = Boolean(r.hwSurahId || r.hwSabrJuz);
-    const hasRevDot = Boolean(r.dRevFrom || r.dRevSurahId || dRevExtras.length || Number(r.dRevPages) > 0 || r.dRevEval || r.rabt);
+    const hasRevDot = Boolean((r.dRevEval && r.dRevEval !== "بانتظار التقييم") || r.rabt);
     const hasSabrDot = Boolean(r.sabrJuz);
     const hasNotesDot = Boolean(String(r.notes || "").trim());
 
     let toolPanelHtml = "";
     if (evalSheetTool === "rev") {
-      const hasRevVal = Boolean(r.dRevFrom || r.dRevSurahId || dRevExtras.length || Number(r.dRevPages) > 0);
+      const hasRevVal = Boolean(r.dRevSabrJuz || r.dRevFrom || r.dRevSurahId || dRevExtras.length || Number(r.dRevPages) > 0);
+      const revAssignedPg = calcDailyReviewAssignedPages(r);
+      const revPanelTitle = !hasIndependentDailyReview(r)
+        ? "لم يُحدد مقطع بعد"
+        : (r.dRevSabrJuz
+          ? `🎓 سبر ${formatJuzClean(r.dRevSabrJuz)}`
+          : (r.dRevSardLabel
+            ? `📚 ${r.dRevSardLabel}`
+            : (r.dRevIsPages && r.dRevFrom
+              ? `📄 ${r.dRevFrom === r.dRevTo ? r.dRevFrom : r.dRevFrom + " ← " + r.dRevTo}`
+              : (formatSegmentsInline(getSegments(r, "dRev")) || (r.dRevFrom ? formatMajStripDisplay(r.dRevFrom, r.dRevTo) : "لم يُحدد مقطع بعد")))));
+      const revAutoHint = (r.dRevAuto && !r.dRevEval) ? " • مرحّل تلقائياً (لن يظهر بالتقرير حتى تقييمه)" : "";
       toolPanelHtml = `
         <div class="es-tool-panel compact-v115">
           <div class="es-tool-panel-hdr">
@@ -27381,8 +27458,8 @@ function renderCardBody(s, st, r, idx) {
           </div>
           <div class="adv-row-card">
             <div class="arc-l">
-              <div class="arc-t">مقطع المراجعة (${formatNum(calcPureDailyReviewPages(r))} ص)</div>
-              <div class="arc-v">${escapeHtml(!hasIndependentDailyReview(r) ? "لم يُحدد مقطع بعد" : (r.dRevSardLabel ? `📚 ${r.dRevSardLabel}` : (r.dRevIsPages && r.dRevFrom ? `📄 ${r.dRevFrom === r.dRevTo ? r.dRevFrom : r.dRevFrom + " ← " + r.dRevTo}` : (formatSegmentsInline(getSegments(r, "dRev")) || (r.dRevFrom ? `${r.dRevFrom}${r.dRevTo ? " ← " + r.dRevTo : ""}` : "لم يُحدد مقطع بعد")))))}</div>
+              <div class="arc-t">مقطع المراجعة (${formatNum(revAssignedPg)} ص)${revAutoHint}</div>
+              <div class="arc-v">${escapeHtml(revPanelTitle)}</div>
             </div>
             <div style="display:flex; gap:4px;">
               <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','dRev')">📖 اختيار</button>
@@ -28313,8 +28390,13 @@ function setAttendance(studentId, status) {
       if (s.type === "saturday" && !r.majEval) {
         r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = false; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
       }
+      if (s.type === "daily" && st?.track !== "rashidi" && !r.dRevEval) {
+        const revPlan = computeSmartMajorReviewForDate(h, s.date, st, getSessionReportMonth(s));
+        if (revPlan) applySmartMajorPlanToDailyRecord(r, revPlan);
+      }
     }
     r.points = computeRecordPoints(s, r, st);
+    syncUpcomingSaturdayMajorForStudent(h, s, studentId);
     saveState(); renderSessionPreservingScroll();
     showToast(`تم إلغاء حالة «${status}» ↩️`, { undo: true });
     return;
@@ -28389,7 +28471,7 @@ function setRecEval(studentId, ev, errCount = null) {
     r.recErrors = 0; r.recAlerts = 0; r.recPageEvals = null; r.recRepeatHwOnly = false;
     r.rabt = false;
     r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = "";
-    if ((r.dRevEval === "تثبيت" || r.dRevEval === "تثبيت حفظ") && !(Number(r.dRevPages) > 0)) {
+    if ((r.dRevEval === "تثبيت" || r.dRevEval === "تثبيت حفظ") && !r.dRevAuto && !(Number(r.dRevPages) > 0)) {
       r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = "";
     }
     r.notes = "";
@@ -28411,7 +28493,7 @@ function setRecEval(studentId, ev, errCount = null) {
   removeStudentFromQueue(s, studentId);
 
   // Clear stale auto-generated "تثبيت" if user switched away from "جيد"
-  if (ev !== "جيد" && (r.dRevEval === "تثبيت" || r.dRevEval === "تثبيت حفظ") && !(Number(r.dRevPages) > 0)) {
+  if (ev !== "جيد" && (r.dRevEval === "تثبيت" || r.dRevEval === "تثبيت حفظ") && !r.dRevAuto && !(Number(r.dRevPages) > 0)) {
     r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = "";
   }
 
@@ -28635,6 +28717,7 @@ function quickSatBothEval(studentId, ev) {
     r.notes = "";
     r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = false; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
     if (r.attendance === "حاضر") r.attendance = "لم يُسمّع";
+    syncUpcomingSaturdayMajorForStudent(h, s, studentId);
     saveState(); renderSessionView();
     showToast(`تم إلغاء تقييم ${st.name} ↩️`, { undo: true });
     return;
@@ -28700,17 +28783,15 @@ function setDailyRevEval(studentId, ev) {
   const isSame = r.dRevEval === ev || (ev === "تثبيت" && r.dRevEval === "تثبيت حفظ");
   if (isSame) {
     r.dRevEval = "";
-    if (!(Number(r.dRevPages) > 0) && !r.dRevSurahId) { r.dRevFrom = ""; r.dRevTo = ""; }
     r.points = computeRecordPoints(s, r, st);
-    saveState(); renderSessionView();
+    syncUpcomingSaturdayMajorForStudent(h, s, studentId);
+    saveState(); renderSessionPreservingScroll();
     showToast("تم إلغاء تقييم مراجعة اليوم ↩️");
     return;
   }
   r.dRevEval = ev;
-  if (ev === "إعادة") {
-    r.dRevPages = 0;
-  } else if (ev !== "تثبيت حفظ" && ev !== "تثبيت" && !(Number(r.dRevPages) > 0)) {
-    const pg = calcDailyReviewPages(r);
+  if (ev !== "تثبيت حفظ" && ev !== "تثبيت" && !(Number(r.dRevPages) > 0)) {
+    const pg = calcDailyReviewAssignedPages(r);
     if (pg > 0) r.dRevPages = pg;
   }
   r.points = computeRecordPoints(s, r, st);
@@ -28720,11 +28801,13 @@ function setDailyRevEval(studentId, ev) {
 }
 
 function clearDailyRev(studentId) {
-  const s = getCurrentSession(), r = getStudentRecord(s, studentId);
+  const h = getActiveHalaqa(), s = getCurrentSession(), st = h?.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
   r.dRevSurahId = ""; r.dRevFromAyah = ""; r.dRevToAyah = ""; r.dRevExtras = [];
   r.dRevIsPages = false; r.dRevPageFrom = ""; r.dRevPageTo = ""; r.dRevSardJuzIds = []; r.dRevSardLabel = "";
+  r.dRevSabrJuz = ""; r.dRevAuto = false; r.manualDRev = false;
   r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevPages = 0;
-  syncUpcomingSaturdayMajorForStudent(getActiveHalaqa(), s, studentId);
+  if (st) r.points = computeRecordPoints(s, r, st);
+  syncUpcomingSaturdayMajorForStudent(h, s, studentId);
   openCardId = studentId; openAdvCardId = studentId;
   saveState(); renderSessionPreservingScroll();
   showToast("تم مسح مراجعة اليوم للطالب");
@@ -28951,6 +29034,11 @@ function getNextClassDayContext(s, h) {
 // ==================== MAKIN v110: DAILY REVIEW (MON/WED) -> SATURDAY MAJOR REVIEW CONTINUITY + MANUAL SAT->MON HW ====================
 function getDailyReviewEndPoint(pr) {
   if (!pr || !hasIndependentDailyReview(pr)) return null;
+  // 0) Carried-over Sabr Juz inside Daily Review
+  if (pr.dRevSabrJuz) {
+    const jObj = getJuzByName(pr.dRevSabrJuz);
+    if (jObj) return { endSurahId: jObj.endSurah, endAyah: jObj.endAyah };
+  }
   // 1) Sard Juz (full juz review)
   const dRevSardIds = extractSardJuzIds(pr.dRevSardJuzIds, pr.dRevSardLabel, pr.dRevFrom, pr.dRevTo);
   if (dRevSardIds.length) {
@@ -29043,11 +29131,93 @@ function advanceMajorRangeFromEndPoint(endSurahId, endAyah, revPace, bounds, sab
   return buildMajorReviewFromPoint(nextStartId, nextStartA, revPace, bounds, null);
 }
 
-// Single Source of Truth for Major Review Assignment on any target review date (targetIso):
-// 1) Checks Mon/Wed (daily) reviews AFTER the last evaluated Saturday (and < targetIso):
-//    - If student reviewed on Mon/Wed with ممتاز or جيد جداً => counts as Major Review -> advance immediately after that review!
-//    - If student didn't review, or got إعادة / جيد / تثبيت / absent => skip that day and keep existing progression!
-// 2) Otherwise follows last evaluated Saturday progression (Sabr repeat, Sard, Pages, or Surah+Ayah).
+// ==================== MAKIN v128: UNIFIED CONTINUOUS MAJOR REVIEW CHAIN (SAT <-> MON <-> WED <-> SAT) ====================
+// Single Source of Truth for Major Review Assignment on ANY class day (Saturday OR Monday/Wednesday):
+// - Pass (ممتاز / جيد جداً) on ANY day => advances immediately to a NEW review assignment for the very next class day!
+// - Fail / Non-pass (غياب / إعادة / جيد / لم يُسمّع / unevaluated) => carries over the EXACT SAME assignment (Sabr, Sard, Pages, or Surah+Ayah)
+//   seamlessly from Saturday -> Monday -> Wednesday -> Saturday until passed with ممتاز or جيد جداً!
+function buildCarryPlanFromSatRecord(pr, st, h, ps, bounds) {
+  if (!pr) return null;
+  const carrySabr = pr.sabrJuz || pr.nextMajSabrJuz || "";
+  if (carrySabr) {
+    const jObj = getJuzByName(carrySabr);
+    if (jObj) return { kind: "sabr", juz: jObj, source: "prevSat" };
+  }
+  const carrySardIds = extractSardJuzIds(pr.majSardJuzIds, pr.majSardLabel, pr.majFrom, pr.majTo);
+  const fallbackNextSard = carrySardIds.length ? carrySardIds : extractSardJuzIds(pr.nextMajSardJuzIds, pr.nextMajSardLabel, pr.nextMajFrom, pr.nextMajTo);
+  if (fallbackNextSard.length) {
+    const si = formatSardJuzInfo(fallbackNextSard);
+    if (si.ids.length) return { kind: "sard", info: si, source: "prevSat" };
+  }
+  if (pr.majIsPages && pr.majFrom) {
+    const p1 = parseArabicNum(pr.majStartPage, 582);
+    const p2 = parseArabicNum(pr.majEndPage, p1);
+    return {
+      kind: "pages",
+      startPage: p1,
+      endPage: p2,
+      startSurahId: pr.majStartSurahId || String(getPageStartInfo(p1).surah.id),
+      endSurahId: pr.majEndSurahId || String(getPageEndInfo(p2).surah.id),
+      fromLabel: pr.majFrom,
+      toLabel: pr.majTo || "",
+      pages: Math.max(1, Math.abs(p2 - p1) + 1),
+      source: "prevSat"
+    };
+  }
+  if (pr.majStartSurahId || pr.majFrom || (Array.isArray(pr.majExtras) && pr.majExtras.length)) {
+    const prevPts = getMajorReviewStartEndPoints(pr, st, h, ps);
+    const s1 = SURAH_MAP[prevPts.startSurahId], s2 = SURAH_MAP[prevPts.endSurahId];
+    if (s1 && s2) {
+      const p1 = getPageForSurahAyah(s1.id, prevPts.startAyah), p2 = getPageForSurahAyah(s2.id, prevPts.endAyah);
+      const pgs = Math.max(0.25, Math.round((getMushafPos(s2.id, prevPts.endAyah, true) - getMushafPos(s1.id, prevPts.startAyah, false)) * 100) / 100);
+      const rng = formatMajorRangeObject(s1, prevPts.startAyah, s2, prevPts.endAyah, p1, p2, pgs, p1, false, bounds.startPage, bounds.endPage);
+      return { kind: "range", rng, source: "prevSat" };
+    }
+  }
+  return null;
+}
+
+function buildCarryPlanFromDailyRecord(dr, bounds) {
+  if (!dr) return null;
+  if (dr.dRevSabrJuz) {
+    const jObj = getJuzByName(dr.dRevSabrJuz);
+    if (jObj) return { kind: "sabr", juz: jObj, source: "prevDaily" };
+  }
+  const sardIds = extractSardJuzIds(dr.dRevSardJuzIds, dr.dRevSardLabel, dr.dRevFrom, dr.dRevTo);
+  if (sardIds.length) {
+    const si = formatSardJuzInfo(sardIds);
+    if (si.ids.length) return { kind: "sard", info: si, source: "prevDaily" };
+  }
+  if (dr.dRevIsPages && dr.dRevFrom) {
+    const p1 = parseArabicNum(dr.dRevPageFrom, 582);
+    const p2 = parseArabicNum(dr.dRevPageTo, p1);
+    return {
+      kind: "pages",
+      startPage: p1,
+      endPage: p2,
+      startSurahId: dr.dRevPageFromSurahId || String(getPageStartInfo(p1).surah.id),
+      endSurahId: dr.dRevPageToSurahId || String(getPageEndInfo(p2).surah.id),
+      fromLabel: dr.dRevFrom,
+      toLabel: dr.dRevTo || "",
+      pages: Math.max(1, Math.abs(p2 - p1) + 1),
+      source: "prevDaily"
+    };
+  }
+  const segs = getSegments(dr, "dRev");
+  if (segs.length) {
+    const first = segs[0], last = segs[segs.length - 1];
+    const s1 = SURAH_MAP[Number(first.surahId)], s2 = SURAH_MAP[Number(last.surahId)] || s1;
+    if (s1 && s2) {
+      const a1 = parseArabicNum(first.from, 1), a2 = parseArabicNum(last.to, s2.a);
+      const p1 = getPageForSurahAyah(s1.id, a1), p2 = getPageForSurahAyah(s2.id, a2);
+      const pgs = Math.max(0.25, calcSegmentsPages(segs));
+      const rng = formatMajorRangeObject(s1, a1, s2, a2, p1, p2, pgs, p1, false, bounds.startPage, bounds.endPage);
+      return { kind: "range", rng, source: "prevDaily" };
+    }
+  }
+  return null;
+}
+
 function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = "") {
   if (!h || !st || !targetIso || st.track === "rashidi") return null;
   const bounds = getStudentRevCycleBounds(st, h);
@@ -29056,133 +29226,108 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
   const sabrJuz = sabrJuzId ? JUZ_PAGE_MAP[sabrJuzId] : null;
   const revPace = Number(st.revPace || (sabrJuz ? 5 : (h.defaultRevPace || 2)));
 
-  // Find latest evaluated/absent Saturday before targetIso
-  const prevSats = (h.sessions || [])
-    .filter(x => x && x.type === "saturday" && !x.noClass && x.date && x.date < targetIso)
+  // Walk ALL previous non-holiday class sessions (Saturday + Daily) newest-first!
+  const prevAll = (h.sessions || [])
+    .filter(x => x && !x.noClass && x.date && x.date < targetIso)
     .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 
-  let lastSatSession = null, lastSatRec = null;
-  for (const ps of prevSats) {
+  let fallbackSatPlan = null;
+
+  for (const ps of prevAll) {
     const pr = ps.records?.[st.id];
     if (!pr) continue;
     const isAbs = Boolean(pr.attendance && String(pr.attendance || "").includes("غياب"));
     const isNoRec = isPresentNoRecite(pr.attendance);
-    const hasMajEval = Boolean(pr.majEval && String(pr.majEval).trim());
-    if (!hasMajEval && !isAbs && !isNoRec) continue;
-    lastSatSession = ps;
-    lastSatRec = pr;
-    break;
-  }
-  const afterDate = lastSatSession?.date || "";
 
-  // Check Mon/Wed daily reviews strictly after lastSatSession (and < targetIso) — newest first!
-  const prevDaily = (h.sessions || [])
-    .filter(x => x && x.type === "daily" && !x.noClass && x.date && x.date < targetIso && (!afterDate || x.date > afterDate))
-    .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-
-  for (const ds of prevDaily) {
-    const dr = ds.records?.[st.id];
-    if (!dr) continue;
-    const isAbs = Boolean(dr.attendance && String(dr.attendance || "").includes("غياب"));
-    const isNoRec = isPresentNoRecite(dr.attendance);
-    if (isAbs || isNoRec) continue;
-    const ev = String(dr.dRevEval || "").trim();
-    // ONLY ممتاز or جيد جداً advance the Major Review sequence (إعادة / جيد / تثبيت / empty are ignored!)
-    if (ev !== "ممتاز" && ev !== "جيد جداً") continue;
-    const endPt = getDailyReviewEndPoint(dr);
-    if (!endPt) continue;
-    const rng = advanceMajorRangeFromEndPoint(endPt.endSurahId, endPt.endAyah, revPace, bounds, sabrJuz);
-    if (rng) {
-      return { kind: "range", rng, source: "dailyRev", sourceDayName: ds.dayName || "" };
+    if (ps.type === "daily") {
+      const ev = String(pr.dRevEval || "").trim();
+      const passed = !isAbs && !isNoRec && isMajorPassEval(ev);
+      if (passed) {
+        // Student PASSED review on Mon/Wed (ممتاز / جيد جداً) -> ADVANCE to NEW review assignment!
+        if (pr.dRevSabrJuz) {
+          const jObj = getJuzByName(pr.dRevSabrJuz);
+          if (jObj) {
+            const afterJ = getNextSurahAyahForward(jObj.endSurah, jObj.endAyah);
+            const rng = buildMajorReviewFromPoint(afterJ ? afterJ.surahId : bounds.startSurahId, afterJ ? afterJ.ayah : bounds.startAyah, Number(st.revPace || h.defaultRevPace || 2), bounds, null);
+            return { kind: "range", rng, source: "dailyRev", sourceDayName: ps.dayName || "" };
+          }
+        }
+        const endPt = getDailyReviewEndPoint(pr);
+        if (endPt) {
+          const rng = advanceMajorRangeFromEndPoint(endPt.endSurahId, endPt.endAyah, revPace, bounds, sabrJuz);
+          if (rng) return { kind: "range", rng, source: "dailyRev", sourceDayName: ps.dayName || "" };
+        }
+        continue;
+      }
+      // If teacher MANUALLY picked a custom review on this daily day and student didn't pass (إعادة/جيد/لم يُسمّع/empty), carry it forward!
+      if (pr.manualDRev && !isAbs && ev !== "تثبيت" && ev !== "تثبيت حفظ") {
+        const manCarry = buildCarryPlanFromDailyRecord(pr, bounds);
+        if (manCarry) return manCarry;
+      }
+      // Otherwise (auto-prefilled daily review not passed, or absent, or empty old daily session): skip cleanly to find the true checkpoint!
+      continue;
     }
-  }
 
-  // No qualifying Mon/Wed review (ممتاز / جيد جداً) -> follow Saturday progression from lastSatSession
-  if (lastSatSession && lastSatRec) {
-    const pr = lastSatRec;
-    const isAbs = Boolean(pr.attendance && String(pr.attendance || "").includes("غياب"));
-    const isNoRec = isPresentNoRecite(pr.attendance);
-    const majPassed = isMajorPassEval(pr.majEval) && !isAbs && !isNoRec;
+    if (ps.type === "saturday") {
+      const hasMajEval = Boolean(pr.majEval && String(pr.majEval).trim());
+      const satCarryPlan = buildCarryPlanFromSatRecord(pr, st, h, ps, bounds);
+      if (!fallbackSatPlan && satCarryPlan) fallbackSatPlan = satCarryPlan;
 
-    // v126: If last Saturday was إعادة / جيد / غياب / حضر ولم يُسمّع (and teacher didn't manually override nextMaj),
-    // carry over the EXACT same Major Review (Sabr, Sard, Pages, or Surah+Ayah) directly from lastSatRec!
-    if (!majPassed && !pr.manualNextMaj) {
-      const carrySabr = pr.sabrJuz || pr.nextMajSabrJuz || "";
-      if (carrySabr) {
-        const jObj = getJuzByName(carrySabr);
+      const isAuthoritative = hasMajEval || Boolean(pr.manualMaj && satCarryPlan) || Boolean((isAbs || isNoRec) && pr.manualNextMaj);
+      if (!isAuthoritative) continue;
+
+      const majPassed = hasMajEval && isMajorPassEval(pr.majEval) && !isAbs && !isNoRec;
+
+      // Did NOT pass Saturday Major Review (إعادة / جيد / غياب / حضر ولم يُسمّع / unevaluated manual) -> CARRY OVER EXACT SAME!
+      if (!majPassed && !pr.manualNextMaj) {
+        if (satCarryPlan) return satCarryPlan;
+        continue;
+      }
+
+      // PASSED Saturday Major Review (ممتاز / جيد جداً) OR teacher explicitly overrode nextMaj -> NEW assignment!
+      const carrySabrName = pr.nextMajSabrJuz || "";
+      if (carrySabrName) {
+        const jObj = getJuzByName(carrySabrName);
         if (jObj) return { kind: "sabr", juz: jObj, source: "prevSat" };
       }
-      const carrySardIds = extractSardJuzIds(pr.majSardJuzIds, pr.majSardLabel, pr.majFrom, pr.majTo);
-      const fallbackNextSard = carrySardIds.length ? carrySardIds : extractSardJuzIds(pr.nextMajSardJuzIds, pr.nextMajSardLabel, pr.nextMajFrom, pr.nextMajTo);
-      if (fallbackNextSard.length) {
-        const si = formatSardJuzInfo(fallbackNextSard);
+      const nextSardIds = extractSardJuzIds(pr.nextMajSardJuzIds, pr.nextMajSardLabel, pr.nextMajFrom, pr.nextMajTo);
+      if (nextSardIds.length) {
+        const si = formatSardJuzInfo(nextSardIds);
         if (si.ids.length) return { kind: "sard", info: si, source: "prevSat" };
       }
-      if (pr.majIsPages && pr.majFrom) {
-        const p1 = parseArabicNum(pr.majStartPage, 582);
-        const p2 = parseArabicNum(pr.majEndPage, p1);
+      if (pr.nextMajIsPages && pr.nextMajFrom) {
+        const p1 = parseArabicNum(pr.nextMajStartPage, 582);
+        const p2 = parseArabicNum(pr.nextMajEndPage, p1);
         return {
           kind: "pages",
           startPage: p1,
           endPage: p2,
-          startSurahId: pr.majStartSurahId || String(getPageStartInfo(p1).surah.id),
-          endSurahId: pr.majEndSurahId || String(getPageEndInfo(p2).surah.id),
-          fromLabel: pr.majFrom,
-          toLabel: pr.majTo || "",
+          startSurahId: pr.nextMajStartSurahId || String(getPageStartInfo(p1).surah.id),
+          endSurahId: pr.nextMajEndSurahId || String(getPageEndInfo(p2).surah.id),
+          fromLabel: pr.nextMajFrom,
+          toLabel: pr.nextMajTo || "",
           pages: Math.max(1, Math.abs(p2 - p1) + 1),
           source: "prevSat"
         };
       }
-      const prevPts = getMajorReviewStartEndPoints(pr, st, h, lastSatSession);
-      const s1 = SURAH_MAP[prevPts.startSurahId], s2 = SURAH_MAP[prevPts.endSurahId];
-      if (s1 && s2) {
-        const p1 = getPageForSurahAyah(s1.id, prevPts.startAyah), p2 = getPageForSurahAyah(s2.id, prevPts.endAyah);
-        const pgs = Math.max(0.25, Math.round((getMushafPos(s2.id, prevPts.endAyah, true) - getMushafPos(s1.id, prevPts.startAyah, false)) * 100) / 100);
-        const rng = formatMajorRangeObject(s1, prevPts.startAyah, s2, prevPts.endAyah, p1, p2, pgs, p1, false, bounds.startPage, bounds.endPage);
+      if (pr.nextMajStartSurahId && pr.nextMajEndSurahId && SURAH_MAP[Number(pr.nextMajStartSurahId)] && SURAH_MAP[Number(pr.nextMajEndSurahId)]) {
+        const s1 = SURAH_MAP[Number(pr.nextMajStartSurahId)], s2 = SURAH_MAP[Number(pr.nextMajEndSurahId)];
+        const a1 = parseArabicNum(pr.nextMajStartAyah, 1), a2 = parseArabicNum(pr.nextMajEndAyah, s2.a);
+        const p1 = getPageForSurahAyah(s1.id, a1), p2 = getPageForSurahAyah(s2.id, a2);
+        const pgs = Math.max(0.25, Math.round((getMushafPos(s2.id, a2, true) - getMushafPos(s1.id, a1, false)) * 100) / 100);
+        const rng = formatMajorRangeObject(s1, a1, s2, a2, p1, p2, pgs, Math.min(bounds.endPage, p2 + 1), false, bounds.startPage, bounds.endPage);
         return { kind: "range", rng, source: "prevSat" };
       }
-    }
-
-    // Passed last Saturday (or teacher explicitly overrode nextMaj)
-    const carrySabrName = pr.nextMajSabrJuz || "";
-    if (carrySabrName) {
-      const jObj = getJuzByName(carrySabrName);
-      if (jObj) return { kind: "sabr", juz: jObj, source: "prevSat" };
-    }
-    const nextSardIds = extractSardJuzIds(pr.nextMajSardJuzIds, pr.nextMajSardLabel, pr.nextMajFrom, pr.nextMajTo);
-    if (nextSardIds.length) {
-      const si = formatSardJuzInfo(nextSardIds);
-      if (si.ids.length) return { kind: "sard", info: si, source: "prevSat" };
-    }
-    if (pr.nextMajIsPages && pr.nextMajFrom) {
-      const p1 = parseArabicNum(pr.nextMajStartPage, 582);
-      const p2 = parseArabicNum(pr.nextMajEndPage, p1);
-      return {
-        kind: "pages",
-        startPage: p1,
-        endPage: p2,
-        startSurahId: pr.nextMajStartSurahId || String(getPageStartInfo(p1).surah.id),
-        endSurahId: pr.nextMajEndSurahId || String(getPageEndInfo(p2).surah.id),
-        fromLabel: pr.nextMajFrom,
-        toLabel: pr.nextMajTo || "",
-        pages: Math.max(1, Math.abs(p2 - p1) + 1),
-        source: "prevSat"
-      };
-    }
-    if (pr.nextMajStartSurahId && pr.nextMajEndSurahId && SURAH_MAP[Number(pr.nextMajStartSurahId)] && SURAH_MAP[Number(pr.nextMajEndSurahId)]) {
-      const s1 = SURAH_MAP[Number(pr.nextMajStartSurahId)], s2 = SURAH_MAP[Number(pr.nextMajEndSurahId)];
-      const a1 = parseArabicNum(pr.nextMajStartAyah, 1), a2 = parseArabicNum(pr.nextMajEndAyah, s2.a);
-      const p1 = getPageForSurahAyah(s1.id, a1), p2 = getPageForSurahAyah(s2.id, a2);
-      const pgs = Math.max(0.25, Math.round((getMushafPos(s2.id, a2, true) - getMushafPos(s1.id, a1, false)) * 100) / 100);
-      const rng = formatMajorRangeObject(s1, a1, s2, a2, p1, p2, pgs, Math.min(bounds.endPage, p2 + 1), false, bounds.startPage, bounds.endPage);
+      const prevPts = getMajorReviewStartEndPoints(pr, st, h, ps);
+      const rng = advanceMajorRangeFromEndPoint(prevPts.endSurahId, prevPts.endAyah, revPace, bounds, sabrJuz);
       return { kind: "range", rng, source: "prevSat" };
     }
-    const prevPts = getMajorReviewStartEndPoints(pr, st, h, lastSatSession);
-    const rng = advanceMajorRangeFromEndPoint(prevPts.endSurahId, prevPts.endAyah, revPace, bounds, sabrJuz);
-    return { kind: "range", rng, source: "prevSat" };
   }
 
-  // Initial Major Review fallback
+  // Fallback: if an earlier Saturday had an assignment that was left completely unevaluated (e.g. first Saturday) -> carry it over!
+  if (fallbackSatPlan) return fallbackSatPlan;
+
+  // Initial Major Review fallback for brand new student
   let initSurahId = sabrJuz ? sabrJuz.startSurah : bounds.startSurahId;
   let initAyah = sabrJuz ? sabrJuz.startAyah : bounds.startAyah;
   if (!sabrJuz && st.revPage && Number(st.revPage) >= bounds.startPage && Number(st.revPage) <= bounds.endPage) {
@@ -29191,6 +29336,60 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
   }
   const rng = buildMajorReviewFromPoint(initSurahId, initAyah, revPace, bounds, sabrJuz);
   return { kind: "range", rng, source: "init" };
+}
+
+function applySmartMajorPlanToDailyRecord(rec, plan) {
+  if (!rec || !plan) return false;
+  rec.dRevSurahId = ""; rec.dRevFromAyah = ""; rec.dRevToAyah = ""; rec.dRevExtras = [];
+  rec.dRevIsPages = false; rec.dRevPageFrom = ""; rec.dRevPageTo = ""; rec.dRevPageFromSurahId = ""; rec.dRevPageToSurahId = "";
+  rec.dRevSardJuzIds = []; rec.dRevSardLabel = "";
+  rec.dRevSabrJuz = "";
+  rec.dRevAuto = true;
+  rec.manualDRev = false;
+
+  if (plan.kind === "sabr" && plan.juz) {
+    const jObj = plan.juz;
+    rec.dRevSabrJuz = jObj.name;
+    rec.dRevFrom = `سبر ${jObj.id >= 28 ? jObj.shortName : "الجزء " + jObj.id}`;
+    rec.dRevTo = "كاملاً";
+    rec.dRevPages = jObj.pages || 20;
+    return true;
+  }
+  if (plan.kind === "sard" && plan.info?.ids?.length) {
+    const info = plan.info;
+    rec.dRevSardJuzIds = [...info.ids];
+    rec.dRevSardLabel = info.label;
+    rec.dRevFrom = info.fromCol;
+    rec.dRevTo = info.toCol;
+    rec.dRevPages = info.totalPages;
+    return true;
+  }
+  if (plan.kind === "pages") {
+    rec.dRevIsPages = true;
+    rec.dRevPageFrom = plan.startPage;
+    rec.dRevPageTo = plan.endPage;
+    rec.dRevPageFromSurahId = plan.startSurahId || "";
+    rec.dRevPageToSurahId = plan.endSurahId || "";
+    rec.dRevFrom = plan.fromLabel;
+    rec.dRevTo = plan.toLabel;
+    rec.dRevPages = plan.pages;
+    return true;
+  }
+  if (plan.kind === "range" && plan.rng) {
+    const rng = plan.rng;
+    const segs = expandContiguousRangeToSegments(rng.startSurahId, rng.startAyah, rng.endSurahId, rng.endAyah);
+    if (segs.length) {
+      rec.dRevSurahId = segs[0].surahId;
+      rec.dRevFromAyah = segs[0].from;
+      rec.dRevToAyah = segs[0].to;
+      rec.dRevExtras = segs.slice(1).map(x => ({ ...x }));
+    }
+    rec.dRevFrom = rng.fromLabel;
+    rec.dRevTo = rng.toLabel;
+    rec.dRevPages = rng.pages;
+    return true;
+  }
+  return false;
 }
 
 function applySmartMajorPlanToSatRecord(rec, plan) {
@@ -29894,8 +30093,10 @@ function renderDailyReport() {
         if (r.recEval && r.recEval !== "إعادة" && !r.recIsSabr) dayMemPgs += Number(r.recPages) || calcRecordRecPages(r);
         dayRevPgs += calcDailyReviewPages(r);
       } else {
-        if (r.minEval && r.minEval !== "إعادة") dayRevPgs += Number(r.minPages) || calcRecordMinPages(r);
-        if (r.majEval && r.majEval !== "إعادة") dayRevPgs += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+        if (!isPresentNoRecite(r.attendance)) {
+          if (isMajorPassEval(r.minEval)) dayRevPgs += Number(r.minPages) || calcRecordMinPages(r);
+          if (isMajorPassEval(r.majEval)) dayRevPgs += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+        }
       }
     }
   });
@@ -29951,10 +30152,11 @@ function renderDailyReport() {
         const isPendingNoEval = Boolean(!r.recEval && !isAbs && r.attendance === "لم يُسمّع");
         const compactDRevFrom = String(r.dRevFrom || "").replace(/^إعادة\s+/, "").replace(/\s*ص\s*\d+/g, "").trim();
         const compactDRevTo = String(r.dRevTo || "").replace(/^\(|\)$/g, "").trim();
-        const hasIndepRev = !isRashidiRow && !isAbs && hasIndependentDailyReview(r);
-        const dRevCols = (!hasIndepRev || (isPendingNoEval && !r.dRevEval))
+        const hasIndepRev = !isRashidiRow && !isAbs && !isNoRec && hasIndependentDailyReview(r);
+        const hasGradedDRevRep = Boolean(hasIndepRev && r.dRevEval && String(r.dRevEval).trim() && r.dRevEval !== "بانتظار التقييم");
+        const dRevCols = !hasGradedDRevRep
           ? { from: "", to: "", lines: 1 }
-          : ((r.dRevIsPages || r.dRevSardLabel)
+          : ((r.dRevSabrJuz || r.dRevIsPages || r.dRevSardLabel)
             ? { from: escapeHtml(compactDRevFrom), to: escapeHtml(compactDRevTo), lines: 1 }
             : formatReviewPairColumns(getSegments(r, "dRev"), compactDRevFrom, compactDRevTo, true));
         const dRevHtml = formatUnifiedReviewCell(dRevCols, true);
@@ -30397,11 +30599,13 @@ function computeMonthlyData(monthFilter) {
         }
         if (!isAbs) revPages += calcDailyReviewPages(r);
       } else if (!isAbs) {
-        if (r.minEval && r.minEval !== "إعادة") {
-          revPages += Number(r.minPages) || calcRecordMinPages(r);
-        }
-        if (r.majEval && r.majEval !== "إعادة") {
-          revPages += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+        if (!isPresentNoRecite(r.attendance)) {
+          if (isMajorPassEval(r.minEval)) {
+            revPages += Number(r.minPages) || calcRecordMinPages(r);
+          }
+          if (isMajorPassEval(r.majEval)) {
+            revPages += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+          }
         }
       }
     });
@@ -31570,8 +31774,10 @@ function computeStudentStatsForSessions(st, sessions, h, extraBase = null) {
         }
         revPages += calcDailyReviewPages(r);
       } else {
-        if (r.minEval && r.minEval !== "إعادة") revPages += Number(r.minPages) || calcRecordMinPages(r);
-        if (r.majEval && r.majEval !== "إعادة") revPages += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+        if (!isPresentNoRecite(r.attendance)) {
+          if (isMajorPassEval(r.minEval)) revPages += Number(r.minPages) || calcRecordMinPages(r);
+          if (isMajorPassEval(r.majEval)) revPages += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+        }
       }
     }
   });
@@ -33192,8 +33398,10 @@ async function exportDailyExcelStyled() {
           if (r.recEval && r.recEval !== "إعادة" && !r.recIsSabr) xlMemPgs += Number(r.recPages) || calcRecordRecPages(r);
           xlRevPgs += calcDailyReviewPages(r);
         } else {
-          if (r.minEval && r.minEval !== "إعادة") xlRevPgs += Number(r.minPages) || calcRecordMinPages(r);
-          if (r.majEval && r.majEval !== "إعادة") xlRevPgs += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+          if (!isPresentNoRecite(r.attendance)) {
+            if (isMajorPassEval(r.minEval)) xlRevPgs += Number(r.minPages) || calcRecordMinPages(r);
+            if (isMajorPassEval(r.majEval)) xlRevPgs += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+          }
         }
       }
     });
@@ -33322,10 +33530,11 @@ async function exportDailyExcelStyled() {
         const isPendingNoEval = Boolean(!r.recEval && !isAbs && r.attendance === "لم يُسمّع");
         const compactDRevFrom = String(r.dRevFrom || "").replace(/^إعادة\s+/, "").replace(/\s*ص\s*\d+/g, "").trim();
         const compactDRevTo = String(r.dRevTo || "").replace(/^\(|\)$/g, "").trim();
-        const hasIndepRevXl = !isRashidiRow && !isAbs && hasIndependentDailyReview(r);
-        const dRevCols = (!hasIndepRevXl || (isPendingNoEval && !r.dRevEval))
+        const hasIndepRevXl = !isRashidiRow && !isAbs && !isNoRecXl && hasIndependentDailyReview(r);
+        const hasGradedDRevXl = Boolean(hasIndepRevXl && r.dRevEval && String(r.dRevEval).trim() && r.dRevEval !== "بانتظار التقييم");
+        const dRevCols = !hasGradedDRevXl
           ? { from: "", to: "", lines: 1 }
-          : ((r.dRevIsPages || r.dRevSardLabel)
+          : ((r.dRevSabrJuz || r.dRevIsPages || r.dRevSardLabel)
             ? { from: compactDRevFrom, to: compactDRevTo, lines: 1 }
             : formatReviewPairColumns(getSegments(r, "dRev"), compactDRevFrom, compactDRevTo, false));
         const dRevTxt = formatUnifiedReviewCell(dRevCols, false);
@@ -36189,8 +36398,10 @@ function computeHalaqaSummaryForSupervisor(hData, monthLabel, supCustomProgs = [
           if (!sabrSet.has(k)) { sabrSet.add(k); sabrCount++; }
         }
       } else {
-        if (r.minEval && r.minEval !== "إعادة") revPages += Number(r.minPages) || calcRecordMinPages(r);
-        if (r.majEval && r.majEval !== "إعادة") revPages += Number(r.majPages) || calcMajorPagesFallback(r, st, hData);
+        if (!isPresentNoRecite(r.attendance)) {
+          if (isMajorPassEval(r.minEval)) revPages += Number(r.minPages) || calcRecordMinPages(r);
+          if (isMajorPassEval(r.majEval)) revPages += Number(r.majPages) || calcMajorPagesFallback(r, st, hData);
+        }
       }
     });
   });
@@ -38775,12 +38986,12 @@ function runSilentDataSanitizer() {
         });
       });
     }
-    // v126: Normalize any Firebase object-encoded Sard arrays & self-heal unevaluated Saturday Major Reviews!
+    // v128: Normalize Firebase Sard arrays & self-heal continuous Major Review chain across ALL unfinished sessions (Sat + Mon + Wed)!
     if (Array.isArray(h.sessions)) {
-      const sortedSats = h.sessions
-        .filter(s => s && s.type === "saturday" && !s.noClass && s.date)
+      const sortedAll = h.sessions
+        .filter(s => s && !s.noClass && s.date)
         .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
-      sortedSats.forEach(s => {
+      sortedAll.forEach(s => {
         if (!s.records || typeof s.records !== "object") return;
         Object.values(s.records).forEach(r => {
           if (!r || typeof r !== "object") return;
@@ -38798,8 +39009,14 @@ function runSilentDataSanitizer() {
             if (!r.nextMajSardLabel) r.nextMajSardLabel = info.label;
             repaired = true;
           }
+          const dSard = extractSardJuzIds(r.dRevSardJuzIds, r.dRevSardLabel, r.dRevFrom, r.dRevTo);
+          if (dSard.length && (!Array.isArray(r.dRevSardJuzIds) || !r.dRevSardJuzIds.length)) {
+            const info = formatSardJuzInfo(dSard);
+            r.dRevSardJuzIds = [...info.ids];
+            if (!r.dRevSardLabel) r.dRevSardLabel = info.label;
+            repaired = true;
+          }
         });
-        // Refresh unevaluated students on unfinished Saturdays so carried-over Sard/Pages/جيد/إعادة/غياب show immediately!
         if (!s.finalized) {
           const sMonth = getSessionReportMonth(s);
           (h.students || []).forEach(st => {
@@ -38808,12 +39025,16 @@ function runSilentDataSanitizer() {
             if (!rec) return;
             const isAbs = Boolean(rec.attendance && String(rec.attendance || "").includes("غياب"));
             const isNoRec = isPresentNoRecite(rec.attendance);
-            if (!rec.majEval && !isAbs && !isNoRec) {
+            if (isAbs || isNoRec) return;
+            if (s.type === "saturday" && !rec.majEval) {
               const plan = computeSmartMajorReviewForDate(h, s.date, st, sMonth);
               if (plan) {
                 rec.manualMaj = false;
                 if (applySmartMajorPlanToSatRecord(rec, plan)) repaired = true;
               }
+            } else if (s.type === "daily" && !rec.dRevEval && !rec.manualDRev) {
+              const plan = computeSmartMajorReviewForDate(h, s.date, st, sMonth);
+              if (plan && applySmartMajorPlanToDailyRecord(rec, plan)) repaired = true;
             }
           });
         }
@@ -39227,7 +39448,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v127";
+const TIBYAN_APP_VERSION = "v128";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -39640,7 +39861,7 @@ async function hydrateSignedInFirebaseUser(fbUser) {
       if (authVisible || (!anyModalOpen && !isUserTyping && changedUserOrData)) {
         routeAppByCurrentUser();
       } else {
-        if (merged && getCurrentSession()?.type === "saturday") prefillSaturdayReviews(false, false);
+        if (merged) { if (getCurrentSession()?.type === "saturday") prefillSaturdayReviews(false, false); else if (getCurrentSession()?.type === "daily") prefillDailyRecitation(false, false); }
         updateTeacherAccountDrawerUI();
         updateNotifToggleUI();
         updateCentralCloudIndicatorUI();
@@ -41898,7 +42119,7 @@ const CLOUD_SAFE_ZERO_FIELDS = new Set([
 ]);
 const CLOUD_SAFE_FALSE_FIELDS = new Set([
   "twoSurahs", "minTwoSurahs", "rabt", "recIsSabr", "dRevIsPages", "minIsPages", "majIsPages",
-  "ptsForgotSheet", "recRepeatHwOnly", "manualSatHw", "nextMajIsPages", "manualNextMaj"
+  "ptsForgotSheet", "recRepeatHwOnly", "manualSatHw", "nextMajIsPages", "manualNextMaj", "dRevAuto", "manualDRev"
 ]);
 const CLOUD_KEEP_EXPLICIT_BOOLS = new Set(["ptsAdab", "ptsParticip", "ptsEarly"]);
 
@@ -42121,5 +42342,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v127 -->
+<!-- Makin App v128 -->
 </html>
