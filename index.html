@@ -13694,6 +13694,162 @@ table.t-daily tfoot td {
   padding: 7px 12px !important;
 }
 
+
+/* ==================== MAKIN v124: DARKER CRISP LINES & INK + FIXED META BAR + CRISP WHITE ABSENT TEXT ==================== */
+/* 1) Rock-Solid html2canvas-Safe Header Meta Table */
+.odh-meta-tbl {
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: #edf2f7;
+  border: 1.5px solid #64748b;
+  width: auto !important;
+  min-width: 0 !important;
+}
+.odh-meta-tbl td {
+  padding: 5px 14px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a;
+  white-space: nowrap;
+  text-align: center;
+  border: none;
+  border-left: 1.5px solid #94a3b8;
+  line-height: 1.3;
+}
+.odh-meta-tbl td:last-child {
+  border-left: none;
+}
+#hdExportStage .odh-meta-tbl {
+  border: 1.6px solid #475569 !important;
+  background: #edf2f7 !important;
+}
+#hdExportStage .odh-meta-tbl td {
+  padding: 6px 18px !important;
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  border-left: 1.6px solid #7b8ea3 !important;
+}
+#hdExportStage .odh-meta-tbl td:last-child {
+  border-left: none !important;
+}
+.official-daily-hdr-v20 {
+  border-bottom: 2.2px solid #1e293b !important;
+}
+.odh-org-box {
+  color: #1e293b !important;
+  font-weight: 800 !important;
+}
+
+/* 2) Darker, Sharper Table Grid Lines & Crisp Dark Ink (Readable on Phone & Print!) */
+table.t-daily {
+  border: 2px solid #0f172a !important;
+}
+.report-paper table.t-daily th,
+#hdExportStage table.t-daily th {
+  border: 1.2px solid #64748b !important;
+}
+.report-paper table.t-daily td,
+#hdExportStage table.t-daily td {
+  border: 1.25px solid #7b8ea3 !important;
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+.report-paper table.t-daily th.col-sec-start,
+.report-paper table.t-daily td.col-sec-start,
+#hdExportStage table.t-daily th.col-sec-start,
+#hdExportStage table.t-daily td.col-sec-start {
+  border-right: 2px solid #33464f !important;
+}
+table.t-daily td.td-idx {
+  color: #1e293b !important;
+  font-weight: 800 !important;
+}
+table.t-daily td.td-name-col {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+table.t-daily td.td-range-unified {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+table.t-daily td.td-note {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+#hdExportStage table.t-daily {
+  border: 2.2px solid #0f172a !important;
+}
+#hdExportStage table.t-daily th {
+  border: 1.3px solid #64748b !important;
+}
+#hdExportStage table.t-daily td {
+  border: 1.3px solid #7b8ea3 !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+#hdExportStage table.t-daily td.td-name-col {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+#hdExportStage table.t-daily td.td-note {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+#hdExportStage table.t-daily tfoot td {
+  border-top: 2.2px solid #1e293b !important;
+  color: #000000 !important;
+}
+
+/* 3) Restore Crisp White Text on Red Absent Cells & High-Contrast Grade Cells */
+.report-paper table.t-daily td.td-absent,
+#hdExportStage table.t-daily td.td-absent {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+.report-paper table.t-daily td.td-excellent,
+#hdExportStage table.t-daily td.td-excellent {
+  background: #d1fae5 !important;
+  color: #064e3b !important;
+}
+.report-paper table.t-daily td.td-vgood,
+#hdExportStage table.t-daily td.td-vgood {
+  background: #dbeafe !important;
+  color: #1e3a8a !important;
+}
+.report-paper table.t-daily td.td-good,
+#hdExportStage table.t-daily td.td-good {
+  background: #fef3c7 !important;
+  color: #78350f !important;
+}
+.report-paper table.t-daily td.td-repeat,
+#hdExportStage table.t-daily td.td-repeat {
+  background: #fed7aa !important;
+  color: #7c2d12 !important;
+}
+.report-paper table.t-daily td.td-sabr,
+#hdExportStage table.t-daily td.td-sabr {
+  background: #ccefdc !important;
+  color: #064e3b !important;
+}
+
+/* 4) Darker, Sharper Circled Ayah Badges */
+.ayah-circ {
+  border: 1.25px solid #475569 !important;
+  background: #edf2f7 !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+#hdExportStage .ayah-circ {
+  border: 1.35px solid #475569 !important;
+  background: #edf2f7 !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+.ayah-sep { color: #334155 !important; }
+.ayah-sub-lbl, .ayah-end-lbl { color: #334155 !important; font-weight: 700 !important; }
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -14204,7 +14360,7 @@ table.t-daily tfoot td {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v123</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v124</span>
         </button>
       </div>
     </div>
@@ -29323,6 +29479,7 @@ function formatUnifiedReviewCell(pairCols, isHtml = true) {
   if (!fPlain && tPlain) return styleSurahAyahToken(tPlain, isHtml);
   if (fPlain === tPlain) return styleSurahAyahToken(fPlain, isHtml);
   if (fPlain === "جزء") return esc(`جزء ${tPlain}`);
+  if (tPlain === "كاملاً" || tPlain === "كامل") return esc(`${fPlain} ${tPlain}`);
 
   const tAscii = toAsciiDigits(tPlain);
   const tIsNum = /^\d+$/.test(tAscii);
@@ -29853,11 +30010,11 @@ function renderDailyReport() {
       <div class="odh-org-box">${escapeHtml(bm.org)}<br>${escapeHtml(bm.branch)}<br>${escapeHtml(bm.program)}</div>
       <div class="odh-title-col">
         <h2>${title}</h2>
-        <div class="odh-meta-bar">
-          <span class="odh-meta-item">يوم <b>${escapeHtml(s.dayName)}</b> &nbsp; ${escapeHtml(s.hijriDate)}</span>
-          <span class="odh-meta-item">الغياب: مبرر <b>${excused}</b> / غير مبرر <b>${absent}</b></span>
-          <span class="odh-meta-item">${escapeHtml(_gtRep.supervisorTitle)}: <b>${escapeHtml(bm.sheikh)}</b></span>
-        </div>
+        <table class="odh-meta-tbl"><tbody><tr>
+          <td>يوم: ${escapeHtml(s.dayName)} &nbsp; ${escapeHtml(s.hijriDate)}</td>
+          <td>الغياب: المبرر ${excused} / غير المبرر ${absent}</td>
+          <td>${escapeHtml(_gtRep.supervisorTitle)}: ${escapeHtml(bm.sheikh)}</td>
+        </tr></tbody></table>
       </div>
       <div class="odh-logo-col"><img src="${bm.logoSrc}" alt="شعار المؤسسة"></div>
     </div>
@@ -32851,16 +33008,16 @@ async function exportDailyExcelStyled() {
     const xlSatNextIsDaily = isSat && xlNextCtx.nextType === "daily";
     const totalCols = (!isSat && xlDailyNextIsReview) ? (ptsOn ? 10 : 9) : (ptsOn ? 9 : 8);
     const SOFT_XL_BORDER = {
-      top: { style: "thin", color: { argb: "FFCBD5E1" } },
-      left: { style: "thin", color: { argb: "FFCBD5E1" } },
-      bottom: { style: "thin", color: { argb: "FFCBD5E1" } },
-      right: { style: "thin", color: { argb: "FFCBD5E1" } }
+      top: { style: "thin", color: { argb: "FF7B8EA3" } },
+      left: { style: "thin", color: { argb: "FF7B8EA3" } },
+      bottom: { style: "thin", color: { argb: "FF7B8EA3" } },
+      right: { style: "thin", color: { argb: "FF7B8EA3" } }
     };
     const HDR_XL_BORDER = {
-      top: { style: "thin", color: { argb: "FF94A3B8" } },
-      left: { style: "thin", color: { argb: "FF94A3B8" } },
-      bottom: { style: "thin", color: { argb: "FF64748B" } },
-      right: { style: "thin", color: { argb: "FF94A3B8" } }
+      top: { style: "thin", color: { argb: "FF475569" } },
+      left: { style: "thin", color: { argb: "FF475569" } },
+      bottom: { style: "medium", color: { argb: "FF1E293B" } },
+      right: { style: "thin", color: { argb: "FF475569" } }
     };
     const maxXlNoteChars = Math.max(0, ...h.students.map(st => stripMushafPageTokens(getStudentRecord(s, st.id).notes || "").trim().length));
     const dynXlNoteW = maxXlNoteChars === 0 ? 18 : Math.min(40, Math.max(20, Math.round(maxXlNoteChars * 0.52 + 8)));
@@ -38829,7 +38986,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v123";
+const TIBYAN_APP_VERSION = "v124";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -41722,5 +41879,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v123 -->
+<!-- Makin App v124 -->
 </html>
