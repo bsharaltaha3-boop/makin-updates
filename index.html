@@ -14902,12 +14902,10 @@ table.t-daily td.td-sard,
 
       <div class="drawer-group-lbl">البرامج المصاحبة</div>
       <div class="drawer-card-group">
-        <div class="drawer-item" style="cursor:pointer;" onclick="closeRightDrawer(); openProgramsModal('points');">
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('points');">
           <span class="drawer-item-l"><span class="drawer-ico-box gold">⭐</span><span>برنامج النقاط والتحفيز</span></span>
-          <button type="button" style="border:none; background:transparent; padding:4px; cursor:pointer; display:inline-flex; align-items:center;" onclick="event.stopPropagation(); togglePointsMode();" aria-label="تفعيل أو إيقاف النقاط">
-            <span class="m-switch on" id="drawerPointsSwitch" aria-hidden="true"></span>
-          </button>
-        </div>
+          <span class="badge b-green" id="drawerPointsBadge" style="font-size:10px;">مفعّل</span>
+        </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('istihda');">
           <span class="drawer-item-l"><span class="drawer-ico-box">🌿</span><span>برنامج استهداء</span></span>
           <span class="badge b-slate" id="drawerProgIstihdaBadge">0</span>
@@ -14933,21 +14931,13 @@ table.t-daily td.td-sard,
           <span class="drawer-item-l"><span class="drawer-ico-box">🔊</span><span>صوت النقرة الخفيفة</span></span>
           <span class="m-switch on" id="drawerTapSoundSwitch" aria-hidden="true"></span>
         </button>
-        <button type="button" class="drawer-item" onclick="toggleHandsFreeFlow(); updateDrawerQuickStates();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">⚡</span><span>الانتقال التلقائي للتالي</span></span>
-          <span class="m-switch on" id="drawerFlowSwitch" aria-hidden="true"></span>
-        </button>
-        <button type="button" class="drawer-item" onclick="toggleAutoSinkDone(); updateDrawerQuickStates();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">⬇️</span><span>إنزال المُنجَزين للأسفل</span></span>
-          <span class="m-switch on" id="drawerSinkSwitch" aria-hidden="true"></span>
-        </button>
         <button type="button" class="drawer-item" onclick="toggleTheme(); updateDrawerQuickStates();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🌙</span><span>الوضع الليلي</span></span>
           <span class="m-switch" id="drawerThemeSwitch" aria-hidden="true"></span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v134</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v135</span>
         </button>
       </div>
     </div>
@@ -15947,16 +15937,9 @@ table.t-daily td.td-sard,
             <div class="field"><label>اسم البرنامج</label><input type="text" id="setProgram" placeholder="مثال: برنامج تبيان"></div>
           </div>
           <div id="setLockedBrandCard" class="locked-brand-card"></div>
-          <div class="exec-grid-2" style="margin-bottom:8px;">
+          <div class="exec-grid-2" style="margin-bottom:2px;">
             <div class="field"><label>نوع الحلقة</label><select id="setHalaqaGender"><option value="male">ذكور (الشيخ / الطالب)</option><option value="female">إناث (المعلمة / الطالبة)</option></select></div>
             <div class="field"><label>اتجاه الحفظ</label><select id="setDefaultDir"><option value="desc">من الناس ← البقرة</option><option value="asc">من البقرة ← الناس</option></select></div>
-          </div>
-          <div class="field" style="margin-bottom:2px;">
-            <label>نظام المراجعة الكبرى في الحلقة</label>
-            <select id="setMajorRevSystem">
-              <option value="juniors">🧒 نظام الصغار (كل المحفوظ حتى الآن)</option>
-              <option value="seniors">🎓 نظام الكبار (الأجزاء المسبورة فقط)</option>
-            </select>
           </div>
         </div>
 
@@ -15985,14 +15968,7 @@ table.t-daily td.td-sard,
             <span>🗓️ أيام الدوام المعتمدة</span>
             <button type="button" class="btn btn-primary btn-sm" onclick="closeModal('settingsModal'); openClassDaysModal();">✏️ تعديل الأيام</button>
           </div>
-          <div id="setClassDaysSummary" style="font-size:12.5px; color:var(--ink-700); line-height:1.6; margin-bottom:9px;"></div>
-          <label class="gr-toggle-row" for="setSeqDayLock" style="margin-bottom:0;">
-            <div>
-              <b>🔒 قفل الأيام القادمة بالتسلسل (منع الخربطة)</b>
-              <small>يفتح يوماً قادماً واحداً فقط حتى تُنهي جلسته أو تسجّله كعطلة</small>
-            </div>
-            <input type="checkbox" id="setSeqDayLock" checked style="width:18px; height:18px; accent-color:var(--green); flex-shrink:0;">
-          </label>
+          <div id="setClassDaysSummary" style="font-size:12.5px; color:var(--ink-700); line-height:1.6; margin-bottom:0;"></div>
         </div>
 
         <div class="exec-card">
@@ -24273,12 +24249,11 @@ function updateDrawerQuickStates() {
   });
   updateTeacherAccountDrawerUI();
   const ptsOn = isPointsEnabled();
-  const psw = document.getElementById("drawerPointsSwitch");
-  if (psw) psw.classList.toggle("on", ptsOn);
-  const fsw = document.getElementById("drawerFlowSwitch");
-  if (fsw) fsw.classList.toggle("on", Boolean(handsFreeFlow));
-  const ssw = document.getElementById("drawerSinkSwitch");
-  if (ssw) ssw.classList.toggle("on", Boolean(autoSinkDone));
+  const pb = document.getElementById("drawerPointsBadge");
+  if (pb) {
+    pb.textContent = ptsOn ? "مفعّل" : "موقّف";
+    pb.className = "badge " + (ptsOn ? "b-green" : "b-muted");
+  }
   const tssw = document.getElementById("drawerTapSoundSwitch");
   if (tssw) tssw.classList.toggle("on", tibyanNotifPrefs.tapSound !== false);
   const isDark = (document.documentElement.getAttribute("data-theme") || "light") === "dark";
@@ -41522,7 +41497,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v134";
+const TIBYAN_APP_VERSION = "v135";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -44419,5 +44394,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v134 -->
+<!-- Makin App v135 -->
 </html>
