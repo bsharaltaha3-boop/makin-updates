@@ -14224,6 +14224,194 @@ table.t-daily td.td-sard,
   min-width: 0 !important;
 }
 
+
+/* ==================== MAKIN v134: ZERO-CLIP EXEC PICKER, HALAQA SETTINGS STUDIO & PENDING JUZ BADGE ==================== */
+/* Fix Screenshot 2: Prevent long picker option text from clipping or overlapping checkmark! */
+#execPickerSheet .eps-item {
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px 12px !important;
+}
+#execPickerSheet .eps-item-l {
+  min-width: 0 !important;
+  flex: 1 !important;
+  overflow: hidden !important;
+}
+#execPickerSheet .eps-txt {
+  min-width: 0 !important;
+  flex: 1 !important;
+}
+#execPickerSheet .eps-title {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  word-break: break-word !important;
+  line-height: 1.42 !important;
+  font-size: 13px !important;
+  display: block !important;
+}
+#execPickerSheet .eps-check {
+  flex-shrink: 0 !important;
+  margin-right: 4px !important;
+}
+
+/* Halaqa Settings Studio Cards (Clean 2-Choice Visual Cards — Zero Clipped Dropdowns!) */
+.hs-choice-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+.hs-choice-card {
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-900);
+  border-radius: 12px;
+  padding: 9px 8px;
+  text-align: right;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: all 0.14s ease;
+  min-width: 0;
+}
+.hs-choice-card:active { transform: scale(0.98); }
+.hs-choice-card b {
+  font-size: 12.2px;
+  font-weight: 800;
+  color: var(--brand-slate);
+  line-height: 1.3;
+}
+.hs-choice-card span {
+  font-size: 10.5px;
+  color: var(--ink-500);
+  font-weight: 600;
+  line-height: 1.42;
+}
+.hs-choice-card.on {
+  background: #142a46;
+  border-color: #c8a14b;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(20, 42, 70, 0.22);
+}
+.hs-choice-card.on b { color: #f6dc93; }
+.hs-choice-card.on span { color: #dce9f7; }
+[data-theme="dark"] .hs-choice-card.on {
+  background: #1f3d61;
+  border-color: #c8a14b;
+}
+
+.hs-toggle-row {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink-900);
+  border-radius: 11px;
+  padding: 9px 10px;
+  margin-bottom: 7px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  text-align: right;
+}
+.hs-toggle-row:last-child { margin-bottom: 0; }
+.hs-toggle-txt { min-width: 0; flex: 1; }
+.hs-toggle-txt b { display: block; font-size: 12.5px; font-weight: 800; color: var(--ink-900); line-height: 1.3; }
+.hs-toggle-txt small { display: block; font-size: 10.8px; color: var(--ink-500); font-weight: 600; margin-top: 2px; line-height: 1.4; }
+
+.hs-pill-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin-top: 6px;
+}
+.hs-pill-btn {
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-700);
+  border-radius: 9px;
+  padding: 6px 4px;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+}
+.hs-pill-btn.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #f6dc93;
+}
+[data-theme="dark"] .hs-pill-btn.on { background: #c8a14b; border-color: #c8a14b; color: #0f233c; }
+
+.hs-quick-links-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.hs-qlink-btn {
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--brand-slate);
+  border-radius: 10px;
+  padding: 8px 4px;
+  font-size: 11.2px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.hs-qlink-btn:active { background: var(--brand-tint); }
+
+/* Persistent Pending Incomplete Juz Reminder Badge (Reports + Eval Sheet) */
+.rep-pending-juz-badge {
+  display: inline-block;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #d97706;
+  border-right: 3px solid #b45309;
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-left: 4px;
+  margin-bottom: 2px;
+  vertical-align: middle;
+}
+#hdExportStage .rep-pending-juz-badge {
+  font-size: 11.2px !important;
+  padding: 1.5px 7px !important;
+  border-width: 1px !important;
+  border-right-width: 3.5px !important;
+}
+.es-pending-juz-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  background: #fffbeb;
+  border: 1.5px solid #f59e0b;
+  border-right: 4px solid #b45309;
+  border-radius: 10px;
+  padding: 6px 9px;
+  margin-bottom: 7px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #92400e;
+}
+[data-theme="dark"] .es-pending-juz-strip {
+  background: #2b2110;
+  border-color: #b45309;
+  color: #fde68a;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -14676,6 +14864,14 @@ table.t-daily td.td-sard,
         </button>
       </div>
 
+      <div class="drawer-group-lbl">نظام الحلقة</div>
+      <div class="drawer-card-group">
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openHalaqaSettingsModal();">
+          <span class="drawer-item-l"><span class="drawer-ico-box gold">🎛️</span><span>إعدادات الحلقة</span></span>
+          <span class="badge b-blue" id="drawerHalaqaRulesBadge" style="font-size:10px;">تخصيص</span>
+        </button>
+      </div>
+
       <div class="drawer-group-lbl">الحساب والتواصل</div>
       <div class="drawer-card-group">
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openTeacherAccountModal();">
@@ -14751,7 +14947,7 @@ table.t-daily td.td-sard,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v133</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v134</span>
         </button>
       </div>
     </div>
@@ -15660,6 +15856,28 @@ table.t-daily td.td-sard,
 </div>
 
 
+
+<!-- ===== MODAL: HALAQA SETTINGS & RULES STUDIO (v134) ===== -->
+<div class="modal-backdrop exec-modal-backdrop" id="halaqaRulesModal" style="z-index:150;" onclick="if(event.target===this) closeModal('halaqaRulesModal')">
+  <div class="exec-modal-box" style="max-width:560px;">
+    <div class="exec-modal-hdr">
+      <div class="es-handle"></div>
+      <div class="exec-modal-hdr-row">
+        <div style="min-width:0; flex:1;">
+          <h3>🎛️ إعدادات الحلقة</h3>
+          <div class="exec-modal-sub">تحكّم كامل بنظام النقاط، التقييم، المراجعة الكبرى، السرد والسبر</div>
+        </div>
+        <button type="button" class="exec-modal-close" onclick="closeModal('halaqaRulesModal')" aria-label="إغلاق">×</button>
+      </div>
+    </div>
+    <div class="exec-modal-body" id="halaqaRulesModalBody"></div>
+    <div class="exec-modal-footer">
+      <span style="font-size:11.5px; font-weight:700; color:var(--green);">✓ تُحفظ جميع الإعدادات فوراً</span>
+      <button type="button" class="btn btn-primary btn-sm" style="padding:8px 20px;" onclick="closeModal('halaqaRulesModal')">تم ✓</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===== MODAL: PARENT ALERTS STUDIO (3 CONSECUTIVE ABSENCES / 3 CONSECUTIVE REPEATS HD CARD — v133) ===== -->
 <div class="modal-backdrop exec-modal-backdrop" id="parentAlertModal" style="z-index:152;" onclick="if(event.target===this) closeModal('parentAlertModal')">
   <div class="exec-modal-box" style="max-width:560px;">
@@ -15736,8 +15954,8 @@ table.t-daily td.td-sard,
           <div class="field" style="margin-bottom:2px;">
             <label>نظام المراجعة الكبرى في الحلقة</label>
             <select id="setMajorRevSystem">
-              <option value="juniors">🧒 نظام الصغار — المراجعة الكبرى لكل ما حفظه الطالب حتى الآن</option>
-              <option value="seniors">🎓 نظام الكبار — المراجعة الكبرى للأجزاء المسبورة فقط (يدخل الجزء بعد سرده وسبره)</option>
+              <option value="juniors">🧒 نظام الصغار (كل المحفوظ حتى الآن)</option>
+              <option value="seniors">🎓 نظام الكبار (الأجزاء المسبورة فقط)</option>
             </select>
           </div>
         </div>
@@ -18253,6 +18471,7 @@ function recomputeAutoDailyHomework(st, r, h) {
       r.hwSabrJuz = "";
       const curSaved = getStudentExtraEndJuzIds(st);
       if (!curSaved.includes(sabrObj.id)) st.extraMemJuzIds = [...curSaved, sabrObj.id].sort((a, b) => a - b);
+      clearStudentPendingJuz(st, sabrObj.id);
       const nxtHw = computeFirstHwAfterJuz(sabrObj, dir, pace, getStudentJuzOrder(st, h), getStudentExtraEndJuzIds(st));
       if (nxtHw) Object.assign(r, nxtHw);
     }
@@ -19738,6 +19957,7 @@ function setMultiSabrScore(studentId, juzName, rawVal) {
     if (target.juzObj && target.eval !== "إعادة") {
       const curSaved = getStudentExtraEndJuzIds(st);
       if (!curSaved.includes(target.juzObj.id)) st.extraMemJuzIds = [...curSaved, target.juzObj.id].sort((a, b) => a - b);
+      clearStudentPendingJuz(st, target.juzObj.id);
     }
   }
   r.sabrEntries = entries.map(e => ({ juzName: e.juzName, score: e.score, eval: e.eval }));
@@ -19830,13 +20050,17 @@ function setSabrScore(studentId, rawVal) {
     } else if (juz && ev !== "إعادة" && st) {
       const curSaved = getStudentExtraEndJuzIds(st);
       if (!curSaved.includes(juz.id)) st.extraMemJuzIds = [...curSaved, juz.id].sort((a, b) => a - b);
+      clearStudentPendingJuz(st, juz.id);
     }
+    if (juz && ev !== "إعادة" && st) clearStudentPendingJuz(st, juz.id);
     // Strip any stale "استعداداً لاختبار السبر" prep note while preserving Tajweed tags!
     r.notes = applyTajweedToNote(stripStaleHwSabrPrepText(r.notes || ""), r);
     // If homework was empty or pointed to Sabr of the same Juz just passed, auto-recompute cleanly!
     const hwMissing = !r.hwSurahId && !r.hwSabrJuz;
     const hwSamePassedSabr = Boolean(juz && ev !== "إعادة" && r.hwSabrJuz && getJuzByName(r.hwSabrJuz)?.id === juz.id);
-    if (r.recIsSabr || hwMissing || hwSamePassedSabr) {
+    if (r.recIsSabr && ev === "إعادة" && juz && checkSardSabrAutoAdvanceOnRepeat(h, s, st, r, juz)) {
+      // Auto-advanced after repeated Sabr fails with persistent pending-Juz reminder!
+    } else if (r.recIsSabr || hwMissing || hwSamePassedSabr) {
       recomputeAutoDailyHomework(st, r, h);
     }
   } else {
@@ -19845,6 +20069,11 @@ function setSabrScore(studentId, rawVal) {
   if (Array.isArray(r.majPageEvals)) r.majPageEvals = null;
     if (juz) {
       r.majPages = juz.pages;
+      if (ev !== "إعادة" && st) {
+        const curSaved = getStudentExtraEndJuzIds(st);
+        if (!curSaved.includes(juz.id)) st.extraMemJuzIds = [...curSaved, juz.id].sort((a, b) => a - b);
+        clearStudentPendingJuz(st, juz.id);
+      }
     }
     applyNextMajorReview(st, r, isMajorPassEval(ev));
     r.notes = applyTajweedToNote(buildConciseRecNote(ev, { sabrJuz: r.sabrJuz, score }), r);
@@ -21264,16 +21493,24 @@ function reconcileRecEvalAfterRangeChange(h, s, st, r, snap, skipAutoApply = fal
   }
 }
 
+function getHalaqaOverallEvalMode(hOverride = null) {
+  const h = hOverride || (typeof getActiveHalaqa === "function" ? getActiveHalaqa() : null);
+  return h?.overallEvalMode === "auto_editable" ? "auto_editable" : "auto_only";
+}
+
 function shouldUsePerPageMode(r, st, kind, h) {
   if (!r || !st || st.track === "rashidi") return false;
   if (kind !== "rec" && kind !== "min") return false;
-  if (kind === "rec" && r.recIsSabr && r.sabrJuz) return false;
+  if (kind === "rec" && ((r.recIsSabr && r.sabrJuz) || (r.recIsSard && r.sardJuz))) return false;
   const slots = buildRecitationPageSlots(r, st, kind, h);
   if (slots.length < 2 || slots.length > 50) return false;
   const mKey = getPageModeKey(kind);
-  if (r[mKey] === "single") return false;
+  if (h?.perPageAutoEnabled === false) {
+    return r[mKey] === "multi";
+  }
+  const ovMode = getHalaqaOverallEvalMode(h);
+  if (ovMode === "auto_editable" && r[mKey] === "single") return false;
   if (r[mKey] === "multi") return true;
-  // Auto-open per-page ONLY when student actually recites >= 1.35 real pages AND at least 2 meaningful pages (>= 0.2 ص each)!
   const realTotalPg = kind === "maj"
     ? (parseArabicNum(r.majPages, 0) || slots.length)
     : calcSegmentsPages(getSegments(r, kind));
@@ -21494,8 +21731,10 @@ function applyPerPageAutoEval(studentId, kind, overrideOverallEv = null, trigger
   const totalErrs = pages.reduce((a, p) => a + (Number(p.errors) || 0), 0);
   const totalAlrts = pages.reduce((a, p) => a + (Number(p.alerts) || 0), 0);
   const { overallEv: calcEv, passed, failed } = computePerPageOverallGrade(pages);
-  r[getPageOverallKey(kind)] = "";
-  const overallEv = overrideOverallEv || calcEv;
+  const ovEditable = getHalaqaOverallEvalMode(h) === "auto_editable";
+  const savedManOv = ovEditable ? (overrideOverallEv || r[getPageOverallKey(kind)] || "") : "";
+  r[getPageOverallKey(kind)] = ovEditable ? (overrideOverallEv ? overrideOverallEv : (r[getPageOverallKey(kind)] || "")) : "";
+  const overallEv = (ovEditable && savedManOv) ? savedManOv : (overrideOverallEv || calcEv);
   if (!overallEv) {
     clearPerPageEvaluation(studentId, kind);
     return;
@@ -21652,10 +21891,14 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
       return `<button type="button" class="pp-ov-mini-btn ${onCls}" onclick="setPerPageOverallOverride('${studentId}','${kind}','${ev}')">${ev === "جيد جداً" ? "ج.ج" : ev}</button>`;
     }).join("");
 
+    const ovMode = getHalaqaOverallEvalMode(h);
+    const isOvEditable = ovMode === "auto_editable";
     return `<div class="pp-studio-v86">
       <div class="pp-eval-hdr">
         <span>📄 تقييم صفحة بصفحة (${pages.length} صفحات)</span>
-        <button type="button" class="pp-mode-link" onclick="togglePerPageEvalMode('${studentId}','${kind}','single')">↩️ وضع إجمالي</button>
+        ${isOvEditable
+          ? `<button type="button" class="pp-mode-link" onclick="togglePerPageEvalMode('${studentId}','${kind}','single')">↩️ وضع موحّد</button>`
+          : `<span style="font-size:10.5px; font-weight:800; color:var(--green);">⚡ حساب تلقائي</span>`}
       </div>
       <div class="pp-tabs-strip ${pages.length > 6 ? 'is-many' : ''}" style="grid-template-columns:repeat(${pages.length <= 4 ? pages.length : (pages.length <= 6 ? 3 : 4)}, minmax(0, 1fr));">${tabsHtml}</div>
       <div class="pp-active-box">
@@ -21683,13 +21926,17 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
       </div>
       ${repeatHtml}
       <div class="pp-overall-card">
-        <div class="pp-ov-row1" style="margin-bottom:0;">
+        <div class="pp-ov-row1" style="margin-bottom:${isOvEditable ? '6px' : '0'};">
           <div class="pp-ov-info">
-            <div>📊 التقييم الإجمالي (متوسط الصفحات): <span class="badge ${ovCls}">${(ov.overallEv || savedKindEval) ? (ov.overallEv || savedKindEval) : "بانتظار التقييم"}</span></div>
-            <small>مقيّم: ${gradedPages.length}/${pages.length} • أخطاء: ${totE} • تنبيه: ${totA}${failed.length && ov.overallEv !== "إعادة" ? " • الإعادة بالملاحظات" : ""}</small>
+            <div>📊 التقييم الإجمالي${savedOv && isOvEditable ? " (معدّل يدوياً)" : " (تلقائي)"}: <span class="badge ${ovCls}">${effectiveOv || savedKindEval || "بانتظار التقييم"}</span></div>
+            <small>مقيّم: ${gradedPages.length}/${pages.length} • أخطاء: ${totE} • تنبيه: ${totA}${failed.length && effectiveOv !== "إعادة" ? " • الإعادة بالملاحظات" : ""}</small>
           </div>
           ${savedKindEval ? `<button type="button" class="lms-btn" style="padding:4px 8px; color:var(--red); border-color:rgba(185,34,34,0.28); background:var(--red-bg); flex-shrink:0;" onclick="clearPerPageEvaluation('${studentId}','${kind}')" title="إلغاء التقييم بالكامل">✕</button>` : ""}
         </div>
+        ${isOvEditable ? `<div class="pp-ov-override-row">
+          <span>تعديل الإجمالي:</span>
+          <div class="pp-ov-mini-4">${ovMiniBtnsHtml}</div>
+        </div>` : ""}
       </div>
     </div>`;
   }
@@ -21835,9 +22082,15 @@ function spCanQuickEval(kind) {
 
 
 // ==================== MAKIN v126: BULLETPROOF SARD EXTRACTOR & MAJOR REVIEW PASS / SYNC ENGINE ====================
-function isMajorPassEval(ev) {
+function isMajorPassEval(ev, hOverride = null) {
   const e = String(ev || "").trim();
-  return e === "ممتاز" || e === "جيد جداً";
+  if (e === "ممتاز" || e === "جيد جداً") return true;
+  if (e === "جيد") {
+    const h = hOverride || (typeof getActiveHalaqa === "function" ? getActiveHalaqa() : null);
+    // Default true (جيد مثل الإعادة في الكبرى)، وإذا ألغاه الشيخ يصبح جيد ناجحاً وينتقل!
+    return h ? (h.majorGoodAsRepeat === false) : false;
+  }
+  return false;
 }
 
 function extractSardJuzIds(rawIds, labelText = "", fromText = "", toText = "") {
@@ -24049,6 +24302,11 @@ function updateDrawerQuickStates() {
   const mpb = document.getElementById("drawerMonthlyPlanBadge");
   if (mpb && typeof getMonthlyPlanDrawerBadgeText === "function") {
     mpb.textContent = getMonthlyPlanDrawerBadgeText();
+  }
+  const hrb = document.getElementById("drawerHalaqaRulesBadge");
+  if (hrb) {
+    const _hR = getActiveHalaqa();
+    hrb.textContent = _hR?.majorRevSystem === "seniors" ? "الكبار" : "الصغار";
   }
   const pab = document.getElementById("drawerParentAlertsBadge");
   if (pab && typeof getFlaggedParentAlertsList === "function") {
@@ -28955,7 +29213,13 @@ function renderCardBody(s, st, r, idx) {
   const absNoticeHtml = isAbsCard
     ? `<div class="es-abs-notice slim-v115"><span>🚫 <b>${escapeHtml(r.attendance)}</b> — الواجب مُرحّل للجلسة القادمة</span></div>`
     : (isNoRecCard ? `<div class="es-norecite-notice slim-v115"><span>📋 <b>لم يُسمّع</b> — يُحتسب حاضراً ويُرحّل واجبه للجلسة القادمة</span></div>` : "");
-  return `${_attnBannerHtml}<div class="es-att-shell"><div class="es-att-5">${attBtns}</div></div>${absNoticeHtml}${bonusSectionHtml}${bodyCore}`;
+  const _pendIdsEs = st.track !== "rashidi" ? getStudentPendingJuzIds(st) : [];
+  const _pendJuzBannerHtml = _pendIdsEs.length ? _pendIdsEs.map(jid => `
+    <div class="es-pending-juz-strip">
+      <span>⚠️ لم يُتمّ الجزء السابق: <b>${escapeHtml(formatPendingJuzLabel(jid))}</b></span>
+      <button type="button" class="btn btn-success btn-sm" style="padding:3px 9px; font-size:11px;" onclick="openPendingJuzSabrNow('${st.id}',${jid})">🎓 سبره الآن</button>
+    </div>`).join("") : "";
+  return `${_attnBannerHtml}${_pendJuzBannerHtml}<div class="es-att-shell"><div class="es-att-5">${attBtns}</div></div>${absNoticeHtml}${bonusSectionHtml}${bodyCore}`;
 }
 
 // ==================== RECORD MUTATIONS ====================
@@ -29656,10 +29920,12 @@ function setRecEval(studentId, ev, errCount = null) {
     const sardObj = getJuzByName(r.sardJuz);
     const jLbl = sardObj ? formatJuzCompactLabel(sardObj) : formatJuzClean(r.sardJuz);
     if (ev === "إعادة") {
-      r.hwSardJuz = r.sardJuz;
-      r.hwSabrJuz = "";
-      r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwEndSurahId = ""; r.hwExtras = [];
-      r.notes = applyTajweedToNote(`يُرجى إعادة سرد ${jLbl} للجلسة القادمة.`, r);
+      if (!checkSardSabrAutoAdvanceOnRepeat(h, s, st, r, sardObj)) {
+        r.hwSardJuz = r.sardJuz;
+        r.hwSabrJuz = "";
+        r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwEndSurahId = ""; r.hwExtras = [];
+        r.notes = applyTajweedToNote(`يُرجى إعادة سرد ${jLbl} للجلسة القادمة.`, r);
+      }
     } else {
       r.hwSardJuz = "";
       r.hwSabrJuz = r.sardJuz;
@@ -29685,11 +29951,17 @@ function setRecEval(studentId, ev, errCount = null) {
     }
     const sabrObj = getJuzByName(r.sabrJuz);
     if (ev === "إعادة") {
-      r.hwSabrJuz = r.sabrJuz;
-      r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
+      if (!checkSardSabrAutoAdvanceOnRepeat(h, s, st, r, sabrObj)) {
+        r.hwSabrJuz = r.sabrJuz;
+        r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
+      }
     } else if (sabrObj) {
       r.hwSabrJuz = "";
-      if (st) { const curSaved = getStudentExtraEndJuzIds(st); if (!curSaved.includes(sabrObj.id)) st.extraMemJuzIds = [...curSaved, sabrObj.id].sort((a,b)=>a-b); }
+      if (st) {
+        const curSaved = getStudentExtraEndJuzIds(st);
+        if (!curSaved.includes(sabrObj.id)) st.extraMemJuzIds = [...curSaved, sabrObj.id].sort((a,b)=>a-b);
+        clearStudentPendingJuz(st, sabrObj.id);
+      }
       const nxtHw = computeFirstHwAfterJuz(sabrObj, dir, st?.pace || 0.5, getStudentJuzOrder(st, h), getStudentExtraEndJuzIds(st));
       if (nxtHw) Object.assign(r, nxtHw);
     }
@@ -31465,8 +31737,14 @@ function renderDailyReport() {
         if (fullNotePlainLen > maxDailyNoteLen) maxDailyNoteLen = fullNotePlainLen;
 
         const noteCellCls = sabrNoteInfo.hasBadge ? (sabrNoteInfo.isRep ? "td-note-sabr-rep" : "td-note-sabr") : "";
+        const pendingJuzBadge = !isRashidiRow ? buildPendingJuzNoteBadge(st, true) : { hasBadge: false, html: "", plain: "" };
+        if (pendingJuzBadge.plain.length > 0) {
+          const withPendLen = fullNotePlainLen + pendingJuzBadge.plain.length + 4;
+          if (withPendLen > maxDailyNoteLen) maxDailyNoteLen = withPendLen;
+        }
         const notePartsHtml = [];
         if (sabrNoteInfo.hasBadge) notePartsHtml.push(sabrNoteInfo.html);
+        if (pendingJuzBadge.hasBadge) notePartsHtml.push(pendingJuzBadge.html);
         if (tjBadge.html) notePartsHtml.push(tjBadge.html);
         if (cleanFreeRest) notePartsHtml.push(`<span>${escapeHtml(cleanFreeRest)}</span>`);
         const noteCellHtml = notePartsHtml.join(" ");
@@ -31595,10 +31873,11 @@ function renderDailyReport() {
         const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
         const majRaw = isRashidiRow ? "" : (isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || "")))));
         const majSt = getEvalCellStyle(majRaw, !isRashidiRow && isAbs);
+        const satPendBadge = !isRashidiRow ? buildPendingJuzNoteBadge(st, true) : { hasBadge: false, html: "", plain: "" };
         const satTjBadge = (!isRashidiRow && !isAbs && !isNoRec) ? buildTajweedReportBadgeHtml(r) : { html: "", plain: "" };
         const satFreeNote = stripTajweedSuffix(stripMushafPageTokens(r.notes || "")).trim();
-        const noteTxt = [satTjBadge.plain, satFreeNote].filter(Boolean).join(" — ");
-        const noteHtml = [satTjBadge.html, satFreeNote ? `<span>${escapeHtml(satFreeNote)}</span>` : ""].filter(Boolean).join(" ");
+        const noteTxt = [satPendBadge.plain, satTjBadge.plain, satFreeNote].filter(Boolean).join(" — ");
+        const noteHtml = [satPendBadge.html, satTjBadge.html, satFreeNote ? `<span>${escapeHtml(satFreeNote)}</span>` : ""].filter(Boolean).join(" ");
         if (noteTxt.length > maxSatNoteLen) maxSatNoteLen = noteTxt.length;
         const ptsDisp = getDailyReportPointsDisplay(s, r, st, isAbs, isNoRec);
 
@@ -34831,9 +35110,8 @@ async function exportDailyExcelStyled() {
         const restXlNote = (!isRashidiRow && !isAbs && !isNoRecXl)
           ? applyTajweedToNote(baseXlRest, r)
           : baseXlRest;
-        const cleanNote = xlSabrNote.hasBadge
-          ? (restXlNote ? `${xlSabrNote.plain} — ${restXlNote}` : xlSabrNote.plain)
-          : restXlNote;
+        const xlPendJuz = !isRashidiRow ? buildPendingJuzNoteBadge(st, false) : { hasBadge: false, plain: "" };
+        const cleanNote = [xlSabrNote.hasBadge ? xlSabrNote.plain : "", xlPendJuz.hasBadge ? xlPendJuz.plain : "", restXlNote].filter(Boolean).join(" — ");
         const ptsDisp = getDailyReportPointsDisplay(s, r, st, isAbs, isNoRecXl);
 
         const rIdx = 8 + idx;
@@ -40556,6 +40834,276 @@ function getStudentAttentionAlert(h, curSession, studentId, precomputedRelevant 
 }
 
 
+
+// ==================== MAKIN v134: PENDING INCOMPLETE JUZ (3+ SARD/SABR FAILS) & HALAQA SETTINGS STUDIO ====================
+function getStudentPendingJuzIds(st) {
+  if (!st || !Array.isArray(st.pendingIncompleteJuzIds)) return [];
+  return Array.from(new Set(st.pendingIncompleteJuzIds.map(Number).filter(id => id >= 1 && id <= 30))).sort((a, b) => a - b);
+}
+
+function addStudentPendingJuz(st, juzId) {
+  if (!st) return;
+  const id = Number(juzId);
+  if (!(id >= 1 && id <= 30)) return;
+  const cur = getStudentPendingJuzIds(st);
+  if (!cur.includes(id)) st.pendingIncompleteJuzIds = [...cur, id].sort((a, b) => a - b);
+}
+
+function clearStudentPendingJuz(st, juzId) {
+  if (!st) return;
+  const id = Number(juzId);
+  const cur = getStudentPendingJuzIds(st);
+  if (cur.includes(id)) {
+    st.pendingIncompleteJuzIds = cur.filter(x => x !== id);
+  }
+}
+
+function formatPendingJuzLabel(juzId) {
+  const j = JUZ_PAGE_MAP[Number(juzId)];
+  if (!j) return `الجزء ${juzId}`;
+  return j.id >= 28 ? `جزء ${j.shortName} (الجزء ${j.id})` : `الجزء ${j.id}`;
+}
+
+function buildPendingJuzNoteBadge(st, isHtml = true) {
+  const ids = getStudentPendingJuzIds(st);
+  if (!ids.length) return { hasBadge: false, html: "", plain: "" };
+  const listTxt = ids.map(formatPendingJuzLabel).join(" و");
+  const plain = `لم يُتمّ الجزء السابق: ${listTxt}`;
+  const htmlStr = isHtml ? `<span class="rep-pending-juz-badge">⚠️ ${escapeHtml(plain)}</span>` : plain;
+  return { hasBadge: true, html: htmlStr, plain };
+}
+
+function countStudentJuzSardSabrRepeats(h, curSession, studentId, juzId) {
+  if (!h || !studentId || !(Number(juzId) >= 1)) return 0;
+  const targetId = Number(juzId);
+  const refDate = curSession?.date || todayISO();
+  const sessList = (h.sessions || [])
+    .filter(s => s && !s.noClass && s.date && s.date <= refDate)
+    .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  let cnt = 0;
+  for (const s of sessList) {
+    const r = s.records?.[studentId];
+    if (!r || String(r.attendance || "").includes("غياب")) continue;
+    const sardMatch = Boolean(r.recIsSard && r.sardJuz && getJuzByName(r.sardJuz)?.id === targetId);
+    const sabrMatch = Boolean(r.sabrJuz && getJuzByName(r.sabrJuz)?.id === targetId);
+    if (sardMatch) {
+      if (r.recEval === "إعادة") cnt++;
+      else if (r.recEval) break;
+    } else if (sabrMatch) {
+      const sEv = getDailySabrEval(r) || r.recEval || r.majEval;
+      if (sEv === "إعادة") cnt++;
+      else if (sEv) break;
+    }
+  }
+  return cnt;
+}
+
+function checkSardSabrAutoAdvanceOnRepeat(h, s, st, r, juzObj) {
+  if (!h || !st || !r || !juzObj || !h.sardSabrAutoAdvance) return false;
+  const maxFails = Math.max(2, Number(h.sardSabrMaxFails) || 3);
+  const fails = countStudentJuzSardSabrRepeats(h, s, st.id, juzObj.id);
+  if (fails < maxFails) return false;
+
+  addStudentPendingJuz(st, juzObj.id);
+  const dir = st.direction || h.defaultDir || "desc";
+  const pace = st.pace || 0.5;
+  const savedPlusPending = Array.from(new Set([...getStudentExtraEndJuzIds(st), ...getStudentPendingJuzIds(st)]));
+  const nxtHw = computeFirstHwAfterJuz(juzObj, dir, pace, getStudentJuzOrder(st, h), savedPlusPending);
+  r.hwSardJuz = "";
+  r.hwSabrJuz = "";
+  if (nxtHw) Object.assign(r, nxtHw);
+  const jLbl = formatPendingJuzLabel(juzObj.id);
+  r.notes = applyTajweedToNote(`تكررت الإعادة (${fails}×) — انتقال للحفظ الجديد مع إبقاء تنبيه ${jLbl} حتى السبر.`, r);
+  return true;
+}
+
+function openPendingJuzSabrNow(studentId, juzId) {
+  const j = JUZ_PAGE_MAP[Number(juzId)];
+  if (!j) return;
+  openCardId = studentId;
+  onSabrJuzChange(studentId, j.name);
+  evalSheetTool = "sabr";
+  syncStudentEvalSheet();
+  showToast(`🎓 فُتح سبر ${formatPendingJuzLabel(j.id)} — أدخل العلامة أو التقييم لإتمامه وإزالة التنبيه`);
+}
+
+function openHalaqaSettingsModal() {
+  renderHalaqaSettingsModal();
+  openModal("halaqaRulesModal");
+}
+
+function updateHalaqaRuleSetting(key, value) {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  if (key === "pointsEnabled") {
+    h.pointsEnabled = Boolean(value);
+  } else if (key === "overallEvalMode") {
+    h.overallEvalMode = value === "auto_editable" ? "auto_editable" : "auto_only";
+  } else if (key === "perPageAutoEnabled") {
+    h.perPageAutoEnabled = Boolean(value);
+  } else if (key === "majorRevSystem") {
+    h.majorRevSystem = value === "seniors" ? "seniors" : "juniors";
+    if (document.getElementById("setMajorRevSystem")) document.getElementById("setMajorRevSystem").value = h.majorRevSystem;
+  } else if (key === "majorGoodAsRepeat") {
+    h.majorGoodAsRepeat = Boolean(value);
+  } else if (key === "sardSabrAutoAdvance") {
+    h.sardSabrAutoAdvance = Boolean(value);
+  } else if (key === "sardSabrMaxFails") {
+    h.sardSabrMaxFails = Math.max(2, Math.min(6, Number(value) || 3));
+  } else if (key === "parentAlertThreshold") {
+    h.parentAlertThreshold = Math.max(2, Math.min(5, Number(value) || 3));
+  } else if (key === "sequentialDayLock") {
+    h.sequentialDayLock = Boolean(value);
+    const seqCb = document.getElementById("setSeqDayLock");
+    if (seqCb) seqCb.checked = h.sequentialDayLock;
+  }
+  saveState();
+  renderHalaqaSettingsModal();
+  updateDrawerQuickStates();
+  renderSessionPreservingScroll();
+  if (document.getElementById("studentEvalSheet")?.classList.contains("show")) syncStudentEvalSheet();
+  const activeView = document.querySelector(".view.active")?.id;
+  if (activeView === "view-reports") { renderDailyReport(); renderMonthlyReport(); }
+  if (activeView === "view-stats") renderStats();
+}
+
+function renderHalaqaSettingsModal() {
+  const h = getActiveHalaqa();
+  const body = document.getElementById("halaqaRulesModalBody");
+  if (!h || !body) return;
+
+  const ptsOn = isPointsEnabled(h);
+  const ovMode = getHalaqaOverallEvalMode(h);
+  const ppAuto = h.perPageAutoEnabled !== false;
+  const majSys = h.majorRevSystem === "seniors" ? "seniors" : "juniors";
+  const goodAsRep = h.majorGoodAsRepeat !== false;
+  const autoAdvJuz = Boolean(h.sardSabrAutoAdvance);
+  const maxFails = Number(h.sardSabrMaxFails) || 3;
+  const alertThr = Number(h.parentAlertThreshold) || 3;
+  const seqLock = h.sequentialDayLock !== false;
+
+  body.innerHTML = `
+    <div class="exec-card">
+      <div class="exec-card-ttl"><span>⭐ النقاط والتحفيز</span></div>
+      <button type="button" class="hs-toggle-row" onclick="updateHalaqaRuleSetting('pointsEnabled', ${!ptsOn})">
+        <div class="hs-toggle-txt">
+          <b>تفعيل نظام النقاط في الحلقة</b>
+          <small>${ptsOn ? "مفعّل — تظهر النقاط في البطاقات والتقارير ولوحة الشرف" : "موقّف — تُخفى أعمدة النقاط من الجلسات والتقارير"}</small>
+        </div>
+        <span class="m-switch ${ptsOn ? 'on' : ''}" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="exec-card">
+      <div class="exec-card-ttl"><span>📊 التقييم الإجمالي للصفحات</span></div>
+      <div class="hs-choice-2">
+        <button type="button" class="hs-choice-card ${ovMode === 'auto_only' ? 'on' : ''}" onclick="updateHalaqaRuleSetting('overallEvalMode', 'auto_only')">
+          <b>⚡ تلقائي بالكامل</b>
+          <span>يُخفي زر «وضع إجمالي»؛ يُقيّم الصفحات ويعرض التقييم الإجمالي المحسوب مباشرة</span>
+        </button>
+        <button type="button" class="hs-choice-card ${ovMode === 'auto_editable' ? 'on' : ''}" onclick="updateHalaqaRuleSetting('overallEvalMode', 'auto_editable')">
+          <b>✏️ تلقائي مع تعديل يدوي</b>
+          <span>يحسب الإجمالي تلقائياً مع إظهار أزرار تتيح لك تعديل الإجمالي يدوياً وقتما شئت</span>
+        </button>
+      </div>
+      <button type="button" class="hs-toggle-row" onclick="updateHalaqaRuleSetting('perPageAutoEnabled', ${!ppAuto})">
+        <div class="hs-toggle-txt">
+          <b>📄 فتح وضع «صفحة بصفحة» تلقائياً</b>
+          <small>${ppAuto ? "مفعّل عند تسميع صفحتين فأكثر" : "موقّف — تقييم موحّد مباشر بدون تقسيم الصفحات"}</small>
+        </div>
+        <span class="m-switch ${ppAuto ? 'on' : ''}" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="exec-card">
+      <div class="exec-card-ttl"><span>📘 نظام المراجعة الكبرى في الحلقة</span></div>
+      <div class="hs-choice-2">
+        <button type="button" class="hs-choice-card ${majSys === 'juniors' ? 'on' : ''}" onclick="updateHalaqaRuleSetting('majorRevSystem', 'juniors')">
+          <b>🧒 نظام الصغار</b>
+          <span>الكبرى تشمل كل ما حفظه الطالب حتى الآن (حتى الجزء الجاري حفظه ثم يعود للبداية)</span>
+        </button>
+        <button type="button" class="hs-choice-card ${majSys === 'seniors' ? 'on' : ''}" onclick="updateHalaqaRuleSetting('majorRevSystem', 'seniors')">
+          <b>🎓 نظام الكبار</b>
+          <span>الكبرى للأجزاء المسبورة فقط؛ لا يدخل الجزء الجديد إلا بعد إتمام سرده وسبره بنجاح</span>
+        </button>
+      </div>
+
+      <div style="font-size:11.8px; font-weight:800; color:var(--ink-700); margin:8px 0 6px;">⚖️ حكم تقييم «جيد» في المراجعة الكبرى:</div>
+      <div class="hs-choice-2" style="margin-bottom:0;">
+        <button type="button" class="hs-choice-card ${goodAsRep ? 'on' : ''}" onclick="updateHalaqaRuleSetting('majorGoodAsRepeat', true)">
+          <b>🔁 مثل الإعادة</b>
+          <span>تقييم «جيد» في الكبرى يثبّت نفس المقطع للجلسة القادمة ولا ينتقل</span>
+        </button>
+        <button type="button" class="hs-choice-card ${!goodAsRep ? 'on' : ''}" onclick="updateHalaqaRuleSetting('majorGoodAsRepeat', false)">
+          <b>✅ ناجح وينتقل</b>
+          <span>تقييم «جيد» في الكبرى ينقله للمقطع التالي وتُحتسب صفحاته</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="exec-card">
+      <div class="exec-card-ttl"><span>🔄 تعثّر الطالب في سرد أو سبر الجزء</span></div>
+      <div class="hs-choice-2">
+        <button type="button" class="hs-choice-card ${!autoAdvJuz ? 'on' : ''}" onclick="updateHalaqaRuleSetting('sardSabrAutoAdvance', false)">
+          <b>🔒 البقاء في الجزء</b>
+          <span>يبقى الطالب في سرد/سبر نفس الجزء حتى ينجح فيه ويخرج منه</span>
+        </button>
+        <button type="button" class="hs-choice-card ${autoAdvJuz ? 'on' : ''}" onclick="updateHalaqaRuleSetting('sardSabrAutoAdvance', true)">
+          <b>➡️ انتقال للحفظ الجديد</b>
+          <span>بعد تكرار الإعادة ينتقل للجزء التالي مع إبقاء تنبيه دائم بالملاحظات حتى يُسبره</span>
+        </button>
+      </div>
+      ${autoAdvJuz ? `
+        <div style="background:var(--brand-tint); border:1px solid var(--line); border-radius:10px; padding:8px 9px;">
+          <div style="font-size:11.5px; font-weight:800; color:var(--brand-slate);">الانتقال للحفظ الجديد بعد كم إعادة في السرد/السبر؟</div>
+          <div class="hs-pill-row-3">
+            ${[3, 4, 5].map(n => `<button type="button" class="hs-pill-btn ${maxFails === n ? 'on' : ''}" onclick="updateHalaqaRuleSetting('sardSabrMaxFails', ${n})">${n} إعادات</button>`).join("")}
+          </div>
+          <div style="font-size:10.8px; color:var(--ink-500); font-weight:700; margin-top:6px; line-height:1.45;">
+            📌 سيبقى تنبيه <b>«لم يُتمّ الجزء السابق: اسم الجزء (رقمه)»</b> ظاهراً في الملاحظات تلقائياً في كل جلسة وتقرير حتى يعطيه الشيخ تقييم وعلامة السبر بنجاح.
+          </div>
+        </div>` : ""}
+    </div>
+
+    <div class="exec-card">
+      <div class="exec-card-ttl"><span>🚨 تنبيهات الأهل وتنظيم الجلسة</span></div>
+      <div style="font-size:11.8px; font-weight:800; color:var(--ink-700); margin-bottom:4px;">إظهار تنبيه الأهل الفوري بعد تكرار الغياب أو الإعادة:</div>
+      <div class="hs-pill-row-3" style="margin-bottom:9px;">
+        ${[2, 3, 4].map(n => `<button type="button" class="hs-pill-btn ${alertThr === n ? 'on' : ''}" onclick="updateHalaqaRuleSetting('parentAlertThreshold', ${n})">${n} جلسات متتالية</button>`).join("")}
+      </div>
+      <button type="button" class="hs-toggle-row" onclick="updateHalaqaRuleSetting('sequentialDayLock', ${!seqLock})">
+        <div class="hs-toggle-txt">
+          <b>🔒 قفل الأيام القادمة بالتسلسل</b>
+          <small>يفتح يوماً قادماً واحداً فقط حتى تُنهي جلسته أو تسجّله عطلة</small>
+        </div>
+        <span class="m-switch ${seqLock ? 'on' : ''}" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="hs-toggle-row" onclick="toggleHandsFreeFlow(); renderHalaqaSettingsModal();">
+        <div class="hs-toggle-txt">
+          <b>⚡ الانتقال التلقائي للطالب التالي</b>
+          <small>ينتقل تلقائياً للطالب التالي بعد إتمام التقييم</small>
+        </div>
+        <span class="m-switch ${handsFreeFlow ? 'on' : ''}" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="hs-toggle-row" onclick="toggleAutoSinkDone(); renderHalaqaSettingsModal();">
+        <div class="hs-toggle-txt">
+          <b>⬇️ إنزال المُنجَزين للأسفل</b>
+          <small>يُبقي الطلاب المنتظرين في أعلى القائمة تلقائياً</small>
+        </div>
+        <span class="m-switch ${autoSinkDone ? 'on' : ''}" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="exec-card">
+      <div class="exec-card-ttl"><span>🔗 اختصارات متقدمة للحلقة</span></div>
+      <div class="hs-quick-links-3">
+        <button type="button" class="hs-qlink-btn" onclick="closeModal('halaqaRulesModal'); openClassDaysModal();"><span>🗓️</span><span>أيام الدوام</span></button>
+        <button type="button" class="hs-qlink-btn" onclick="closeModal('halaqaRulesModal'); openSettingsModal(); switchSettingsTab('system');"><span>🎯</span><span>معيار الأخطاء</span></button>
+        <button type="button" class="hs-qlink-btn" onclick="closeModal('halaqaRulesModal'); openSettingsModal(); switchSettingsTab('halaqa');"><span>🏛️</span><span>بيانات الحلقة</span></button>
+      </div>
+    </div>`;
+}
+
 // ==================== MAKIN v133: TRIPLE ABSENCE / TRIPLE REPEAT PARENT ALERT STUDIO ====================
 let _paStudentId = "";
 let _paAlertType = "absent"; // "absent" | "repeat"
@@ -40625,12 +41173,13 @@ function getFlaggedParentAlertsList(hOverride = null, sOverride = null) {
   const s = sOverride || getCurrentSession();
   if (!h || !Array.isArray(h.students)) return [];
   const out = [];
+  const thr = Math.max(2, Number(h.parentAlertThreshold) || 3);
   h.students.forEach(st => {
     const sk = getStudentConsecutiveStreaks(h, s, st.id);
-    if (sk.absStreak >= 3) {
+    if (sk.absStreak >= thr) {
       out.push({ student: st, type: "absent", count: sk.absStreak, sessions: sk.absSessions });
     }
-    if (sk.repStreak >= 3) {
+    if (sk.repStreak >= thr) {
       out.push({ student: st, type: "repeat", count: sk.repStreak, sessions: sk.repSessions });
     }
   });
@@ -40641,9 +41190,10 @@ function checkAndFireTripleAlert(studentId, triggerKind) {
   const h = getActiveHalaqa(), s = getCurrentSession();
   const st = h?.students?.find(x => x.id === studentId);
   if (!h || !s || !st) return;
+  const thr = Math.max(2, Number(h.parentAlertThreshold) || 3);
   const sk = getStudentConsecutiveStreaks(h, s, studentId);
-  const isAbs = triggerKind === "absent" && sk.absStreak >= 3;
-  const isRep = triggerKind === "repeat" && sk.repStreak >= 3;
+  const isAbs = triggerKind === "absent" && sk.absStreak >= thr;
+  const isRep = triggerKind === "repeat" && sk.repStreak >= thr;
   if (!isAbs && !isRep) return;
 
   const cnt = isAbs ? sk.absStreak : sk.repStreak;
@@ -40972,7 +41522,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v133";
+const TIBYAN_APP_VERSION = "v134";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -43869,5 +44419,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v133 -->
+<!-- Makin App v134 -->
 </html>
