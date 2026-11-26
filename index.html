@@ -14490,6 +14490,370 @@ table.t-daily td.td-sard,
   border-radius: 8px;
 }
 
+
+/* ==================== MAKIN v139: EXECUTIVE PROGRAMS & POINTS STUDIO REDESIGN ==================== */
+#programsModal .prog-tabs-bar-v139 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  background: var(--white);
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+#programsModal .prog-tabs-bar-v139 .prog-tab-btn {
+  border: 1px solid transparent;
+  background: var(--bg);
+  color: var(--ink-700);
+  border-radius: 11px;
+  padding: 6px 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  transition: background 0.14s ease, color 0.14s ease, box-shadow 0.14s ease;
+}
+#programsModal .prog-tabs-bar-v139 .prog-tab-btn.on {
+  background: #142a46;
+  color: #ffffff;
+  box-shadow: 0 3px 9px rgba(20, 42, 70, 0.22);
+}
+[data-theme="dark"] #programsModal .prog-tabs-bar-v139 .prog-tab-btn.on {
+  background: #c8a14b;
+  color: #0f233c;
+}
+
+/* Compact Executive Status Strip for Points Tab */
+.pts-status-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: linear-gradient(140deg, #102540 0%, #1d3c61 100%);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin-bottom: 9px;
+  border-right: 4px solid #c8a14b;
+  box-shadow: 0 4px 12px rgba(16, 37, 64, 0.16);
+}
+.pts-status-strip.is-off {
+  background: linear-gradient(140deg, #374151 0%, #4b5563 100%);
+  border-right-color: #9ca3af;
+}
+.pts-ss-info { min-width: 0; flex: 1; }
+.pts-ss-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.pts-ss-sub {
+  font-size: 11px;
+  color: #d2e2f0;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pts-ss-toggle {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-radius: 99px;
+  padding: 5px 10px;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.pts-ss-toggle.on {
+  background: rgba(22, 163, 74, 0.28);
+  border-color: rgba(134, 239, 172, 0.55);
+  color: #dcfce7;
+}
+.pts-ss-toggle:active { transform: scale(0.96); }
+
+/* Crisp Elevated 3 KPI Tiles */
+.pts-kpi-3-v139 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  margin-bottom: 9px;
+}
+.pts-kpi-card-v139 {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 3px solid #142a46;
+  border-radius: 12px;
+  padding: 8px 5px 7px;
+  text-align: center;
+  box-shadow: 0 1px 5px rgba(16, 42, 73, 0.04);
+}
+.pts-kpi-card-v139.gold { border-top-color: #c8a14b; }
+.pts-kpi-card-v139.green { border-top-color: var(--green); }
+.pts-kpi-card-v139.warn { border-top-color: var(--orange); }
+.pts-kpi-card-v139 .pk-v {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink-900);
+  line-height: 1.2;
+}
+.pts-kpi-card-v139 .pk-l {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--ink-500);
+  margin-top: 3px;
+  white-space: nowrap;
+}
+
+/* Segmented Sub-tabs Bar */
+.pts-subtabs-v139 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 9px;
+  box-shadow: 0 1px 4px rgba(16, 42, 73, 0.04);
+}
+.pts-subtabs-v139 .pts-subtab-btn {
+  padding: 7.5px 4px;
+  border-radius: 9px;
+  font-size: 11.8px;
+}
+
+/* Balanced 4-Column Duration Presets + Full-Width Open Cycle Pill (ZERO Wrapping, ZERO Orphan Gap!) */
+.pts-dur-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 6px;
+}
+.pts-dur-card {
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-900);
+  border-radius: 11px;
+  padding: 7px 3px 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5px;
+  text-align: center;
+  transition: all 0.14s ease;
+  min-width: 0;
+}
+.pts-dur-card b {
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.pts-dur-card small {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ink-500);
+  white-space: nowrap;
+}
+.pts-dur-card.on {
+  background: #142a46;
+  border-color: #142a46;
+  color: #ffffff;
+  box-shadow: 0 3px 9px rgba(20, 42, 70, 0.22);
+}
+.pts-dur-card.on small { color: #f6dc93; }
+[data-theme="dark"] .pts-dur-card.on {
+  background: #c8a14b;
+  border-color: #c8a14b;
+  color: #0f233c;
+}
+[data-theme="dark"] .pts-dur-card.on small { color: #0f233c; opacity: 0.85; }
+
+.pts-dur-open-btn {
+  width: 100%;
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-700);
+  border-radius: 10px;
+  padding: 7.5px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  transition: all 0.14s ease;
+}
+.pts-dur-open-btn.on {
+  background: #142a46;
+  border-color: #c8a14b;
+  color: #f6dc93;
+  box-shadow: 0 3px 9px rgba(20, 42, 70, 0.2);
+}
+[data-theme="dark"] .pts-dur-open-btn.on {
+  background: #c8a14b;
+  border-color: #c8a14b;
+  color: #0f233c;
+}
+
+/* Cycle Timeline Progress Bar */
+.pts-cyc-prog-wrap {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 7px 9px;
+  margin-bottom: 9px;
+}
+.pts-cyc-prog-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink-700);
+  margin-bottom: 5px;
+}
+.pts-cyc-prog-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--line);
+  overflow: hidden;
+}
+.pts-cyc-prog-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #16794c 0%, #c8a14b 100%);
+  transition: width 0.25s ease;
+}
+.pts-cyc-prog-fill.expired {
+  background: linear-gradient(90deg, #b85610 0%, #dc2626 100%);
+}
+
+/* Clean Date Pair Inputs */
+.pts-dates-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.pts-dates-grid .field label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink-500);
+  margin-bottom: 3px;
+}
+.pts-dates-grid .field input[type="date"] {
+  width: 100%;
+  height: 36px;
+  padding: 0 8px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink-900);
+  font-size: 12.5px;
+  font-weight: 700;
+  direction: ltr;
+  text-align: center;
+}
+.pts-dates-grid .field input[type="date"]:focus {
+  border-color: #142a46;
+  background: var(--white);
+}
+
+/* Refined Matte Reset Card */
+.pts-reset-card-v139 {
+  background: var(--white);
+  border: 1.5px solid rgba(184, 86, 16, 0.3);
+  border-right: 4px solid var(--orange);
+  border-radius: 13px;
+  padding: 10px 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pts-reset-info {
+  font-size: 11.5px;
+  color: var(--ink-700);
+  font-weight: 600;
+  line-height: 1.5;
+}
+.pts-reset-info b { color: var(--ink-900); }
+.pts-reset-card-v139 .pts-reset-btn {
+  margin-bottom: 0;
+  padding: 9px 12px;
+  font-size: 12.8px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #c25e12 0%, #b45309 100%);
+  box-shadow: 0 3px 10px rgba(184, 86, 16, 0.22);
+}
+
+/* Polished Rules Table Cards */
+.pts-rules-v139 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin-bottom: 10px;
+}
+.pts-rule-card-v139 {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 3px solid #142a46;
+  border-radius: 12px;
+  padding: 9px 10px;
+}
+.pts-rule-card-v139.gold { border-top-color: #c8a14b; }
+.pts-rule-card-v139.green { border-top-color: var(--green); }
+.pts-rule-card-v139 h5 {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--brand-slate);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.pts-rule-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-700);
+  padding: 3px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.pts-rule-row:last-child { border-bottom: none; padding-bottom: 0; }
+.pts-rule-row b {
+  color: var(--ink-900);
+  font-weight: 800;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+#programsModalFooter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+#programsModalFooter .btn {
+  width: 100%;
+  padding: 9.5px 8px;
+  border-radius: 11px;
+  font-size: 12.5px;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -15016,7 +15380,7 @@ table.t-daily td.td-sard,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v138</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v139</span>
         </button>
       </div>
     </div>
@@ -16262,21 +16626,28 @@ table.t-daily td.td-sard,
 
 
 <!-- ===== MODAL: HALAQA PROGRAMS & CUSTOM BOOKS MANAGER (v44) ===== -->
-<div class="modal-backdrop" id="programsModal" style="z-index:136;">
-  <div class="modal-box" style="max-width:580px;">
-    <div class="modal-header">
-      <h3>📚 البرامج المصاحبة والكتب المعتمدة</h3>
-      <button class="close-x" onclick="closeModal('programsModal')">×</button>
+<div class="modal-backdrop exec-modal-backdrop" id="programsModal" style="z-index:136;" onclick="if(event.target===this) closeModal('programsModal')">
+  <div class="modal-box exec-modal-box" style="max-width:560px;">
+    <div class="exec-modal-hdr">
+      <div class="es-handle"></div>
+      <div class="exec-modal-hdr-row">
+        <div style="min-width:0; flex:1;">
+          <h3 id="programsModalHeading">📚 البرامج المصاحبة والتحفيز</h3>
+          <div class="exec-modal-sub" id="programsModalSub">إدارة الدروس والأنشطة ودورة النقاط</div>
+        </div>
+        <button type="button" class="exec-modal-close" onclick="closeModal('programsModal')" aria-label="إغلاق">×</button>
+      </div>
     </div>
 
-    <div class="prog-tabs-4">
+    <div class="prog-tabs-bar-v139">
       <button type="button" class="prog-tab-btn on" id="progTab_istihda" onclick="switchProgramTab('istihda')"><span class="stb-ico">🌿</span><span class="stb-lbl">استهداء</span></button>
       <button type="button" class="prog-tab-btn" id="progTab_hadith" onclick="switchProgramTab('hadith')"><span class="stb-ico">📜</span><span class="stb-lbl">الحديث</span></button>
       <button type="button" class="prog-tab-btn" id="progTab_activities" onclick="switchProgramTab('activities')"><span class="stb-ico">⚽</span><span class="stb-lbl">النشاطات</span></button>
       <button type="button" class="prog-tab-btn" id="progTab_points" onclick="switchProgramTab('points')"><span class="stb-ico">⭐</span><span class="stb-lbl">النقاط</span></button>
     </div>
 
-    <div id="programsModalBody"></div>
+    <div class="exec-modal-body" id="programsModalBody"></div>
+    <div class="exec-modal-footer" id="programsModalFooter" style="display:none;"></div>
   </div>
 </div>
 
@@ -32994,10 +33365,15 @@ function switchProgramTab(tabKey) {
 function renderProgramsModalBody() {
   const h = getActiveHalaqa();
   const body = document.getElementById("programsModalBody");
+  const footer = document.getElementById("programsModalFooter");
+  const headingEl = document.getElementById("programsModalHeading");
+  const subEl = document.getElementById("programsModalSub");
   if (!h || !body) return;
   const progs = ensureHalaqaPrograms(h);
 
   if (_activeProgTab === "points") {
+    if (headingEl) headingEl.textContent = "⭐ برنامج النقاط والتحفيز";
+    if (subEl) subEl.textContent = "إدارة دورة النقاط، الرصيد السابق، ولائحة التوزيع";
     const ptsOn = isPointsEnabled(h);
     const cyc = getPointsCycleStatus(h);
     const pc = cyc.pc;
@@ -33008,29 +33384,55 @@ function renderProgramsModalBody() {
     if (!window._ptsSubTab) window._ptsSubTab = "cycle";
     const subTab = window._ptsSubTab;
 
+    const computedSpanDays = (pc.startDate && pc.endDate && pc.endDate >= pc.startDate)
+      ? Math.round((new Date(pc.endDate + "T12:00:00") - new Date(pc.startDate + "T12:00:00")) / 86400000) + 1
+      : 0;
+    const effectiveDurDays = cyc.hasDuration ? (Number(pc.durationDays) > 0 ? Number(pc.durationDays) : computedSpanDays) : 0;
+
     const durShortVal = cyc.expired
-      ? "انتهت!"
+      ? "انتهت"
       : (cyc.hasDuration ? `${Math.max(0, cyc.daysLeft)} يوم` : "مفتوحة");
+    const durShortLbl = cyc.expired ? "⏰ حالة الدورة" : (cyc.hasDuration ? "⏳ المتبقي" : "♾️ المدة");
 
     let subBodyHtml = "";
 
     if (subTab === "cycle") {
-      const durBtns = [
-        [14, "أسبوعان (14 ي)"],
-        [30, "شهر (30 ي)"],
-        [60, "شهران (60 ي)"],
-        [90, "فصل (3 أشهر)"],
-        [0, "♾️ مدة مفتوحة"]
-      ].map(([d, lbl]) => `<button type="button" class="pts-dur-btn ${Number(pc.durationDays || 0) === d ? 'on' : ''}" onclick="setPointsCycleDurationPreset(${d})">${lbl}</button>`).join("");
+      const presets4 = [
+        [14, "أسبوعان", "14 يوم"],
+        [30, "شهر", "30 يوم"],
+        [60, "شهران", "60 يوم"],
+        [90, "فصل", "3 أشهر"]
+      ];
+      const durBtns = presets4.map(([d, title, sub]) => {
+        const isActive = cyc.hasDuration && (effectiveDurDays === d || computedSpanDays === d);
+        return `<button type="button" class="pts-dur-card ${isActive ? 'on' : ''}" onclick="setPointsCycleDurationPreset(${d})"><b>${title}</b><small>${sub}</small></button>`;
+      }).join("");
+      const isOpenDurActive = !cyc.hasDuration;
+      const isCustomDur = cyc.hasDuration && ![14, 30, 60, 90].includes(effectiveDurDays) && ![14, 30, 60, 90].includes(computedSpanDays);
 
       const statusBadge = cyc.expired
         ? `<span class="badge b-orange">⏰ انتهت (${cyc.endDate})</span>`
         : (cyc.hasDuration
-          ? `<span class="badge b-green">⏳ متبقٍ ${Math.max(0, cyc.daysLeft)} يوم</span>`
-          : `<span class="badge b-blue">♾️ مفتوحة</span>`);
+          ? `<span class="badge b-green">⏳ متبقي ${Math.max(0, cyc.daysLeft)} يوم</span>`
+          : `<span class="badge b-blue">♾️ دورة مفتوحة</span>`);
+
+      let progBarHtml = "";
+      if (cyc.hasDuration && effectiveDurDays > 0) {
+        const left = Math.max(0, Number(cyc.daysLeft) || 0);
+        const elapsed = Math.max(0, Math.min(effectiveDurDays, effectiveDurDays - left));
+        const pct = cyc.expired ? 100 : Math.max(4, Math.min(100, Math.round((elapsed / effectiveDurDays) * 100)));
+        progBarHtml = `
+          <div class="pts-cyc-prog-wrap">
+            <div class="pts-cyc-prog-top">
+              <span>${cyc.expired ? "⏰ انتهت المدة المحددة للدورة" : `مضى ${elapsed} من أصل ${effectiveDurDays} يوم${isCustomDur ? " (مخصّصة)" : ""}`}</span>
+              <span>${pct}%</span>
+            </div>
+            <div class="pts-cyc-prog-track"><div class="pts-cyc-prog-fill ${cyc.expired ? 'expired' : ''}" style="width:${pct}%;"></div></div>
+          </div>`;
+      }
 
       const histHtml = pc.history.length ? `
-        <details class="extra-box" style="margin-top:9px; margin-bottom:0;">
+        <details class="extra-box" style="margin-top:9px; margin-bottom:0; border-radius:12px;">
           <summary>📜 أرشيف الدورات السابقة (${pc.history.length})</summary>
           <div style="margin-top:8px;">
             ${pc.history.map(item => `
@@ -33046,25 +33448,25 @@ function renderProgramsModalBody() {
         </details>` : "";
 
       subBodyHtml = `
-        <div class="pts-guide-hint">
-          💡 حدّد مدة دورة النقاط (أو اتركها مفتوحة)، وعند انتهاء الدورة اضغط <b>«بدء دورة جديدة»</b> ليبدأ كل طالب من <b>0</b> دون حذف أي تقرير.
-        </div>
-
-        <div class="panel-block" style="margin-bottom:9px;">
-          <div class="panel-label">
-            <span>⏳ اختر مدة الدورة</span>
+        <div class="exec-card" style="margin-bottom:9px;">
+          <div class="exec-card-ttl" style="margin-bottom:8px;">
+            <span>⏳ مدة دورة النقاط</span>
             ${statusBadge}
           </div>
-          <div class="pts-dur-grid">${durBtns}</div>
-          <div class="exec-grid-2">
+          ${progBarHtml}
+          <div class="pts-dur-grid-4">${durBtns}</div>
+          <button type="button" class="pts-dur-open-btn ${isOpenDurActive ? 'on' : ''}" onclick="setPointsCycleDurationPreset(0)">
+            <span>♾️</span><span>دورة مفتوحة (بدون تاريخ نهاية)</span>
+          </button>
+          <div class="pts-dates-grid">
             <div class="field"><label>تاريخ البداية</label><input type="date" value="${escapeHtml(pc.startDate || '')}" onchange="onPointsCycleDateChange('startDate', this.value)"></div>
             <div class="field"><label>تاريخ النهاية (اختياري)</label><input type="date" value="${escapeHtml(pc.endDate || '')}" onchange="onPointsCycleDateChange('endDate', this.value)"></div>
           </div>
         </div>
 
-        <div class="pts-reset-card">
-          <button type="button" class="pts-reset-btn" onclick="resetPointsCycleFromZero(true)">🔄 تصفير وبدء دورة جديدة من الصفر</button>
-          <div class="pts-reset-sub">يحفظ أوائل الدورة الحالية في الأرشيف ويعيد عدّاد نقاط كل طالب إلى 0 دون حذف تقارير الجلسات.</div>
+        <div class="pts-reset-card-v139">
+          <div class="pts-reset-info">🔄 <b>بدء دورة جديدة من الصفر:</b> يحفظ أوائل الدورة الحالية في الأرشيف ويعيد عدّاد كل طالب إلى <b>0</b> دون حذف أي تقرير سابق.</div>
+          <button type="button" class="pts-reset-btn" onclick="resetPointsCycleFromZero(true)">🔄 تصفير وبدء دورة جديدة</button>
         </div>
         ${histHtml}
       `;
@@ -33110,22 +33512,30 @@ function renderProgramsModalBody() {
       `;
     } else {
       subBodyHtml = `
-        <div class="pts-rules-grid">
-          <div class="pts-rule-tile">
-            <b>📖 الحفظ (صفحة / نصف صفحة)</b>
-            <span>ممتاز: 10 / 5 • جيد جداً: 6 / 3<br>جيد: 0 • إعادة: 0</span>
+        <div class="pts-rules-v139">
+          <div class="pts-rule-card-v139 gold">
+            <h5>📖 الحفظ (صفحة / ½ ص)</h5>
+            <div class="pts-rule-row"><span>ممتاز</span><b>10 / 5</b></div>
+            <div class="pts-rule-row"><span>جيد جداً</span><b>6 / 3</b></div>
+            <div class="pts-rule-row"><span>جيد • إعادة</span><b>0</b></div>
           </div>
-          <div class="pts-rule-tile">
-            <b>📘 مراجعة الاثنين والأربعاء</b>
-            <span>ممتاز: 7 • جيد جداً: 5<br>جيد: 0 • إعادة: 0</span>
+          <div class="pts-rule-card-v139">
+            <h5>📘 مراجعة يومية / سبر</h5>
+            <div class="pts-rule-row"><span>ممتاز</span><b>7</b></div>
+            <div class="pts-rule-row"><span>جيد جداً</span><b>5</b></div>
+            <div class="pts-rule-row"><span>جيد • إعادة</span><b>0</b></div>
           </div>
-          <div class="pts-rule-tile">
-            <b>🗓️ يوم المراجعة (صغرى + كبرى)</b>
-            <span>صغرى: ممتاز 3 • جيد جداً 2<br>كبرى: ممتاز 4 • جيد جداً 3 • جيد 0</span>
+          <div class="pts-rule-card-v139">
+            <h5>🗓️ يوم المراجعة (السبت)</h5>
+            <div class="pts-rule-row"><span>الصغرى (م / ج.ج)</span><b>3 / 2</b></div>
+            <div class="pts-rule-row"><span>الكبرى (م / ج.ج)</span><b>4 / 3</b></div>
+            <div class="pts-rule-row"><span>جيد • إعادة</span><b>0</b></div>
           </div>
-          <div class="pts-rule-tile">
-            <b>✨ السلوك والحضور</b>
-            <span>أدب: +5 • مشاركة: +5<br>حضور مبكر: +5</span>
+          <div class="pts-rule-card-v139 green">
+            <h5>✨ السلوك والحضور</h5>
+            <div class="pts-rule-row"><span>الأدب والالتزام</span><b>+5</b></div>
+            <div class="pts-rule-row"><span>المشاركة والتفاعل</span><b>+5</b></div>
+            <div class="pts-rule-row"><span>الحضور المبكر</span><b>+5</b></div>
           </div>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:7px;">
@@ -33136,45 +33546,54 @@ function renderProgramsModalBody() {
     }
 
     body.innerHTML = `
-      <div class="prog-hero" style="margin-bottom:9px;">
-        <div>
-          <h4>⭐ برنامج النقاط والتحفيز</h4>
-          <p>${escapeHtml(pc.cycleName || 'الدورة الحالية')} • ${ptsOn ? 'نشط في البطاقات والتقارير' : 'متوقف حالياً (يمكنك تفعيله متى شئت)'}</p>
+      <div class="pts-status-strip ${ptsOn ? '' : 'is-off'}">
+        <div class="pts-ss-info">
+          <div class="pts-ss-title">⭐ ${escapeHtml(pc.cycleName || 'الدورة الحالية')}</div>
+          <div class="pts-ss-sub">${ptsOn ? 'نشط في البطاقات والتقارير ولوحة الشرف' : 'متوقف حالياً — يمكنك تفعيله متى شئت'}</div>
         </div>
-        <button type="button" class="btn ${ptsOn ? 'btn-success' : 'btn-accent'} btn-sm" onclick="togglePointsMode();">${ptsOn ? '✓ مفعّل' : '▶ تفعيل'}</button>
+        <button type="button" class="pts-ss-toggle ${ptsOn ? 'on' : ''}" onclick="togglePointsMode();">
+          <span>${ptsOn ? '✓ مفعّل' : 'موقّف'}</span>
+          <span class="m-switch ${ptsOn ? 'on' : ''}" aria-hidden="true"></span>
+        </button>
       </div>
 
-      <div class="pts-kpi-3">
-        <div class="pts-kpi-tile gold">
+      <div class="pts-kpi-3-v139">
+        <div class="pts-kpi-card-v139 gold">
           <div class="pk-v">${cycTotals.totalPoints}</div>
           <div class="pk-l">🏆 نقاط الدورة</div>
         </div>
-        <div class="pts-kpi-tile">
+        <div class="pts-kpi-card-v139 ${cyc.expired ? 'warn' : ''}">
           <div class="pk-v">${durShortVal}</div>
-          <div class="pk-l">⏳ المدة</div>
+          <div class="pk-l">${durShortLbl}</div>
         </div>
-        <div class="pts-kpi-tile green">
-          <div class="pk-v" id="ptsPastTotalBadge">+${cyc.totalPastPoints}</div>
+        <div class="pts-kpi-card-v139 green">
+          <div class="pk-v" id="ptsPastTotalBadge"><span dir="ltr">+${cyc.totalPastPoints}</span></div>
           <div class="pk-l">➕ رصيد سابق</div>
         </div>
       </div>
 
-      <div class="pts-subtabs-3">
+      <div class="pts-subtabs-v139">
         <button type="button" class="pts-subtab-btn ${subTab === 'cycle' ? 'on' : ''}" onclick="setPointsModalSubTab('cycle')">⏳ الدورة والمدة</button>
         <button type="button" class="pts-subtab-btn ${subTab === 'past' ? 'on' : ''}" onclick="setPointsModalSubTab('past')">➕ نقاط سابقة</button>
         <button type="button" class="pts-subtab-btn ${subTab === 'guide' ? 'on' : ''}" onclick="setPointsModalSubTab('guide')">📋 اللائحة</button>
       </div>
 
       ${subBodyHtml}
-
-      <div style="display:flex; gap:6px; margin-top:10px; padding-top:9px; border-top:1px dashed var(--line); flex-wrap:wrap;">
-        <button type="button" class="btn btn-primary btn-sm" style="flex:1;" onclick="closeModal('programsModal'); openPointsReportModal('table');">📋 طباعة النقاط</button>
-        <button type="button" class="btn btn-soft btn-sm" style="flex:1;" onclick="closeModal('programsModal'); openPointsReportModal('podium');">🏆 لوحة الأوائل</button>
-        <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('programsModal')">إغلاق</button>
-      </div>
     `;
+
+    if (footer) {
+      footer.style.display = "grid";
+      footer.innerHTML = `
+        <button type="button" class="btn btn-primary" onclick="closeModal('programsModal'); openPointsReportModal('table');">📋 جدول النقاط</button>
+        <button type="button" class="btn btn-soft" onclick="closeModal('programsModal'); openPointsReportModal('podium');">🏆 لوحة الأوائل</button>
+      `;
+    }
     return;
   }
+
+  if (headingEl) headingEl.textContent = "📚 البرامج المصاحبة والكتب المعتمدة";
+  if (subEl) subEl.textContent = "سجّل تقدّم الكتب والدروس والأنشطة ليظهر في التقرير";
+  if (footer) { footer.style.display = "none"; footer.innerHTML = ""; }
 
   const customSupProg = getLinkedSupervisorCustomPrograms().find(x => x.key === _activeProgTab);
   const meta = PROG_META[_activeProgTab] || (customSupProg ? {
@@ -41814,7 +42233,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v138";
+const TIBYAN_APP_VERSION = "v139";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -44716,5 +45135,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v138 -->
+<!-- Makin App v139 -->
 </html>
