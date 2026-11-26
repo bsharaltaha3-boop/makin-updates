@@ -13893,6 +13893,105 @@ table.t-daily td.td-note {
   margin: 0 2.5px !important;
 }
 
+
+/* ==================== MAKIN v130: LOCKED TAJWEED BADGE, MULTI-SABR & SURAH-TO-SURAH RANGE ==================== */
+.rep-tajweed-badge {
+  display: inline-block;
+  background: #ede9fe;
+  color: #4c1d95;
+  border: 1px solid #8b5cf6;
+  border-right: 3px solid #6d28d9;
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-left: 4px;
+  margin-bottom: 2px;
+  vertical-align: middle;
+}
+#hdExportStage .rep-tajweed-badge {
+  font-size: 11.2px !important;
+  padding: 1.5px 7px !important;
+  border-width: 1px !important;
+  border-right-width: 3.5px !important;
+  line-height: 1.24 !important;
+}
+.es-tajweed-locked-box {
+  background: #f5f3ff;
+  border: 1px solid rgba(109, 40, 217, 0.28);
+  border-right: 3.5px solid #6d28d9;
+  border-radius: 9px;
+  padding: 6px 9px;
+  margin-bottom: 7px;
+  font-size: 11.5px;
+  color: #4c1d95;
+  font-weight: 700;
+  line-height: 1.45;
+  user-select: none;
+}
+[data-theme="dark"] .es-tajweed-locked-box {
+  background: #1f1738;
+  border-color: rgba(167, 139, 250, 0.35);
+  color: #ddd6fe;
+}
+.monthly-tj-locked {
+  display: inline-block;
+  background: #ede9fe;
+  color: #4c1d95;
+  border: 1px solid #8b5cf6;
+  border-right: 3px solid #6d28d9;
+  border-radius: 5px;
+  padding: 1.5px 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+#hdExportStage .monthly-tj-locked {
+  font-size: 11.8px !important;
+  padding: 2px 7px !important;
+}
+.sp-multi-sabr-row {
+  background: var(--white);
+  border: 1px solid rgba(22, 121, 76, 0.3);
+  border-right: 3.5px solid var(--green);
+  border-radius: 10px;
+  padding: 7px 8px;
+  margin-bottom: 6px;
+}
+.sp-multi-sabr-row:last-child { margin-bottom: 0; }
+.sp-ayah-mode-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 3.5px;
+  margin-bottom: 8px;
+}
+.sp-ayah-mode-btn {
+  border: none;
+  background: transparent;
+  color: var(--ink-700);
+  padding: 6px 6px;
+  border-radius: 8px;
+  font-size: 11.8px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+.sp-ayah-mode-btn.on {
+  background: #142a46;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(20, 42, 70, 0.2);
+}
+[data-theme="dark"] .sp-ayah-mode-btn.on {
+  background: #c8a14b;
+  color: #0f233c;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -14403,7 +14502,7 @@ table.t-daily td.td-note {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v129</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v130</span>
         </button>
       </div>
     </div>
@@ -15930,7 +16029,12 @@ table.t-daily td.td-note {
           <button type="button" class="sp-unit-btn" id="spUnitAyahBtn" onclick="spSetReviewUnit('ayah')">🔢 بالآيات</button>
         </div>
 
+        <div id="spAyahRangeToggle" class="sp-ayah-mode-toggle" style="display:none;">
+          <button type="button" class="sp-ayah-mode-btn on" id="spAyahModeSingleBtn" onclick="spSetAyahRangeMode('single')">📖 سورة واحدة</button>
+          <button type="button" class="sp-ayah-mode-btn" id="spAyahModeRangeBtn" onclick="spSetAyahRangeMode('range')">🔀 من سورة ← إلى سورة</button>
+        </div>
         <div id="spAyahBox" class="sp-ayah-box"></div>
+        <div id="spRangeSurahBox" style="display:none;"></div>
         <div id="spPagesBox" style="display:none;"></div>
       </div>
 
@@ -16370,8 +16474,6 @@ function getPageForSurahAyah(surahId, ayahNum) {
 function formatSurahAyahPoint(surahInfo, ayahNum, isEnd = false) {
   if (!surahInfo) return "";
   const a = Math.max(1, Math.min(surahInfo.a, parseArabicNum(ayahNum, isEnd ? surahInfo.a : 1)));
-  if (!isEnd && a <= 1) return surahInfo.n;
-  if (isEnd && a >= surahInfo.a) return surahInfo.n;
   return `${surahInfo.n} ${a}`;
 }
 
@@ -16381,15 +16483,11 @@ function isSurahEndToken(str) {
   return t === "آخرها" || t === "نهايتها";
 }
 
+// v130: ALWAYS explicit start & end ayah numbers (e.g. النبأ (1–40), الزمر (1–50), الجن (16–28))!
 function formatSingleSurahInline(surahInfo, fromA, toA) {
   if (!surahInfo) return "";
   const f = Math.max(1, Math.min(surahInfo.a, parseArabicNum(fromA, 1)));
   const t = Math.max(f, Math.min(surahInfo.a, parseArabicNum(toA, surahInfo.a)));
-  const atStart = f <= 1;
-  const atEnd = t >= surahInfo.a;
-  if (atStart && atEnd) return surahInfo.n;
-  if (atStart) return `${surahInfo.n} (إلى ${t})`;
-  if (atEnd) return `${surahInfo.n} (${f}–${SURAH_END_TOKEN})`;
   return `${surahInfo.n} (${f}–${t})`;
 }
 
@@ -16837,6 +16935,36 @@ function stripTajweedSuffix(noteStr) {
     .replace(/\s*\(تجويد:\s*[^)]*\)\s*/g, " ")
     .replace(/\s{2,}/g, " ")
     .trim();
+}
+
+
+function updateRecNoteFreeText(studentId, freeVal) {
+  const s = getCurrentSession();
+  if (!s) return;
+  const r = getStudentRecord(s, studentId);
+  const cleanFree = stripTajweedSuffix(freeVal || "");
+  r.notes = applyTajweedToNote(cleanFree, r);
+  saveStateDebounced();
+}
+
+function renderLockedTajweedNoteBox(r) {
+  const tags = getNormalizedTajweedTags(r);
+  if (!tags.length) return "";
+  return `<div class="es-tajweed-locked-box">🔒 <b>ملاحظات التجويد (بلون مميّز ولا تُعدّل من هنا):</b> ضعف في (${escapeHtml(tags.join("، "))})</div>`;
+}
+
+function buildTajweedReportBadgeHtml(r) {
+  const tags = getNormalizedTajweedTags(r);
+  if (!tags.length) return { html: "", plain: "" };
+  const plain = `ضعف في (${tags.join("، ")})`;
+  return { html: `<span class="rep-tajweed-badge">🎙️ ${escapeHtml(plain)}</span>`, plain };
+}
+
+function computeStudentMonthlyTopTajweedText(h, studentId, monthFilter) {
+  const rep = computeStudentFocusReport(h, studentId, monthFilter);
+  if (!rep || !Array.isArray(rep.ranked) || !rep.ranked.length) return "";
+  const top = rep.ranked.slice(0, 3);
+  return `تجويد: ${top.map(x => `${x.tag}${x.count > 1 ? ` (${x.count})` : ""}`).join("، ")}`;
 }
 
 function applyTajweedToNote(baseNote, r) {
@@ -17769,22 +17897,28 @@ function stripRedundantSabrNoteText(noteStr) {
 }
 
 function buildDailySabrNoteBadge(r, isHtml = true) {
-  if (!r || !r.sabrJuz) return { hasBadge: false, isRep: false, html: "", plain: "" };
-  const sEv = getDailySabrEval(r);
-  if (!sEv) return { hasBadge: false, isRep: false, html: "", plain: "" };
-  const jObj = getJuzByName(r.sabrJuz);
-  const shortN = jObj ? (jObj.id >= 28 ? jObj.shortName : `الجزء ${jObj.id}`) : formatJuzClean(r.sabrJuz);
-  const hasSc = r.sabrScore !== "" && r.sabrScore !== null && r.sabrScore !== undefined && !isNaN(Number(r.sabrScore));
-  const scNum = hasSc ? Math.round(Number(r.sabrScore)) : "";
-  const isRep = sEv === "إعادة";
-  if (isRep) {
-    const plain = hasSc ? `إعادة سبر ${shortN} ${scNum}%` : `إعادة سبر ${shortN}`;
-    const badgeHtml = `<span class="rep-sabr-badge is-rep">${escapeHtml(plain)}</span>`;
-    return { hasBadge: true, isRep: true, html: badgeHtml, plain };
-  }
-  const plain = hasSc ? `سبر ${shortN} ${scNum}%` : `سبر ${shortN} • ${sEv}`;
-  const badgeHtml = `<span class="rep-sabr-badge">${escapeHtml(plain)}</span>`;
-  return { hasBadge: true, isRep: false, html: badgeHtml, plain };
+  const entries = getRecordSabrEntries(r);
+  if (!entries.length) return { hasBadge: false, isRep: false, html: "", plain: "" };
+  const badgesHtml = [];
+  const plains = [];
+  let anyRep = false;
+  entries.forEach(ent => {
+    const sEv = ent.score !== "" ? evalFromSabrScore(ent.score) : (ent.eval || getDailySabrEval(r));
+    if (!sEv) return;
+    const jObj = ent.juzObj || getJuzByName(ent.juzName);
+    const shortN = jObj ? (jObj.id >= 28 ? jObj.shortName : `الجزء ${jObj.id}`) : formatJuzClean(ent.juzName);
+    const hasSc = ent.score !== "" && ent.score !== null && ent.score !== undefined && !isNaN(Number(ent.score));
+    const scNum = hasSc ? Math.round(Number(ent.score)) : "";
+    const isRep = sEv === "إعادة";
+    if (isRep) anyRep = true;
+    const plain = isRep
+      ? (hasSc ? `إعادة سبر ${shortN} ${scNum}%` : `إعادة سبر ${shortN}`)
+      : (hasSc ? `سبر ${shortN} ${scNum}%` : `سبر ${shortN} • ${sEv}`);
+    plains.push(plain);
+    badgesHtml.push(`<span class="rep-sabr-badge${isRep ? ' is-rep' : ''}">${escapeHtml(plain)}</span>`);
+  });
+  if (!plains.length) return { hasBadge: false, isRep: false, html: "", plain: "" };
+  return { hasBadge: true, isRep: anyRep, html: badgesHtml.join(" "), plain: plains.join(" + ") };
 }
 
 // Unified Daily Automatic Homework Calculator (v95 — NEVER leaves Homework blank after evaluation!)
@@ -17903,12 +18037,11 @@ function calcDailyReviewPages(r) {
   if (r.attendance && (String(r.attendance).includes("غياب") || isPresentNoRecite(r.attendance))) return 0;
   const pureRev = calcPureDailyReviewPages(r);
   let sabrPg = 0;
-  if (r.sabrJuz) {
-    const sEv = getDailySabrEval(r);
-    if (isMajorPassEval(sEv)) {
-      sabrPg = getJuzByName(r.sabrJuz)?.pages || 20;
-    }
-  }
+  const _sEnts = getRecordSabrEntries(r);
+  _sEnts.forEach(ent => {
+    const sEv = ent.score !== "" ? evalFromSabrScore(ent.score) : (ent.eval || getDailySabrEval(r));
+    if (isMajorPassEval(sEv)) sabrPg += (ent.juzObj?.pages || 20);
+  });
   return Math.round((pureRev + sabrPg) * 100) / 100;
 }
 
@@ -18081,8 +18214,8 @@ function formatSegmentsColumns(segs, isHtml = true) {
   const endS = s2 || s1;
   const fNum = Math.max(1, Math.min(s1.a, parseArabicNum(first.from, 1)));
   const tNum = Math.max(1, Math.min(endS.a, parseArabicNum(last.to, endS.a)));
-  const fromCell = fNum <= 1 ? "" : String(fNum);
-  const toCell = tNum >= endS.a ? (fNum > 1 ? SURAH_END_TOKEN : "") : String(tNum);
+  const fromCell = String(fNum);
+  const toCell = String(tNum);
 
   if (segs.length === 1 || (s2 && s1.id === s2.id)) {
     return { surah: esc(s1.n), from: esc(fromCell), to: esc(toCell), lines: 1, merged3: false, mergedHtml: "", mergedText: "" };
@@ -18097,41 +18230,25 @@ function formatSegmentsColumns(segs, isHtml = true) {
       ? `${esc(s1.n)}${sep}${esc(s2.n)}`
       : segs.map(x => esc(SURAH_MAP[Number(x.surahId)]?.n || "")).filter(Boolean).join(sep);
 
-    // Multi-surah with ayah numbers (e.g. الفجر 17 ← الغاشية 11): merge all 3 cells with crisp circled ayah badges!
-    const hasMidAyah = (fNum > 1) || (tNum < endS.a) || !isConsec;
+    const hasMidAyah = true;
     let mergedHtml = "", mergedText = "";
-    if (hasMidAyah) {
-      if (isConsec) {
-        const p1Html = fNum > 1 ? `${escapeHtml(s1.n)} <span class="ayah-num">${fNum}</span>` : escapeHtml(s1.n);
-        const p2Html = tNum < endS.a ? `${escapeHtml(endS.n)} <span class="ayah-num">${tNum}</span>` : escapeHtml(endS.n);
-        const p1Txt = fNum > 1 ? `${s1.n} ${fNum}` : s1.n;
-        const p2Txt = tNum < endS.a ? `${endS.n} ${tNum}` : endS.n;
-        mergedHtml = `${p1Html}${sepHtml}${p2Html}`;
-        mergedText = `${p1Txt}${sepTxt}${p2Txt}`;
-      } else {
-        const htmlParts = [], txtParts = [];
-        segs.forEach(seg => {
-          const si = SURAH_MAP[Number(seg.surahId)];
-          if (!si) return;
-          const sf = Math.max(1, Math.min(si.a, parseArabicNum(seg.from, 1)));
-          const st = Math.max(sf, Math.min(si.a, parseArabicNum(seg.to, si.a)));
-          if (sf <= 1 && st >= si.a) {
-            htmlParts.push(escapeHtml(si.n));
-            txtParts.push(si.n);
-          } else if (sf <= 1) {
-            htmlParts.push(`${escapeHtml(si.n)} (إلى ${formatCircledAyahBadge(st, true)})`);
-            txtParts.push(`${si.n} (إلى ${st})`);
-          } else if (st >= si.a) {
-            htmlParts.push(`${escapeHtml(si.n)} (${formatCircledAyahBadge(sf, true)}–${SURAH_END_TOKEN})`);
-            txtParts.push(`${si.n} (${sf}–${SURAH_END_TOKEN})`);
-          } else {
-            htmlParts.push(`${escapeHtml(si.n)} (${formatCircledAyahBadge(sf, true)}–${formatCircledAyahBadge(st, true)})`);
-            txtParts.push(`${si.n} (${sf}–${st})`);
-          }
-        });
-        mergedHtml = htmlParts.join(sepHtml);
-        mergedText = txtParts.join(sepTxt);
-      }
+    if (isConsec) {
+      const p1Html = `${escapeHtml(s1.n)} <span class="ayah-num">${fNum}</span>`;
+      const p2Html = `${escapeHtml(endS.n)} <span class="ayah-num">${tNum}</span>`;
+      mergedHtml = `${p1Html}${sepHtml}${p2Html}`;
+      mergedText = `${s1.n} ${fNum}${sepTxt}${endS.n} ${tNum}`;
+    } else {
+      const htmlParts = [], txtParts = [];
+      segs.forEach(seg => {
+        const si = SURAH_MAP[Number(seg.surahId)];
+        if (!si) return;
+        const sf = Math.max(1, Math.min(si.a, parseArabicNum(seg.from, 1)));
+        const st = Math.max(sf, Math.min(si.a, parseArabicNum(seg.to, si.a)));
+        htmlParts.push(`${escapeHtml(si.n)} <span class="ayah-range">(${sf}–${st})</span>`);
+        txtParts.push(`${si.n} (${sf}–${st})`);
+      });
+      mergedHtml = htmlParts.join(sepHtml);
+      mergedText = txtParts.join(sepTxt);
     }
     return {
       surah: surahLbl,
@@ -18208,8 +18325,8 @@ function formatReviewPairColumns(segs, fallbackFrom, fallbackTo, isHtml = true) 
     const f = Math.max(1, Math.min(s.a, parseArabicNum(a1, 1)));
     const t = Math.max(f, Math.min(s.a, parseArabicNum(a2, s.a)));
     return {
-      from: esc(formatSurahAyahPoint(s, f, false)),
-      to: esc(t >= s.a ? (f > 1 ? SURAH_END_TOKEN : "") : String(t)),
+      from: esc(`${s.n} ${f}`),
+      to: esc(String(t)),
       lines: 1
     };
   };
@@ -18587,8 +18704,8 @@ function formatMajorRangeObject(s1, a1, s2, a2, p1, p2, actualPages, nextStartPa
   let surahLabel, fromLabel, toLabel, inlineLabel;
   if (isSingleSurah) {
     surahLabel = s1.n;
-    fromLabel = formatSurahAyahPoint(s1, a1, false);
-    toLabel = a2 >= s1.a ? (a1 > 1 ? SURAH_END_TOKEN : "") : String(a2);
+    fromLabel = `${s1.n} ${a1}`;
+    toLabel = String(a2);
     inlineLabel = formatSingleSurahInline(s1, a1, a2);
   } else {
     surahLabel = `${s1.n} ← ${s2.n}`;
@@ -18606,8 +18723,8 @@ function formatMajorRangeObject(s1, a1, s2, a2, p1, p2, actualPages, nextStartPa
   };
 }
 
-function buildMajorReviewFromPoint(startSurahId, startAyah, pagesCount, bounds, sabrJuz = null) {
-  // Determine which memorized segment contains (startSurahId, startAyah) — supports dual-end students!
+function buildMajorReviewFromPoint(startSurahId, startAyah, pagesCount, bounds, sabrJuz = null, revDir = null) {
+  const effectiveDir = revDir || (bounds?.isAscMem === false ? "desc" : "asc");
   const allSegs = sabrJuz
     ? [{ startSurahId: sabrJuz.startSurah, startAyah: sabrJuz.startAyah, endSurahId: sabrJuz.endSurah, endAyah: sabrJuz.endAyah, startPage: sabrJuz.startPage, endPage: sabrJuz.endPage }]
     : (Array.isArray(bounds?.segments) && bounds.segments.length ? bounds.segments : [{
@@ -18616,13 +18733,13 @@ function buildMajorReviewFromPoint(startSurahId, startAyah, pagesCount, bounds, 
         startPage: bounds?.startPage || 582, endPage: bounds?.endPage || 604
       }]);
 
-  let segIdx = 0;
+  let segIdx = effectiveDir === "desc" ? (allSegs.length - 1) : 0;
   let reqS = SURAH_MAP[Number(startSurahId)];
   if (reqS) {
     const reqPos = getMushafPos(reqS.id, parseArabicNum(startAyah, 1), false);
     const foundIdx = allSegs.findIndex(sg =>
       reqPos >= getMushafPos(sg.startSurahId, sg.startAyah, false) - 0.03 &&
-      reqPos < getMushafPos(sg.endSurahId, sg.endAyah, true) - 0.02
+      reqPos <= getMushafPos(sg.endSurahId, sg.endAyah, true) + 0.03
     );
     if (foundIdx >= 0) segIdx = foundIdx;
   }
@@ -18631,7 +18748,61 @@ function buildMajorReviewFromPoint(startSurahId, startAyah, pagesCount, bounds, 
   const bStartId = activeSeg.startSurahId, bStartA = activeSeg.startAyah;
   const bEndId = activeSeg.endSurahId, bEndA = activeSeg.endAyah;
   const cStartPg = activeSeg.startPage, cEndPg = activeSeg.endPage;
+  const pace = Math.max(0.5, Number(pagesCount) || 2);
 
+  // ===== v130: DESCENDING SURAH-ORDER MAJOR REVIEW (الناس -> النبأ، المرسلات -> الملك، داخل كل سورة من الآية 1 إلى آخرها!) =====
+  if (effectiveDir === "desc") {
+    let s1 = SURAH_MAP[Number(startSurahId)] || SURAH_MAP[bEndId];
+    let a1 = Math.max(1, Math.min(s1.a, parseArabicNum(startAyah, 1)));
+    if (s1.id < bStartId || s1.id > bEndId) {
+      s1 = SURAH_MAP[bEndId];
+      a1 = 1;
+    }
+    let curSid = s1.id;
+    let curFrom = a1;
+    let remPages = pace;
+    let s2 = s1, a2 = a1, segFinished = false;
+
+    for (let step = 0; step < 120 && curSid >= bStartId; step++) {
+      const sObj = SURAH_MAP[curSid];
+      if (!sObj) break;
+      const maxAForSurah = (curSid === bEndId) ? Math.min(sObj.a, bEndA || sObj.a) : sObj.a;
+      const remSurahPg = calcRangePages(sObj.id, curFrom, maxAForSurah);
+      if (remSurahPg <= remPages + 0.18 || (curSid === bStartId && remSurahPg <= remPages * 1.25)) {
+        s2 = sObj;
+        a2 = maxAForSurah;
+        remPages -= remSurahPg;
+        if (curSid <= bStartId) {
+          segFinished = true;
+          break;
+        }
+        curSid--;
+        curFrom = 1;
+        if (remPages <= 0.16) break;
+      } else {
+        const endA = getEndAyahByExactMushafPages(sObj.id, curFrom, remPages);
+        s2 = sObj;
+        a2 = Math.min(maxAForSurah, Math.max(curFrom, endA));
+        if (sObj.a - a2 <= 2) a2 = maxAForSurah;
+        if (curSid <= bStartId && a2 >= maxAForSurah) segFinished = true;
+        break;
+      }
+    }
+
+    const actualPages = Math.max(0.25, calcRangePages(s1.id, a1, a2, s2.id));
+    const p1 = getPageForSurahAyah(s1.id, a1);
+    const p2 = getPageForSurahAyah(s2.id, a2);
+    const wrapped = segFinished && segIdx === 0;
+    const nextSeg = segFinished ? allSegs[(segIdx - 1 + allSegs.length) % allSegs.length] : null;
+    const nextStartPage = nextSeg ? nextSeg.endPage : Math.max(cStartPg, p2);
+    const obj = formatMajorRangeObject(s1, a1, s2, a2, p1, p2, actualPages, nextStartPage, wrapped, cStartPg, cEndPg);
+    obj.segIdx = segIdx;
+    obj.segFinished = segFinished;
+    obj.nextSegStart = nextSeg ? { surahId: nextSeg.endSurahId, ayah: 1 } : null;
+    return obj;
+  }
+
+  // ===== ASCENDING SURAH-ORDER MAJOR REVIEW (البقرة -> الناس) =====
   const minPos = getMushafPos(bStartId, bStartA, false);
   const maxPos = getMushafPos(bEndId, bEndA, true);
 
@@ -18645,7 +18816,6 @@ function buildMajorReviewFromPoint(startSurahId, startAyah, pagesCount, bounds, 
     startPos = minPos;
   }
 
-  const pace = Math.max(0.5, Number(pagesCount) || 2);
   const targetPos = Math.min(maxPos, startPos + pace);
 
   let s2 = SURAH_MAP[bEndId], a2 = bEndA, segFinished = false;
@@ -18829,15 +18999,16 @@ function formatSatNextMajColumns(r, isHtml = true) {
     const endS = s2 || s1;
     const fNum = Math.max(1, Math.min(s1.a, parseArabicNum(a1, 1)));
     const tNum = Math.max(1, Math.min(endS.a, parseArabicNum(a2, endS.a)));
-    const fromCell = fNum <= 1 ? "" : String(fNum);
-    const toCell = tNum >= endS.a ? (fNum > 1 ? SURAH_END_TOKEN : "") : String(tNum);
+    const fromCell = String(fNum);
+    const toCell = String(tNum);
     if (s1.id === endS.id) {
       return { surah: esc(s1.n), from: esc(fromCell), to: esc(toCell), lines: 1 };
     }
-    const surahTxt = isHtml
-      ? `${esc(s1.n)} <span class="rep-arrow-sep">←</span> ${esc(endS.n)}`
-      : `${s1.n} ← ${endS.n}`;
-    return { surah: surahTxt, from: esc(fromCell), to: esc(toCell), lines: 1 };
+    const p1Html = `${esc(s1.n)} <span class="ayah-num">${fNum}</span>`;
+    const p2Html = `${esc(endS.n)} <span class="ayah-num">${tNum}</span>`;
+    const mergedHtml = `${p1Html} <span class="rep-arrow-sep">←</span> ${p2Html}`;
+    const mergedText = `${s1.n} ${fNum} ← ${endS.n} ${tNum}`;
+    return { surah: "", from: "", to: "", lines: 1, merged3: true, mergedHtml, mergedText };
   };
 
   if (r.nextMajStartSurahId && SURAH_MAP[Number(r.nextMajStartSurahId)]) {
@@ -19094,6 +19265,174 @@ async function togglePointsMode() {
   showToast(h.pointsEnabled ? "تم تفعيل وضع النقاط في جميع الشاشات والتقارير ⭐" : "تم إيقاف وضع النقاط وإزالتها من البطاقات والتقارير ✓");
 }
 
+
+// ==================== MAKIN v130: MULTI-JUZ SABR ENGINE (2+ JUZ WITH INDIVIDUAL SCORES) ====================
+function getRecordSabrEntries(r) {
+  if (!r) return [];
+  const rawArr = Array.isArray(r.sabrEntries)
+    ? r.sabrEntries
+    : (r.sabrEntries && typeof r.sabrEntries === "object" ? Object.values(r.sabrEntries) : []);
+  const out = [];
+  const seen = new Set();
+  rawArr.forEach(item => {
+    if (!item || !item.juzName) return;
+    const jObj = getJuzByName(item.juzName);
+    const key = jObj ? jObj.name : formatJuzClean(item.juzName);
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    const hasSc = item.score !== "" && item.score !== null && item.score !== undefined && !isNaN(Number(item.score));
+    const sc = hasSc ? Math.max(0, Math.min(100, Math.round(Number(item.score)))) : "";
+    const ev = hasSc ? evalFromSabrScore(sc) : String(item.eval || "").trim();
+    out.push({ juzName: key, juzObj: jObj, score: sc, eval: ev });
+  });
+  if (!out.length && r.sabrJuz) {
+    const jObj = getJuzByName(r.sabrJuz);
+    const key = jObj ? jObj.name : formatJuzClean(r.sabrJuz);
+    if (key) {
+      const hasSc = r.sabrScore !== "" && r.sabrScore !== null && r.sabrScore !== undefined && !isNaN(Number(r.sabrScore));
+      const sc = hasSc ? Math.max(0, Math.min(100, Math.round(Number(r.sabrScore)))) : "";
+      const ev = hasSc ? evalFromSabrScore(sc) : String(r.sabrEval || "").trim();
+      out.push({ juzName: key, juzObj: jObj, score: sc, eval: ev });
+    }
+  }
+  return out;
+}
+
+function syncRecordSabrLegacyFields(r) {
+  if (!r) return;
+  const entries = getRecordSabrEntries(r);
+  if (!entries.length) {
+    r.sabrEntries = [];
+    r.sabrEntries = [];
+    r.sabrJuz = "";
+    r.sabrScore = "";
+    r.sabrEval = "";
+    return;
+  }
+  r.sabrEntries = entries.map(e => ({ juzName: e.juzName, score: e.score, eval: e.eval }));
+  r.sabrJuz = entries[0].juzName;
+  r.sabrScore = entries[0].score;
+  r.sabrEval = entries[0].eval;
+}
+
+function getEffectiveEntrySabrEval(s, r, entry) {
+  if (!entry) return "";
+  if (entry.score !== "" && entry.score !== null && entry.score !== undefined && !isNaN(Number(entry.score))) {
+    return evalFromSabrScore(entry.score);
+  }
+  if (entry.eval) return entry.eval;
+  if (s?.type === "saturday") return r?.majEval || "";
+  if (r?.recIsSabr) return r?.recEval || "";
+  return r?.recEval || "";
+}
+
+function isSabrEntryPassed(s, r, entry) {
+  if (!s || !r || !entry || !entry.juzName) return false;
+  if (r.attendance && (String(r.attendance || "").includes("غياب") || r.attendance === "لم يُسمّع")) return false;
+  const ev = getEffectiveEntrySabrEval(s, r, entry);
+  return Boolean(ev && ev !== "إعادة");
+}
+
+function toggleMultiSabrJuz(studentId, juzName) {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  const st = h?.students.find(x => x.id === studentId);
+  if (!s || !st || !juzName) return;
+  const r = getStudentRecord(s, studentId);
+  const jObj = getJuzByName(juzName);
+  const key = jObj ? jObj.name : formatJuzClean(juzName);
+  const entries = getRecordSabrEntries(r);
+  const idx = entries.findIndex(e => e.juzName === key);
+  if (idx >= 0) {
+    entries.splice(idx, 1);
+    if (!entries.length) {
+      onSabrJuzChange(studentId, "");
+      return;
+    }
+    r.sabrEntries = entries.map(e => ({ juzName: e.juzName, score: e.score, eval: e.eval }));
+    syncRecordSabrLegacyFields(r);
+    if (s.type === "saturday") {
+      r.majPages = entries.reduce((sum, e) => sum + (e.juzObj?.pages || 20), 0);
+    }
+    r.points = computeRecordPoints(s, r, st);
+    saveState(); renderSessionPreservingScroll();
+    showToast(`تم إزالة سبر ${formatJuzClean(key)} ↩️`);
+    return;
+  }
+  if (!entries.length) {
+    onSabrJuzChange(studentId, key);
+    return;
+  }
+  captureUndoSnapshot(studentId);
+  entries.push({ juzName: key, juzObj: jObj, score: "", eval: "" });
+  r.sabrEntries = entries.map(e => ({ juzName: e.juzName, score: e.score, eval: e.eval }));
+  syncRecordSabrLegacyFields(r);
+  if (s.type === "saturday") {
+    r.majPages = entries.reduce((sum, e) => sum + (e.juzObj?.pages || 20), 0);
+  }
+  r.points = computeRecordPoints(s, r, st);
+  openCardId = studentId;
+  saveState(); renderSessionPreservingScroll();
+  showToast(`🎓 تمت إضافة ${formatJuzClean(key)} (${entries.length} أجزاء سبر اليوم)`);
+}
+
+function setMultiSabrScore(studentId, juzName, rawVal) {
+  cancelAutoAdvance(false);
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  const st = h?.students.find(x => x.id === studentId);
+  if (!s || !st) return;
+  const r = getStudentRecord(s, studentId);
+  const entries = getRecordSabrEntries(r);
+  if (!entries.length) return;
+  const target = entries.find(e => e.juzName === juzName) || entries[0];
+  if (entries.length === 1 && target === entries[0]) {
+    setSabrScore(studentId, rawVal);
+    return;
+  }
+  const trimmed = String(rawVal ?? "").trim();
+  if (trimmed === "") {
+    target.score = "";
+    target.eval = "";
+  } else {
+    const score = Math.max(0, Math.min(100, Math.round(parseArabicNum(trimmed, 0))));
+    target.score = score;
+    target.eval = evalFromSabrScore(score);
+    if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || String(r.attendance || "").includes("غياب")) {
+      r.attendance = "حاضر";
+      ensureRecordBonuses(r);
+    }
+    if (target.juzObj && target.eval !== "إعادة") {
+      const curSaved = getStudentExtraEndJuzIds(st);
+      if (!curSaved.includes(target.juzObj.id)) st.extraMemJuzIds = [...curSaved, target.juzObj.id].sort((a, b) => a - b);
+    }
+  }
+  r.sabrEntries = entries.map(e => ({ juzName: e.juzName, score: e.score, eval: e.eval }));
+  syncRecordSabrLegacyFields(r);
+
+  const scored = entries.filter(e => e.score !== "" && !isNaN(Number(e.score)));
+  const avgSc = scored.length ? Math.round(scored.reduce((a, b) => a + Number(b.score), 0) / scored.length) : "";
+  const aggEv = avgSc !== "" ? evalFromSabrScore(avgSc) : (target.eval || "");
+  if (s.type === "daily" && r.recIsSabr && aggEv) r.recEval = aggEv;
+  if (s.type === "saturday" && aggEv) {
+    r.majEval = aggEv;
+    r.majPages = entries.reduce((sum, e) => sum + (e.juzObj?.pages || 20), 0);
+    applyNextMajorReview(st, r, isMajorPassEval(aggEv));
+  }
+  r.points = computeRecordPoints(s, r, st);
+  openCardId = studentId;
+  saveState();
+  renderSessionPreservingScroll();
+  if (target.score !== "") showToast(`🎓 ${formatJuzClean(target.juzName)}: ${target.score}% (${target.eval})`);
+}
+
+function stepMultiSabrScore(studentId, juzName, delta) {
+  const s = getCurrentSession();
+  if (!s) return;
+  const r = getStudentRecord(s, studentId);
+  const entry = getRecordSabrEntries(r).find(e => e.juzName === juzName);
+  const cur = (entry && entry.score !== "" && entry.score !== null && entry.score !== undefined) ? Number(entry.score) : 90;
+  setMultiSabrScore(studentId, juzName, Math.max(0, Math.min(100, cur + delta)));
+}
+
 // Sabr Score (0–100) -> Evaluation Grade (ONLY used for Sabr!)
 function evalFromSabrScore(score) {
   if (score === "" || score === null || score === undefined) return "";
@@ -19131,6 +19470,12 @@ function setSabrScore(studentId, rawVal) {
   const score = Math.max(0, Math.min(100, Math.round(parseArabicNum(trimmed, 0))));
   const ev = evalFromSabrScore(score);
   r.sabrScore = score;
+  if (Array.isArray(r.sabrEntries) && r.sabrEntries.length) {
+    r.sabrEntries[0].score = score;
+    r.sabrEntries[0].eval = ev;
+  } else if (r.sabrJuz) {
+    r.sabrEntries = [{ juzName: r.sabrJuz, score, eval: ev }];
+  }
 
   const juz = getJuzByName(r.sabrJuz);
   const dir = st.direction || h.defaultDir || "desc";
@@ -19186,35 +19531,45 @@ function stepSabrScore(studentId, delta) {
 }
 
 function renderSabrScoreBox(studentId, r, isSat = false) {
-  if (!r || !r.sabrJuz) return "";
-  const hasScore = r.sabrScore !== "" && r.sabrScore !== null && r.sabrScore !== undefined && !isNaN(Number(r.sabrScore));
-  const curScore = hasScore ? Math.round(Number(r.sabrScore)) : "";
-  const curEval = hasScore ? evalFromSabrScore(curScore) : (isSat ? r.majEval : getDailySabrEval(r));
-  const evBadgeCls = curEval === "ممتاز" ? "b-green" : (curEval === "إعادة" ? "b-red" : (curEval ? "b-blue" : "b-muted"));
-  const canCert = Boolean(r.sabrJuz) && curEval !== "إعادة";
+  const entries = getRecordSabrEntries(r);
+  if (!entries.length) return "";
+  const s = getCurrentSession();
+  const isMulti = entries.length > 1;
+  return entries.map(entry => {
+    const hasScore = entry.score !== "" && entry.score !== null && entry.score !== undefined && !isNaN(Number(entry.score));
+    const curScore = hasScore ? Math.round(Number(entry.score)) : "";
+    const curEval = getEffectiveEntrySabrEval(s, r, entry);
+    const evBadgeCls = curEval === "ممتاز" ? "b-green" : (curEval === "إعادة" ? "b-red" : (curEval ? "b-blue" : "b-muted"));
+    const canCert = curEval !== "إعادة";
+    const escJ = escapeHtml(entry.juzName).replace(/'/g, "&#39;");
+    const lbl = entry.juzObj ? `جزء ${entry.juzObj.shortName} (الجزء ${entry.juzObj.id})` : formatJuzClean(entry.juzName);
 
-  return `<div class="sabr-score-box">
-    <div class="sabr-score-hdr">
-      <span>🎯 درجة السبر (من 100) — يحدد التقييم تلقائياً</span>
-      <span class="badge ${evBadgeCls}">${hasScore ? `${curScore}% • ${curEval}` : (curEval || 'أدخل الدرجة')}</span>
-    </div>
-    <div class="sabr-score-grid">
-      <button type="button" onclick="stepSabrScore('${studentId}', -5)">−5</button>
-      <button type="button" onclick="stepSabrScore('${studentId}', -1)">−1</button>
-      <input type="number" inputmode="numeric" min="0" max="100" value="${curScore}" placeholder="0–100" onchange="setSabrScore('${studentId}', this.value)">
-      <button type="button" onclick="stepSabrScore('${studentId}', 1)">+1</button>
-      <button type="button" onclick="stepSabrScore('${studentId}', 5)">+5</button>
-    </div>
-    <div class="sabr-score-presets">
-      ${[100, 95, 90, 85, 80, 75, 65].map(sc =>
-        `<button type="button" class="sabr-sc-chip ${curScore === sc ? 'on' : ''}" onclick="setSabrScore('${studentId}', ${sc})">${sc}%</button>`
-      ).join("")}
-    </div>
-    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px; margin-top:6px;">
-      <span class="sabr-scale-hint">90–100 ممتاز • 80–89 جيد جداً • 70–79 جيد • &lt;70 إعادة</span>
-      ${canCert ? `<button type="button" class="btn btn-success btn-sm" style="padding:4px 10px; font-size:11.5px;" onclick="openSabrHifzCertificate('${studentId}')">🎓 شهادة حفظ الجزء</button>` : ''}
-    </div>
-  </div>`;
+    return `<div class="sabr-score-box" style="margin-bottom:7px;">
+      <div class="sabr-score-hdr">
+        <span>🎯 ${isMulti ? escapeHtml(lbl) : 'درجة السبر (من 100)'}</span>
+        <div style="display:flex; align-items:center; gap:5px; flex-shrink:0;">
+          <span class="badge ${evBadgeCls}">${hasScore ? `${curScore}% • ${curEval}` : (curEval || 'أدخل الدرجة')}</span>
+          ${isMulti ? `<button type="button" class="lms-btn" style="padding:1px 6px; font-size:11px; color:var(--red);" onclick="toggleMultiSabrJuz('${studentId}','${escJ}')" title="إزالة هذا الجزء">×</button>` : ''}
+        </div>
+      </div>
+      <div class="sabr-score-grid">
+        <button type="button" onclick="stepMultiSabrScore('${studentId}','${escJ}', -5)">−5</button>
+        <button type="button" onclick="stepMultiSabrScore('${studentId}','${escJ}', -1)">−1</button>
+        <input type="number" inputmode="numeric" min="0" max="100" value="${curScore}" placeholder="0–100" onchange="setMultiSabrScore('${studentId}','${escJ}', this.value)">
+        <button type="button" onclick="stepMultiSabrScore('${studentId}','${escJ}', 1)">+1</button>
+        <button type="button" onclick="stepMultiSabrScore('${studentId}','${escJ}', 5)">+5</button>
+      </div>
+      <div class="sabr-score-presets">
+        ${[100, 95, 90, 85, 80, 75, 65].map(sc =>
+          `<button type="button" class="sabr-sc-chip ${curScore === sc ? 'on' : ''}" onclick="setMultiSabrScore('${studentId}','${escJ}', ${sc})">${sc}%</button>`
+        ).join("")}
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px; margin-top:6px;">
+        <span class="sabr-scale-hint">90–100 ممتاز • 80–89 جيد جداً • 70–79 جيد • &lt;70 إعادة</span>
+        ${canCert ? `<button type="button" class="btn btn-success btn-sm" style="padding:4px 10px; font-size:11.5px;" onclick="openSabrHifzCertificate('${studentId}','${escJ}','${curScore}','${escapeHtml(curEval || 'ممتاز')}')">🎓 شهادة ${escapeHtml(formatJuzClean(entry.juzName))}</button>` : ''}
+      </div>
+    </div>`;
+  }).join("");
 }
 
 // Gather ALL passed Sabr Juz records for a student across all sessions (for Profile + Hifz Certificates!)
@@ -19252,27 +19607,29 @@ function getStudentSabrRecords(st, h) {
   const sorted = [...(h.sessions || [])].filter(s => !s.noClass).sort((a, b) => (b.date || "").localeCompare(a.date || ""));
   sorted.forEach(s => {
     const r = s.records?.[st.id];
-    if (!isSabrEvaluatedAndPassed(s, r)) return;
+    if (!r) return;
     const isReviewSabr = s.type === "saturday" || Boolean(r.sabrIsReview);
-    const key = r.sabrJuz + (isReviewSabr ? "_rev" : "_mem");
-    if (seen.has(key)) return;
-    seen.add(key);
-    const jObj = getJuzByName(r.sabrJuz);
-    const score = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
-      ? Math.round(Number(r.sabrScore)) : "";
-    const rawEv = s.type === "saturday" ? r.majEval : (r.recIsSabr ? r.recEval : (r.sabrEval || r.recEval || "ممتاز"));
-    const finalEval = score !== "" ? evalFromSabrScore(score) : (rawEv || "ممتاز");
-    list.push({
-      juzName: formatJuzClean(r.sabrJuz),
-      juzId: jObj?.id || 30,
-      juzShort: jObj?.shortName || r.sabrJuz,
-      pages: jObj?.pages || 20,
-      isReviewSabr,
-      score,
-      evalGrade: finalEval,
-      date: s.date || todayISO(),
-      hijriDate: s.hijriDate || getExactHijriInfo(s.date || todayISO()).formatted,
-      sessionId: s.id
+    getRecordSabrEntries(r).forEach(ent => {
+      if (!isSabrEntryPassed(s, r, ent)) return;
+      const key = ent.juzName + (isReviewSabr ? "_rev" : "_mem");
+      if (seen.has(key)) return;
+      seen.add(key);
+      const jObj = ent.juzObj || getJuzByName(ent.juzName);
+      const score = (ent.score !== "" && ent.score !== undefined && ent.score !== null && !isNaN(Number(ent.score)))
+        ? Math.round(Number(ent.score)) : "";
+      const finalEval = getEffectiveEntrySabrEval(s, r, ent) || "ممتاز";
+      list.push({
+        juzName: formatJuzClean(ent.juzName),
+        juzId: jObj?.id || 30,
+        juzShort: jObj?.shortName || ent.juzName,
+        pages: jObj?.pages || 20,
+        isReviewSabr,
+        score,
+        evalGrade: finalEval,
+        date: s.date || todayISO(),
+        hijriDate: s.hijriDate || getExactHijriInfo(s.date || todayISO()).formatted,
+        sessionId: s.id
+      });
     });
   });
   return list;
@@ -20786,21 +21143,16 @@ function computePerPageMemPoints(r) {
   return Math.round(weightedBase * factor);
 }
 
+// v130: Pure Arithmetic Average across evaluated pages (ممتاز=4, جيد جداً=3, جيد=2, إعادة=1)
 function computePerPageOverallGrade(pages) {
   if (!Array.isArray(pages) || !pages.length) return { overallEv: "ممتاز", passed: [], failed: [] };
+  const graded = pages.filter(p => p.manualEval || p.touched || p.errors > 0 || p.alerts > 0);
+  const sample = graded.length ? graded : pages;
   const passed = pages.filter(p => p.eval !== "إعادة");
   const failed = pages.filter(p => p.eval === "إعادة");
-  const gradeRank = ev => ev === "ممتاز" ? 4 : (ev === "جيد جداً" ? 3 : (ev === "جيد" ? 2 : 0));
-  let overallEv = "إعادة";
-  if (passed.length > 0) {
-    const wSum = passed.reduce((a, p) => a + Math.max(0.05, Number(p.pages) || 0.5), 0);
-    const avg = passed.reduce((a, p) => a + gradeRank(p.eval) * Math.max(0.05, Number(p.pages) || 0.5), 0) / wSum;
-    if (failed.length === 0) {
-      overallEv = avg >= 3.5 ? "ممتاز" : (avg >= 2.5 ? "جيد جداً" : "جيد");
-    } else {
-      overallEv = (passed.length >= failed.length && avg >= 3) ? "جيد جداً" : "جيد";
-    }
-  }
+  const gradeVal = ev => ev === "ممتاز" ? 4 : (ev === "جيد جداً" ? 3 : (ev === "جيد" ? 2 : 1));
+  const avg = sample.reduce((sum, p) => sum + gradeVal(p.eval), 0) / sample.length;
+  const overallEv = avg >= 3.5 ? "ممتاز" : (avg >= 2.5 ? "جيد جداً" : (avg >= 1.5 ? "جيد" : "إعادة"));
   return { overallEv, passed, failed };
 }
 
@@ -20824,8 +21176,8 @@ function applyPerPageAutoEval(studentId, kind, overrideOverallEv = null, trigger
   const totalErrs = pages.reduce((a, p) => a + (Number(p.errors) || 0), 0);
   const totalAlrts = pages.reduce((a, p) => a + (Number(p.alerts) || 0), 0);
   const { overallEv: calcEv, passed, failed } = computePerPageOverallGrade(pages);
-  const savedOverride = r[getPageOverallKey(kind)] || "";
-  const overallEv = overrideOverallEv || savedOverride || calcEv;
+  r[getPageOverallKey(kind)] = "";
+  const overallEv = overrideOverallEv || calcEv;
   const repeatShort = formatFailedPagesShort(failed);
 
   if (kind === "rec") {
@@ -21007,18 +21359,12 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
       </div>
       ${repeatHtml}
       <div class="pp-overall-card">
-        <div class="pp-ov-row1">
+        <div class="pp-ov-row1" style="margin-bottom:0;">
           <div class="pp-ov-info">
-            <div>📊 التقييم الإجمالي: <span class="badge ${ovCls}">${savedKindEval ? effectiveOv : "بانتظار التقييم"}</span></div>
-            <small>أخطاء: ${totE} • تنبيه: ${totA} • مقبول: ${passedCnt}/${pages.length}${failed.length && effectiveOv !== "إعادة" ? " • الإعادة بالملاحظات" : ""}</small>
+            <div>📊 التقييم الإجمالي (متوسط الصفحات): <span class="badge ${ovCls}">${savedKindEval ? ov.overallEv : "بانتظار التقييم"}</span></div>
+            <small>مقيّم: ${pages.filter(p => p.manualEval || p.touched || p.errors > 0 || p.alerts > 0).length}/${pages.length} • أخطاء: ${totE} • تنبيه: ${totA}${failed.length && ov.overallEv !== "إعادة" ? " • الإعادة بالملاحظات" : ""}</small>
           </div>
-          <div style="display:flex; gap:4px; align-items:center; flex-shrink:0;">
-            ${savedKindEval ? `<span class="pp-auto-saved-pill">✓ تلقائي</span><button type="button" class="lms-btn" style="padding:4px 7px; color:var(--red); border-color:rgba(185,34,34,0.28); background:var(--red-bg);" onclick="clearPerPageEvaluation('${studentId}','${kind}')" title="إلغاء التقييم بالكامل">✕ إلغاء</button>` : ""}
-          </div>
-        </div>
-        <div class="pp-ov-override-row">
-          <span>تعديل الإجمالي:</span>
-          <div class="pp-ov-mini-4">${ovMiniBtnsHtml}</div>
+          ${savedKindEval ? `<button type="button" class="lms-btn" style="padding:4px 8px; color:var(--red); border-color:rgba(185,34,34,0.28); background:var(--red-bg); flex-shrink:0;" onclick="clearPerPageEvaluation('${studentId}','${kind}')" title="إلغاء التقييم بالكامل">✕</button>` : ""}
         </div>
       </div>
     </div>`;
@@ -21503,7 +21849,7 @@ function openSurahPicker(studentId, kind, forceMode = "") {
     mode: (forceMode === "sabr" && spCanUseSabr(kind)) ? "sabr" : ((forceMode === "sard" && spIsReviewKind(kind)) ? "sard" : initMode),
     reviewUnit,
     pageNumMode: "surah",
-    dir: (kind === "maj" || kind === "nextMaj") ? "asc" : dir,
+    dir,
     segs: existing,
     activeIdx: 0,
     juzFilter: 0,
@@ -21514,7 +21860,13 @@ function openSurahPicker(studentId, kind, forceMode = "") {
     pageToSurahId,
     sardJuzIds: activeSardIds,
     sabrJuzName: activeSabr,
-    sabrScore: (r.sabrScore !== undefined && r.sabrScore !== null) ? r.sabrScore : ""
+    sabrScore: (r.sabrScore !== undefined && r.sabrScore !== null) ? r.sabrScore : "",
+    sabrEntries: (kind === "hw" || kind === "nextMaj") ? (activeSabr ? [{ juzName: activeSabr, score: "", eval: "" }] : []) : getRecordSabrEntries(r).map(e => ({ juzName: e.juzName, score: e.score, eval: e.eval })),
+    ayahRangeMode: (existing.length >= 2 && isConsecutiveSurahRun(existing)) ? "range" : "single",
+    rangeFromSurahId: String(existing[0]?.surahId || (dir === "asc" ? 2 : 114)),
+    rangeFromAyah: parseArabicNum(existing[0]?.from, 1),
+    rangeToSurahId: String(existing[existing.length - 1]?.surahId || existing[0]?.surahId || (dir === "asc" ? 2 : 114)),
+    rangeToAyah: parseArabicNum(existing[existing.length - 1]?.to, SURAH_MAP[Number(existing[existing.length - 1]?.surahId || existing[0]?.surahId || 114)]?.a || 6)
   };
   spSearch = "";
   const sInp = document.getElementById("spSearchInput");
@@ -21670,7 +22022,18 @@ function renderSurahPickerUI() {
 
   const activeSurahHost = document.getElementById("spActiveSurahCard");
   const drawer = document.getElementById("spBrowserDrawer");
-  if (activeSurahHost) activeSurahHost.style.display = isPageUnit ? "none" : "block";
+  const rangeToggle = document.getElementById("spAyahRangeToggle");
+  const rangeBox = document.getElementById("spRangeSurahBox");
+  const canAyahRange = spState.mode === "surah" && !isPageUnit && spState.kind !== "studentStart";
+  const isRangeMode = canAyahRange && spState.ayahRangeMode === "range";
+
+  if (rangeToggle) rangeToggle.style.display = canAyahRange ? "grid" : "none";
+  document.getElementById("spAyahModeSingleBtn")?.classList.toggle("on", !isRangeMode);
+  document.getElementById("spAyahModeRangeBtn")?.classList.toggle("on", isRangeMode);
+  if (rangeBox) rangeBox.style.display = isRangeMode ? "block" : "none";
+  if (ayahBox) ayahBox.style.display = (isPageUnit || isRangeMode) ? "none" : "block";
+  if (segBar) segBar.style.display = (isPageUnit || isRangeMode) ? "none" : "flex";
+  if (activeSurahHost) activeSurahHost.style.display = (isPageUnit || isRangeMode) ? "none" : "block";
 
   if (spState.mode === "sabr") {
     renderSpSabrGrid();
@@ -21679,6 +22042,9 @@ function renderSurahPickerUI() {
   } else if (isPageUnit) {
     if (drawer) drawer.style.display = "none";
     renderSpPagesBox();
+  } else if (isRangeMode) {
+    if (drawer) drawer.style.display = "none";
+    renderSpRangeSurahBox();
   } else {
     renderSpSegBar();
     renderSpActiveSurahCard();
@@ -21781,11 +22147,11 @@ function spSelectFullStartSurah() {
   renderSpPagesBox();
 }
 
+// v130: ALWAYS use real Madinah Mushaf page numbers (1–604), NEVER invented relative numbers!
 function spSetPageVal(field, val) {
   const sid = field === "from" ? spState.pageFromSurahId : spState.pageToSurahId;
   const sp = getSurahPageSpan(sid);
-  const rel = Math.max(1, Math.min(sp.count, Math.round(parseArabicNum(val, 1))));
-  const mushafPg = Math.max(1, Math.min(604, sp.start + rel - 1));
+  const mushafPg = Math.max(sp.start, Math.min(sp.end, Math.round(parseArabicNum(val, sp.start))));
   if (field === "from") {
     spState.pageFrom = mushafPg;
     if (String(spState.pageToSurahId) === String(sid) && spState.pageTo < mushafPg) {
@@ -21801,14 +22167,13 @@ function spStepPageVal(field, delta) {
   const sid = field === "from" ? spState.pageFromSurahId : spState.pageToSurahId;
   const sp = getSurahPageSpan(sid);
   const curMushaf = field === "from" ? (spState.pageFrom || sp.start) : (spState.pageTo || sp.start);
-  const curRel = Math.max(1, Math.min(sp.count, curMushaf - sp.start + 1));
-  spSetPageVal(field, curRel + delta);
+  spSetPageVal(field, curMushaf + delta);
 }
 
 function spApplyPageSpanPreset(spanPages) {
   const p1 = Math.max(1, Math.min(604, spState.pageFrom || 1));
   const step = Math.max(1, spanPages) - 1;
-  const p2 = Math.min(604, p1 + step);
+  const p2 = spState.dir === "desc" ? Math.max(1, p1 - step) : Math.min(604, p1 + step);
   spState.pageTo = p2;
   const autoS2 = getPageEndInfo(p2)?.surah;
   if (autoS2) spState.pageToSurahId = String(autoS2.id);
@@ -21826,14 +22191,14 @@ function getSpSurahPageSummary() {
   const rel2 = Math.max(1, Math.min(sp2.count, p2 - sp2.start + 1));
   const pCount = Math.abs(p2 - p1) + 1;
   const sameS = Boolean(s1 && s2 && s1.id === s2.id);
-  const isFullSame = sameS && rel1 === 1 && rel2 === sp1.count;
-  const fromCol = s1 ? (sp1.count === 1 ? s1.n : `${s1.n} ص ${rel1}`) : `ص ${p1}`;
-  const toCol = sameS ? `ص ${rel2}` : (s2 ? (sp2.count === 1 ? s2.n : `${s2.n} ص ${rel2}`) : `ص ${p2}`);
+  const isFullSame = sameS && p1 === sp1.start && p2 === sp1.end;
+  const fromCol = s1 ? `${s1.n} ص ${p1}` : `ص ${p1}`;
+  const toCol = sameS ? `ص ${p2}` : (s2 ? `${s2.n} ص ${p2}` : `ص ${p2}`);
   const headerLbl = sameS ? s1.n : (s1 && s2 ? `${s1.n} ← ${s2.n}` : "صفحات");
   const fullLabel = sameS
-    ? (isFullSame ? `سورة ${s1.n} كاملة` : `${s1.n} (${rel1 === rel2 ? `صفحة ${rel1}` : `ص ${rel1} ← ص ${rel2}`})`)
+    ? (isFullSame ? `${s1.n} (ص ${p1}–${p2})` : `${s1.n} (${p1 === p2 ? `ص ${p1}` : `ص ${p1} ← ص ${p2}`})`)
     : `${fromCol} ← ${toCol}`;
-  return { p1, p2, rel1, rel2, sp1, sp2, pCount, s1, s2, sameS, isRel: true, fromCol, toCol, headerLbl, fullLabel };
+  return { p1, p2, rel1, rel2, sp1, sp2, pCount, s1, s2, sameS, isRel: false, fromCol, toCol, headerLbl, fullLabel };
 }
 
 function syncSpPageInputsOnly() {
@@ -21847,57 +22212,177 @@ function syncSpPageInputsOnly() {
   const fN = document.getElementById("spPageFromNum");
   const tR = document.getElementById("spPageToRange");
   const tN = document.getElementById("spPageToNum");
-  if (fR) { fR.min = 1; fR.max = sum.sp1.count; if (Number(fR.value) !== sum.rel1) fR.value = sum.rel1; }
-  if (fN) { fN.min = 1; fN.max = sum.sp1.count; if (document.activeElement !== fN) fN.value = sum.rel1; }
-  if (tR) { tR.min = 1; tR.max = sum.sp2.count; if (Number(tR.value) !== sum.rel2) tR.value = sum.rel2; }
-  if (tN) { tN.min = 1; tN.max = sum.sp2.count; if (document.activeElement !== tN) tN.value = sum.rel2; }
+  if (fR) { fR.min = sum.sp1.start; fR.max = sum.sp1.end; if (Number(fR.value) !== sum.p1) fR.value = sum.p1; }
+  if (fN) { fN.min = sum.sp1.start; fN.max = sum.sp1.end; if (document.activeElement !== fN) fN.value = sum.p1; }
+  if (tR) { tR.min = sum.sp2.start; tR.max = sum.sp2.end; if (Number(tR.value) !== sum.p2) tR.value = sum.p2; }
+  if (tN) { tN.min = sum.sp2.start; tN.max = sum.sp2.end; if (document.activeElement !== tN) tN.value = sum.p2; }
 
   document.querySelectorAll("#spFromPills .sp-pg-pill").forEach(btn => {
-    btn.classList.toggle("on", Number(btn.dataset.pg) === sum.rel1);
+    btn.classList.toggle("on", Number(btn.dataset.pg) === sum.p1);
   });
   document.querySelectorAll("#spToPills .sp-pg-pill").forEach(btn => {
-    btn.classList.toggle("on", Number(btn.dataset.pg) === sum.rel2);
+    btn.classList.toggle("on", Number(btn.dataset.pg) === sum.p2);
   });
 
   const fHint = document.getElementById("spPageFromSurahHint");
   const tHint = document.getElementById("spPageToSurahHint");
-  if (fHint) fHint.textContent = sum.sp1.count === 1 ? `صفحة واحدة • المصحف ص ${sum.p1}` : `المصحف ص ${sum.p1}`;
-  if (tHint) tHint.textContent = sum.sp2.count === 1 ? `صفحة واحدة • المصحف ص ${sum.p2}` : `المصحف ص ${sum.p2}`;
+  if (fHint) fHint.textContent = `صفحات السورة: ${sum.sp1.start}–${sum.sp1.end} (${sum.sp1.count} ص)`;
+  if (tHint) tHint.textContent = `صفحات السورة: ${sum.sp2.start}–${sum.sp2.end} (${sum.sp2.count} ص)`;
   renderSpPreview();
 }
 
 function renderSpPageControlRow(which, relVal, sp, mushafPg) {
   if (sp.count <= 1) {
     return `<div class="sp-rev-pg-bar">
-      <span class="sp-mushaf-muted" id="spPage${which === "from" ? "From" : "To"}SurahHint">صفحة واحدة • المصحف ص ${mushafPg}</span>
+      <span class="sp-mushaf-muted" id="spPage${which === "from" ? "From" : "To"}SurahHint">المصحف ص ${mushafPg} (صفحة واحدة)</span>
     </div>`;
   }
   if (sp.count <= 6) {
     const pills = [];
-    for (let p = 1; p <= sp.count; p++) {
-      pills.push(`<button type="button" class="sp-pg-pill ${p === relVal ? "on" : ""}" data-pg="${p}" onclick="spSetPageVal('${which}', ${p})">${p}</button>`);
+    for (let p = sp.start; p <= sp.end; p++) {
+      pills.push(`<button type="button" class="sp-pg-pill ${p === mushafPg ? "on" : ""}" data-pg="${p}" onclick="spSetPageVal('${which}', ${p})">${p}</button>`);
     }
     return `<div class="sp-rev-pg-bar">
       <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-        <span style="font-size:11.5px; font-weight:800; color:var(--ink-700);">صفحة:</span>
+        <span style="font-size:11.5px; font-weight:800; color:var(--ink-700);">صفحة المصحف:</span>
         <div class="sp-pg-pills-row" id="sp${which === "from" ? "From" : "To"}Pills">${pills.join("")}</div>
       </div>
-      <span class="sp-mushaf-muted" id="spPage${which === "from" ? "From" : "To"}SurahHint">المصحف ص ${mushafPg}</span>
+      <span class="sp-mushaf-muted" id="spPage${which === "from" ? "From" : "To"}SurahHint">ص ${sp.start}–${sp.end}</span>
     </div>`;
   }
   const idPrefix = which === "from" ? "spPageFrom" : "spPageTo";
   return `<div class="sp-rev-pg-bar" style="margin-bottom:5px;">
     <div style="display:flex; align-items:center; gap:6px;">
-      <span style="font-size:11.5px; font-weight:800; color:var(--ink-700);">صفحة (1–${sp.count}):</span>
+      <span style="font-size:11.5px; font-weight:800; color:var(--ink-700);">صفحة المصحف (${sp.start}–${sp.end}):</span>
       <div class="sp-mini-step">
         <button type="button" onclick="spStepPageVal('${which}',-1)">−</button>
-        <input type="number" id="${idPrefix}Num" inputmode="numeric" min="1" max="${sp.count}" value="${relVal}" oninput="spSetPageVal('${which}',this.value)">
+        <input type="number" id="${idPrefix}Num" inputmode="numeric" min="${sp.start}" max="${sp.end}" value="${mushafPg}" oninput="spSetPageVal('${which}',this.value)">
         <button type="button" onclick="spStepPageVal('${which}',1)">+</button>
       </div>
     </div>
-    <span class="sp-mushaf-muted" id="${idPrefix}SurahHint">المصحف ص ${mushafPg}</span>
+    <span class="sp-mushaf-muted" id="${idPrefix}SurahHint">${sp.count} ص</span>
   </div>
-  <input type="range" id="${idPrefix}Range" class="sp-range-input" min="1" max="${sp.count}" value="${relVal}" oninput="spSetPageVal('${which}',this.value)">`;
+  <input type="range" id="${idPrefix}Range" class="sp-range-input" min="${sp.start}" max="${sp.end}" value="${mushafPg}" oninput="spSetPageVal('${which}',this.value)">`;
+}
+
+
+function spSetAyahRangeMode(mode) {
+  spState.ayahRangeMode = mode === "range" ? "range" : "single";
+  if (spState.ayahRangeMode === "range") {
+    const first = spState.segs[0];
+    const last = spState.segs[spState.segs.length - 1] || first;
+    if (first?.surahId) {
+      spState.rangeFromSurahId = String(first.surahId);
+      spState.rangeFromAyah = parseArabicNum(first.from, 1);
+    }
+    if (last?.surahId) {
+      spState.rangeToSurahId = String(last.surahId);
+      spState.rangeToAyah = parseArabicNum(last.to, SURAH_MAP[Number(last.surahId)]?.a || 1);
+    }
+    spSyncRangeSegs();
+  }
+  renderSurahPickerUI();
+}
+
+function spSyncRangeSegs() {
+  const s1 = SURAH_MAP[Number(spState.rangeFromSurahId)] || SURAH_MAP[spState.dir === "asc" ? 2 : 114];
+  const s2 = SURAH_MAP[Number(spState.rangeToSurahId)] || s1;
+  spState.rangeFromSurahId = String(s1.id);
+  spState.rangeToSurahId = String(s2.id);
+  spState.rangeFromAyah = Math.max(1, Math.min(s1.a, Math.round(parseArabicNum(spState.rangeFromAyah, 1))));
+  spState.rangeToAyah = Math.max(1, Math.min(s2.a, Math.round(parseArabicNum(spState.rangeToAyah, s2.a))));
+  if (s1.id === s2.id && spState.rangeToAyah < spState.rangeFromAyah) {
+    spState.rangeToAyah = spState.rangeFromAyah;
+  }
+  spState.segs = expandContiguousRangeToSegments(s1.id, spState.rangeFromAyah, s2.id, spState.rangeToAyah);
+  spState.activeIdx = 0;
+}
+
+function spOnRangeSurahPick(which, surahId) {
+  const s = SURAH_MAP[Number(surahId)];
+  if (!s) return;
+  if (which === "from") {
+    spState.rangeFromSurahId = String(s.id);
+    spState.rangeFromAyah = 1;
+    if (!spState.rangeToSurahId || !SURAH_MAP[Number(spState.rangeToSurahId)]) {
+      spState.rangeToSurahId = String(s.id);
+      spState.rangeToAyah = s.a;
+    }
+  } else {
+    spState.rangeToSurahId = String(s.id);
+    spState.rangeToAyah = s.a;
+  }
+  spSyncRangeSegs();
+  renderSpRangeSurahBox();
+  renderSpPreview();
+}
+
+function spSetRangeAyah(which, val) {
+  const sid = which === "from" ? spState.rangeFromSurahId : spState.rangeToSurahId;
+  const s = SURAH_MAP[Number(sid)];
+  if (!s) return;
+  const a = Math.max(1, Math.min(s.a, Math.round(parseArabicNum(val, which === "from" ? 1 : s.a))));
+  if (which === "from") spState.rangeFromAyah = a;
+  else spState.rangeToAyah = a;
+  spSyncRangeSegs();
+  const inp = document.getElementById(which === "from" ? "spRangeFromAyahInp" : "spRangeToAyahInp");
+  if (inp && document.activeElement !== inp) inp.value = String(which === "from" ? spState.rangeFromAyah : spState.rangeToAyah);
+  renderSpPreview();
+}
+
+function spStepRangeAyah(which, delta) {
+  const cur = which === "from" ? spState.rangeFromAyah : spState.rangeToAyah;
+  spSetRangeAyah(which, (Number(cur) || 1) + delta);
+}
+
+function spRangeSurahOptsHtml(selectedId) {
+  const list = spState.dir === "desc" ? [...SURAHS].reverse() : SURAHS;
+  return list.map(s => `<option value="${s.id}" ${String(selectedId) === String(s.id) ? "selected" : ""}>${s.n} (${s.a} آية)</option>`).join("");
+}
+
+function renderSpRangeSurahBox() {
+  const box = document.getElementById("spRangeSurahBox");
+  if (!box) return;
+  spSyncRangeSegs();
+  const s1 = SURAH_MAP[Number(spState.rangeFromSurahId)];
+  const s2 = SURAH_MAP[Number(spState.rangeToSurahId)] || s1;
+  box.innerHTML = `
+    <div class="sp-rev-card">
+      <div class="sp-rev-row1">
+        <span class="sp-rev-lbl">▶️ من السورة:</span>
+        <select id="spRangeFromSurahSel" aria-label="من السورة" class="sp-rev-sel" onchange="spOnRangeSurahPick('from', this.value)">${spRangeSurahOptsHtml(s1.id)}</select>
+      </div>
+      <div class="sp-rev-pg-bar">
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span style="font-size:11.5px; font-weight:800; color:var(--ink-700);">من الآية (1–${s1.a}):</span>
+          <div class="sp-mini-step">
+            <button type="button" onclick="spStepRangeAyah('from',-1)">−</button>
+            <input type="number" id="spRangeFromAyahInp" inputmode="numeric" min="1" max="${s1.a}" value="${spState.rangeFromAyah}" oninput="spSetRangeAyah('from',this.value)">
+            <button type="button" onclick="spStepRangeAyah('from',1)">+</button>
+          </div>
+        </div>
+        <button type="button" class="lms-btn" onclick="spSetRangeAyah('from',1)">البداية (1)</button>
+      </div>
+    </div>
+
+    <div class="sp-rev-card is-end">
+      <div class="sp-rev-row1">
+        <span class="sp-rev-lbl">⏹️ إلى السورة:</span>
+        <select id="spRangeToSurahSel" aria-label="إلى السورة" class="sp-rev-sel" onchange="spOnRangeSurahPick('to', this.value)">${spRangeSurahOptsHtml(s2.id)}</select>
+      </div>
+      <div class="sp-rev-pg-bar">
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span style="font-size:11.5px; font-weight:800; color:var(--ink-700);">إلى الآية (1–${s2.a}):</span>
+          <div class="sp-mini-step">
+            <button type="button" onclick="spStepRangeAyah('to',-1)">−</button>
+            <input type="number" id="spRangeToAyahInp" inputmode="numeric" min="1" max="${s2.a}" value="${spState.rangeToAyah}" oninput="spSetRangeAyah('to',this.value)">
+            <button type="button" onclick="spStepRangeAyah('to',1)">+</button>
+          </div>
+        </div>
+        <button type="button" class="lms-btn" onclick="spSetRangeAyah('to',${s2.a})">النهاية (${s2.a})</button>
+      </div>
+    </div>`;
+  if (typeof enhanceAllVisibleSelects === "function") enhanceAllVisibleSelects(box);
 }
 
 function renderSpPagesBox() {
@@ -21992,36 +22477,47 @@ function renderSpSabrGrid() {
   const grid = document.getElementById("spSabrGrid");
   if (!grid) return;
 
+  const isSingleOnly = spState.kind === "hw" || spState.kind === "nextMaj";
+  if (!Array.isArray(spState.sabrEntries)) {
+    spState.sabrEntries = spState.sabrJuzName ? [{ juzName: spState.sabrJuzName, score: spState.sabrScore ?? "", eval: "" }] : [];
+  }
   if (hintEl) {
-    hintEl.innerHTML = spState.kind === "hw"
+    hintEl.innerHTML = isSingleOnly
       ? "🎓 اختر الجزء لتعيينه <b>واجب سبر للجلسة القادمة</b> (يُلغي واجب السور العادي تلقائياً)."
-      : "🎓 اختر الجزء الذي سبره الطالب وأدخل <b>الدرجة من 100</b> ليُعتمد التقييم تلقائياً.";
+      : "🎓 يمكنك اختيار <b>جزء واحد أو جزئين أو أكثر</b>، وإعطاء كل جزء علامة سبر مستقلة (من 100).";
   }
 
   if (scoreWrap) {
-    if (spState.kind !== "hw" && spState.sabrJuzName) {
-      const hasSc = spState.sabrScore !== "" && spState.sabrScore !== null && spState.sabrScore !== undefined && !isNaN(Number(spState.sabrScore));
-      const scVal = hasSc ? Math.round(Number(spState.sabrScore)) : "";
-      const autoEv = hasSc ? evalFromSabrScore(scVal) : "";
+    if (!isSingleOnly && spState.sabrEntries.length) {
       scoreWrap.style.display = "block";
-      scoreWrap.innerHTML = `<div class="sabr-score-box" style="margin-bottom:0;">
-        <div class="sabr-score-hdr">
-          <span>🎯 درجة السبر (من 100)</span>
-          <span id="spSabrScoreBadge" class="badge ${autoEv==='ممتاز'?'b-green':(autoEv==='إعادة'?'b-red':(autoEv?'b-blue':'b-muted'))}">${hasSc ? `${scVal}% • ${autoEv}` : 'تحديد تلقائي للتقييم'}</span>
-        </div>
-        <div class="sabr-score-grid">
-          <button type="button" onclick="spStepSabrScore(-5)">−5</button>
-          <button type="button" onclick="spStepSabrScore(-1)">−1</button>
-          <input type="number" id="spSabrScoreInput" inputmode="numeric" min="0" max="100" value="${scVal}" placeholder="0–100" oninput="spSetSabrScore(this.value, true)">
-          <button type="button" onclick="spStepSabrScore(1)">+1</button>
-          <button type="button" onclick="spStepSabrScore(5)">+5</button>
-        </div>
-        <div class="sabr-score-presets" id="spSabrScorePresets">
-          ${[100, 95, 90, 85, 80, 75, 65].map(sc =>
-            `<button type="button" class="sabr-sc-chip ${scVal === sc ? 'on' : ''}" data-sc="${sc}" onclick="spSetSabrScore(${sc}, false)">${sc}%</button>`
-          ).join("")}
-        </div>
-      </div>`;
+      scoreWrap.innerHTML = spState.sabrEntries.map((ent, eIdx) => {
+        const jObj = getJuzByName(ent.juzName);
+        const hasSc = ent.score !== "" && ent.score !== null && ent.score !== undefined && !isNaN(Number(ent.score));
+        const scVal = hasSc ? Math.round(Number(ent.score)) : "";
+        const autoEv = hasSc ? evalFromSabrScore(scVal) : "";
+        const lbl = jObj ? `جزء ${jObj.shortName} (الجزء ${jObj.id})` : formatJuzClean(ent.juzName);
+        return `<div class="sp-multi-sabr-row">
+          <div class="sabr-score-hdr" style="margin-bottom:5px;">
+            <span>🎯 ${escapeHtml(lbl)}</span>
+            <div style="display:flex; align-items:center; gap:5px;">
+              <span id="spSabrScoreBadge_${eIdx}" class="badge ${autoEv==='ممتاز'?'b-green':(autoEv==='إعادة'?'b-red':(autoEv?'b-blue':'b-muted'))}">${hasSc ? `${scVal}% • ${autoEv}` : 'أدخل الدرجة'}</span>
+              <button type="button" class="lms-btn" style="padding:1px 6px; font-size:11px; color:var(--red);" onclick="spPickSabrJuz(${jObj?.id || 0})">×</button>
+            </div>
+          </div>
+          <div class="sabr-score-grid" style="margin-bottom:5px;">
+            <button type="button" onclick="spStepSabrEntryScore(${eIdx}, -5)">−5</button>
+            <button type="button" onclick="spStepSabrEntryScore(${eIdx}, -1)">−1</button>
+            <input type="number" id="spSabrScoreInput_${eIdx}" inputmode="numeric" min="0" max="100" value="${scVal}" placeholder="0–100" oninput="spSetSabrEntryScore(${eIdx}, this.value, true)">
+            <button type="button" onclick="spStepSabrEntryScore(${eIdx}, 1)">+1</button>
+            <button type="button" onclick="spStepSabrEntryScore(${eIdx}, 5)">+5</button>
+          </div>
+          <div class="sabr-score-presets" id="spSabrScorePresets_${eIdx}">
+            ${[100, 95, 90, 85, 80, 75, 65].map(sc =>
+              `<button type="button" class="sabr-sc-chip ${scVal === sc ? 'on' : ''}" data-sc="${sc}" onclick="spSetSabrEntryScore(${eIdx}, ${sc}, false)">${sc}%</button>`
+            ).join("")}
+          </div>
+        </div>`;
+      }).join("");
     } else {
       scoreWrap.style.display = "none";
       scoreWrap.innerHTML = "";
@@ -22030,7 +22526,9 @@ function renderSpSabrGrid() {
 
   const orderedJuz = spState.dir === "desc" ? [...JUZ_PAGES].reverse() : JUZ_PAGES;
   grid.innerHTML = orderedJuz.map(j => {
-    const isSel = spState.sabrJuzName === j.name;
+    const isSel = isSingleOnly
+      ? spState.sabrJuzName === j.name
+      : spState.sabrEntries.some(e => e.juzName === j.name);
     const isMem = completedIds.includes(j.id);
     const s1 = SURAH_MAP[j.startSurah]?.n || "";
     const s2 = SURAH_MAP[j.endSurah]?.n || "";
@@ -22044,38 +22542,52 @@ function renderSpSabrGrid() {
   }).join("");
 }
 
-function spSetSabrScore(val, fromInput = false) {
+function spSetSabrEntryScore(idx, val, fromInput = false) {
+  if (!Array.isArray(spState.sabrEntries) || !spState.sabrEntries[idx]) return;
   const str = String(val ?? "").trim();
   const numVal = str === "" ? "" : Math.max(0, Math.min(100, Math.round(parseArabicNum(str, 0))));
-  spState.sabrScore = numVal;
+  spState.sabrEntries[idx].score = numVal;
+  spState.sabrEntries[idx].eval = numVal === "" ? "" : evalFromSabrScore(numVal);
+  if (idx === 0) spState.sabrScore = numVal;
 
-  // In-place DOM sync so keyboard NEVER closes and input NEVER loses focus!
-  const inp = document.getElementById("spSabrScoreInput");
+  const inp = document.getElementById("spSabrScoreInput_" + idx);
   if (inp && (!fromInput || document.activeElement !== inp)) {
     inp.value = numVal === "" ? "" : String(numVal);
   }
-  const badge = document.getElementById("spSabrScoreBadge");
+  const badge = document.getElementById("spSabrScoreBadge_" + idx);
   if (badge) {
     const hasSc = numVal !== "";
     const autoEv = hasSc ? evalFromSabrScore(numVal) : "";
     badge.className = "badge " + (autoEv === "ممتاز" ? "b-green" : (autoEv === "إعادة" ? "b-red" : (autoEv ? "b-blue" : "b-muted")));
-    badge.textContent = hasSc ? `${numVal}% • ${autoEv}` : "تحديد تلقائي للتقييم";
+    badge.textContent = hasSc ? `${numVal}% • ${autoEv}` : "أدخل الدرجة";
   }
-  document.querySelectorAll("#spSabrScorePresets .sabr-sc-chip").forEach(btn => {
+  document.querySelectorAll(`#spSabrScorePresets_${idx} .sabr-sc-chip`).forEach(btn => {
     btn.classList.toggle("on", numVal !== "" && Number(btn.dataset.sc) === numVal);
   });
   renderSpPreview();
 }
 
-function spStepSabrScore(delta) {
-  const cur = (spState.sabrScore !== "" && spState.sabrScore !== null && spState.sabrScore !== undefined) ? Number(spState.sabrScore) : 90;
-  spSetSabrScore(cur + delta);
+function spStepSabrEntryScore(idx, delta) {
+  const ent = spState.sabrEntries?.[idx];
+  const cur = (ent && ent.score !== "" && ent.score !== null && ent.score !== undefined) ? Number(ent.score) : 90;
+  spSetSabrEntryScore(idx, cur + delta, false);
 }
 
 function spPickSabrJuz(juzId) {
   const j = JUZ_PAGE_MAP[Number(juzId)];
   if (!j) return;
-  spState.sabrJuzName = (spState.sabrJuzName === j.name) ? "" : j.name;
+  const isSingleOnly = spState.kind === "hw" || spState.kind === "nextMaj";
+  if (isSingleOnly) {
+    spState.sabrJuzName = (spState.sabrJuzName === j.name) ? "" : j.name;
+    spState.sabrEntries = spState.sabrJuzName ? [{ juzName: spState.sabrJuzName, score: "", eval: "" }] : [];
+  } else {
+    if (!Array.isArray(spState.sabrEntries)) spState.sabrEntries = [];
+    const idx = spState.sabrEntries.findIndex(e => e.juzName === j.name);
+    if (idx >= 0) spState.sabrEntries.splice(idx, 1);
+    else spState.sabrEntries.push({ juzName: j.name, score: "", eval: "" });
+    spState.sabrJuzName = spState.sabrEntries[0]?.juzName || "";
+    spState.sabrScore = spState.sabrEntries[0]?.score ?? "";
+  }
   renderSpSabrGrid();
   renderSpPreview();
 }
@@ -22390,10 +22902,19 @@ function renderSpPreview() {
     return;
   }
   if (spState.mode === "sabr") {
-    const j = getJuzByName(spState.sabrJuzName);
-    el.innerHTML = j
-      ? (() => { const hasSc = spState.sabrScore !== "" && spState.sabrScore !== null && spState.sabrScore !== undefined; const sc = hasSc ? Math.round(Number(spState.sabrScore)) : ""; const ev = hasSc ? evalFromSabrScore(sc) : ""; return `<span>🎓 <b>سبر ${escapeHtml(j.name)}</b>${hasSc ? ` • ${sc}% (${ev})` : ""}</span><span class="badge b-green">${j.pages} صفحة</span>`; })()
-      : `<span style="color:var(--ink-500);">اختر جزءاً من الأعلى لاعتماد السبر</span><span class="badge b-muted">لم يُختر</span>`;
+    const ents = Array.isArray(spState.sabrEntries) && spState.sabrEntries.length
+      ? spState.sabrEntries
+      : (spState.sabrJuzName ? [{ juzName: spState.sabrJuzName, score: spState.sabrScore ?? "" }] : []);
+    if (!ents.length) {
+      el.innerHTML = `<span style="color:var(--ink-500);">اختر جزءاً أو أكثر من الأعلى لاعتماد السبر</span><span class="badge b-muted">لم يُختر</span>`;
+      return;
+    }
+    const totPg = ents.reduce((sum, e) => sum + (getJuzByName(e.juzName)?.pages || 20), 0);
+    const lbls = ents.map(e => {
+      const hasSc = e.score !== "" && e.score !== null && e.score !== undefined && !isNaN(Number(e.score));
+      return `${formatJuzClean(e.juzName)}${hasSc ? ` (${Math.round(Number(e.score))}%)` : ""}`;
+    }).join(" + ");
+    el.innerHTML = `<span>🎓 <b>سبر ${escapeHtml(lbls)}</b></span><span class="badge b-green">${totPg} صفحة</span>`;
     return;
   }
   if (spState.kind === "studentStart") {
@@ -22505,15 +23026,36 @@ function applySurahPicker(quickEval = null) {
       showToast(`🎓 تم تعيين واجب السبت القادم: سبر ${spState.sabrJuzName}`);
       return;
     }
+    const chosenEnts = (Array.isArray(spState.sabrEntries) && spState.sabrEntries.length)
+      ? spState.sabrEntries.map(e => ({ juzName: e.juzName, score: e.score ?? "", eval: e.score !== "" && e.score !== null && e.score !== undefined ? evalFromSabrScore(e.score) : (e.eval || "") }))
+      : [{ juzName: spState.sabrJuzName, score: spState.sabrScore ?? "", eval: "" }];
     if (k === "rec") {
-      // Pure Full-Juz Sabr day in memorization
       r.recSurahId = ""; r.recFrom = ""; r.recTo = ""; r.recEndSurahId = ""; r.recExtras = []; r.recPages = 0;
       r.recIsSabr = true;
     }
-    onSabrJuzChange(st.id, spState.sabrJuzName);
-    if (spState.sabrScore !== "" && spState.sabrScore !== null && spState.sabrScore !== undefined) {
-      setSabrScore(st.id, spState.sabrScore);
-    } else if (quickEval) {
+    onSabrJuzChange(st.id, chosenEnts[0].juzName);
+    r.sabrEntries = chosenEnts;
+    syncRecordSabrLegacyFields(r);
+    if (s.type === "saturday") {
+      r.majPages = chosenEnts.reduce((sum, e) => sum + (getJuzByName(e.juzName)?.pages || 20), 0);
+    }
+    if (chosenEnts.length === 1) {
+      if (chosenEnts[0].score !== "" && chosenEnts[0].score !== null && chosenEnts[0].score !== undefined) {
+        setSabrScore(st.id, chosenEnts[0].score);
+        return;
+      }
+    } else {
+      chosenEnts.forEach(e => {
+        if (e.score !== "" && e.score !== null && e.score !== undefined) {
+          setMultiSabrScore(st.id, e.juzName, e.score);
+        }
+      });
+      if (chosenEnts.some(e => e.score !== "" && e.score !== null && e.score !== undefined)) return;
+    }
+    if (quickEval) {
+      chosenEnts.forEach(e => { if (!e.eval) e.eval = quickEval; });
+      r.sabrEntries = chosenEnts;
+      syncRecordSabrLegacyFields(r);
       if (k === "rec") {
         if (r.recEval === quickEval) r.recEval = "";
         setRecEval(st.id, quickEval);
@@ -22525,6 +23067,9 @@ function applySurahPicker(quickEval = null) {
         r.points = computeRecordPoints(s, r, st);
         saveState(); renderSessionPreservingScroll();
       }
+    } else {
+      r.points = computeRecordPoints(s, r, st);
+      saveState(); renderSessionPreservingScroll();
     }
     return;
   }
@@ -27505,8 +28050,9 @@ function renderCardBody(s, st, r, idx) {
             <span>💬 ملاحظات الطالب (الرشيدي)</span>
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','notes')">إخفاء</button>
           </div>
+          ${renderLockedTajweedNoteBox(r)}
           <div class="field" style="margin-bottom:0;">
-            <textarea rows="2" placeholder="اكتب ملاحظة..." oninput="updateRecSilent('${st.id}','notes',this.value)">${escapeHtml(r.notes || '')}</textarea>
+            <textarea rows="2" placeholder="اكتب ملاحظة..." oninput="updateRecNoteFreeText('${st.id}',this.value)">${escapeHtml(stripTajweedSuffix(r.notes || ''))}</textarea>
             <div class="quick-note-chips">${QUICK_NOTE_CHIPS.map(p => `<button type="button" class="qn-chip" onclick="appendQuickNote('${st.id}','${escapeHtml(p)}')">+ ${escapeHtml(p)}</button>`).join("")}</div>
           </div>
         </div>
@@ -27585,17 +28131,16 @@ function renderCardBody(s, st, r, idx) {
           <div class="es-sabr-quick-grid ${_suggIds.length === 2 ? 'cols-2' : 'cols-3'}">
             ${_suggIds.map(jid => {
               const j = JUZ_PAGE_MAP[jid];
-              const isSel = r.sabrJuz === j.name;
-              return `<button type="button" class="es-sabr-qchip ${isSel ? 'on' : ''}" onclick="onSabrJuzChange('${st.id}','${isSel ? '' : escapeHtml(j.name)}')"><b>جزء ${j.shortName}</b><small>الجزء ${j.id}</small></button>`;
+              const isSel = getRecordSabrEntries(r).some(e => e.juzName === j.name);
+              return `<button type="button" class="es-sabr-qchip ${isSel ? 'on' : ''}" onclick="toggleMultiSabrJuz('${st.id}','${escapeHtml(j.name)}')"><b>جزء ${j.shortName}</b><small>الجزء ${j.id}${isSel ? ' ✓' : ''}</small></button>`;
             }).join("")}
           </div>
           <button type="button" class="es-sabr-more-btn" style="margin-bottom:${r.sabrJuz ? '8px' : '0'};" onclick="openSurahPicker('${st.id}','rec','sabr')">
-            <span>🎓 ${r.sabrJuz ? `المحدد: ${escapeHtml(formatJuzClean(r.sabrJuz))} — تغيير الجزء` : 'اختيار أي جزء آخر من الـ 30 جزءاً'}</span>
+            <span>🎓 ${getRecordSabrEntries(r).length ? `المحدد (${getRecordSabrEntries(r).length}): ${escapeHtml(getRecordSabrEntries(r).map(e => formatJuzClean(e.juzName)).join(" + "))} — إضافة/تعديل` : 'اختيار جزء أو عدة أجزاء من الـ 30 جزءاً'}</span>
           </button>
           ${r.sabrJuz ? `
             <div style="display:flex; gap:6px; flex-wrap:wrap;">
-              ${getDailySabrEval(r) !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="flex:1;" onclick="openSabrHifzCertificate('${st.id}')">🎓 إصدار شهادة حفظ الجزء</button>` : ''}
-              <button type="button" class="btn btn-outline btn-sm" onclick="onSabrJuzChange('${st.id}','')">↩️ إلغاء السبر</button>
+              <button type="button" class="btn btn-outline btn-sm" style="width:100%;" onclick="onSabrJuzChange('${st.id}','')">↩️ إلغاء كل أجزاء السبر اليوم</button>
             </div>
           ` : ''}
         </div>`;
@@ -27606,8 +28151,9 @@ function renderCardBody(s, st, r, idx) {
             <span>💬 ملاحظات وتنبيهات الحفظ</span>
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','notes')">إخفاء</button>
           </div>
+          ${renderLockedTajweedNoteBox(r)}
           <div class="field" style="margin-bottom:0;">
-            <textarea rows="2" placeholder="اكتب ملاحظة للتقرير وولي الأمر..." oninput="updateRecSilent('${st.id}','notes',this.value)">${escapeHtml(r.notes || '')}</textarea>
+            <textarea rows="2" placeholder="اكتب ملاحظة للتقرير وولي الأمر..." oninput="updateRecNoteFreeText('${st.id}',this.value)">${escapeHtml(stripTajweedSuffix(r.notes || ''))}</textarea>
             <div class="quick-note-chips">${QUICK_NOTE_CHIPS.map(p => `<button type="button" class="qn-chip" onclick="appendQuickNote('${st.id}','${escapeHtml(p)}')">+ ${escapeHtml(p)}</button>`).join("")}</div>
           </div>
         </div>`;
@@ -27810,8 +28356,9 @@ function renderCardBody(s, st, r, idx) {
             <span>💬 ملاحظات المراجعة</span>
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','notes')">إخفاء</button>
           </div>
+          ${renderLockedTajweedNoteBox(r)}
           <div class="field" style="margin-bottom:0;">
-            <textarea rows="2" placeholder="اكتب ملاحظة..." oninput="updateRecSilent('${st.id}','notes',this.value)">${escapeHtml(r.notes || '')}</textarea>
+            <textarea rows="2" placeholder="اكتب ملاحظة..." oninput="updateRecNoteFreeText('${st.id}',this.value)">${escapeHtml(stripTajweedSuffix(r.notes || ''))}</textarea>
             <div class="quick-note-chips">${QUICK_NOTE_CHIPS.map(p => `<button type="button" class="qn-chip" onclick="appendQuickNote('${st.id}','${escapeHtml(p)}')">+ ${escapeHtml(p)}</button>`).join("")}</div>
           </div>
         </div>`;
@@ -28006,6 +28553,7 @@ function onSabrJuzChange(studentId, juzName) {
   if (!juz) return;
   const s1 = SURAH_MAP[juz.startSurah], s2 = SURAH_MAP[juz.endSurah];
   r.sabrJuz = juz.name;
+  r.sabrEntries = [{ juzName: juz.name, score: r.sabrScore ?? "", eval: r.sabrEval || "" }];
 
   if (s.type === "daily") {
     // Keep any independent Daily Review / Sard completely intact!
@@ -28438,56 +28986,26 @@ function applyNextMajorReviewCore(st, r, passed, h, s) {
     const s1 = SURAH_MAP[curPts.startSurahId], s2 = SURAH_MAP[curPts.endSurahId];
     if (s1 && s2) {
       const p1 = getPageForSurahAyah(s1.id, curPts.startAyah), p2 = getPageForSurahAyah(s2.id, curPts.endAyah);
-      const pgs = Math.max(0.25, Math.round((getMushafPos(s2.id, curPts.endAyah, true) - getMushafPos(s1.id, curPts.startAyah, false)) * 100) / 100);
+      const pgs = Math.max(0.25, calcRangePages(s1.id, curPts.startAyah, curPts.endAyah, s2.id));
       assignNextRange(formatMajorRangeObject(s1, curPts.startAyah, s2, curPts.endAyah, p1, p2, pgs, p1, false, bounds.startPage, bounds.endPage), "");
     }
     return;
   }
 
+  const revDir = (st?.direction || h?.defaultDir || "desc") === "asc" ? "asc" : "desc";
   if (r.sabrJuz) {
     const juz = getJuzByName(r.sabrJuz);
     const normalPace = Number(st?.revPace || h.defaultRevPace || 2);
-    const afterJuz = juz ? getNextSurahAyahForward(juz.endSurah, juz.endAyah) : null;
-    const startId = afterJuz ? afterJuz.surahId : bounds.startSurahId;
-    const startA = afterJuz ? afterJuz.ayah : bounds.startAyah;
-    assignNextRange(buildMajorReviewFromPoint(startId, startA, normalPace, bounds, null), "");
+    const afterJuz = juz
+      ? (revDir === "desc" ? getNextSurahAyahByRevDir(juz.startSurah, SURAH_MAP[juz.startSurah]?.a || 1, "desc") : getNextSurahAyahForward(juz.endSurah, juz.endAyah))
+      : null;
+    const startId = afterJuz ? afterJuz.surahId : (revDir === "desc" ? bounds.endSurahId : bounds.startSurahId);
+    const startA = afterJuz ? afterJuz.ayah : (revDir === "desc" ? 1 : bounds.startAyah);
+    assignNextRange(buildMajorReviewFromPoint(startId, startA, normalPace, bounds, null, revDir), "");
     return;
   }
 
-  // Find which memorized segment current end point belongs to (supports dual-end students!)
-  const curEndPos = getMushafPos(curPts.endSurahId, curPts.endAyah, true);
-  if (cyc.sabrJuz) {
-    const limPos = getMushafPos(cyc.sabrJuz.endSurah, cyc.sabrJuz.endAyah, true);
-    if (curEndPos >= limPos - 0.04) {
-      assignNextRange(buildMajorReviewFromPoint(bounds.startSurahId, bounds.startAyah, Number(st?.revPace || h.defaultRevPace || 2), bounds, null), "");
-      return;
-    }
-    const nxtPt = getNextSurahAyahForward(curPts.endSurahId, curPts.endAyah);
-    assignNextRange(buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : cyc.sabrJuz.startSurah, nxtPt ? nxtPt.ayah : cyc.sabrJuz.startAyah, revPace, bounds, cyc.sabrJuz), "");
-    return;
-  }
-
-  let curSegIdx = allSegs.findIndex(sg =>
-    curEndPos >= getMushafPos(sg.startSurahId, sg.startAyah, false) - 0.04 &&
-    curEndPos <= getMushafPos(sg.endSurahId, sg.endAyah, true) + 0.04
-  );
-  if (curSegIdx < 0) curSegIdx = 0;
-  const curSeg = allSegs[curSegIdx];
-  const curSegEndPos = getMushafPos(curSeg.endSurahId, curSeg.endAyah, true);
-
-  let nextStartId, nextStartA;
-  if (curEndPos >= curSegEndPos - 0.04) {
-    // Finished this segment -> jump smoothly to the NEXT memorized segment (e.g. البقرة -> عمّ/تبارك, or الناس -> البقرة)!
-    const nextSeg = allSegs[(curSegIdx + 1) % allSegs.length];
-    nextStartId = nextSeg.startSurahId;
-    nextStartA = nextSeg.startAyah;
-  } else {
-    const nxtPt = getNextSurahAyahForward(curPts.endSurahId, curPts.endAyah);
-    nextStartId = nxtPt ? nxtPt.surahId : allSegs[0].startSurahId;
-    nextStartA = nxtPt ? nxtPt.ayah : allSegs[0].startAyah;
-  }
-
-  assignNextRange(buildMajorReviewFromPoint(nextStartId, nextStartA, revPace, bounds, null), "");
+  assignNextRange(advanceMajorRangeFromEndPoint(curPts.endSurahId, curPts.endAyah, revPace, bounds, cyc.sabrJuz, revDir), "");
 }
 
 function setAttendance(studentId, status) {
@@ -29173,27 +29691,21 @@ function getDailyReviewEndPoint(pr) {
   if (pr.dRevIsPages && (pr.dRevPageTo || pr.dRevPageFrom)) {
     const p1 = parseArabicNum(pr.dRevPageFrom, 0);
     const p2 = parseArabicNum(pr.dRevPageTo, p1);
-    const endPg = Math.max(1, Math.min(604, Math.max(p1, p2)));
+    const endPg = Math.max(1, Math.min(604, p2 || p1));
     if (endPg >= 1) {
       const pe = getPageEndInfo(endPg);
       if (pe?.surah) return { endSurahId: pe.surah.id, endAyah: pe.ayah };
     }
   }
-  // 3) Surah/Ayah segments daily review
+  // 3) Surah/Ayah segments daily review — always use ACTUAL last segment (respects both asc & desc paths!)
   const dSegs = getSegments(pr, "dRev");
   if (dSegs.length) {
-    let best = null, bestPos = -1;
-    dSegs.forEach(sg => {
-      const sObj = SURAH_MAP[Number(sg.surahId)];
-      if (!sObj) return;
-      const toA = Math.max(1, Math.min(sObj.a, parseArabicNum(sg.to, sObj.a)));
-      const pos = getMushafPos(sObj.id, toA, true);
-      if (pos >= bestPos) {
-        bestPos = pos;
-        best = { endSurahId: sObj.id, endAyah: toA };
-      }
-    });
-    if (best) return best;
+    const lastSg = dSegs[dSegs.length - 1];
+    const sObj = SURAH_MAP[Number(lastSg.surahId)];
+    if (sObj) {
+      const toA = Math.max(1, Math.min(sObj.a, parseArabicNum(lastSg.to, sObj.a)));
+      return { endSurahId: sObj.id, endAyah: toA };
+    }
   }
   // 4) Fallback parsing from dRevFrom + dRevTo text (handles single-surah numeric dRevTo like "الملك" + "27")
   const fTxt = String(pr.dRevFrom || "").trim();
@@ -29218,24 +29730,71 @@ function getDailyReviewEndPoint(pr) {
   return null;
 }
 
-function advanceMajorRangeFromEndPoint(endSurahId, endAyah, revPace, bounds, sabrJuz = null) {
+function getNextSurahAyahByRevDir(endSurahId, endAyah, revDir = "asc") {
+  const s = SURAH_MAP[Number(endSurahId)];
+  if (!s) return null;
+  const a = Math.max(1, Math.min(s.a, parseArabicNum(endAyah, s.a)));
+  if (a < s.a) return { surahId: s.id, ayah: a + 1 };
+  if (revDir === "desc") {
+    return s.id > 2 ? { surahId: s.id - 1, ayah: 1 } : null;
+  }
+  return s.id < 114 ? { surahId: s.id + 1, ayah: 1 } : null;
+}
+
+function advanceMajorRangeFromEndPoint(endSurahId, endAyah, revPace, bounds, sabrJuz = null, revDir = null) {
+  const effectiveDir = revDir || (bounds?.isAscMem === false ? "desc" : "asc");
   const allSegs = Array.isArray(bounds?.segments) && bounds.segments.length ? bounds.segments : [bounds];
-  const curEndPos = getMushafPos(endSurahId, endAyah, true);
+  const sEndObj = SURAH_MAP[Number(endSurahId)];
+  const curAyah = sEndObj ? Math.max(1, Math.min(sEndObj.a, parseArabicNum(endAyah, sEndObj.a))) : 1;
+
+  if (effectiveDir === "desc") {
+    if (sabrJuz) {
+      const reachedEndOfJuz = (Number(endSurahId) <= sabrJuz.startSurah && curAyah >= (SURAH_MAP[sabrJuz.startSurah]?.a || 1));
+      if (reachedEndOfJuz) {
+        const lastSg = allSegs[allSegs.length - 1];
+        return buildMajorReviewFromPoint(lastSg.endSurahId, 1, revPace, bounds, null, "desc");
+      }
+      const nxtPt = getNextSurahAyahByRevDir(endSurahId, curAyah, "desc");
+      return buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : sabrJuz.endSurah, nxtPt ? nxtPt.ayah : 1, revPace, bounds, sabrJuz, "desc");
+    }
+    const curPos = getMushafPos(endSurahId, curAyah, true);
+    let curSegIdx = allSegs.findIndex(sg =>
+      curPos >= getMushafPos(sg.startSurahId, sg.startAyah, false) - 0.04 &&
+      curPos <= getMushafPos(sg.endSurahId, sg.endAyah, true) + 0.04
+    );
+    if (curSegIdx < 0) curSegIdx = allSegs.length - 1;
+    const curSeg = allSegs[curSegIdx];
+    const reachedSegMin = (Number(endSurahId) <= curSeg.startSurahId && curAyah >= (SURAH_MAP[curSeg.startSurahId]?.a || 1));
+    let nextStartId, nextStartA;
+    if (reachedSegMin) {
+      const nextSeg = allSegs[(curSegIdx - 1 + allSegs.length) % allSegs.length];
+      nextStartId = nextSeg.endSurahId;
+      nextStartA = 1;
+    } else {
+      const nxtPt = getNextSurahAyahByRevDir(endSurahId, curAyah, "desc");
+      nextStartId = nxtPt ? nxtPt.surahId : curSeg.endSurahId;
+      nextStartA = nxtPt ? nxtPt.ayah : 1;
+    }
+    return buildMajorReviewFromPoint(nextStartId, nextStartA, revPace, bounds, null, "desc");
+  }
+
+  // Ascending (البقرة -> الناس)
+  const curEndPos = getMushafPos(endSurahId, curAyah, true);
   if (sabrJuz) {
     const limPos = getMushafPos(sabrJuz.endSurah, sabrJuz.endAyah, true);
     if (curEndPos >= limPos - 0.04) {
-      return buildMajorReviewFromPoint(bounds.startSurahId, bounds.startAyah, revPace, bounds, null);
+      return buildMajorReviewFromPoint(bounds.startSurahId, bounds.startAyah, revPace, bounds, null, "asc");
     }
-    const nxtPt = getNextSurahAyahForward(endSurahId, endAyah);
-    return buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : sabrJuz.startSurah, nxtPt ? nxtPt.ayah : sabrJuz.startAyah, revPace, bounds, sabrJuz);
+    const nxtPt = getNextSurahAyahForward(endSurahId, curAyah);
+    return buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : sabrJuz.startSurah, nxtPt ? nxtPt.ayah : sabrJuz.startAyah, revPace, bounds, sabrJuz, "asc");
   }
   let curSegIdx = allSegs.findIndex(sg =>
     curEndPos >= getMushafPos(sg.startSurahId, sg.startAyah, false) - 0.04 &&
     curEndPos <= getMushafPos(sg.endSurahId, sg.endAyah, true) + 0.04
   );
   if (curSegIdx < 0) {
-    const nxtPt = getNextSurahAyahForward(endSurahId, endAyah);
-    return buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : allSegs[0].startSurahId, nxtPt ? nxtPt.ayah : allSegs[0].startAyah, revPace, bounds, null);
+    const nxtPt = getNextSurahAyahForward(endSurahId, curAyah);
+    return buildMajorReviewFromPoint(nxtPt ? nxtPt.surahId : allSegs[0].startSurahId, nxtPt ? nxtPt.ayah : allSegs[0].startAyah, revPace, bounds, null, "asc");
   }
   const curSeg = allSegs[curSegIdx];
   const curSegEndPos = getMushafPos(curSeg.endSurahId, curSeg.endAyah, true);
@@ -29245,11 +29804,11 @@ function advanceMajorRangeFromEndPoint(endSurahId, endAyah, revPace, bounds, sab
     nextStartId = nextSeg.startSurahId;
     nextStartA = nextSeg.startAyah;
   } else {
-    const nxtPt = getNextSurahAyahForward(endSurahId, endAyah);
+    const nxtPt = getNextSurahAyahForward(endSurahId, curAyah);
     nextStartId = nxtPt ? nxtPt.surahId : allSegs[0].startSurahId;
     nextStartA = nxtPt ? nxtPt.ayah : allSegs[0].startAyah;
   }
-  return buildMajorReviewFromPoint(nextStartId, nextStartA, revPace, bounds, null);
+  return buildMajorReviewFromPoint(nextStartId, nextStartA, revPace, bounds, null, "asc");
 }
 
 // ==================== MAKIN v128: UNIFIED CONTINUOUS MAJOR REVIEW CHAIN (SAT <-> MON <-> WED <-> SAT) ====================
@@ -29290,7 +29849,7 @@ function buildCarryPlanFromSatRecord(pr, st, h, ps, bounds) {
     const s1 = SURAH_MAP[prevPts.startSurahId], s2 = SURAH_MAP[prevPts.endSurahId];
     if (s1 && s2) {
       const p1 = getPageForSurahAyah(s1.id, prevPts.startAyah), p2 = getPageForSurahAyah(s2.id, prevPts.endAyah);
-      const pgs = Math.max(0.25, Math.round((getMushafPos(s2.id, prevPts.endAyah, true) - getMushafPos(s1.id, prevPts.startAyah, false)) * 100) / 100);
+      const pgs = Math.max(0.25, calcRangePages(s1.id, prevPts.startAyah, prevPts.endAyah, s2.id));
       const rng = formatMajorRangeObject(s1, prevPts.startAyah, s2, prevPts.endAyah, p1, p2, pgs, p1, false, bounds.startPage, bounds.endPage);
       return { kind: "range", rng, source: "prevSat" };
     }
@@ -29375,7 +29934,8 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
         }
         const endPt = getDailyReviewEndPoint(pr);
         if (endPt) {
-          const rng = advanceMajorRangeFromEndPoint(endPt.endSurahId, endPt.endAyah, revPace, bounds, sabrJuz);
+          const _rDir = (st?.direction || h?.defaultDir || "desc") === "asc" ? "asc" : "desc";
+          const rng = advanceMajorRangeFromEndPoint(endPt.endSurahId, endPt.endAyah, revPace, bounds, sabrJuz, _rDir);
           if (rng) return { kind: "range", rng, source: "dailyRev", sourceDayName: ps.dayName || "" };
         }
         continue;
@@ -29446,12 +30006,13 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
         const s1 = SURAH_MAP[Number(pr.nextMajStartSurahId)], s2 = SURAH_MAP[Number(pr.nextMajEndSurahId)];
         const a1 = parseArabicNum(pr.nextMajStartAyah, 1), a2 = parseArabicNum(pr.nextMajEndAyah, s2.a);
         const p1 = getPageForSurahAyah(s1.id, a1), p2 = getPageForSurahAyah(s2.id, a2);
-        const pgs = Math.max(0.25, Math.round((getMushafPos(s2.id, a2, true) - getMushafPos(s1.id, a1, false)) * 100) / 100);
+        const pgs = Math.max(0.25, calcRangePages(s1.id, a1, a2, s2.id));
         const rng = formatMajorRangeObject(s1, a1, s2, a2, p1, p2, pgs, Math.min(bounds.endPage, p2 + 1), false, bounds.startPage, bounds.endPage);
         return { kind: "range", rng, source: "prevSat" };
       }
       const prevPts = getMajorReviewStartEndPoints(pr, st, h, ps);
-      const rng = advanceMajorRangeFromEndPoint(prevPts.endSurahId, prevPts.endAyah, revPace, bounds, sabrJuz);
+      const _rDir = (st?.direction || h?.defaultDir || "desc") === "asc" ? "asc" : "desc";
+      const rng = advanceMajorRangeFromEndPoint(prevPts.endSurahId, prevPts.endAyah, revPace, bounds, sabrJuz, _rDir);
       return { kind: "range", rng, source: "prevSat" };
     }
   }
@@ -29459,14 +30020,21 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
   // Fallback: if an earlier Saturday had an assignment that was left completely unevaluated (e.g. first Saturday) -> carry it over!
   if (fallbackSatPlan) return fallbackSatPlan;
 
-  // Initial Major Review fallback for brand new student
-  let initSurahId = sabrJuz ? sabrJuz.startSurah : bounds.startSurahId;
-  let initAyah = sabrJuz ? sabrJuz.startAyah : bounds.startAyah;
-  if (!sabrJuz && st.revPage && Number(st.revPage) >= bounds.startPage && Number(st.revPage) <= bounds.endPage) {
-    const pi = getPageStartInfo(Number(st.revPage));
-    initSurahId = pi.surah.id; initAyah = pi.ayah;
+  // Initial Major Review fallback for brand new student (respects student's memorization path: الناس->البقرة or البقرة->الناس!)
+  const revDir = (st?.direction || h?.defaultDir || "desc") === "asc" ? "asc" : "desc";
+  let initSurahId, initAyah;
+  if (revDir === "desc") {
+    initSurahId = sabrJuz ? sabrJuz.endSurah : bounds.endSurahId;
+    initAyah = 1;
+  } else {
+    initSurahId = sabrJuz ? sabrJuz.startSurah : bounds.startSurahId;
+    initAyah = sabrJuz ? sabrJuz.startAyah : bounds.startAyah;
+    if (!sabrJuz && st.revPage && Number(st.revPage) >= bounds.startPage && Number(st.revPage) <= bounds.endPage) {
+      const pi = getPageStartInfo(Number(st.revPage));
+      initSurahId = pi.surah.id; initAyah = pi.ayah;
+    }
   }
-  const rng = buildMajorReviewFromPoint(initSurahId, initAyah, revPace, bounds, sabrJuz);
+  const rng = buildMajorReviewFromPoint(initSurahId, initAyah, revPace, bounds, sabrJuz, revDir);
   return { kind: "range", rng, source: "init" };
 }
 
@@ -29962,15 +30530,17 @@ function formatUnifiedRangeCell(cols, isHtml = true) {
   }
   if (fIsNum && tIsEnd) {
     const a1 = Number(fAscii);
+    const sObjEnd = findSurahByName(sPlain);
+    const endA = sObjEnd ? sObjEnd.a : SURAH_END_TOKEN;
     return isHtml
-      ? `${sHtml} <span class="ayah-range">(${a1}–${SURAH_END_TOKEN})</span>`
-      : `${sPlain} (${a1}–${SURAH_END_TOKEN})`;
+      ? `${sHtml} <span class="ayah-range">(${a1}–${endA})</span>`
+      : `${sPlain} (${a1}–${endA})`;
   }
   if (!fPlain && tIsNum) {
     const a2 = Number(tAscii);
     return isHtml
-      ? `${sHtml} <span class="ayah-range">(إلى ${a2})</span>`
-      : `${sPlain} (إلى ${a2})`;
+      ? `${sHtml} <span class="ayah-range">(1–${a2})</span>`
+      : `${sPlain} (1–${a2})`;
   }
   if (fIsNum && !tPlain) {
     const a1 = Number(fAscii);
@@ -30026,16 +30596,24 @@ function formatUnifiedReviewCell(pairCols, isHtml = true) {
         : `${mF[1].trim()} (${a1}–${a2})`;
     }
     return isHtml
-      ? `${escapeHtml(fPlain)} <span class="ayah-range">(إلى ${a2})</span>`
-      : `${fPlain} (إلى ${a2})`;
+      ? `${escapeHtml(fPlain)} <span class="ayah-range">(1–${a2})</span>`
+      : `${fPlain} (1–${a2})`;
   }
   if (tIsEnd) {
     const mF = fPlain.match(/^(.+?)\s+([0-9٠-٩]+)$/);
     if (mF && !/^(ص|صفحة|صفحات|الجزء|جزء)$/.test(mF[1].trim())) {
       const a1 = parseArabicNum(mF[2], 1);
+      const sObjEnd = findSurahByName(mF[1].trim());
+      const endA = sObjEnd ? sObjEnd.a : SURAH_END_TOKEN;
       return isHtml
-        ? `${escapeHtml(mF[1].trim())} <span class="ayah-range">(${a1}–${SURAH_END_TOKEN})</span>`
-        : `${mF[1].trim()} (${a1}–${SURAH_END_TOKEN})`;
+        ? `${escapeHtml(mF[1].trim())} <span class="ayah-range">(${a1}–${endA})</span>`
+        : `${mF[1].trim()} (${a1}–${endA})`;
+    }
+    const sObjOnly = findSurahByName(fPlain);
+    if (sObjOnly) {
+      return isHtml
+        ? `${escapeHtml(sObjOnly.n)} <span class="ayah-range">(1–${sObjOnly.a})</span>`
+        : `${sObjOnly.n} (1–${sObjOnly.a})`;
     }
     return esc(fPlain);
   }
@@ -30050,14 +30628,16 @@ function formatInlineReviewHwHtml(text) {
     const p = part.trim();
     const mRange = p.match(/^(.+?)\s*\(\s*([0-9٠-٩]+)\s*[–-]\s*([0-9٠-٩]+|آخرها|نهايتها)\s*\)$/);
     if (mRange) {
+      const sName = mRange[1].trim();
       const a1 = parseArabicNum(mRange[2], 1);
       const endTok = mRange[3].trim();
-      const endTxt = isSurahEndToken(endTok) ? SURAH_END_TOKEN : String(parseArabicNum(endTok, a1));
-      return `${escapeHtml(mRange[1].trim())} <span class="ayah-range">(${a1}–${endTxt})</span>`;
+      const sObj = findSurahByName(sName);
+      const endTxt = isSurahEndToken(endTok) ? String(sObj ? sObj.a : SURAH_END_TOKEN) : String(parseArabicNum(endTok, a1));
+      return `${escapeHtml(sName)} <span class="ayah-range">(${a1}–${endTxt})</span>`;
     }
     const mTo = p.match(/^(.+?)\s*\(\s*إلى\s+([0-9٠-٩]+)\s*\)$/);
     if (mTo) {
-      return `${escapeHtml(mTo[1].trim())} <span class="ayah-range">(إلى ${parseArabicNum(mTo[2], 1)})</span>`;
+      return `${escapeHtml(mTo[1].trim())} <span class="ayah-range">(1–${parseArabicNum(mTo[2], 1)})</span>`;
     }
     const mSingle = p.match(/^(.+?)\s*\(\s*([0-9٠-٩]+)\s*\)$/);
     if (mSingle) {
@@ -30282,7 +30862,7 @@ function renderDailyReport() {
 
         const isPendingSabrOnly = Boolean(r.recIsSabr && r.sabrJuz && !r.recEval && !isAbs);
         const isPendingNoEval = Boolean(!r.recEval && !isAbs && r.attendance === "لم يُسمّع");
-        const compactDRevFrom = String(r.dRevFrom || "").replace(/^إعادة\s+/, "").replace(/\s*ص\s*\d+/g, "").trim();
+        const compactDRevFrom = r.dRevIsPages ? String(r.dRevFrom || "").replace(/^إعادة\s+/, "").trim() : String(r.dRevFrom || "").replace(/^إعادة\s+/, "").replace(/\s*ص\s*\d+/g, "").trim();
         const compactDRevTo = String(r.dRevTo || "").replace(/^\(|\)$/g, "").trim();
         const hasIndepRev = !isRashidiRow && !isAbs && !isNoRec && hasIndependentDailyReview(r);
         const hasGradedDRevRep = Boolean(hasIndepRev && r.dRevEval && String(r.dRevEval).trim() && r.dRevEval !== "بانتظار التقييم");
@@ -30334,16 +30914,19 @@ function renderDailyReport() {
         const baseRestNote = sabrNoteInfo.hasBadge
           ? stripRedundantSabrNoteText(rawCleanNote)
           : (!r.hwSabrJuz ? stripStaleHwSabrPrepText(rawCleanNote) : rawCleanNote);
-        const finalRestNote = (!isRashidiRow && !isAbs && !isNoRec)
-          ? applyTajweedToNote(baseRestNote, r)
-          : baseRestNote;
-        const fullNotePlainLen = ((sabrNoteInfo.hasBadge ? sabrNoteInfo.plain + " " : "") + finalRestNote).trim().length;
+        const tjBadge = (!isRashidiRow && !isAbs && !isNoRec)
+          ? buildTajweedReportBadgeHtml(r)
+          : { html: "", plain: "" };
+        const cleanFreeRest = stripTajweedSuffix(baseRestNote);
+        const fullNotePlainLen = ((sabrNoteInfo.hasBadge ? sabrNoteInfo.plain + " " : "") + (tjBadge.plain ? tjBadge.plain + " " : "") + cleanFreeRest).trim().length;
         if (fullNotePlainLen > maxDailyNoteLen) maxDailyNoteLen = fullNotePlainLen;
 
         const noteCellCls = sabrNoteInfo.hasBadge ? (sabrNoteInfo.isRep ? "td-note-sabr-rep" : "td-note-sabr") : "";
-        const noteCellHtml = sabrNoteInfo.hasBadge
-          ? `${sabrNoteInfo.html}${finalRestNote ? ` <span>${escapeHtml(finalRestNote)}</span>` : ""}`
-          : escapeHtml(finalRestNote);
+        const notePartsHtml = [];
+        if (sabrNoteInfo.hasBadge) notePartsHtml.push(sabrNoteInfo.html);
+        if (tjBadge.html) notePartsHtml.push(tjBadge.html);
+        if (cleanFreeRest) notePartsHtml.push(`<span>${escapeHtml(cleanFreeRest)}</span>`);
+        const noteCellHtml = notePartsHtml.join(" ");
         const ptsDisp = getDailyReportPointsDisplay(s, r, st, isAbs, isNoRec);
 
         return { ok: true, idx, st, recHtml, recSabr: Boolean(_recSabrObj), evalSt, ptsDisp, dRevHtml, revSt, hwHtml, hwCls, hwMinHtml, hwMajHtml, hwMajCls, hwIsRashidiRev, noteCellCls, noteCellHtml };
@@ -30469,11 +31052,14 @@ function renderDailyReport() {
         const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
         const majRaw = isRashidiRow ? "" : (isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || "")))));
         const majSt = getEvalCellStyle(majRaw, !isRashidiRow && isAbs);
-        const noteTxt = stripMushafPageTokens(r.notes || "").trim();
+        const satTjBadge = (!isRashidiRow && !isAbs && !isNoRec) ? buildTajweedReportBadgeHtml(r) : { html: "", plain: "" };
+        const satFreeNote = stripTajweedSuffix(stripMushafPageTokens(r.notes || "")).trim();
+        const noteTxt = [satTjBadge.plain, satFreeNote].filter(Boolean).join(" — ");
+        const noteHtml = [satTjBadge.html, satFreeNote ? `<span>${escapeHtml(satFreeNote)}</span>` : ""].filter(Boolean).join(" ");
         if (noteTxt.length > maxSatNoteLen) maxSatNoteLen = noteTxt.length;
         const ptsDisp = getDailyReportPointsDisplay(s, r, st, isAbs, isNoRec);
 
-        return { ok: true, idx, st, minHtml, minSt, majHtml, majSt, ptsDisp, hwHtml, hwIsSabr, noteTxt };
+        return { ok: true, idx, st, minHtml, minSt, majHtml, majSt, ptsDisp, hwHtml, hwIsSabr, noteTxt, noteHtml };
       } catch (rowErr) {
         console.warn("Sat report row error for student:", st?.name, rowErr);
         return { ok: false, idx, st };
@@ -30525,7 +31111,7 @@ function renderDailyReport() {
         <td class="${row.majSt.cls} td-eval-slim">${escapeHtml(row.majSt.text)}</td>
         ${ptsOn ? `<td class="td-pts col-sec-start">${row.ptsDisp.html}</td>` : ''}
         <td class="td-range-unified col-sec-start ${row.hwIsSabr ? 'td-sabr' : ''}">${row.hwHtml}</td>
-        <td class="txt-right td-note col-sec-start">${escapeHtml(row.noteTxt)}</td>
+        <td class="txt-right td-note col-sec-start">${row.noteHtml || escapeHtml(row.noteTxt)}</td>
       </tr>`;
     });
 
@@ -30701,10 +31287,14 @@ function computeMonthlyData(monthFilter) {
       else if (r.attendance === "غياب مبرر") excusedDays++;
       else if (r.attendance === "غياب غير مبرر") absentDays++;
       totalPoints += Number(r.points) || 0;
-      if (isPassedNewMemSabrForMonthly(s, r)) {
-        const cleanSabrJuz = formatJuzClean(r.sabrJuz);
-        const scLbl = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore))) ? `${cleanSabrJuz} (${Math.round(Number(r.sabrScore))}%)` : cleanSabrJuz;
-        if (cleanSabrJuz && !sabrList.some(x => x.startsWith(cleanSabrJuz))) sabrList.push(scLbl);
+      if (s.type === "daily" && !r.sabrIsReview) {
+        getRecordSabrEntries(r).forEach(ent => {
+          if (!isSabrEntryPassed(s, r, ent)) return;
+          const cleanSabrJuz = formatJuzClean(ent.juzName);
+          const hasSc = ent.score !== "" && ent.score !== undefined && ent.score !== null && !isNaN(Number(ent.score));
+          const scLbl = hasSc ? `${cleanSabrJuz} (${Math.round(Number(ent.score))}%)` : cleanSabrJuz;
+          if (cleanSabrJuz && !sabrList.some(x => x.startsWith(cleanSabrJuz))) sabrList.push(scLbl);
+        });
       }
 
       const isAbs = String(r.attendance || "").includes("غياب") || r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع";
@@ -30722,10 +31312,10 @@ function computeMonthlyData(monthFilter) {
             const firstS = rSegs[0], lastS = rSegs[rSegs.length - 1];
             const sObj1 = SURAH_MAP[Number(firstS.surahId)], sObj2 = SURAH_MAP[Number(lastS.surahId)] || sObj1;
             const n1 = sObj1?.n || "", n2 = sObj2?.n || n1;
-            const f1Short = sObj1 && sObj1.a < 8 && parseArabicNum(firstS.from, 1) <= 1;
-            const t2Short = sObj2 && sObj2.a < 8 && parseArabicNum(lastS.to, sObj2.a) >= sObj2.a;
-            if (!firstMem && n1) firstMem = f1Short ? n1 : `${n1}${firstS.from ? ' - ' + firstS.from : ''}`;
-            if (n2) lastMem = t2Short ? n2 : `${n2}${lastS.to ? ' - ' + lastS.to : ''}`;
+            const f1Val = Math.max(1, parseArabicNum(firstS.from, 1));
+            const t2Val = Math.max(1, parseArabicNum(lastS.to, sObj2?.a || 1));
+            if (!firstMem && n1) firstMem = `${n1} - ${f1Val}`;
+            if (n2) lastMem = `${n2} - ${t2Val}`;
             memPages += Number(r.recPages) || calcSegmentsPages(rSegs);
           }
         }
@@ -30748,6 +31338,7 @@ function computeMonthlyData(monthFilter) {
       memPages: Math.round(memPages * 100) / 100, revPages: Math.round(revPages * 100) / 100, rashidiPages: Math.round(rashidiPages * 100) / 100,
       sabrList, sabrCount: sabrList.length, totalPoints,
       presentDays, lateDays, excusedDays, absentDays, totalAbsences: excusedDays + absentDays,
+      autoTajweedNote: (!isPointsCycle && st.track !== "rashidi") ? computeStudentMonthlyTopTajweedText(h, st.id, monthFilter) : "",
       customNote: replaceLegacyJuzOrdinalsInText(h.monthlyNotes?.[noteKey] ?? ""), noteKey
     };
   });
@@ -31058,6 +31649,7 @@ function renderMonthlyReport() {
       <td style="font-weight:700;">${formatNum(row.revPages)}</td>
       <td>${escapeHtml(row.sabrList.join("، ") || "—")}</td>
       <td class="txt-right">
+        ${row.autoTajweedNote ? `<div class="monthly-tj-locked">🎙️ ${escapeHtml(row.autoTajweedNote)}</div>` : ""}
         <input type="text" class="no-print" value="${escapeHtml(row.customNote)}" placeholder="أضف ملاحظة..." style="width:100%; border:1px solid #d4cfba; border-radius:4px; padding:2px 5px; font-size:12px;" oninput="updateMonthlyNote('${row.noteKey}', this.value)">
         <span class="only-print-txt" style="display:none;">${escapeHtml(row.customNote)}</span>
       </td>
@@ -33660,7 +34252,7 @@ async function exportDailyExcelStyled() {
 
         const isPendingSabrOnly = Boolean(r.recIsSabr && r.sabrJuz && !r.recEval && !isAbs);
         const isPendingNoEval = Boolean(!r.recEval && !isAbs && r.attendance === "لم يُسمّع");
-        const compactDRevFrom = String(r.dRevFrom || "").replace(/^إعادة\s+/, "").replace(/\s*ص\s*\d+/g, "").trim();
+        const compactDRevFrom = r.dRevIsPages ? String(r.dRevFrom || "").replace(/^إعادة\s+/, "").trim() : String(r.dRevFrom || "").replace(/^إعادة\s+/, "").replace(/\s*ص\s*\d+/g, "").trim();
         const compactDRevTo = String(r.dRevTo || "").replace(/^\(|\)$/g, "").trim();
         const hasIndepRevXl = !isRashidiRow && !isAbs && !isNoRecXl && hasIndependentDailyReview(r);
         const hasGradedDRevXl = Boolean(hasIndepRevXl && r.dRevEval && String(r.dRevEval).trim() && r.dRevEval !== "بانتظار التقييم");
@@ -33980,9 +34572,10 @@ async function exportMonthlyExcelStyled() {
     rows.forEach((r, idx) => {
       const rowNum = dataStart + idx;
       const row = ws.getRow(rowNum);
-      row.height = estimateRowHeight(r.customNote, 24, 34);
+      row.height = estimateRowHeight([r.autoTajweedNote, r.customNote].filter(Boolean).join(" — "), 24, 34);
       const pgVal = r.student.track === "rashidi" ? `${formatNum(r.rashidiPages)} (رشيدي)` : r.memPages;
-      const vals = [idx + 1, r.student.name, r.fromMem, r.toMem, pgVal, r.revPages, r.sabrList.join("، ") || "—", r.customNote || ""];
+      const combinedMonthNote = [r.autoTajweedNote ? `🎙️ ${r.autoTajweedNote}` : "", r.customNote || ""].filter(Boolean).join(" — ");
+      const vals = [idx + 1, r.student.name, r.fromMem, r.toMem, pgVal, r.revPages, r.sabrList.join("، ") || "—", combinedMonthNote];
       const bg = idx % 2 === 1 ? "FFE7E4D9" : "FFFFFFFF";
       vals.forEach((v, ci) => {
         const col = 4 + ci;
@@ -34136,10 +34729,12 @@ function buildDailyWhatsAppText() {
       }
     } else {
       // Daily Recitation Day
-      if (isSabrEvaluatedAndPassed(s, r)) {
-        const sEv = getDailySabrEval(r);
-        sabrHeroes.push(`• *${st.name}* — ${formatJuzClean(r.sabrJuz)}${r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null ? ` (${r.sabrScore}% — ${sEv})` : (sEv ? ` (${sEv})` : "")}`);
-      }
+      getRecordSabrEntries(r).forEach(ent => {
+        if (!isSabrEntryPassed(s, r, ent)) return;
+        const sEv = getEffectiveEntrySabrEval(s, r, ent);
+        const hasSc = ent.score !== "" && ent.score !== undefined && ent.score !== null;
+        sabrHeroes.push(`• *${st.name}* — ${formatJuzClean(ent.juzName)}${hasSc ? ` (${ent.score}% — ${sEv})` : (sEv ? ` (${sEv})` : "")}`);
+      });
 
       const recRep = r.recEval === "إعادة";
       const dRevRep = r.dRevEval === "إعادة";
@@ -39118,7 +39713,20 @@ function runSilentDataSanitizer() {
         });
       });
     }
-    // v129: Self-heal continuous Major Review chain across ALL sessions (Sat + Mon + Wed, including finalized)!
+    // v130: Normalize any Firebase object-encoded sabrEntries arrays
+    if (Array.isArray(h.sessions)) {
+      h.sessions.forEach(s => {
+        if (!s?.records) return;
+        Object.values(s.records).forEach(r => {
+          if (r && r.sabrEntries && !Array.isArray(r.sabrEntries) && typeof r.sabrEntries === "object") {
+            r.sabrEntries = Object.values(r.sabrEntries).filter(x => x && x.juzName);
+            syncRecordSabrLegacyFields(r);
+            repaired = true;
+          }
+        });
+      });
+    }
+    // v130: Self-heal continuous Major Review chain across ALL sessions (Sat + Mon + Wed, including finalized)!
     if (reconcileAllMajorReviewChains(h, true) > 0) repaired = true;
     h._sanitizedVersion = TIBYAN_APP_VERSION;
   });
@@ -39528,7 +40136,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v129";
+const TIBYAN_APP_VERSION = "v130";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -42425,5 +43033,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v129 -->
+<!-- Makin App v130 -->
 </html>
