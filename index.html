@@ -14412,6 +14412,77 @@ table.t-daily td.td-sard,
   color: #fde68a;
 }
 
+
+/* ==================== MAKIN v137: UNIVERSAL STEP-BACK ARROW ON ALL PAGES & MODALS ==================== */
+.hdr-back-btn {
+  background: rgba(200, 161, 75, 0.2);
+  color: #f6dc93;
+  border: 1px solid rgba(244, 217, 141, 0.48);
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+  transition: transform 0.1s ease, background 0.14s ease;
+}
+.hdr-back-btn.show {
+  display: inline-flex;
+}
+.hdr-back-btn:active {
+  transform: scale(0.92);
+  background: rgba(200, 161, 75, 0.36);
+}
+.hdr-back-btn svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+}
+
+.modal-header {
+  gap: 8px;
+}
+.modal-back-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  border: 1px solid var(--line-strong);
+  background: var(--brand-tint);
+  color: var(--brand-slate);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+  transition: transform 0.1s ease, background 0.14s ease;
+}
+.modal-back-btn:active {
+  transform: scale(0.92);
+  background: var(--line);
+}
+.modal-back-btn svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+.modal-back-btn.on-dark {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(244, 217, 141, 0.42);
+  color: #f6dc93;
+}
+.modal-back-btn.on-dark:active {
+  background: rgba(255, 255, 255, 0.24);
+}
+#studentEvalSheet .modal-back-btn.on-dark {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -14814,6 +14885,7 @@ table.t-daily td.td-sard,
     <div class="header-inner">
       <div class="brand">
         <button type="button" class="menu-burger-btn" onclick="openRightDrawer()" title="القائمة والإعدادات">☰</button>
+        <button type="button" class="hdr-back-btn" id="btnAppHeaderBack" onclick="goBackMainView()" title="رجوع خطوة للخلف" aria-label="رجوع"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
         <div class="brand-logo-pill" onclick="openSettingsModal()" style="cursor:pointer;"><img id="hdrLogoImg" alt="تبيان"></div>
         <div style="min-width:0; cursor:pointer;" onclick="openSettingsModal()">
           <div class="brand-title" id="hdrHalaqaName">حلقة ...</div>
@@ -14937,7 +15009,7 @@ table.t-daily td.td-sard,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v136</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v137</span>
         </button>
       </div>
     </div>
@@ -15153,6 +15225,7 @@ table.t-daily td.td-sard,
   <header class="sup-header">
     <div class="header-inner">
       <div class="brand">
+        <button type="button" class="hdr-back-btn" id="btnSupHeaderBack" onclick="goBackSupView()" title="رجوع خطوة للخلف" aria-label="رجوع"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
         <div class="brand-logo-pill"><img id="supHdrLogoImg" alt="تبيان"></div>
         <div style="min-width:0;">
           <div class="brand-title" id="supHdrBranchName">صرح ...</div>
@@ -15204,6 +15277,7 @@ table.t-daily td.td-sard,
   <header class="owner-header">
     <div class="header-inner">
       <div class="brand">
+        <button type="button" class="hdr-back-btn" id="btnOwnerHeaderBack" onclick="goBackOwnerView()" title="رجوع خطوة للخلف" aria-label="رجوع"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
         <div class="brand-logo-pill"><img id="ownerHdrLogoImg" alt="تبيان"></div>
         <div style="min-width:0;">
           <div class="brand-title">👑 لوحة المؤسس — صروح مكين</div>
@@ -23988,6 +24062,8 @@ function initApp() {
     runSilentDataSanitizer();
     routeAppByCurrentUser();
     startUniversalSelectEnhancer();
+    ensureAllModalBackButtons();
+    syncHeaderBackButtons();
     updateNotifToggleUI();
     updateCentralCloudIndicatorUI();
 
@@ -24239,11 +24315,25 @@ function openRightDrawer() {
   document.getElementById("rightDrawerBackdrop")?.classList.add("open");
   document.getElementById("rightDrawer")?.classList.add("open");
   if (typeof syncBodyScrollLock === "function") syncBodyScrollLock();
+  openRightDrawer_pushGuard();
+}
+
+function openRightDrawer_pushGuard() {
+  try {
+    if (!window._makinBackPushed) {
+      history.pushState({ makinOverlay: true }, "");
+      window._makinBackPushed = true;
+    }
+  } catch {}
 }
 
 function closeRightDrawer() {
+  const dr = document.getElementById("rightDrawer");
+  if (dr?.classList.contains("open") && !_navIsRestoringBack) {
+    _lastDrawerClosedAt = Date.now();
+  }
   document.getElementById("rightDrawerBackdrop")?.classList.remove("open");
-  document.getElementById("rightDrawer")?.classList.remove("open");
+  dr?.classList.remove("open");
   if (typeof syncBodyScrollLock === "function") syncBodyScrollLock();
 }
 
@@ -24302,6 +24392,10 @@ function updateDrawerQuickStates() {
 }
 
 function switchTab(tab) {
+  const prevTab = document.querySelector("#appShell .nav-tab.active")?.dataset.tab || "session";
+  if (!_navIsRestoringBack && tab && tab !== prevTab) {
+    pushNavTabHistory("app", { tab: prevTab, sub: prevTab === "reports" ? currentReportSubtab : null });
+  }
   if (tab !== "session" && openCardId) {
     openCardId = null;
     closeStudentEvalSheet(false);
@@ -24320,12 +24414,18 @@ function switchTab(tab) {
     else if (curS?.type === "daily") prefillDailyRecitation(false, false);
     populateSessionSelectors();
     populateMonthFilters();
-    switchReportSubtab("daily");
+    switchReportSubtab("daily", false);
   }
   if (tab === "stats") { populateMonthFilters(); renderStats(); }
+  syncHeaderBackButtons();
 }
 
-function switchReportSubtab(sub) {
+function switchReportSubtab(sub, recordHist = true) {
+  const prevSub = currentReportSubtab;
+  const isReportsActive = document.getElementById("view-reports")?.classList.contains("active");
+  if (recordHist && !_navIsRestoringBack && isReportsActive && sub && prevSub && sub !== prevSub) {
+    pushNavTabHistory("app", { tab: "reports", sub: prevSub });
+  }
   currentReportSubtab = sub;
   document.getElementById("subtabDailyBtn").classList.toggle("active", sub === "daily");
   document.getElementById("subtabMonthlyBtn").classList.toggle("active", sub === "monthly");
@@ -24333,6 +24433,7 @@ function switchReportSubtab(sub) {
   document.getElementById("panelMonthlyReport").style.display = sub === "monthly" ? "block" : "none";
   if (sub === "daily") renderDailyReport();
   else renderMonthlyReport();
+  syncHeaderBackButtons();
 }
 
 // ==================== STUDENTS MANAGEMENT ====================
@@ -28645,6 +28746,7 @@ function syncStudentEvalSheet() {
     <div class="es-handle"></div>
     <div class="es-hdr-top">
       <div class="es-hdr-id">
+        <button type="button" class="modal-back-btn on-dark" onclick="goBackFromModal('studentEvalSheet')" title="رجوع خطوة للخلف" aria-label="رجوع"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
         <span class="es-num-badge">${idx + 1}</span>
         <div class="es-st-name">${escapeHtml(st.name)}</div>
       </div>
@@ -37046,10 +37148,230 @@ function getEffectiveModalZ(el) {
   return (!isNaN(stZ) && stZ > 0) ? stZ : 100;
 }
 
+// ==================== MAKIN v137: UNIVERSAL STEP-BACK NAVIGATION ENGINE ====================
+let _navIsRestoringBack = false;
+let _lastDrawerClosedAt = 0;
+let _lastModalClosed = null;
+const _modalReturnMap = {};
+const _appTabHistory = [];
+const _supTabHistory = [];
+const _ownerTabHistory = [];
+
+function pushNavTabHistory(shell, entry) {
+  const arr = shell === "sup" ? _supTabHistory : (shell === "owner" ? _ownerTabHistory : _appTabHistory);
+  const last = arr[arr.length - 1];
+  if (last && JSON.stringify(last) === JSON.stringify(entry)) return;
+  arr.push(entry);
+  if (arr.length > 25) arr.shift();
+  try {
+    if (!window._makinBackPushed) {
+      history.pushState({ makinOverlay: true }, "");
+      window._makinBackPushed = true;
+    }
+  } catch {}
+}
+
+function captureModalNavMeta(id) {
+  if (id === "settingsModal") {
+    const active = ["halaqa", "system", "cloud"].find(k => document.getElementById("setTabBtn_" + k)?.classList.contains("on"));
+    return { settingsTab: active || "halaqa" };
+  }
+  if (id === "programsModal") {
+    return { progTab: typeof _activeProgTab !== "undefined" ? _activeProgTab : "istihda" };
+  }
+  if (id === "studentModal") {
+    const active = ["basic", "path", "rev"].find(k => document.getElementById("stmTab_" + k)?.classList.contains("on"));
+    return { stmTab: active || "basic" };
+  }
+  return null;
+}
+
+function restoreModalById(id, meta) {
+  if (!id || !document.getElementById(id)) return;
+  if (id === "halaqaRulesModal") {
+    renderHalaqaSettingsModal();
+    openModal("halaqaRulesModal");
+  } else if (id === "settingsModal") {
+    openSettingsModal();
+    if (meta?.settingsTab && typeof switchSettingsTab === "function") switchSettingsTab(meta.settingsTab);
+  } else if (id === "programsModal") {
+    openProgramsModal(meta?.progTab || "istihda");
+  } else if (id === "classDaysModal") {
+    openClassDaysModal();
+  } else if (id === "monthlyPlanModal") {
+    openMonthlyPlanModal();
+  } else if (id === "parentAlertModal") {
+    openParentAlertsModal();
+  } else if (id === "studentEvalSheet") {
+    if (openCardId) { openModal("studentEvalSheet"); syncStudentEvalSheet(); }
+  } else {
+    openModal(id);
+  }
+}
+
+function goBackFromModal(id) {
+  if (!id) return;
+  const ret = _modalReturnMap[id];
+  delete _modalReturnMap[id];
+  _navIsRestoringBack = true;
+  try {
+    if (id === "studentEvalSheet") closeStudentEvalSheet();
+    else if (id === "supInspectModal") closeSupInspectModal();
+    else closeModal(id);
+
+    const stillOpen = document.querySelectorAll(".modal-backdrop.show").length > 0;
+    if (!stillOpen && ret) {
+      if (ret.kind === "modal" && ret.id && ret.id !== id) {
+        restoreModalById(ret.id, ret.meta);
+      } else if (ret.kind === "drawer") {
+        openRightDrawer();
+      }
+    }
+  } finally {
+    _navIsRestoringBack = false;
+  }
+  syncHeaderBackButtons();
+}
+
+function syncHeaderBackButtons() {
+  const curAppTab = document.querySelector("#appShell .nav-tab.active")?.dataset.tab || "session";
+  const showAppBack = _appTabHistory.length > 0 || curAppTab !== "session" || (curAppTab === "reports" && currentReportSubtab === "monthly");
+  document.getElementById("btnAppHeaderBack")?.classList.toggle("show", Boolean(showAppBack));
+
+  const showSupBack = _supTabHistory.length > 0 || (typeof _activeSupTab !== "undefined" && _activeSupTab !== "overview");
+  document.getElementById("btnSupHeaderBack")?.classList.toggle("show", Boolean(showSupBack));
+
+  const showOwnerBack = _ownerTabHistory.length > 0 || (typeof _activeOwnerTab !== "undefined" && _activeOwnerTab !== "dashboard");
+  document.getElementById("btnOwnerHeaderBack")?.classList.toggle("show", Boolean(showOwnerBack));
+}
+
+function goBackMainView() {
+  _navIsRestoringBack = true;
+  try {
+    if (_appTabHistory.length > 0) {
+      const prev = _appTabHistory.pop();
+      const curTab = document.querySelector("#appShell .nav-tab.active")?.dataset.tab || "session";
+      if (prev.tab === "reports" && curTab === "reports" && prev.sub) {
+        switchReportSubtab(prev.sub, false);
+      } else {
+        switchTab(prev.tab || "session");
+        if (prev.tab === "reports" && prev.sub && prev.sub !== currentReportSubtab) {
+          switchReportSubtab(prev.sub, false);
+        }
+      }
+    } else {
+      const curTab = document.querySelector("#appShell .nav-tab.active")?.dataset.tab || "session";
+      if (curTab === "reports" && currentReportSubtab === "monthly") {
+        switchReportSubtab("daily", false);
+      } else if (curTab !== "session") {
+        switchTab("session");
+      }
+    }
+  } finally {
+    _navIsRestoringBack = false;
+  }
+  syncHeaderBackButtons();
+}
+
+function goBackSupView() {
+  _navIsRestoringBack = true;
+  try {
+    const prev = _supTabHistory.length ? _supTabHistory.pop() : "overview";
+    switchSupTab(prev || "overview");
+  } finally {
+    _navIsRestoringBack = false;
+  }
+  syncHeaderBackButtons();
+}
+
+function goBackOwnerView() {
+  _navIsRestoringBack = true;
+  try {
+    const prev = _ownerTabHistory.length ? _ownerTabHistory.pop() : "dashboard";
+    switchOwnerTab(prev || "dashboard");
+  } finally {
+    _navIsRestoringBack = false;
+  }
+  syncHeaderBackButtons();
+}
+
+function handleUniversalStepBack() {
+  const openModals = Array.from(document.querySelectorAll(".modal-backdrop.show"))
+    .sort((a, b) => getEffectiveModalZ(b) - getEffectiveModalZ(a));
+  if (openModals.length) {
+    const top = openModals[0];
+    if (top.id === "makinDialogModal") { resolveMakinDialog(false); return true; }
+    goBackFromModal(top.id);
+    return true;
+  }
+  if (document.getElementById("rightDrawer")?.classList.contains("open")) {
+    closeRightDrawer();
+    return true;
+  }
+  if (document.getElementById("appShell")?.style.display !== "none") {
+    const curTab = document.querySelector("#appShell .nav-tab.active")?.dataset.tab || "session";
+    if (_appTabHistory.length > 0 || curTab !== "session" || (curTab === "reports" && currentReportSubtab === "monthly")) {
+      goBackMainView();
+      return true;
+    }
+  } else if (document.getElementById("supervisorShell")?.style.display !== "none") {
+    if (_supTabHistory.length > 0 || (typeof _activeSupTab !== "undefined" && _activeSupTab !== "overview")) {
+      goBackSupView();
+      return true;
+    }
+  } else if (document.getElementById("ownerShell")?.style.display !== "none") {
+    if (_ownerTabHistory.length > 0 || (typeof _activeOwnerTab !== "undefined" && _activeOwnerTab !== "dashboard")) {
+      goBackOwnerView();
+      return true;
+    }
+  }
+  return false;
+}
+
+function ensureAllModalBackButtons() {
+  const backIconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>';
+  document.querySelectorAll(".modal-backdrop[id]").forEach(backdrop => {
+    const id = backdrop.id;
+    if (!id || id === "makinDialogModal" || id === "studentEvalSheet") return;
+    const hdrRow = backdrop.querySelector(".exec-modal-hdr-row, .sp-exec-hdr-row, .modal-header");
+    if (!hdrRow || hdrRow.querySelector(".modal-back-btn")) return;
+    const isDarkHdr = hdrRow.classList.contains("exec-modal-hdr-row") || hdrRow.classList.contains("sp-exec-hdr-row");
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "modal-back-btn" + (isDarkHdr ? " on-dark" : "");
+    btn.title = "رجوع خطوة للخلف";
+    btn.setAttribute("aria-label", "رجوع");
+    btn.innerHTML = backIconSvg;
+    btn.onclick = (e) => { e.stopPropagation(); goBackFromModal(id); };
+    hdrRow.insertBefore(btn, hdrRow.firstChild);
+  });
+}
+
 function openModal(id) {
   const el = document.getElementById(id);
   if (!el) return;
-  if (id !== "studentEvalSheet") closeRightDrawer();
+  const now = Date.now();
+  const drawerWasOpen = Boolean(document.getElementById("rightDrawer")?.classList.contains("open"));
+  const otherOpenModals = Array.from(document.querySelectorAll(".modal-backdrop.show")).filter(m => m.id !== id);
+  if (!_navIsRestoringBack && id !== "makinDialogModal") {
+    if (_lastModalClosed && _lastModalClosed.id && _lastModalClosed.id !== id && (now - _lastModalClosed.ts) < 350) {
+      _modalReturnMap[id] = { kind: "modal", id: _lastModalClosed.id, meta: _lastModalClosed.meta };
+      _lastModalClosed = null;
+    } else if (id !== "studentEvalSheet" && (drawerWasOpen || (now - _lastDrawerClosedAt) < 350)) {
+      _modalReturnMap[id] = { kind: "drawer" };
+      _lastDrawerClosedAt = 0;
+    } else if (otherOpenModals.length > 0) {
+      _modalReturnMap[id] = { kind: "underneath" };
+    } else {
+      _modalReturnMap[id] = { kind: "page" };
+    }
+  }
+  if (id !== "studentEvalSheet") {
+    const prevRestore = _navIsRestoringBack;
+    _navIsRestoringBack = true;
+    closeRightDrawer();
+    _navIsRestoringBack = prevRestore;
+  }
   if (id === "makinDialogModal") {
     el.style.setProperty("z-index", "255", "important");
   } else if (id === "execPickerSheet") {
@@ -37078,6 +37400,10 @@ function openModal(id) {
 
 function closeModal(id) {
   const el = document.getElementById(id);
+  const wasOpen = Boolean(el && el.classList.contains("show"));
+  if (wasOpen && !_navIsRestoringBack && id !== "makinDialogModal") {
+    _lastModalClosed = { id, ts: Date.now(), meta: captureModalNavMeta(id) };
+  }
   if (el) el.classList.remove("show");
   if (id === "quickAttendanceModal" && _qaDirtySession) {
     _qaDirtySession = false;
@@ -37087,7 +37413,7 @@ function closeModal(id) {
   syncBodyScrollLock();
 }
 
-// Universal backdrop click-outside-to-close + Escape key + Mobile Back button overlay dismissal
+// Universal backdrop click-outside-to-close + Escape key + Mobile Back button step-by-step navigation
 (function bindUniversalOverlayControls() {
   if (window._makinOverlayControlsBound) return;
   window._makinOverlayControlsBound = true;
@@ -37101,33 +37427,18 @@ function closeModal(id) {
   });
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
-    const openModals = Array.from(document.querySelectorAll(".modal-backdrop.show"))
-      .sort((a, b) => getEffectiveModalZ(b) - getEffectiveModalZ(a));
-    if (openModals.length) {
-      const top = openModals[0];
-      if (top.id === "studentEvalSheet") closeStudentEvalSheet();
-      else if (top.id === "supInspectModal") closeSupInspectModal();
-      else closeModal(top.id);
-    } else if (document.getElementById("rightDrawer")?.classList.contains("open")) {
-      closeRightDrawer();
-    }
+    handleUniversalStepBack();
   });
   window.addEventListener("popstate", () => {
     window._makinBackPushed = false;
-    const openModals = Array.from(document.querySelectorAll(".modal-backdrop.show"))
-      .sort((a, b) => getEffectiveModalZ(b) - getEffectiveModalZ(a));
-    if (openModals.length) {
-      const top = openModals[0];
-      if (top.id === "studentEvalSheet") closeStudentEvalSheet();
-      else if (top.id === "supInspectModal") closeSupInspectModal();
-      else closeModal(top.id);
-      if (document.querySelector(".modal-backdrop.show")) {
-        try { history.pushState({ makinOverlay: true }, ""); window._makinBackPushed = true; } catch {}
-      }
-      return;
-    }
-    if (document.getElementById("rightDrawer")?.classList.contains("open")) {
-      closeRightDrawer();
+    handleUniversalStepBack();
+    const hasMore = document.querySelector(".modal-backdrop.show")
+      || document.getElementById("rightDrawer")?.classList.contains("open")
+      || _appTabHistory.length > 0
+      || _supTabHistory.length > 0
+      || _ownerTabHistory.length > 0;
+    if (hasMore) {
+      try { history.pushState({ makinOverlay: true }, ""); window._makinBackPushed = true; } catch {}
     }
   });
 })();
@@ -38004,7 +38315,11 @@ function renderSupervisorShell() {
 }
 
 function switchSupTab(tab) {
-  _activeSupTab = tab || "overview";
+  const nextTab = tab || "overview";
+  if (!_navIsRestoringBack && _activeSupTab && nextTab !== _activeSupTab) {
+    pushNavTabHistory("sup", _activeSupTab);
+  }
+  _activeSupTab = nextTab;
   document.querySelectorAll("[data-suptab]").forEach(el => el.classList.toggle("active", el.dataset.suptab === _activeSupTab));
   ["overview", "branchReport", "messages", "programs", "profile"].forEach(k => {
     document.getElementById("sup-view-" + k)?.classList.toggle("active", k === _activeSupTab);
@@ -38015,6 +38330,7 @@ function switchSupTab(tab) {
   else if (_activeSupTab === "messages") renderSupMessagesTab();
   else if (_activeSupTab === "programs") renderSupProgramsTab();
   else if (_activeSupTab === "profile") renderSupProfileTab();
+  syncHeaderBackButtons();
 }
 
 // (refreshSupervisorData upgraded in v51 below)
@@ -41530,7 +41846,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v136";
+const TIBYAN_APP_VERSION = "v137";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -42611,7 +42927,11 @@ function renderOwnerShell() {
 }
 
 function switchOwnerTab(tab) {
-  _activeOwnerTab = tab || "dashboard";
+  const nextTab = tab || "dashboard";
+  if (!_navIsRestoringBack && _activeOwnerTab && nextTab !== _activeOwnerTab) {
+    pushNavTabHistory("owner", _activeOwnerTab);
+  }
+  _activeOwnerTab = nextTab;
   document.querySelectorAll("[data-owntab]").forEach(el => el.classList.toggle("active", el.dataset.owntab === _activeOwnerTab));
   ["dashboard", "invites", "broadcast"].forEach(k => {
     document.getElementById("owner-view-" + k)?.classList.toggle("active", k === _activeOwnerTab);
@@ -42620,6 +42940,7 @@ function switchOwnerTab(tab) {
   if (_activeOwnerTab === "dashboard") renderOwnerDashboardTab();
   else if (_activeOwnerTab === "invites") renderOwnerInvitesTab();
   else if (_activeOwnerTab === "broadcast") renderOwnerBroadcastTab();
+  syncHeaderBackButtons();
 }
 
 async function refreshOwnerData(notify = false) {
@@ -44427,5 +44748,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v136 -->
+<!-- Makin App v137 -->
 </html>
