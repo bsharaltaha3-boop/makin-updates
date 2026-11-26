@@ -12632,7 +12632,14 @@ table.t-daily { min-width: 1240px; table-layout: fixed; }
   gap: 6px;
   margin-bottom: 7px;
 }
-.es-tools-3 .es-tool-btn {
+.es-tools-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 7px;
+}
+.es-tools-3 .es-tool-btn,
+.es-tools-2 .es-tool-btn {
   padding: 8px 4px 7px !important;
   border-radius: 12px !important;
 }
@@ -15009,7 +15016,7 @@ table.t-daily td.td-sard,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v137</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v138</span>
         </button>
       </div>
     </div>
@@ -28929,48 +28936,7 @@ function renderCardBody(s, st, r, idx) {
     const hasNotesDot = Boolean(String(r.notes || "").trim());
 
     let toolPanelHtml = "";
-    if (evalSheetTool === "rev") {
-      const hasRevVal = Boolean(r.dRevSabrJuz || r.dRevFrom || r.dRevSurahId || dRevExtras.length || Number(r.dRevPages) > 0);
-      const revAssignedPg = calcDailyReviewAssignedPages(r);
-      const revPanelTitle = !hasIndependentDailyReview(r)
-        ? "لم يُحدد مقطع بعد"
-        : (r.dRevSabrJuz
-          ? `🎓 سبر ${formatJuzClean(r.dRevSabrJuz)}`
-          : (r.dRevSardLabel
-            ? `📚 ${r.dRevSardLabel}`
-            : (r.dRevIsPages && r.dRevFrom
-              ? `📄 ${r.dRevFrom === r.dRevTo ? r.dRevFrom : r.dRevFrom + " ← " + r.dRevTo}`
-              : (formatSegmentsInline(getSegments(r, "dRev")) || (r.dRevFrom ? formatMajStripDisplay(r.dRevFrom, r.dRevTo) : "لم يُحدد مقطع بعد")))));
-      const revAutoHint = (r.dRevAuto && !r.dRevEval) ? " • مرحّل تلقائياً (لن يظهر بالتقرير حتى تقييمه)" : "";
-      toolPanelHtml = `
-        <div class="es-tool-panel compact-v115">
-          <div class="es-tool-panel-hdr">
-            <span>📘 مراجعة اليوم والربط</span>
-            <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','rev')">إخفاء</button>
-          </div>
-          <div class="adv-row-card">
-            <div class="arc-l">
-              <div class="arc-t">مقطع المراجعة (${formatNum(revAssignedPg)} ص)${revAutoHint}</div>
-              <div class="arc-v">${escapeHtml(revPanelTitle)}</div>
-            </div>
-            <div style="display:flex; gap:4px;">
-              <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','dRev')">📖 اختيار</button>
-              ${hasRevVal ? `<button type="button" class="lms-btn" onclick="clearDailyRev('${st.id}')">مسح</button>` : ''}
-            </div>
-          </div>
-          <div class="es-rev-eval-4">
-            ${["ممتاز", "جيد جداً", "جيد", "إعادة"].map(ev => {
-              const cls = ev === "ممتاز" ? "on-green" : ev === "إعادة" ? "on-red" : "on-blue";
-              const isOn = r.dRevEval === ev;
-              return `<button type="button" class="pill ${isOn?cls:''}" onclick="setDailyRevEval('${st.id}','${ev}')">${ev}</button>`;
-            }).join("")}
-          </div>
-          <button type="button" class="es-rabt-toggle-card ${r.rabt ? 'on' : ''}" onclick="updateRecField('${st.id}','rabt',${!r.rabt},true)">
-            <span>🔗 الربط مع المحفوظ السابق</span>
-            <span class="m-switch ${r.rabt ? 'on' : ''}" aria-hidden="true"></span>
-          </button>
-        </div>`;
-    } else if (evalSheetTool === "sabr") {
+    if (evalSheetTool === "sabr") {
       const _curRecSid = Number(r.recSurahId || st.startSurahId || (dir === "asc" ? 2 : 114));
       const _curRecP = SURAH_MAP[_curRecSid] ? Math.floor(SURAH_MAP[_curRecSid].fs) : 582;
       const _nearJuz = JUZ_PAGES.find(j => _curRecP >= j.startPage && _curRecP <= j.endPage) || JUZ_PAGES[29];
@@ -29067,27 +29033,33 @@ function renderCardBody(s, st, r, idx) {
         const dRevVisLbl = formatDailyReviewShortLabel(r);
         const dRevVisPg = calcDailyReviewAssignedPages(r);
         const dRevVisEv = (r.dRevEval && r.dRevEval !== "بانتظار التقييم") ? r.dRevEval : "";
+        const hasRevClearable = Boolean(r.dRevSabrJuz || r.dRevFrom || r.dRevSurahId || dRevExtras.length || Number(r.dRevPages) > 0 || dRevVisEv);
         const dRevStatusPill = dRevVisEv
           ? `<span class="badge ${dRevVisEv === 'ممتاز' ? 'b-green' : (dRevVisEv === 'إعادة' ? 'b-red' : 'b-blue')}" style="font-size:10.5px;">${escapeHtml(dRevVisEv)}</span>`
           : `<span class="badge b-muted" style="font-size:10px;">بانتظار التقييم</span>`;
-        return `<div class="es-card" style="padding:8px 10px !important; border-right:3.5px solid var(--brand-ochre);">
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:6px;">
+        return `<div class="es-card" style="padding:9px 10px !important; border-right:3.5px solid var(--brand-ochre);">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:7px;">
             <div class="lms-tap-area" style="flex:1; min-width:0;" onclick="openSurahPicker('${st.id}','dRev')" title="اضغط لتعديل مقرر المراجعة">
               <div style="font-size:12.5px; font-weight:800; color:var(--ink-900); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">📘 المراجعة: ${escapeHtml(dRevVisLbl || "لم يُحدد مقطع")}</div>
               <div style="font-size:10.5px; color:var(--ink-500); font-weight:600;">${dRevVisLbl ? `${formatNum(dRevVisPg)} ص • ${dRevVisEv ? (isMajorPassEval(dRevVisEv) ? 'مُنجزة ← مقرر جديد لليوم القادم' : 'تُرحّل تلقائياً لليوم القادم') : 'فارغة بالتقرير حتى التقييم'}` : 'اضغط اختيار لتحديد مقطع مراجعة'}</div>
             </div>
             <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
               ${dRevStatusPill}
-              <button type="button" class="lms-btn accent" style="padding:3px 7px; font-size:11px;" onclick="openSurahPicker('${st.id}','dRev')">✏️</button>
+              <button type="button" class="lms-btn accent" style="padding:3px 7px; font-size:11px;" onclick="openSurahPicker('${st.id}','dRev')" title="تعديل مقطع المراجعة">✏️</button>
+              ${hasRevClearable ? `<button type="button" class="lms-btn" style="padding:3px 7px; font-size:11px; color:var(--red);" onclick="clearDailyRev('${st.id}')" title="مسح مراجعة اليوم">✕</button>` : ''}
             </div>
           </div>
-          <div class="es-eval-4" style="margin-bottom:0;">
+          <div class="es-eval-4" style="margin-bottom:7px;">
             ${["ممتاز", "جيد جداً", "جيد", "إعادة"].map(ev => {
               const cls = ev === "ممتاز" ? "on-green" : (ev === "إعادة" ? "on-red" : "on-blue");
               const isOn = r.dRevEval === ev;
               return `<button type="button" class="es-eval-btn ${isOn ? cls : ''}" style="padding:6.5px 2px; font-size:11.8px;" onclick="setDailyRevEval('${st.id}','${ev}')">${ev}</button>`;
             }).join("")}
           </div>
+          <button type="button" class="es-rabt-toggle-card ${r.rabt ? 'on' : ''}" onclick="updateRecField('${st.id}','rabt',${!r.rabt},true)">
+            <span>🔗 الربط مع المحفوظ السابق</span>
+            <span class="m-switch ${r.rabt ? 'on' : ''}" aria-hidden="true"></span>
+          </button>
         </div>`;
       })()}
 
@@ -29095,11 +29067,7 @@ function renderCardBody(s, st, r, idx) {
         <span class="es-note-preview-txt">💬 ${escapeHtml(stripMushafPageTokens(r.notes))}</span>
         <span style="font-size:10.5px; font-weight:800; opacity:0.75; white-space:nowrap;">تعديل ✏️</span>
       </div>` : ''}
-      <div class="es-tools-3">
-        <button type="button" class="es-tool-btn ${evalSheetTool==='rev'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','rev')">
-          ${hasRevDot ? '<span class="es-tool-dot"></span>' : ''}
-          <span class="et-ico">📘</span><span class="et-lbl">مراجعة</span>
-        </button>
+      <div class="es-tools-2">
         <button type="button" class="es-tool-btn ${evalSheetTool==='sabr'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','sabr')">
           ${hasSabrDot ? '<span class="es-tool-dot"></span>' : ''}
           <span class="et-ico">🎓</span><span class="et-lbl">سبر</span>
@@ -41846,7 +41814,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v137";
+const TIBYAN_APP_VERSION = "v138";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -44748,5 +44716,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v137 -->
+<!-- Makin App v138 -->
 </html>
