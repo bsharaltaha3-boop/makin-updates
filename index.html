@@ -14937,7 +14937,7 @@ table.t-daily td.td-sard,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v135</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v136</span>
         </button>
       </div>
     </div>
@@ -23675,7 +23675,17 @@ function applySurahPicker(quickEval = null) {
       if (chosenEnts.some(e => e.score !== "" && e.score !== null && e.score !== undefined)) return;
     }
     if (quickEval) {
-      chosenEnts.forEach(e => { if (!e.eval) e.eval = quickEval; });
+      chosenEnts.forEach(e => {
+        if (!e.eval) e.eval = quickEval;
+        if (quickEval !== "إعادة") {
+          const jO = getJuzByName(e.juzName);
+          if (jO && st) {
+            const curS = getStudentExtraEndJuzIds(st);
+            if (!curS.includes(jO.id)) st.extraMemJuzIds = [...curS, jO.id].sort((a,b)=>a-b);
+            clearStudentPendingJuz(st, jO.id);
+          }
+        }
+      });
       r.sabrEntries = chosenEnts;
       syncRecordSabrLegacyFields(r);
       if (k === "rec") {
@@ -26662,8 +26672,17 @@ function prefillDailyRecitation(notify = true, forceRefresh = false) {
         continue;
       }
 
-      // Case B: Student was Absent OR Present-No-Recite OR got إعادة -> Keep exact same assignment (NEVER advance!).
+      // Case B: Student was Absent OR Present-No-Recite OR got إعادة -> Keep exact same assignment (EXCEPT when sardSabrAutoAdvanced moved them to next Juz!).
       if (isAbsent || isNoRecPrev || pr.recEval === "إعادة") {
+        if (pr.sardSabrAutoAdvanced && hwSegs.length && !pr.hwSardJuz && !pr.hwSabrJuz) {
+          rec.recIsSabr = false; rec.recIsSard = false; rec.sardJuz = "";
+          rec.recSurahId = hwSegs[0].surahId; rec.recFrom = hwSegs[0].from; rec.recTo = hwSegs[0].to;
+          rec.recEndSurahId = ""; rec.twoSurahs = false;
+          rec.recExtras = hwSegs.slice(1).map(x => ({ ...x }));
+          rec.recPages = calcSegmentsPages(hwSegs);
+          if (!lastSrcSessionLabel) lastSrcSessionLabel = `${ps.dayName} ${ps.hijriDate}`;
+          found = true; filled++; break;
+        }
         const carrySard = (pr.recIsSard && pr.sardJuz) ? pr.sardJuz : (pr.hwSardJuz || "");
         if (carrySard) {
           rec.recSurahId = ""; rec.recFrom = ""; rec.recTo = ""; rec.recExtras = []; rec.recPages = 0;
@@ -29874,7 +29893,7 @@ function setRecEval(studentId, ev, errCount = null) {
   ensureRecordBonuses(r);
   r.recEval = ev;
   // If per-page evaluations exist, adopt this button as the OVERALL grade while preserving repeated page(s) in notes!
-  if (Array.isArray(r.recPageEvals) && r.recPageEvals.length >= 2) {
+  if (shouldUsePerPageMode(r, st, "rec", h) && Array.isArray(r.recPageEvals) && r.recPageEvals.length >= 2) {
     applyPerPageAutoEval(studentId, "rec", ev, true);
     return;
   }
@@ -30320,7 +30339,7 @@ function setSatMinEval(studentId, ev, errCount = null) {
 
   if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || String(r.attendance || "").includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
-  if (Array.isArray(r.minPageEvals) && r.minPageEvals.length >= 2) { applyPerPageAutoEval(studentId, "min", ev, true); return; }
+  if (shouldUsePerPageMode(r, st, "min", h) && Array.isArray(r.minPageEvals) && r.minPageEvals.length >= 2) { applyPerPageAutoEval(studentId, "min", ev, true); return; }
   r.minEval = ev;
   if (!(Number(r.minPages) > 0)) r.minPages = calcRecordMinPages(r);
   r.points = computeRecordPoints(s, r, st);
@@ -31151,6 +31170,14 @@ function computeUpcomingDailyHomeworkCols(h, s, st, r, nextCtx, isHtml = true) {
     const hwSegs = getSegments(pr, "hw");
 
     if (isAbs || isNoRec || pr.recEval === "إعادة") {
+      if (pr.sardSabrAutoAdvanced && hwSegs.length && !pr.hwSardJuz && !pr.hwSabrJuz) {
+        const fc = formatSegmentsColumns(hwSegs, isHtml);
+        return { ...fc, isSabr: false, plainText: formatSegmentsInline(hwSegs) };
+      }
+      if (pr.recIsSard && pr.sardJuz) {
+        const sc = formatHwSardColumns(pr.sardJuz, isHtml);
+        return { ...sc, isSabr: false, isSard: true, plainText: `سرد ${formatJuzCompactLabel(pr.sardJuz)}` };
+      }
       if (pr.recIsSabr && pr.sabrJuz) {
         const sc = formatHwSabrColumns(pr.sabrJuz, isHtml);
         return { ...sc, isSabr: true, plainText: `سبر ${formatJuzClean(pr.sabrJuz)}` };
@@ -35208,7 +35235,9 @@ async function exportDailyExcelStyled() {
         const hasHwSabr = xlSatNextIsDaily
           ? Boolean(hwCols.isSabr)
           : Boolean(r.nextMajSabrJuz || (r.sabrJuz && (r.majEval === "إعادة" || isAbs)));
-        const cleanNote = stripMushafPageTokens(r.notes || "");
+        const xlSatPendJuz = !isRashidiRow ? buildPendingJuzNoteBadge(st, false) : { hasBadge: false, plain: "" };
+        const _satRawXl = stripMushafPageTokens(r.notes || "");
+        const cleanNote = [xlSatPendJuz.hasBadge ? xlSatPendJuz.plain : "", _satRawXl].filter(Boolean).join(" — ");
         const ptsDisp = getDailyReportPointsDisplay(s, r, st, isAbs, isNoRecXl);
 
         const rIdx = 8 + idx;
@@ -40886,6 +40915,7 @@ function checkSardSabrAutoAdvanceOnRepeat(h, s, st, r, juzObj) {
   const nxtHw = computeFirstHwAfterJuz(juzObj, dir, pace, getStudentJuzOrder(st, h), savedPlusPending);
   r.hwSardJuz = "";
   r.hwSabrJuz = "";
+  r.sardSabrAutoAdvanced = true;
   if (nxtHw) Object.assign(r, nxtHw);
   const jLbl = formatPendingJuzLabel(juzObj.id);
   r.notes = applyTajweedToNote(`تكررت الإعادة (${fails}×) — انتقال للحفظ الجديد مع إبقاء تنبيه ${jLbl} حتى السبر.`, r);
@@ -41212,7 +41242,8 @@ function buildParentAlertCardHtml(st, h, s, alertType, customNote = "") {
   const gt = getGenderTerms(h);
   const sk = getStudentConsecutiveStreaks(h, s, st.id);
   const isAbs = alertType !== "repeat";
-  const cnt = isAbs ? Math.max(3, sk.absStreak) : Math.max(3, sk.repStreak);
+  const thr = Math.max(2, Number(h.parentAlertThreshold) || 3);
+  const cnt = isAbs ? Math.max(thr, sk.absStreak) : Math.max(thr, sk.repStreak);
   const sessList = isAbs ? sk.absSessions.slice(0, 5) : sk.repSessions.slice(0, 5);
   const todayH = getExactHijriInfo(s?.date || todayISO()).formatted;
 
@@ -41277,9 +41308,10 @@ function renderParentAlertsModal() {
   if (!st) return;
   _paStudentId = st.id;
 
+  const thr = Math.max(2, Number(h.parentAlertThreshold) || 3);
   const flaggedHtml = flagged.length
     ? `<div class="exec-card">
-        <div class="exec-card-ttl"><span>🚨 طلاب بلغوا 3 غيابات أو 3 إعادات متتالية (${flagged.length})</span></div>
+        <div class="exec-card-ttl"><span>🚨 طلاب بلغوا ${thr} غيابات أو ${thr} إعادات متتالية (${flagged.length})</span></div>
         <div class="pa-flagged-list">
           ${flagged.map(item => {
             const isSel = item.student.id === _paStudentId && item.type === _paAlertType;
@@ -41294,7 +41326,7 @@ function renderParentAlertsModal() {
         </div>
       </div>`
     : `<div class="exec-card" style="background:var(--green-bg); border-color:rgba(22,121,76,0.28); color:var(--green); font-size:12.5px; font-weight:800; text-align:center;">
-        ✅ لا يوجد حالياً أي طالب بلغ 3 غيابات متتالية أو 3 إعادات متتالية — يمكنك توليد بطاقة تنبيه لأي طالب يدوياً أدناه.
+        ✅ لا يوجد حالياً أي طالب بلغ ${thr} غيابات متتالية أو ${thr} إعادات متتالية — يمكنك توليد بطاقة تنبيه لأي طالب يدوياً أدناه.
       </div>`;
 
   const stOpts = h.students.map(x => `<option value="${x.id}" ${x.id === st.id ? "selected" : ""}>${escapeHtml(x.name)}</option>`).join("");
@@ -41306,8 +41338,8 @@ function renderParentAlertsModal() {
         <div class="field"><label>اختيار الطالب</label><select onchange="selectParentAlertTarget(this.value, _paAlertType)">${stOpts}</select></div>
         <div class="field"><label>نوع التنبيه</label>
           <select onchange="selectParentAlertTarget(_paStudentId, this.value)">
-            <option value="absent" ${_paAlertType === "absent" ? "selected" : ""}>🚨 غياب متكرر (3 متتالية)</option>
-            <option value="repeat" ${_paAlertType === "repeat" ? "selected" : ""}>⚠️ إعادة متكررة (3 متتالية)</option>
+            <option value="absent" ${_paAlertType === "absent" ? "selected" : ""}>🚨 غياب متكرر (${thr} متتالية)</option>
+            <option value="repeat" ${_paAlertType === "repeat" ? "selected" : ""}>⚠️ إعادة متكررة (${thr} متتالية)</option>
           </select>
         </div>
       </div>
@@ -41363,7 +41395,8 @@ function sendParentAlertTextWA() {
   const st = h?.students?.find(x => x.id === _paStudentId);
   if (!st || !h) return;
   const sk = getStudentConsecutiveStreaks(h, s, st.id);
-  const cnt = _paAlertType === "absent" ? Math.max(3, sk.absStreak) : Math.max(3, sk.repStreak);
+  const thr = Math.max(2, Number(h.parentAlertThreshold) || 3);
+  const cnt = _paAlertType === "absent" ? Math.max(thr, sk.absStreak) : Math.max(thr, sk.repStreak);
   sendParentFollowupAlertWA(st.id, _paAlertType, cnt);
 }
 
@@ -41497,7 +41530,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v135";
+const TIBYAN_APP_VERSION = "v136";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -44394,5 +44427,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v135 -->
+<!-- Makin App v136 -->
 </html>
