@@ -13911,7 +13911,7 @@ table.t-daily td.td-span-3 {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v121</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v122</span>
         </button>
       </div>
     </div>
@@ -34823,7 +34823,7 @@ function getAllTeacherLinks(u = null) {
   if (!isUserTeacherCapable(user) || !user.supervisorId) return [];
   const supLinks = tibyanAccounts.links[user.supervisorId] || {};
   return Object.entries(supLinks)
-    .filter(([k, v]) => v && (v.teacherId === user.id || k === user.id))
+    .filter(([k, v]) => k !== "_idx" && v && typeof v === "object" && (v.teacherId === user.id || k === user.id))
     .map(([k, v]) => ({ linkKey: k, ...v }));
 }
 
@@ -34854,15 +34854,17 @@ async function submitJoinRequestToSupervisor(teacherUser, supUser, halaqaObj) {
   teacherUser.supervisorName = supUser.name;
   teacherUser.supervisorBranchName = supUser.branchName;
   if (!alreadyApproved) teacherUser.supervisorStatus = "pending";
+  const lightMeta = buildLightLinkMeta(linkObj);
   saveAccountsState();
   await platformCloudPut(`links/${supUser.id}/${linkKey}`, linkObj);
+  if (lightMeta) fbDbSet(`links/${supUser.id}/_idx/${linkKey}`, lightMeta).catch(() => {});
   await platformCloudPut(`users/${teacherUser.id}`, teacherUser);
 }
 
 function buildTeacherReportSnapshot(teacherUser, h) {
   if (!h) return null;
-  // Compact clean copy of the halaqa data (omitting huge custom base64 logo to keep cloud payload fast)
-  const clone = JSON.parse(JSON.stringify(h));
+  // v122: Use compact cloud serializer (strips empty strings, default zeros/falses, ghost sessions & logos -> ~60% smaller!)
+  const clone = (typeof buildCleanHalaqaForCloud === "function") ? buildCleanHalaqaForCloud(h) : JSON.parse(JSON.stringify(h));
   delete clone.customLogoSrc;
   delete clone.customLogoB64;
   return {
@@ -35208,9 +35210,11 @@ async function uploadTeacherReportsToSupervisor(sourceKind = "daily", targetHal 
   existing.lastUploadAt = new Date().toISOString();
   existing.snapshot = buildTeacherReportSnapshot(u, h);
 
-  tibyanAccounts.links[u.supervisorId][linkKey] = existing;
+  const lightMeta = buildLightLinkMeta(existing);
+  tibyanAccounts.links[u.supervisorId][linkKey] = isUserSupervisorCapable(u) ? existing : (lightMeta || existing);
   saveAccountsState();
   const cloudOk = await platformCloudPut(`links/${u.supervisorId}/${linkKey}`, existing);
+  if (cloudOk && lightMeta) fbDbSet(`links/${u.supervisorId}/_idx/${linkKey}`, lightMeta).catch(() => {});
   updateUnsyncedIndicators();
   showToast(`✅ تم رفع تقارير «حلقة ${h.name}» لمشرف ${u.supervisorBranchName} بنجاح${cloudOk ? ' (سحابياً ☁️)' : ''}`);
 }
@@ -35263,7 +35267,68 @@ async function openTeacherMessagesModal() {
 // SUPERVISOR EXECUTIVE DASHBOARD
 // ==============================================================================
 function getSupLinksMap(supId) {
-  return tibyanAccounts.links[supId] || {};
+  const raw = tibyanAccounts.links[supId] || {};
+  const clean = {};
+  Object.entries(raw).forEach(([k, v]) => {
+    if (k === "_idx" || !v || typeof v !== "object") return;
+    clean[k] = v;
+  });
+  return clean;
+}
+
+// v122 Ultra-Low-Bandwidth Link Index Builder (~280 bytes per halaqa instead of ~300 KB!)
+function buildLightLinkMeta(lnk, customProgs = []) {
+  if (!lnk || typeof lnk !== "object") return null;
+  const hData = lnk.snapshot?.halaqaData || null;
+  const allSum = hData ? computeHalaqaSummaryForSupervisor(hData, "all", customProgs) : null;
+  return {
+    linkKey: lnk.linkKey || "",
+    teacherId: lnk.teacherId || "",
+    teacherName: lnk.teacherName || "",
+    teacherEmail: lnk.teacherEmail || "",
+    halaqaId: lnk.halaqaId || "",
+    halaqaName: lnk.halaqaName || "",
+    gender: lnk.gender || hData?.gender || "male",
+    status: lnk.status || "pending",
+    requestedAt: lnk.requestedAt || "",
+    approvedAt: lnk.approvedAt || "",
+    lastUploadAt: lnk.lastUploadAt || "",
+    hasSnapshot: Boolean(hData || lnk.hasSnapshot),
+    studentsCount: allSum ? allSum.studentsCount : (lnk.snapshot?.studentsCount ?? lnk.studentsCount ?? 0),
+    memPages: allSum ? allSum.memPages : (lnk.memPages ?? 0),
+    rashidiPages: allSum ? allSum.rashidiPages : (lnk.rashidiPages ?? 0),
+    revPages: allSum ? allSum.revPages : (lnk.revPages ?? 0),
+    sabrCount: allSum ? allSum.sabrCount : (lnk.sabrCount ?? 0),
+    sessionsCount: allSum ? allSum.sessionsCount : (lnk.snapshot?.sessionsCount ?? lnk.sessionsCount ?? 0)
+  };
+}
+
+function buildSupLinksIndexMap(linksObj, customProgs = []) {
+  const idx = {};
+  Object.entries(linksObj || {}).forEach(([k, v]) => {
+    if (k === "_idx" || !v || typeof v !== "object") return;
+    const m = buildLightLinkMeta(v, customProgs);
+    if (m) {
+      if (!m.linkKey) m.linkKey = k;
+      idx[k] = m;
+    }
+  });
+  return idx;
+}
+
+function stripHeavySnapshotsFromTeacherLocalLinks() {
+  const cur = getCurrentAccountUser();
+  if (!cur || isUserSupervisorCapable(cur)) return;
+  Object.keys(tibyanAccounts.links || {}).forEach(supId => {
+    const map = tibyanAccounts.links[supId];
+    if (!map || typeof map !== "object") return;
+    Object.keys(map).forEach(k => {
+      if (k === "_idx") { delete map[k]; return; }
+      if (map[k] && map[k].snapshot && map[k].snapshot.halaqaData) {
+        map[k] = buildLightLinkMeta(map[k]) || map[k];
+      }
+    });
+  });
 }
 
 function getSupAvailableMonths(supId) {
@@ -35517,16 +35582,19 @@ async function supHandleJoinDecision(linkKey, decision) {
       await platformCloudPut(`users/${tid}`, tibyanAccounts.users[tid]);
     }
     await platformCloudPut(`links/${sup.id}/${linkKey}`, lnk);
+    const _lmApp = buildLightLinkMeta(lnk, sup.customPrograms);
+    if (_lmApp) fbDbSet(`links/${sup.id}/_idx/${linkKey}`, _lmApp).catch(() => {});
     showToast(`✓ تمت الموافقة على انضمام ${lnk.teacherName} (حلقة ${lnk.halaqaName})`);
   } else {
     delete tibyanAccounts.links[sup.id][linkKey];
-    const remainingForTeacher = Object.values(tibyanAccounts.links[sup.id] || {}).some(x => x && x.teacherId === tid);
+    const remainingForTeacher = Object.values(getSupLinksMap(sup.id)).some(x => x && x.teacherId === tid);
     if (!remainingForTeacher && tibyanAccounts.users[tid]) {
       tibyanAccounts.users[tid].supervisorStatus = "rejected";
       tibyanAccounts.users[tid].supervisorId = "";
       await platformCloudPut(`users/${tid}`, tibyanAccounts.users[tid]);
     }
     await platformCloudPut(`links/${sup.id}/${linkKey}`, null);
+    fbDbSet(`links/${sup.id}/_idx/${linkKey}`, null).catch(() => {});
     showToast(`تم رفض طلب الانضمام`);
   }
   saveAccountsState();
@@ -35540,7 +35608,7 @@ async function supRemoveTeacher(linkKey) {
   if (!(await makinConfirm(`هل تريد إزالة «حلقة ${lnk.halaqaName}» (${lnk.teacherName}) من تحت إشرافك؟`, { title: "🗑️ إزالة حلقة", danger: true, okText: "نعم، إزالة" }))) return;
   const tid = lnk.teacherId || linkKey;
   delete tibyanAccounts.links[sup.id][linkKey];
-  const remaining = Object.values(tibyanAccounts.links[sup.id] || {}).some(x => x && x.teacherId === tid);
+  const remaining = Object.values(getSupLinksMap(sup.id)).some(x => x && x.teacherId === tid);
   if (!remaining && tibyanAccounts.users[tid]) {
     tibyanAccounts.users[tid].supervisorId = "";
     tibyanAccounts.users[tid].supervisorStatus = "none";
@@ -35551,14 +35619,32 @@ async function supRemoveTeacher(linkKey) {
   }
   saveAccountsState();
   await platformCloudPut(`links/${sup.id}/${linkKey}`, null);
+  fbDbSet(`links/${sup.id}/_idx/${linkKey}`, null).catch(() => {});
   renderSupOverviewTab();
   showToast(`تمت إزالة حلقة ${lnk.halaqaName} من الإشراف`);
 }
 
 // ===== SUPERVISOR: INSPECT & DOWNLOAD EXACT TEACHER REPORTS (DAILY / WEEKLY / MONTHLY) =====
-function openSupInspectModal(teacherId) {
+async function ensureSupLinkSnapshotLoaded(supId, linkKey) {
+  if (!supId || !linkKey) return null;
+  let lnk = tibyanAccounts.links[supId]?.[linkKey];
+  if (lnk?.snapshot?.halaqaData) return lnk;
+  if (_fbDb && navigator.onLine) {
+    showToast("جاري تحميل تقارير الحلقة...");
+    const full = await fbDbGet(`links/${supId}/${linkKey}`);
+    if (full && typeof full === "object") {
+      if (!tibyanAccounts.links[supId]) tibyanAccounts.links[supId] = {};
+      tibyanAccounts.links[supId][linkKey] = full;
+      saveAccountsState();
+      return full;
+    }
+  }
+  return lnk || null;
+}
+
+async function openSupInspectModal(teacherId) {
   const sup = getCurrentAccountUser();
-  const lnk = tibyanAccounts.links[sup?.id]?.[teacherId];
+  const lnk = await ensureSupLinkSnapshotLoaded(sup?.id, teacherId);
   if (!lnk || !lnk.snapshot?.halaqaData) {
     showToast("لم يقم هذا المعلم برفع تقاريره بعد — أرسل له تنبيهاً للضغط على «رفع التقرير للمشرف»");
     return;
@@ -35686,10 +35772,11 @@ async function supExportTeacherReport(kind, fmt) {
 }
 
 // ===== SUPERVISOR: INDIVIDUAL MONTHLY REPORT CARD FOR A TEACHER (كشف شهري للمعلم) =====
-function openSupTeacherCardModal(teacherId) {
+async function openSupTeacherCardModal(teacherId) {
   const sup = getCurrentAccountUser();
-  const lnk = tibyanAccounts.links[sup?.id]?.[teacherId];
-  if (!sup || !lnk) return;
+  if (!sup) return;
+  const lnk = await ensureSupLinkSnapshotLoaded(sup.id, teacherId);
+  if (!lnk) return;
   _supTCardTeacherId = teacherId;
   const months = getSupAvailableMonths(sup.id);
   _supTCardMonth = (_supSelectedMonth && _supSelectedMonth !== "all") ? _supSelectedMonth : months[0];
@@ -36230,6 +36317,9 @@ async function supSendMessage() {
     sentAt: new Date().toISOString(),
     readBy: {}
   });
+  if (tibyanAccounts.messages[sup.id].length > 45) {
+    tibyanAccounts.messages[sup.id] = tibyanAccounts.messages[sup.id].slice(0, 45);
+  }
   saveAccountsState();
   await platformCloudPut(`messages/${sup.id}`, tibyanAccounts.messages[sup.id]);
   renderSupMessagesTab();
@@ -38294,7 +38384,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v121";
+const TIBYAN_APP_VERSION = "v122";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -38671,17 +38761,20 @@ async function hydrateSignedInFirebaseUser(fbUser) {
         }
       }
 
-      // 2) Auto-Restore ALL Supervisor Links, Reports, Messages & Monthly Notes on ANY device!
+      // 2) v122 Smart Delta Restore for Supervisor (downloads ONLY changed halaqa snapshots via _idx -> ~95% less bandwidth!)
       if (isUserSupervisorCapable(profile)) {
-        const [remoteLinks, remoteMsgs, remoteNotes] = await Promise.all([
-          fbDbGet(`links/${fbUser.uid}`),
+        const [linksChanged, remoteMsgs, remoteNotes] = await Promise.all([
+          syncSupervisorLinksSmart(fbUser.uid, { forceFull: false, customProgs: profile.customPrograms || [] }),
           fbDbGet(`messages/${fbUser.uid}`),
           fbDbGet(`teacher_monthly_notes/${fbUser.uid}`)
         ]);
-        if (remoteLinks && typeof remoteLinks === "object") { tibyanAccounts.links[fbUser.uid] = remoteLinks; merged = true; }
+        if (linksChanged) merged = true;
         if (Array.isArray(remoteMsgs)) { tibyanAccounts.messages[fbUser.uid] = remoteMsgs; merged = true; }
         if (remoteNotes && typeof remoteNotes === "object") { tibyanAccounts.teacherMonthlyNotes[fbUser.uid] = remoteNotes; merged = true; }
+        _lastSupRefreshAt = Date.now();
         saveAccountsState();
+      } else {
+        stripHeavySnapshotsFromTeacherLocalLinks();
       }
 
       // If Founder opens app on a newer build than Firebase config/latestVersion, silently keep server version aligned
@@ -38691,7 +38784,9 @@ async function hydrateSignedInFirebaseUser(fbUser) {
       } else {
         renderGlobalAnnouncement(ann, latestVer);
       }
-      startLiveNotificationListeners();
+      // Seed notification baseline from already-hydrated data and start poller WITHOUT immediate redundant re-fetch!
+      seedNotifPollBaselineFromLocal(profile);
+      startLiveNotificationListeners(true);
 
       const anyModalOpen = Boolean(document.querySelector(".modal-backdrop.show"));
       const activeTag = document.activeElement?.tagName || "";
@@ -39179,17 +39274,107 @@ async function supSaveProfile() {
   showToast("تم تحديث بيانات المشرف والصرح سحابياً ✓");
 }
 
+let _lastSupRefreshAt = 0;
+let _lastTeacherNotifRefreshAt = 0;
+let _lastOwnerRefreshAt = 0;
+
+// v122 Smart Delta Supervisor Sync: reads tiny _idx (< 1 KB) first, then downloads ONLY new/changed halaqa snapshots!
+async function syncSupervisorLinksSmart(supId, opts = {}) {
+  if (!_fbDb || !supId) return false;
+  const forceFull = Boolean(opts.forceFull);
+  const customProgs = Array.isArray(opts.customProgs) ? opts.customProgs : [];
+  if (!tibyanAccounts.links[supId] || typeof tibyanAccounts.links[supId] !== "object") {
+    tibyanAccounts.links[supId] = {};
+  }
+  const localMap = tibyanAccounts.links[supId];
+  delete localMap._idx;
+
+  const remoteIdx = await fbDbGet(`links/${supId}/_idx`);
+  if (remoteIdx && typeof remoteIdx === "object" && Object.keys(remoteIdx).length > 0) {
+    let changed = false;
+    const remoteKeys = new Set(Object.keys(remoteIdx));
+    Object.keys(localMap).forEach(k => {
+      if (!remoteKeys.has(k)) { delete localMap[k]; changed = true; }
+    });
+
+    const keysToFetch = [];
+    Object.entries(remoteIdx).forEach(([k, meta]) => {
+      if (!meta || typeof meta !== "object") return;
+      const loc = localMap[k];
+      const needsSnapshot = Boolean(
+        forceFull ||
+        !loc ||
+        (meta.hasSnapshot && !loc.snapshot?.halaqaData) ||
+        ((meta.lastUploadAt || "") !== (loc.lastUploadAt || ""))
+      );
+      if (needsSnapshot) {
+        keysToFetch.push(k);
+      } else {
+        // Update lightweight status/name metadata without re-downloading full snapshot (0 KB!)
+        if (loc.status !== meta.status || loc.halaqaName !== meta.halaqaName || loc.teacherName !== meta.teacherName) {
+          Object.assign(loc, {
+            status: meta.status,
+            teacherName: meta.teacherName || loc.teacherName,
+            teacherEmail: meta.teacherEmail || loc.teacherEmail,
+            halaqaId: meta.halaqaId || loc.halaqaId,
+            halaqaName: meta.halaqaName || loc.halaqaName,
+            gender: meta.gender || loc.gender,
+            approvedAt: meta.approvedAt || loc.approvedAt,
+            lastUploadAt: meta.lastUploadAt || loc.lastUploadAt
+          });
+          changed = true;
+        }
+      }
+    });
+
+    if (keysToFetch.length > 0) {
+      const fetched = await Promise.all(keysToFetch.map(k => fbDbGet(`links/${supId}/${k}`)));
+      keysToFetch.forEach((k, i) => {
+        if (fetched[i] && typeof fetched[i] === "object") {
+          localMap[k] = fetched[i];
+          changed = true;
+        } else if (remoteIdx[k]) {
+          localMap[k] = remoteIdx[k];
+          changed = true;
+        }
+      });
+    }
+    return changed;
+  }
+
+  // One-time legacy migration (for supervisors before v122 who don't have links/{supId}/_idx yet)
+  const fullLinks = await fbDbGet(`links/${supId}`);
+  if (fullLinks && typeof fullLinks === "object") {
+    const cleaned = {};
+    Object.entries(fullLinks).forEach(([k, v]) => {
+      if (k !== "_idx" && v && typeof v === "object") cleaned[k] = v;
+    });
+    tibyanAccounts.links[supId] = cleaned;
+    const idxMap = buildSupLinksIndexMap(cleaned, customProgs);
+    if (Object.keys(idxMap).length > 0) {
+      fbDbSet(`links/${supId}/_idx`, idxMap).catch(() => {});
+    }
+    return true;
+  }
+  return false;
+}
+
 async function refreshSupervisorData(notify = false) {
   const sup = getCurrentAccountUser();
   if (!sup) return;
+  const now = Date.now();
+  if (!notify && (now - _lastSupRefreshAt) < 60000) {
+    renderSupervisorShell();
+    return;
+  }
   if (_fbDb) {
-    const [remoteLinks, remoteMsgs, remoteNotes] = await Promise.all([
-      fbDbGet(`links/${sup.id}`),
+    _lastSupRefreshAt = now;
+    const [, remoteMsgs, remoteNotes] = await Promise.all([
+      syncSupervisorLinksSmart(sup.id, { forceFull: false, customProgs: sup.customPrograms || [] }),
       fbDbGet(`messages/${sup.id}`),
       fbDbGet(`teacher_monthly_notes/${sup.id}`)
     ]);
-    tibyanAccounts.links[sup.id] = (remoteLinks && typeof remoteLinks === "object") ? remoteLinks : {};
-    tibyanAccounts.messages[sup.id] = Array.isArray(remoteMsgs) ? remoteMsgs : [];
+    if (Array.isArray(remoteMsgs)) tibyanAccounts.messages[sup.id] = remoteMsgs;
     if (remoteNotes && typeof remoteNotes === "object") tibyanAccounts.teacherMonthlyNotes[sup.id] = remoteNotes;
     saveAccountsState();
   }
@@ -39197,10 +39382,16 @@ async function refreshSupervisorData(notify = false) {
   if (notify) showToast("تم تحديث تقارير المعلمين وطلبات الانضمام من السحابة ✓");
 }
 
-async function refreshTeacherSupervisorNotifications(showAlert = false) {
+async function refreshTeacherSupervisorNotifications(showAlert = false, forceRefresh = false) {
   const u = getCurrentAccountUser();
   if (!u) { updateTeacherAccountDrawerUI(); return; }
+  const now = Date.now();
+  if (!forceRefresh && !showAlert && (now - _lastTeacherNotifRefreshAt) < 60000) {
+    updateTeacherAccountDrawerUI();
+    return;
+  }
   if (_fbDb && u.supervisorId) {
+    _lastTeacherNotifRefreshAt = now;
     const [remoteSup, remoteMsgs, remoteProfile] = await Promise.all([
       fbDbGet(`users/${u.supervisorId}`),
       fbDbGet(`messages/${u.supervisorId}`),
@@ -39217,14 +39408,30 @@ async function refreshTeacherSupervisorNotifications(showAlert = false) {
     }
     if (Array.isArray(remoteMsgs)) tibyanAccounts.messages[u.supervisorId] = remoteMsgs;
 
-    // Fetch each of this teacher's halaqa links under this supervisor
+    // v122: Fetch ONLY tiny scalar status & lastUploadAt (~40 bytes!) — NEVER re-download own full snapshot!
     const hals = Object.values(appState.halaqat || {});
     if (!tibyanAccounts.links[u.supervisorId]) tibyanAccounts.links[u.supervisorId] = {};
-    for (const hal of hals) {
+    await Promise.all(hals.map(async hal => {
       const k = makeSupLinkKey(u.id, hal.id);
-      const rLnk = await fbDbGet(`links/${u.supervisorId}/${k}`);
-      if (rLnk) tibyanAccounts.links[u.supervisorId][k] = rLnk;
-    }
+      const [stVal, upVal] = await Promise.all([
+        fbDbGet(`links/${u.supervisorId}/${k}/status`),
+        fbDbGet(`links/${u.supervisorId}/${k}/lastUploadAt`)
+      ]);
+      if (stVal) {
+        const prevLnk = tibyanAccounts.links[u.supervisorId][k] || {};
+        tibyanAccounts.links[u.supervisorId][k] = {
+          linkKey: k,
+          teacherId: u.id,
+          teacherName: u.name,
+          teacherEmail: u.email,
+          halaqaId: hal.id,
+          halaqaName: hal.name,
+          status: stVal,
+          lastUploadAt: upVal || prevLnk.lastUploadAt || ""
+        };
+      }
+    }));
+    stripHeavySnapshotsFromTeacherLocalLinks();
     saveAccountsState();
   }
   updateTeacherAccountDrawerUI();
@@ -39267,18 +39474,47 @@ function switchOwnerTab(tab) {
 
 async function refreshOwnerData(notify = false) {
   if (!_fbDb) return;
-  const [users, invites, links, announcement, masterKey, latestVersion] = await Promise.all([
+  const now = Date.now();
+  if (!notify && (now - _lastOwnerRefreshAt) < 45000 && Object.keys(_ownerDataCache.users || {}).length) {
+    switchOwnerTab(_activeOwnerTab);
+    return;
+  }
+  _lastOwnerRefreshAt = now;
+  const [users, invites, announcement, masterKey, latestVersion] = await Promise.all([
     fbDbGet("users"),
     fbDbGet("supervisor_invites"),
-    fbDbGet("links"),
     fbDbGet("config/announcement"),
     fbDbGet("config/supervisorMasterKey"),
     fbDbGet("config/latestVersion")
   ]);
+  const usersObj = users || {};
+  const sups = Object.values(usersObj).filter(u => u && (u.role === "supervisor" || u.role === "owner"));
+  const lightLinksBySup = {};
+
+  // v122: Fetch ONLY lightweight links/{supId}/_idx (~1 KB per branch instead of megabytes of full snapshots!)
+  await Promise.all(sups.map(async sp => {
+    const idxObj = await fbDbGet(`links/${sp.id}/_idx`);
+    if (idxObj && typeof idxObj === "object") {
+      lightLinksBySup[sp.id] = idxObj;
+      return;
+    }
+    // One-time migration for legacy supervisors without _idx
+    const fullSupLinks = await fbDbGet(`links/${sp.id}`);
+    if (fullSupLinks && typeof fullSupLinks === "object") {
+      const builtIdx = buildSupLinksIndexMap(fullSupLinks, sp.customPrograms || []);
+      lightLinksBySup[sp.id] = builtIdx;
+      if (Object.keys(builtIdx).length) {
+        fbDbSet(`links/${sp.id}/_idx`, builtIdx).catch(() => {});
+      }
+    } else {
+      lightLinksBySup[sp.id] = {};
+    }
+  }));
+
   _ownerDataCache = {
-    users: users || {},
+    users: usersObj,
     invites: invites || {},
-    links: links || {},
+    links: lightLinksBySup,
     announcement: announcement || null,
     masterKey: masterKey || DEFAULT_FOUNDER_PASSCODE,
     latestVersion: latestVersion || TIBYAN_APP_VERSION
@@ -39296,11 +39532,19 @@ function renderOwnerDashboardTab() {
 
   let totalHalaqat = 0, totalStudents = 0, totalMem = 0, totalRashidi = 0;
   const supCardsHtml = sups.map(sp => {
-    const spLinks = Object.values(_ownerDataCache.links?.[sp.id] || {}).filter(x => x && x.status === "approved");
+    const spLinks = Object.entries(_ownerDataCache.links?.[sp.id] || {})
+      .filter(([k, x]) => k !== "_idx" && x && typeof x === "object" && x.status === "approved")
+      .map(([, x]) => x);
     let stCnt = 0, memP = 0, rashP = 0;
     spLinks.forEach(lnk => {
-      const sum = computeHalaqaSummaryForSupervisor(lnk.snapshot?.halaqaData, "all", sp.customPrograms);
-      stCnt += sum.studentsCount; memP += sum.memPages; rashP += sum.rashidiPages;
+      if (lnk.snapshot?.halaqaData) {
+        const sum = computeHalaqaSummaryForSupervisor(lnk.snapshot.halaqaData, "all", sp.customPrograms);
+        stCnt += sum.studentsCount; memP += sum.memPages; rashP += sum.rashidiPages;
+      } else {
+        stCnt += Number(lnk.studentsCount) || 0;
+        memP += Number(lnk.memPages) || 0;
+        rashP += Number(lnk.rashidiPages) || 0;
+      }
     });
     totalHalaqat += spLinks.length; totalStudents += stCnt; totalMem += memP; totalRashidi += rashP;
     const isActive = sp.active !== false;
@@ -40176,21 +40420,31 @@ async function pollLiveNotificationsOnce(forceInitial = false) {
       }
     }
 
-    // 3) Supervisor / Owner Notifications (New Join Requests + New Uploaded Reports)
+    // 3) v122 Ultra-Light Supervisor / Owner Notifications (Reads ONLY tiny links/{uid}/_idx -> ~1 KB instead of full snapshots!)
     if (isUserSupervisorCapable(u)) {
-      const linksObj = (await fbDbGet(`links/${u.id}`)) || {};
-      tibyanAccounts.links[u.id] = linksObj;
-      saveAccountsState();
+      let idxObj = await fbDbGet(`links/${u.id}/_idx`);
+      if (!idxObj || typeof idxObj !== "object") {
+        // One-time auto-build of _idx from local cache if already hydrated
+        const localSup = getSupLinksMap(u.id);
+        if (Object.keys(localSup).length) {
+          idxObj = buildSupLinksIndexMap(localSup, u.customPrograms || []);
+          fbDbSet(`links/${u.id}/_idx`, idxObj).catch(() => {});
+        } else {
+          idxObj = {};
+        }
+      }
       if (forceInitial || _notifPollState.initLinks) {
-        Object.entries(linksObj).forEach(([k, v]) => {
-          if (v) _notifPollState.prevUploadMap[k] = { status: v.status, lastUploadAt: v.lastUploadAt || "" };
+        Object.entries(idxObj).forEach(([k, v]) => {
+          if (k !== "_idx" && v) _notifPollState.prevUploadMap[k] = { status: v.status, lastUploadAt: v.lastUploadAt || "" };
         });
         _notifPollState.initLinks = false;
       } else {
-        Object.entries(linksObj).forEach(([k, v]) => {
-          if (!v) return;
+        const changedKeysToFetch = [];
+        Object.entries(idxObj).forEach(([k, v]) => {
+          if (k === "_idx" || !v) return;
           const prev = _notifPollState.prevUploadMap[k];
           if (!prev && v.status === "pending") {
+            changedKeysToFetch.push(k);
             fireTibyanNotification(
               `join_${k}_${v.requestedAt || ""}`,
               "🔔 طلب انضمام معلم جديد",
@@ -40202,6 +40456,7 @@ async function pollLiveNotificationsOnce(forceInitial = false) {
               }
             );
           } else if (v.status === "approved" && v.lastUploadAt && (!prev || prev.lastUploadAt !== v.lastUploadAt)) {
+            changedKeysToFetch.push(k);
             fireTibyanNotification(
               `rep_${k}_${v.lastUploadAt}`,
               "☁️ تم رفع تقرير حلقة جديد",
@@ -40215,8 +40470,22 @@ async function pollLiveNotificationsOnce(forceInitial = false) {
           }
           _notifPollState.prevUploadMap[k] = { status: v.status, lastUploadAt: v.lastUploadAt || "" };
         });
-        if (document.getElementById("supervisorShell")?.style.display !== "none" && !document.querySelector(".modal-backdrop.show")) {
-          renderSupervisorShell();
+
+        // Download ONLY the single halaqa(s) that actually changed (0 KB when nothing changed!)
+        if (changedKeysToFetch.length > 0) {
+          if (!tibyanAccounts.links[u.id]) tibyanAccounts.links[u.id] = {};
+          const fetchedChanged = await Promise.all(changedKeysToFetch.map(k => fbDbGet(`links/${u.id}/${k}`)));
+          changedKeysToFetch.forEach((k, i) => {
+            if (fetchedChanged[i] && typeof fetchedChanged[i] === "object") {
+              tibyanAccounts.links[u.id][k] = fetchedChanged[i];
+            } else if (idxObj[k]) {
+              tibyanAccounts.links[u.id][k] = idxObj[k];
+            }
+          });
+          saveAccountsState();
+          if (document.getElementById("supervisorShell")?.style.display !== "none" && !document.querySelector(".modal-backdrop.show")) {
+            renderSupervisorShell();
+          }
         }
       }
     }
@@ -40225,22 +40494,42 @@ async function pollLiveNotificationsOnce(forceInitial = false) {
   }
 }
 
+function seedNotifPollBaselineFromLocal(u) {
+  if (!u) return;
+  _notifPollState = {
+    uid: u.id,
+    initAnn: false,
+    initMsgs: false,
+    initLinks: false,
+    prevUploadMap: {},
+    lastPollAt: Date.now()
+  };
+  if (isUserSupervisorCapable(u)) {
+    const map = getSupLinksMap(u.id);
+    Object.entries(map).forEach(([k, v]) => {
+      if (v) _notifPollState.prevUploadMap[k] = { status: v.status, lastUploadAt: v.lastUploadAt || "" };
+    });
+  }
+}
+
 function onAppReturnToForegroundPoll() {
   if (!navigator.onLine || !_fbAuth?.currentUser) return;
   const elapsed = Date.now() - (_notifPollState.lastPollAt || 0);
-  if (elapsed >= 90000) {
+  if (elapsed >= 210000) { // 3.5 minutes cooldown on foreground return
     pollLiveNotificationsOnce(false);
   }
 }
 
-function startLiveNotificationListeners() {
+function startLiveNotificationListeners(skipImmediate = false) {
   stopLiveNotificationListeners();
   if (!_fbDb || !_fbAuth?.currentUser) return;
   const u = getCurrentAccountUser();
   if (!u) return;
-  // v116 Zero-Persistent-Socket Poller: connects briefly only to check updates, then goOffline() automatically!
-  pollLiveNotificationsOnce(true);
-  const intervalMs = isUserSupervisorCapable(u) ? 150000 : 300000; // 2.5 min for Supervisor, 5 min for Teacher
+  // v122 Ultra-Low-Bandwidth Poller: connects briefly only to read tiny _idx/status, zero redundant startup fetch!
+  if (!skipImmediate) {
+    pollLiveNotificationsOnce(true);
+  }
+  const intervalMs = isUserSupervisorCapable(u) ? 240000 : 360000; // 4 min Supervisor, 6 min Teacher
   _notifPollTimer = setInterval(() => {
     if (document.visibilityState === "visible" && navigator.onLine) {
       pollLiveNotificationsOnce(false);
@@ -40988,5 +41277,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v98 -->
+<!-- Makin App v122 -->
 </html>
