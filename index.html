@@ -13401,6 +13401,299 @@ table.t-daily td.td-span-3 {
   unicode-bidi: isolate !important;
 }
 
+
+/* ==================== MAKIN v123: EXECUTIVE CALM DAILY & WEEKLY REPORT REDESIGN (MONTHLY UNTOUCHED!) ==================== */
+/* 1) Refined Calm Header Bar (Replaces 3 heavy black boxes with 1 sleek matte info strip!) */
+.official-daily-wrap {
+  min-width: 960px !important;
+  background: #ffffff;
+}
+.official-daily-hdr-v20 {
+  border-bottom: 2px solid #33464f !important;
+  padding-bottom: 10px !important;
+  margin-bottom: 10px !important;
+}
+.odh-org-box {
+  color: #33464f !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1.55 !important;
+}
+.odh-title-col h2 {
+  color: #142a46 !important;
+  font-size: 19px !important;
+  font-weight: 800 !important;
+  margin-bottom: 8px !important;
+}
+.odh-meta-bar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 5px 14px;
+  color: #1e293b;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.odh-meta-item {
+  white-space: nowrap;
+  padding: 0 11px;
+  border-left: 1px solid #cbd5e1;
+}
+.odh-meta-item:last-child {
+  border-left: none;
+  padding-left: 2px;
+}
+.odh-meta-item:first-child {
+  padding-right: 2px;
+}
+.odh-meta-item b {
+  color: #142a46;
+  font-weight: 800;
+}
+
+/* 2) Calm Soft-Gray Grid Lines + Strong Section Dividers + Airy Row Padding (ONLY .t-daily!) */
+table.t-daily {
+  min-width: 960px !important;
+  border: 1.8px solid #1e293b !important;
+  border-collapse: collapse !important;
+  font-size: 12.5px !important;
+}
+.report-paper table.t-daily th,
+#hdExportStage table.t-daily th {
+  border: 1px solid #94a3b8 !important;
+  padding: 6px 6px !important;
+}
+.report-paper table.t-daily td,
+#hdExportStage table.t-daily td {
+  border: 1px solid #cbd5e1 !important;
+  color: #1e293b !important;
+  font-weight: 500 !important;
+  padding: 5.5px 7px !important;
+  line-height: 1.32 !important;
+}
+/* Subtle Slate Section Separators between Major Groups (RTL: border-right starts a new section) */
+.report-paper table.t-daily th.col-sec-start,
+.report-paper table.t-daily td.col-sec-start,
+#hdExportStage table.t-daily th.col-sec-start,
+#hdExportStage table.t-daily td.col-sec-start {
+  border-right: 1.7px solid #64748b !important;
+}
+
+/* Harmonious Matte Header Colors (Calmer Gold & Deep Navy Points instead of harsh red!) */
+table.t-daily th.th-gray {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+table.t-daily th.th-slate {
+  background: #2b3f4e !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+table.t-daily th.th-ochre {
+  background: #b69135 !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+table.t-daily th.th-pts-calm {
+  background: #1e3a5f !important;
+  color: #f8e3a3 !important;
+  font-weight: 800 !important;
+}
+table.t-daily th.th-sub {
+  background: #f8fafc !important;
+  color: #334155 !important;
+  font-weight: 700 !important;
+  font-size: 11.5px !important;
+  border-bottom: 1.5px solid #64748b !important;
+}
+table.t-daily th.th-sub-slate {
+  background: #3b5365 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 11.5px !important;
+  border-bottom: 1.5px solid #334155 !important;
+}
+table.t-daily th.th-sub-ochre {
+  background: #c5a147 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 11.5px !important;
+  border-bottom: 1.5px solid #8c6d21 !important;
+}
+
+/* Clear Visual Hierarchy: Bold Names & Grades, Calm Medium Ranges */
+table.t-daily tbody tr:nth-child(even) {
+  background: #f8fafc !important;
+}
+table.t-daily td.td-idx {
+  color: #64748b !important;
+  font-weight: 700 !important;
+  font-size: 11.8px !important;
+}
+table.t-daily td.td-name-col {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  padding-right: 9px !important;
+  white-space: nowrap !important;
+}
+table.t-daily td.td-range-unified {
+  color: #1e293b !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+}
+table.t-daily td.td-eval-slim {
+  font-weight: 800 !important;
+}
+table.t-daily td.td-pts {
+  background: #f8fafc !important;
+  color: #142a46 !important;
+  font-weight: 800 !important;
+}
+.pts-zero-dash {
+  color: #94a3b8;
+  font-weight: 600;
+}
+table.t-daily tfoot td {
+  background: #eef2f6 !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  border-top: 1.8px solid #33464f !important;
+  padding: 7px 9px !important;
+}
+
+/* 3) Calm Softer Ayah Circles with Breathing Space (Zero Letter Collision!) */
+.ayah-circ {
+  display: inline-block;
+  min-width: 18px !important;
+  height: 18px !important;
+  line-height: 16px !important;
+  padding: 0 4px !important;
+  border: 1px solid #94a3b8 !important;
+  border-radius: 999px !important;
+  background: #f1f5f9 !important;
+  color: #1e3a5f !important;
+  font-size: 10.6px !important;
+  font-weight: 700 !important;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 3.5px !important;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.ayah-sep {
+  color: #64748b;
+  font-weight: 700;
+  margin: 0 1px;
+}
+.ayah-sub-lbl {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 600;
+  margin: 0 2px;
+}
+.ayah-end-lbl {
+  color: #475569;
+  font-size: 11px;
+  font-weight: 700;
+  margin-right: 1px;
+}
+.rep-arrow-sep {
+  color: #2563eb !important;
+  font-weight: 700 !important;
+  margin: 0 3px !important;
+}
+
+/* 4) Crisp HD Export Stage Alignment for 9-Column Daily/Weekly Layout (A4 Landscape, Large Readable Text!) */
+#hdExportStage:not(.is-monthly-stage):not(.is-cert-stage):not(.is-indiv-stage):not(.is-poster-stage) {
+  width: 1480px !important;
+  padding: 20px 24px !important;
+}
+#hdExportStage .official-daily-hdr-v20 {
+  border-bottom: 2.2px solid #33464f !important;
+  padding-bottom: 10px !important;
+  margin-bottom: 11px !important;
+}
+#hdExportStage .odh-title-col h2 {
+  font-size: 25px !important;
+  margin-bottom: 8px !important;
+  color: #142a46 !important;
+}
+#hdExportStage .odh-meta-bar {
+  padding: 6px 18px !important;
+  font-size: 14.5px !important;
+  border-radius: 9px !important;
+}
+#hdExportStage .odh-meta-item {
+  padding: 0 14px !important;
+}
+#hdExportStage table.t-daily {
+  border: 2px solid #1e293b !important;
+  font-size: 14px !important;
+}
+#hdExportStage table.t-daily th {
+  font-size: 14px !important;
+  padding: 7px 6px !important;
+  border: 1.1px solid #94a3b8 !important;
+}
+#hdExportStage table.t-daily th.th-sub,
+#hdExportStage table.t-daily th.th-sub-slate,
+#hdExportStage table.t-daily th.th-sub-ochre {
+  font-size: 12.6px !important;
+  padding: 5px 5px !important;
+}
+#hdExportStage table.t-daily td {
+  padding: 5.5px 8px !important;
+  font-size: 13.8px !important;
+  font-weight: 500 !important;
+  border: 1.1px solid #cbd5e1 !important;
+  line-height: 1.3 !important;
+}
+#hdExportStage table.t-daily td.td-name-col {
+  font-size: 14.2px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+}
+#hdExportStage table.t-daily td.td-range-unified {
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+}
+#hdExportStage table.t-daily td.td-eval-slim,
+#hdExportStage table.t-daily td.td-pts {
+  font-weight: 700 !important;
+}
+#hdExportStage .ayah-circ {
+  min-width: 21px !important;
+  height: 21px !important;
+  line-height: 19px !important;
+  padding: 0 4.5px !important;
+  border: 1.15px solid #94a3b8 !important;
+  background: #f1f5f9 !important;
+  color: #1e3a5f !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  margin: 0 4px !important;
+  word-spacing: 0 !important;
+}
+#hdExportStage .ayah-sub-lbl,
+#hdExportStage .ayah-end-lbl {
+  font-size: 12.2px !important;
+}
+#hdExportStage table.t-daily td.td-note {
+  font-size: 12.8px !important;
+  font-weight: 600 !important;
+  padding: 5px 10px !important;
+}
+#hdExportStage table.t-daily tfoot td {
+  font-size: 14px !important;
+  padding: 7px 12px !important;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -13911,7 +14204,7 @@ table.t-daily td.td-span-3 {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v122</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v123</span>
         </button>
       </div>
     </div>
@@ -28905,6 +29198,213 @@ function renderReportRangePairCells(fromHtml, toHtml) {
   return `<td>${fromHtml}</td><td>${toHtml}</td>`;
 }
 
+
+// ==================== MAKIN v123: UNIFIED SINGLE-CELL RANGE FORMATTERS (DAILY & WEEKLY ONLY!) ====================
+function stripHtmlSimple(v) {
+  return String(v ?? "").replace(/<[^>]+>/g, "").trim();
+}
+
+function styleSurahAyahToken(str, isHtml = true) {
+  const txt = stripHtmlSimple(str);
+  if (!txt) return "";
+  const esc = v => isHtml ? escapeHtml(v) : v;
+  const ascii = toAsciiDigits(txt);
+  // Match "<Arabic Surah Name> <ayahNumber>" (skip page labels like "ص 12" or "الجزء 25")
+  const m = txt.match(/^(.+?)\s+([0-9٠-٩]+)$/);
+  if (m) {
+    const head = m[1].trim();
+    const num = parseArabicNum(m[2], 0);
+    if (num > 0 && !/^(ص|صفحة|صفحات|الجزء|جزء|أجزاء)$/.test(head) && !/^ص\s/.test(head) && /[؀-ۿ]{2,}/.test(head)) {
+      return isHtml ? `${escapeHtml(head)} ${formatCircledAyahBadge(num, true)}` : `${head} (${num})`;
+    }
+  }
+  return esc(txt);
+}
+
+function formatUnifiedRangeCell(cols, isHtml = true) {
+  if (!cols) return "";
+  if (cols.merged3) {
+    return isHtml ? (cols.mergedHtml || "") : (cols.mergedText || "");
+  }
+  const esc = v => isHtml ? escapeHtml(String(v ?? "")) : String(v ?? "");
+  const sHtml = String(cols.surah || "").trim();
+  const sPlain = stripHtmlSimple(sHtml);
+  const fPlain = stripHtmlSimple(cols.from);
+  const tPlain = stripHtmlSimple(cols.to);
+  if (!sPlain && !fPlain && !tPlain) return "";
+
+  const sep = isHtml ? ` <span class="rep-arrow-sep">←</span> ` : ` ← `;
+  const dash = isHtml ? `<span class="ayah-sep">–</span>` : `–`;
+
+  // 1) Sabr Juz ("سبر" + "جزء" + shortName) or already starts with "سبر "
+  if (sPlain === "سبر" && fPlain === "جزء" && tPlain) {
+    const lbl = tPlain.startsWith("الجزء") ? `سبر ${tPlain}` : `سبر جزء ${tPlain}`;
+    return esc(lbl);
+  }
+  if (sPlain.startsWith("سبر ")) {
+    return esc(sPlain);
+  }
+  // 2) Sard Juz ("سرد" + "جزء"/"X أجزاء" + names)
+  if (sPlain === "سرد" && tPlain) {
+    const lbl = fPlain === "جزء" ? `سرد جزء ${tPlain}` : (fPlain ? `سرد ${fPlain}: ${tPlain}` : `سرد ${tPlain}`);
+    return esc(lbl);
+  }
+  // 3) Rashidi ("الرشيدي" + ص X + ص Y)
+  if (sPlain === "الرشيدي") {
+    if (fPlain && tPlain && fPlain !== tPlain) {
+      return esc(`الرشيدي ${fPlain}–${tPlain.replace(/^ص\s*/, "")}`);
+    }
+    return esc(fPlain ? `الرشيدي ${fPlain}` : (tPlain ? `الرشيدي ${tPlain}` : "الرشيدي"));
+  }
+  // 4) Pure full surah(s) with no ayah bounds
+  if (!fPlain && !tPlain) {
+    return isHtml ? sHtml : sPlain;
+  }
+
+  const fAscii = toAsciiDigits(fPlain);
+  const tAscii = toAsciiDigits(tPlain);
+  const fIsNum = /^\d+$/.test(fAscii);
+  const tIsNum = /^\d+$/.test(tAscii);
+  const tIsEnd = isSurahEndToken(tPlain);
+
+  // 5) Single or multi surah with ayah numbers
+  if (fIsNum && tIsNum) {
+    const a1 = Number(fAscii), a2 = Number(tAscii);
+    return isHtml
+      ? `${sHtml} ${formatCircledAyahBadge(a1, true)}${dash}${formatCircledAyahBadge(a2, true)}`
+      : `${sPlain} (${a1}–${a2})`;
+  }
+  if (fIsNum && tIsEnd) {
+    const a1 = Number(fAscii);
+    return isHtml
+      ? `${sHtml} ${formatCircledAyahBadge(a1, true)}${dash}<span class="ayah-end-lbl">${SURAH_END_TOKEN}</span>`
+      : `${sPlain} (${a1}–${SURAH_END_TOKEN})`;
+  }
+  if (!fPlain && tIsNum) {
+    const a2 = Number(tAscii);
+    return isHtml
+      ? `${sHtml} <span class="ayah-sub-lbl">إلى</span> ${formatCircledAyahBadge(a2, true)}`
+      : `${sPlain} (إلى ${a2})`;
+  }
+  if (fIsNum && !tPlain) {
+    const a1 = Number(fAscii);
+    return isHtml
+      ? `${sHtml} ${formatCircledAyahBadge(a1, true)}`
+      : `${sPlain} (${a1})`;
+  }
+  if (!fPlain && tIsEnd) {
+    return isHtml ? sHtml : sPlain;
+  }
+
+  // 6) Fallback for page ranges or named bounds (e.g. ص 10 ← ص 14 or Recitation Sabr Juz)
+  if (/^(الجزء|جزء)\s/.test(sPlain)) {
+    return esc(`سبر ${sPlain}`);
+  }
+  const fFmt = styleSurahAyahToken(fPlain, isHtml);
+  const tFmt = styleSurahAyahToken(tPlain, isHtml);
+  if (fFmt && tFmt && fPlain !== tPlain) {
+    return (sPlain && sPlain !== "صفحات") ? `${isHtml ? sHtml : sPlain}: ${fFmt}${sep}${tFmt}` : `${fFmt}${sep}${tFmt}`;
+  }
+  const singleBound = fFmt || tFmt;
+  return (sPlain && sPlain !== "صفحات" && singleBound) ? `${isHtml ? sHtml : sPlain} ${singleBound}` : (singleBound || (isHtml ? sHtml : sPlain));
+}
+
+function formatUnifiedReviewCell(pairCols, isHtml = true) {
+  if (!pairCols) return "";
+  const fPlain = stripHtmlSimple(pairCols.from);
+  const tPlain = stripHtmlSimple(pairCols.to);
+  if (!fPlain && !tPlain) return "";
+
+  const esc = v => isHtml ? escapeHtml(v) : v;
+  const sep = isHtml ? ` <span class="rep-arrow-sep">←</span> ` : ` ← `;
+  const dash = isHtml ? `<span class="ayah-sep">–</span>` : `–`;
+
+  if (fPlain && !tPlain) return styleSurahAyahToken(fPlain, isHtml);
+  if (!fPlain && tPlain) return styleSurahAyahToken(tPlain, isHtml);
+  if (fPlain === tPlain) return styleSurahAyahToken(fPlain, isHtml);
+  if (fPlain === "جزء") return esc(`جزء ${tPlain}`);
+
+  const tAscii = toAsciiDigits(tPlain);
+  const tIsNum = /^\d+$/.test(tAscii);
+  const tIsEnd = isSurahEndToken(tPlain);
+
+  // Handles single-surah review like ("الملك", "27") or ("الملك 10", "27") or ("الملك 10", "آخرها")
+  if (tIsNum) {
+    const a2 = Number(tAscii);
+    const mF = fPlain.match(/^(.+?)\s+([0-9٠-٩]+)$/);
+    if (mF && !/^(ص|صفحة|صفحات|الجزء|جزء)$/.test(mF[1].trim())) {
+      const a1 = parseArabicNum(mF[2], 1);
+      return isHtml
+        ? `${escapeHtml(mF[1].trim())} ${formatCircledAyahBadge(a1, true)}${dash}${formatCircledAyahBadge(a2, true)}`
+        : `${mF[1].trim()} (${a1}–${a2})`;
+    }
+    return isHtml
+      ? `${escapeHtml(fPlain)} <span class="ayah-sub-lbl">إلى</span> ${formatCircledAyahBadge(a2, true)}`
+      : `${fPlain} (إلى ${a2})`;
+  }
+  if (tIsEnd) {
+    const mF = fPlain.match(/^(.+?)\s+([0-9٠-٩]+)$/);
+    if (mF && !/^(ص|صفحة|صفحات|الجزء|جزء)$/.test(mF[1].trim())) {
+      const a1 = parseArabicNum(mF[2], 1);
+      return isHtml
+        ? `${escapeHtml(mF[1].trim())} ${formatCircledAyahBadge(a1, true)}${dash}<span class="ayah-end-lbl">${SURAH_END_TOKEN}</span>`
+        : `${mF[1].trim()} (${a1}–${SURAH_END_TOKEN})`;
+    }
+    return esc(fPlain);
+  }
+
+  return `${styleSurahAyahToken(fPlain, isHtml)}${sep}${styleSurahAyahToken(tPlain, isHtml)}`;
+}
+
+function formatInlineReviewHwHtml(text) {
+  const txt = stripHtmlSimple(text);
+  if (!txt || txt === "—") return escapeHtml(txt || "");
+  return txt.split(/\s*←\s*/).map(part => {
+    const p = part.trim();
+    const mRange = p.match(/^(.+?)\s*\(\s*([0-9٠-٩]+)\s*[–-]\s*([0-9٠-٩]+|آخرها|نهايتها)\s*\)$/);
+    if (mRange) {
+      const a1 = parseArabicNum(mRange[2], 1);
+      const endTok = mRange[3].trim();
+      const endHtml = isSurahEndToken(endTok)
+        ? `<span class="ayah-end-lbl">${SURAH_END_TOKEN}</span>`
+        : formatCircledAyahBadge(parseArabicNum(endTok, a1), true);
+      return `${escapeHtml(mRange[1].trim())} ${formatCircledAyahBadge(a1, true)}<span class="ayah-sep">–</span>${endHtml}`;
+    }
+    const mTo = p.match(/^(.+?)\s*\(\s*إلى\s+([0-9٠-٩]+)\s*\)$/);
+    if (mTo) {
+      return `${escapeHtml(mTo[1].trim())} <span class="ayah-sub-lbl">إلى</span> ${formatCircledAyahBadge(parseArabicNum(mTo[2], 1), true)}`;
+    }
+    const mSingle = p.match(/^(.+?)\s*\(\s*([0-9٠-٩]+)\s*\)$/);
+    if (mSingle) {
+      return `${escapeHtml(mSingle[1].trim())} ${formatCircledAyahBadge(parseArabicNum(mSingle[2], 1), true)}`;
+    }
+    return styleSurahAyahToken(p, true);
+  }).join(` <span class="rep-arrow-sep">←</span> `);
+}
+
+function getDailyReportPointsDisplay(s, r, st, isAbs, isNoRec) {
+  const pts = Number(r?.points) || 0;
+  if (pts > 0) return { html: String(pts), xl: pts };
+  const evaluated = Boolean(
+    isAbs || isNoRec ||
+    (r?.recEval && String(r.recEval).trim()) ||
+    (r?.minEval && String(r.minEval).trim()) ||
+    (r?.majEval && String(r.majEval).trim()) ||
+    (r?.dRevEval && String(r.dRevEval).trim()) ||
+    (r?.attendance && r.attendance !== "لم يُسمّع" && r.attendance !== "حاضر")
+  );
+  if (!evaluated) return { html: "", xl: null };
+  return { html: `<span class="pts-zero-dash">—</span>`, xl: 0 };
+}
+
+function buildUnifiedColgroup(colWeights) {
+  const total = colWeights.reduce((a, b) => a + b, 0) || 100;
+  const pcts = colWeights.map(w => +((w / total) * 100).toFixed(2));
+  const diff = +(100 - pcts.reduce((a, b) => a + b, 0)).toFixed(2);
+  if (pcts.length) pcts[pcts.length - 1] = +(pcts[pcts.length - 1] + diff).toFixed(2);
+  return `<colgroup>${pcts.map(p => `<col style="width:${p}%">`).join("")}</colgroup>`;
+}
+
 function renderReport3Cells(cols, extraCls = "") {
   if (cols && cols.merged3 && cols.mergedHtml) {
     return `<td colspan="3" class="td-span-3 ${extraCls}">${cols.mergedHtml}</td>`;
@@ -29067,216 +29567,240 @@ function renderDailyReport() {
 
   let tbl = "";
   const dayLessonsFooterTxt = formatSessionLessonsFooter(s, true);
+  const allPendingSession = (h.students || []).length > 0 && pendingCnt >= (h.students || []).length && totalPts === 0;
+  const totalPtsCellHtml = allPendingSession ? `<span class="pts-zero-dash">—</span>` : String(totalPts);
+
   if (s.type === "daily") {
     const maxNameLen = Math.max(...(h.students || []).map(x => String(x.name || "").trim().length), 10);
-    const nameW = maxNameLen <= 14 ? 10.6 : (maxNameLen <= 18 ? 11.6 : (maxNameLen <= 22 ? 12.6 : 13.4));
-    let maxDailyNoteLen = 0;
-    let hwMaxMinorLen = 0, hwMaxMajorLen = 0, hwMaxSurahLen = 0, hwMaxFromLen = 0, hwMaxToLen = 0, hwMaxSpanLen = 0;
-    const revHwByStudent = new Map();
-    const stdHwByStudent = new Map();
-    (h.students || []).forEach(st => {
+    const nameW = maxNameLen <= 14 ? 12.2 : (maxNameLen <= 18 ? 13.5 : (maxNameLen <= 22 ? 14.8 : 15.8));
+    let maxDailyNoteLen = 0, maxRecLen = 10, maxRevLen = 8, maxHwLen = 10, maxHwMinLen = 8, maxHwMajLen = 8;
+    const preRows = (h.students || []).map((st, idx) => {
       try {
         const r = getStudentRecord(s, st.id);
         const isAbs = String(r.attendance || "").includes("غياب");
         const isNoRec = isPresentNoRecite(r.attendance);
-        const isRash = st.track === "rashidi";
-        const sb = (!isRash && !isAbs && !isNoRec && !(r.recIsSabr && r.sabrJuz && !r.recEval)) ? buildDailySabrNoteBadge(r, false) : { hasBadge: false, plain: "" };
-        const rawN = stripMushafPageTokens(r.notes || "");
-        const baseN = sb.hasBadge ? stripRedundantSabrNoteText(rawN) : (!r.hwSabrJuz ? stripStaleHwSabrPrepText(rawN) : rawN);
-        const fullN = (sb.hasBadge ? (sb.plain + " ") : "") + ((!isRash && !isAbs && !isNoRec) ? applyTajweedToNote(baseN, r) : baseN);
-        if (fullN.trim().length > maxDailyNoteLen) maxDailyNoteLen = fullN.trim().length;
+        const isRashidiRow = st.track === "rashidi";
+        const _recSabrObj = (!isRashidiRow && r.recIsSabr && r.sabrJuz) ? getJuzByName(r.sabrJuz) : null;
+        const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
+          ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
 
+        const recCols = isRashidiRow
+          ? { surah: "الرشيدي", from: escapeHtml(r.rashidiFrom ? `ص ${r.rashidiFrom}` : ""), to: escapeHtml(r.rashidiTo ? `ص ${r.rashidiTo}` : ""), lines: 1 }
+          : (_recSabrObj
+            ? { surah: escapeHtml(`سبر ${formatJuzCompactLabel(_recSabrObj)}`), from: "", to: "", lines: 1, isSabr: true }
+            : formatSegmentsColumns(getSegments(r, "rec"), true));
+        const recHtml = formatUnifiedRangeCell(recCols, true);
+        const recPlainLen = stripHtmlSimple(recHtml).length;
+        if (recPlainLen > maxRecLen) maxRecLen = recPlainLen;
+
+        const isPendingSabrOnly = Boolean(r.recIsSabr && r.sabrJuz && !r.recEval && !isAbs);
+        const isPendingNoEval = Boolean(!r.recEval && !isAbs && r.attendance === "لم يُسمّع");
+        const compactDRevFrom = String(r.dRevFrom || "").replace(/^إعادة\s+/, "").replace(/\s*ص\s*\d+/g, "").trim();
+        const compactDRevTo = String(r.dRevTo || "").replace(/^\(|\)$/g, "").trim();
+        const hasIndepRev = !isRashidiRow && !isAbs && hasIndependentDailyReview(r);
+        const dRevCols = (!hasIndepRev || (isPendingNoEval && !r.dRevEval))
+          ? { from: "", to: "", lines: 1 }
+          : ((r.dRevIsPages || r.dRevSardLabel)
+            ? { from: escapeHtml(compactDRevFrom), to: escapeHtml(compactDRevTo), lines: 1 }
+            : formatReviewPairColumns(getSegments(r, "dRev"), compactDRevFrom, compactDRevTo, true));
+        const dRevHtml = formatUnifiedReviewCell(dRevCols, true);
+        const dRevPlainLen = stripHtmlSimple(dRevHtml).length;
+        if (dRevPlainLen > maxRevLen) maxRevLen = dRevPlainLen;
+
+        let hwHtml = "", hwCls = "", hwMinHtml = "", hwMajHtml = "", hwMajCls = "", hwIsRashidiRev = false;
         if (dailyNextIsReview) {
           const revHw = computeUpcomingReviewHomework(h, s, st, r, nextCtx);
-          revHwByStudent.set(st.id, revHw);
           if (revHw.isRashidi) {
-            const rl = maxPlainLineLen(revHw.text);
-            if (rl > hwMaxMinorLen) hwMaxMinorLen = Math.min(rl, 22);
+            hwIsRashidiRev = true;
+            hwHtml = escapeHtml(revHw.text);
+            const rl = stripHtmlSimple(hwHtml).length;
+            if (rl > maxHwMinLen) maxHwMinLen = Math.min(rl, 22);
           } else {
-            const mnL = maxPlainLineLen(revHw.minorText);
-            const mjL = maxPlainLineLen(revHw.majorText);
-            if (mnL > hwMaxMinorLen) hwMaxMinorLen = mnL;
-            if (mjL > hwMaxMajorLen) hwMaxMajorLen = mjL;
+            hwMinHtml = formatInlineReviewHwHtml(revHw.minorText);
+            hwMajHtml = formatInlineReviewHwHtml(revHw.majorText);
+            hwMajCls = revHw.isMajorSabr ? "td-sabr" : "";
+            const mnL = stripHtmlSimple(hwMinHtml).length;
+            const mjL = stripHtmlSimple(hwMajHtml).length;
+            if (mnL > maxHwMinLen) maxHwMinLen = mnL;
+            if (mjL > maxHwMajLen) maxHwMajLen = mjL;
           }
         } else {
-          const hwCols = isRash
+          const hwCols = isRashidiRow
             ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1 }
             : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, true) : formatSegmentsColumns(getSegments(r, "hw"), true));
-          stdHwByStudent.set(st.id, hwCols);
-          const sL = maxPlainLineLen(hwCols.merged3 ? hwCols.mergedText : hwCols.surah);
-          const fPlain = String(hwCols.from || "").replace(/<[^>]+>/g, "").trim();
-          const tPlain = String(hwCols.to || "").replace(/<[^>]+>/g, "").trim();
-          if (hwCols.merged3) {
-            if (Math.ceil(sL * 0.65) > hwMaxSurahLen) hwMaxSurahLen = Math.ceil(sL * 0.65);
-            if (Math.ceil(sL * 0.5) > hwMaxSpanLen) hwMaxSpanLen = Math.ceil(sL * 0.5);
-          } else if (sL > hwMaxSurahLen) hwMaxSurahLen = sL;
-          if ((/[؀-ۿ]{3,}/.test(fPlain) && !isSurahEndToken(fPlain)) || (/[؀-ۿ]{3,}/.test(tPlain) && !isSurahEndToken(tPlain))) {
-            const comb = (fPlain === "جزء" && tPlain) ? `جزء ${tPlain}` : ((fPlain && tPlain && fPlain !== tPlain) ? `${fPlain} ← ${tPlain}` : (fPlain || tPlain));
-            if (comb.length > hwMaxSpanLen) hwMaxSpanLen = comb.length;
-          } else {
-            const fL = maxPlainLineLen(hwCols.from), tL = maxPlainLineLen(hwCols.to);
-            if (fL > hwMaxFromLen) hwMaxFromLen = fL;
-            if (tL > hwMaxToLen) hwMaxToLen = tL;
-          }
+          hwHtml = formatUnifiedRangeCell(hwCols, true);
+          hwCls = r.hwSabrJuz ? "td-sabr" : "";
+          const hl = stripHtmlSimple(hwHtml).length;
+          if (hl > maxHwLen) maxHwLen = hl;
         }
-      } catch {}
-    });
-    const dynNoteW = computeDynamicNoteWidthPct(maxDailyNoteLen);
-    const dynHwCols = dailyNextIsReview
-      ? computeDynamicHw3Cols("dailyReview", { maxMinorLen: hwMaxMinorLen, maxMajorLen: hwMaxMajorLen })
-      : computeDynamicHw3Cols("standard", { maxSurahLen: hwMaxSurahLen, maxFromLen: hwMaxFromLen, maxToLen: hwMaxToLen, maxSpanLen: hwMaxSpanLen });
-    const fixedCols = ptsOn
-      ? [2.5, nameW, 8.5, 3.2, 3.2, 5.7, 3.7, 6.4, 6.4, 5.4]
-      : [2.5, nameW + 0.6, 8.7, 3.3, 3.3, 5.9, 6.6, 6.6, 5.6];
-    const colgroup = buildScaledDailyColgroup(fixedCols, dynHwCols, dynNoteW);
 
+        const evalRaw = isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : ((r.recEval || "") + (_recSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : "")));
+        const evalSt = getEvalCellStyle(evalRaw, isAbs);
+        const cleanDRevEval = hasIndepRev ? (r.dRevEval === "بانتظار التقييم" ? "" : (r.dRevEval || "")) : "";
+        const revSt = getEvalCellStyle(cleanDRevEval, false);
+
+        const sabrNoteInfo = (!isRashidiRow && !isAbs && !isNoRec && !isPendingSabrOnly)
+          ? buildDailySabrNoteBadge(r, true)
+          : { hasBadge: false, isRep: false, html: "", plain: "" };
+        const rawCleanNote = stripMushafPageTokens(r.notes || "");
+        const baseRestNote = sabrNoteInfo.hasBadge
+          ? stripRedundantSabrNoteText(rawCleanNote)
+          : (!r.hwSabrJuz ? stripStaleHwSabrPrepText(rawCleanNote) : rawCleanNote);
+        const finalRestNote = (!isRashidiRow && !isAbs && !isNoRec)
+          ? applyTajweedToNote(baseRestNote, r)
+          : baseRestNote;
+        const fullNotePlainLen = ((sabrNoteInfo.hasBadge ? sabrNoteInfo.plain + " " : "") + finalRestNote).trim().length;
+        if (fullNotePlainLen > maxDailyNoteLen) maxDailyNoteLen = fullNotePlainLen;
+
+        const noteCellCls = sabrNoteInfo.hasBadge ? (sabrNoteInfo.isRep ? "td-note-sabr-rep" : "td-note-sabr") : "";
+        const noteCellHtml = sabrNoteInfo.hasBadge
+          ? `${sabrNoteInfo.html}${finalRestNote ? ` <span>${escapeHtml(finalRestNote)}</span>` : ""}`
+          : escapeHtml(finalRestNote);
+        const ptsDisp = getDailyReportPointsDisplay(s, r, st, isAbs, isNoRec);
+
+        return { ok: true, idx, st, recHtml, recSabr: Boolean(_recSabrObj), evalSt, ptsDisp, dRevHtml, revSt, hwHtml, hwCls, hwMinHtml, hwMajHtml, hwMajCls, hwIsRashidiRev, noteCellCls, noteCellHtml };
+      } catch (rowErr) {
+        console.warn("Daily report row error for student:", st?.name, rowErr);
+        return { ok: false, idx, st };
+      }
+    });
+
+    const noteW = computeDynamicNoteWidthPct(maxDailyNoteLen);
+    const recW = Math.min(18.5, Math.max(12.5, +(9.5 + maxRecLen * 0.36).toFixed(1)));
+    const revW = Math.min(16.5, Math.max(10.5, +(8.2 + maxRevLen * 0.34).toFixed(1)));
+    let colWeights;
+    if (dailyNextIsReview) {
+      const hwMinW = Math.min(15.5, Math.max(9.5, +(7.5 + maxHwMinLen * 0.34).toFixed(1)));
+      const hwMajW = Math.min(15.5, Math.max(9.5, +(7.5 + maxHwMajLen * 0.34).toFixed(1)));
+      colWeights = ptsOn
+        ? [2.8, nameW, recW, 6.8, 4.6, revW, 6.6, hwMinW, hwMajW, noteW]
+        : [2.8, nameW + 0.8, recW, 7.0, revW, 6.8, hwMinW, hwMajW, noteW];
+    } else {
+      const hwW = Math.min(19.0, Math.max(12.5, +(9.5 + maxHwLen * 0.36).toFixed(1)));
+      colWeights = ptsOn
+        ? [3.0, nameW, recW, 7.4, 4.8, revW, 7.2, hwW, noteW]
+        : [3.0, nameW + 0.8, recW, 7.6, revW, 7.4, hwW, noteW];
+    }
+    const colgroup = buildUnifiedColgroup(colWeights);
+    const totalDailyCols = colWeights.length;
     const hwGroupHdr = dailyNextIsReview
       ? `الواجب المنزلي (مراجعة ${escapeHtml(nextCtx.nextDayName)})`
       : `الواجب المنزلي`;
-    const hwSubHdrs = dailyNextIsReview
-      ? `<th class="th-sub">الصغرى</th><th colspan="2" class="th-sub">الكبرى</th>`
-      : `<th class="th-sub">السورة</th><th class="th-sub">من</th><th class="th-sub">إلى</th>`;
 
     tbl = `<table class="t-daily" id="dailyReportTable">${colgroup}
       <thead>
         <tr>
           <th rowspan="2" class="th-gray">م</th>
           <th rowspan="2" class="th-gray">الاسم الثلاثي</th>
-          <th colspan="4" class="th-slate">التسميع الجديد</th>
-          ${ptsOn ? '<th rowspan="2" class="th-red">النقاط</th>' : ''}
-          <th colspan="3" class="th-ochre">المراجعة</th>
-          <th colspan="3" class="th-slate">${hwGroupHdr}</th>
-          <th rowspan="2" class="th-gray">تنبيهات الحفظ والأداء</th>
+          <th colspan="2" class="th-slate col-sec-start">التسميع الجديد</th>
+          ${ptsOn ? '<th rowspan="2" class="th-pts-calm col-sec-start">النقاط</th>' : ''}
+          <th colspan="2" class="th-ochre col-sec-start">المراجعة</th>
+          ${dailyNextIsReview
+            ? `<th colspan="2" class="th-slate col-sec-start">${hwGroupHdr}</th>`
+            : `<th rowspan="2" class="th-slate col-sec-start">${hwGroupHdr}</th>`}
+          <th rowspan="2" class="th-gray col-sec-start">تنبيهات الحفظ والأداء</th>
         </tr>
         <tr>
-          <th class="th-sub">السورة</th><th class="th-sub">من</th><th class="th-sub">إلى</th><th class="th-slate">التقييم</th>
-          <th class="th-sub">من</th><th class="th-sub">إلى</th><th class="th-ochre">التقييم</th>
-          ${hwSubHdrs}
+          <th class="th-sub col-sec-start">المقرر</th><th class="th-sub-slate">التقييم</th>
+          <th class="th-sub col-sec-start">المقرر</th><th class="th-sub-ochre">التقييم</th>
+          ${dailyNextIsReview ? `<th class="th-sub col-sec-start">الصغرى</th><th class="th-sub">الكبرى</th>` : ''}
         </tr>
       </thead><tbody>`;
-    (h.students || []).forEach((st, idx) => {
-      try {
-      const r = getStudentRecord(s, st.id);
-      const isAbs = String(r.attendance || "").includes("غياب");
-      const _recSabrObj = (r.recIsSabr && r.sabrJuz) ? getJuzByName(r.sabrJuz) : null;
-      const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
-        ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
-      const isRashidiRow = st.track === "rashidi";
-      const recCols = isRashidiRow
-        ? { surah: "الرشيدي", from: escapeHtml(r.rashidiFrom ? `ص ${r.rashidiFrom}` : ""), to: escapeHtml(r.rashidiTo ? `ص ${r.rashidiTo}` : ""), lines: 1 }
-        : (_recSabrObj
-          ? { surah: escapeHtml(formatJuzCompactLabel(_recSabrObj)), from: escapeHtml(SURAH_MAP[_recSabrObj.startSurah]?.n || ""), to: escapeHtml(SURAH_MAP[_recSabrObj.endSurah]?.n || ""), lines: 1 }
-          : formatSegmentsColumns(getSegments(r, "rec"), true));
 
-      let hwCellsHtml = "";
-      if (dailyNextIsReview) {
-        const revHw = revHwByStudent.get(st.id) || computeUpcomingReviewHomework(h, s, st, r, nextCtx);
-        if (revHw.isRashidi) {
-          hwCellsHtml = `<td colspan="3">${escapeHtml(revHw.text)}</td>`;
-        } else {
-          hwCellsHtml = `<td class="td-rev-slim">${escapeHtml(revHw.minorText)}</td><td colspan="2" class="td-rev-slim ${revHw.isMajorSabr ? 'td-sabr' : ''}">${escapeHtml(revHw.majorText)}</td>`;
-        }
-      } else {
-        const hwCols = stdHwByStudent.get(st.id) || (isRashidiRow
-          ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1 }
-          : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, true) : formatSegmentsColumns(getSegments(r, "hw"), true)));
-        hwCellsHtml = renderReport3Cells(hwCols);
+    preRows.forEach(row => {
+      if (!row.ok) {
+        tbl += `<tr><td class="td-idx">${row.idx + 1}</td><td class="txt-right td-name-col">${escapeHtml(row.st?.name || "")}</td><td colspan="${totalDailyCols - 2}">—</td></tr>`;
+        return;
       }
-
-      const isPendingSabrOnly = Boolean(r.recIsSabr && r.sabrJuz && !r.recEval && !isAbs);
-      const isPendingNoEval = Boolean(!r.recEval && !isAbs && r.attendance === "لم يُسمّع");
-      const compactDRevFrom = String(r.dRevFrom || "").replace(/^إعادة\s+/, "").replace(/\s*ص\s*\d+/g, "").trim();
-      const compactDRevTo = String(r.dRevTo || "").replace(/^\(|\)$/g, "").trim();
-      const hasIndepRev = !isRashidiRow && !isAbs && hasIndependentDailyReview(r);
-      const dRevCols = (!hasIndepRev || (isPendingNoEval && !r.dRevEval))
-        ? { from: "", to: "", lines: 1 }
-        : ((r.dRevIsPages || r.dRevSardLabel)
-          ? { from: escapeHtml(compactDRevFrom), to: escapeHtml(compactDRevTo), lines: 1 }
-          : formatReviewPairColumns(getSegments(r, "dRev"), compactDRevFrom, compactDRevTo, true));
-      const isNoRec = isPresentNoRecite(r.attendance);
-      const evalRaw = isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : ((r.recEval || "") + (_recSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : "")));
-      const evalSt = getEvalCellStyle(evalRaw, isAbs);
-      const cleanDRevEval = hasIndepRev ? (r.dRevEval === "بانتظار التقييم" ? "" : (r.dRevEval || "")) : "";
-      const revSt = getEvalCellStyle(cleanDRevEval, false);
-
-      const sabrNoteInfo = (!isRashidiRow && !isAbs && !isNoRec && !isPendingSabrOnly)
-        ? buildDailySabrNoteBadge(r, true)
-        : { hasBadge: false, isRep: false, html: "", plain: "" };
-      const rawCleanNote = stripMushafPageTokens(r.notes || "");
-      const baseRestNote = sabrNoteInfo.hasBadge
-        ? stripRedundantSabrNoteText(rawCleanNote)
-        : (!r.hwSabrJuz ? stripStaleHwSabrPrepText(rawCleanNote) : rawCleanNote);
-      const finalRestNote = (!isRashidiRow && !isAbs && !isNoRec)
-        ? applyTajweedToNote(baseRestNote, r)
-        : baseRestNote;
-      const noteCellCls = sabrNoteInfo.hasBadge ? (sabrNoteInfo.isRep ? "td-note-sabr-rep" : "td-note-sabr") : "";
-      const noteCellHtml = sabrNoteInfo.hasBadge
-        ? `${sabrNoteInfo.html}${finalRestNote ? ` <span>${escapeHtml(finalRestNote)}</span>` : ""}`
-        : escapeHtml(finalRestNote);
+      const hwCellsHtml = dailyNextIsReview
+        ? (row.hwIsRashidiRev
+          ? `<td colspan="2" class="td-range-unified col-sec-start">${row.hwHtml}</td>`
+          : `<td class="td-range-unified col-sec-start">${row.hwMinHtml}</td><td class="td-range-unified ${row.hwMajCls}">${row.hwMajHtml}</td>`)
+        : `<td class="td-range-unified col-sec-start ${row.hwCls}">${row.hwHtml}</td>`;
 
       tbl += `<tr>
-        <td>${idx + 1}</td>
-        <td class="txt-right td-name-col">${escapeHtml(st.name)}</td>
-        ${renderReport3Cells(recCols)}
-        <td class="${evalSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(evalSt.text)}</td>
-        ${ptsOn ? `<td class="td-pts">${r.points || 0}</td>` : ''}
-        <td class="td-rev-slim">${dRevCols.from}</td>
-        <td class="td-rev-slim">${dRevCols.to}</td>
-        <td class="${revSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(revSt.text)}</td>
+        <td class="td-idx">${row.idx + 1}</td>
+        <td class="txt-right td-name-col">${escapeHtml(row.st.name)}</td>
+        <td class="td-range-unified col-sec-start ${row.recSabr ? 'td-sabr' : ''}">${row.recHtml}</td>
+        <td class="${row.evalSt.cls} td-eval-slim">${escapeHtml(row.evalSt.text)}</td>
+        ${ptsOn ? `<td class="td-pts col-sec-start">${row.ptsDisp.html}</td>` : ''}
+        <td class="td-range-unified col-sec-start">${row.dRevHtml}</td>
+        <td class="${row.revSt.cls} td-eval-slim">${escapeHtml(row.revSt.text)}</td>
         ${hwCellsHtml}
-        <td class="txt-right td-note ${noteCellCls}">${noteCellHtml}</td>
+        <td class="txt-right td-note col-sec-start ${row.noteCellCls}">${row.noteCellHtml}</td>
       </tr>`;
-      } catch (rowErr) {
-        console.warn("Daily report row error for student:", st?.name, rowErr);
-        tbl += `<tr><td>${idx + 1}</td><td class="txt-right td-name-col">${escapeHtml(st?.name || "")}</td><td colspan="${ptsOn ? 12 : 11}">—</td></tr>`;
-      }
     });
+
     const footHtml = ptsOn
-      ? `<td colspan="6">مجموع نقاط الحلقة اليوم</td><td>${totalPts}</td>
-         <td colspan="7" class="txt-right">📚 الدروس والنشاطات: ${escapeHtml(dayLessonsFooterTxt)}</td>`
-      : `<td colspan="13" class="txt-right">📚 الدروس والنشاطات: ${escapeHtml(dayLessonsFooterTxt)}</td>`;
+      ? `<td colspan="4">مجموع نقاط الحلقة اليوم</td><td class="col-sec-start">${totalPtsCellHtml}</td>
+         <td colspan="${totalDailyCols - 5}" class="txt-right col-sec-start">📚 الدروس والنشاطات: ${escapeHtml(dayLessonsFooterTxt)}</td>`
+      : `<td colspan="${totalDailyCols}" class="txt-right">📚 الدروس والنشاطات: ${escapeHtml(dayLessonsFooterTxt)}</td>`;
     tbl += `</tbody><tfoot><tr>${footHtml}</tr></tfoot></table>`;
   } else {
     const maxNameLen = Math.max(...(h.students || []).map(x => String(x.name || "").trim().length), 10);
-    const nameW = maxNameLen <= 14 ? 10.6 : (maxNameLen <= 18 ? 11.6 : (maxNameLen <= 22 ? 12.6 : 13.4));
-    let maxSatNoteLen = 0;
-    let satHwSurahLen = 0, satHwFromLen = 0, satHwToLen = 0, satHwSpanLen = 0;
-    const satHwByStudent = new Map();
-    (h.students || []).forEach(st => {
+    const nameW = maxNameLen <= 14 ? 12.2 : (maxNameLen <= 18 ? 13.5 : (maxNameLen <= 22 ? 14.8 : 15.8));
+    let maxSatNoteLen = 0, maxMinLen = 10, maxMajLen = 10, maxSatHwLen = 10;
+
+    const preSatRows = (h.students || []).map((st, idx) => {
       try {
         const r = getStudentRecord(s, st.id);
-        const len = stripMushafPageTokens(r.notes || "").trim().length;
-        if (len > maxSatNoteLen) maxSatNoteLen = len;
-        const isRash = st.track === "rashidi";
-        const hc = satNextIsDaily
+        const isAbs = String(r.attendance || "").includes("غياب");
+        const isNoRec = isPresentNoRecite(r.attendance);
+        const isRashidiRow = st.track === "rashidi";
+        const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
+          ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
+
+        const minSegs = getSegments(r, "min");
+        const minCols = isRashidiRow
+          ? { surah: "الرشيدي", from: escapeHtml(r.rashidiFrom ? `ص ${r.rashidiFrom}` : ""), to: escapeHtml(r.rashidiTo ? `ص ${r.rashidiTo}` : ""), lines: 1 }
+          : (minSegs.length ? formatSegmentsColumns(minSegs, true) : { surah: escapeHtml(r.minSurah || r.minText || ""), from: escapeHtml(r.minFrom || ""), to: escapeHtml(r.minTo || ""), lines: 1 });
+        const minHtml = formatUnifiedRangeCell(minCols, true);
+        const mnL = stripHtmlSimple(minHtml).length;
+        if (mnL > maxMinLen) maxMinLen = mnL;
+
+        const majCols = isRashidiRow
+          ? { from: "", to: "", lines: 1 }
+          : ((r.majIsPages || r.majSardLabel)
+            ? { from: escapeHtml(r.majFrom || ""), to: escapeHtml(r.majTo || ""), lines: 1 }
+            : formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, true));
+        const majHtml = formatUnifiedReviewCell(majCols, true);
+        const mjL = stripHtmlSimple(majHtml).length;
+        if (mjL > maxMajLen) maxMajLen = mjL;
+
+        const hwCols = satNextIsDaily
           ? computeUpcomingDailyHomeworkCols(h, s, st, r, nextCtx, true)
-          : (isRash
+          : (isRashidiRow
             ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1, isSabr: false }
             : formatSatNextMajColumns(r, true));
-        satHwByStudent.set(st.id, hc);
-        const sL = maxPlainLineLen(hc.merged3 ? hc.mergedText : hc.surah);
-        const fPlain = String(hc.from || "").replace(/<[^>]+>/g, "").trim();
-        const tPlain = String(hc.to || "").replace(/<[^>]+>/g, "").trim();
-        if (hc.merged3) {
-          if (Math.ceil(sL * 0.65) > satHwSurahLen) satHwSurahLen = Math.ceil(sL * 0.65);
-          if (Math.ceil(sL * 0.5) > satHwSpanLen) satHwSpanLen = Math.ceil(sL * 0.5);
-        } else if (sL > satHwSurahLen) satHwSurahLen = sL;
-        if ((/[؀-ۿ]{3,}/.test(fPlain) && !isSurahEndToken(fPlain)) || (/[؀-ۿ]{3,}/.test(tPlain) && !isSurahEndToken(tPlain))) {
-          const comb = (fPlain === "جزء" && tPlain) ? `جزء ${tPlain}` : ((fPlain && tPlain && fPlain !== tPlain) ? `${fPlain} ← ${tPlain}` : (fPlain || tPlain));
-          if (comb.length > satHwSpanLen) satHwSpanLen = comb.length;
-        } else {
-          const fL = maxPlainLineLen(hc.from), tL = maxPlainLineLen(hc.to);
-          if (fL > satHwFromLen) satHwFromLen = fL;
-          if (tL > satHwToLen) satHwToLen = tL;
-        }
-      } catch {}
+        const hwHtml = formatUnifiedRangeCell(hwCols, true);
+        const hwIsSabr = Boolean(hwCols.isSabr || (!satNextIsDaily && (r.nextMajSabrJuz || (r.sabrJuz && (r.majEval === "إعادة" || isAbs)))));
+        const hwL = stripHtmlSimple(hwHtml).length;
+        if (hwL > maxSatHwLen) maxSatHwLen = hwL;
+
+        const minSt = getEvalCellStyle(isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isRashidiRow ? (r.recEval || "") : (r.minEval || ""))), isAbs);
+        const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
+        const majRaw = isRashidiRow ? "" : (isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || "")))));
+        const majSt = getEvalCellStyle(majRaw, !isRashidiRow && isAbs);
+        const noteTxt = stripMushafPageTokens(r.notes || "").trim();
+        if (noteTxt.length > maxSatNoteLen) maxSatNoteLen = noteTxt.length;
+        const ptsDisp = getDailyReportPointsDisplay(s, r, st, isAbs, isNoRec);
+
+        return { ok: true, idx, st, minHtml, minSt, majHtml, majSt, ptsDisp, hwHtml, hwIsSabr, noteTxt };
+      } catch (rowErr) {
+        console.warn("Sat report row error for student:", st?.name, rowErr);
+        return { ok: false, idx, st };
+      }
     });
-    const dynNoteW = computeDynamicNoteWidthPct(maxSatNoteLen);
-    const dynSatHwCols = computeDynamicHw3Cols("standard", { maxSurahLen: satHwSurahLen, maxFromLen: satHwFromLen, maxToLen: satHwToLen, maxSpanLen: satHwSpanLen, longHdr: true });
-    const fixedSatCols = ptsOn
-      ? [2.5, nameW, 8.2, 3.2, 3.2, 5.6, 6.8, 6.8, 5.6, 3.8]
-      : [2.5, nameW + 0.6, 8.4, 3.3, 3.3, 5.8, 7.0, 7.0, 5.8];
-    const colgroup = buildScaledDailyColgroup(fixedSatCols, dynSatHwCols, dynNoteW);
+
+    const noteW = computeDynamicNoteWidthPct(maxSatNoteLen);
+    const minW = Math.min(18.5, Math.max(12.5, +(9.5 + maxMinLen * 0.36).toFixed(1)));
+    const majW = Math.min(18.5, Math.max(12.5, +(9.5 + maxMajLen * 0.36).toFixed(1)));
+    const hwW = Math.min(19.5, Math.max(13.0, +(10.0 + maxSatHwLen * 0.36).toFixed(1)));
+    const colWeights = ptsOn
+      ? [3.0, nameW, minW, 7.2, majW, 7.4, 4.8, hwW, noteW]
+      : [3.0, nameW + 0.8, minW, 7.4, majW, 7.6, hwW, noteW];
+    const colgroup = buildUnifiedColgroup(colWeights);
+    const totalSatCols = colWeights.length;
 
     const satHwHdr = satNextIsDaily
       ? `الواجب المنزلي (تسميع ${escapeHtml(nextCtx.nextDayName)})`
@@ -29287,66 +29811,40 @@ function renderDailyReport() {
         <tr>
           <th rowspan="2" class="th-gray">م</th>
           <th rowspan="2" class="th-gray">الاسم الثلاثي</th>
-          <th colspan="4" class="th-slate">المراجعة الصغرى</th>
-          <th colspan="3" class="th-ochre">المراجعة الكبرى</th>
-          ${ptsOn ? '<th rowspan="2" class="th-red">النقاط</th>' : ''}
-          <th colspan="3" class="th-slate">${satHwHdr}</th>
-          <th rowspan="2" class="th-gray">تنبيهات الحفظ والأداء</th>
+          <th colspan="2" class="th-slate col-sec-start">المراجعة الصغرى</th>
+          <th colspan="2" class="th-ochre col-sec-start">المراجعة الكبرى</th>
+          ${ptsOn ? '<th rowspan="2" class="th-pts-calm col-sec-start">النقاط</th>' : ''}
+          <th rowspan="2" class="th-slate col-sec-start">${satHwHdr}</th>
+          <th rowspan="2" class="th-gray col-sec-start">تنبيهات الحفظ والأداء</th>
         </tr>
         <tr>
-          <th class="th-sub">السورة</th><th class="th-sub">من</th><th class="th-sub">إلى</th><th class="th-slate">التقييم</th>
-          <th class="th-sub">من</th><th class="th-sub">إلى</th><th class="th-ochre">التقييم</th>
-          <th class="th-sub">السورة</th><th class="th-sub">من</th><th class="th-sub">إلى</th>
+          <th class="th-sub col-sec-start">المقرر</th><th class="th-sub-slate">التقييم</th>
+          <th class="th-sub col-sec-start">المقرر</th><th class="th-sub-ochre">التقييم</th>
         </tr>
       </thead><tbody>`;
-    (h.students || []).forEach((st, idx) => {
-      try {
-      const r = getStudentRecord(s, st.id);
-      const isAbs = String(r.attendance || "").includes("غياب");
-      const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
-        ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
-      const minSegs = getSegments(r, "min");
-      const isRashidiRow = st.track === "rashidi";
-      const minCols = isRashidiRow
-        ? { surah: "الرشيدي", from: escapeHtml(r.rashidiFrom ? `ص ${r.rashidiFrom}` : ""), to: escapeHtml(r.rashidiTo ? `ص ${r.rashidiTo}` : ""), lines: 1 }
-        : (minSegs.length ? formatSegmentsColumns(minSegs, true) : { surah: escapeHtml(r.minSurah || r.minText || ""), from: escapeHtml(r.minFrom || ""), to: escapeHtml(r.minTo || ""), lines: 1 });
-      const majCols = isRashidiRow
-        ? { from: "", to: "", lines: 1 }
-        : ((r.majIsPages || r.majSardLabel)
-          ? { from: escapeHtml(r.majFrom || ""), to: escapeHtml(r.majTo || ""), lines: 1 }
-          : formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, true));
-      const hwCols = satHwByStudent.get(st.id) || (satNextIsDaily
-        ? computeUpcomingDailyHomeworkCols(h, s, st, r, nextCtx, true)
-        : (isRashidiRow
-          ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: escapeHtml(r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : ""), to: escapeHtml(r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : ""), lines: 1, isSabr: false }
-          : formatSatNextMajColumns(r, true)));
-      const isNoRec = isPresentNoRecite(r.attendance);
-      const minSt = getEvalCellStyle(isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isRashidiRow ? (r.recEval || "") : (r.minEval || ""))), isAbs);
-      const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
-      const majRaw = isRashidiRow ? "" : (isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || "")))));
-      const majSt = getEvalCellStyle(majRaw, !isRashidiRow && isAbs);
 
-      tbl += `<tr>
-        <td>${idx + 1}</td>
-        <td class="txt-right td-name-col">${escapeHtml(st.name)}</td>
-        ${renderReport3Cells(minCols)}
-        <td class="${minSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(minSt.text)}</td>
-        <td class="td-rev-slim">${majCols.from}</td>
-        <td class="td-rev-slim">${majCols.to}</td>
-        <td class="${majSt.cls} td-eval-slim" style="font-weight:800;">${escapeHtml(majSt.text)}</td>
-        ${ptsOn ? `<td class="td-pts">${r.points || 0}</td>` : ''}
-        ${renderReport3Cells(hwCols, hwCols.isSabr ? 'td-sabr' : '')}
-        <td class="txt-right td-note">${escapeHtml(stripMushafPageTokens(r.notes || ""))}</td>
-      </tr>`;
-      } catch (rowErr) {
-        console.warn("Sat report row error for student:", st?.name, rowErr);
-        tbl += `<tr><td>${idx + 1}</td><td class="txt-right td-name-col">${escapeHtml(st?.name || "")}</td><td colspan="${ptsOn ? 12 : 11}">—</td></tr>`;
+    preSatRows.forEach(row => {
+      if (!row.ok) {
+        tbl += `<tr><td class="td-idx">${row.idx + 1}</td><td class="txt-right td-name-col">${escapeHtml(row.st?.name || "")}</td><td colspan="${totalSatCols - 2}">—</td></tr>`;
+        return;
       }
+      tbl += `<tr>
+        <td class="td-idx">${row.idx + 1}</td>
+        <td class="txt-right td-name-col">${escapeHtml(row.st.name)}</td>
+        <td class="td-range-unified col-sec-start">${row.minHtml}</td>
+        <td class="${row.minSt.cls} td-eval-slim">${escapeHtml(row.minSt.text)}</td>
+        <td class="td-range-unified col-sec-start">${row.majHtml}</td>
+        <td class="${row.majSt.cls} td-eval-slim">${escapeHtml(row.majSt.text)}</td>
+        ${ptsOn ? `<td class="td-pts col-sec-start">${row.ptsDisp.html}</td>` : ''}
+        <td class="td-range-unified col-sec-start ${row.hwIsSabr ? 'td-sabr' : ''}">${row.hwHtml}</td>
+        <td class="txt-right td-note col-sec-start">${escapeHtml(row.noteTxt)}</td>
+      </tr>`;
     });
+
     const footHtml = ptsOn
-      ? `<td colspan="9">مجموع نقاط الحلقة اليوم</td><td>${totalPts}</td>
-         <td colspan="4" class="txt-right">📚 الدروس والنشاطات: ${escapeHtml(dayLessonsFooterTxt)}</td>`
-      : `<td colspan="13" class="txt-right">📚 الدروس والنشاطات: ${escapeHtml(dayLessonsFooterTxt)}</td>`;
+      ? `<td colspan="6">مجموع نقاط الحلقة اليوم</td><td class="col-sec-start">${totalPtsCellHtml}</td>
+         <td colspan="2" class="txt-right col-sec-start">📚 الدروس والنشاطات: ${escapeHtml(dayLessonsFooterTxt)}</td>`
+      : `<td colspan="${totalSatCols}" class="txt-right">📚 الدروس والنشاطات: ${escapeHtml(dayLessonsFooterTxt)}</td>`;
     tbl += `</tbody><tfoot><tr>${footHtml}</tr></tfoot></table>`;
   }
 
@@ -29355,10 +29853,10 @@ function renderDailyReport() {
       <div class="odh-org-box">${escapeHtml(bm.org)}<br>${escapeHtml(bm.branch)}<br>${escapeHtml(bm.program)}</div>
       <div class="odh-title-col">
         <h2>${title}</h2>
-        <div class="odh-meta-grid">
-          <div class="odh-meta-cell">يوم : ${escapeHtml(s.dayName)} &nbsp; ${escapeHtml(s.hijriDate)}</div>
-          <div class="odh-meta-cell">الغياب: المبرر: ${excused} &nbsp;/&nbsp; غير المبرر: ${absent}</div>
-          <div class="odh-meta-cell">${escapeHtml(_gtRep.supervisorTitle)}: ${escapeHtml(bm.sheikh)}</div>
+        <div class="odh-meta-bar">
+          <span class="odh-meta-item">يوم <b>${escapeHtml(s.dayName)}</b> &nbsp; ${escapeHtml(s.hijriDate)}</span>
+          <span class="odh-meta-item">الغياب: مبرر <b>${excused}</b> / غير مبرر <b>${absent}</b></span>
+          <span class="odh-meta-item">${escapeHtml(_gtRep.supervisorTitle)}: <b>${escapeHtml(bm.sheikh)}</b></span>
         </div>
       </div>
       <div class="odh-logo-col"><img src="${bm.logoSrc}" alt="شعار المؤسسة"></div>
@@ -32348,178 +32846,143 @@ async function exportDailyExcelStyled() {
     const xlRashTag = xlRashidiPgs > 0 ? `  |  صفحات الرشيدي: ${formatNum(xlRashidiPgs)}` : "";
 
     const logoId = wb.addImage({ base64: bm.logoB64, extension: bm.logoExt });
-    const totalCols = ptsOn ? 14 : 13;
     const xlNextCtx = getNextClassDayContext(s, h);
     const xlDailyNextIsReview = !isSat && xlNextCtx.nextType === "saturday";
     const xlSatNextIsDaily = isSat && xlNextCtx.nextType === "daily";
+    const totalCols = (!isSat && xlDailyNextIsReview) ? (ptsOn ? 10 : 9) : (ptsOn ? 9 : 8);
+    const SOFT_XL_BORDER = {
+      top: { style: "thin", color: { argb: "FFCBD5E1" } },
+      left: { style: "thin", color: { argb: "FFCBD5E1" } },
+      bottom: { style: "thin", color: { argb: "FFCBD5E1" } },
+      right: { style: "thin", color: { argb: "FFCBD5E1" } }
+    };
+    const HDR_XL_BORDER = {
+      top: { style: "thin", color: { argb: "FF94A3B8" } },
+      left: { style: "thin", color: { argb: "FF94A3B8" } },
+      bottom: { style: "thin", color: { argb: "FF64748B" } },
+      right: { style: "thin", color: { argb: "FF94A3B8" } }
+    };
+    const maxXlNoteChars = Math.max(0, ...h.students.map(st => stripMushafPageTokens(getStudentRecord(s, st.id).notes || "").trim().length));
+    const dynXlNoteW = maxXlNoteChars === 0 ? 18 : Math.min(40, Math.max(20, Math.round(maxXlNoteChars * 0.52 + 8)));
 
     if (!isSat) {
       ws.columns = xlDailyNextIsReview
         ? (ptsOn
-          ? [{ width: 4.5 }, { width: 22 }, { width: 18 }, { width: 8.5 }, { width: 8.5 }, { width: 11 }, { width: 7 }, { width: 14 }, { width: 14 }, { width: 10.5 }, { width: 22 }, { width: 11.5 }, { width: 11.5 }, { width: 38 }]
-          : [{ width: 4.5 }, { width: 23 }, { width: 18 }, { width: 8.5 }, { width: 8.5 }, { width: 11.5 }, { width: 14 }, { width: 14 }, { width: 11 }, { width: 23 }, { width: 12 }, { width: 12 }, { width: 40 }])
+          ? [{ width: 4.5 }, { width: 22 }, { width: 22 }, { width: 11.5 }, { width: 8 }, { width: 20 }, { width: 11 }, { width: 20 }, { width: 20 }, { width: dynXlNoteW }]
+          : [{ width: 4.5 }, { width: 23 }, { width: 22 }, { width: 12 }, { width: 21 }, { width: 11.5 }, { width: 21 }, { width: 21 }, { width: dynXlNoteW }])
         : (ptsOn
-          ? [{ width: 4.5 }, { width: 22 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 7 }, { width: 15 }, { width: 15 }, { width: 11 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 42 }]
-          : [{ width: 4.5 }, { width: 23 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 12 }, { width: 15 }, { width: 15 }, { width: 12 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 44 }]);
+          ? [{ width: 4.5 }, { width: 22 }, { width: 24 }, { width: 12 }, { width: 8 }, { width: 22 }, { width: 11.5 }, { width: 24 }, { width: dynXlNoteW }]
+          : [{ width: 4.5 }, { width: 23 }, { width: 25 }, { width: 12.5 }, { width: 23 }, { width: 12 }, { width: 25 }, { width: dynXlNoteW }]);
     } else {
       ws.columns = ptsOn
-        ? [{ width: 4.5 }, { width: 22 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 17 }, { width: 17 }, { width: 12 }, { width: 7 }, { width: 18 }, { width: 10 }, { width: 10 }, { width: 38 }]
-        : [{ width: 4.5 }, { width: 23 }, { width: 18 }, { width: 9.5 }, { width: 9.5 }, { width: 11 }, { width: 17 }, { width: 17 }, { width: 12.5 }, { width: 18 }, { width: 10 }, { width: 10 }, { width: 40 }];
-    }
-    const maxXlNoteChars = Math.max(0, ...h.students.map(st => stripMushafPageTokens(getStudentRecord(s, st.id).notes || "").trim().length));
-    const dynXlNoteW = maxXlNoteChars === 0 ? 18 : Math.min(42, Math.max(20, Math.round(maxXlNoteChars * 0.52 + 8)));
-    if (ws.columns && ws.columns.length >= 4) {
-      ws.columns[ws.columns.length - 1].width = dynXlNoteW;
-      const hwColIdx0 = ws.columns.length - 4;
-      if (xlDailyNextIsReview) {
-        let xlMinL = 0, xlMajL = 0;
-        h.students.forEach(st => {
-          const revHw = computeUpcomingReviewHomework(h, s, st, getStudentRecord(s, st.id), xlNextCtx);
-          xlMinL = Math.max(xlMinL, maxPlainLineLen(revHw.isRashidi ? revHw.text : revHw.minorText));
-          xlMajL = Math.max(xlMajL, maxPlainLineLen(revHw.isRashidi ? "" : revHw.majorText));
-        });
-        ws.columns[hwColIdx0].width = Math.min(34, Math.max(14, Math.round(xlMinL * 0.62 + 6)));
-        const halfMajW = Math.min(18, Math.max(9.5, +(Math.round((xlMajL * 0.62 + 6) / 2 * 2) / 2)));
-        ws.columns[hwColIdx0 + 1].width = halfMajW;
-        ws.columns[hwColIdx0 + 2].width = halfMajW;
-      } else {
-        let xlSurL = 0, xlFromL = 0, xlToL = 0;
-        h.students.forEach(st => {
-          const r = getStudentRecord(s, st.id);
-          const isRash = st.track === "rashidi";
-          let hc;
-          if (!isSat) {
-            hc = isRash
-              ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "" }
-              : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, false) : formatSegmentsColumns(getSegments(r, "hw"), false));
-          } else {
-            hc = xlSatNextIsDaily
-              ? computeUpcomingDailyHomeworkCols(h, s, st, r, xlNextCtx, false)
-              : (isRash
-                ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "" }
-                : formatSatNextMajColumns(r, false));
-          }
-          xlSurL = Math.max(xlSurL, maxPlainLineLen(hc?.surah));
-          xlFromL = Math.max(xlFromL, maxPlainLineLen(hc?.from));
-          xlToL = Math.max(xlToL, maxPlainLineLen(hc?.to));
-        });
-        ws.columns[hwColIdx0].width = Math.min(26, Math.max(13, Math.round(xlSurL * 0.72 + 5)));
-        ws.columns[hwColIdx0 + 1].width = Math.min(15, Math.max(8, Math.round(xlFromL * 0.75 + 4)));
-        ws.columns[hwColIdx0 + 2].width = Math.min(15, Math.max(8, Math.round(xlToL * 0.75 + 4)));
-      }
+        ? [{ width: 4.5 }, { width: 22 }, { width: 24 }, { width: 12 }, { width: 24 }, { width: 12 }, { width: 8 }, { width: 24 }, { width: dynXlNoteW }]
+        : [{ width: 4.5 }, { width: 23 }, { width: 25 }, { width: 12.5 }, { width: 25 }, { width: 12.5 }, { width: 25 }, { width: dynXlNoteW }];
     }
 
-    // Dynamic Official Header (Rows 1-5)
-    ws.getRow(1).height = 10; ws.getRow(2).height = 22; ws.getRow(3).height = 18; ws.getRow(4).height = 20; ws.getRow(5).height = 10;
+    const colLtr = n => String.fromCharCode(64 + n);
+    const lastLtr = colLtr(totalCols);
+    const midEndLtr = colLtr(Math.max(4, totalCols - 2));
+
+    // Dynamic Calm Official Header (Rows 1-5)
+    ws.getRow(1).height = 8; ws.getRow(2).height = 23; ws.getRow(3).height = 18; ws.getRow(4).height = 22; ws.getRow(5).height = 8;
     ws.mergeCells("A2:B2"); ws.getCell("A2").value = bm.org;
     ws.mergeCells("A3:B3"); ws.getCell("A3").value = bm.branch;
     ws.mergeCells("A4:B4"); ws.getCell("A4").value = bm.program;
-    styleCell(ws.getCell("A2"), { fontColor: "FF000000", bold: true, size: 10.5, border: false });
-    styleCell(ws.getCell("A3"), { fontColor: "FF000000", bold: true, size: 10.5, border: false });
-    styleCell(ws.getCell("A4"), { fontColor: "FF000000", bold: true, size: 10.5, border: false });
+    styleCell(ws.getCell("A2"), { fontColor: "FF33464F", bold: true, size: 10.5, border: false });
+    styleCell(ws.getCell("A3"), { fontColor: "FF33464F", bold: true, size: 10, border: false });
+    styleCell(ws.getCell("A4"), { fontColor: "FF33464F", bold: true, size: 10, border: false });
 
-    ws.mergeCells(ptsOn ? "C2:L3" : "C2:K3");
+    ws.mergeCells(`C2:${midEndLtr}3`);
     ws.getCell("C2").value = isSat
       ? `ورقة المراجعة الأسبوعية لحلقة ${bm.name}`
       : `ورقة التسميع اليومي لحلقة ${bm.name}`;
-    styleCell(ws.getCell("C2"), { fontColor: "FF000000", bold: true, size: 15, border: false });
+    styleCell(ws.getCell("C2"), { fontColor: "FF142A46", bold: true, size: 15.5, border: false });
 
-    ws.mergeCells("C4:E4");
-    ws.getCell("C4").value = `يوم : ${s.dayName}   ${s.hijriDate}`;
-    styleCell(ws.getCell("C4"), { fontColor: "FF000000", bold: true, size: 10.5, border: false });
+    ws.mergeCells(`C4:${midEndLtr}4`);
+    ws.getCell("C4").value = `يوم ${s.dayName}  ${s.hijriDate}   •   الغياب: مبرر ${excused} / غير مبرر ${absent}   •   ${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}`;
+    styleCell(ws.getCell("C4"), { fill: "FFF1F5F9", fontColor: "FF1E293B", bold: true, size: 10.5, border: SOFT_XL_BORDER });
 
-    ws.mergeCells("F4:I4");
-    ws.getCell("F4").value = `الغياب: المبرر: ${excused}   /   غير المبرر: ${absent}`;
-    styleCell(ws.getCell("F4"), { fontColor: "FF000000", bold: true, size: 10.5, border: false });
+    ws.addImage(logoId, { tl: { col: totalCols - 1.75, row: 0.6 }, ext: { width: 184, height: 62 } });
 
-    ws.mergeCells(ptsOn ? "J4:L4" : "J4:K4");
-    ws.getCell("J4").value = `${getGenderTerms(h).supervisorTitle}: ${bm.sheikh}`;
-    styleCell(ws.getCell("J4"), { fontColor: "FF000000", bold: true, size: 10.5, border: false });
-
-    ws.addImage(logoId, { tl: { col: ptsOn ? 12.15 : 11.15, row: 0.7 }, ext: { width: 196, height: 66 } });
-
-    ws.getRow(6).height = 23; ws.getRow(7).height = 22;
+    ws.getRow(6).height = 24; ws.getRow(7).height = 21;
 
     if (!isSat) {
       ws.mergeCells("A6:A7"); ws.getCell("A6").value = "م";
-      ws.mergeCells("B6:B7"); ws.getCell("B6").value = "الاســم الثلاثــــي";
-      ws.mergeCells("C6:F6"); ws.getCell("C6").value = "التسميع الجديد";
-      ws.getCell("C7").value = "سورة"; ws.getCell("D7").value = "من الآية"; ws.getCell("E7").value = "إلى الآية"; ws.getCell("F7").value = "التقييم";
+      ws.mergeCells("B6:B7"); ws.getCell("B6").value = "الاسم الثلاثي";
+      ws.mergeCells("C6:D6"); ws.getCell("C6").value = "التسميع الجديد";
+      ws.getCell("C7").value = "المقرر"; ws.getCell("D7").value = "التقييم";
 
       const xlDailyHwTitle = xlDailyNextIsReview ? `الواجب المنزلي (مراجعة ${xlNextCtx.nextDayName})` : "الواجب المنزلي";
-      if (ptsOn) {
-        ws.mergeCells("G6:G7"); ws.getCell("G6").value = "النقاط";
-        ws.mergeCells("H6:J6"); ws.getCell("H6").value = "المراجعة";
-        ws.mergeCells("K6:M6"); ws.getCell("K6").value = xlDailyHwTitle;
-        ws.mergeCells("N6:N7"); ws.getCell("N6").value = "تنبيهات الحفظ والأداء";
-        ws.getCell("H7").value = "من"; ws.getCell("I7").value = "إلى"; ws.getCell("J7").value = "التقييم";
-        if (xlDailyNextIsReview) {
-          ws.getCell("K7").value = "الصغرى";
-          ws.mergeCells("L7:M7"); ws.getCell("L7").value = "الكبرى";
-        } else {
-          ws.getCell("K7").value = "السورة"; ws.getCell("L7").value = "من الآية"; ws.getCell("M7").value = "إلى الآية";
-        }
-      } else {
-        ws.mergeCells("G6:I6"); ws.getCell("G6").value = "المراجعة";
-        ws.mergeCells("J6:L6"); ws.getCell("J6").value = xlDailyHwTitle;
-        ws.mergeCells("M6:M7"); ws.getCell("M6").value = "تنبيهات الحفظ والأداء";
-        ws.getCell("G7").value = "من"; ws.getCell("H7").value = "إلى"; ws.getCell("I7").value = "التقييم";
-        if (xlDailyNextIsReview) {
-          ws.getCell("J7").value = "الصغرى";
-          ws.mergeCells("K7:L7"); ws.getCell("K7").value = "الكبرى";
-        } else {
-          ws.getCell("J7").value = "السورة"; ws.getCell("K7").value = "من الآية"; ws.getCell("L7").value = "إلى الآية";
-        }
-      }
-
-      styleCell(ws.getCell("A6"), { fill: "FFD9D9D9", fontColor: "FF000000", bold: true, size: 10 });
-      styleCell(ws.getCell("B6"), { fill: "FFD0D7DE", fontColor: "FF000000", bold: true, size: 11 });
-      (ptsOn ? ["C6","D6","E6","F6","K6","L6","M6"] : ["C6","D6","E6","F6","J6","K6","L6"]).forEach(c => styleCell(ws.getCell(c), { fill: "FF33464F", fontColor: "FFFFFFFF", bold: true, size: 11 }));
-      if (ptsOn) styleCell(ws.getCell("G6"), { fill: "FFC00000", fontColor: "FFFFFFFF", bold: true, size: 10.5 });
-      (ptsOn ? ["H6","I6","J6"] : ["G6","H6","I6"]).forEach(c => styleCell(ws.getCell(c), { fill: "FFCAA642", fontColor: "FFFFFFFF", bold: true, size: 11 }));
-      styleCell(ws.getCell(ptsOn ? "N6" : "M6"), { fill: "FFD9D9D9", fontColor: "FF000000", bold: true, size: 11 });
-
-      (ptsOn ? ["C7","D7","E7","H7","I7","K7","L7","M7"] : ["C7","D7","E7","G7","H7","J7","K7","L7"]).forEach(c => styleCell(ws.getCell(c), { fill: "FFF2F2F2", fontColor: "FF000000", bold: true, size: 9.5 }));
-      styleCell(ws.getCell("F7"), { fill: "FF33464F", fontColor: "FFFFFFFF", bold: true, size: 9.5 });
-      styleCell(ws.getCell(ptsOn ? "J7" : "I7"), { fill: "FFCAA642", fontColor: "FFFFFFFF", bold: true, size: 9.5 });
-      (ptsOn ? ["A7","B7","G7","N7"] : ["A7","B7","M7"]).forEach(c => { ws.getCell(c).border = THIN_BORDER; });
-
-      const revEvalCol = ptsOn ? 10 : 9;
-      const hwStartCol = ptsOn ? 11 : 10;
+      const ptsCol = ptsOn ? 5 : 0;
+      const revStartCol = ptsOn ? 6 : 5;
+      const revEvalCol = revStartCol + 1;
+      const hwStartCol = revEvalCol + 1;
       const noteCol = totalCols;
+
+      if (ptsOn) { ws.mergeCells("E6:E7"); ws.getCell("E6").value = "النقاط"; }
+      ws.mergeCells(`${colLtr(revStartCol)}6:${colLtr(revEvalCol)}6`); ws.getCell(6, revStartCol).value = "المراجعة";
+      ws.getCell(7, revStartCol).value = "المقرر"; ws.getCell(7, revEvalCol).value = "التقييم";
+
+      if (xlDailyNextIsReview) {
+        ws.mergeCells(`${colLtr(hwStartCol)}6:${colLtr(hwStartCol + 1)}6`); ws.getCell(6, hwStartCol).value = xlDailyHwTitle;
+        ws.getCell(7, hwStartCol).value = "الصغرى"; ws.getCell(7, hwStartCol + 1).value = "الكبرى";
+      } else {
+        ws.mergeCells(`${colLtr(hwStartCol)}6:${colLtr(hwStartCol)}7`); ws.getCell(6, hwStartCol).value = xlDailyHwTitle;
+      }
+      ws.mergeCells(`${lastLtr}6:${lastLtr}7`); ws.getCell(6, noteCol).value = "تنبيهات الحفظ والأداء";
+
+      styleCell(ws.getCell(6, 1), { fill: "FFE2E8F0", fontColor: "FF0F172A", bold: true, size: 10, border: HDR_XL_BORDER });
+      styleCell(ws.getCell(6, 2), { fill: "FFE2E8F0", fontColor: "FF0F172A", bold: true, size: 11, border: HDR_XL_BORDER });
+      [3, 4].forEach(c => styleCell(ws.getCell(6, c), { fill: "FF2B3F4E", fontColor: "FFFFFFFF", bold: true, size: 11, border: HDR_XL_BORDER }));
+      if (ptsOn) styleCell(ws.getCell(6, ptsCol), { fill: "FF1E3A5F", fontColor: "FFF8E3A3", bold: true, size: 10.5, border: HDR_XL_BORDER });
+      [revStartCol, revEvalCol].forEach(c => styleCell(ws.getCell(6, c), { fill: "FFB69135", fontColor: "FFFFFFFF", bold: true, size: 11, border: HDR_XL_BORDER }));
+      for (let c = hwStartCol; c < noteCol; c++) styleCell(ws.getCell(6, c), { fill: "FF2B3F4E", fontColor: "FFFFFFFF", bold: true, size: 11, border: HDR_XL_BORDER });
+      styleCell(ws.getCell(6, noteCol), { fill: "FFE2E8F0", fontColor: "FF0F172A", bold: true, size: 11, border: HDR_XL_BORDER });
+
+      styleCell(ws.getCell(7, 3), { fill: "FFF8FAFC", fontColor: "FF334155", bold: true, size: 9.5, border: HDR_XL_BORDER });
+      styleCell(ws.getCell(7, 4), { fill: "FF3B5365", fontColor: "FFFFFFFF", bold: true, size: 9.5, border: HDR_XL_BORDER });
+      styleCell(ws.getCell(7, revStartCol), { fill: "FFF8FAFC", fontColor: "FF334155", bold: true, size: 9.5, border: HDR_XL_BORDER });
+      styleCell(ws.getCell(7, revEvalCol), { fill: "FFC5A147", fontColor: "FFFFFFFF", bold: true, size: 9.5, border: HDR_XL_BORDER });
+      if (xlDailyNextIsReview) {
+        styleCell(ws.getCell(7, hwStartCol), { fill: "FFF8FAFC", fontColor: "FF334155", bold: true, size: 9.5, border: HDR_XL_BORDER });
+        styleCell(ws.getCell(7, hwStartCol + 1), { fill: "FFF8FAFC", fontColor: "FF334155", bold: true, size: 9.5, border: HDR_XL_BORDER });
+      }
+      for (let c = 1; c <= totalCols; c++) { if (!ws.getCell(7, c).border) ws.getCell(7, c).border = HDR_XL_BORDER; }
 
       h.students.forEach((st, idx) => {
         const r = getStudentRecord(s, st.id);
         const isAbs = String(r.attendance || "").includes("غياب");
-        const hasSabr = Boolean(r.sabrJuz);
+        const isNoRecXl = isPresentNoRecite(r.attendance);
+        const isRashidiRow = st.track === "rashidi";
         const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
           ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
-        const isRashidiRow = st.track === "rashidi";
         const _xlSabrObj = (!isRashidiRow && r.recIsSabr && r.sabrJuz) ? getJuzByName(r.sabrJuz) : null;
         const recCols = isRashidiRow
           ? { surah: "الرشيدي", from: r.rashidiFrom ? `ص ${r.rashidiFrom}` : "", to: r.rashidiTo ? `ص ${r.rashidiTo}` : "", lines: 1 }
           : (_xlSabrObj
-            ? { surah: formatJuzCompactLabel(_xlSabrObj), from: SURAH_MAP[_xlSabrObj.startSurah]?.n || "", to: SURAH_MAP[_xlSabrObj.endSurah]?.n || "", lines: 1 }
+            ? { surah: `سبر ${formatJuzCompactLabel(_xlSabrObj)}`, from: "", to: "", lines: 1 }
             : formatSegmentsColumns(getSegments(r, "rec"), false));
-        const xlRevHw = xlDailyNextIsReview ? computeUpcomingReviewHomework(h, s, st, r, xlNextCtx) : null;
-        const hwCols = xlDailyNextIsReview
-          ? (xlRevHw.isRashidi
-            ? { surah: xlRevHw.text, from: "", to: "", lines: 1 }
-            : { surah: xlRevHw.minorText, from: xlRevHw.majorText, to: "", lines: 1 })
-          : (isRashidiRow
-            ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "", lines: 1 }
-            : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, false) : formatSegmentsColumns(getSegments(r, "hw"), false)));
+        const recTxt = formatUnifiedRangeCell(recCols, false);
+
         const isPendingSabrOnly = Boolean(r.recIsSabr && r.sabrJuz && !r.recEval && !isAbs);
         const isPendingNoEval = Boolean(!r.recEval && !isAbs && r.attendance === "لم يُسمّع");
         const compactDRevFrom = String(r.dRevFrom || "").replace(/^إعادة\s+/, "").replace(/\s*ص\s*\d+/g, "").trim();
         const compactDRevTo = String(r.dRevTo || "").replace(/^\(|\)$/g, "").trim();
-        const isNoRecXl = isPresentNoRecite(r.attendance);
         const hasIndepRevXl = !isRashidiRow && !isAbs && hasIndependentDailyReview(r);
         const dRevCols = (!hasIndepRevXl || (isPendingNoEval && !r.dRevEval))
           ? { from: "", to: "", lines: 1 }
           : ((r.dRevIsPages || r.dRevSardLabel)
             ? { from: compactDRevFrom, to: compactDRevTo, lines: 1 }
             : formatReviewPairColumns(getSegments(r, "dRev"), compactDRevFrom, compactDRevTo, false));
+        const dRevTxt = formatUnifiedReviewCell(dRevCols, false);
+
+        const xlRevHw = xlDailyNextIsReview ? computeUpcomingReviewHomework(h, s, st, r, xlNextCtx) : null;
+        const hwColsStd = !xlDailyNextIsReview
+          ? (isRashidiRow
+            ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "", lines: 1 }
+            : (r.hwSabrJuz ? formatHwSabrColumns(r.hwSabrJuz, false) : formatSegmentsColumns(getSegments(r, "hw"), false)))
+          : null;
+        const hwTxtStd = hwColsStd ? formatUnifiedRangeCell(hwColsStd, false) : "";
 
         const evalSt = getEvalCellStyle(isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : ((r.recEval || "") + (_xlSabrObj ? scTag : "") + (!isRashidiRow && r.rabt ? " ✓" : ""))), isAbs);
         const cleanXlRev = hasIndepRevXl ? (r.dRevEval === "بانتظار التقييم" ? "" : (r.dRevEval || "")) : "";
@@ -32538,52 +33001,149 @@ async function exportDailyExcelStyled() {
         const cleanNote = xlSabrNote.hasBadge
           ? (restXlNote ? `${xlSabrNote.plain} — ${restXlNote}` : xlSabrNote.plain)
           : restXlNote;
+        const ptsDisp = getDailyReportPointsDisplay(s, r, st, isAbs, isNoRecXl);
 
         const rIdx = 8 + idx;
         const row = ws.getRow(rIdx);
-        row.values = ptsOn
-          ? [idx + 1, st.name, recCols.surah, recCols.from, recCols.to, evalSt.text, Number(r.points) || 0, dRevCols.from, dRevCols.to, revSt.text, hwCols.surah, hwCols.from, hwCols.to, cleanNote]
-          : [idx + 1, st.name, recCols.surah, recCols.from, recCols.to, evalSt.text, dRevCols.from, dRevCols.to, revSt.text, hwCols.surah, hwCols.from, hwCols.to, cleanNote];
-        const maxLines = Math.max(recCols.lines, hwCols.lines, dRevCols.lines);
-        row.height = Math.max(estimateRowHeight(cleanNote, 20, 48), maxLines * 15 + 6);
-        const altAB = idx % 2 === 1 ? "FFF2F2F2" : "FFFFFFFF";
-        const altBody = idx % 2 === 1 ? "FFFAFAFA" : "FFFFFFFF";
+        const vals = [idx + 1, st.name, recTxt, evalSt.text];
+        if (ptsOn) vals.push(ptsDisp.xl);
+        vals.push(dRevTxt, revSt.text);
+        if (xlDailyNextIsReview) {
+          if (xlRevHw?.isRashidi) vals.push(xlRevHw.text, "");
+          else vals.push(xlRevHw?.minorText || "", xlRevHw?.majorText || "");
+        } else {
+          vals.push(hwTxtStd);
+        }
+        vals.push(cleanNote);
+        row.values = vals;
+        row.height = Math.max(estimateRowHeight(cleanNote, 22, 46), 22);
+
+        const altRow = idx % 2 === 1 ? "FFF8FAFC" : "FFFFFFFF";
         for (let c = 1; c <= totalCols; c++) {
-          let fill = (c <= 2) ? altAB : altBody;
-          let fontColor = "FF000000";
-          let bold = true;
-          let sz = c === noteCol ? 9 : (c === 2 ? 10 : 10.5);
-          if (ptsOn && c === 7) fill = "FFFDF2F2";
-          if (c === 6 && evalSt.xlFill) { fill = evalSt.xlFill; fontColor = evalSt.xlFont; bold = true; }
+          let fill = altRow;
+          let fontColor = "FF1E293B";
+          let bold = (c === 2 || c === 4 || c === revEvalCol || (ptsOn && c === ptsCol));
+          let sz = c === noteCol ? 9.5 : (c === 2 ? 10.5 : 10);
+          if (c === 2) fontColor = "FF0F172A";
+          if (ptsOn && c === ptsCol) { fill = "FFF8FAFC"; fontColor = "FF142A46"; }
+          if (c === 3 && _xlSabrObj) fill = "FFD1FAE5";
+          if (c === 4 && evalSt.xlFill) { fill = evalSt.xlFill; fontColor = evalSt.xlFont; bold = true; }
           if (c === revEvalCol && revSt.xlFill) { fill = revSt.xlFill; fontColor = revSt.xlFont; bold = true; }
-          if (!xlDailyNextIsReview && hasHwSabr && c >= hwStartCol && c < noteCol) { fill = "FFE8F5E9"; }
-          if (xlDailyNextIsReview && xlRevHw?.isMajorSabr && c >= hwStartCol + 1 && c < noteCol) { fill = "FFE8F5E9"; }
+          if (!xlDailyNextIsReview && hasHwSabr && c === hwStartCol) fill = "FFD1FAE5";
+          if (xlDailyNextIsReview && xlRevHw?.isMajorSabr && c === hwStartCol + 1) fill = "FFD1FAE5";
           if (c === noteCol && xlSabrNote.hasBadge) {
             fill = xlSabrNote.isRep ? "FFFEE2E2" : "FFD1FAE5";
             fontColor = xlSabrNote.isRep ? "FF991B1B" : "FF064E3B";
             bold = true;
           }
-          styleCell(row.getCell(c), { fill, fontColor, bold, size: sz, align: (c === 2 || c === noteCol) ? "right" : "center" });
+          styleCell(row.getCell(c), { fill, fontColor, bold, size: sz, border: SOFT_XL_BORDER, align: (c === 2 || c === noteCol) ? "right" : "center" });
         }
-        if (recCols.merged3 && recCols.mergedText) {
-          ws.mergeCells(rIdx, 3, rIdx, 5);
-          row.getCell(3).value = recCols.mergedText;
+        if (xlDailyNextIsReview && xlRevHw?.isRashidi) {
+          ws.mergeCells(rIdx, hwStartCol, rIdx, hwStartCol + 1);
+          row.getCell(hwStartCol).value = xlRevHw.text;
         }
-        if (xlDailyNextIsReview) {
-          if (xlRevHw?.isRashidi) {
-            ws.mergeCells(rIdx, hwStartCol, rIdx, hwStartCol + 2);
-            row.getCell(hwStartCol).value = xlRevHw.text;
-          } else {
-            ws.mergeCells(rIdx, hwStartCol + 1, rIdx, hwStartCol + 2);
-            row.getCell(hwStartCol + 1).value = xlRevHw.majorText;
-          }
-        } else if (hasHwSabr) {
-          const c1 = hwStartCol + 1, c2 = hwStartCol + 2;
-          ws.mergeCells(rIdx, c1, rIdx, c2);
-          row.getCell(c1).value = (hwCols.from === "جزء" && hwCols.to) ? `جزء ${hwCols.to}` : `${hwCols.from} ← ${hwCols.to}`;
-        } else if (hwCols.merged3 && hwCols.mergedText) {
-          ws.mergeCells(rIdx, hwStartCol, rIdx, hwStartCol + 2);
-          row.getCell(hwStartCol).value = hwCols.mergedText;
+      });
+
+      const footIdx = 8 + h.students.length;
+      const xlLessonsFoot = `الدروس والنشاطات: ${formatSessionLessonsFooter(s, false)}`;
+      if (ptsOn) {
+        ws.mergeCells(`A${footIdx}:D${footIdx}`); ws.getCell(`A${footIdx}`).value = "مجموع نقاط الحلقة اليوم";
+        ws.getCell(`E${footIdx}`).value = { formula: `SUM(E8:E${footIdx - 1})`, result: totalPts };
+        ws.mergeCells(`F${footIdx}:${lastLtr}${footIdx}`);
+        ws.getCell(`F${footIdx}`).value = xlLessonsFoot;
+      } else {
+        ws.mergeCells(`A${footIdx}:${lastLtr}${footIdx}`);
+        ws.getCell(`A${footIdx}`).value = xlLessonsFoot;
+      }
+      for (let c = 1; c <= totalCols; c++) styleCell(ws.getRow(footIdx).getCell(c), { fill: "FFEEF2F6", fontColor: "FF0F172A", bold: true, size: 10.5, border: HDR_XL_BORDER });
+      ws.getRow(footIdx).height = 24;
+    } else {
+      const ptsCol = ptsOn ? 7 : 0;
+      const hwCol = ptsOn ? 8 : 7;
+      const noteCol = totalCols;
+
+      ws.mergeCells("A6:A7"); ws.getCell("A6").value = "م";
+      ws.mergeCells("B6:B7"); ws.getCell("B6").value = "الاسم الثلاثي";
+      ws.mergeCells("C6:D6"); ws.getCell("C6").value = "المراجعة الصغرى";
+      ws.mergeCells("E6:F6"); ws.getCell("E6").value = "المراجعة الكبرى";
+      ws.getCell("C7").value = "المقرر"; ws.getCell("D7").value = "التقييم";
+      ws.getCell("E7").value = "المقرر"; ws.getCell("F7").value = "التقييم";
+
+      const xlSatHwTitle = xlSatNextIsDaily ? `الواجب المنزلي (تسميع ${xlNextCtx.nextDayName})` : "الواجب المنزلي (مراجعة كبرى)";
+      if (ptsOn) { ws.mergeCells("G6:G7"); ws.getCell("G6").value = "النقاط"; }
+      ws.mergeCells(`${colLtr(hwCol)}6:${colLtr(hwCol)}7`); ws.getCell(6, hwCol).value = xlSatHwTitle;
+      ws.mergeCells(`${lastLtr}6:${lastLtr}7`); ws.getCell(6, noteCol).value = "تنبيهات الحفظ والأداء";
+
+      styleCell(ws.getCell(6, 1), { fill: "FFE2E8F0", fontColor: "FF0F172A", bold: true, size: 10, border: HDR_XL_BORDER });
+      styleCell(ws.getCell(6, 2), { fill: "FFE2E8F0", fontColor: "FF0F172A", bold: true, size: 11, border: HDR_XL_BORDER });
+      [3, 4].forEach(c => styleCell(ws.getCell(6, c), { fill: "FF2B3F4E", fontColor: "FFFFFFFF", bold: true, size: 11, border: HDR_XL_BORDER }));
+      [5, 6].forEach(c => styleCell(ws.getCell(6, c), { fill: "FFB69135", fontColor: "FFFFFFFF", bold: true, size: 11, border: HDR_XL_BORDER }));
+      if (ptsOn) styleCell(ws.getCell(6, ptsCol), { fill: "FF1E3A5F", fontColor: "FFF8E3A3", bold: true, size: 10.5, border: HDR_XL_BORDER });
+      styleCell(ws.getCell(6, hwCol), { fill: "FF2B3F4E", fontColor: "FFFFFFFF", bold: true, size: 11, border: HDR_XL_BORDER });
+      styleCell(ws.getCell(6, noteCol), { fill: "FFE2E8F0", fontColor: "FF0F172A", bold: true, size: 11, border: HDR_XL_BORDER });
+
+      styleCell(ws.getCell(7, 3), { fill: "FFF8FAFC", fontColor: "FF334155", bold: true, size: 9.5, border: HDR_XL_BORDER });
+      styleCell(ws.getCell(7, 4), { fill: "FF3B5365", fontColor: "FFFFFFFF", bold: true, size: 9.5, border: HDR_XL_BORDER });
+      styleCell(ws.getCell(7, 5), { fill: "FFF8FAFC", fontColor: "FF334155", bold: true, size: 9.5, border: HDR_XL_BORDER });
+      styleCell(ws.getCell(7, 6), { fill: "FFC5A147", fontColor: "FFFFFFFF", bold: true, size: 9.5, border: HDR_XL_BORDER });
+      for (let c = 1; c <= totalCols; c++) { if (!ws.getCell(7, c).border) ws.getCell(7, c).border = HDR_XL_BORDER; }
+
+      h.students.forEach((st, idx) => {
+        const r = getStudentRecord(s, st.id);
+        const isAbs = String(r.attendance || "").includes("غياب");
+        const isNoRecXl = isPresentNoRecite(r.attendance);
+        const isRashidiRow = st.track === "rashidi";
+        const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
+          ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
+
+        const minSegs = getSegments(r, "min");
+        const minCols = isRashidiRow
+          ? { surah: "الرشيدي", from: r.rashidiFrom ? `ص ${r.rashidiFrom}` : "", to: r.rashidiTo ? `ص ${r.rashidiTo}` : "", lines: 1 }
+          : (minSegs.length ? formatSegmentsColumns(minSegs, false) : { surah: r.minSurah || r.minText || "", from: r.minFrom || "", to: r.minTo || "", lines: 1 });
+        const minTxt = formatUnifiedRangeCell(minCols, false);
+
+        const majCols = isRashidiRow
+          ? { from: "", to: "", lines: 1 }
+          : ((r.majIsPages || r.majSardLabel)
+            ? { from: String(r.majFrom || ""), to: String(r.majTo || ""), lines: 1 }
+            : formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, false));
+        const majTxt = formatUnifiedReviewCell(majCols, false);
+
+        const hwCols = xlSatNextIsDaily
+          ? computeUpcomingDailyHomeworkCols(h, s, st, r, xlNextCtx, false)
+          : (isRashidiRow
+            ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "", lines: 1, isSabr: false }
+            : formatSatNextMajColumns(r, false));
+        const hwTxt = formatUnifiedRangeCell(hwCols, false);
+
+        const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
+        const minSt = getEvalCellStyle(isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : (isRashidiRow ? (r.recEval || "") : (r.minEval || ""))), isAbs);
+        const majSt = getEvalCellStyle(isRashidiRow ? "" : (isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || ""))))), !isRashidiRow && isAbs);
+        const hasHwSabr = xlSatNextIsDaily
+          ? Boolean(hwCols.isSabr)
+          : Boolean(r.nextMajSabrJuz || (r.sabrJuz && (r.majEval === "إعادة" || isAbs)));
+        const cleanNote = stripMushafPageTokens(r.notes || "");
+        const ptsDisp = getDailyReportPointsDisplay(s, r, st, isAbs, isNoRecXl);
+
+        const rIdx = 8 + idx;
+        const row = ws.getRow(rIdx);
+        row.values = ptsOn
+          ? [idx + 1, st.name, minTxt, minSt.text, majTxt, majSt.text, ptsDisp.xl, hwTxt, cleanNote]
+          : [idx + 1, st.name, minTxt, minSt.text, majTxt, majSt.text, hwTxt, cleanNote];
+        row.height = Math.max(estimateRowHeight(cleanNote, 22, 44), 22);
+
+        const altRow = idx % 2 === 1 ? "FFF8FAFC" : "FFFFFFFF";
+        for (let c = 1; c <= totalCols; c++) {
+          let fill = altRow;
+          let fontColor = "FF1E293B";
+          let bold = (c === 2 || c === 4 || c === 6 || (ptsOn && c === ptsCol));
+          let sz = c === noteCol ? 9.5 : (c === 2 ? 10.5 : 10);
+          if (c === 2) fontColor = "FF0F172A";
+          if (ptsOn && c === ptsCol) { fill = "FFF8FAFC"; fontColor = "FF142A46"; }
+          if (c === 4 && minSt.xlFill) { fill = minSt.xlFill; fontColor = minSt.xlFont; bold = true; }
+          if (c === 6 && majSt.xlFill) { fill = majSt.xlFill; fontColor = majSt.xlFont; bold = true; }
+          if (hasHwSabr && c === hwCol) fill = "FFD1FAE5";
+          styleCell(row.getCell(c), { fill, fontColor, bold, size: sz, border: SOFT_XL_BORDER, align: (c === 2 || c === noteCol) ? "right" : "center" });
         }
       });
 
@@ -32592,128 +33152,13 @@ async function exportDailyExcelStyled() {
       if (ptsOn) {
         ws.mergeCells(`A${footIdx}:F${footIdx}`); ws.getCell(`A${footIdx}`).value = "مجموع نقاط الحلقة اليوم";
         ws.getCell(`G${footIdx}`).value = { formula: `SUM(G8:G${footIdx - 1})`, result: totalPts };
-        ws.mergeCells(`H${footIdx}:N${footIdx}`);
+        ws.mergeCells(`H${footIdx}:${lastLtr}${footIdx}`);
         ws.getCell(`H${footIdx}`).value = xlLessonsFoot;
       } else {
-        ws.mergeCells(`A${footIdx}:M${footIdx}`);
+        ws.mergeCells(`A${footIdx}:${lastLtr}${footIdx}`);
         ws.getCell(`A${footIdx}`).value = xlLessonsFoot;
       }
-      for (let c = 1; c <= totalCols; c++) styleCell(ws.getRow(footIdx).getCell(c), { fill: "FFE8EEF2", fontColor: "FF000000", bold: true, size: 10.5 });
-      ws.getRow(footIdx).height = 24;
-    } else {
-      ws.mergeCells("A6:A7"); ws.getCell("A6").value = "م";
-      ws.mergeCells("B6:B7"); ws.getCell("B6").value = "الاســم الثلاثــــي";
-      ws.mergeCells("C6:F6"); ws.getCell("C6").value = "المراجعة الصغرى";
-      ws.mergeCells("G6:I6"); ws.getCell("G6").value = "المراجعة الكبرى";
-      ws.getCell("C7").value = "سورة"; ws.getCell("D7").value = "من الآية"; ws.getCell("E7").value = "إلى الآية"; ws.getCell("F7").value = "التقييم";
-      ws.getCell("G7").value = "من"; ws.getCell("H7").value = "إلى"; ws.getCell("I7").value = "التقييم";
-
-      const xlSatHwTitle = xlSatNextIsDaily ? `الواجب المنزلي (تسميع ${xlNextCtx.nextDayName})` : "الواجب المنزلي (مراجعة كبرى)";
-      if (ptsOn) {
-        ws.mergeCells("J6:J7"); ws.getCell("J6").value = "النقاط";
-        ws.mergeCells("K6:M6"); ws.getCell("K6").value = xlSatHwTitle;
-        ws.mergeCells("N6:N7"); ws.getCell("N6").value = "تنبيهات الحفظ والأداء";
-        ws.getCell("K7").value = "السورة"; ws.getCell("L7").value = "من الآية"; ws.getCell("M7").value = "إلى الآية";
-      } else {
-        ws.mergeCells("J6:L6"); ws.getCell("J6").value = xlSatHwTitle;
-        ws.mergeCells("M6:M7"); ws.getCell("M6").value = "تنبيهات الحفظ والأداء";
-        ws.getCell("J7").value = "السورة"; ws.getCell("K7").value = "من الآية"; ws.getCell("L7").value = "إلى الآية";
-      }
-
-      styleCell(ws.getCell("A6"), { fill: "FFD9D9D9", fontColor: "FF000000", bold: true, size: 10 });
-      styleCell(ws.getCell("B6"), { fill: "FFD0D7DE", fontColor: "FF000000", bold: true, size: 11 });
-      (ptsOn ? ["C6","D6","E6","F6","K6","L6","M6"] : ["C6","D6","E6","F6","J6","K6","L6"]).forEach(c => styleCell(ws.getCell(c), { fill: "FF33464F", fontColor: "FFFFFFFF", bold: true, size: 11 }));
-      ["G6","H6","I6"].forEach(c => styleCell(ws.getCell(c), { fill: "FFCAA642", fontColor: "FFFFFFFF", bold: true, size: 11 }));
-      if (ptsOn) styleCell(ws.getCell("J6"), { fill: "FFC00000", fontColor: "FFFFFFFF", bold: true, size: 10.5 });
-      styleCell(ws.getCell(ptsOn ? "N6" : "M6"), { fill: "FFD9D9D9", fontColor: "FF000000", bold: true, size: 11 });
-
-      (ptsOn ? ["C7","D7","E7","G7","H7","K7","L7","M7"] : ["C7","D7","E7","G7","H7","J7","K7","L7"]).forEach(c => styleCell(ws.getCell(c), { fill: "FFF2F2F2", fontColor: "FF000000", bold: true, size: 9.5 }));
-      styleCell(ws.getCell("F7"), { fill: "FF33464F", fontColor: "FFFFFFFF", bold: true, size: 9.5 });
-      styleCell(ws.getCell("I7"), { fill: "FFCAA642", fontColor: "FFFFFFFF", bold: true, size: 9.5 });
-      (ptsOn ? ["A7","B7","J7","N7"] : ["A7","B7","M7"]).forEach(c => { ws.getCell(c).border = THIN_BORDER; });
-
-      const hwStartCol = ptsOn ? 11 : 10;
-      const noteCol = totalCols;
-
-      h.students.forEach((st, idx) => {
-        const r = getStudentRecord(s, st.id);
-        const isAbs = String(r.attendance || "").includes("غياب");
-        const hasSabr = Boolean(r.sabrJuz);
-        const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
-          ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
-        const isRashidiRow = st.track === "rashidi";
-        const minSegs = getSegments(r, "min");
-        const minCols = isRashidiRow
-          ? { surah: "الرشيدي", from: r.rashidiFrom ? `ص ${r.rashidiFrom}` : "", to: r.rashidiTo ? `ص ${r.rashidiTo}` : "", lines: 1 }
-          : (minSegs.length
-            ? formatSegmentsColumns(minSegs, false)
-            : { surah: r.minSurah || r.minText || "", from: r.minFrom || "", to: r.minTo || "", lines: 1 });
-        const majCols = isRashidiRow
-          ? { from: "", to: "", lines: 1 }
-          : ((r.majIsPages || r.majSardLabel)
-            ? { from: String(r.majFrom || ""), to: String(r.majTo || ""), lines: 1 }
-            : formatReviewPairColumns(getSegments(r, "maj"), r.majFrom, r.majTo, false));
-        const hwCols = xlSatNextIsDaily
-          ? computeUpcomingDailyHomeworkCols(h, s, st, r, xlNextCtx, false)
-          : (isRashidiRow
-            ? { surah: r.hwRashidiFrom ? "الرشيدي" : "", from: r.hwRashidiFrom ? `ص ${r.hwRashidiFrom}` : "", to: r.hwRashidiTo ? `ص ${r.hwRashidiTo}` : "", lines: 1, isSabr: false }
-            : formatSatNextMajColumns(r, false));
-
-        const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
-        const isNoRecXl = isPresentNoRecite(r.attendance);
-        const minSt = getEvalCellStyle(isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : (isRashidiRow ? (r.recEval || "") : (r.minEval || ""))), isAbs);
-        const majSt = getEvalCellStyle(isRashidiRow ? "" : (isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || ""))))), !isRashidiRow && isAbs);
-        const hasHwSabr = xlSatNextIsDaily
-          ? Boolean(hwCols.isSabr)
-          : Boolean(r.nextMajSabrJuz || (r.sabrJuz && (r.majEval === "إعادة" || isAbs)));
-        const cleanNote = stripMushafPageTokens(r.notes || "");
-
-        const rIdx = 8 + idx;
-        const row = ws.getRow(rIdx);
-        row.values = ptsOn
-          ? [idx + 1, st.name, minCols.surah, minCols.from, minCols.to, minSt.text, majCols.from, majCols.to, majSt.text, Number(r.points) || 0, hwCols.surah, hwCols.from, hwCols.to, cleanNote]
-          : [idx + 1, st.name, minCols.surah, minCols.from, minCols.to, minSt.text, majCols.from, majCols.to, majSt.text, hwCols.surah, hwCols.from, hwCols.to, cleanNote];
-        const maxLines = Math.max(minCols.lines, majCols.lines, hwCols.lines);
-        row.height = Math.max(estimateRowHeight(cleanNote, 20, 44), maxLines * 15 + 6);
-        const altAB = idx % 2 === 1 ? "FFF2F2F2" : "FFFFFFFF";
-        const altBody = idx % 2 === 1 ? "FFFAFAFA" : "FFFFFFFF";
-        for (let c = 1; c <= totalCols; c++) {
-          let fill = (c <= 2) ? altAB : altBody;
-          let fontColor = "FF000000";
-          let bold = true;
-          let sz = c === noteCol ? 9 : (c === 2 ? 10 : 10.5);
-          if (ptsOn && c === 10) fill = "FFFDF2F2";
-          if (c === 6 && minSt.xlFill) { fill = minSt.xlFill; fontColor = minSt.xlFont; bold = true; }
-          if (c === 9 && majSt.xlFill) { fill = majSt.xlFill; fontColor = majSt.xlFont; bold = true; }
-          if (hasHwSabr && c >= hwStartCol && c < noteCol) { fill = "FFE8F5E9"; }
-          styleCell(row.getCell(c), { fill, fontColor, bold, size: sz, align: (c === 2 || c === noteCol) ? "right" : "center" });
-        }
-        if (minCols.merged3 && minCols.mergedText) {
-          ws.mergeCells(rIdx, 3, rIdx, 5);
-          row.getCell(3).value = minCols.mergedText;
-        }
-        if (hwCols.merged3 && hwCols.mergedText) {
-          ws.mergeCells(rIdx, hwStartCol, rIdx, hwStartCol + 2);
-          row.getCell(hwStartCol).value = hwCols.mergedText;
-        } else if ((/[\u0600-\u06FF]{3,}/.test(String(hwCols.from || "")) && !isSurahEndToken(hwCols.from)) || (/[\u0600-\u06FF]{3,}/.test(String(hwCols.to || "")) && !isSurahEndToken(hwCols.to))) {
-          const c1 = hwStartCol + 1, c2 = hwStartCol + 2;
-          ws.mergeCells(rIdx, c1, rIdx, c2);
-          row.getCell(c1).value = (hwCols.from === "جزء" && hwCols.to) ? `جزء ${hwCols.to}` : ((hwCols.from && hwCols.to && hwCols.from !== hwCols.to) ? `${hwCols.from} ← ${hwCols.to}` : (hwCols.from || hwCols.to));
-        }
-      });
-
-      const footIdx = 8 + h.students.length;
-      const xlLessonsFoot = `الدروس والنشاطات: ${formatSessionLessonsFooter(s, false)}`;
-      if (ptsOn) {
-        ws.mergeCells(`A${footIdx}:I${footIdx}`); ws.getCell(`A${footIdx}`).value = "مجموع نقاط الحلقة اليوم";
-        ws.getCell(`J${footIdx}`).value = { formula: `SUM(J8:J${footIdx - 1})`, result: totalPts };
-        ws.mergeCells(`K${footIdx}:N${footIdx}`);
-        ws.getCell(`K${footIdx}`).value = xlLessonsFoot;
-      } else {
-        ws.mergeCells(`A${footIdx}:M${footIdx}`);
-        ws.getCell(`A${footIdx}`).value = xlLessonsFoot;
-      }
-      for (let c = 1; c <= totalCols; c++) styleCell(ws.getRow(footIdx).getCell(c), { fill: "FFE8EEF2", fontColor: "FF000000", bold: true, size: 10.5 });
+      for (let c = 1; c <= totalCols; c++) styleCell(ws.getRow(footIdx).getCell(c), { fill: "FFEEF2F6", fontColor: "FF0F172A", bold: true, size: 10.5, border: HDR_XL_BORDER });
       ws.getRow(footIdx).height = 24;
     }
 
@@ -38384,7 +38829,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v122";
+const TIBYAN_APP_VERSION = "v123";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -41277,5 +41722,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v122 -->
+<!-- Makin App v123 -->
 </html>
