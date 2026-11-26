@@ -14502,7 +14502,7 @@ table.t-daily td.td-note {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v131</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v132</span>
         </button>
       </div>
     </div>
@@ -15997,19 +15997,20 @@ table.t-daily td.td-note {
     </div>
 
     <div class="sp-sheet-body">
-      <!-- Mode Switcher: 2-Tab for Memorization/HW, 3-Tab for Reviews (سورة وصفحات | سرد جزء | سبر) -->
+      <!-- v132: ONE Single Clean Top Bar (ZERO Stacked Sub-Tabs!) -->
       <div id="spModeTabs" class="sp-mode-tabs">
-        <button type="button" class="sp-mode-tab on" id="spTabSurah" onclick="spSetMode('surah')"><span class="sp-mt-ico">📖</span><span class="sp-mt-lbl" id="spTabSurahLbl">سورة وآيات</span></button>
-        <button type="button" class="sp-mode-tab" id="spTabSard" style="display:none;" onclick="spSetMode('sard')"><span class="sp-mt-ico">📚</span><span class="sp-mt-lbl">سرد جزء</span></button>
-        <button type="button" class="sp-mode-tab" id="spTabSabr" onclick="spSetMode('sabr')"><span class="sp-mt-ico">🎓</span><span class="sp-mt-lbl" id="spTabSabrLbl">سبر جزء</span></button>
+        <button type="button" class="sp-mode-tab on" id="spTabSurah" onclick="spPickTopTab('ayah')"><span class="sp-mt-ico">🔢</span><span class="sp-mt-lbl" id="spTabSurahLbl">بالآيات</span></button>
+        <button type="button" class="sp-mode-tab" id="spTabPages" style="display:none;" onclick="spPickTopTab('page')"><span class="sp-mt-ico">📄</span><span class="sp-mt-lbl">بالصفحات</span></button>
+        <button type="button" class="sp-mode-tab" id="spTabSard" style="display:none;" onclick="spPickTopTab('sard')"><span class="sp-mt-ico">📚</span><span class="sp-mt-lbl">سرد جزء</span></button>
+        <button type="button" class="sp-mode-tab" id="spTabSabr" onclick="spPickTopTab('sabr')"><span class="sp-mt-ico">🎓</span><span class="sp-mt-lbl" id="spTabSabrLbl">سبر جزء</span></button>
       </div>
 
-      <!-- Panel A: Unified Surah + Ayahs OR Surah + Mushaf Pages Range -->
+      <!-- Panel A: Unified Direct Picker (بالآيات: من سورة ← إلى سورة، أو بالصفحات) -->
       <div id="spSurahModePanel">
-        <div id="spSegBar" class="sp-seg-bar"></div>
-        <div id="spActiveSurahCard"></div>
+        <div id="spSegBar" class="sp-seg-bar" style="display:none;"></div>
+        <div id="spActiveSurahCard" style="display:none;"></div>
 
-        <!-- Collapsible Surah Browser Drawer -->
+        <!-- Collapsible Surah Browser Drawer (used for studentStart only) -->
         <div id="spBrowserDrawer" class="sp-browser-drawer" style="display:none;">
           <div class="sp-search-row">
             <div class="sp-browser-search-wrap">
@@ -16023,17 +16024,7 @@ table.t-daily td.td-note {
           <div id="spSurahGrid" class="sp-surah-grid" style="margin-bottom:0;"></div>
         </div>
 
-        <!-- Review Sub-Unit Switcher (بالآيات vs من صفحة إلى صفحة) -->
-        <div id="spReviewUnitToggle" class="sp-unit-toggle" style="display:none;">
-          <button type="button" class="sp-unit-btn on" id="spUnitPageBtn" onclick="spSetReviewUnit('page')">📄 بالصفحات</button>
-          <button type="button" class="sp-unit-btn" id="spUnitAyahBtn" onclick="spSetReviewUnit('ayah')">🔢 بالآيات</button>
-        </div>
-
-        <div id="spAyahRangeToggle" class="sp-ayah-mode-toggle" style="display:none;">
-          <button type="button" class="sp-ayah-mode-btn on" id="spAyahModeSingleBtn" onclick="spSetAyahRangeMode('single')">📖 سورة واحدة</button>
-          <button type="button" class="sp-ayah-mode-btn" id="spAyahModeRangeBtn" onclick="spSetAyahRangeMode('range')">🔀 من سورة ← إلى سورة</button>
-        </div>
-        <div id="spAyahBox" class="sp-ayah-box"></div>
+        <div id="spAyahBox" class="sp-ayah-box" style="display:none;"></div>
         <div id="spRangeSurahBox" style="display:none;"></div>
         <div id="spPagesBox" style="display:none;"></div>
       </div>
@@ -21861,7 +21852,7 @@ function openSurahPicker(studentId, kind, forceMode = "") {
     sabrJuzName: activeSabr,
     sabrScore: (r.sabrScore !== undefined && r.sabrScore !== null) ? r.sabrScore : "",
     sabrEntries: (kind === "hw" || kind === "nextMaj") ? (activeSabr ? [{ juzName: activeSabr, score: "", eval: "" }] : []) : getRecordSabrEntries(r).map(e => ({ juzName: e.juzName, score: e.score, eval: e.eval })),
-    ayahRangeMode: (existing.length >= 2 && isConsecutiveSurahRun(existing)) ? "range" : "single",
+    ayahRangeMode: "range",
     rangeFromSurahId: String(existing[0]?.surahId || (dir === "asc" ? 2 : 114)),
     rangeFromAyah: parseArabicNum(existing[0]?.from, 1),
     rangeToSurahId: String(existing[existing.length - 1]?.surahId || existing[0]?.surahId || (dir === "asc" ? 2 : 114)),
@@ -21921,11 +21912,36 @@ function openSurahPickerForStudentModal() {
   openModal("surahPickerModal");
 }
 
-function spSetMode(mode) {
-  if (mode === "sabr" && !spCanUseSabr(spState.kind)) return;
-  if (mode === "sard" && !spIsReviewKind(spState.kind)) return;
-  spState.mode = mode;
+function spPickTopTab(tab) {
+  if (tab === "sabr") {
+    if (!spCanUseSabr(spState.kind)) return;
+    spState.mode = "sabr";
+    renderSurahPickerUI();
+    return;
+  }
+  if (tab === "sard") {
+    if (!spIsReviewKind(spState.kind)) return;
+    spState.mode = "sard";
+    renderSurahPickerUI();
+    return;
+  }
+  if (tab === "page") {
+    if (!spIsReviewKind(spState.kind)) return;
+    spState.mode = "surah";
+    spSetReviewUnit("page");
+    return;
+  }
+  spState.mode = "surah";
+  spState.reviewUnit = "ayah";
+  spState.ayahRangeMode = "range";
   renderSurahPickerUI();
+}
+
+function spSetMode(mode) {
+  if (mode === "sabr") { spPickTopTab("sabr"); return; }
+  if (mode === "sard") { spPickTopTab("sard"); return; }
+  if (mode === "pages") { spPickTopTab("page"); return; }
+  spPickTopTab("ayah");
 }
 
 function spSetReviewUnit(unit) {
@@ -21978,32 +21994,42 @@ function renderSpDirBtn() {
 function renderSurahPickerUI() {
   const isRev = spIsReviewKind(spState.kind);
   const canSabr = spCanUseSabr(spState.kind);
+  const isStartOnly = spState.kind === "studentStart";
   const isPageUnit = isRev && spState.mode === "surah" && spState.reviewUnit === "page";
+  const isAyahMode = spState.mode === "surah" && !isPageUnit;
+
   const modeTabs = document.getElementById("spModeTabs");
   const surahPanel = document.getElementById("spSurahModePanel");
   const sardPanel = document.getElementById("spSardModePanel");
   const sabrPanel = document.getElementById("spSabrModePanel");
   const tabSurah = document.getElementById("spTabSurah");
+  const tabPages = document.getElementById("spTabPages");
   const tabSard = document.getElementById("spTabSard");
   const tabSabr = document.getElementById("spTabSabr");
   const tabSurahLbl = document.getElementById("spTabSurahLbl");
   const tabSabrLbl = document.getElementById("spTabSabrLbl");
-  const unitToggle = document.getElementById("spReviewUnitToggle");
   const ayahBox = document.getElementById("spAyahBox");
+  const rangeBox = document.getElementById("spRangeSurahBox");
   const pagesBox = document.getElementById("spPagesBox");
   const segBar = document.getElementById("spSegBar");
+  const activeSurahHost = document.getElementById("spActiveSurahCard");
+  const drawer = document.getElementById("spBrowserDrawer");
   const qeWrap = document.getElementById("spQuickEvalWrap");
 
+  const visibleTabCount = 1 + (isRev ? 2 : 0) + (canSabr ? 1 : 0);
   if (modeTabs) {
-    modeTabs.style.display = (isRev || canSabr) ? "grid" : "none";
-    modeTabs.classList.toggle("cols-3", isRev && canSabr);
+    modeTabs.style.display = (!isStartOnly && visibleTabCount >= 2) ? "grid" : "none";
+    modeTabs.classList.toggle("cols-3", visibleTabCount === 3);
+    modeTabs.classList.toggle("cols-4", visibleTabCount === 4);
   }
+  if (tabPages) tabPages.style.display = isRev ? "flex" : "none";
   if (tabSard) tabSard.style.display = isRev ? "flex" : "none";
-  if (tabSabr) tabSabr.style.display = canSabr ? (isRev ? "flex" : "inline-flex") : "none";
-  if (tabSurahLbl) tabSurahLbl.textContent = isRev ? "سورة وصفحات" : "سورة وآيات";
-  if (tabSabrLbl) tabSabrLbl.textContent = isRev ? "سبر" : "سبر جزء كامل";
+  if (tabSabr) tabSabr.style.display = canSabr ? "flex" : "none";
+  if (tabSurahLbl) tabSurahLbl.textContent = "بالآيات";
+  if (tabSabrLbl) tabSabrLbl.textContent = isRev ? "سبر" : "سبر جزء";
 
-  if (tabSurah) tabSurah.className = "sp-mode-tab" + (spState.mode === "surah" ? " on" : "");
+  if (tabSurah) tabSurah.className = "sp-mode-tab" + (isAyahMode ? " on" : "");
+  if (tabPages) tabPages.className = "sp-mode-tab" + (isPageUnit ? " on-pages" : "");
   if (tabSard) tabSard.className = "sp-mode-tab" + (spState.mode === "sard" ? " on-sard" : "");
   if (tabSabr) tabSabr.className = "sp-mode-tab" + (spState.mode === "sabr" ? " on-sabr" : "");
 
@@ -22012,27 +22038,14 @@ function renderSurahPickerUI() {
   if (sabrPanel) sabrPanel.style.display = spState.mode === "sabr" ? "block" : "none";
   if (qeWrap) qeWrap.style.display = spCanQuickEval(spState.kind) ? "block" : "none";
 
-  if (unitToggle) unitToggle.style.display = (isRev && spState.mode === "surah") ? "grid" : "none";
-  document.getElementById("spUnitAyahBtn")?.classList.toggle("on", !isPageUnit);
-  document.getElementById("spUnitPageBtn")?.classList.toggle("on", isPageUnit);
-  if (ayahBox) ayahBox.style.display = isPageUnit ? "none" : "block";
+  const showUnifiedRange = isAyahMode && !isStartOnly;
+  const showStartSingle = isAyahMode && isStartOnly;
+
   if (pagesBox) pagesBox.style.display = isPageUnit ? "block" : "none";
-  if (segBar) segBar.style.display = isPageUnit ? "none" : "flex";
-
-  const activeSurahHost = document.getElementById("spActiveSurahCard");
-  const drawer = document.getElementById("spBrowserDrawer");
-  const rangeToggle = document.getElementById("spAyahRangeToggle");
-  const rangeBox = document.getElementById("spRangeSurahBox");
-  const canAyahRange = spState.mode === "surah" && !isPageUnit && spState.kind !== "studentStart";
-  const isRangeMode = canAyahRange && spState.ayahRangeMode === "range";
-
-  if (rangeToggle) rangeToggle.style.display = canAyahRange ? "grid" : "none";
-  document.getElementById("spAyahModeSingleBtn")?.classList.toggle("on", !isRangeMode);
-  document.getElementById("spAyahModeRangeBtn")?.classList.toggle("on", isRangeMode);
-  if (rangeBox) rangeBox.style.display = isRangeMode ? "block" : "none";
-  if (ayahBox) ayahBox.style.display = (isPageUnit || isRangeMode) ? "none" : "block";
-  if (segBar) segBar.style.display = (isPageUnit || isRangeMode) ? "none" : "flex";
-  if (activeSurahHost) activeSurahHost.style.display = (isPageUnit || isRangeMode) ? "none" : "block";
+  if (rangeBox) rangeBox.style.display = showUnifiedRange ? "block" : "none";
+  if (ayahBox) ayahBox.style.display = showStartSingle ? "block" : "none";
+  if (segBar) segBar.style.display = "none";
+  if (activeSurahHost) activeSurahHost.style.display = showStartSingle ? "block" : "none";
 
   if (spState.mode === "sabr") {
     renderSpSabrGrid();
@@ -22041,11 +22054,10 @@ function renderSurahPickerUI() {
   } else if (isPageUnit) {
     if (drawer) drawer.style.display = "none";
     renderSpPagesBox();
-  } else if (isRangeMode) {
+  } else if (showUnifiedRange) {
     if (drawer) drawer.style.display = "none";
     renderSpRangeSurahBox();
   } else {
-    renderSpSegBar();
     renderSpActiveSurahCard();
     if (drawer) drawer.style.display = spState.browserOpen ? "block" : "none";
     if (spState.browserOpen) {
@@ -22301,9 +22313,10 @@ function spOnRangeSurahPick(which, surahId) {
   const s = SURAH_MAP[Number(surahId)];
   if (!s) return;
   if (which === "from") {
+    const wasSame = String(spState.rangeFromSurahId) === String(spState.rangeToSurahId);
     spState.rangeFromSurahId = String(s.id);
     spState.rangeFromAyah = 1;
-    if (!spState.rangeToSurahId || !SURAH_MAP[Number(spState.rangeToSurahId)]) {
+    if (wasSame || !spState.rangeToSurahId || !SURAH_MAP[Number(spState.rangeToSurahId)]) {
       spState.rangeToSurahId = String(s.id);
       spState.rangeToAyah = s.a;
     }
@@ -22311,6 +22324,46 @@ function spOnRangeSurahPick(which, surahId) {
     spState.rangeToSurahId = String(s.id);
     spState.rangeToAyah = s.a;
   }
+  spSyncRangeSegs();
+  renderSpRangeSurahBox();
+  renderSpPreview();
+}
+
+function spApplyRangeQuickPages(pagesVal) {
+  const s1 = SURAH_MAP[Number(spState.rangeFromSurahId)];
+  if (!s1) return;
+  if (pagesVal === "full") {
+    spState.rangeFromAyah = 1;
+    spState.rangeToSurahId = String(s1.id);
+    spState.rangeToAyah = s1.a;
+    spSyncRangeSegs();
+    renderSpRangeSurahBox();
+    renderSpPreview();
+    return;
+  }
+  const pace = Math.max(0.25, Number(pagesVal) || 0.5);
+  const fA = Math.max(1, Math.min(s1.a, parseArabicNum(spState.rangeFromAyah, 1)));
+  const getNextId = sid => spState.dir === "asc" ? (sid < 114 ? sid + 1 : null) : (sid > 2 ? sid - 1 : null);
+  let curSid = s1.id, curFrom = fA, rem = pace;
+  let endSid = s1.id, endAyah = s1.a;
+  for (let step = 0; step < 40 && curSid && SURAH_MAP[curSid]; step++) {
+    const sObj = SURAH_MAP[curSid];
+    const remSurah = calcRangePages(sObj.id, curFrom, sObj.a);
+    if (remSurah <= rem + 0.14) {
+      endSid = sObj.id;
+      endAyah = sObj.a;
+      rem -= remSurah;
+      if (rem <= 0.16) break;
+      curSid = getNextId(curSid);
+      curFrom = 1;
+    } else {
+      endSid = sObj.id;
+      endAyah = getEndAyahByExactMushafPages(sObj.id, curFrom, rem);
+      break;
+    }
+  }
+  spState.rangeToSurahId = String(endSid);
+  spState.rangeToAyah = endAyah;
   spSyncRangeSegs();
   renderSpRangeSurahBox();
   renderSpPreview();
@@ -22380,6 +22433,13 @@ function renderSpRangeSurahBox() {
         </div>
         <button type="button" class="lms-btn" onclick="spSetRangeAyah('to',${s2.a})">النهاية (${s2.a})</button>
       </div>
+    </div>
+
+    <div class="sp-preset-grid-4" style="margin-bottom:0;">
+      <button type="button" class="sp-preset-btn accent" onclick="spApplyRangeQuickPages('full')">السورة كاملة</button>
+      <button type="button" class="sp-preset-btn" onclick="spApplyRangeQuickPages(0.5)">+½ ص</button>
+      <button type="button" class="sp-preset-btn" onclick="spApplyRangeQuickPages(1)">+1 ص</button>
+      <button type="button" class="sp-preset-btn" onclick="spApplyRangeQuickPages(2)">+2 ص</button>
     </div>`;
   if (typeof enhanceAllVisibleSelects === "function") enhanceAllVisibleSelects(box);
 }
@@ -40135,7 +40195,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v131";
+const TIBYAN_APP_VERSION = "v132";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -43032,5 +43092,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v131 -->
+<!-- Makin App v132 -->
 </html>
