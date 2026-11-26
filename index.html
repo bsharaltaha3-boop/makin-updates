@@ -14502,7 +14502,7 @@ table.t-daily td.td-note {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v130</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v131</span>
         </button>
       </div>
     </div>
@@ -16858,7 +16858,7 @@ function formatPointsBreakdownText(s, r, st) {
       if (r.recEval) {
         const ppPts = computePerPageMemPoints(r);
         if (ppPts !== null) {
-          const passedN = r.recPageEvals.filter(p => p.eval !== "إعادة").length;
+          const passedN = r.recPageEvals.filter(p => isPerPageItemGraded(p) && p.eval && p.eval !== "إعادة").length;
           parts.push(`حفظ (${passedN}/${r.recPageEvals.length} ص): ${ppPts}`);
         } else {
           const pg = Number(r.recPages) || calcRecordRecPages(r) || Number(st?.pace || 0.5);
@@ -20793,6 +20793,10 @@ function getPageOverallKey(kind) {
   return kind === "min" ? "minOverallOverride" : (kind === "maj" ? "majOverallOverride" : "recOverallOverride");
 }
 
+function isPerPageItemGraded(p) {
+  return Boolean(p && (p.manualEval || p.touched || (Number(p.errors) || 0) > 0 || (Number(p.alerts) || 0) > 0));
+}
+
 function getSyncedPageEvals(r, st, kind, h) {
   const slots = buildRecitationPageSlots(r, st, kind, h);
   if (slots.length < 2) return null;
@@ -20804,6 +20808,7 @@ function getSyncedPageEvals(r, st, kind, h) {
     const alerts = match ? Math.max(0, Number(match.alerts) || 0) : 0;
     const manualEval = (match && match.manualEval) ? String(match.manualEval) : "";
     const touched = Boolean(match && match.touched);
+    const isGraded = Boolean(manualEval || touched || errors > 0 || alerts > 0);
     return {
       ...slot,
       idx: i + 1,
@@ -20811,7 +20816,7 @@ function getSyncedPageEvals(r, st, kind, h) {
       alerts,
       manualEval,
       touched,
-      eval: manualEval || evalFromErrorCount(errors, alerts, h)
+      eval: isGraded ? (manualEval || evalFromErrorCount(errors, alerts, h)) : ""
     };
   });
 }
@@ -20854,14 +20859,19 @@ function reconcileRecEvalAfterRangeChange(h, s, st, r, snap, skipAutoApply = fal
       const mp = Number(slot.mushafPage);
       const saved = prevByPage.get(mp);
       if (saved) {
+        const _e = Math.max(0, Number(saved.errors) || 0);
+        const _a = Math.max(0, Number(saved.alerts) || 0);
+        const _m = saved.manualEval ? String(saved.manualEval) : "";
+        const _t = Boolean(saved.touched);
+        const _g = Boolean(_m || _t || _e > 0 || _a > 0);
         return {
           ...slot,
           idx: i + 1,
-          errors: Math.max(0, Number(saved.errors) || 0),
-          alerts: Math.max(0, Number(saved.alerts) || 0),
-          manualEval: saved.manualEval ? String(saved.manualEval) : "",
-          touched: Boolean(saved.touched),
-          eval: saved.manualEval || evalFromErrorCount(saved.errors || 0, saved.alerts || 0, h)
+          errors: _e,
+          alerts: _a,
+          manualEval: _m,
+          touched: _t,
+          eval: _g ? (_m || evalFromErrorCount(_e, _a, h)) : ""
         };
       }
       // Single-page -> Multi-page expansion! Carry the already-graded page's grade, errors & alerts onto its page slot!
@@ -20885,7 +20895,7 @@ function reconcileRecEvalAfterRangeChange(h, s, st, r, snap, skipAutoApply = fal
         alerts: 0,
         manualEval: "",
         touched: false,
-        eval: evalFromErrorCount(0, 0, h)
+        eval: ""
       };
     });
 
@@ -20963,24 +20973,9 @@ function togglePerPageEvalMode(studentId, kind, toMode) {
   renderStudentCardsOnly();
 }
 
-function selectPerPageTab(studentId, kind, idx, autoCommitPrev = false) {
+function selectPerPageTab(studentId, kind, idx) {
   const mapKey = `${studentId}_${kind}`;
-  const prevIdx = Number(_activePageTabMap[mapKey] || 0);
   _activePageTabMap[mapKey] = idx;
-  if (autoCommitPrev) {
-    const h = getActiveHalaqa(), s = getCurrentSession();
-    const st = h?.students?.find(x => x.id === studentId);
-    if (h && s && st) {
-      const r = getStudentRecord(s, studentId);
-      const pages = getSyncedPageEvals(r, st, kind, h);
-      if (pages && pages[prevIdx] && !pages[prevIdx].touched) {
-        pages[prevIdx].touched = true;
-        r[getPageEvalKey(kind)] = pages;
-        applyPerPageAutoEval(studentId, kind, null, false);
-        return;
-      }
-    }
-  }
   if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
     syncStudentEvalSheet();
   }
@@ -21070,7 +21065,7 @@ function clearPerPageEvaluation(studentId, kind) {
   showToast(`تم إلغاء تقييم ${st.name} ↩️`, { undo: true });
 }
 
-// Grade ONLY the currently selected page (pages[pageIdx]) — 2nd tap on active grade toggles it OFF!
+// v131: Grade ONLY the currently selected page (pages[pageIdx]) — 2nd tap ALWAYS removes it cleanly!
 function setPageDirectEval(studentId, kind, pageIdx, ev) {
   const h = getActiveHalaqa(), s = getCurrentSession();
   if (!h || !s) return;
@@ -21080,12 +21075,11 @@ function setPageDirectEval(studentId, kind, pageIdx, ev) {
   const pages = getSyncedPageEvals(r, st, kind, h);
   if (!pages || !pages[pageIdx]) return;
   const pg = pages[pageIdx];
-  const savedKindEval = kind === "min" ? r.minEval : (kind === "maj" ? r.majEval : r.recEval);
-  const isPageVisiblyOn = Boolean(pg.manualEval || pg.touched || pg.errors > 0 || pg.alerts > 0 || savedKindEval);
+  const isPageVisiblyOn = isPerPageItemGraded(pg);
 
-  // 2nd tap on the already-selected grade => toggle OFF / cancel!
+  // 2nd tap on the already-selected grade for THIS page => toggle OFF / cancel cleanly!
   if (isPageVisiblyOn && pg.eval === ev) {
-    const anyOtherGraded = pages.some((p, i) => i !== pageIdx && (p.touched || p.manualEval || p.errors > 0 || p.alerts > 0));
+    const anyOtherGraded = pages.some((p, i) => i !== pageIdx && isPerPageItemGraded(p));
     if (!anyOtherGraded) {
       clearPerPageEvaluation(studentId, kind);
       return;
@@ -21095,7 +21089,7 @@ function setPageDirectEval(studentId, kind, pageIdx, ev) {
     pg.touched = false;
     pg.errors = 0;
     pg.alerts = 0;
-    pg.eval = evalFromErrorCount(0, 0, h);
+    pg.eval = "";
     r[getPageEvalKey(kind)] = pages;
     r[getPageOverallKey(kind)] = "";
     _activePageTabMap[`${studentId}_${kind}`] = pageIdx;
@@ -21132,7 +21126,7 @@ function setPerPageOverallOverride(studentId, kind, ev) {
 
 function computePerPageMemPoints(r) {
   if (!r || !Array.isArray(r.recPageEvals) || r.recPageEvals.length < 2) return null;
-  const passed = r.recPageEvals.filter(p => p.eval && p.eval !== "إعادة");
+  const passed = r.recPageEvals.filter(p => isPerPageItemGraded(p) && p.eval && p.eval !== "إعادة");
   if (!passed.length) return 0;
   const totalPassedPg = passed.reduce((a, p) => a + Math.max(0.05, Number(p.pages) || 0.5), 0);
   const weightedBase = passed.reduce((a, p) => a + (MEM_FULL_POINTS[p.eval] || 0) * Math.max(0.05, Number(p.pages) || 0.5), 0) / totalPassedPg;
@@ -21143,17 +21137,17 @@ function computePerPageMemPoints(r) {
   return Math.round(weightedBase * factor);
 }
 
-// v130: Pure Arithmetic Average across evaluated pages (ممتاز=4, جيد جداً=3, جيد=2, إعادة=1)
+// v131: Pure Arithmetic Average across ONLY evaluated pages (ممتاز=4, جيد جداً=3, جيد=2, إعادة=1)
 function computePerPageOverallGrade(pages) {
-  if (!Array.isArray(pages) || !pages.length) return { overallEv: "ممتاز", passed: [], failed: [] };
-  const graded = pages.filter(p => p.manualEval || p.touched || p.errors > 0 || p.alerts > 0);
-  const sample = graded.length ? graded : pages;
-  const passed = pages.filter(p => p.eval !== "إعادة");
-  const failed = pages.filter(p => p.eval === "إعادة");
+  if (!Array.isArray(pages) || !pages.length) return { overallEv: "", passed: [], failed: [], gradedCount: 0 };
+  const graded = pages.filter(p => isPerPageItemGraded(p) && p.eval);
+  if (!graded.length) return { overallEv: "", passed: [], failed: [], gradedCount: 0 };
+  const passed = graded.filter(p => p.eval !== "إعادة");
+  const failed = graded.filter(p => p.eval === "إعادة");
   const gradeVal = ev => ev === "ممتاز" ? 4 : (ev === "جيد جداً" ? 3 : (ev === "جيد" ? 2 : 1));
-  const avg = sample.reduce((sum, p) => sum + gradeVal(p.eval), 0) / sample.length;
+  const avg = graded.reduce((sum, p) => sum + gradeVal(p.eval), 0) / graded.length;
   const overallEv = avg >= 3.5 ? "ممتاز" : (avg >= 2.5 ? "جيد جداً" : (avg >= 1.5 ? "جيد" : "إعادة"));
-  return { overallEv, passed, failed };
+  return { overallEv, passed, failed, gradedCount: graded.length };
 }
 
 function formatFailedPagesShort(failed) {
@@ -21178,6 +21172,10 @@ function applyPerPageAutoEval(studentId, kind, overrideOverallEv = null, trigger
   const { overallEv: calcEv, passed, failed } = computePerPageOverallGrade(pages);
   r[getPageOverallKey(kind)] = "";
   const overallEv = overrideOverallEv || calcEv;
+  if (!overallEv) {
+    clearPerPageEvaluation(studentId, kind);
+    return;
+  }
   const repeatShort = formatFailedPagesShort(failed);
 
   if (kind === "rec") {
@@ -21283,14 +21281,15 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
     let activeIdx = Number(_activePageTabMap[mapKey] || 0);
     if (activeIdx < 0 || activeIdx >= pages.length) activeIdx = 0;
     const curPg = pages[activeIdx];
-    const failed = pages.filter(p => p.eval === "إعادة");
-    const passedCnt = pages.length - failed.length;
+    const gradedPages = pages.filter(p => isPerPageItemGraded(p) && p.eval);
+    const failed = gradedPages.filter(p => p.eval === "إعادة");
+    const passedCnt = gradedPages.length - failed.length;
     const evCls = ev => ev === "ممتاز" ? "st-ex" : (ev === "جيد جداً" ? "st-vg" : (ev === "جيد" ? "st-gd" : "st-rp"));
     const evShort = ev => ev === "جيد جداً" ? "ج.ج" : ev;
     const nextIdx = (activeIdx + 1) % pages.length;
 
     const savedKindEval = kind === "min" ? r.minEval : (kind === "maj" ? r.majEval : r.recEval);
-    const isPgGraded = p => Boolean(p.manualEval || p.touched || p.errors > 0 || p.alerts > 0 || savedKindEval);
+    const isPgGraded = p => Boolean(isPerPageItemGraded(p) && p.eval);
 
     const tabsHtml = pages.map((p, idx) => {
       const graded = isPgGraded(p);
@@ -21337,7 +21336,7 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
       <div class="pp-active-box">
         <div class="pp-active-top">
           <span style="min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">📖 صفحة ${activeIdx + 1}/${pages.length}: <b>${escapeHtml(curPg.label)}</b> (ص ${curPg.mushafPage})</span>
-          <button type="button" class="lms-btn accent" style="padding:2px 8px; font-size:10.5px;" onclick="selectPerPageTab('${studentId}','${kind}',${nextIdx},true)">التالية ←</button>
+          <button type="button" class="lms-btn accent" style="padding:2px 8px; font-size:10.5px;" onclick="selectPerPageTab('${studentId}','${kind}',${nextIdx})">التالية ←</button>
         </div>
         <div class="es-err-grid-2" style="margin-bottom:0;">
           <div class="es-err-cap" title="أخطاء هذه الصفحة فقط">
@@ -21353,7 +21352,7 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
         </div>
         <div class="pp-page-grade-lbl">
           <span>🎯 تقييم <b>ص ${curPg.mushafPage}</b> فقط</span>
-          <span>${curPg.manualEval ? "يدوي" : "تلقائي"}</span>
+          <span>${curPgGraded ? (curPg.manualEval ? "يدوي (اضغط مجدداً للإلغاء)" : "حسب الأخطاء") : "غير مقيّمة"}</span>
         </div>
         <div class="pp-page-eval-4">${pageGradeBtnsHtml}</div>
       </div>
@@ -21361,8 +21360,8 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
       <div class="pp-overall-card">
         <div class="pp-ov-row1" style="margin-bottom:0;">
           <div class="pp-ov-info">
-            <div>📊 التقييم الإجمالي (متوسط الصفحات): <span class="badge ${ovCls}">${savedKindEval ? ov.overallEv : "بانتظار التقييم"}</span></div>
-            <small>مقيّم: ${pages.filter(p => p.manualEval || p.touched || p.errors > 0 || p.alerts > 0).length}/${pages.length} • أخطاء: ${totE} • تنبيه: ${totA}${failed.length && ov.overallEv !== "إعادة" ? " • الإعادة بالملاحظات" : ""}</small>
+            <div>📊 التقييم الإجمالي (متوسط الصفحات): <span class="badge ${ovCls}">${(ov.overallEv || savedKindEval) ? (ov.overallEv || savedKindEval) : "بانتظار التقييم"}</span></div>
+            <small>مقيّم: ${gradedPages.length}/${pages.length} • أخطاء: ${totE} • تنبيه: ${totA}${failed.length && ov.overallEv !== "إعادة" ? " • الإعادة بالملاحظات" : ""}</small>
           </div>
           ${savedKindEval ? `<button type="button" class="lms-btn" style="padding:4px 8px; color:var(--red); border-color:rgba(185,34,34,0.28); background:var(--red-bg); flex-shrink:0;" onclick="clearPerPageEvaluation('${studentId}','${kind}')" title="إلغاء التقييم بالكامل">✕</button>` : ""}
         </div>
@@ -40136,7 +40135,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v130";
+const TIBYAN_APP_VERSION = "v131";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -43033,5 +43032,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v130 -->
+<!-- Makin App v131 -->
 </html>
