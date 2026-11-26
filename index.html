@@ -14360,7 +14360,7 @@ table.t-daily td.td-note {
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v124</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v125</span>
         </button>
       </div>
     </div>
@@ -20615,7 +20615,7 @@ function clearPerPageEvaluation(studentId, kind) {
   } else if (kind === "maj") {
     r.majEval = "";
     r.majErrors = 0; r.majAlerts = 0; r.majPageEvals = null; r.majOverallOverride = "";
-    r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
+    r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = false; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
     if (!r.minEval) {
       if (r.attendance === "حاضر") r.attendance = "لم يُسمّع";
       r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined; r.ptsForgotSheet = false;
@@ -22202,7 +22202,7 @@ function clearSurahPickerSelection() {
   else if (k === "hw") { r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwEndSurahId = ""; r.hwSabrJuz = ""; if (s.type === "saturday") { r.manualSatHw = false; syncSatManualHwToNextDaily(h, s, st, r); } }
   else if (k === "min") { r.minSurahId = ""; r.minFrom = ""; r.minTo = ""; r.minExtras = []; r.minSurah = ""; r.minText = ""; r.minPages = 0; r.minIsPages = false; r.minSardJuzIds = []; r.manualMin = true; }
   else if (k === "maj") { r.majExtras = []; r.majFrom = ""; r.majTo = ""; r.majPages = 0; r.majStartSurahId = ""; r.majEndSurahId = ""; r.majIsPages = false; r.majSardJuzIds = []; r.majSardLabel = ""; r.manualMaj = true; }
-  else if (k === "nextMaj") { r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajTitle = ""; }
+  else if (k === "nextMaj") { r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = false; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajTitle = ""; }
   else if (k === "dRev") { clearDailyRev(spState.studentId); closeModal("surahPickerModal"); return; }
   if (r.recEval || r.minEval || r.majEval) r.points = computeRecordPoints(s, r, st);
   openCardId = spState.studentId;
@@ -22253,7 +22253,7 @@ function applySurahPicker(quickEval = null) {
     }
     if (k === "nextMaj") {
       const jObj = getJuzByName(spState.sabrJuzName);
-      r.nextMajSabrJuz = spState.sabrJuzName;
+      r.nextMajSabrJuz = spState.sabrJuzName; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = true;
       if (jObj) {
         const s1 = SURAH_MAP[jObj.startSurah], s2 = SURAH_MAP[jObj.endSurah];
         r.nextMajStartSurahId = String(jObj.startSurah); r.nextMajStartAyah = jObj.startAyah;
@@ -22330,7 +22330,7 @@ function applySurahPicker(quickEval = null) {
       r.nextMajIsPages = true;
       r.nextMajStartSurahId = s1 ? String(s1.id) : ""; r.nextMajEndSurahId = s2 ? String(s2.id) : "";
       r.nextMajStartPage = p1; r.nextMajEndPage = p2;
-      r.nextMajTitle = surahHeaderLbl; r.nextMajFrom = `ص ${p1}`; r.nextMajTo = `ص ${p2}`;
+      r.nextMajTitle = surahHeaderLbl; r.nextMajFrom = fromCol; r.nextMajTo = toCol; r.manualNextMaj = true;
     }
     closeModal("surahPickerModal");
     if (quickEval) {
@@ -22377,7 +22377,7 @@ function applySurahPicker(quickEval = null) {
       r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
       r.nextMajSardJuzIds = [...info.ids]; r.nextMajSardLabel = info.label;
       r.nextMajStartPage = firstJ.startPage; r.nextMajEndPage = lastJ.endPage;
-      r.nextMajTitle = "سرد"; r.nextMajFrom = info.fromCol; r.nextMajTo = info.toCol;
+      r.nextMajTitle = "سرد"; r.nextMajFrom = info.fromCol; r.nextMajTo = info.toCol; r.manualNextMaj = true;
     }
     closeModal("surahPickerModal");
     if (quickEval) {
@@ -22438,7 +22438,7 @@ function applySurahPicker(quickEval = null) {
     r.nextMajStartSurahId = rng.startSurahId; r.nextMajStartAyah = rng.startAyah;
     r.nextMajEndSurahId = rng.endSurahId; r.nextMajEndAyah = rng.endAyah;
     r.nextMajStartPage = rng.startPage; r.nextMajEndPage = rng.endPage;
-    r.nextMajTitle = rng.surahLabel; r.nextMajFrom = rng.fromLabel; r.nextMajTo = rng.toLabel;
+    r.nextMajTitle = rng.surahLabel; r.nextMajFrom = rng.fromLabel; r.nextMajTo = rng.toLabel; r.manualNextMaj = true;
   } else if (k === "dRev") {
     r.dRevIsPages = false; r.dRevSardJuzIds = []; r.dRevSardLabel = "";
     // Keep r.sabrJuz independent from Daily Review / Sard (v93)
@@ -25501,7 +25501,7 @@ function applyAbsenceCarryOver(s, st, r, status) {
         r.hwExtras = rs.slice(1).map(x => ({ ...x }));
       }
     }
-  } else if (s.type === "saturday" && (r.majStartPage || _prevSabr)) {
+  } else if (s.type === "saturday" && (r.majStartPage || r.majFrom || r.majStartSurahId || (Array.isArray(r.majSardJuzIds) && r.majSardJuzIds.length) || _prevSabr)) {
     r.recIsSabr = false;
     if (_prevSabr) r.sabrJuz = _prevSabr;
     if (st) applyNextMajorReview(st, r, false);
@@ -28035,6 +28035,7 @@ function onNextMajStartPageEdit(studentId, pageVal) {
     const nxtRng = buildMajorReviewRange(p, revPace, cyc.cycleStart, cyc.cycleEnd);
     r.nextMajStartPage = nxtRng.startPage;
     r.nextMajEndPage = nxtRng.endPage;
+    r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = true;
     r.nextMajTitle = nxtRng.surahLabel;
     r.nextMajFrom = nxtRng.fromLabel;
     r.nextMajTo = nxtRng.toLabel;
@@ -28054,6 +28055,10 @@ function applyNextMajorReview(st, r, passed) {
 
   const assignNextRange = (rng, sabrCarryName = "") => {
     r.nextMajSabrJuz = sabrCarryName || "";
+    r.nextMajIsPages = false;
+    r.nextMajSardJuzIds = [];
+    r.nextMajSardLabel = "";
+    r.manualNextMaj = false;
     r.nextMajStartSurahId = rng.startSurahId;
     r.nextMajStartAyah = rng.startAyah;
     r.nextMajEndSurahId = rng.endSurahId;
@@ -28068,6 +28073,7 @@ function applyNextMajorReview(st, r, passed) {
   const curPts = getMajorReviewStartEndPoints(r, st, h, s);
 
   if (!passed) {
+    // 1) Repeat Full-Juz Sabr
     if (r.sabrJuz) {
       const jObj = getJuzByName(r.sabrJuz);
       if (jObj) {
@@ -28079,6 +28085,49 @@ function applyNextMajorReview(st, r, passed) {
         return;
       }
     }
+    // 2) Repeat Full-Juz Sard (v125 fix: preserve exact Sard Juz on repeat/absence!)
+    if (Array.isArray(r.majSardJuzIds) && r.majSardJuzIds.length) {
+      const info = formatSardJuzInfo(r.majSardJuzIds);
+      if (info.ids.length) {
+        const firstJ = JUZ_PAGE_MAP[info.ids[0]], lastJ = JUZ_PAGE_MAP[info.ids[info.ids.length - 1]];
+        r.nextMajSabrJuz = "";
+        r.nextMajIsPages = false;
+        r.manualNextMaj = false;
+        r.nextMajSardJuzIds = [...info.ids];
+        r.nextMajSardLabel = info.label;
+        r.nextMajStartSurahId = "";
+        r.nextMajStartAyah = "";
+        r.nextMajEndSurahId = "";
+        r.nextMajEndAyah = "";
+        r.nextMajStartPage = firstJ ? firstJ.startPage : (r.majStartPage || "");
+        r.nextMajEndPage = lastJ ? lastJ.endPage : (r.majEndPage || "");
+        r.nextMajTitle = "سرد";
+        r.nextMajFrom = info.fromCol;
+        r.nextMajTo = info.toCol;
+        return;
+      }
+    }
+    // 3) Repeat Page-Based Major Review (v125 fix: preserve exact pages on repeat/absence!)
+    if (r.majIsPages && r.majFrom) {
+      const p1 = parseArabicNum(r.majStartPage, 582);
+      const p2 = parseArabicNum(r.majEndPage, p1);
+      r.nextMajSabrJuz = "";
+      r.nextMajSardJuzIds = [];
+      r.nextMajSardLabel = "";
+      r.nextMajIsPages = true;
+      r.manualNextMaj = false;
+      r.nextMajStartSurahId = r.majStartSurahId || String(getPageStartInfo(p1).surah.id);
+      r.nextMajStartAyah = r.majStartAyah || 1;
+      r.nextMajEndSurahId = r.majEndSurahId || String(getPageEndInfo(p2).surah.id);
+      r.nextMajEndAyah = r.majEndAyah || 1;
+      r.nextMajStartPage = p1;
+      r.nextMajEndPage = p2;
+      r.nextMajTitle = "";
+      r.nextMajFrom = r.majFrom;
+      r.nextMajTo = r.majTo || "";
+      return;
+    }
+    // 4) Repeat Standard Surah/Ayah Major Review
     const s1 = SURAH_MAP[curPts.startSurahId], s2 = SURAH_MAP[curPts.endSurahId];
     if (s1 && s2) {
       const p1 = getPageForSurahAyah(s1.id, curPts.startAyah), p2 = getPageForSurahAyah(s2.id, curPts.endAyah);
@@ -28149,7 +28198,7 @@ function setAttendance(studentId, status) {
         r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = "";
       }
       if (s.type === "saturday" && !r.majEval) {
-        r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
+        r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = false; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
       }
     }
     r.points = computeRecordPoints(s, r, st);
@@ -28471,7 +28520,7 @@ function quickSatBothEval(studentId, ev) {
     r.minErrors = 0; r.majErrors = 0;
     r.points = 0; r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined; r.ptsForgotSheet = false;
     r.notes = "";
-    r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
+    r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = false; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
     if (r.attendance === "حاضر") r.attendance = "لم يُسمّع";
     saveState(); renderSessionView();
     showToast(`تم إلغاء تقييم ${st.name} ↩️`, { undo: true });
@@ -28688,7 +28737,7 @@ function setSatMajEval(studentId, ev, errCount = null) {
   if (errCount === null && r.majEval === ev) {
     r.majEval = "";
     r.majErrors = 0; r.majAlerts = 0;
-    r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
+    r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = false; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
     if (!r.minEval) {
       if (r.attendance === "حاضر") r.attendance = "لم يُسمّع";
       r.ptsAdab = undefined; r.ptsParticip = undefined; r.ptsEarly = undefined; r.ptsForgotSheet = false;
@@ -28820,19 +28869,24 @@ function getDailyReviewEndPoint(pr) {
     });
     if (best) return best;
   }
-  // 4) Fallback parsing from dRevTo / dRevFrom text
-  const txt = String(pr.dRevTo || pr.dRevFrom || "").trim();
-  if (txt) {
-    const pm = toAsciiDigits(txt).match(/ص\s*(\d+)/);
+  // 4) Fallback parsing from dRevFrom + dRevTo text (handles single-surah numeric dRevTo like "الملك" + "27")
+  const fTxt = String(pr.dRevFrom || "").trim();
+  const tTxt = String(pr.dRevTo || "").trim();
+  if (tTxt) {
+    const pm = toAsciiDigits(tTxt).match(/ص\s*(\d+)/);
     if (pm) {
       const pe = getPageEndInfo(Number(pm[1]));
       if (pe?.surah) return { endSurahId: pe.surah.id, endAyah: pe.ayah };
     }
-    const sObj = findSurahByName(txt);
-    if (sObj) {
-      const nums = toAsciiDigits(txt).match(/\d+/g);
-      const a = nums && nums.length ? Math.max(1, Math.min(sObj.a, Number(nums[nums.length - 1]))) : sObj.a;
-      return { endSurahId: sObj.id, endAyah: a };
+    const pt = parsePageSurahAyahString(tTxt, true);
+    if (pt?.surah) return { endSurahId: pt.surah.id, endAyah: pt.ayah };
+  }
+  if (fTxt) {
+    const pf = parsePageSurahAyahString(fTxt, false);
+    if (pf?.surah) {
+      const mNum = toAsciiDigits(tTxt).match(/^(\d+)$/);
+      if (mNum) return { endSurahId: pf.surah.id, endAyah: Math.max(1, Math.min(pf.surah.a, Number(mNum[1]))) };
+      return { endSurahId: pf.surah.id, endAyah: pf.surah.a };
     }
   }
   return null;
@@ -28926,7 +28980,7 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
     }
   }
 
-  // No qualifying Mon/Wed review -> follow normal Saturday progression from lastSatSession
+  // No qualifying Mon/Wed review (ممتاز / جيد جداً) -> follow Saturday progression from lastSatSession
   if (lastSatSession && lastSatRec) {
     const pr = lastSatRec;
     const isAbs = Boolean(pr.attendance && String(pr.attendance || "").includes("غياب"));
@@ -28934,7 +28988,49 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
     const hasMajEval = Boolean(pr.majEval && String(pr.majEval).trim());
     const majPassed = hasMajEval && pr.majEval !== "إعادة" && !isAbs && !isNoRec;
 
-    const carrySabrName = (!majPassed && pr.sabrJuz) ? pr.sabrJuz : (pr.nextMajSabrJuz || "");
+    // v125: If last Saturday was إعادة / غياب / حضر ولم يُسمّع (and teacher didn't manually override nextMaj),
+    // carry over the EXACT same Major Review (Sabr, Sard, Pages, or Surah+Ayah) directly from lastSatRec!
+    // This also self-heals existing sessions saved before v125!
+    if (!majPassed && !pr.manualNextMaj) {
+      const carrySabr = pr.sabrJuz || pr.nextMajSabrJuz || "";
+      if (carrySabr) {
+        const jObj = getJuzByName(carrySabr);
+        if (jObj) return { kind: "sabr", juz: jObj, source: "prevSat" };
+      }
+      const carrySardIds = (Array.isArray(pr.majSardJuzIds) && pr.majSardJuzIds.length)
+        ? pr.majSardJuzIds
+        : (Array.isArray(pr.nextMajSardJuzIds) && pr.nextMajSardJuzIds.length ? pr.nextMajSardJuzIds : []);
+      if (carrySardIds.length) {
+        const si = formatSardJuzInfo(carrySardIds);
+        if (si.ids.length) return { kind: "sard", info: si, source: "prevSat" };
+      }
+      if (pr.majIsPages && pr.majFrom) {
+        const p1 = parseArabicNum(pr.majStartPage, 582);
+        const p2 = parseArabicNum(pr.majEndPage, p1);
+        return {
+          kind: "pages",
+          startPage: p1,
+          endPage: p2,
+          startSurahId: pr.majStartSurahId || String(getPageStartInfo(p1).surah.id),
+          endSurahId: pr.majEndSurahId || String(getPageEndInfo(p2).surah.id),
+          fromLabel: pr.majFrom,
+          toLabel: pr.majTo || "",
+          pages: Math.max(1, Math.abs(p2 - p1) + 1),
+          source: "prevSat"
+        };
+      }
+      const prevPts = getMajorReviewStartEndPoints(pr, st, h, lastSatSession);
+      const s1 = SURAH_MAP[prevPts.startSurahId], s2 = SURAH_MAP[prevPts.endSurahId];
+      if (s1 && s2) {
+        const p1 = getPageForSurahAyah(s1.id, prevPts.startAyah), p2 = getPageForSurahAyah(s2.id, prevPts.endAyah);
+        const pgs = Math.max(0.25, Math.round((getMushafPos(s2.id, prevPts.endAyah, true) - getMushafPos(s1.id, prevPts.startAyah, false)) * 100) / 100);
+        const rng = formatMajorRangeObject(s1, prevPts.startAyah, s2, prevPts.endAyah, p1, p2, pgs, p1, false, bounds.startPage, bounds.endPage);
+        return { kind: "range", rng, source: "prevSat" };
+      }
+    }
+
+    // Passed last Saturday (or teacher explicitly overrode nextMaj)
+    const carrySabrName = pr.nextMajSabrJuz || "";
     if (carrySabrName) {
       const jObj = getJuzByName(carrySabrName);
       if (jObj) return { kind: "sabr", juz: jObj, source: "prevSat" };
@@ -28953,7 +29049,7 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
         startSurahId: pr.nextMajStartSurahId || String(getPageStartInfo(p1).surah.id),
         endSurahId: pr.nextMajEndSurahId || String(getPageEndInfo(p2).surah.id),
         fromLabel: pr.nextMajFrom,
-        toLabel: pr.nextMajTo || pr.nextMajFrom,
+        toLabel: pr.nextMajTo || "",
         pages: Math.max(1, Math.abs(p2 - p1) + 1),
         source: "prevSat"
       };
@@ -28967,18 +29063,8 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
       return { kind: "range", rng, source: "prevSat" };
     }
     const prevPts = getMajorReviewStartEndPoints(pr, st, h, lastSatSession);
-    if (majPassed) {
-      const rng = advanceMajorRangeFromEndPoint(prevPts.endSurahId, prevPts.endAyah, revPace, bounds, sabrJuz);
-      return { kind: "range", rng, source: "prevSat" };
-    } else {
-      const s1 = SURAH_MAP[prevPts.startSurahId], s2 = SURAH_MAP[prevPts.endSurahId];
-      if (s1 && s2) {
-        const p1 = getPageForSurahAyah(s1.id, prevPts.startAyah), p2 = getPageForSurahAyah(s2.id, prevPts.endAyah);
-        const pgs = Math.max(0.25, Math.round((getMushafPos(s2.id, prevPts.endAyah, true) - getMushafPos(s1.id, prevPts.startAyah, false)) * 100) / 100);
-        const rng = formatMajorRangeObject(s1, prevPts.startAyah, s2, prevPts.endAyah, p1, p2, pgs, p1, false, bounds.startPage, bounds.endPage);
-        return { kind: "range", rng, source: "prevSat" };
-      }
-    }
+    const rng = advanceMajorRangeFromEndPoint(prevPts.endSurahId, prevPts.endAyah, revPace, bounds, sabrJuz);
+    return { kind: "range", rng, source: "prevSat" };
   }
 
   // Initial Major Review fallback
@@ -38751,7 +38837,7 @@ function qaSetStatus(studentId, status) {
       r.notes = "";
       if (st.track === "rashidi" && !r.recEval) { r.hwRashidiFrom = ""; r.hwRashidiTo = ""; }
       if (s.type === "daily" && !r.recEval) { r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = ""; }
-      if (s.type === "saturday" && !r.majEval) { r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; }
+      if (s.type === "saturday" && !r.majEval) { r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = false; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; }
     }
     r.points = computeRecordPoints(s, r, st);
     _qaDirtySession = true;
@@ -38767,7 +38853,7 @@ function qaSetStatus(studentId, status) {
       r.notes = "";
       if (st.track === "rashidi" && !r.recEval) { r.hwRashidiFrom = ""; r.hwRashidiTo = ""; }
       if (s.type === "daily" && !r.recEval) { r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwSabrJuz = ""; }
-      if (s.type === "saturday" && !r.majEval) { r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; }
+      if (s.type === "saturday" && !r.majEval) { r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = false; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; }
     }
     r.attendance = status;
     ensureRecordBonuses(r);
@@ -38986,7 +39072,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v124";
+const TIBYAN_APP_VERSION = "v125";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -41656,7 +41742,7 @@ const CLOUD_SAFE_ZERO_FIELDS = new Set([
 ]);
 const CLOUD_SAFE_FALSE_FIELDS = new Set([
   "twoSurahs", "minTwoSurahs", "rabt", "recIsSabr", "dRevIsPages", "minIsPages", "majIsPages",
-  "ptsForgotSheet", "recRepeatHwOnly", "manualSatHw"
+  "ptsForgotSheet", "recRepeatHwOnly", "manualSatHw", "nextMajIsPages", "manualNextMaj"
 ]);
 const CLOUD_KEEP_EXPLICIT_BOOLS = new Set(["ptsAdab", "ptsParticip", "ptsEarly"]);
 
@@ -41879,5 +41965,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v124 -->
+<!-- Makin App v125 -->
 </html>
