@@ -3205,7 +3205,7 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-refresh"/></svg></span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v150</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v151</span>
         </button>
       </div>
     </div>
@@ -27754,10 +27754,95 @@ function getLinkedSupervisorCustomPrograms() {
 
 
 
+function normalizeMessagesArray(raw) {
+  if (!raw) return [];
+  const arr = Array.isArray(raw) ? raw : (typeof raw === "object" ? Object.values(raw) : []);
+  return arr.filter(m => m && typeof m === "object" && (m.body || m.title));
+}
+
+// v151: Self-heal missing supervisorId / supervisorName from supervisorCodeUsed (e.g. SUP-XXXX-XXXX)
+let _repairSupLinkBusy = false;
+async function repairTeacherSupervisorLinkIfMissing(u = null) {
+  const user = u || getCurrentAccountUser();
+  if (!user || !isUserTeacherCapable(user) || !_fbDb || _repairSupLinkBusy) return false;
+  const needsId = !user.supervisorId && Boolean(user.supervisorCodeUsed);
+  const needsName = Boolean(user.supervisorId) && (!user.supervisorName || !user.supervisorBranchName);
+  if (!needsId && !needsName) return false;
+  _repairSupLinkBusy = true;
+  try {
+    let changed = false;
+    if (!user.supervisorId && user.supervisorCodeUsed) {
+      const sup = await findSupervisorByCode(user.supervisorCodeUsed);
+      if (sup && sup.id) {
+        user.supervisorId = sup.id;
+        if (!user.supervisorName && sup.name) user.supervisorName = sup.name;
+        if (!user.supervisorBranchName && sup.branchName) user.supervisorBranchName = sup.branchName;
+        changed = true;
+      }
+    }
+    if (user.supervisorId && (!user.supervisorName || !user.supervisorBranchName)) {
+      const supObj = tibyanAccounts.users[user.supervisorId] || await fbDbGet(`users/${user.supervisorId}`);
+      if (supObj && supObj.id) {
+        tibyanAccounts.users[user.supervisorId] = supObj;
+        if (!user.supervisorName && supObj.name) { user.supervisorName = supObj.name; changed = true; }
+        if (!user.supervisorBranchName && supObj.branchName) { user.supervisorBranchName = supObj.branchName; changed = true; }
+      }
+    }
+    if (user.supervisorId) {
+      const hals = Object.values(appState.halaqat || {});
+      if (!tibyanAccounts.links[user.supervisorId]) tibyanAccounts.links[user.supervisorId] = {};
+      for (const hal of hals) {
+        const k = makeSupLinkKey(user.id, hal.id);
+        let stVal = await fbDbGet(`links/${user.supervisorId}/${k}/status`);
+        let upVal = stVal ? await fbDbGet(`links/${user.supervisorId}/${k}/lastUploadAt`) : "";
+        let usedKey = k;
+        if (!stVal) {
+          const legSt = await fbDbGet(`links/${user.supervisorId}/${user.id}/status`);
+          if (legSt) {
+            stVal = legSt;
+            upVal = await fbDbGet(`links/${user.supervisorId}/${user.id}/lastUploadAt`);
+            usedKey = user.id;
+          }
+        }
+        if (stVal) {
+          tibyanAccounts.links[user.supervisorId][usedKey] = {
+            linkKey: usedKey,
+            teacherId: user.id,
+            teacherName: user.name,
+            teacherEmail: user.email,
+            halaqaId: hal.id,
+            halaqaName: hal.name,
+            status: stVal,
+            lastUploadAt: upVal || ""
+          };
+          if (stVal === "approved" && user.supervisorStatus !== "approved") {
+            user.supervisorStatus = "approved";
+            changed = true;
+          }
+        }
+      }
+      if (changed) {
+        tibyanAccounts.users[user.id] = user;
+        saveAccountsState();
+        await fbDbUpdate(`users/${user.id}`, {
+          supervisorId: user.supervisorId || "",
+          supervisorName: user.supervisorName || "",
+          supervisorBranchName: user.supervisorBranchName || "",
+          supervisorCodeUsed: user.supervisorCodeUsed || "",
+          supervisorStatus: user.supervisorStatus || "none"
+        }).catch(() => {});
+      }
+    }
+    return changed;
+  } finally {
+    _repairSupLinkBusy = false;
+  }
+}
+
 function getTeacherMessagesList(u = null) {
   const user = u || getCurrentAccountUser();
   if (!isUserTeacherCapable(user) || !user.supervisorId || user.supervisorStatus !== "approved") return [];
-  const allMsgs = tibyanAccounts.messages[user.supervisorId] || [];
+  const allMsgs = normalizeMessagesArray(tibyanAccounts.messages[user.supervisorId]);
   return allMsgs.filter(m => m.toTeacherId === "all" || m.toTeacherId === user.id);
 }
 
@@ -27778,7 +27863,7 @@ function updateTeacherAccountDrawerUI() {
   const bellCnt = document.getElementById("hdrUnreadMsgBadge");
   const customWrap = document.getElementById("drawerSupCustomProgsWrap");
 
-  // Sync teacher approval status from link record if present
+  // Sync teacher approval status from link record ONLY when link record exists locally (NEVER wipe on cache miss!)
   if (isUserTeacherCapable(u) && u.supervisorId) {
     const lnk = getTeacherLinkRecord(u);
     if (lnk && lnk.status && lnk.status !== u.supervisorStatus) {
@@ -27788,9 +27873,9 @@ function updateTeacherAccountDrawerUI() {
         if (h && h.branch !== u.supervisorBranchName) { h.branch = u.supervisorBranchName; saveState(true); }
       }
       saveAccountsState();
-    } else if (!lnk && u.supervisorStatus === "approved") {
-      // Removed by supervisor
-      u.supervisorId = ""; u.supervisorStatus = "none"; u.supervisorName = ""; u.supervisorBranchName = "";
+    }
+    if (!u.supervisorName && tibyanAccounts.users[u.supervisorId]?.name) {
+      u.supervisorName = tibyanAccounts.users[u.supervisorId].name;
       saveAccountsState();
     }
   }
@@ -27902,12 +27987,26 @@ function openTeacherAccountModal() {
     return;
   }
 
+  if ((!u.supervisorId && u.supervisorCodeUsed) || (u.supervisorId && !u.supervisorName)) {
+    repairTeacherSupervisorLinkIfMissing(u).then(didFix => {
+      if (didFix) {
+        updateTeacherAccountDrawerUI();
+        startLiveNotificationListeners(true);
+        if (document.getElementById("teacherAccountModal")?.classList.contains("show")) openTeacherAccountModal();
+      }
+    }).catch(() => {});
+  }
+  const resolvedSupName = u.supervisorName || (u.supervisorId && tibyanAccounts.users[u.supervisorId]?.name) || "المشرف";
+  const resolvedBranchName = u.supervisorBranchName || (u.supervisorId && tibyanAccounts.users[u.supervisorId]?.branchName) || (h?.branch || "الصرح");
+  const isOfficiallyLinked = Boolean(u.supervisorStatus === "approved" && u.supervisorId);
   const allHals = Object.values(appState.halaqat || {});
-  const statusTxt = u.supervisorStatus === "approved"
-    ? `<span class="badge badge-wrap-ok b-green">✓ مرتبط رسمياً بصرح: ${escapeHtml(u.supervisorBranchName)} (المشرف: ${escapeHtml(u.supervisorName)})</span>`
+  const statusTxt = isOfficiallyLinked
+    ? `<span class="badge badge-wrap-ok b-green">✓ مرتبط رسمياً بصرح: ${escapeHtml(resolvedBranchName)} (المشرف: ${escapeHtml(resolvedSupName)})</span>`
     : (u.supervisorStatus === "pending"
-      ? `<span class="badge badge-wrap-ok b-orange">⏳ بانتظار موافقة المشرف (${escapeHtml(u.supervisorName)} — ${escapeHtml(u.supervisorBranchName)})</span>`
-      : `<span class="badge b-muted">غير مرتبط بمشرف حالياً</span>`);
+      ? `<span class="badge badge-wrap-ok b-orange">⏳ بانتظار موافقة المشرف (${escapeHtml(resolvedSupName)} — ${escapeHtml(resolvedBranchName)})</span>`
+      : (u.supervisorStatus === "approved" && u.supervisorCodeUsed
+        ? `<span class="badge badge-wrap-ok b-orange">🔄 جاري استعادة بيانات الارتباط بالكود ${escapeHtml(u.supervisorCodeUsed)}...</span>`
+        : `<span class="badge b-muted">غير مرتبط بمشرف حالياً</span>`));
 
   const multiHalHtml = (u.supervisorId && allHals.length) ? `
     <div class="panel-block">
@@ -27942,11 +28041,19 @@ function openTeacherAccountModal() {
 
     <div class="panel-block">
       <div class="panel-label">🛡️ حالة الارتباط بمشرف الصرح</div>
-      <div style="margin-bottom:8px;">${statusTxt}</div>
-      <div style="display:flex; gap:6px; align-items:center;">
-        <input type="text" id="teacherLinkSupCodeInp" value="${escapeHtml(u.supervisorCodeUsed || '')}" placeholder="أدخل رمز المشرف (مثال: SUP-XXXX-XXXX)" dir="ltr" style="flex:1; padding:7px 9px; border:1px solid var(--line-strong); border-radius:8px; text-align:right; text-transform:uppercase;">
-        <button type="button" class="btn btn-primary btn-sm" onclick="teacherRequestSupervisorLink()">إرسال طلب</button>
-      </div>
+      <div style="margin-bottom:${isOfficiallyLinked ? '6px' : '8px'};">${statusTxt}</div>
+      ${isOfficiallyLinked ? `
+        <details class="mini-more" style="margin-top:4px; padding-top:5px;">
+          <summary><span>🔄 تغيير المشرف أو الانتقال لصرح آخر</span><span>▾</span></summary>
+          <div style="display:flex; gap:6px; align-items:center; margin-top:7px;">
+            <input type="text" id="teacherLinkSupCodeInp" value="${escapeHtml(u.supervisorCodeUsed || '')}" placeholder="أدخل رمز المشرف الجديد" dir="ltr" style="flex:1; padding:7px 9px; border:1px solid var(--line-strong); border-radius:8px; text-align:right; text-transform:uppercase;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="teacherRequestSupervisorLink()">تغيير</button>
+          </div>
+        </details>` : `
+        <div style="display:flex; gap:6px; align-items:center;">
+          <input type="text" id="teacherLinkSupCodeInp" value="${escapeHtml(u.supervisorCodeUsed || '')}" placeholder="أدخل رمز المشرف (مثال: SUP-XXXX-XXXX)" dir="ltr" style="flex:1; padding:7px 9px; border:1px solid var(--line-strong); border-radius:8px; text-align:right; text-transform:uppercase;">
+          <button type="button" class="btn btn-primary btn-sm" onclick="teacherRequestSupervisorLink()">إرسال طلب</button>
+        </div>`}
     </div>
 
     ${multiHalHtml}
@@ -28027,6 +28134,7 @@ async function teacherRequestSupervisorLink() {
   const sup = await findSupervisorByCode(code);
   if (!sup) { showToast("لم يتم العثور على مشرف بهذا الكود — تأكد من صحة الكود أو رابط السحابة"); return; }
   await submitJoinRequestToSupervisor(u, sup, h);
+  startLiveNotificationListeners(true);
   updateTeacherAccountDrawerUI();
   openTeacherAccountModal();
   showToast(`تم إرسال طلب الانضمام لمشرف ${sup.branchName} — بانتظار موافقته ⏳`);
@@ -28041,13 +28149,16 @@ async function uploadTeacherReportsToSupervisor(sourceKind = "daily", targetHal 
     openTeacherAccountModal();
     return;
   }
+  if (!await ensureFirebaseReady(10000)) { showToast("تعذّر الاتصال بالسحابة — تحقق من الإنترنت وحاول مجدداً"); return; }
+  if (!u.supervisorId && u.supervisorCodeUsed) {
+    await repairTeacherSupervisorLinkIfMissing(u);
+  }
   if (!u.supervisorId) {
     showToast("أدخل رمز المشرف في «حساب المعلم وربط المشرف» أولاً");
     openTeacherAccountModal();
     return;
   }
-  if (!await ensureFirebaseReady(10000)) { showToast("تعذّر الاتصال بالسحابة — تحقق من الإنترنت وحاول مجدداً"); return; }
-  await refreshTeacherSupervisorNotifications(false);
+  await refreshTeacherSupervisorNotifications(false, true);
   if (u.supervisorStatus === "pending") {
     showToast(`طلبك لا يزال بانتظار موافقة المشرف (${u.supervisorName}) ⏳`);
     return;
@@ -28088,9 +28199,14 @@ async function uploadTeacherReportsToSupervisor(sourceKind = "daily", targetHal 
 async function openTeacherMessagesModal() {
   const body = document.getElementById("teacherMessagesModalBody");
   if (!body) return;
-  await refreshTeacherSupervisorNotifications(false);
+  await ensureFirebaseReady(8000);
+  const uInit = getCurrentAccountUser();
+  if (uInit && (!uInit.supervisorId && uInit.supervisorCodeUsed)) {
+    await repairTeacherSupervisorLinkIfMissing(uInit);
+  }
+  await refreshTeacherSupervisorNotifications(false, true);
   const u = getCurrentAccountUser();
-  if (!u || u.supervisorStatus !== "approved") {
+  if (!u || !u.supervisorId || u.supervisorStatus !== "approved") {
     body.innerHTML = `<div class="empty-state" style="padding:18px;">
       <p style="margin-bottom:10px;">${u?.supervisorStatus === 'pending' ? 'طلب انضمامك بانتظار موافقة المشرف ⏳' : 'اربط حسابك برمز المشرف لتصلك رسائله وتنبيهاته هنا مباشرة.'}</p>
       <button type="button" class="btn btn-primary btn-sm" onclick="closeModal('teacherMessagesModal'); openTeacherAccountModal();">🛡️ ربط برمز المشرف</button>
@@ -28099,15 +28215,21 @@ async function openTeacherMessagesModal() {
     return;
   }
 
+  const rawAll = normalizeMessagesArray(tibyanAccounts.messages[u.supervisorId]);
+  tibyanAccounts.messages[u.supervisorId] = rawAll;
   const msgs = getTeacherMessagesList(u).sort((a, b) => (b.sentAt || "").localeCompare(a.sentAt || ""));
-  let markedAny = false;
-  msgs.forEach(m => {
+  const readWrites = [];
+  rawAll.forEach((m, idx) => {
+    if (!m || (m.toTeacherId !== "all" && m.toTeacherId !== u.id)) return;
     if (!m.readBy) m.readBy = {};
-    if (!m.readBy[u.id]) { m.readBy[u.id] = true; markedAny = true; }
+    if (!m.readBy[u.id]) {
+      m.readBy[u.id] = true;
+      readWrites.push(fbDbSet(`messages/${u.supervisorId}/${idx}/readBy/${u.id}`, true));
+    }
   });
-  if (markedAny) {
+  if (readWrites.length) {
     saveAccountsState();
-    platformCloudPut(`messages/${u.supervisorId}`, tibyanAccounts.messages[u.supervisorId]);
+    Promise.all(readWrites).catch(() => {});
     updateTeacherAccountDrawerUI();
   }
 
@@ -28444,12 +28566,18 @@ async function supHandleJoinDecision(linkKey, decision) {
   if (decision === "approved") {
     lnk.status = "approved";
     lnk.approvedAt = new Date().toISOString();
+    const userPatch = {
+      supervisorId: sup.id,
+      supervisorName: sup.name || "",
+      supervisorBranchName: sup.branchName || "",
+      supervisorCodeUsed: sup.supervisorCode || "",
+      supervisorStatus: "approved",
+      inheritedBrand: (sup.licensedOrg && sup.licensedOrg.orgName) ? sup.licensedOrg : null
+    };
     if (tibyanAccounts.users[tid]) {
-      tibyanAccounts.users[tid].supervisorStatus = "approved";
-      tibyanAccounts.users[tid].supervisorBranchName = sup.branchName;
-      tibyanAccounts.users[tid].inheritedBrand = (sup.licensedOrg && sup.licensedOrg.orgName) ? sup.licensedOrg : null;
-      await platformCloudPut(`users/${tid}`, tibyanAccounts.users[tid]);
+      Object.assign(tibyanAccounts.users[tid], userPatch);
     }
+    await fbDbUpdate(`users/${tid}`, userPatch);
     await platformCloudPut(`links/${sup.id}/${linkKey}`, lnk);
     const _lmApp = buildLightLinkMeta(lnk, sup.customPrograms);
     if (_lmApp) fbDbSet(`links/${sup.id}/_idx/${linkKey}`, _lmApp).catch(() => {});
@@ -28457,10 +28585,10 @@ async function supHandleJoinDecision(linkKey, decision) {
   } else {
     delete tibyanAccounts.links[sup.id][linkKey];
     const remainingForTeacher = Object.values(getSupLinksMap(sup.id)).some(x => x && x.teacherId === tid);
-    if (!remainingForTeacher && tibyanAccounts.users[tid]) {
-      tibyanAccounts.users[tid].supervisorStatus = "rejected";
-      tibyanAccounts.users[tid].supervisorId = "";
-      await platformCloudPut(`users/${tid}`, tibyanAccounts.users[tid]);
+    if (!remainingForTeacher) {
+      const rejPatch = { supervisorStatus: "rejected", supervisorId: "" };
+      if (tibyanAccounts.users[tid]) Object.assign(tibyanAccounts.users[tid], rejPatch);
+      await fbDbUpdate(`users/${tid}`, rejPatch);
     }
     await platformCloudPut(`links/${sup.id}/${linkKey}`, null);
     fbDbSet(`links/${sup.id}/_idx/${linkKey}`, null).catch(() => {});
@@ -28478,13 +28606,10 @@ async function supRemoveTeacher(linkKey) {
   const tid = lnk.teacherId || linkKey;
   delete tibyanAccounts.links[sup.id][linkKey];
   const remaining = Object.values(getSupLinksMap(sup.id)).some(x => x && x.teacherId === tid);
-  if (!remaining && tibyanAccounts.users[tid]) {
-    tibyanAccounts.users[tid].supervisorId = "";
-    tibyanAccounts.users[tid].supervisorStatus = "none";
-    tibyanAccounts.users[tid].supervisorName = "";
-    tibyanAccounts.users[tid].supervisorBranchName = "";
-    tibyanAccounts.users[tid].inheritedBrand = null;
-    await platformCloudPut(`users/${tid}`, tibyanAccounts.users[tid]);
+  if (!remaining) {
+    const rmPatch = { supervisorId: "", supervisorStatus: "none", supervisorName: "", supervisorBranchName: "", inheritedBrand: null };
+    if (tibyanAccounts.users[tid]) Object.assign(tibyanAccounts.users[tid], rmPatch);
+    await fbDbUpdate(`users/${tid}`, rmPatch);
   }
   saveAccountsState();
   await platformCloudPut(`links/${sup.id}/${linkKey}`, null);
@@ -31869,7 +31994,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v150";
+const TIBYAN_APP_VERSION = "v151";
 function mkIcon(name, cls = "") {
   return `<svg class="mk-ico${cls ? " " + cls : ""}" aria-hidden="true"><use href="#ico-${name}"/></svg>`;
 }
@@ -32234,16 +32359,28 @@ async function hydrateSignedInFirebaseUser(fbUser) {
             } catch {}
           }
         }
+        if ((!profile.supervisorId && profile.supervisorCodeUsed) || (profile.supervisorId && !profile.supervisorName)) {
+          await repairTeacherSupervisorLinkIfMissing(profile);
+        }
         if (profile.supervisorId) {
-          const remoteSup = await fbDbGet(`users/${profile.supervisorId}`);
+          const [remoteSup, remoteSupMsgs] = await Promise.all([
+            fbDbGet(`users/${profile.supervisorId}`),
+            fbDbGet(`messages/${profile.supervisorId}`)
+          ]);
           if (remoteSup && remoteSup.id) {
             tibyanAccounts.users[profile.supervisorId] = remoteSup;
+            if (!profile.supervisorName && remoteSup.name) profile.supervisorName = remoteSup.name;
+            if (!profile.supervisorBranchName && remoteSup.branchName) profile.supervisorBranchName = remoteSup.branchName;
             profile.inheritedBrand = (profile.supervisorStatus === "approved" && remoteSup.active !== false && remoteSup.licensedOrg?.orgName)
               ? remoteSup.licensedOrg : null;
             tibyanAccounts.users[fbUser.uid] = profile;
-            saveAccountsState();
             merged = true;
           }
+          if (remoteSupMsgs) {
+            tibyanAccounts.messages[profile.supervisorId] = normalizeMessagesArray(remoteSupMsgs);
+            merged = true;
+          }
+          saveAccountsState();
         }
         // Flush ONLY this account's own local offline edits!
         const hasCloudHals = Boolean(metaHals && Object.keys(metaHals).length) || Boolean(remoteHals && Object.keys(remoteHals).some(k => k !== "_syncMeta"));
@@ -32948,6 +33085,9 @@ async function refreshTeacherSupervisorNotifications(showAlert = false, forceRef
     updateTeacherAccountDrawerUI();
     return;
   }
+  if (_fbDb && (!u.supervisorId && u.supervisorCodeUsed)) {
+    await repairTeacherSupervisorLinkIfMissing(u);
+  }
   if (_fbDb && u.supervisorId) {
     _lastTeacherNotifRefreshAt = now;
     const [remoteSup, remoteMsgs, remoteProfile] = await Promise.all([
@@ -32956,15 +33096,21 @@ async function refreshTeacherSupervisorNotifications(showAlert = false, forceRef
       fbDbGet(`users/${u.id}`)
     ]);
     if (remoteProfile && remoteProfile.id) {
+      const keepSupId = u.supervisorId;
+      const keepSupName = u.supervisorName;
       tibyanAccounts.users[u.id] = Object.assign(u, remoteProfile);
+      if (!u.supervisorId && keepSupId && u.supervisorStatus === "approved") u.supervisorId = keepSupId;
+      if (!u.supervisorName && keepSupName) u.supervisorName = keepSupName;
     }
     if (remoteSup && remoteSup.id) {
       tibyanAccounts.users[u.supervisorId] = remoteSup;
+      if (!u.supervisorName && remoteSup.name) u.supervisorName = remoteSup.name;
+      if (!u.supervisorBranchName && remoteSup.branchName) u.supervisorBranchName = remoteSup.branchName;
       u.inheritedBrand = (u.supervisorStatus === "approved" && remoteSup.active !== false && remoteSup.licensedOrg?.orgName)
         ? remoteSup.licensedOrg : null;
       if (typeof renderHeader === "function") renderHeader();
     }
-    if (Array.isArray(remoteMsgs)) tibyanAccounts.messages[u.supervisorId] = remoteMsgs;
+    if (remoteMsgs) tibyanAccounts.messages[u.supervisorId] = normalizeMessagesArray(remoteMsgs);
 
     // v122: Fetch ONLY tiny scalar status & lastUploadAt (~40 bytes!) — NEVER re-download own full snapshot!
     const hals = Object.values(appState.halaqat || {});
@@ -33973,7 +34119,7 @@ async function pollLiveNotificationsOnce(forceInitial = false) {
         fbDbGet(`messages/${u.supervisorId}`),
         u.supervisorStatus !== "approved" ? fbDbGet(`users/${u.id}/supervisorStatus`) : Promise.resolve(u.supervisorStatus)
       ]);
-      const arr = Array.isArray(msgVal) ? msgVal : [];
+      const arr = normalizeMessagesArray(msgVal);
       tibyanAccounts.messages[u.supervisorId] = arr;
       saveAccountsState();
       updateTeacherAccountDrawerUI();
@@ -34111,7 +34257,7 @@ function startLiveNotificationListeners(skipImmediate = false) {
   if (!_fbDb || !_fbAuth?.currentUser) return;
   const u = getCurrentAccountUser();
   if (!u) return;
-  // v144: Instant Real-Time Listener ONLY on tiny config/announcement (~150 bytes -> sub-second delivery, 0 quota overhead!)
+  // v144: Instant Real-Time Listener on tiny config/announcement
   attachFbListener("config/announcement", "value", snap => {
     try {
       const ann = snap?.val?.() || null;
@@ -34121,6 +34267,33 @@ function startLiveNotificationListeners(skipImmediate = false) {
       }
     } catch {}
   });
+  // v151: Instant Real-Time Listener on Supervisor Messages (sub-second delivery to teachers!)
+  if (isUserTeacherCapable(u) && u.supervisorId && u.supervisorStatus === "approved") {
+    let _msgRtFirst = true;
+    const _supIdRt = u.supervisorId;
+    attachFbListener(`messages/${_supIdRt}`, "value", snap => {
+      try {
+        const arr = normalizeMessagesArray(snap?.val?.());
+        tibyanAccounts.messages[_supIdRt] = arr;
+        saveAccountsState();
+        updateTeacherAccountDrawerUI();
+        if (_msgRtFirst) { _msgRtFirst = false; return; }
+        const curU = getCurrentAccountUser();
+        if (!curU) return;
+        const myUnread = arr.filter(m => m && (m.toTeacherId === "all" || m.toTeacherId === curU.id) && !(m.readBy && m.readBy[curU.id]));
+        if (myUnread.length) {
+          const latest = myUnread[0];
+          fireTibyanNotification(
+            `msg_${latest.id || latest.sentAt}`,
+            `📩 رسالة من المشرف: ${latest.title || "تنبيه"}`,
+            String(latest.body || "").slice(0, 120),
+            "📩",
+            () => openTeacherMessagesModal()
+          );
+        }
+      } catch {}
+    });
+  }
   if (!skipImmediate) {
     pollLiveNotificationsOnce(true);
   }
@@ -34875,5 +35048,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v150 -->
+<!-- Makin App v151 -->
 </html>
