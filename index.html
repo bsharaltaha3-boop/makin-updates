@@ -2750,6 +2750,13 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
 .mb-next-st-btn:active{transform:scale(0.98)}
 .mb-sync-bar{display:flex;align-items:center;gap:7px;background:var(--brand-tint);border:1px solid var(--line);border-radius:10px;padding:7px 9px;font-size:11px;font-weight:800;color:var(--brand-slate);cursor:pointer;width:100%;margin-bottom:7px;line-height:1.4}
 .mb-sync-bar input{width:17px;height:17px;accent-color:#16794c;flex-shrink:0}
+/* MAKIN v158: Student Modal Prior Month Progress Tab (خطة الطالب -> رصيد الشهر) */
+.stm-tab-btn{position:relative}
+.stm-tab-dot{position:absolute;top:5px;left:6px;width:7px;height:7px;border-radius:50%;background:var(--green);display:none}
+.stm-tab-btn.has-data .stm-tab-dot{display:block}
+.stm-tab-btn.on .stm-tab-dot{background:#f6dc93}
+.stm-prior-hint{background:var(--brand-tint);border:1px solid var(--line);border-right:3.5px solid #c8a14b;border-radius:10px;padding:7px 9px;font-size:11.2px;font-weight:700;color:var(--ink-700);line-height:1.5;margin-bottom:8px}
+
 </style>
 </head>
 <body>
@@ -3248,10 +3255,6 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
           <span class="drawer-item-l"><span class="drawer-ico-box gold"><svg class="mk-ico" aria-hidden="true"><use href="#ico-sliders"/></svg></span><span>إعدادات الحلقة</span></span>
           <span class="badge b-blue" id="drawerHalaqaRulesBadge" style="font-size:10px;">تخصيص</span>
         </button>
-        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openMonthlyBaselineModal();">
-          <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-edit"/></svg></span><span>رصيد الأيام الماضية (منتصف الشهر)</span></span>
-          <span class="badge b-slate" id="drawerBaselineBadge" style="font-size:10px;">إدخال سريع</span>
-        </button>
       </div>
 
       <div class="drawer-group-lbl">الحساب والتواصل</div>
@@ -3319,7 +3322,7 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-refresh"/></svg></span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v157</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v158</span>
         </button>
       </div>
     </div>
@@ -3892,10 +3895,11 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
     <input type="hidden" id="stTrackInput" value="quran">
     <input type="hidden" id="stExtraMemJuzInput" value="">
 
-    <div class="stm-tabs-bar" style="margin:8px 12px 0; flex-shrink:0;">
+    <div class="stm-tabs-bar" style="margin:8px 12px 0; flex-shrink:0; grid-template-columns:repeat(4, minmax(0, 1fr));">
       <button type="button" class="stm-tab-btn on" id="stmTabBtn_info" onclick="setStudentModalTab('info')"><span class="stb-ico">👤</span><span class="stb-lbl">البيانات</span></button>
       <button type="button" class="stm-tab-btn" id="stmTabBtn_hifz" onclick="setStudentModalTab('hifz')"><span class="stb-ico" id="stmTabIco_hifz">📖</span><span class="stb-lbl">مسار الحفظ</span></button>
       <button type="button" class="stm-tab-btn" id="stmTabBtn_rev" onclick="setStudentModalTab('rev')"><span class="stb-ico">📘</span><span class="stb-lbl">المراجعة</span></button>
+      <button type="button" class="stm-tab-btn" id="stmTabBtn_prior" onclick="setStudentModalTab('prior')"><span class="stm-tab-dot"></span><span class="stb-ico">📊</span><span class="stb-lbl">رصيد الشهر</span></button>
     </div>
 
     <div class="exec-modal-body">
@@ -4117,6 +4121,144 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
             </div>
           </div>
           <div id="stRevPageLiveHint" style="font-size:11.5px; color:var(--ink-500); font-weight:600;"></div>
+        </div>
+      </div>
+
+      <!-- TAB 4: PRIOR MONTH PROGRESS FOR THIS STUDENT (v158 — MID-MONTH JOINERS) -->
+      <div class="stm-pane" id="stmPane_prior">
+        <div class="stm-prior-hint">
+          📌 إذا بدأ الطالب أو الحلقة من منتصف الشهر، أدخل هنا ما حفظه وراجعه ونقاطه السابقة؛ وسيُدمج <b>تلقائياً</b> في التقرير الشهري والإحصائيات.
+        </div>
+
+        <div class="exec-card" style="margin-bottom:8px; padding:9px 10px;">
+          <div style="display:flex; align-items:end; gap:7px;">
+            <div class="field" style="flex:1; margin-bottom:0;">
+              <label style="font-size:11px;">الشهر الهجري</label>
+              <select id="stPriorMonthSelect" onchange="onStPriorMonthChange(this.value)" style="padding:6px 8px; font-size:12.5px; font-weight:800;"></select>
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" style="height:35px; padding:0 10px;" onclick="clearStModalPriorData()">🗑️ مسح</button>
+          </div>
+        </div>
+
+        <!-- Quran Prior Mem -->
+        <div id="stPriorQuranMemBox" class="exec-card" style="margin-bottom:8px; border-right:3.5px solid #15629a;">
+          <div class="mb-sec-ttl">
+            <span>📖 الحفظ بهذا الشهر (حساب تلقائي بالمصحف)</span>
+            <div style="display:flex; gap:4px;">
+              <button type="button" class="mb-mini-act" onclick="stPriorFillFromPlanStart()">📌 من بدايته</button>
+              <button type="button" class="mb-mini-act" onclick="stPriorQuickFullSurah()">⚡ سورة كاملة</button>
+            </div>
+          </div>
+          <div class="mb-surah-pair">
+            <div class="field">
+              <label>من سورة (بداية الشهر)</label>
+              <select id="stPriorFromSurah" onchange="onStPriorSurahChange('from', this.value)"></select>
+            </div>
+            <div class="field">
+              <label id="stPriorFromAyahLbl">من آية</label>
+              <input type="text" inputmode="numeric" id="stPriorFromAyah" placeholder="1" oninput="onStPriorAyahOrRashidiChange()">
+            </div>
+          </div>
+          <div class="mb-surah-pair">
+            <div class="field">
+              <label>إلى سورة (أين وصل الآن)</label>
+              <select id="stPriorToSurah" onchange="onStPriorSurahChange('to', this.value)"></select>
+            </div>
+            <div class="field">
+              <label id="stPriorToAyahLbl">إلى آية</label>
+              <input type="text" inputmode="numeric" id="stPriorToAyah" placeholder="" oninput="onStPriorAyahOrRashidiChange()">
+            </div>
+          </div>
+          <div class="mb-auto-pg-row">
+            <div class="mb-auto-pg-lbl">صفحات الحفظ<small id="stPriorCalcHint">اختر «من» و«إلى» ليحسب الصفحات تلقائياً</small></div>
+            <input type="text" inputmode="decimal" id="stPriorMemPages" class="mb-auto-pg-inp" placeholder="0" oninput="onStPriorManualFieldChange()">
+          </div>
+          <label class="check-inline" style="margin-top:7px; font-size:11.5px;">
+            <input type="checkbox" id="stPriorAutoAdvanceCheck" checked>
+            <span>🔄 إكمال حفظ الطالب تلقائياً من الآية التي تلي «إلى»</span>
+          </label>
+        </div>
+
+        <!-- Rashidi Prior Mem -->
+        <div id="stPriorRashidiMemBox" class="exec-card" style="display:none; margin-bottom:8px; border-right:3.5px solid #6d28d9;">
+          <div class="mb-sec-ttl">
+            <span>🔤 القاعدة الرشيدية بهذا الشهر</span>
+            <button type="button" class="mb-mini-act" onclick="stPriorFillFromPlanStart()">📌 من بدايته</button>
+          </div>
+          <div class="exec-grid-2" style="margin-bottom:6px;">
+            <div class="field"><label style="font-size:10.5px;">من صفحة</label><input type="text" inputmode="numeric" id="stPriorRashidiFrom" style="text-align:center; padding:6px;" placeholder="1" oninput="onStPriorAyahOrRashidiChange()"></div>
+            <div class="field"><label style="font-size:10.5px;">إلى صفحة</label><input type="text" inputmode="numeric" id="stPriorRashidiTo" style="text-align:center; padding:6px;" placeholder="8" oninput="onStPriorAyahOrRashidiChange()"></div>
+          </div>
+          <div class="mb-auto-pg-row">
+            <div class="mb-auto-pg-lbl">صفحات الرشيدي<small id="stPriorRashidiHint">أدخل من ص ← إلى ص ليحسبها تلقائياً</small></div>
+            <input type="text" inputmode="decimal" id="stPriorRashidiPages" class="mb-auto-pg-inp" placeholder="0" oninput="onStPriorManualFieldChange()">
+          </div>
+        </div>
+
+        <!-- Review & Points -->
+        <div class="exec-card" style="margin-bottom:8px; border-right:3.5px solid #c8a14b;">
+          <div class="mb-sec-ttl"><span id="stPriorRevPtsTitle">📘 المراجعة والنقاط بهذا الشهر</span></div>
+          <div class="exec-grid-2" id="stPriorRevPtsGrid">
+            <div class="field" id="stPriorRevCol">
+              <label style="font-size:10.5px;">صفحات المراجعة</label>
+              <input type="text" inputmode="decimal" id="stPriorRevPages" style="padding:6px 8px; text-align:center; font-weight:800; font-size:14px;" placeholder="0" oninput="onStPriorManualFieldChange()">
+              <div class="mb-qadd-row">
+                <button type="button" class="mb-qadd-btn" onclick="stPriorStepField('stPriorRevPages',1)">+1</button>
+                <button type="button" class="mb-qadd-btn" onclick="stPriorStepField('stPriorRevPages',2)">+2</button>
+                <button type="button" class="mb-qadd-btn" onclick="stPriorStepField('stPriorRevPages',5)">+5</button>
+                <button type="button" class="mb-qadd-btn" onclick="stPriorStepField('stPriorRevPages',10)">+10</button>
+              </div>
+            </div>
+            <div class="field" id="stPriorPtsCol">
+              <label style="font-size:10.5px;">النقاط السابقة</label>
+              <input type="text" inputmode="numeric" id="stPriorPoints" style="padding:6px 8px; text-align:center; font-weight:800; font-size:14px;" placeholder="0" oninput="onStPriorManualFieldChange()">
+              <div class="mb-qadd-row">
+                <button type="button" class="mb-qadd-btn" onclick="stPriorStepField('stPriorPoints',10)">+10</button>
+                <button type="button" class="mb-qadd-btn" onclick="stPriorStepField('stPriorPoints',20)">+20</button>
+                <button type="button" class="mb-qadd-btn" onclick="stPriorStepField('stPriorPoints',50)">+50</button>
+                <button type="button" class="mb-qadd-btn" onclick="stPriorStepField('stPriorPoints',100)">+100</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optional Details: Sabr, Period, Attendance, Note -->
+        <div class="exec-card" style="margin-bottom:8px; border-right:3.5px solid #16794c; padding:8px 10px;">
+          <details id="stPriorOptDetails" class="mb-opt-details">
+            <summary>
+              <span>⚙️ تفاصيل إضافية (سبر جزء • حضور وغياب • فترة خاصة • ملاحظة)</span>
+              <span style="font-size:10.5px; color:var(--ink-500);">اختياري ▾</span>
+            </summary>
+
+            <div class="mb-sabr-row" id="stPriorSabrRow">
+              <div class="field"><label style="font-size:10.5px;">سبر جزء سابق</label><select id="stPriorSabrJuz" style="padding:6px 7px; font-size:12px;" onchange="onStPriorManualFieldChange()"></select></div>
+              <div class="field"><label style="font-size:10.5px;">العلامة %</label><input type="text" inputmode="numeric" id="stPriorSabrScore" style="padding:6px 7px; font-size:12.5px; text-align:center; font-weight:800; direction:ltr;" placeholder="98" oninput="onStPriorManualFieldChange()"></div>
+            </div>
+
+            <div class="mb-st-period-box">
+              <div style="font-size:10.8px; font-weight:800; color:var(--brand-slate); margin-bottom:5px;">📅 فترة دوام سابقة لهذا الطالب (حساب تلقائي)</div>
+              <div class="exec-grid-2" style="gap:5px;">
+                <div class="field"><label style="font-size:10px;">من تاريخ</label><input type="date" id="stPriorFromDate" style="padding:4px 5px; font-size:11.5px; direction:ltr; text-align:center;" onchange="onStPriorDateRangeChange()"></div>
+                <div class="field"><label style="font-size:10px;">إلى تاريخ</label><input type="date" id="stPriorToDate" style="padding:4px 5px; font-size:11.5px; direction:ltr; text-align:center;" onchange="onStPriorDateRangeChange()"></div>
+              </div>
+              <div id="stPriorDateHint"></div>
+              <div class="mb-st-period-acts" id="stPriorPeriodBtns">
+                <button type="button" class="g" onclick="stPriorQuickCalcFromPeriod('att')">✓ حضوره</button>
+                <button type="button" id="stPriorCalcRevBtn" onclick="stPriorQuickCalcFromPeriod('rev')">📘 مراجعته</button>
+                <button type="button" id="stPriorCalcPtsBtn" onclick="stPriorQuickCalcFromPeriod('pts')">⭐ نقاطه</button>
+              </div>
+            </div>
+
+            <div class="form-grid" style="grid-template-columns:repeat(3, 1fr); gap:6px; margin-bottom:6px;">
+              <div class="field"><label style="font-size:10.5px;">أيام حضور</label><input type="text" inputmode="numeric" id="stPriorPresentDays" style="padding:5px 7px; font-size:12.5px; text-align:center; font-weight:800;" placeholder="0" oninput="onStPriorManualFieldChange()"></div>
+              <div class="field"><label style="font-size:10.5px;">غياب مبرر</label><input type="text" inputmode="numeric" id="stPriorExcusedDays" style="padding:5px 7px; font-size:12.5px; text-align:center; font-weight:800;" placeholder="0" oninput="onStPriorAbsChange()"></div>
+              <div class="field"><label style="font-size:10.5px;">غياب غير مبرر</label><input type="text" inputmode="numeric" id="stPriorAbsentDays" style="padding:5px 7px; font-size:12.5px; text-align:center; font-weight:800;" placeholder="0" oninput="onStPriorAbsChange()"></div>
+            </div>
+
+            <div class="field" style="margin-bottom:0;">
+              <input type="text" id="stPriorNote" style="padding:5.5px 8px; font-size:11.8px;" placeholder="ملاحظة سابقة اختيارية (تظهر بالتقرير الشهري)..." oninput="onStPriorManualFieldChange()">
+            </div>
+          </details>
         </div>
       </div>
 
@@ -13714,15 +13856,6 @@ function updateDrawerQuickStates() {
   if (mpb && typeof getMonthlyPlanDrawerBadgeText === "function") {
     mpb.textContent = getMonthlyPlanDrawerBadgeText();
   }
-  const bsb = document.getElementById("drawerBaselineBadge");
-  if (bsb) {
-    const hCur = getActiveHalaqa();
-    const curM = getExactHijriInfo(todayISO()).monthLabel;
-    const bSt = hCur?.monthlyBaselines?.[curM]?.students || {};
-    const bCnt = Object.values(bSt).filter(sb => _isMbStudentFilled(sb)).length;
-    bsb.textContent = bCnt > 0 ? `${bCnt} مُدخَل` : "إدخال سريع";
-    bsb.className = "badge " + (bCnt > 0 ? "b-green" : "b-slate");
-  }
   const hrb = document.getElementById("drawerHalaqaRulesBadge");
   if (hrb) {
     const _hR = getActiveHalaqa();
@@ -14735,7 +14868,8 @@ function syncStModalButtons() {
   const hifzTabLbl = document.querySelector("#stmTabBtn_hifz .stb-lbl");
   const hifzTabIco = document.getElementById("stmTabIco_hifz");
   if (revTabBtn) revTabBtn.classList.toggle("is-hidden", isRashidi);
-  if (tabsBar) tabsBar.style.gridTemplateColumns = isRashidi ? "repeat(2, minmax(0, 1fr))" : "repeat(3, minmax(0, 1fr))";
+  if (tabsBar) tabsBar.style.gridTemplateColumns = isRashidi ? "repeat(3, minmax(0, 1fr))" : "repeat(4, minmax(0, 1fr))";
+  if (typeof syncStPriorTrackUI === "function") syncStPriorTrackUI();
   if (hifzTabLbl) hifzTabLbl.textContent = isRashidi ? "الرشيدي" : "مسار الحفظ";
   if (hifzTabIco) hifzTabIco.textContent = isRashidi ? "🔤" : "📖";
   const rPaceVal = parseArabicNum(document.getElementById("stRashidiPaceInput")?.value, 1) || 1;
@@ -14765,6 +14899,10 @@ function setStModalChoice(kind, val) {
     document.getElementById("stDirectionInput").value = val;
     const curSid = document.getElementById("stStartSurahInput").value;
     document.getElementById("stStartSurahInput").innerHTML = surahOptionsHtml(curSid, "-- اختر السورة التي يبدأ بها --", val);
+    const pFSel = document.getElementById("stPriorFromSurah");
+    const pTSel = document.getElementById("stPriorToSurah");
+    if (pFSel) { const v1 = pFSel.value; pFSel.innerHTML = surahOptionsHtml(v1, "-- اختر سورة البداية --", val); _syncStPriorSelectLabel(pFSel); }
+    if (pTSel) { const v2 = pTSel.value; pTSel.innerHTML = surahOptionsHtml(v2, "-- اختر سورة النهاية --", val); _syncStPriorSelectLabel(pTSel); }
   } else if (kind === "pace") {
     document.getElementById("stPaceInput").value = String(val);
   } else if (kind === "revPace") {
@@ -14961,10 +15099,434 @@ function updateStudentModalPreview() {
 function setStudentModalTab(tab) {
   const isRashidi = (document.getElementById("stTrackInput")?.value || "quran") === "rashidi";
   const safeTab = (isRashidi && tab === "rev") ? "hifz" : tab;
-  ["info", "hifz", "rev"].forEach(k => {
+  ["info", "hifz", "rev", "prior"].forEach(k => {
     document.getElementById("stmTabBtn_" + k)?.classList.toggle("on", k === safeTab);
     document.getElementById("stmPane_" + k)?.classList.toggle("active", k === safeTab);
   });
+  if (safeTab === "prior" && typeof syncStPriorTrackUI === "function") syncStPriorTrackUI();
+}
+
+
+// ==================== STUDENT MODAL PRIOR MONTH TAB (v158 — PER-STUDENT IN خطة الطالب) ====================
+let _stPriorActiveMonth = "";
+
+function _syncStPriorSelectLabel(el) {
+  if (el && typeof el._epSyncLabel === "function") { try { el._epSyncLabel(); } catch {} }
+}
+
+function syncStPriorTrackUI() {
+  const h = getActiveHalaqa();
+  const isRashidi = (document.getElementById("stTrackInput")?.value || "quran") === "rashidi";
+  const ptsOn = isPointsEnabled(h);
+  const qBox = document.getElementById("stPriorQuranMemBox");
+  const rBox = document.getElementById("stPriorRashidiMemBox");
+  const revCol = document.getElementById("stPriorRevCol");
+  const ptsCol = document.getElementById("stPriorPtsCol");
+  const revPtsGrid = document.getElementById("stPriorRevPtsGrid");
+  const revPtsTtl = document.getElementById("stPriorRevPtsTitle");
+  const sabrRow = document.getElementById("stPriorSabrRow");
+  const calcRevBtn = document.getElementById("stPriorCalcRevBtn");
+  const calcPtsBtn = document.getElementById("stPriorCalcPtsBtn");
+  const pBtns = document.getElementById("stPriorPeriodBtns");
+
+  if (qBox) qBox.style.display = isRashidi ? "none" : "block";
+  if (rBox) rBox.style.display = isRashidi ? "block" : "none";
+  if (revCol) revCol.style.display = isRashidi ? "none" : "block";
+  if (ptsCol) ptsCol.style.display = ptsOn ? "block" : "none";
+  if (revPtsGrid) {
+    const showBoth = !isRashidi && ptsOn;
+    revPtsGrid.style.gridTemplateColumns = showBoth ? "repeat(2, minmax(0, 1fr))" : "1fr";
+    const card = revPtsGrid.closest(".exec-card");
+    if (card) card.style.display = (!isRashidi || ptsOn) ? "block" : "none";
+  }
+  if (revPtsTtl) {
+    revPtsTtl.textContent = !isRashidi && ptsOn
+      ? "📘 المراجعة والنقاط بهذا الشهر"
+      : (!isRashidi ? "📘 المراجعة بهذا الشهر" : "⭐ النقاط السابقة بهذا الشهر");
+  }
+  if (sabrRow) sabrRow.style.display = isRashidi ? "none" : "grid";
+  if (calcRevBtn) calcRevBtn.style.display = isRashidi ? "none" : "";
+  if (calcPtsBtn) calcPtsBtn.style.display = ptsOn ? "" : "none";
+  if (pBtns) {
+    const cnt = 1 + (isRashidi ? 0 : 1) + (ptsOn ? 1 : 0);
+    pBtns.style.gridTemplateColumns = `repeat(${cnt}, minmax(0, 1fr))`;
+  }
+}
+
+function _readStPriorFormObj() {
+  const isRashidi = (document.getElementById("stTrackInput")?.value || "quran") === "rashidi";
+  const fromSid = document.getElementById("stPriorFromSurah")?.value || "";
+  const toSid = document.getElementById("stPriorToSurah")?.value || "";
+  const s1 = fromSid ? SURAH_MAP[Number(fromSid)] : null;
+  const s2 = toSid ? SURAH_MAP[Number(toSid)] : s1;
+  const fA = s1 ? Math.max(1, Math.min(s1.a, parseArabicNum(document.getElementById("stPriorFromAyah")?.value, 1))) : "";
+  const tA = s2 ? Math.max(1, Math.min(s2.a, parseArabicNum(document.getElementById("stPriorToAyah")?.value, s2.a))) : "";
+  const rf = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorRashidiFrom")?.value, 0)));
+  const rt = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorRashidiTo")?.value, 0)));
+  const rPg = parseArabicNum(document.getElementById("stPriorRashidiPages")?.value, 0);
+  const mPg = isRashidi ? rPg : parseArabicNum(document.getElementById("stPriorMemPages")?.value, 0);
+  const revPg = isRashidi ? 0 : parseArabicNum(document.getElementById("stPriorRevPages")?.value, 0);
+  const pts = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorPoints")?.value, 0)));
+  const sabrJuz = isRashidi ? "" : (document.getElementById("stPriorSabrJuz")?.value || "");
+  const scRaw = toAsciiDigits(document.getElementById("stPriorSabrScore")?.value || "").replace(/[^0-9.]/g, "");
+  const sabrScore = (sabrJuz && scRaw !== "") ? Math.max(0, Math.min(100, Math.round(Number(scRaw)))) : "";
+  const pres = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorPresentDays")?.value, 0)));
+  const exc = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorExcusedDays")?.value, 0)));
+  const abs = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorAbsentDays")?.value, 0)));
+  const note = (document.getElementById("stPriorNote")?.value || "").trim();
+  const fromDate = document.getElementById("stPriorFromDate")?.value || "";
+  const toDate = document.getElementById("stPriorToDate")?.value || "";
+
+  const fromMem = isRashidi ? (rf ? `الرشيدي ص ${rf}` : "") : (s1 ? `${s1.n} - ${fA}` : "");
+  const toMem = isRashidi ? (rt ? `الرشيدي ص ${rt}` : (rf ? `الرشيدي ص ${rf}` : "")) : (s2 ? `${s2.n} - ${tA}` : "");
+
+  return {
+    fromMem, toMem,
+    fromSurahId: isRashidi ? "" : fromSid,
+    fromAyah: isRashidi ? "" : fA,
+    toSurahId: isRashidi ? "" : (s2 ? String(s2.id) : ""),
+    toAyah: isRashidi ? "" : tA,
+    rashidiFrom: isRashidi ? (rf || "") : "",
+    rashidiTo: isRashidi ? (rt || "") : "",
+    rashidiPages: isRashidi ? rPg : 0,
+    memPages: mPg,
+    revPages: revPg,
+    points: pts,
+    presentDays: pres,
+    excusedDays: exc,
+    absentDays: abs,
+    sabrJuz, sabrScore, note,
+    fromDate, toDate
+  };
+}
+
+function _refreshStPriorTabDot() {
+  const obj = _readStPriorFormObj();
+  const hasAny = _isMbStudentFilled(obj);
+  document.getElementById("stmTabBtn_prior")?.classList.toggle("has-data", hasAny);
+}
+
+function initStudentModalPriorSection(stId, dir) {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const todayHj = getExactHijriInfo(todayISO());
+  const months = _getAvailableBaselineMonths(h);
+  const targetM = todayHj.monthLabel;
+  if (!months.includes(targetM)) months.unshift(targetM);
+  _stPriorActiveMonth = targetM;
+
+  const mSel = document.getElementById("stPriorMonthSelect");
+  if (mSel) {
+    mSel.innerHTML = months.map(m => `<option value="${escapeHtml(m)}" ${m === targetM ? 'selected' : ''}>${escapeHtml(m)} هـ</option>`).join("");
+    mSel.value = targetM;
+    _syncStPriorSelectLabel(mSel);
+  }
+  loadStPriorMonthFields(stId, targetM, dir);
+}
+
+function loadStPriorMonthFields(stId, monthLbl, forcedDir = "") {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  _stPriorActiveMonth = monthLbl || getExactHijriInfo(todayISO()).monthLabel;
+  const dir = forcedDir || document.getElementById("stDirectionInput")?.value || h.defaultDir || "desc";
+  const rawB = (stId && h.monthlyBaselines?.[_stPriorActiveMonth]?.students?.[stId])
+    ? JSON.parse(JSON.stringify(h.monthlyBaselines[_stPriorActiveMonth].students[stId]))
+    : {};
+
+  if (!rawB.fromSurahId && rawB.fromMem) {
+    const p1 = _parseBaselineSurahText(rawB.fromMem);
+    if (p1.surahId) { rawB.fromSurahId = p1.surahId; rawB.fromAyah = p1.ayah || 1; }
+  }
+  if (!rawB.toSurahId && rawB.toMem) {
+    const p2 = _parseBaselineSurahText(rawB.toMem);
+    if (p2.surahId) { rawB.toSurahId = p2.surahId; rawB.toAyah = p2.ayah || SURAH_MAP[Number(p2.surahId)]?.a || 1; }
+  }
+
+  const fSel = document.getElementById("stPriorFromSurah");
+  const tSel = document.getElementById("stPriorToSurah");
+  if (fSel) {
+    fSel.innerHTML = surahOptionsHtml(rawB.fromSurahId || "", "-- اختر سورة البداية --", dir);
+    fSel.value = rawB.fromSurahId || "";
+    _syncStPriorSelectLabel(fSel);
+  }
+  if (tSel) {
+    tSel.innerHTML = surahOptionsHtml(rawB.toSurahId || "", "-- اختر سورة النهاية --", dir);
+    tSel.value = rawB.toSurahId || "";
+    _syncStPriorSelectLabel(tSel);
+  }
+  const s1 = rawB.fromSurahId ? SURAH_MAP[Number(rawB.fromSurahId)] : null;
+  const s2 = rawB.toSurahId ? SURAH_MAP[Number(rawB.toSurahId)] : null;
+  const fALbl = document.getElementById("stPriorFromAyahLbl");
+  const tALbl = document.getElementById("stPriorToAyahLbl");
+  if (fALbl) fALbl.textContent = `من آية${s1 ? ` (1–${s1.a})` : ""}`;
+  if (tALbl) tALbl.textContent = `إلى آية${s2 ? ` (1–${s2.a})` : ""}`;
+
+  const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.value = (v !== undefined && v !== null && v !== 0 && v !== "0") ? String(v) : ""; };
+  setVal("stPriorFromAyah", rawB.fromAyah || "");
+  setVal("stPriorToAyah", rawB.toAyah || "");
+  setVal("stPriorMemPages", rawB.memPages || "");
+  setVal("stPriorRashidiFrom", rawB.rashidiFrom || "");
+  setVal("stPriorRashidiTo", rawB.rashidiTo || "");
+  setVal("stPriorRashidiPages", rawB.rashidiPages || "");
+  setVal("stPriorRevPages", rawB.revPages || "");
+  setVal("stPriorPoints", rawB.points || "");
+  setVal("stPriorSabrScore", rawB.sabrScore !== undefined && rawB.sabrScore !== "" ? rawB.sabrScore : "");
+  setVal("stPriorFromDate", rawB.fromDate || "");
+  setVal("stPriorToDate", rawB.toDate || "");
+  setVal("stPriorPresentDays", rawB.presentDays || "");
+  setVal("stPriorExcusedDays", rawB.excusedDays || "");
+  setVal("stPriorAbsentDays", rawB.absentDays || "");
+  const nEl = document.getElementById("stPriorNote");
+  if (nEl) nEl.value = rawB.note || "";
+
+  const sjSel = document.getElementById("stPriorSabrJuz");
+  if (sjSel) {
+    sjSel.innerHTML = juzOptionsHtml(rawB.sabrJuz || "");
+    sjSel.value = rawB.sabrJuz || "";
+    _syncStPriorSelectLabel(sjSel);
+  }
+  const advCb = document.getElementById("stPriorAutoAdvanceCheck");
+  if (advCb) advCb.checked = true;
+
+  const hintEl = document.getElementById("stPriorCalcHint");
+  if (hintEl) {
+    hintEl.textContent = (s1 && s2)
+      ? `✓ بالمصحف (${s1.n} - ${rawB.fromAyah || 1} ← ${s2.n} - ${rawB.toAyah || s2.a})`
+      : "اختر «من» و«إلى» ليحسب الصفحات تلقائياً";
+  }
+  const rHint = document.getElementById("stPriorRashidiHint");
+  if (rHint) rHint.textContent = rawB.rashidiPages > 0 ? `✓ حُسبت تلقائياً (${rawB.rashidiPages} ص)` : "أدخل من ص ← إلى ص ليحسبها تلقائياً";
+
+  const optDet = document.getElementById("stPriorOptDetails");
+  if (optDet) optDet.open = _hasMbStudentOptData(rawB);
+
+  onStPriorDateRangeChange(false);
+  syncStPriorTrackUI();
+  _refreshStPriorTabDot();
+}
+
+function onStPriorMonthChange(monthLbl) {
+  const stId = (document.getElementById("stEditId")?.value || "").trim();
+  loadStPriorMonthFields(stId, monthLbl);
+}
+
+function onStPriorSurahChange(which, sidVal) {
+  const sObj = sidVal ? SURAH_MAP[Number(sidVal)] : null;
+  if (which === "from") {
+    const fAEl = document.getElementById("stPriorFromAyah");
+    if (fAEl) fAEl.value = sObj ? "1" : "";
+    const fLbl = document.getElementById("stPriorFromAyahLbl");
+    if (fLbl) fLbl.textContent = `من آية${sObj ? ` (1–${sObj.a})` : ""}`;
+    const tSel = document.getElementById("stPriorToSurah");
+    if (sObj && tSel && !tSel.value) {
+      tSel.value = String(sObj.id);
+      _syncStPriorSelectLabel(tSel);
+      const tAEl = document.getElementById("stPriorToAyah");
+      if (tAEl) tAEl.value = String(sObj.a);
+      const tLbl = document.getElementById("stPriorToAyahLbl");
+      if (tLbl) tLbl.textContent = `إلى آية (1–${sObj.a})`;
+    }
+  } else {
+    const tAEl = document.getElementById("stPriorToAyah");
+    if (tAEl) tAEl.value = sObj ? String(sObj.a) : "";
+    const tLbl = document.getElementById("stPriorToAyahLbl");
+    if (tLbl) tLbl.textContent = `إلى آية${sObj ? ` (1–${sObj.a})` : ""}`;
+  }
+  onStPriorAyahOrRashidiChange();
+}
+
+function onStPriorAyahOrRashidiChange() {
+  const isRashidi = (document.getElementById("stTrackInput")?.value || "quran") === "rashidi";
+  if (isRashidi) {
+    const rf = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorRashidiFrom")?.value, 0)));
+    const rt = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorRashidiTo")?.value, 0)));
+    const pgEl = document.getElementById("stPriorRashidiPages");
+    const hEl = document.getElementById("stPriorRashidiHint");
+    let pg = 0;
+    if (rf > 0 && rt >= rf) pg = Math.max(1, rt - rf + 1);
+    else if (rf > 0 && !rt) pg = 1;
+    if (pgEl) pgEl.value = pg || "";
+    if (hEl) hEl.textContent = pg > 0 ? `✓ حُسبت تلقائياً (${pg} ص)` : "أدخل من ص ← إلى ص ليحسبها تلقائياً";
+    _refreshStPriorTabDot();
+    return;
+  }
+  const fSid = document.getElementById("stPriorFromSurah")?.value || "";
+  const tSid = document.getElementById("stPriorToSurah")?.value || fSid;
+  const s1 = fSid ? SURAH_MAP[Number(fSid)] : null;
+  const s2 = tSid ? SURAH_MAP[Number(tSid)] : s1;
+  const pgEl = document.getElementById("stPriorMemPages");
+  const hEl = document.getElementById("stPriorCalcHint");
+  if (s1 && s2) {
+    const f1 = Math.max(1, Math.min(s1.a, parseArabicNum(document.getElementById("stPriorFromAyah")?.value, 1)));
+    let t2 = Math.max(1, Math.min(s2.a, parseArabicNum(document.getElementById("stPriorToAyah")?.value, s2.a)));
+    if (s2.id === s1.id && t2 < f1) t2 = f1;
+    const snapped = snapCleanPages(calcRawRangePages(s1.id, f1, t2, s2.id));
+    if (pgEl) pgEl.value = snapped || "";
+    if (hEl) hEl.textContent = `✓ بالمصحف (${s1.n} - ${f1} ← ${s2.n} - ${t2})`;
+  } else {
+    if (hEl) hEl.textContent = "اختر «من» و«إلى» ليحسب الصفحات تلقائياً";
+  }
+  _refreshStPriorTabDot();
+}
+
+function stPriorFillFromPlanStart() {
+  const isRashidi = (document.getElementById("stTrackInput")?.value || "quran") === "rashidi";
+  if (isRashidi) {
+    const p = Math.max(1, Math.round(parseArabicNum(document.getElementById("stRashidiPageInput")?.value, 1)));
+    const fEl = document.getElementById("stPriorRashidiFrom");
+    const tEl = document.getElementById("stPriorRashidiTo");
+    if (fEl) fEl.value = String(p);
+    if (tEl && !tEl.value) tEl.value = String(p);
+    onStPriorAyahOrRashidiChange();
+    return;
+  }
+  const dir = document.getElementById("stDirectionInput")?.value || "desc";
+  const sid = document.getElementById("stStartSurahInput")?.value || (dir === "asc" ? "2" : "114");
+  const sObj = SURAH_MAP[Number(sid)];
+  if (!sObj) return;
+  const aVal = Math.max(1, Math.min(sObj.a, parseArabicNum(document.getElementById("stStartAyahInput")?.value, 1)));
+  const fSel = document.getElementById("stPriorFromSurah");
+  if (fSel) { fSel.value = String(sObj.id); _syncStPriorSelectLabel(fSel); }
+  const fA = document.getElementById("stPriorFromAyah");
+  if (fA) fA.value = String(aVal);
+  const fLbl = document.getElementById("stPriorFromAyahLbl");
+  if (fLbl) fLbl.textContent = `من آية (1–${sObj.a})`;
+  const tSel = document.getElementById("stPriorToSurah");
+  if (tSel && !tSel.value) {
+    tSel.value = String(sObj.id);
+    _syncStPriorSelectLabel(tSel);
+    const tA = document.getElementById("stPriorToAyah");
+    if (tA) tA.value = String(sObj.a);
+    const tLbl = document.getElementById("stPriorToAyahLbl");
+    if (tLbl) tLbl.textContent = `إلى آية (1–${sObj.a})`;
+  }
+  onStPriorAyahOrRashidiChange();
+}
+
+function stPriorQuickFullSurah() {
+  const dir = document.getElementById("stDirectionInput")?.value || "desc";
+  const sid = document.getElementById("stPriorFromSurah")?.value || document.getElementById("stStartSurahInput")?.value || (dir === "asc" ? "2" : "114");
+  const sObj = SURAH_MAP[Number(sid)];
+  if (!sObj) return;
+  const fSel = document.getElementById("stPriorFromSurah");
+  const tSel = document.getElementById("stPriorToSurah");
+  if (fSel) { fSel.value = String(sObj.id); _syncStPriorSelectLabel(fSel); }
+  if (tSel) { tSel.value = String(sObj.id); _syncStPriorSelectLabel(tSel); }
+  const fA = document.getElementById("stPriorFromAyah");
+  const tA = document.getElementById("stPriorToAyah");
+  if (fA) fA.value = "1";
+  if (tA) tA.value = String(sObj.a);
+  const fLbl = document.getElementById("stPriorFromAyahLbl");
+  const tLbl = document.getElementById("stPriorToAyahLbl");
+  if (fLbl) fLbl.textContent = `من آية (1–${sObj.a})`;
+  if (tLbl) tLbl.textContent = `إلى آية (1–${sObj.a})`;
+  onStPriorAyahOrRashidiChange();
+}
+
+function stPriorStepField(inputId, delta) {
+  const el = document.getElementById(inputId);
+  if (!el) return;
+  const cur = parseArabicNum(el.value, 0);
+  const nxt = Math.max(0, Math.round((cur + delta) * 100) / 100);
+  el.value = nxt || "";
+  _refreshStPriorTabDot();
+}
+
+function onStPriorDateRangeChange(autoFillAtt = true) {
+  const h = getActiveHalaqa();
+  const f = document.getElementById("stPriorFromDate")?.value || "";
+  const t = document.getElementById("stPriorToDate")?.value || "";
+  const stats = _countClassDaysInRange(h, f, t);
+  const hint = document.getElementById("stPriorDateHint");
+  if (hint) {
+    hint.innerHTML = stats
+      ? `<div style="font-size:10.5px; font-weight:700; color:var(--blue); margin-top:4px;">📊 دوام هذه الفترة: <b>${stats.total}</b> يوم (${stats.daily} تسميع + ${stats.rev} مراجعة)</div>`
+      : "";
+  }
+  if (autoFillAtt && stats) {
+    const days = stats.unrecorded > 0 ? stats.unrecorded : stats.total;
+    const exc = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorExcusedDays")?.value, 0)));
+    const abs = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorAbsentDays")?.value, 0)));
+    const pEl = document.getElementById("stPriorPresentDays");
+    if (pEl) pEl.value = String(Math.max(0, days - exc - abs));
+  }
+  _refreshStPriorTabDot();
+}
+
+function onStPriorAbsChange() {
+  const h = getActiveHalaqa();
+  const f = document.getElementById("stPriorFromDate")?.value || "";
+  const t = document.getElementById("stPriorToDate")?.value || "";
+  const stats = _countClassDaysInRange(h, f, t);
+  if (stats) {
+    const days = stats.unrecorded > 0 ? stats.unrecorded : stats.total;
+    const exc = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorExcusedDays")?.value, 0)));
+    const abs = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorAbsentDays")?.value, 0)));
+    const pEl = document.getElementById("stPriorPresentDays");
+    if (pEl) pEl.value = String(Math.max(0, days - exc - abs));
+  }
+  _refreshStPriorTabDot();
+}
+
+function stPriorQuickCalcFromPeriod(kind) {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const f = document.getElementById("stPriorFromDate")?.value || "";
+  const t = document.getElementById("stPriorToDate")?.value || "";
+  const stats = _countClassDaysInRange(h, f, t);
+  const days = stats ? (stats.unrecorded > 0 ? stats.unrecorded : stats.total) : 0;
+  if (kind === "att") {
+    if (!days) { showToast("اختر «من تاريخ» و«إلى تاريخ» أولاً"); return; }
+    const exc = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorExcusedDays")?.value, 0)));
+    const abs = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorAbsentDays")?.value, 0)));
+    const pEl = document.getElementById("stPriorPresentDays");
+    if (pEl) pEl.value = String(Math.max(0, days - exc - abs));
+    showToast(`✓ أيام حضور الطالب: ${Math.max(0, days - exc - abs)}`);
+  } else if (kind === "rev") {
+    const revSess = stats ? Math.max(1, stats.rev) : 1;
+    const revPace = Math.max(1, Number(document.getElementById("stRevPaceInput")?.value || h.defaultRevPace || 2));
+    const val = Math.round(revSess * revPace * 100) / 100;
+    const rEl = document.getElementById("stPriorRevPages");
+    if (rEl) rEl.value = String(val);
+    showToast(`📘 صفحات المراجعة المقدّرة: ${val} ص`);
+  } else if (kind === "pts") {
+    const isRashidi = (document.getElementById("stTrackInput")?.value || "quran") === "rashidi";
+    const mPg = parseArabicNum(document.getElementById(isRashidi ? "stPriorRashidiPages" : "stPriorMemPages")?.value, 0);
+    const rPg = isRashidi ? 0 : parseArabicNum(document.getElementById("stPriorRevPages")?.value, 0);
+    const pres = Math.max(0, Math.round(parseArabicNum(document.getElementById("stPriorPresentDays")?.value, 0)));
+    const sabrBonus = (!isRashidi && document.getElementById("stPriorSabrJuz")?.value) ? 20 : 0;
+    const est = Math.round((mPg * 4) + (rPg * 2) + (pres * 2) + sabrBonus);
+    const ptEl = document.getElementById("stPriorPoints");
+    if (ptEl) ptEl.value = est || "";
+    showToast(est > 0 ? `⭐ النقاط المقدّرة: ${est}` : "أدخل الحفظ أو الحضور أولاً");
+  }
+  _refreshStPriorTabDot();
+}
+
+function onStPriorManualFieldChange() {
+  _refreshStPriorTabDot();
+}
+
+function clearStModalPriorData() {
+  const dir = document.getElementById("stDirectionInput")?.value || "desc";
+  const fSel = document.getElementById("stPriorFromSurah");
+  const tSel = document.getElementById("stPriorToSurah");
+  if (fSel) { fSel.innerHTML = surahOptionsHtml("", "-- اختر سورة البداية --", dir); _syncStPriorSelectLabel(fSel); }
+  if (tSel) { tSel.innerHTML = surahOptionsHtml("", "-- اختر سورة النهاية --", dir); _syncStPriorSelectLabel(tSel); }
+  ["stPriorFromAyah","stPriorToAyah","stPriorMemPages","stPriorRashidiFrom","stPriorRashidiTo","stPriorRashidiPages","stPriorRevPages","stPriorPoints","stPriorSabrScore","stPriorFromDate","stPriorToDate","stPriorPresentDays","stPriorExcusedDays","stPriorAbsentDays","stPriorNote"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "";
+  });
+  const sj = document.getElementById("stPriorSabrJuz");
+  if (sj) { sj.value = ""; _syncStPriorSelectLabel(sj); }
+  const h1 = document.getElementById("stPriorCalcHint");
+  if (h1) h1.textContent = "اختر «من» و«إلى» ليحسب الصفحات تلقائياً";
+  const h2 = document.getElementById("stPriorRashidiHint");
+  if (h2) h2.textContent = "أدخل من ص ← إلى ص ليحسبها تلقائياً";
+  const dh = document.getElementById("stPriorDateHint");
+  if (dh) dh.innerHTML = "";
+  _refreshStPriorTabDot();
+  showToast("تم مسح رصيد الشهر لهذا الطالب (اضغط «حفظ خطة الطالب» للاعتماد)");
 }
 
 function openAddStudentModal() {
@@ -14999,6 +15561,7 @@ function openAddStudentModal() {
   const applyCb = document.getElementById("stApplyToSessionCheck");
   if (applyCb) applyCb.checked = true;
   const _optDr = document.getElementById("stmOptInfoDrawer"); if (_optDr) _optDr.open = false;
+  initStudentModalPriorSection("", dir);
   setStudentModalTab("info");
   syncStModalButtons();
   updateStudentModalPreview();
@@ -15058,6 +15621,7 @@ function openEditStudentModal(id) {
   const applyCb = document.getElementById("stApplyToSessionCheck");
   if (applyCb) applyCb.checked = true;
   const _optDrE = document.getElementById("stmOptInfoDrawer"); if (_optDrE) _optDrE.open = Boolean(st.age || st.schoolGrade || st.parentName || st.bioNotes);
+  initStudentModalPriorSection(st.id, dir);
   setStudentModalTab("info");
   syncStModalButtons();
   updateStudentModalPreview();
@@ -15118,19 +15682,73 @@ function saveStudentModal() {
       h.students.push(savedSt);
     }
 
+    // v158: Save per-student prior month progress (رصيد الشهر) directly from خطة الطالب!
+    let effStartSid = startSurahId;
+    let effStartAyah = startFromAyah;
+    let effRashidiPage = rashidiPage;
+    const priorMonthLbl = (document.getElementById("stPriorMonthSelect")?.value || _stPriorActiveMonth || getExactHijriInfo(todayISO()).monthLabel).trim();
+    const priorObj = _readStPriorFormObj();
+    const priorHasData = _isMbStudentFilled(priorObj);
+    if (priorMonthLbl && priorMonthLbl !== "ALL") {
+      if (priorHasData) {
+        const bMonthObj = getMonthBaselineObj(h, priorMonthLbl);
+        bMonthObj.students[savedSt.id] = priorObj;
+        // Sync Sabr Juz to memorized Juz list
+        if (priorObj.sabrJuz && savedSt.track !== "rashidi") {
+          const jObj = getJuzByName(priorObj.sabrJuz);
+          if (jObj) {
+            if (!Array.isArray(savedSt.extraMemJuzIds)) savedSt.extraMemJuzIds = [];
+            if (!savedSt.extraMemJuzIds.includes(jObj.id)) {
+              savedSt.extraMemJuzIds.push(jObj.id);
+              savedSt.extraMemJuzIds.sort((a, c) => a - c);
+            }
+          }
+        }
+        // Sync prior points into active Points Cycle so Stats/Leaderboard include them automatically
+        if (isPointsEnabled(h) && priorObj.points > 0) {
+          const pc = ensurePointsConfig(h);
+          if (pc) pc.pastPoints[savedSt.id] = priorObj.points;
+        }
+        // Optional auto-advance starting point right after "إلى" (if student has no graded daily session yet in this month)
+        const autoAdv = Boolean(document.getElementById("stPriorAutoAdvanceCheck")?.checked);
+        const hasGradedDailyInPriorM = (h.sessions || []).some(s =>
+          s && !s.noClass && s.type === "daily" && getSessionReportMonth(s) === priorMonthLbl &&
+          s.records?.[savedSt.id]?.recEval && s.records[savedSt.id].recEval !== "إعادة"
+        );
+        if (autoAdv && !hasGradedDailyInPriorM) {
+          if (savedSt.track === "rashidi" && parseArabicNum(priorObj.rashidiTo, 0) > 0) {
+            effRashidiPage = Math.min(85, Math.round(parseArabicNum(priorObj.rashidiTo, 1)) + 1);
+            savedSt.rashidiPage = effRashidiPage;
+          } else if (savedSt.track !== "rashidi" && priorObj.toSurahId && SURAH_MAP[Number(priorObj.toSurahId)]) {
+            const s2 = SURAH_MAP[Number(priorObj.toSurahId)];
+            const t2 = Math.max(1, Math.min(s2.a, parseArabicNum(priorObj.toAyah, s2.a)));
+            const nextHw = computeNextHomework(s2.id, t2, t2, null, direction, pace);
+            if (nextHw?.hwSurahId) {
+              effStartSid = String(nextHw.hwSurahId);
+              effStartAyah = Math.max(1, parseArabicNum(nextHw.hwFrom, 1));
+              savedSt.startSurahId = effStartSid;
+              savedSt.startFromAyah = effStartAyah;
+            }
+          }
+        }
+      } else if (h.monthlyBaselines?.[priorMonthLbl]?.students?.[savedSt.id]) {
+        delete h.monthlyBaselines[priorMonthLbl].students[savedSt.id];
+      }
+    }
+
     const curS = getCurrentSession();
     if (applyNow && curS && savedSt) {
       const r = getStudentRecord(curS, savedSt.id);
       if (savedSt.track === "rashidi" && !r.recEval && !(r.attendance && String(r.attendance || "").includes("غياب"))) {
-        r.rashidiFrom = rashidiPage;
-        r.rashidiTo = Math.min(85, rashidiPage + Math.max(0, Math.ceil(rashidiPace) - 1));
+        r.rashidiFrom = effRashidiPage;
+        r.rashidiTo = Math.min(85, effRashidiPage + Math.max(0, Math.ceil(rashidiPace) - 1));
         r.rashidiPages = rashidiPace;
         r.dRevSurahId = ""; r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevPages = 0; r.dRevExtras = [];
         r.sabrJuz = ""; r.recIsSabr = false; r.minText = ""; r.minEval = ""; r.majFrom = ""; r.majTo = ""; r.majEval = "";
       } else if (curS.type === "daily" && !r.recEval && !(r.attendance && String(r.attendance || "").includes("غياب"))) {
-        if (startSurahId && SURAH_MAP[Number(startSurahId)]) {
-          const s0 = SURAH_MAP[Number(startSurahId)];
-          const fA = Math.max(1, Math.min(s0.a, startFromAyah));
+        if (effStartSid && SURAH_MAP[Number(effStartSid)]) {
+          const s0 = SURAH_MAP[Number(effStartSid)];
+          const fA = Math.max(1, Math.min(s0.a, effStartAyah));
           const rem = s0.a - fA + 1;
           const targetA = Math.max(3, Math.round(pace * (s0.a / Math.max(0.2, s0.l))));
           const tA = (rem <= targetA * 1.25) ? s0.a : Math.min(s0.a, fA + targetA - 1);
@@ -15175,7 +15793,9 @@ function saveStudentModal() {
     renderHeader();
     if (typeof renderStudentsTab === "function") renderStudentsTab();
     if (typeof renderSessionPreservingScroll === "function") renderSessionPreservingScroll(true);
-    showToast(`✓ تم حفظ خطة الطالب «${name}» بنجاح`);
+    if (typeof renderMonthlyReport === "function") renderMonthlyReport();
+    if (typeof renderStats === "function") renderStats();
+    showToast(priorHasData ? `✓ تم حفظ خطة الطالب «${name}» ودمج رصيد الشهر بالتقرير` : `✓ تم حفظ خطة الطالب «${name}» بنجاح`);
   } catch (err) {
     console.error("saveStudentModal error:", err);
     showToast("⚠️ تعذّر الحفظ: " + (err?.message || "خطأ غير متوقع"));
@@ -16928,11 +17548,6 @@ function openDayOptionsModal() {
         <span>📚 دروس ونشاطات الجلسة (استهداء • حديث • نشاطات)</span>
         <span>${getSessionLessonsList(s).length ? '✓' : '+'}</span>
       </button>
-      ${isPointsEnabled(getActiveHalaqa()) ? `
-      <button type="button" class="day-opt-btn" style="color:${s.pointsZeroed ? 'var(--green)' : 'var(--red)'}; border-color:${s.pointsZeroed ? 'rgba(22,121,76,0.32)' : 'rgba(185,34,34,0.28)'}; background:${s.pointsZeroed ? 'var(--green-bg)' : 'var(--red-bg)'};" onclick="closeModal('dayOptionsModal'); toggleZeroCurrentSessionPoints();">
-        <span>${s.pointsZeroed ? '⭐ إلغاء التصفير وإعادة احتساب نقاط هذا اليوم' : '🔄 تصفير نقاط جميع الطلاب لهذا اليوم فقط (0)'}</span>
-        <span>${s.pointsZeroed ? '↺' : '0'}</span>
-      </button>` : ''}
       <button type="button" class="day-opt-btn" style="color:var(--orange); border-color:rgba(184,86,16,0.3); background:var(--orange-bg);" onclick="closeModal('dayOptionsModal'); resetCurrentSessionEvaluations();">
         <span>🔄 إزالة تقييم جميع الطلاب (البدء من جديد)</span>
         <span>↺</span>
@@ -22837,7 +23452,7 @@ function mbQuickFillFromStudentStart(stId) {
   if (!st) return;
   const b = _ensureMbStudentObj(stId);
   if (st.track === "rashidi") {
-    b.rashidiFrom = Math.max(1, Number(st.rashidiStartPage) || 1);
+    b.rashidiFrom = Math.max(1, Number(st.rashidiPage) || 1);
     if (!b.rashidiTo) b.rashidiTo = b.rashidiFrom;
     _recalcMbStudentPages(stId, false);
     renderMonthlyBaselineList();
@@ -22847,7 +23462,7 @@ function mbQuickFillFromStudentStart(stId) {
   const sObj = SURAH_MAP[Number(sid)];
   if (!sObj) return;
   b.fromSurahId = String(sObj.id);
-  b.fromAyah = Math.max(1, Math.min(sObj.a, Number(st.startAyah) || 1));
+  b.fromAyah = Math.max(1, Math.min(sObj.a, Number(st.startFromAyah) || 1));
   if (!b.toSurahId) {
     b.toSurahId = String(sObj.id);
     b.toAyah = sObj.a;
@@ -23131,7 +23746,7 @@ function saveMonthlyBaseline() {
       });
       if (!hasDailyInMonth) {
         if (st.track === "rashidi" && parseArabicNum(b.rashidiTo, 0) > 0) {
-          st.rashidiStartPage = Math.min(85, Math.round(parseArabicNum(b.rashidiTo, 1)) + 1);
+          st.rashidiPage = Math.min(85, Math.round(parseArabicNum(b.rashidiTo, 1)) + 1);
           changed = true;
         } else if (st.track !== "rashidi" && b.toSurahId && SURAH_MAP[Number(b.toSurahId)]) {
           const s2 = SURAH_MAP[Number(b.toSurahId)];
@@ -23140,7 +23755,7 @@ function saveMonthlyBaseline() {
           const nextHw = computeNextHomework(s2.id, t2, t2, null, dir, Number(st.pace) || 0.5);
           if (nextHw?.hwSurahId) {
             st.startSurahId = String(nextHw.hwSurahId);
-            st.startAyah = Math.max(1, parseArabicNum(nextHw.hwFrom, 1));
+            st.startFromAyah = Math.max(1, parseArabicNum(nextHw.hwFrom, 1));
             changed = true;
           }
         }
@@ -32764,25 +33379,7 @@ function renderHalaqaSettingsModal() {
   const alertThr = Number(h.parentAlertThreshold) || 3;
   const seqLock = h.sequentialDayLock !== false;
 
-  const _curBaseMonth = getExactHijriInfo(todayISO()).monthLabel;
-  const _curBaseObj = h.monthlyBaselines?.[_curBaseMonth];
-  const _curBaseCnt = _curBaseObj?.students
-    ? Object.values(_curBaseObj.students).filter(sb => sb && (sb.fromMem || sb.toMem || parseArabicNum(sb.memPages, 0) > 0 || parseArabicNum(sb.revPages, 0) > 0 || parseArabicNum(sb.points, 0) > 0 || sb.sabrJuz || parseArabicNum(sb.presentDays, 0) > 0 || parseArabicNum(sb.excusedDays, 0) > 0 || parseArabicNum(sb.absentDays, 0) > 0)).length
-    : 0;
-
   body.innerHTML = `
-    <div class="exec-card" style="border-right:4px solid #c8a14b;">
-      <div class="exec-card-ttl">
-        <span>📝 رصيد الأيام الماضية (إنجاز سابق للطلاب)</span>
-        <span class="badge ${_curBaseCnt > 0 ? 'b-green' : 'b-slate'}" style="font-size:10.5px;">${_curBaseCnt > 0 ? `${_curBaseCnt} طالب محفوظ` : escapeHtml(_curBaseMonth)}</span>
-      </div>
-      <div style="font-size:11.5px; color:var(--ink-700); line-height:1.55; margin-bottom:8px;">
-        أدخل لكل طالب رصيده السابق في الشهر (بداية ونهاية الحفظ، صفحات الحفظ والمراجعة، النقاط، الأجزاء المسبورة، وأيام الحضور والغياب) ليُدمج تلقائياً في التقارير والإحصائيات.
-      </div>
-      <button type="button" class="btn btn-primary btn-sm" style="width:100%; padding:9px 12px;" onclick="closeModal('halaqaRulesModal'); openMonthlyBaselineModal();">
-        📝 فتح رصيد الأيام الماضية وتعديل بيانات الطلاب
-      </button>
-    </div>
 
     <div class="exec-card">
       <div class="exec-card-ttl"><span>⭐ النقاط والتحفيز</span></div>
@@ -33353,7 +33950,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v157";
+const TIBYAN_APP_VERSION = "v158";
 function mkIcon(name, cls = "") {
   return `<svg class="mk-ico${cls ? " " + cls : ""}" aria-hidden="true"><use href="#ico-${name}"/></svg>`;
 }
@@ -36407,5 +37004,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v157 -->
+<!-- Makin App v158 -->
 </html>
