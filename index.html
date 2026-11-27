@@ -3232,7 +3232,7 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-refresh"/></svg></span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v152</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v154</span>
         </button>
       </div>
     </div>
@@ -4070,32 +4070,48 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
   </div>
 </div>
 
-<!-- ===== MODAL: MONTHLY BASELINE (PRIOR DAYS OF THE MONTH) ===== -->
-<div class="modal-backdrop" id="monthBaselineModal">
-  <div class="modal-box" style="max-width:600px;">
-    <div class="modal-header">
-      <h3 id="mbModalTitle">📝 رصيد الأيام الماضية من الشهر</h3>
-      <button class="close-x" onclick="closeModal('monthBaselineModal')">×</button>
-    </div>
-    <p style="font-size:12.5px; color:var(--ink-700); background:#f4f7f9; padding:8px 10px; border-radius:9px; border-right:3px solid var(--brand-slate); margin-bottom:10px;">
-      إذا بدأت استخدام التطبيق في <b>منتصف الشهر</b>، أدخل هنا إنجاز الأيام التي مضت من هذا الشهر الهجري؛ وسيُضاف <b>تلقائياً</b> إلى الجلسات المسجّلة بالتطبيق في التقرير الشهري والإحصائيات. (وإذا أردت تعبئة كل يوم سابق على حدة، اضغط <a href="#" onclick="event.preventDefault(); closeModal('monthBaselineModal'); openNewSessionModal(true);" style="color:var(--brand-slate); font-weight:800;">تعبئة يوم بالتاريخ</a>).
-    </p>
-    <div class="form-grid" style="margin-bottom:10px;">
-      <div class="field">
-        <label>عدد أيام الدوام الماضية في هذا الشهر (قبل التطبيق)</label>
-        <input type="text" inputmode="numeric" id="mbExtraDays" placeholder="مثال: 4">
-      </div>
-      <div class="field">
-        <label>بحث عن طالب</label>
-        <input type="text" id="mbStudentSearch" placeholder="🔍 اكتب اسم الطالب..." oninput="renderMonthlyBaselineList()">
+<!-- ===== MODAL: MONTHLY BASELINE (PRIOR DAYS OF THE MONTH — v154 EXECUTIVE SINGLE-SCROLL) ===== -->
+<div class="modal-backdrop exec-modal-backdrop" id="monthBaselineModal" style="z-index:154;" onclick="if(event.target===this) closeModal('monthBaselineModal')">
+  <div class="exec-modal-box" style="max-width:600px;">
+    <div class="exec-modal-hdr">
+      <div class="es-handle"></div>
+      <div class="exec-modal-hdr-row">
+        <div style="min-width:0; flex:1;">
+          <h3 id="mbModalTitle">📝 رصيد الأيام الماضية من الشهر</h3>
+          <div class="exec-modal-sub">إدخال كل إنجاز سابق للطالب (حفظ، مراجعة، نقاط، سبر، حضور وغياب)</div>
+        </div>
+        <button type="button" class="exec-modal-close" onclick="closeModal('monthBaselineModal')" aria-label="إغلاق">×</button>
       </div>
     </div>
-    <div id="mbStudentsList" style="max-height:50vh; overflow-y:auto; margin-bottom:12px;"></div>
-    <div style="display:flex; gap:8px; justify-content:space-between; flex-wrap:wrap;">
-      <button type="button" class="btn btn-danger btn-sm" onclick="clearCurrentMonthBaseline()">مسح الرصيد السابق للشهر</button>
-      <div style="display:flex; gap:7px;">
-        <button type="button" class="btn btn-outline" onclick="closeModal('monthBaselineModal')">إلغاء</button>
-        <button type="button" class="btn btn-primary" onclick="saveMonthlyBaseline()">✓ حفظ ودمج في التقرير الشهري</button>
+
+    <div class="exec-modal-body">
+      <p style="font-size:12px; color:var(--ink-700); background:var(--white); border:1px solid var(--line); padding:8px 10px; border-radius:10px; border-right:3.5px solid #142a46; margin-bottom:10px; line-height:1.55;">
+        أدخل هنا إنجاز الأيام التي مضت من الشهر الهجري؛ وسيُضاف <b>تلقائياً</b> إلى الجلسات المسجّلة بالتطبيق في التقرير الشهري والإحصائيات والكشف الفردي. (أو اضغط <a href="#" onclick="event.preventDefault(); closeModal('monthBaselineModal'); openNewSessionModal(true);" style="color:var(--blue); font-weight:800;">تعبئة يوم بالتاريخ</a>).
+      </p>
+      <div class="exec-card" style="margin-bottom:10px;">
+        <div class="exec-grid-2" style="margin-bottom:8px;">
+          <div class="field">
+            <label>الشهر الهجري</label>
+            <select id="mbMonthSelect" onchange="onMbMonthSelectChange(this.value)"></select>
+          </div>
+          <div class="field">
+            <label>أيام الدوام الماضية بالشهر</label>
+            <input type="text" inputmode="numeric" id="mbExtraDays" placeholder="مثال: 4">
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0;">
+          <label>بحث عن طالب</label>
+          <input type="text" id="mbStudentSearch" placeholder="🔍 اكتب اسم الطالب..." oninput="renderMonthlyBaselineList()">
+        </div>
+      </div>
+      <div id="mbStudentsList"></div>
+    </div>
+
+    <div class="exec-modal-footer" style="flex-wrap:wrap; gap:6px;">
+      <button type="button" class="btn btn-danger btn-sm" onclick="clearCurrentMonthBaseline()">🗑️ مسح الشهر</button>
+      <div style="display:flex; gap:6px; flex:1; justify-content:flex-end;">
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('monthBaselineModal')">إلغاء</button>
+        <button type="button" class="btn btn-primary btn-sm" style="flex:1;" onclick="saveMonthlyBaseline()">✓ حفظ ودمج بالتقرير</button>
       </div>
     </div>
   </div>
@@ -7111,6 +7127,142 @@ function getRecordExactMemPagesRaw(s, st, r) {
   return parseArabicNum(r.recPages, 0);
 }
 
+
+// ===== v153 TRACK-AWARE EXACT MUSHAF SPAN ENGINE (FROM -> TO WITH CROSS-JUZ PROTECTION) =====
+function getPassedMemSegmentsForRecord(s, st, r) {
+  if (!s || !st || !r || st.track === "rashidi" || s.type !== "daily") return [];
+  const isAbs = String(r.attendance || "").includes("غياب") || r.attendance === "لم يُسمّع" || isPresentNoRecite(r.attendance);
+  if (isAbs || !r.recEval || r.recEval === "إعادة" || r.recIsSabr || r.recIsSard) return [];
+  if (Array.isArray(r.recPageEvals) && r.recPageEvals.length >= 2 && r.recPageEvals.some(p => isPerPageItemGraded(p) && p.eval === "إعادة")) {
+    const out = [];
+    r.recPageEvals.filter(p => isPerPageItemGraded(p) && p.eval && p.eval !== "إعادة").forEach(p => {
+      if (p.surahId && SURAH_MAP[Number(p.surahId)]) {
+        const sObj = SURAH_MAP[Number(p.surahId)];
+        out.push({ surahId: String(sObj.id), from: Math.max(1, parseArabicNum(p.from, 1)), to: Math.min(sObj.a, parseArabicNum(p.to, sObj.a)) });
+      }
+      if (Array.isArray(p.extraSegs)) {
+        p.extraSegs.forEach(es => {
+          if (es && es.surahId && SURAH_MAP[Number(es.surahId)]) {
+            const sObj = SURAH_MAP[Number(es.surahId)];
+            out.push({ surahId: String(sObj.id), from: Math.max(1, parseArabicNum(es.from, 1)), to: Math.min(sObj.a, parseArabicNum(es.to, sObj.a)) });
+          }
+        });
+      }
+    });
+    return out;
+  }
+  return getSegments(r, "rec");
+}
+
+function getHalaqaMemPagesCalcMode(h) {
+  return h?.memPagesCalcMode === "sessions" ? "sessions" : "span";
+}
+
+function _isPointFurtherOnTrack(ptA, ptB, dir) {
+  if (!ptA || !ptB) return false;
+  if (ptA.sid === ptB.sid) return ptA.ayah > ptB.ayah;
+  return dir === "asc" ? (ptA.sid > ptB.sid) : (ptA.sid < ptB.sid);
+}
+
+function _calcTrackGapPages(prevEnd, curStart, dir) {
+  if (!prevEnd || !curStart) return null;
+  if (curStart.sid === prevEnd.sid) {
+    return getMushafPos(curStart.sid, curStart.ayah, false) - getMushafPos(prevEnd.sid, prevEnd.ayah, true);
+  }
+  if (dir === "asc") {
+    if (curStart.sid > prevEnd.sid) {
+      return getMushafPos(curStart.sid, curStart.ayah, false) - getMushafPos(prevEnd.sid, prevEnd.ayah, true);
+    }
+    return null;
+  }
+  if (curStart.sid < prevEnd.sid) {
+    const sPrev = SURAH_MAP[prevEnd.sid];
+    if (!sPrev) return null;
+    let gap = Math.max(0, getMushafPos(prevEnd.sid, sPrev.a, true) - getMushafPos(prevEnd.sid, prevEnd.ayah, true));
+    for (let id = prevEnd.sid - 1; id > curStart.sid; id--) {
+      const si = SURAH_MAP[id];
+      if (si) gap += Math.max(0, getMushafPos(si.id, si.a, true) - getMushafPos(si.id, 1, false));
+    }
+    gap += Math.max(0, getMushafPos(curStart.sid, curStart.ayah, false) - getMushafPos(curStart.sid, 1, false));
+    return gap;
+  }
+  return null;
+}
+
+function computeStudentPeriodMemPagesRaw(st, sortedSessions, h) {
+  if (!st || st.track === "rashidi" || !Array.isArray(sortedSessions) || !sortedSessions.length) return 0;
+  const mode = getHalaqaMemPagesCalcMode(h);
+  let sessionSum = 0;
+  const segItems = [];
+
+  sortedSessions.forEach(s => {
+    if (!s || s.type !== "daily") return;
+    const r = s.records?.[st.id];
+    if (!r) return;
+    const rawRec = getRecordExactMemPagesRaw(s, st, r);
+    sessionSum += rawRec;
+    if (mode === "span") {
+      const passedSegs = getPassedMemSegmentsForRecord(s, st, r);
+      if (passedSegs.length) {
+        passedSegs.forEach(seg => {
+          const sObj = SURAH_MAP[Number(seg.surahId)];
+          if (!sObj) return;
+          const fA = Math.max(1, Math.min(sObj.a, parseArabicNum(seg.from, 1)));
+          const tA = Math.max(fA, Math.min(sObj.a, parseArabicNum(seg.to, sObj.a)));
+          segItems.push({
+            start: { sid: sObj.id, ayah: fA },
+            end: { sid: sObj.id, ayah: tA },
+            raw: calcRawRangePages(sObj.id, fA, tA)
+          });
+        });
+      } else if (rawRec > 0) {
+        segItems.push({ legacyRaw: rawRec });
+      }
+    }
+  });
+
+  if (mode !== "span") return sessionSum;
+  if (!segItems.length) return sessionSum;
+
+  const fallbackDir = st.direction || h?.defaultDir || "desc";
+  const runs = [];
+  let legacyTotal = 0;
+
+  segItems.forEach(item => {
+    if (item.legacyRaw) { legacyTotal += item.legacyRaw; return; }
+    const stPt = item.start, enPt = item.end;
+    if (!runs.length) {
+      runs.push({ start: { ...stPt }, end: { ...enPt }, dir: null });
+      return;
+    }
+    const cur = runs[runs.length - 1];
+    let tryDir = cur.dir;
+    if (!tryDir && stPt.sid !== cur.end.sid) {
+      const candDir = stPt.sid > cur.end.sid ? "asc" : "desc";
+      const candGap = _calcTrackGapPages(cur.end, stPt, candDir);
+      if (candGap !== null && candGap >= -0.5 && candGap <= 22) {
+        tryDir = candDir;
+      }
+    }
+    const effDir = tryDir || fallbackDir;
+    const gap = _calcTrackGapPages(cur.end, stPt, effDir);
+    if (gap !== null && gap >= -4.0 && gap <= 22.0) {
+      if (!cur.dir && stPt.sid !== cur.end.sid) cur.dir = effDir;
+      if (_isPointFurtherOnTrack(enPt, cur.end, cur.dir || effDir)) {
+        cur.end = { ...enPt };
+      }
+    } else {
+      runs.push({ start: { ...stPt }, end: { ...enPt }, dir: null });
+    }
+  });
+
+  let totalSpan = legacyTotal;
+  runs.forEach(run => {
+    totalSpan += calcRawRangePages(run.start.sid, run.start.ayah, run.end.ayah, run.end.sid);
+  });
+  return totalSpan;
+}
+
 function getRecordExactRevPagesRaw(s, st, r, h) {
   if (!s || !st || !r || st.track === "rashidi") return 0;
   const isAbs = String(r.attendance || "").includes("غياب") || r.attendance === "لم يُسمّع" || isPresentNoRecite(r.attendance);
@@ -9447,6 +9599,7 @@ async function hydrateStateFromIndexedDB(uidOverride = null) {
 
 // Rolling Daily Auto-Recovery Snapshots (keeps latest 5 per account automatically in IndexedDB!)
 async function ensureDailyAutoSnapshot(forceLabel = "") {
+  return false;
   if (!_makinIdbAvailable) return false;
   const uid = getEffectiveAccountUid() || "local";
   const hals = Object.values(appState?.halaqat || {});
@@ -21707,7 +21860,7 @@ function getMonthBaselineObj(h, monthLabel) {
 }
 
 function getStudentBaselineTotals(h, monthFilter, stId) {
-  const res = { fromMem: "", toMem: "", memPages: 0, revPages: 0, points: 0, sabrList: [] };
+  const res = { fromMem: "", toMem: "", memPages: 0, revPages: 0, points: 0, presentDays: 0, excusedDays: 0, absentDays: 0, sabrList: [] };
   if (!h || !h.monthlyBaselines) return res;
   const keys = monthFilter === "ALL" ? Object.keys(h.monthlyBaselines) : [monthFilter];
   keys.forEach(mk => {
@@ -21718,6 +21871,9 @@ function getStudentBaselineTotals(h, monthFilter, stId) {
     res.memPages += parseArabicNum(sb.memPages, 0);
     res.revPages += parseArabicNum(sb.revPages, 0);
     res.points += parseArabicNum(sb.points, 0);
+    res.presentDays += Math.max(0, Math.round(parseArabicNum(sb.presentDays, 0)));
+    res.excusedDays += Math.max(0, Math.round(parseArabicNum(sb.excusedDays, 0)));
+    res.absentDays += Math.max(0, Math.round(parseArabicNum(sb.absentDays, 0)));
     const cleanBaseSabr = formatJuzClean(sb.sabrJuz);
     if (cleanBaseSabr && !res.sabrList.includes(cleanBaseSabr)) res.sabrList.push(cleanBaseSabr);
   });
@@ -21743,7 +21899,7 @@ function computeMonthlyData(monthFilter) {
 
   const rows = h.students.map(st => {
     const base = isPointsCycle
-      ? { fromMem: "", toMem: "", memPages: 0, revPages: 0, points: getStudentPastPoints(h, st.id), sabrList: [] }
+      ? { fromMem: "", toMem: "", memPages: 0, revPages: 0, points: getStudentPastPoints(h, st.id), presentDays: 0, excusedDays: 0, absentDays: 0, sabrList: [] }
       : getStudentBaselineTotals(h, monthFilter, st.id);
     let firstMem = base.fromMem || null;
     let lastMem = base.toMem || null;
@@ -21751,7 +21907,7 @@ function computeMonthlyData(monthFilter) {
     let revPages = base.revPages;
     let rashidiPages = 0;
     let totalPoints = base.points + (!isPointsCycle && monthFilter === "ALL" ? getStudentPastPoints(h, st.id) : 0);
-    let presentDays = 0, lateDays = 0, excusedDays = 0, absentDays = 0;
+    let presentDays = base.presentDays || 0, lateDays = 0, excusedDays = base.excusedDays || 0, absentDays = base.absentDays || 0;
     const sabrList = [...base.sabrList];
 
     sessions.forEach(s => {
@@ -21781,25 +21937,25 @@ function computeMonthlyData(monthFilter) {
           rashidiPages += Number(r.rashidiPages) || 0;
         }
       } else if (s.type === "daily") {
-        if (!isAbs && r.recEval && r.recEval !== "إعادة" && !r.recIsSabr && !r.recIsSard) {
-          const rSegs = getSegments(r, "rec");
-          if (rSegs.length) {
-            const firstS = rSegs[0], lastS = rSegs[rSegs.length - 1];
-            const sObj1 = SURAH_MAP[Number(firstS.surahId)], sObj2 = SURAH_MAP[Number(lastS.surahId)] || sObj1;
-            const n1 = sObj1?.n || "", n2 = sObj2?.n || n1;
-            const f1Val = Math.max(1, parseArabicNum(firstS.from, 1));
-            const t2Val = Math.max(1, parseArabicNum(lastS.to, sObj2?.a || 1));
-            if (!firstMem && n1) firstMem = `${n1} - ${f1Val}`;
-            if (n2) lastMem = `${n2} - ${t2Val}`;
-          }
+        const rSegs = getPassedMemSegmentsForRecord(s, st, r);
+        if (rSegs.length) {
+          const firstS = rSegs[0], lastS = rSegs[rSegs.length - 1];
+          const sObj1 = SURAH_MAP[Number(firstS.surahId)], sObj2 = SURAH_MAP[Number(lastS.surahId)] || sObj1;
+          const n1 = sObj1?.n || "", n2 = sObj2?.n || n1;
+          const f1Val = Math.max(1, parseArabicNum(firstS.from, 1));
+          const t2Val = Math.max(1, parseArabicNum(lastS.to, sObj2?.a || 1));
+          if (!firstMem && n1) firstMem = `${n1} - ${f1Val}`;
+          if (n2) lastMem = `${n2} - ${t2Val}`;
         }
-        memPages += getRecordExactMemPagesRaw(s, st, r);
         revPages += getRecordExactRevPagesRaw(s, st, r, h);
       } else if (!isAbs) {
         revPages += getRecordExactRevPagesRaw(s, st, r, h);
       }
     });
 
+    if (st.track !== "rashidi") {
+      memPages += computeStudentPeriodMemPagesRaw(st, sessions, h);
+    }
     const noteKey = `${monthFilter}__${st.id}`;
     return {
       student: st, fromMem: firstMem || "—", toMem: lastMem || "—",
@@ -21829,29 +21985,67 @@ function computeMonthlyData(monthFilter) {
 let _mbMonthLabel = "";
 let _mbDraft = { extraDays: 0, students: {} };
 
-function openMonthlyBaselineModal() {
-  const h = getActiveHalaqa();
-  if (!h) return;
-  const selVal = document.getElementById("monthlyHijriFilter")?.value || "";
+function _getAvailableBaselineMonths(h) {
   const todayHj = getExactHijriInfo(todayISO());
-  _mbMonthLabel = (selVal && selVal !== "ALL") ? selVal : todayHj.monthLabel;
+  const set = new Set([todayHj.monthLabel]);
+  (h?.sessions || []).forEach(s => {
+    const m = getSessionReportMonth(s);
+    if (m) set.add(m);
+  });
+  Object.keys(h?.monthlyBaselines || {}).forEach(m => { if (m && m !== "ALL") set.add(m); });
+  return Array.from(set);
+}
 
+function _loadMbMonthIntoDraft(h, monthLbl) {
+  _mbMonthLabel = monthLbl;
   const existing = getMonthBaselineObj(h, _mbMonthLabel);
   _mbDraft = {
     extraDays: parseArabicNum(existing.extraDays, 0),
     students: JSON.parse(JSON.stringify(existing.students || {}))
   };
+  const titleEl = document.getElementById("mbModalTitle");
+  if (titleEl) titleEl.textContent = `📝 رصيد الأيام الماضية — ${_mbMonthLabel} هـ`;
+  const daysEl = document.getElementById("mbExtraDays");
+  if (daysEl) daysEl.value = _mbDraft.extraDays || "";
+}
 
-  document.getElementById("mbModalTitle").textContent = `📝 رصيد الأيام الماضية — شهر ${_mbMonthLabel} هـ`;
-  document.getElementById("mbExtraDays").value = _mbDraft.extraDays || "";
-  document.getElementById("mbStudentSearch").value = "";
+function onMbMonthSelectChange(monthLbl) {
+  const h = getActiveHalaqa();
+  if (!h || !monthLbl) return;
+  _loadMbMonthIntoDraft(h, monthLbl);
+  renderMonthlyBaselineList();
+}
+
+function openMonthlyBaselineModal(forcedMonth = "") {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const selVal = forcedMonth || document.getElementById("monthlyHijriFilter")?.value || "";
+  const todayHj = getExactHijriInfo(todayISO());
+  const targetM = (selVal && selVal !== "ALL") ? selVal : todayHj.monthLabel;
+
+  const months = _getAvailableBaselineMonths(h);
+  if (!months.includes(targetM)) months.unshift(targetM);
+  const mSel = document.getElementById("mbMonthSelect");
+  if (mSel) {
+    mSel.innerHTML = months.map(m => `<option value="${escapeHtml(m)}" ${m === targetM ? 'selected' : ''}>${escapeHtml(m)} هـ</option>`).join("");
+    mSel.value = targetM;
+  }
+
+  _loadMbMonthIntoDraft(h, targetM);
+  const sInp = document.getElementById("mbStudentSearch");
+  if (sInp) sInp.value = "";
   renderMonthlyBaselineList();
   openModal("monthBaselineModal");
+  const bodyEl = document.querySelector("#monthBaselineModal .exec-modal-body");
+  if (bodyEl) bodyEl.scrollTop = 0;
 }
 
 function updateMbDraftField(stId, field, val) {
-  if (!_mbDraft.students[stId]) _mbDraft.students[stId] = { fromMem: "", toMem: "", memPages: 0, revPages: 0, points: 0, sabrJuz: "" };
-  _mbDraft.students[stId][field] = (field === "memPages" || field === "revPages" || field === "points")
+  if (!_mbDraft.students[stId]) {
+    _mbDraft.students[stId] = { fromMem: "", toMem: "", memPages: 0, revPages: 0, points: 0, presentDays: 0, excusedDays: 0, absentDays: 0, sabrJuz: "" };
+  }
+  const numFields = ["memPages", "revPages", "points", "presentDays", "excusedDays", "absentDays"];
+  _mbDraft.students[stId][field] = numFields.includes(field)
     ? parseArabicNum(val, 0)
     : val;
 }
@@ -21868,22 +22062,28 @@ function renderMonthlyBaselineList() {
     return;
   }
 
+  const ptsOn = isPointsEnabled(h);
   listEl.innerHTML = filtered.map(({ st, idx }) => {
     const b = _mbDraft.students[st.id] || {};
     return `<div class="base-st-card">
       <div class="base-st-hdr">
         <span>${idx + 1}. ${escapeHtml(st.name)}</span>
-        <span style="font-size:11px; color:var(--ink-500); font-weight:500;">يُضاف تلقائياً لحساب الشهر</span>
+        <span style="font-size:10.5px; color:var(--ink-500); font-weight:600;">يُدمج تلقائياً بالشهر</span>
       </div>
-      <div class="base-grid-4" style="${isPointsEnabled(h) ? '' : 'grid-template-columns:repeat(3, 1fr);'}">
+      <div class="base-grid-4" style="${ptsOn ? '' : 'grid-template-columns:repeat(3, 1fr);'}">
         <div class="field"><label>بداية حفظ الشهر</label><input type="text" value="${escapeHtml(b.fromMem || '')}" placeholder="مثال: الرحمن - 1" oninput="updateMbDraftField('${st.id}','fromMem',this.value)"></div>
         <div class="field"><label>صفحات الحفظ</label><input type="text" inputmode="decimal" value="${b.memPages || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','memPages',this.value)"></div>
         <div class="field"><label>صفحات المراجعة</label><input type="text" inputmode="decimal" value="${b.revPages || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','revPages',this.value)"></div>
-        ${isPointsEnabled(h) ? `<div class="field"><label>النقاط السابقة</label><input type="text" inputmode="numeric" value="${b.points || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','points',this.value)"></div>` : ''}
+        ${ptsOn ? `<div class="field"><label>النقاط السابقة</label><input type="text" inputmode="numeric" value="${b.points || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','points',this.value)"></div>` : ''}
       </div>
-      <div class="form-grid" style="margin-top:6px; grid-template-columns:1fr 1fr;">
+      <div class="form-grid" style="margin-top:6px; grid-template-columns:1fr 1fr; gap:6px;">
         <div class="field"><label style="font-size:11px;">نهاية حفظ سابق (اختياري)</label><input type="text" style="padding:5px 7px; font-size:12px;" value="${escapeHtml(b.toMem || '')}" placeholder="إن لم يُسمّع بعد" oninput="updateMbDraftField('${st.id}','toMem',this.value)"></div>
         <div class="field"><label style="font-size:11px;">سبر جزء سابق</label><select style="padding:5px 7px; font-size:12px;" onchange="updateMbDraftField('${st.id}','sabrJuz',this.value)">${juzOptionsHtml(b.sabrJuz || '')}</select></div>
+      </div>
+      <div class="form-grid" style="margin-top:6px; grid-template-columns:repeat(3, 1fr); gap:6px;">
+        <div class="field"><label style="font-size:10.5px;">أيام حضور سابقة</label><input type="text" inputmode="numeric" style="padding:5px 7px; font-size:12px; text-align:center;" value="${b.presentDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','presentDays',this.value)"></div>
+        <div class="field"><label style="font-size:10.5px;">غياب مبرر سابق</label><input type="text" inputmode="numeric" style="padding:5px 7px; font-size:12px; text-align:center;" value="${b.excusedDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','excusedDays',this.value)"></div>
+        <div class="field"><label style="font-size:10.5px;">غياب غير مبرر</label><input type="text" inputmode="numeric" style="padding:5px 7px; font-size:12px; text-align:center;" value="${b.absentDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','absentDays',this.value)"></div>
       </div>
     </div>`;
   }).join("");
@@ -23407,7 +23607,7 @@ function computeStudentStatsForSessions(st, sessions, h, extraBase = null) {
   let revPages = extraBase?.revPages || 0;
   let rashidiPages = 0;
   let totalPoints = extraBase?.points || 0;
-  let presentDays = 0, lateDays = 0, excusedDays = 0, absentDays = 0;
+  let presentDays = extraBase?.presentDays || 0, lateDays = 0, excusedDays = extraBase?.excusedDays || 0, absentDays = extraBase?.absentDays || 0;
   const sabrList = [...(extraBase?.sabrList || [])];
 
   (sessions || []).forEach(s => {
@@ -23434,21 +23634,23 @@ function computeStudentStatsForSessions(st, sessions, h, extraBase = null) {
           rashidiPages += Number(r.rashidiPages) || 0;
         }
       } else if (s.type === "daily") {
-        if (r.recEval && r.recEval !== "إعادة" && !r.recIsSabr && !r.recIsSard) {
-          const segs = getSegments(r, "rec");
-          if (segs.length) {
-            const s1 = SURAH_MAP[Number(segs[0].surahId)], s2 = SURAH_MAP[Number(segs[segs.length - 1].surahId)] || s1;
-            if (!firstMem && s1) firstMem = `${s1.n}${segs[0].from ? " - " + segs[0].from : ""}`;
-            if (s2) lastMem = `${s2.n}${segs[segs.length - 1].to ? " - " + segs[segs.length - 1].to : ""}`;
-          }
+        const segs = getPassedMemSegmentsForRecord(s, st, r);
+        if (segs.length) {
+          const s1 = SURAH_MAP[Number(segs[0].surahId)], s2 = SURAH_MAP[Number(segs[segs.length - 1].surahId)] || s1;
+          if (!firstMem && s1) firstMem = `${s1.n}${segs[0].from ? " - " + segs[0].from : ""}`;
+          if (s2) lastMem = `${s2.n}${segs[segs.length - 1].to ? " - " + segs[segs.length - 1].to : ""}`;
         }
-        memPages += getRecordExactMemPagesRaw(s, st, r);
         revPages += getRecordExactRevPagesRaw(s, st, r, h);
       } else {
         revPages += getRecordExactRevPagesRaw(s, st, r, h);
       }
     }
   });
+
+  if (st.track !== "rashidi") {
+    const sortedForSpan = [...(sessions || [])].sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+    memPages += computeStudentPeriodMemPagesRaw(st, sortedForSpan, h);
+  }
 
   return {
     fromMem: firstMem || "—",
@@ -26622,13 +26824,13 @@ async function renderTechHardeningCard() {
       </button>
     ` : ""}
 
-    <button type="button" class="btn btn-outline btn-sm" style="width:100%;" onclick="closeModal('settingsModal'); openAutoSnapshotsModal();">🔄 لقطات الاستعادة التلقائية (${mySnaps.length})</button>
-
     <details class="th-adv-drawer" ${wasAdvOpen ? "open" : ""}>
       <summary>
         <span>⚙️ تفاصيل تقنية متقدمة (التخزين والمحركات)</span>
         <span class="th-adv-chev">▾</span>
       </summary>
+
+
 
       <div class="th-grid-3">
         <div class="th-stat-tile ok">
@@ -28373,16 +28575,31 @@ function computeHalaqaSummaryForSupervisor(hData, monthLabel, supCustomProgs = [
     if (s.noClass || !isSessionHasRealActivity(s)) return false;
     if (!monthLabel || monthLabel === "all") return true;
     return getSessionReportMonth(s) === monthLabel;
-  });
+  }).sort((a, b) => (a.date || "").localeCompare(b.date || ""));
 
-  const base = (monthLabel && monthLabel !== "all" && hData.monthlyBaselines?.[monthLabel]) ? hData.monthlyBaselines[monthLabel] : null;
-  if (base?.students) {
-    Object.values(base.students).forEach(b => {
+  const baseKeys = (!monthLabel || monthLabel === "all")
+    ? Object.keys(hData.monthlyBaselines || {})
+    : (hData.monthlyBaselines?.[monthLabel] ? [monthLabel] : []);
+  baseKeys.forEach(mk => {
+    const bObj = hData.monthlyBaselines?.[mk];
+    if (!bObj?.students) return;
+    Object.entries(bObj.students).forEach(([stId, b]) => {
+      if (!b) return;
       memPages += parseArabicNum(b.memPages, 0);
       revPages += parseArabicNum(b.revPages, 0);
       totalPoints += parseArabicNum(b.points, 0);
+      const bp = Math.max(0, Math.round(parseArabicNum(b.presentDays, 0)));
+      const be = Math.max(0, Math.round(parseArabicNum(b.excusedDays, 0)));
+      const ba = Math.max(0, Math.round(parseArabicNum(b.absentDays, 0)));
+      presentSlots += bp;
+      totalSlots += bp + be + ba;
+      const cleanBSabr = formatJuzClean(b.sabrJuz);
+      if (cleanBSabr) {
+        const k = stId + "_" + cleanBSabr;
+        if (!sabrSet.has(k)) { sabrSet.add(k); sabrCount++; }
+      }
     });
-  }
+  });
 
   targetSessions.forEach(s => {
     const isSat = s.type === "saturday";
@@ -28401,7 +28618,6 @@ function computeHalaqaSummaryForSupervisor(hData, monthLabel, supCustomProgs = [
         return;
       }
       if (!isSat) {
-        memPages += getRecordExactMemPagesRaw(s, st, r);
         revPages += getRecordExactRevPagesRaw(s, st, r, hData);
         if (isPassedNewMemSabrForMonthly(s, r)) {
           const k = st.id + "_" + r.sabrJuz;
@@ -28411,6 +28627,12 @@ function computeHalaqaSummaryForSupervisor(hData, monthLabel, supCustomProgs = [
         revPages += getRecordExactRevPagesRaw(s, st, r, hData);
       }
     });
+  });
+
+  students.forEach(st => {
+    if (st && st.track !== "rashidi") {
+      memPages += snapCleanPages(computeStudentPeriodMemPagesRaw(st, targetSessions, hData));
+    }
   });
 
   const progs = hData.programs || {};
@@ -31400,6 +31622,8 @@ function updateHalaqaRuleSetting(key, value) {
   if (!h) return;
   if (key === "pointsEnabled") {
     h.pointsEnabled = Boolean(value);
+  } else if (key === "memPagesCalcMode") {
+    h.memPagesCalcMode = value === "sessions" ? "sessions" : "span";
   } else if (key === "overallEvalMode") {
     h.overallEvalMode = value === "auto_editable" ? "auto_editable" : "auto_only";
   } else if (key === "perPageAutoEnabled") {
@@ -31459,6 +31683,7 @@ function renderHalaqaSettingsModal() {
   if (!h || !body) return;
 
   const ptsOn = isPointsEnabled(h);
+  const memCalcMode = getHalaqaMemPagesCalcMode(h);
   const ovMode = getHalaqaOverallEvalMode(h);
   const ppAuto = h.perPageAutoEnabled !== false;
   const majSys = h.majorRevSystem === "seniors" ? "seniors" : "juniors";
@@ -31469,7 +31694,26 @@ function renderHalaqaSettingsModal() {
   const alertThr = Number(h.parentAlertThreshold) || 3;
   const seqLock = h.sequentialDayLock !== false;
 
+  const _curBaseMonth = getExactHijriInfo(todayISO()).monthLabel;
+  const _curBaseObj = h.monthlyBaselines?.[_curBaseMonth];
+  const _curBaseCnt = _curBaseObj?.students
+    ? Object.values(_curBaseObj.students).filter(sb => sb && (sb.fromMem || sb.toMem || parseArabicNum(sb.memPages, 0) > 0 || parseArabicNum(sb.revPages, 0) > 0 || parseArabicNum(sb.points, 0) > 0 || sb.sabrJuz || parseArabicNum(sb.presentDays, 0) > 0 || parseArabicNum(sb.excusedDays, 0) > 0 || parseArabicNum(sb.absentDays, 0) > 0)).length
+    : 0;
+
   body.innerHTML = `
+    <div class="exec-card" style="border-right:4px solid #c8a14b;">
+      <div class="exec-card-ttl">
+        <span>📝 رصيد الأيام الماضية (إنجاز سابق للطلاب)</span>
+        <span class="badge ${_curBaseCnt > 0 ? 'b-green' : 'b-slate'}" style="font-size:10.5px;">${_curBaseCnt > 0 ? `${_curBaseCnt} طالب محفوظ` : escapeHtml(_curBaseMonth)}</span>
+      </div>
+      <div style="font-size:11.5px; color:var(--ink-700); line-height:1.55; margin-bottom:8px;">
+        أدخل لكل طالب رصيده السابق في الشهر (بداية ونهاية الحفظ، صفحات الحفظ والمراجعة، النقاط، الأجزاء المسبورة، وأيام الحضور والغياب) ليُدمج تلقائياً في التقارير والإحصائيات.
+      </div>
+      <button type="button" class="btn btn-primary btn-sm" style="width:100%; padding:9px 12px;" onclick="closeModal('halaqaRulesModal'); openMonthlyBaselineModal();">
+        📝 فتح رصيد الأيام الماضية وتعديل بيانات الطلاب
+      </button>
+    </div>
+
     <div class="exec-card">
       <div class="exec-card-ttl"><span>⭐ النقاط والتحفيز</span></div>
       <button type="button" class="hs-toggle-row" onclick="updateHalaqaRuleSetting('pointsEnabled', ${!ptsOn})">
@@ -31479,6 +31723,20 @@ function renderHalaqaSettingsModal() {
         </div>
         <span class="m-switch ${ptsOn ? 'on' : ''}" aria-hidden="true"></span>
       </button>
+    </div>
+
+    <div class="exec-card">
+      <div class="exec-card-ttl"><span>📖 حساب صفحات الحفظ (التقارير والإحصائيات)</span></div>
+      <div class="hs-choice-2" style="margin-bottom:0;">
+        <button type="button" class="hs-choice-card ${memCalcMode === 'span' ? 'on' : ''}" onclick="updateHalaqaRuleSetting('memPagesCalcMode', 'span')">
+          <b>🎯 المسافة الفعلية (من ← إلى)</b>
+          <span>يحسب الصفحات الحقيقية بالمصحف من أول آية لآخر آية وصل إليها الطالب (ويعزل القفزات الكبيرة تلقائياً)</span>
+        </button>
+        <button type="button" class="hs-choice-card ${memCalcMode === 'sessions' ? 'on' : ''}" onclick="updateHalaqaRuleSetting('memPagesCalcMode', 'sessions')">
+          <b>📋 جمع الجلسات المسجّلة فقط</b>
+          <span>يجمع صفحات كل جلسة ناجحة سُجّلت في التطبيق على حدة دون احتساب الفجوات بين الجلسات</span>
+        </button>
+      </div>
     </div>
 
     <div class="exec-card">
@@ -32025,7 +32283,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v152";
+const TIBYAN_APP_VERSION = "v154";
 function mkIcon(name, cls = "") {
   return `<svg class="mk-ico${cls ? " " + cls : ""}" aria-hidden="true"><use href="#ico-${name}"/></svg>`;
 }
@@ -35079,5 +35337,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v152 -->
+<!-- Makin App v154 -->
 </html>
