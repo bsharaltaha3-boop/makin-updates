@@ -15425,7 +15425,7 @@ table.t-daily td.td-sard,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v140</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v141</span>
         </button>
       </div>
     </div>
@@ -17296,10 +17296,10 @@ const BUILTIN_EXACT_PAGES = {
   578: [75, 20], 579: [76, 6],  580: [76, 26], 581: [77, 20],
   // Juz 30 (النبأ - الناس)
   582: [78, 1],  583: [78, 31], 584: [79, 16], 585: [80, 1],
-  586: [81, 1],  587: [82, 1],  588: [83, 7],  589: [83, 34],
+  586: [81, 1],  587: [82, 1],  588: [83, 7],  589: [83, 35],
   590: [85, 1],  591: [86, 1],  592: [87, 16], 593: [89, 1],
   594: [89, 24], 595: [91, 1],  596: [92, 15], 597: [95, 1],
-  598: [97, 1],  599: [98, 8],  600: [100, 9], 601: [103, 1],
+  598: [97, 1],  599: [98, 8],  600: [100, 10], 601: [103, 1],
   602: [106, 1], 603: [109, 1], 604: [112, 1]
 };
 let MUSHAF_EXACT_604 = null; // 1-indexed array of 604 [surahId, ayahNum] pairs when loaded
@@ -17557,6 +17557,98 @@ function getExactPageBoundsPair(pageNum) {
   return { stS: st[0], stA: st[1], enS, enA };
 }
 
+// v141: Exact Madinah Mushaf (15-line) Ayah Weight & Clean Quarter-Page Engine
+const MUSHAF_WEIGHTS_CACHE_KEY = "makin_mushaf_ayah_weights_v1";
+let MUSHAF_AYAH_WEIGHTS = null; // Map/Array of surahId (1..114) -> array of char lengths per ayah
+
+function loadCachedMushafAyahWeights() {
+  try {
+    const raw = localStorage.getItem(MUSHAF_WEIGHTS_CACHE_KEY);
+    if (!raw) return false;
+    const obj = JSON.parse(raw);
+    if (obj && Array.isArray(obj[2]) && obj[2].length === 286 && Array.isArray(obj[80]) && obj[80].length === 42) {
+      MUSHAF_AYAH_WEIGHTS = obj;
+      return true;
+    }
+  } catch (e) {}
+  return false;
+}
+loadCachedMushafAyahWeights();
+
+async function ensureExactMushafAyahWeights() {
+  if (MUSHAF_AYAH_WEIGHTS) return true;
+  if (loadCachedMushafAyahWeights()) return true;
+  try {
+    if (typeof idbGet === "function") {
+      const rec = await idbGet(IDB_STORE_LIBS, "mushafWeights");
+      if (rec?.code) {
+        const obj = JSON.parse(rec.code);
+        if (obj && Array.isArray(obj[2]) && obj[2].length === 286) {
+          MUSHAF_AYAH_WEIGHTS = obj;
+          try { localStorage.setItem(MUSHAF_WEIGHTS_CACHE_KEY, rec.code); } catch {}
+          return true;
+        }
+      }
+    }
+  } catch {}
+  try {
+    const res = await fetch("https://api.alquran.cloud/v1/quran/quran-simple-plain", { cache: "force-cache" });
+    if (!res.ok) return false;
+    const json = await res.json();
+    const surs = json?.data?.surahs;
+    if (Array.isArray(surs) && surs.length === 114) {
+      const compact = {};
+      surs.forEach(su => {
+        compact[su.number] = (su.ayahs || []).map(ay => Math.max(8, String(ay.text || "").length));
+      });
+      if (compact[2]?.length === 286 && compact[80]?.length === 42) {
+        const str = JSON.stringify(compact);
+        MUSHAF_AYAH_WEIGHTS = compact;
+        try { localStorage.setItem(MUSHAF_WEIGHTS_CACHE_KEY, str); } catch {}
+        if (typeof idbPut === "function") {
+          await idbPut(IDB_STORE_LIBS, { key: "mushafWeights", code: str, savedAt: new Date().toISOString(), byteSize: str.length * 2 });
+        }
+        return true;
+      }
+    }
+  } catch {}
+  return false;
+}
+
+function getAyahVisualWeight(sid, ayahNum, totalAyahsOnPage = 15) {
+  let w = 1.0;
+  if (MUSHAF_AYAH_WEIGHTS && MUSHAF_AYAH_WEIGHTS[sid] && MUSHAF_AYAH_WEIGHTS[sid][ayahNum - 1]) {
+    w = Math.max(10, Number(MUSHAF_AYAH_WEIGHTS[sid][ayahNum - 1]) || 35);
+    if (ayahNum === 1 && sid !== 1 && sid !== 9) {
+      // Surah header + Basmalah occupies ~2 of 15 lines (~85 chars equivalent)
+      w += 85;
+    } else if (ayahNum === 1 && sid === 9) {
+      w += 42;
+    }
+    return w;
+  }
+  // Built-in high-precision offline weights for uneven Surahs/Ayahs in Madinah Mushaf
+  if (sid === 80) w = ayahNum <= 16 ? 1.55 : 0.72; // سورة عبس: 1-16 نصف صفحة، 17-42 نصف صفحة
+  else if (sid === 2 && ayahNum === 102) w = 4.2;  // آية السحر (9 أسطر = أكثر من نصف صفحة)
+  else if (sid === 2 && ayahNum === 282) w = 15.0; // آية الدّين (صفحة كاملة)
+  else if (sid === 2 && ayahNum === 255) w = 2.6;  // آية الكرسي
+  else if (sid === 73 && ayahNum === 20) w = 5.5;  // آخر سورة المزمل
+  else if (sid === 74 && ayahNum === 31) w = 4.8;  // آية المدثر 31
+  if (ayahNum === 1 && sid !== 1) {
+    w += Math.max(0.8, totalAyahsOnPage * 0.14);
+  }
+  return w;
+}
+
+function snapCleanPages(val) {
+  const v = Number(val) || 0;
+  if (v <= 0) return 0;
+  if (v < 0.18) return Math.max(0.15, Math.round(v * 20) / 20);
+  const nearestInt = Math.round(v);
+  if (nearestInt >= 1 && Math.abs(v - nearestInt) <= 0.12) return nearestInt;
+  return Math.max(0.25, Math.round(v * 4) / 4);
+}
+
 function getMushafPos(surahId, ayahNum, isEnd = false) {
   const sid = Number(surahId);
   const s = SURAH_MAP[sid];
@@ -17565,10 +17657,34 @@ function getMushafPos(surahId, ayahNum, isEnd = false) {
   const p = getPageForSurahAyah(sid, a);
   const pb = getExactPageBoundsPair(p);
   if (pb) {
-    const totalOnPage = countAyahsInclusiveBetween(pb.stS, pb.stA, pb.enS, pb.enA);
-    const idxOnPage = Math.max(0, Math.min(totalOnPage - 1, countAyahsInclusiveBetween(pb.stS, pb.stA, sid, a) - 1));
-    const frac = isEnd ? ((idxOnPage + 1) / totalOnPage) : (idxOnPage / totalOnPage);
-    return p + frac;
+    const pageList = [];
+    if (pb.stS === pb.enS) {
+      for (let ay = pb.stA; ay <= pb.enA; ay++) pageList.push([pb.stS, ay]);
+    } else {
+      const sFirstMax = SURAH_MAP[pb.stS]?.a || pb.stA;
+      for (let ay = pb.stA; ay <= sFirstMax; ay++) pageList.push([pb.stS, ay]);
+      for (let midS = pb.stS + 1; midS < pb.enS; midS++) {
+        const mMax = SURAH_MAP[midS]?.a || 0;
+        for (let ay = 1; ay <= mMax; ay++) pageList.push([midS, ay]);
+      }
+      for (let ay = 1; ay <= pb.enA; ay++) pageList.push([pb.enS, ay]);
+    }
+    const nOnPage = Math.max(1, pageList.length);
+    let totalW = 0, beforeW = 0, targetW = 1;
+    let found = false;
+    for (let i = 0; i < pageList.length; i++) {
+      const [ps, pa] = pageList[i];
+      const w = getAyahVisualWeight(ps, pa, nOnPage);
+      if (!found) {
+        if (ps === sid && pa === a) { targetW = w; found = true; }
+        else beforeW += w;
+      }
+      totalW += w;
+    }
+    if (totalW > 0) {
+      const frac = found ? (isEnd ? ((beforeW + targetW) / totalW) : (beforeW / totalW)) : (isEnd ? 1 : 0);
+      return p + Math.max(0, Math.min(1, frac));
+    }
   }
   const frac = isEnd ? (a / Math.max(1, s.a)) : ((a - 1) / Math.max(1, s.a));
   return s.fs + frac * s.l;
@@ -18795,7 +18911,7 @@ function findSurahByName(text) {
   return null;
 }
 
-function calcRangePages(surahId, fromAyah, toAyah, endSurahId = null) {
+function calcRawRangePages(surahId, fromAyah, toAyah, endSurahId = null) {
   const s1 = SURAH_MAP[Number(surahId)];
   if (!s1) return 0;
   const f1 = Math.max(1, Math.min(s1.a, parseArabicNum(fromAyah, 1)));
@@ -18804,8 +18920,7 @@ function calcRangePages(surahId, fromAyah, toAyah, endSurahId = null) {
     if (!s2) return 0;
     const t2 = Math.max(1, Math.min(s2.a, parseArabicNum(toAyah, s2.a)));
     if (s2.id > s1.id) {
-      const diff = getMushafPos(s2.id, t2, true) - getMushafPos(s1.id, f1, false);
-      return Math.max(0.1, Math.round(diff * 100) / 100);
+      return Math.max(0.05, getMushafPos(s2.id, t2, true) - getMushafPos(s1.id, f1, false));
     }
     let total = Math.max(0, getMushafPos(s1.id, s1.a, true) - getMushafPos(s1.id, f1, false));
     for (let id = s1.id - 1; id > s2.id; id--) {
@@ -18813,11 +18928,15 @@ function calcRangePages(surahId, fromAyah, toAyah, endSurahId = null) {
       if (si) total += Math.max(0, getMushafPos(si.id, si.a, true) - getMushafPos(si.id, 1, false));
     }
     total += Math.max(0, getMushafPos(s2.id, t2, true) - getMushafPos(s2.id, 1, false));
-    return Math.max(0.1, Math.round(total * 100) / 100);
+    return Math.max(0.05, total);
   }
   const t1 = Math.max(f1, Math.min(s1.a, parseArabicNum(toAyah, s1.a)));
-  const diff = getMushafPos(s1.id, t1, true) - getMushafPos(s1.id, f1, false);
-  return Math.max(0.1, Math.round(diff * 100) / 100);
+  return Math.max(0.05, getMushafPos(s1.id, t1, true) - getMushafPos(s1.id, f1, false));
+}
+
+function calcRangePages(surahId, fromAyah, toAyah, endSurahId = null) {
+  const raw = calcRawRangePages(surahId, fromAyah, toAyah, endSurahId);
+  return raw > 0 ? snapCleanPages(raw) : 0;
 }
 
 function calcSmartPagesFromInputs(surahId, fromAyah, toAyah, endSurahId, fallbackText) {
@@ -19162,13 +19281,18 @@ function getSegments(r, kind) {
   return segs;
 }
 
-function calcSegmentsPages(segs) {
+function calcRawSegmentsPages(segs) {
   if (!segs || !segs.length) return 0;
   let total = 0;
   segs.forEach(seg => {
-    total += calcRangePages(seg.surahId, seg.from, seg.to);
+    total += calcRawRangePages(seg.surahId, seg.from, seg.to);
   });
-  return Math.round(total * 100) / 100;
+  return total;
+}
+
+function calcSegmentsPages(segs) {
+  const raw = calcRawSegmentsPages(segs);
+  return raw > 0 ? snapCleanPages(raw) : 0;
 }
 
 function calcRecordRecPages(r) {
@@ -19727,11 +19851,13 @@ function getOrderedRevSegments(bounds, revSpec, sabrJuz = null) {
   }
   const baseSegs = (Array.isArray(bounds?.segments) && bounds.segments.length)
     ? bounds.segments
-    : [{
-        startSurahId: bounds?.startSurahId || 78, startAyah: bounds?.startAyah || 1,
-        endSurahId: bounds?.endSurahId || 114, endAyah: bounds?.endAyah || 6,
-        startPage: bounds?.startPage || 582, endPage: bounds?.endPage || 604
-      }];
+    : ((Array.isArray(bounds?.actualMemSegments) && bounds.actualMemSegments.length)
+      ? bounds.actualMemSegments
+      : [{
+          startSurahId: bounds?.startSurahId || 114, startAyah: bounds?.startAyah || 1,
+          endSurahId: bounds?.endSurahId || 114, endAyah: bounds?.endAyah || 6,
+          startPage: bounds?.startPage || 604, endPage: bounds?.endPage || 604
+        }]);
 
   if (!revSpec?.isMixedJuz) {
     return revSpec?.juzOrder === "juz_desc" ? [...baseSegs].reverse() : [...baseSegs];
@@ -19786,11 +19912,14 @@ function getStudentRevCycleBounds(st, h) {
   const isSeniorsSystem = h?.majorRevSystem === "seniors";
   const segs = getStudentMemorizedSegments(st, h, true);
   const hasMajorRange = segs.length > 0;
-  const first = segs[0] || { startPage: 582, endPage: 604, startSurahId: 78, startAyah: 1, endSurahId: 114, endAyah: 6 };
-  const last = segs[segs.length - 1] || first;
+  // v141 FIX: When Seniors system has NO sabred Juz yet, use student's ACTUAL memorized segments (never fake full Juz Amma النبأ←الناس!)
+  const actualMemSegments = hasMajorRange ? segs : getStudentMemorizedSegments(st, h, false);
+  const effectiveSegs = actualMemSegments.length ? actualMemSegments : [{ startPage: 604, endPage: 604, startSurahId: 114, startAyah: 1, endSurahId: 114, endAyah: 6 }];
+  const first = effectiveSegs[0];
+  const last = effectiveSegs[effectiveSegs.length - 1] || first;
   let totalPages = 0;
-  segs.forEach(sg => {
-    totalPages += Math.max(1, getMushafPos(sg.endSurahId, sg.endAyah, true) - getMushafPos(sg.startSurahId, sg.startAyah, false));
+  effectiveSegs.forEach(sg => {
+    totalPages += Math.max(0.25, getMushafPos(sg.endSurahId, sg.endAyah, true) - getMushafPos(sg.startSurahId, sg.startAyah, false));
   });
   const explicitJuz = parseArabicNum(st?.memorizedJuz, 0);
   const juzCount = explicitJuz > 0 ? explicitJuz : Math.round((totalPages / 20) * 10) / 10;
@@ -19803,6 +19932,7 @@ function getStudentRevCycleBounds(st, h) {
     endSurahId: last.endSurahId,
     endAyah: last.endAyah,
     segments: segs,
+    actualMemSegments: effectiveSegs,
     hasMajorRange,
     isSeniorsSystem,
     juzCount,
@@ -21975,12 +22105,14 @@ function getSyncedPageEvals(r, st, kind, h) {
   if (slots.length < 2) return null;
   const pKey = getPageEvalKey(kind);
   const saved = Array.isArray(r[pKey]) ? r[pKey] : [];
+  const existingKindEval = kind === "min" ? (r.minEval || "") : (kind === "maj" ? (r.majEval || "") : (r.recEval || ""));
+  const seedFromKindEval = saved.length === 0 && Boolean(existingKindEval);
   return slots.map((slot, i) => {
     const match = saved.find(x => x.mushafPage === slot.mushafPage) || null;
     const errors = match ? Math.max(0, Number(match.errors) || 0) : 0;
     const alerts = match ? Math.max(0, Number(match.alerts) || 0) : 0;
-    const manualEval = (match && match.manualEval) ? String(match.manualEval) : "";
-    const touched = Boolean(match && match.touched);
+    const manualEval = (match && match.manualEval) ? String(match.manualEval) : (seedFromKindEval ? existingKindEval : "");
+    const touched = Boolean(match && match.touched) || seedFromKindEval;
     const isGraded = Boolean(manualEval || touched || errors > 0 || alerts > 0);
     return {
       ...slot,
@@ -24377,7 +24509,7 @@ function applySurahPicker(quickEval = null) {
       r.minText = toastLbl;
       r.minPages = pCount; r.manualMin = true;
     } else if (k === "maj") {
-      r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = "";
+      r.majSkipped = false; r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = "";
       r.majExtras = []; r.majSardJuzIds = []; r.majSardLabel = "";
       r.majIsPages = true;
       r.majStartPage = p1; r.majEndPage = p2;
@@ -24427,7 +24559,7 @@ function applySurahPicker(quickEval = null) {
       r.minSurah = "سرد"; r.minFrom = info.ids.length === 1 ? "جزء" : `${info.ids.length} أجزاء`; r.minTo = info.shortNames;
       r.minText = info.label; r.minPages = info.totalPages; r.manualMin = true;
     } else if (k === "maj") {
-      r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = "";
+      r.majSkipped = false; r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = "";
       r.majExtras = []; r.majIsPages = false;
       r.majSardJuzIds = [...info.ids]; r.majSardLabel = info.label;
       r.majStartPage = firstJ.startPage; r.majEndPage = lastJ.endPage;
@@ -24482,12 +24614,12 @@ function applySurahPicker(quickEval = null) {
   } else if (k === "min") {
     r.minIsPages = false; r.minSardJuzIds = [];
     r.minSurahId = first.surahId; r.minFrom = first.from; r.minTo = first.to;
-    r.minEndSurahId = ""; r.minTwoSurahs = false;
+    r.minSkipped = false; r.minEndSurahId = ""; r.minTwoSurahs = false;
     r.minExtras = rest;
     r.manualMin = true;
     syncMinorSummaryStrings(r);
   } else if (k === "maj") {
-    r.sabrJuz = ""; r.majIsPages = false; r.majSardJuzIds = []; r.majSardLabel = "";
+    r.majSkipped = false; r.sabrJuz = ""; r.majIsPages = false; r.majSardJuzIds = []; r.majSardLabel = "";
     r.majExtras = validSegs.map(x => ({ surahId: String(x.surahId), from: x.from, to: x.to }));
     r.manualMaj = true;
     syncMajorSurahsToRecord(r);
@@ -24643,7 +24775,7 @@ function initApp() {
       if (runSilentDataSanitizer()) renderSessionView();
       ensureDailyAutoSnapshot();
       registerTibyanServiceWorker();
-      ensureExactMushaf604Data();
+      ensureExactMushaf604Data(); if (typeof ensureExactMushafAyahWeights === "function") ensureExactMushafAyahWeights();
       setTimeout(() => { if (navigator.onLine) precacheOfflineExportSuite(false); }, 4500);
       const ready = await ensureFirebaseReady(8000);
       if (ready && _fbAuth?.currentUser) {
@@ -27256,9 +27388,12 @@ function isStudentFullyDone(s, st, r) {
   if (r.attendance === "غياب مبرر" || r.attendance === "غياب غير مبرر" || r.attendance === "حضر ولم يُسمّع") return true;
   if (st?.track === "rashidi") return Boolean(r.recEval);
   if (s.type === "daily") return Boolean(r.recEval);
-  const hasMinorTask = Boolean(r.minSurahId || r.minSurah || r.minText);
-  if (hasMinorTask) return Boolean(r.minEval && r.majEval);
-  return Boolean(r.majEval);
+  const hasMinorTask = !r.minSkipped && Boolean(r.minSurahId || r.minSurah || r.minText);
+  const hasMajorTask = !r.majSkipped && Boolean(r.majFrom || r.majSardLabel || r.sabrJuz || r.majStartSurahId || r.majStartPage);
+  if (hasMinorTask && hasMajorTask) return Boolean(r.minEval && r.majEval);
+  if (hasMinorTask) return Boolean(r.minEval);
+  if (hasMajorTask) return Boolean(r.majEval);
+  return Boolean(r.minEval || r.majEval || r.majSkipped || r.minSkipped);
 }
 
 function createNewSession() {
@@ -27608,6 +27743,7 @@ function applyStudentMinorAuto(rec, res) {
 }
 
 function refreshStudentSatMinor(studentId) {
+  const _rsM = getCurrentSession(); if (_rsM) { const _rrM = getStudentRecord(_rsM, studentId); if (_rrM) _rrM.minSkipped = false; }
   const h = getActiveHalaqa(), cur = getCurrentSession();
   if (!cur || cur.type !== "saturday") return;
   const rec = getStudentRecord(cur, studentId);
@@ -28924,17 +29060,11 @@ function getNextEvalTargetStudent(h, s, currentId) {
     return queued[0];
   }
 
-  // 2) No hand-queue items left -> follow pending students (skipping absent!), then remaining non-absent
+  // 2) No hand-queue items left -> ALWAYS advance smoothly to the next non-absent student in the list!
+  // (Never trap the user on a student whose Major Review was not recited — the middle "المتبقي" button jumps to pending students!)
   const activePos = allNonAbs.findIndex(x => x.id === currentId);
-  if (pendRest.length) {
-    const pIdx = pendRest.findIndex(x => x.id === currentId);
-    if (pIdx >= 0) {
-      if (pIdx + 1 < pendRest.length) return pendRest[pIdx + 1];
-      return pendRest.length > 1 ? pendRest[0] : null;
-    }
-    return pendRest[0];
-  }
   if (activePos >= 0 && activePos + 1 < allNonAbs.length) return allNonAbs[activePos + 1];
+  if (activePos < 0 && allNonAbs.length) return allNonAbs[0];
   return null;
 }
 
@@ -29711,6 +29841,20 @@ function renderCardBody(s, st, r, idx) {
             <span>🔗 الربط مع المحفوظ السابق</span>
             <span class="m-switch ${r.rabt ? 'on' : ''}" aria-hidden="true"></span>
           </button>
+          ${(() => {
+            const dNextCtx = getNextClassDayContext(s, h);
+            const upMaj = computeUpcomingMajorReviewForNextSat(h, dNextCtx.nextIso, st, dNextCtx.existingNext);
+            const upMajTxt = (r.manualNextMaj && (r.nextMajSabrJuz || r.nextMajSardLabel || r.nextMajFrom))
+              ? (r.nextMajSabrJuz ? `🎓 سبر ${formatJuzClean(r.nextMajSabrJuz)}` : (r.nextMajSardLabel ? `📚 ${r.nextMajSardLabel}` : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo)))
+              : (upMaj?.text || "يُضبط تلقائياً");
+            return `<div class="es-hw-row" style="margin-top:7px; padding-top:7px; border-top:1px dashed var(--line);">
+              <span class="lms-tap-area" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" onclick="openSurahPicker('${st.id}','nextMaj')" title="اضغط لتعديل واجب الكبرى القادم يدوياً">📘 <b>واجب الكبرى (${escapeHtml(dNextCtx.nextDayName)}):</b> ${escapeHtml(upMajTxt)}${r.manualNextMaj ? ' <span class="badge b-blue" style="font-size:9px; padding:1px 5px;">يدوي</span>' : ''}</span>
+              <div style="display:flex; gap:4px; flex-shrink:0;">
+                ${r.manualNextMaj ? `<button type="button" class="lms-btn" style="padding:2px 7px; font-size:10.5px;" onclick="resetDailyNextMajToAuto('${st.id}')" title="العودة للتلقائي">↺ تلقائي</button>` : ''}
+                <button type="button" class="lms-btn accent" style="padding:2px 8px; font-size:11px;" onclick="openSurahPicker('${st.id}','nextMaj')">✏️ تعديل</button>
+              </div>
+            </div>`;
+          })()}
         </div>`;
       })()}
 
@@ -29858,6 +30002,7 @@ function renderCardBody(s, st, r, idx) {
           <div class="lms-btns">
             <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','min')">✏️ تعديل</button>
             <button type="button" class="lms-btn" onclick="refreshStudentSatMinor('${st.id}')" title="سحب محفوظ الأسبوع">🔄</button>
+            ${(!r.minSkipped && (r.minSurahId || r.minSurah || r.minText || r.minEval)) ? `<button type="button" class="lms-btn" style="color:var(--red);" onclick="clearSatMin('${st.id}')" title="ما سمّع الصغرى (حذف من التقرير)">✕</button>` : ''}
           </div>
           <div class="sat-min-steps-v133">
             <button type="button" class="lms-btn minus-half-v133" onclick="stepMinHalfPageQuick('${st.id}', -0.5)" title="إنقاص نصف صفحة">−½ ص</button>
@@ -29878,13 +30023,26 @@ function renderCardBody(s, st, r, idx) {
             <button type="button" class="btn btn-outline btn-sm" style="padding:2px 7px; font-size:11px;" onclick="onSabrJuzChange('${st.id}','')">إلغاء</button>
           </div>
         </div>` : '')}
+        ${r.majSkipped ? `
+          <div class="live-mushaf-strip rev-gold" style="opacity:0.86;">
+            <div class="lms-info">
+              <div class="lms-main">📘 الكبرى: لم يُسمّع اليوم</div>
+              <div class="lms-sub">فارغة بالتقرير • يُرحّل نفس المقرر تلقائياً للجلسة القادمة</div>
+            </div>
+            <div class="lms-btns">
+              <button type="button" class="lms-btn accent" onclick="restoreSatMaj('${st.id}')">↺ استعادة</button>
+              <button type="button" class="lms-btn" onclick="openSurahPicker('${st.id}','maj')">✏️ اختيار</button>
+            </div>
+          </div>
+        ` : `
         <div class="live-mushaf-strip rev-gold">
           <div class="lms-info lms-tap-area" onclick="openSurahPicker('${st.id}','maj')" title="اضغط لتحديد الكبرى أو السبر">
             <div class="lms-main">📘 الكبرى: ${escapeHtml(r.majSardLabel ? `📚 ${r.majSardLabel}` : (r.majIsPages ? `📄 ${displayMajFrom === displayMajTo ? displayMajFrom : displayMajFrom + " ← " + displayMajTo}` : formatMajStripDisplay(displayMajFrom, displayMajTo)))}</div>
-            <div class="lms-sub">${bounds.isSeniorsSystem && !bounds.hasMajorRange && !r.majFrom ? "🎓 نظام الكبار: بانتظار إتمام وسبر أول جزء" : `${formatNum(effMajPages)} ص • ${bounds.isSeniorsSystem ? "نظام الكبار (المسبور)" : "نظام الصغار"}: ${escapeHtml(SURAH_MAP[bounds.startSurahId]?.n || memStartSurah.n)} ← ${escapeHtml(SURAH_MAP[bounds.endSurahId]?.n || "الناس")}`}</div>
+            <div class="lms-sub">${bounds.isSeniorsSystem && !bounds.hasMajorRange ? `${r.majFrom ? `${formatNum(effMajPages)} ص • ` : ''}نظام الكبار (لا يوجد جزء مسبور بعد • المحفوظ: ${escapeHtml(SURAH_MAP[bounds.startSurahId]?.n || memStartSurah.n)} ← ${escapeHtml(SURAH_MAP[bounds.endSurahId]?.n || "الناس")})` : `${formatNum(effMajPages)} ص • ${bounds.isSeniorsSystem ? "نظام الكبار (المسبور)" : "نظام الصغار"}: ${escapeHtml(SURAH_MAP[bounds.startSurahId]?.n || memStartSurah.n)} ← ${escapeHtml(SURAH_MAP[bounds.endSurahId]?.n || "الناس")}`}</div>
           </div>
           <div class="lms-btns">
-            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','maj')">✏️</button>
+            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','maj')" title="تعديل الكبرى">✏️</button>
+            <button type="button" class="lms-btn" style="color:var(--red);" onclick="clearSatMaj('${st.id}')" title="ما سمّع الكبرى اليوم (حذف من التقرير)">✕</button>
             ${!r.sabrJuz ? `
               <button type="button" class="lms-btn ltr-num" onclick="nudgeMajStartPage('${st.id}', -1)">−1</button>
               <button type="button" class="lms-btn ltr-num" onclick="nudgeMajStartPage('${st.id}', 1)">+1</button>
@@ -29899,6 +30057,7 @@ function renderCardBody(s, st, r, idx) {
         </div>
         ${r.sabrJuz ? renderSabrScoreBox(st.id, r, true) : renderErrorCounterBar(st.id, "maj", r.majErrors, r.majAlerts)}
         ${(r.sabrJuz || !shouldUsePerPageMode(r, st, "maj", h)) ? `<div class="es-eval-4" id="esEvalRow_maj" style="margin-bottom:6px;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors, r.majAlerts)}</div>` : ''}
+        ` }
         ${renderTajweedTagsBar(st.id, r)}
       </div>
 
@@ -30633,9 +30792,18 @@ function setRecEval(studentId, ev, errCount = null) {
   ensureRecordBonuses(r);
   r.recEval = ev;
   // If per-page evaluations exist, adopt this button as the OVERALL grade while preserving repeated page(s) in notes!
-  if (shouldUsePerPageMode(r, st, "rec", h) && Array.isArray(r.recPageEvals) && r.recPageEvals.length >= 2) {
-    applyPerPageAutoEval(studentId, "rec", ev, true);
-    return;
+  if (shouldUsePerPageMode(r, st, "rec", h)) {
+    if (!Array.isArray(r.recPageEvals) || r.recPageEvals.length < 2) {
+      const seeded = getSyncedPageEvals(r, st, "rec", h);
+      if (seeded && seeded.length >= 2) {
+        seeded.forEach(p => { p.manualEval = ev; p.eval = ev; p.touched = true; });
+        r.recPageEvals = seeded;
+      }
+    }
+    if (Array.isArray(r.recPageEvals) && r.recPageEvals.length >= 2) {
+      applyPerPageAutoEval(studentId, "rec", ev, true);
+      return;
+    }
   }
   removeStudentFromQueue(s, studentId);
 
@@ -30987,6 +31155,75 @@ function clearDailyRev(studentId) {
   showToast("تم مسح مراجعة اليوم للطالب");
 }
 
+function clearSatMaj(studentId) {
+  captureUndoSnapshot(studentId);
+  const h = getActiveHalaqa(), s = getCurrentSession(), st = h?.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
+  if (!h || !s || !st || !r) return;
+  r.majSkipped = true;
+  r.majEval = ""; r.majErrors = 0; r.majAlerts = 0; r.majPageEvals = null; r.majOverallOverride = "";
+  r.majExtras = []; r.majIsPages = false; r.majSardJuzIds = []; r.majSardLabel = "";
+  r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = "";
+  r.majStartSurahId = ""; r.majStartAyah = ""; r.majEndSurahId = ""; r.majEndAyah = "";
+  r.majStartPage = ""; r.majEndPage = ""; r.majFrom = ""; r.majTo = ""; r.majPages = 0;
+  r.manualMaj = false;
+  if (!r.manualNextMaj) {
+    r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = "";
+    r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = "";
+    r.nextMajStartSurahId = ""; r.nextMajEndSurahId = "";
+  }
+  r.points = computeRecordPoints(s, r, st);
+  if (r.minEval) {
+    r.notes = buildSaturdayAutoNote(st, r, r.minErrors || null, null, false);
+    removeStudentFromQueue(s, studentId);
+  }
+  syncUpcomingSaturdayMajorForStudent(h, s, studentId);
+  openCardId = studentId;
+  saveState(); renderSessionPreservingScroll();
+  showToast("تم مسح الكبرى لليوم (فارغة بالتقرير ومُرحّلة للجلسة القادمة) ✓", { undo: true });
+}
+
+function restoreSatMaj(studentId) {
+  const h = getActiveHalaqa(), s = getCurrentSession(), st = h?.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
+  if (!h || !s || !st || !r) return;
+  r.majSkipped = false;
+  const plan = computeSmartMajorReviewForDate(h, s.date, st, getSessionReportMonth(s));
+  if (plan) applySmartMajorPlanToSatRecord(r, plan);
+  openCardId = studentId;
+  saveState(); renderSessionPreservingScroll();
+  showToast("تمت استعادة مقرر الكبرى ↺");
+}
+
+function clearSatMin(studentId) {
+  captureUndoSnapshot(studentId);
+  const h = getActiveHalaqa(), s = getCurrentSession(), st = h?.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
+  if (!h || !s || !st || !r) return;
+  r.minSkipped = true;
+  r.minEval = ""; r.minErrors = 0; r.minAlerts = 0; r.minPageEvals = null; r.minOverallOverride = "";
+  r.minSurahId = ""; r.minFrom = ""; r.minTo = ""; r.minEndSurahId = ""; r.minExtras = [];
+  r.minSurah = ""; r.minText = ""; r.minPages = 0; r.minIsPages = false; r.minSardJuzIds = [];
+  r.points = computeRecordPoints(s, r, st);
+  if (r.majEval) {
+    r.notes = buildSaturdayAutoNote(st, r, null, r.majErrors || null, false);
+    removeStudentFromQueue(s, studentId);
+  }
+  openCardId = studentId;
+  saveState(); renderSessionPreservingScroll();
+  showToast("تم مسح الصغرى لليوم (فارغة بالتقرير) ✓", { undo: true });
+}
+
+function resetDailyNextMajToAuto(studentId) {
+  const h = getActiveHalaqa(), s = getCurrentSession(), st = h?.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
+  if (!h || !s || !st || !r) return;
+  r.manualNextMaj = false;
+  r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = "";
+  r.nextMajStartSurahId = ""; r.nextMajStartAyah = ""; r.nextMajEndSurahId = ""; r.nextMajEndAyah = "";
+  r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = "";
+  syncUpcomingSaturdayMajorForStudent(h, s, studentId);
+  openCardId = studentId;
+  saveState(); renderSessionPreservingScroll();
+  showToast("تمت استعادة واجب الكبرى التلقائي ↺");
+}
+
 function onMinSurahChange(studentId, surahId) {
   const h = getActiveHalaqa(), s = getCurrentSession(), st = h.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
   r.minSurahId = surahId;
@@ -31079,7 +31316,17 @@ function setSatMinEval(studentId, ev, errCount = null) {
 
   if (r.attendance === "لم يُسمّع" || r.attendance === "حضر ولم يُسمّع" || String(r.attendance || "").includes("غياب")) r.attendance = "حاضر";
   ensureRecordBonuses(r);
-  if (shouldUsePerPageMode(r, st, "min", h) && Array.isArray(r.minPageEvals) && r.minPageEvals.length >= 2) { applyPerPageAutoEval(studentId, "min", ev, true); return; }
+  if (shouldUsePerPageMode(r, st, "min", h)) {
+    if (!Array.isArray(r.minPageEvals) || r.minPageEvals.length < 2) {
+      r.minEval = ev;
+      const seeded = getSyncedPageEvals(r, st, "min", h);
+      if (seeded && seeded.length >= 2) {
+        seeded.forEach(p => { p.manualEval = ev; p.eval = ev; p.touched = true; });
+        r.minPageEvals = seeded;
+      }
+    }
+    if (Array.isArray(r.minPageEvals) && r.minPageEvals.length >= 2) { applyPerPageAutoEval(studentId, "min", ev, true); return; }
+  }
   r.minEval = ev;
   if (!(Number(r.minPages) > 0)) r.minPages = calcRecordMinPages(r);
   r.points = computeRecordPoints(s, r, st);
@@ -31477,6 +31724,30 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
     const isNoRec = isPresentNoRecite(pr.attendance);
 
     if (ps.type === "daily") {
+      // v141: Respect teacher's explicit manual "واجب الكبرى القادم" edited on a Daily session (Mon/Wed)!
+      if (pr.manualNextMaj) {
+        if (pr.nextMajSabrJuz) {
+          const jObj = getJuzByName(pr.nextMajSabrJuz);
+          if (jObj) return { kind: "sabr", juz: jObj, source: "dailyManual" };
+        }
+        const mSardIds = extractSardJuzIds(pr.nextMajSardJuzIds, pr.nextMajSardLabel, pr.nextMajFrom, pr.nextMajTo);
+        if (mSardIds.length) {
+          const si = formatSardJuzInfo(mSardIds);
+          if (si.ids.length) return { kind: "sard", info: si, source: "dailyManual" };
+        }
+        if (pr.nextMajIsPages && pr.nextMajFrom) {
+          const p1 = parseArabicNum(pr.nextMajStartPage, 582), p2 = parseArabicNum(pr.nextMajEndPage, p1);
+          return { kind: "pages", startPage: p1, endPage: p2, startSurahId: pr.nextMajStartSurahId || String(getPageStartInfo(p1).surah.id), endSurahId: pr.nextMajEndSurahId || String(getPageEndInfo(p2).surah.id), fromLabel: pr.nextMajFrom, toLabel: pr.nextMajTo || "", pages: Math.max(1, Math.abs(p2 - p1) + 1), source: "dailyManual" };
+        }
+        if (pr.nextMajStartSurahId && pr.nextMajEndSurahId && SURAH_MAP[Number(pr.nextMajStartSurahId)] && SURAH_MAP[Number(pr.nextMajEndSurahId)]) {
+          const s1 = SURAH_MAP[Number(pr.nextMajStartSurahId)], s2 = SURAH_MAP[Number(pr.nextMajEndSurahId)];
+          const a1 = parseArabicNum(pr.nextMajStartAyah, 1), a2 = parseArabicNum(pr.nextMajEndAyah, s2.a);
+          const p1 = getPageForSurahAyah(s1.id, a1), p2 = getPageForSurahAyah(s2.id, a2);
+          const pgs = Math.max(0.25, calcRangePages(s1.id, a1, a2, s2.id));
+          const rng = formatMajorRangeObject(s1, a1, s2, a2, p1, p2, pgs, Math.min(bounds.endPage, p2 + 1), false, bounds.startPage, bounds.endPage);
+          return { kind: "range", rng, source: "dailyManual" };
+        }
+      }
       const ev = String(pr.dRevEval || "").trim();
       const passed = !isAbs && !isNoRec && isMajorPassEval(ev);
       if (passed) {
@@ -31509,6 +31780,8 @@ function computeSmartMajorReviewForDate(h, targetIso, st, targetMonthOverride = 
     }
 
     if (ps.type === "saturday") {
+      // If teacher skipped/cleared Major Review on this Saturday without setting a custom nextMaj, skip cleanly to inherit the previous checkpoint!
+      if (pr.majSkipped && !pr.manualNextMaj) continue;
       const hasMajEval = Boolean(pr.majEval && String(pr.majEval).trim());
       const satCarryPlan = buildCarryPlanFromSatRecord(pr, st, h, ps, bounds);
       if (!fallbackSatPlan && satCarryPlan) fallbackSatPlan = satCarryPlan;
@@ -32608,15 +32881,17 @@ function renderDailyReport() {
         const scTag = (r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null && !isNaN(Number(r.sabrScore)))
           ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
 
-        const minSegs = getSegments(r, "min");
-        const minCols = isRashidiRow
-          ? { surah: "الرشيدي", from: escapeHtml(r.rashidiFrom ? `ص ${r.rashidiFrom}` : ""), to: escapeHtml(r.rashidiTo ? `ص ${r.rashidiTo}` : ""), lines: 1 }
-          : (minSegs.length ? formatSegmentsColumns(minSegs, true) : { surah: escapeHtml(r.minSurah || r.minText || ""), from: escapeHtml(r.minFrom || ""), to: escapeHtml(r.minTo || ""), lines: 1 });
+        const minSegs = r.minSkipped ? [] : getSegments(r, "min");
+        const minCols = r.minSkipped
+          ? { surah: "", from: "", to: "", lines: 1 }
+          : (isRashidiRow
+            ? { surah: "الرشيدي", from: escapeHtml(r.rashidiFrom ? `ص ${r.rashidiFrom}` : ""), to: escapeHtml(r.rashidiTo ? `ص ${r.rashidiTo}` : ""), lines: 1 }
+            : (minSegs.length ? formatSegmentsColumns(minSegs, true) : { surah: escapeHtml(r.minSurah || r.minText || ""), from: escapeHtml(r.minFrom || ""), to: escapeHtml(r.minTo || ""), lines: 1 }));
         const minHtml = formatUnifiedRangeCell(minCols, true);
         const mnL = stripHtmlSimple(minHtml).length;
         if (mnL > maxMinLen) maxMinLen = mnL;
 
-        const majCols = isRashidiRow
+        const majCols = (isRashidiRow || r.majSkipped)
           ? { from: "", to: "", lines: 1 }
           : ((r.majIsPages || r.majSardLabel)
             ? { from: escapeHtml(r.majFrom || ""), to: escapeHtml(r.majTo || ""), lines: 1 }
@@ -32635,9 +32910,9 @@ function renderDailyReport() {
         const hwL = stripHtmlSimple(hwHtml).length;
         if (hwL > maxSatHwLen) maxSatHwLen = hwL;
 
-        const minSt = getEvalCellStyle(isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isRashidiRow ? (r.recEval || "") : (r.minEval || ""))), isAbs);
+        const minSt = getEvalCellStyle(r.minSkipped ? "" : (isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isRashidiRow ? (r.recEval || "") : (r.minEval || "")))), !r.minSkipped && isAbs);
         const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
-        const majRaw = isRashidiRow ? "" : (isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || "")))));
+        const majRaw = (isRashidiRow || r.majSkipped) ? "" : (isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || "")))));
         const majSt = getEvalCellStyle(majRaw, !isRashidiRow && isAbs);
         const satPendBadge = !isRashidiRow ? buildPendingJuzNoteBadge(st, true) : { hasBadge: false, html: "", plain: "" };
         const satTjBadge = (!isRashidiRow && !isAbs && !isNoRec) ? buildTajweedReportBadgeHtml(r) : { html: "", plain: "" };
@@ -32904,17 +33179,30 @@ function computeMonthlyData(monthFilter) {
             const t2Val = Math.max(1, parseArabicNum(lastS.to, sObj2?.a || 1));
             if (!firstMem && n1) firstMem = `${n1} - ${f1Val}`;
             if (n2) lastMem = `${n2} - ${t2Val}`;
-            memPages += Number(r.recPages) || calcSegmentsPages(rSegs);
+            // v141: Always sum EXACT Madinah Mushaf raw pages from recorded segments (handles partial per-page repeats accurately!)
+            let sessMemRaw = 0;
+            if (Array.isArray(r.recPageEvals) && r.recPageEvals.length >= 2 && r.recPageEvals.some(p => isPerPageItemGraded(p) && p.eval === "إعادة")) {
+              const passedPgs = r.recPageEvals.filter(p => isPerPageItemGraded(p) && p.eval && p.eval !== "إعادة");
+              passedPgs.forEach(p => {
+                sessMemRaw += calcRawRangePages(p.surahId, p.from, p.to);
+                if (Array.isArray(p.extraSegs)) p.extraSegs.forEach(es => { sessMemRaw += calcRawRangePages(es.surahId, es.from, es.to); });
+              });
+            } else {
+              sessMemRaw = calcRawSegmentsPages(rSegs) || Number(r.recPages) || 0;
+            }
+            memPages += sessMemRaw;
           }
         }
         if (!isAbs) revPages += calcDailyReviewPages(r);
       } else if (!isAbs) {
         if (!isPresentNoRecite(r.attendance)) {
-          if (isMajorPassEval(r.minEval)) {
-            revPages += Number(r.minPages) || calcRecordMinPages(r);
+          if (!r.minSkipped && isMajorPassEval(r.minEval)) {
+            const mSegs = getSegments(r, "min");
+            revPages += (mSegs.length ? calcRawSegmentsPages(mSegs) : (Number(r.minPages) || calcRecordMinPages(r)));
           }
-          if (isMajorPassEval(r.majEval)) {
-            revPages += Number(r.majPages) || calcMajorPagesFallback(r, st, h);
+          if (!r.majSkipped && isMajorPassEval(r.majEval)) {
+            const jSegs = getSegments(r, "maj");
+            revPages += (jSegs.length && !r.sabrJuz && !r.majSardLabel && !r.majIsPages ? calcRawSegmentsPages(jSegs) : (Number(r.majPages) || calcMajorPagesFallback(r, st, h)));
           }
         }
       }
@@ -32923,7 +33211,7 @@ function computeMonthlyData(monthFilter) {
     const noteKey = `${monthFilter}__${st.id}`;
     return {
       student: st, fromMem: firstMem || "—", toMem: lastMem || "—",
-      memPages: Math.round(memPages * 100) / 100, revPages: Math.round(revPages * 100) / 100, rashidiPages: Math.round(rashidiPages * 100) / 100,
+      memPages: snapCleanPages(memPages), revPages: snapCleanPages(revPages), rashidiPages: Math.round(rashidiPages * 100) / 100,
       sabrList, sabrCount: sabrList.length, totalPoints,
       presentDays, lateDays, excusedDays, absentDays, totalAbsences: excusedDays + absentDays,
       autoTajweedNote: (!isPointsCycle && st.track !== "rashidi") ? computeStudentMonthlyTopTajweedText(h, st.id, monthFilter) : "",
@@ -36022,12 +36310,14 @@ async function exportDailyExcelStyled() {
           ? ` (${Math.round(Number(r.sabrScore))}%)` : "";
 
         const minSegs = getSegments(r, "min");
-        const minCols = isRashidiRow
-          ? { surah: "الرشيدي", from: r.rashidiFrom ? `ص ${r.rashidiFrom}` : "", to: r.rashidiTo ? `ص ${r.rashidiTo}` : "", lines: 1 }
-          : (minSegs.length ? formatSegmentsColumns(minSegs, false) : { surah: r.minSurah || r.minText || "", from: r.minFrom || "", to: r.minTo || "", lines: 1 });
+        const minCols = r.minSkipped
+          ? { surah: "", from: "", to: "", lines: 1 }
+          : (isRashidiRow
+            ? { surah: "الرشيدي", from: r.rashidiFrom ? `ص ${r.rashidiFrom}` : "", to: r.rashidiTo ? `ص ${r.rashidiTo}` : "", lines: 1 }
+            : (minSegs.length ? formatSegmentsColumns(minSegs, false) : { surah: r.minSurah || r.minText || "", from: r.minFrom || "", to: r.minTo || "", lines: 1 }));
         const minTxt = formatUnifiedRangeCell(minCols, false);
 
-        const majCols = isRashidiRow
+        const majCols = (isRashidiRow || r.majSkipped)
           ? { from: "", to: "", lines: 1 }
           : ((r.majIsPages || r.majSardLabel)
             ? { from: String(r.majFrom || ""), to: String(r.majTo || ""), lines: 1 }
@@ -36042,8 +36332,8 @@ async function exportDailyExcelStyled() {
         const hwTxt = formatUnifiedRangeCell(hwCols, false);
 
         const isSatSabrPending = Boolean(r.sabrJuz && !r.majEval && !isAbs);
-        const minSt = getEvalCellStyle(isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : (isRashidiRow ? (r.recEval || "") : (r.minEval || ""))), isAbs);
-        const majSt = getEvalCellStyle(isRashidiRow ? "" : (isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || ""))))), !isRashidiRow && isAbs);
+        const minSt = getEvalCellStyle(r.minSkipped ? "" : (isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : (isRashidiRow ? (r.recEval || "") : (r.minEval || "")))), !r.minSkipped && isAbs);
+        const majSt = getEvalCellStyle((isRashidiRow || r.majSkipped) ? "" : (isAbs ? getGenderTerms(h).absent : (isNoRecXl ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || ""))))), !(isRashidiRow || r.majSkipped) && isAbs);
         const hasHwSabr = xlSatNextIsDaily
           ? Boolean(hwCols.isSabr)
           : Boolean(r.nextMajSabrJuz || (r.sabrJuz && (r.majEval === "إعادة" || isAbs)));
@@ -36552,10 +36842,10 @@ function setPointsPodiumLimit(lim) {
 }
 
 function formatPosterPages(n) {
-  const v = Math.round((Number(n) || 0) * 10) / 10;
+  const v = Math.round((Number(n) || 0) * 100) / 100;
   if (v === 1) return "صفحة واحدة";
   if (v === 2) return "صفحتان";
-  const str = Number.isInteger(v) ? String(v) : v.toFixed(1).replace(/\.0$/, "");
+  const str = formatNum(v);
   return `${str} ${v >= 3 && v <= 10 && Number.isInteger(v) ? "صفحات" : "صفحة"}`;
 }
 
@@ -36863,7 +37153,7 @@ function renderPointsReportModal() {
       <table class="t-points-all">${colgroup}<thead>${thead}</thead><tbody>${tbody}</tbody><tfoot>${tfoot}</tfoot></table>
       <div style="display:flex; justify-content:space-between; font-size:12.5px; font-weight:700; color:#475569; padding-top:6px; border-top:1px solid #cbd5e1;">
         <span>${escapeHtml(bm.org)} — ${escapeHtml(bm.branch)}</span>
-        <span>تاريخ الإصدار: ${escapeHtml(getExactHijriInfo(todayISO()).dateStr)}</span>
+        <span>تاريخ الإصدار: ${escapeHtml(getExactHijriInfo(todayISO()).formatted)}</span>
       </div>
     </div>`;
   } else if (_prCat === "all") {
@@ -42593,7 +42883,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v140";
+const TIBYAN_APP_VERSION = "v141";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -45495,5 +45785,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v140 -->
+<!-- Makin App v141 -->
 </html>
