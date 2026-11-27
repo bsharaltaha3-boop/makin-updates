@@ -14945,6 +14945,213 @@ table.t-daily td.td-sard,
   border-right-color: #be123c;
 }
 
+
+/* ==================== MAKIN v144: INSTANT FOUNDER BROADCAST ENGINE & URGENT MODAL ==================== */
+.global-ann-banner.is-urgent {
+  background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%) !important;
+  border-bottom: 2.5px solid #fbbf24 !important;
+}
+.global-ann-banner .gab-tap {
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+  line-height: 1.45;
+}
+#urgentAnnModal {
+  z-index: 270 !important;
+  background: rgba(10, 22, 38, 0.74) !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
+}
+.uann-box {
+  width: 100%;
+  max-width: 430px;
+  background: var(--white);
+  border-radius: 22px;
+  overflow: hidden;
+  border: 2px solid #c8a14b;
+  box-shadow: 0 24px 60px rgba(7, 18, 32, 0.5);
+  animation: esSlideUp 0.18s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+.uann-box.is-urgent {
+  border-color: #ef4444;
+}
+.uann-hdr {
+  background: linear-gradient(145deg, #102540 0%, #1a3b61 100%);
+  color: #ffffff;
+  padding: 14px 16px;
+  border-bottom: 3px solid #c8a14b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.uann-box.is-urgent .uann-hdr {
+  background: linear-gradient(145deg, #7f1d1d 0%, #b91c1c 100%);
+  border-bottom-color: #fbbf24;
+}
+.uann-hdr-l {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  flex: 1;
+}
+.uann-ico {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.16);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  flex-shrink: 0;
+}
+.uann-hdr h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.3;
+}
+.uann-hdr small {
+  display: block;
+  font-size: 11px;
+  color: #f6dc93;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.uann-body {
+  padding: 16px 16px 13px;
+}
+.uann-msg {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-right: 4px solid #142a46;
+  border-radius: 12px;
+  padding: 12px 13px;
+  font-size: 13.8px;
+  font-weight: 700;
+  color: var(--ink-900);
+  line-height: 1.75;
+  white-space: pre-line;
+  word-break: break-word;
+  margin-bottom: 10px;
+}
+.uann-box.is-urgent .uann-msg {
+  border-right-color: #dc2626;
+}
+.uann-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-500);
+}
+.uann-foot {
+  padding: 11px 16px 15px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+.uann-ack-btn {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffffff;
+  background: linear-gradient(135deg, #142a46 0%, #16794c 100%);
+  cursor: pointer;
+  box-shadow: 0 5px 16px rgba(20, 42, 70, 0.24);
+}
+.uann-box.is-urgent .uann-ack-btn {
+  background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%);
+  box-shadow: 0 5px 16px rgba(185, 28, 28, 0.28);
+}
+.uann-ack-btn:active { transform: scale(0.985); }
+
+/* Founder Broadcast Studio Controls */
+.own-bc-seg-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.own-bc-pill {
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-700);
+  border-radius: 10px;
+  padding: 8px 4px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.14s ease;
+}
+.own-bc-pill.on {
+  background: #142a46;
+  border-color: #c8a14b;
+  color: #f6dc93;
+  box-shadow: 0 3px 9px rgba(20, 42, 70, 0.2);
+}
+.own-bc-prio-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin-bottom: 11px;
+}
+.own-bc-prio-card {
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-900);
+  border-radius: 11px;
+  padding: 9px 9px;
+  text-align: right;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: all 0.14s ease;
+}
+.own-bc-prio-card b { font-size: 12.2px; font-weight: 800; color: var(--brand-slate); }
+.own-bc-prio-card span { font-size: 10.5px; color: var(--ink-500); font-weight: 600; line-height: 1.38; }
+.own-bc-prio-card.on {
+  background: #142a46;
+  border-color: #c8a14b;
+  color: #ffffff;
+}
+.own-bc-prio-card.on b { color: #f6dc93; }
+.own-bc-prio-card.on span { color: #dce9f7; }
+.own-bc-prio-card.on-urgent {
+  background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%);
+  border-color: #fbbf24;
+  color: #ffffff;
+}
+.own-bc-prio-card.on-urgent b { color: #fde68a; }
+.own-bc-prio-card.on-urgent span { color: #fee2e2; }
+.own-bc-status-box {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-right: 4px solid var(--green);
+  border-radius: 11px;
+  padding: 9px 11px;
+  margin-bottom: 11px;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.own-bc-status-box.is-off {
+  border-right-color: var(--ink-500);
+  opacity: 0.85;
+}
+.own-bc-status-box.is-urgent {
+  border-right-color: #dc2626;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -14980,6 +15187,31 @@ table.t-daily td.td-sard,
 
 <!-- Global Founder Announcement Banner -->
 <div id="globalAnnouncementBar" class="global-ann-banner no-print" style="display:none;"></div>
+
+<!-- Urgent / Full Founder Announcement Modal (v144) -->
+<div id="urgentAnnModal" class="modal-backdrop no-print" onclick="if(event.target===this && !this.dataset.locked) dismissUrgentAnnModal();">
+  <div id="urgentAnnBox" class="uann-box">
+    <div class="uann-hdr">
+      <div class="uann-hdr-l">
+        <span class="uann-ico" id="uannIco">📢</span>
+        <div style="min-width:0; flex:1;">
+          <h3 id="uannTitle">تنبيه من إدارة صروح مكين</h3>
+          <small id="uannSub">رسالة رسمية من الإدارة</small>
+        </div>
+      </div>
+    </div>
+    <div class="uann-body">
+      <div class="uann-msg" id="uannBody"></div>
+      <div class="uann-meta">
+        <span id="uannAudienceLbl">🌍 لجميع المستخدمين</span>
+        <span id="uannTimeLbl"></span>
+      </div>
+    </div>
+    <div class="uann-foot">
+      <button type="button" class="uann-ack-btn" id="uannAckBtn" onclick="dismissUrgentAnnModal()">✓ تم الاطلاع</button>
+    </div>
+  </div>
+</div>
 
 <!-- Owner Quick Return Bar (when Founder is previewing Teacher/Supervisor views) -->
 <div id="ownerQuickReturnBar" class="owner-quick-bar no-print" style="display:none;">
@@ -15471,7 +15703,7 @@ table.t-daily td.td-sard,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v143</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v144</span>
         </button>
       </div>
     </div>
@@ -21813,6 +22045,7 @@ document.addEventListener("visibilitychange", () => {
     if (typeof isCloudSyncDirty === "function" && isCloudSyncDirty() && navigator.onLine && typeof syncCentralCloudNow === "function") {
       syncCentralCloudNow(false);
     }
+    if (typeof stopAnnouncementLiveListener === "function") stopAnnouncementLiveListener();
   } else if (typeof onAppReturnToForegroundPoll === "function") {
     onAppReturnToForegroundPoll();
   }
@@ -43288,7 +43521,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v143";
+const TIBYAN_APP_VERSION = "v144";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -43685,13 +43918,12 @@ async function hydrateSignedInFirebaseUser(fbUser) {
       }
 
       // If Founder opens app on a newer build than Firebase config/latestVersion, silently keep server version aligned
-      if (profile.isOwner && parseAppVersionNum(TIBYAN_APP_VERSION) > parseAppVersionNum(latestVer)) {
-        fbDbSet("config/latestVersion", TIBYAN_APP_VERSION).catch(() => {});
-        renderGlobalAnnouncement(ann, TIBYAN_APP_VERSION);
-      } else {
-        renderGlobalAnnouncement(ann, latestVer);
-      }
-      // Seed notification baseline from already-hydrated data and start poller WITHOUT immediate redundant re-fetch!
+      const _effInitVer = (profile.isOwner && parseAppVersionNum(TIBYAN_APP_VERSION) > parseAppVersionNum(latestVer))
+        ? (fbDbSet("config/latestVersion", TIBYAN_APP_VERSION).catch(() => {}), TIBYAN_APP_VERSION)
+        : latestVer;
+      // v144: Process founder announcement IMMEDIATELY on startup (shows popup + sound + urgent modal if unseen!)
+      processIncomingAnnouncement(ann, _effInitVer);
+      // Seed notification baseline from already-hydrated data and start instant foreground announcement listener + light poller!
       seedNotifPollBaselineFromLocal(profile);
       startLiveNotificationListeners(true);
 
@@ -43727,6 +43959,137 @@ function parseAppVersionNum(verStr) {
 }
 
 let _cachedRemoteLatestVer = null;
+let _cachedRemoteAnnouncement = null;
+let _lastSelfPublishedAnnKey = "";
+let _activeUrgentAnnKey = "";
+let _activeUrgentAnnPreview = false;
+
+function getAnnouncementUniqueKey(ann) {
+  if (!ann) return "";
+  return String(ann.id || ann.updatedAt || `${ann.title || ""}_${String(ann.body || "").slice(0, 30)}`).trim();
+}
+
+function getAnnouncementAudienceLabel(aud) {
+  if (aud === "teachers") return "📖 للمعلمين فقط";
+  if (aud === "supervisors") return "🏛️ للمشرفين فقط";
+  return "🌍 لجميع المستخدمين";
+}
+
+function doesAnnouncementMatchUser(ann, u) {
+  if (!ann || !ann.active || !String(ann.body || "").trim()) return false;
+  const aud = ann.audience || "all";
+  if (aud === "all") return true;
+  if (!u) return false;
+  if (u.role === "owner" || u.isOwner) {
+    if (aud === "teachers") return _ownerWorkspace === "teacher";
+    if (aud === "supervisors") return _ownerWorkspace === "supervisor";
+    return true;
+  }
+  if (aud === "teachers") return u.role === "teacher";
+  if (aud === "supervisors") return u.role === "supervisor";
+  return true;
+}
+
+function formatAnnTimeArabic(iso) {
+  if (!iso) return "";
+  try {
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return "";
+    return d.toLocaleString("ar-SY", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+  } catch {
+    return "";
+  }
+}
+
+function openUrgentAnnModal(ann, isPreview = false) {
+  if (!ann || !String(ann.body || "").trim()) return;
+  const modal = document.getElementById("urgentAnnModal");
+  const box = document.getElementById("urgentAnnBox");
+  if (!modal || !box) return;
+  const isUrgent = ann.priority === "urgent";
+  _activeUrgentAnnKey = isPreview ? "" : getAnnouncementUniqueKey(ann);
+  _activeUrgentAnnPreview = Boolean(isPreview);
+  modal.dataset.locked = isUrgent ? "1" : "";
+  box.classList.toggle("is-urgent", isUrgent);
+  const icoEl = document.getElementById("uannIco");
+  const ttlEl = document.getElementById("uannTitle");
+  const subEl = document.getElementById("uannSub");
+  const bodyEl = document.getElementById("uannBody");
+  const audEl = document.getElementById("uannAudienceLbl");
+  const tmEl = document.getElementById("uannTimeLbl");
+  const btnEl = document.getElementById("uannAckBtn");
+  if (icoEl) icoEl.textContent = isUrgent ? "🚨" : "📢";
+  if (ttlEl) ttlEl.textContent = ann.title || (isUrgent ? "تنبيه هام من الإدارة" : "تنبيه من الإدارة");
+  if (subEl) subEl.textContent = isPreview
+    ? "👁️ معاينة كما ستظهر للمستخدمين"
+    : (isUrgent ? "تنبيه عاجل من إدارة صروح مكين" : "إشعار رسمي من إدارة صروح مكين");
+  if (bodyEl) bodyEl.textContent = ann.body || "";
+  if (audEl) audEl.textContent = getAnnouncementAudienceLabel(ann.audience || "all");
+  if (tmEl) tmEl.textContent = formatAnnTimeArabic(ann.updatedAt);
+  if (btnEl) btnEl.textContent = isPreview ? "إغلاق المعاينة ✓" : "✓ تم الاطلاع";
+  modal.classList.add("show");
+}
+
+function dismissUrgentAnnModal() {
+  const modal = document.getElementById("urgentAnnModal");
+  if (modal) {
+    modal.classList.remove("show");
+    modal.dataset.locked = "";
+  }
+  if (_activeUrgentAnnKey && !_activeUrgentAnnPreview) {
+    try {
+      localStorage.setItem("tibyan_ann_dismissed_v1", _activeUrgentAnnKey);
+      tibyanNotifPrefs.seen[`ann_${_activeUrgentAnnKey}`] = Date.now();
+      saveNotifPrefs();
+    } catch {}
+    const bar = document.getElementById("globalAnnouncementBar");
+    if (bar && !_cachedRemoteLatestVer) bar.style.display = "none";
+    renderGlobalAnnouncement(_cachedRemoteAnnouncement, null);
+  }
+  _activeUrgentAnnKey = "";
+  _activeUrgentAnnPreview = false;
+}
+
+function processIncomingAnnouncement(ann, latestVer = null, opts = {}) {
+  if (!opts.isPreview) _cachedRemoteAnnouncement = ann || null;
+  renderGlobalAnnouncement(ann, latestVer);
+  const u = getCurrentAccountUser();
+  if (!opts.isPreview && !doesAnnouncementMatchUser(ann, u)) return;
+  if (!ann || !ann.active || !String(ann.body || "").trim()) return;
+
+  const annKey = getAnnouncementUniqueKey(ann);
+  if (!annKey) return;
+  const seenKey = `ann_${annKey}`;
+
+  // Don't blast the founder on the same device right after publishing (they can tap Preview anytime)
+  if (!opts.isPreview && _lastSelfPublishedAnnKey && _lastSelfPublishedAnnKey === annKey) {
+    tibyanNotifPrefs.seen[seenKey] = Date.now();
+    saveNotifPrefs();
+    return;
+  }
+
+  const alreadySeen = Boolean(tibyanNotifPrefs.seen[seenKey]);
+  const alreadyDismissed = localStorage.getItem("tibyan_ann_dismissed_v1") === annKey;
+  if (!opts.isPreview && (alreadySeen || alreadyDismissed)) return;
+
+  const isUrgent = ann.priority === "urgent";
+  const ico = isUrgent ? "🚨" : "📢";
+  const fullTitle = `${ico} ${ann.title || (isUrgent ? "تنبيه هام من الإدارة" : "تنبيه من الإدارة")}`;
+
+  fireTibyanNotification(
+    opts.isPreview ? "" : seenKey,
+    fullTitle,
+    ann.body,
+    ico,
+    () => openUrgentAnnModal(ann, Boolean(opts.isPreview)),
+    Boolean(opts.isPreview || isUrgent)
+  );
+
+  if (isUrgent || opts.forceModal) {
+    openUrgentAnnModal(ann, Boolean(opts.isPreview));
+  }
+}
+
 function renderGlobalAnnouncement(ann, latestVer) {
   if (latestVer) _cachedRemoteLatestVer = latestVer;
   const effLatestVer = latestVer || _cachedRemoteLatestVer;
@@ -43735,12 +44098,17 @@ function renderGlobalAnnouncement(ann, latestVer) {
   const dismissedKey = "tibyan_ann_dismissed_v1";
   const dismissedVerKey = "tibyan_ver_dismissed_v1";
   const parts = [];
-  let shownAnnTs = "";
+  let shownAnnKey = "";
   let shownVer = "";
+  let isUrgentAnn = false;
 
-  if (ann && ann.active && ann.body && localStorage.getItem(dismissedKey) !== ann.updatedAt) {
-    parts.push(`📢 <b>${escapeHtml(ann.title || 'تنبيه من الإدارة')}:</b> ${escapeHtml(ann.body)}`);
-    shownAnnTs = ann.updatedAt || "";
+  const u = getCurrentAccountUser();
+  const annKey = getAnnouncementUniqueKey(ann);
+  if (ann && ann.active && ann.body && doesAnnouncementMatchUser(ann, u) && localStorage.getItem(dismissedKey) !== annKey) {
+    isUrgentAnn = ann.priority === "urgent";
+    const ico = isUrgentAnn ? "🚨" : "📢";
+    parts.push(`<span class="gab-tap" onclick="openUrgentAnnModal(_cachedRemoteAnnouncement, false)" title="اضغط لقراءة التنبيه كاملاً">${ico} <b>${escapeHtml(ann.title || 'تنبيه من الإدارة')}:</b> ${escapeHtml(ann.body)}</span>`);
+    shownAnnKey = annKey;
   }
 
   const curNum = parseAppVersionNum(TIBYAN_APP_VERSION);
@@ -43752,14 +44120,19 @@ function renderGlobalAnnouncement(ann, latestVer) {
     shownVer = String(effLatestVer);
   }
 
+  bar.classList.toggle("is-urgent", isUrgentAnn);
   if (!parts.length) { bar.style.display = "none"; return; }
-  bar.innerHTML = `<div style="flex:1;">${parts.join(" &nbsp;|&nbsp; ")}</div>
-    <button type="button" class="global-ann-close" onclick="dismissGlobalAnnouncement('${escapeHtml(shownAnnTs)}','${escapeHtml(shownVer)}')">×</button>`;
+  bar.innerHTML = `<div style="flex:1; min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:6px;">${parts.join(" &nbsp;|&nbsp; ")}</div>
+    <button type="button" class="global-ann-close" onclick="dismissGlobalAnnouncement('${escapeHtml(shownAnnKey)}','${escapeHtml(shownVer)}')">×</button>`;
   bar.style.display = "flex";
 }
 
-function dismissGlobalAnnouncement(ts, verStr = "") {
-  if (ts) localStorage.setItem("tibyan_ann_dismissed_v1", ts);
+function dismissGlobalAnnouncement(annKey, verStr = "") {
+  if (annKey) {
+    localStorage.setItem("tibyan_ann_dismissed_v1", annKey);
+    tibyanNotifPrefs.seen[`ann_${annKey}`] = Date.now();
+    saveNotifPrefs();
+  }
   if (verStr) localStorage.setItem("tibyan_ver_dismissed_v1", verStr);
   const bar = document.getElementById("globalAnnouncementBar");
   if (bar) bar.style.display = "none";
@@ -44753,25 +45126,87 @@ async function ownerSaveMasterKey() {
   showToast("🔐 تم تحديث كلمة سر التفعيل العامة على السيرفر ✓");
 }
 
+let _ownAnnDraftAud = "";
+let _ownAnnDraftPrio = "";
+
+function selectOwnerAnnAudience(aud) {
+  _ownAnnDraftAud = aud || "all";
+  const hidden = document.getElementById("ownAnnAudience");
+  if (hidden) hidden.value = _ownAnnDraftAud;
+  document.querySelectorAll(".own-bc-pill[data-aud]").forEach(btn => {
+    btn.classList.toggle("on", btn.dataset.aud === _ownAnnDraftAud);
+  });
+}
+
+function selectOwnerAnnPriority(prio) {
+  _ownAnnDraftPrio = prio === "urgent" ? "urgent" : "normal";
+  const hidden = document.getElementById("ownAnnPriority");
+  if (hidden) hidden.value = _ownAnnDraftPrio;
+  const nBtn = document.getElementById("ownPrioNormalBtn");
+  const uBtn = document.getElementById("ownPrioUrgentBtn");
+  if (nBtn) nBtn.className = `own-bc-prio-card ${_ownAnnDraftPrio === "normal" ? "on" : ""}`;
+  if (uBtn) uBtn.className = `own-bc-prio-card ${_ownAnnDraftPrio === "urgent" ? "on-urgent" : ""}`;
+}
+
 function renderOwnerBroadcastTab() {
   const wrap = document.getElementById("owner-view-broadcast");
   if (!wrap) return;
-  const ann = _ownerDataCache.announcement || { title: "", body: "", active: false };
+  const ann = _ownerDataCache.announcement || { title: "", body: "", active: false, audience: "all", priority: "normal" };
+  const curAud = _ownAnnDraftAud || ann.audience || "all";
+  const curPrio = _ownAnnDraftPrio || ann.priority || "normal";
+  const timeTxt = formatAnnTimeArabic(ann.updatedAt);
+
+  const statusHtml = ann.body ? `
+    <div class="own-bc-status-box ${!ann.active ? 'is-off' : (ann.priority === 'urgent' ? 'is-urgent' : '')}">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:4px;">
+        <b>${ann.active ? (ann.priority === "urgent" ? "🚨 تنبيه عاجل نشط الآن" : "📢 تنبيه نشط الآن") : "🔕 آخر تنبيه (مخفي)"}</b>
+        <span class="badge ${ann.active ? (ann.priority === "urgent" ? "b-red" : "b-green") : "b-muted"}">${escapeHtml(getAnnouncementAudienceLabel(ann.audience || "all"))}</span>
+      </div>
+      <div style="font-weight:700; color:var(--ink-900);">${escapeHtml(ann.title || "تنبيه من الإدارة")}: ${escapeHtml(ann.body)}</div>
+      ${timeTxt ? `<div style="font-size:10.5px; color:var(--ink-500); margin-top:3px;">🕒 آخر نشر: ${escapeHtml(timeTxt)} • يصل فورياً للمتصلين وفور الفتح للجميع</div>` : ""}
+    </div>` : "";
 
   wrap.innerHTML = `
     <div class="card">
-      <div class="card-title">📢 إرسال تنبيه عام لجميع مستخدمي تطبيق تبيان</div>
+      <div class="card-title">
+        <span>📢 إرسال إشعار فوري من المؤسس</span>
+        <span class="badge b-green" style="font-size:10.5px;">⚡ وصول لحظي</span>
+      </div>
+      ${statusHtml}
+      <input type="hidden" id="ownAnnAudience" value="${escapeHtml(curAud)}">
+      <input type="hidden" id="ownAnnPriority" value="${escapeHtml(curPrio)}">
+
+      <div style="font-size:11.5px; font-weight:800; color:var(--ink-700); margin-bottom:5px;">1) المستهدفون بالإشعار:</div>
+      <div class="own-bc-seg-3">
+        <button type="button" class="own-bc-pill ${curAud === 'all' ? 'on' : ''}" data-aud="all" onclick="selectOwnerAnnAudience('all')">🌍 الجميع</button>
+        <button type="button" class="own-bc-pill ${curAud === 'teachers' ? 'on' : ''}" data-aud="teachers" onclick="selectOwnerAnnAudience('teachers')">📖 المعلمون</button>
+        <button type="button" class="own-bc-pill ${curAud === 'supervisors' ? 'on' : ''}" data-aud="supervisors" onclick="selectOwnerAnnAudience('supervisors')">🏛️ المشرفون</button>
+      </div>
+
+      <div style="font-size:11.5px; font-weight:800; color:var(--ink-700); margin-bottom:5px;">2) مستوى الإشعار وطريقة الظهور:</div>
+      <div class="own-bc-prio-2">
+        <button type="button" id="ownPrioNormalBtn" class="own-bc-prio-card ${curPrio === 'normal' ? 'on' : ''}" onclick="selectOwnerAnnPriority('normal')">
+          <b>📢 تنبيه عادي</b>
+          <span>إشعار منبثق + صوت + شريط علوي + حفظ بالجرس</span>
+        </button>
+        <button type="button" id="ownPrioUrgentBtn" class="own-bc-prio-card ${curPrio === 'urgent' ? 'on-urgent' : ''}" onclick="selectOwnerAnnPriority('urgent')">
+          <b>🚨 تنبيه هام وعاجل</b>
+          <span>نافذة واضحة وسط الشاشة مع زر «تم الاطلاع ✓» + صوت</span>
+        </button>
+      </div>
+
       <div class="field" style="margin-bottom:8px;">
         <label>عنوان التنبيه</label>
-        <input type="text" id="ownAnnTitle" value="${escapeHtml(ann.title || '')}" placeholder="مثال: تحديث جديد / تنبيه هام">
+        <input type="text" id="ownAnnTitle" value="${escapeHtml(ann.title || '')}" placeholder="مثال: تحديث جديد / تنبيه هام للمعلمين">
       </div>
-      <div class="field" style="margin-bottom:9px;">
-        <label>نص التنبيه (يظهر في شريط علوي لجميع المعلمين والمشرفين)</label>
-        <textarea id="ownAnnBody" rows="3" placeholder="اكتب رسالتك العامة هنا...">${escapeHtml(ann.body || '')}</textarea>
+      <div class="field" style="margin-bottom:10px;">
+        <label>نص التنبيه (يصل فوراً وبشكل مؤكد عند فتح التطبيق)</label>
+        <textarea id="ownAnnBody" rows="3" placeholder="اكتب رسالتك هنا...">${escapeHtml(ann.body || '')}</textarea>
       </div>
       <div style="display:flex; gap:7px; flex-wrap:wrap;">
-        <button type="button" class="btn btn-primary" style="flex:1;" onclick="ownerPublishAnnouncement(true)">📢 نشر التنبيه للجميع الآن</button>
-        ${ann.active ? `<button type="button" class="btn btn-danger" onclick="ownerPublishAnnouncement(false)">إخفاء التنبيه</button>` : ''}
+        <button type="button" class="btn btn-primary" id="btnOwnerPublishAnn" style="flex:1.4;" onclick="ownerPublishAnnouncement(true)">🚀 إرسال الإشعار الآن</button>
+        <button type="button" class="btn btn-soft" onclick="ownerPreviewAnnouncement()">👁️ معاينة</button>
+        ${ann.active ? `<button type="button" class="btn btn-danger" onclick="ownerPublishAnnouncement(false)">إخفاء</button>` : ''}
       </div>
     </div>
 
@@ -44786,20 +45221,62 @@ function renderOwnerBroadcastTab() {
   `;
 }
 
-async function ownerPublishAnnouncement(active) {
-  const title = (document.getElementById("ownAnnTitle")?.value || "").trim() || "تنبيه من إدارة تبيان";
+function ownerPreviewAnnouncement() {
+  const title = (document.getElementById("ownAnnTitle")?.value || "").trim() || "تنبيه من إدارة صروح مكين";
   const body = (document.getElementById("ownAnnBody")?.value || "").trim();
+  if (!body) { showToast("اكتب نص التنبيه أولاً للمعاينة"); return; }
+  const audience = document.getElementById("ownAnnAudience")?.value || _ownAnnDraftAud || "all";
+  const priority = document.getElementById("ownAnnPriority")?.value || _ownAnnDraftPrio || "normal";
+  const sample = { id: "preview_" + Date.now(), title, body, active: true, audience, priority, updatedAt: new Date().toISOString() };
+  processIncomingAnnouncement(sample, null, { isPreview: true, forceModal: priority === "urgent" });
+}
+
+async function ownerPublishAnnouncement(active) {
+  const title = (document.getElementById("ownAnnTitle")?.value || "").trim() || "تنبيه من إدارة صروح مكين";
+  const body = (document.getElementById("ownAnnBody")?.value || "").trim();
+  const audience = document.getElementById("ownAnnAudience")?.value || _ownAnnDraftAud || "all";
+  const priority = document.getElementById("ownAnnPriority")?.value || _ownAnnDraftPrio || "normal";
   if (active && !body) { showToast("اكتب نص التنبيه أولاً"); return; }
-  const obj = { title, body, active, updatedAt: new Date().toISOString() };
-  await fbDbSet("config/announcement", obj);
+  if (!navigator.onLine) { showToast("⚠️ لا يوجد اتصال بالإنترنت لإرسال الإشعار"); return; }
+
+  const btn = document.getElementById("btnOwnerPublishAnn");
+  if (btn) { btn.disabled = true; btn.textContent = "⏳ جاري الإرسال..."; }
+
+  const newId = "ann_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 6);
+  const obj = {
+    id: newId,
+    title,
+    body,
+    active: Boolean(active),
+    audience,
+    priority,
+    updatedAt: new Date().toISOString()
+  };
+
+  if (active) _lastSelfPublishedAnnKey = newId;
+  const ok = await fbDbSet("config/announcement", obj);
+  if (btn) { btn.disabled = false; btn.textContent = "🚀 إرسال الإشعار الآن"; }
+
+  if (!ok) {
+    _lastSelfPublishedAnnKey = "";
+    showToast("⚠️ تعذّر إرسال الإشعار للسحابة — تحقق من الإنترنت وصلاحيات Firebase");
+    return;
+  }
+
   _ownerDataCache.announcement = obj;
+  _cachedRemoteAnnouncement = obj;
+  _ownAnnDraftAud = audience;
+  _ownAnnDraftPrio = priority;
+  renderGlobalAnnouncement(obj, null);
   renderOwnerBroadcastTab();
-  showToast(active ? "📢 تم نشر التنبيه لجميع مستخدمي تبيان ✓" : "تم إخفاء التنبيه العام");
+  const audTxt = audience === "teachers" ? "للمعلمين" : (audience === "supervisors" ? "للمشرفين" : "للجميع");
+  showToast(active ? `${priority === "urgent" ? "🚨" : "📢"} تم إرسال الإشعار بنجاح (${audTxt}) — يصل فورياً ✓` : "تم إخفاء التنبيه العام ✓");
 }
 
 async function ownerSaveLatestVersion() {
   const v = (document.getElementById("ownLatestVerInp")?.value || "").trim() || TIBYAN_APP_VERSION;
-  await fbDbSet("config/latestVersion", v);
+  const ok = await fbDbSet("config/latestVersion", v);
+  if (!ok) { showToast("⚠️ تعذّر حفظ الإصدار على السحابة"); return; }
   _ownerDataCache.latestVersion = v;
   showToast(`✓ تم ضبط أحدث إصدار على السيرفر: ${v}`);
 }
@@ -45261,16 +45738,71 @@ async function fireTibyanNotification(dedupKey, title, body, iconEmoji = "🔔",
 let _notifPollTimer = null;
 let _notifPollState = { uid: "", initAnn: true, initMsgs: true, initLinks: true, prevUploadMap: {}, lastPollAt: 0 };
 
+let _annLiveListenerEntry = null;
+let _lastAnnAttachAt = 0;
+
+function stopAnnouncementLiveListener() {
+  if (_annLiveListenerEntry) {
+    try { _annLiveListenerEntry.ref.off(_annLiveListenerEntry.ev, _annLiveListenerEntry.cb); } catch {}
+    _activeFbListeners = _activeFbListeners.filter(x => x !== _annLiveListenerEntry);
+    _annLiveListenerEntry = null;
+  }
+  if (_fbDb && _fbDbActiveOps === 0 && _activeFbListeners.length === 0) {
+    clearTimeout(_fbDbIdleTimer);
+    _fbDbIdleTimer = setTimeout(() => {
+      if (_fbDb && _fbDbActiveOps === 0 && _activeFbListeners.length === 0) {
+        try { _fbDb.goOffline(); _fbDbIsOnline = false; } catch {}
+      }
+    }, 2500);
+  }
+}
+
+function startAnnouncementLiveListener() {
+  if (!_fbDb || !_fbAuth?.currentUser || !navigator.onLine) return;
+  if (document.visibilityState === "hidden") return;
+  if (_annLiveListenerEntry) return;
+  _lastAnnAttachAt = Date.now();
+  clearTimeout(_fbDbIdleTimer);
+  if (!_fbDbIsOnline) {
+    try { _fbDb.goOnline(); _fbDbIsOnline = true; } catch {}
+  }
+  const ref = _fbDb.ref("config/announcement");
+  const cb = snap => {
+    try {
+      const ann = snap && snap.exists() ? snap.val() : null;
+      processIncomingAnnouncement(ann, null);
+    } catch (e) {
+      console.warn("Live ann cb err:", e);
+    }
+  };
+  ref.on("value", cb, () => {});
+  _annLiveListenerEntry = { ref, ev: "value", cb };
+  _activeFbListeners.push(_annLiveListenerEntry);
+}
+
 function stopLiveNotificationListeners() {
   if (_notifPollTimer) { clearInterval(_notifPollTimer); _notifPollTimer = null; }
+  _annLiveListenerEntry = null;
   _activeFbListeners.forEach(({ ref, ev, cb }) => {
     try { ref.off(ev, cb); } catch {}
   });
   _activeFbListeners = [];
+  if (_fbDb && _fbDbActiveOps === 0) {
+    clearTimeout(_fbDbIdleTimer);
+    _fbDbIdleTimer = setTimeout(() => {
+      if (_fbDb && _fbDbActiveOps === 0 && _activeFbListeners.length === 0) {
+        try { _fbDb.goOffline(); _fbDbIsOnline = false; } catch {}
+      }
+    }, 2500);
+  }
 }
 
 function attachFbListener(path, ev, cb) {
   if (!_fbDb) return;
+  clearTimeout(_fbDbIdleTimer);
+  if (!_fbDbIsOnline) {
+    try { _fbDb.goOnline(); _fbDbIsOnline = true; } catch {}
+  }
   const ref = _fbDb.ref(path);
   ref.on(ev, cb, () => {});
   _activeFbListeners.push({ ref, ev, cb });
@@ -45285,14 +45817,10 @@ async function pollLiveNotificationsOnce(forceInitial = false) {
   }
   _notifPollState.lastPollAt = Date.now();
   try {
-    // 1) Global Founder Announcement Check
+    // 1) Global Founder Announcement Check (fires immediately for any unseen broadcast!)
     const ann = await fbDbGet("config/announcement");
-    renderGlobalAnnouncement(ann, null);
-    if (forceInitial || _notifPollState.initAnn) {
-      _notifPollState.initAnn = false;
-    } else if (ann && ann.active && ann.body) {
-      fireTibyanNotification(`ann_${ann.updatedAt || ann.body.slice(0, 20)}`, `📢 ${ann.title || "تنبيه من الإدارة"}`, ann.body, "📢");
-    }
+    _notifPollState.initAnn = false;
+    processIncomingAnnouncement(ann, null);
 
     // 2) Teacher Notifications (Supervisor Messages + Join Approval)
     if (isUserTeacherCapable(u) && u.supervisorId) {
@@ -45427,8 +45955,12 @@ function seedNotifPollBaselineFromLocal(u) {
 
 function onAppReturnToForegroundPoll() {
   if (!navigator.onLine || !_fbAuth?.currentUser) return;
+  // v144: Re-attach lightweight foreground announcement listener immediately so broadcasts arrive in <1s!
+  if (Date.now() - _lastAnnAttachAt >= 5000) {
+    startAnnouncementLiveListener();
+  }
   const elapsed = Date.now() - (_notifPollState.lastPollAt || 0);
-  if (elapsed >= 210000) { // 3.5 minutes cooldown on foreground return
+  if (elapsed >= 180000) { // 3 minutes cooldown for heavy links/messages poll
     pollLiveNotificationsOnce(false);
   }
 }
@@ -45438,7 +45970,9 @@ function startLiveNotificationListeners(skipImmediate = false) {
   if (!_fbDb || !_fbAuth?.currentUser) return;
   const u = getCurrentAccountUser();
   if (!u) return;
-  // v122 Ultra-Low-Bandwidth Poller: connects briefly only to read tiny _idx/status, zero redundant startup fetch!
+  // v144: Real-time foreground-only listener on tiny config/announcement (~150B, detached on background -> 0 idle sockets!)
+  startAnnouncementLiveListener();
+  // v122 Ultra-Low-Bandwidth Poller for supervisor links & messages
   if (!skipImmediate) {
     pollLiveNotificationsOnce(true);
   }
@@ -46177,6 +46711,12 @@ function installAutoOnlineCloudSync() {
 
   window.addEventListener("offline", () => {
     updateCentralCloudIndicatorUI("offline");
+    if (typeof stopAnnouncementLiveListener === "function") stopAnnouncementLiveListener();
+  });
+  window.addEventListener("online", () => {
+    if (document.visibilityState === "visible" && typeof startAnnouncementLiveListener === "function") {
+      startAnnouncementLiveListener();
+    }
   });
 
   document.addEventListener("visibilitychange", () => {
@@ -46190,5 +46730,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v143 -->
+<!-- Makin App v144 -->
 </html>
