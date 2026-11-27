@@ -2590,6 +2590,52 @@ html,body{background:#fff!important;padding:0!important;margin:0!important;color
 .official-daily-hdr,.official-daily-wrap,.official-daily-hdr-v20,.official-monthly-wrap,table.t-daily,table.t-monthly{min-width:0!important;width:100%!important}
 *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
 }
+/* MAKIN v150: Interactive SVG Analytics Charts (Stats & Student Profile — 100% Offline) */
+.mk-chart-card{background:var(--white);border:1px solid var(--line);border-top:3.5px solid #142a46;border-radius:15px;padding:12px;margin-bottom:11px;box-shadow:var(--shadow);overflow:hidden}
+[data-theme="dark"] .mk-chart-card{border-top-color:#c8a14b}
+.mk-chart-hdr{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:9px}
+.mk-chart-title{font-size:14px;font-weight:800;color:var(--brand-slate);display:inline-flex;align-items:center;gap:6px}
+[data-theme="dark"] .mk-chart-title{color:#eef3f7}
+.mk-chart-seg{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:2.5px;gap:2px}
+.mk-chart-seg button{border:none;background:transparent;color:var(--ink-700);padding:4.5px 9px;border-radius:7.5px;font-size:11.5px;font-weight:800;cursor:pointer;white-space:nowrap;transition:background 0.14s ease,color 0.14s ease}
+.mk-chart-seg button.on-mem{background:var(--green);color:#ffffff}
+.mk-chart-seg button.on-rev{background:#b8912e;color:#ffffff}
+.mk-chart-seg button.on-att{background:#15629a;color:#ffffff}
+.mk-chart-seg button.on-mode{background:#142a46;color:#f6dc93}
+[data-theme="dark"] .mk-chart-seg button.on-mode{background:#c8a14b;color:#0f233c}
+.mk-chart-subbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.mk-chart-readout{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;background:var(--brand-tint);border:1px solid var(--line);border-right:3.5px solid var(--green);border-radius:10px;padding:7px 10px;margin-bottom:9px;font-size:12px}
+.mk-chart-readout.is-rev{border-right-color:#caa642}
+.mk-chart-readout.is-att{border-right-color:#15629a}
+.mk-cr-label{font-weight:800;color:var(--ink-900);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.mk-cr-val{font-size:13.5px;font-weight:800;color:var(--brand-slate);white-space:nowrap}
+[data-theme="dark"] .mk-cr-val{color:#f4d98d}
+.mk-cr-meta{font-size:11px;font-weight:700;color:var(--ink-500)}
+.mk-svg-stage{width:100%;overflow:hidden;border-radius:11px;background:var(--bg);border:1px solid var(--line);padding:6px 4px 4px}
+.mk-svg-stage svg{width:100%;height:auto;display:block;user-select:none}
+.mk-svg-grid{stroke:var(--line-strong);stroke-width:1;stroke-dasharray:3 3;opacity:0.65}
+.mk-svg-axis-txt{fill:var(--ink-500);font-size:10.5px;font-weight:700;font-family:'Tajawal',sans-serif}
+.mk-svg-val-txt{fill:var(--ink-900);font-size:10.5px;font-weight:800;font-family:'Tajawal',sans-serif}
+.mk-svg-hit{cursor:pointer}
+.mk-svg-bar{transition:opacity 0.14s ease,transform 0.14s ease}
+.mk-svg-dot{transition:r 0.14s ease}
+.mk-grade-dist{margin-top:10px;padding-top:9px;border-top:1px dashed var(--line)}
+.mk-gd-hdr{display:flex;align-items:center;justify-content:space-between;font-size:11.5px;font-weight:800;color:var(--ink-700);margin-bottom:6px}
+.mk-gd-track{display:flex;width:100%;height:10px;border-radius:99px;overflow:hidden;background:var(--bg);border:1px solid var(--line);margin-bottom:7px}
+.mk-gd-seg{height:100%;transition:width 0.3s ease}
+.mk-gd-seg.ex{background:#16794c}
+.mk-gd-seg.vg{background:#15629a}
+.mk-gd-seg.gd{background:#d99b26}
+.mk-gd-seg.rp{background:#dc2626}
+.mk-gd-legend{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.mk-gd-pill{display:flex;align-items:center;justify-content:center;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:4px 3px;font-size:10.5px;font-weight:800;color:var(--ink-700);white-space:nowrap}
+.mk-gd-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.mk-gd-dot.ex{background:#16794c}
+.mk-gd-dot.vg{background:#15629a}
+.mk-gd-dot.gd{background:#d99b26}
+.mk-gd-dot.rp{background:#dc2626}
+.mk-prof-chart{background:var(--white);border:1px solid var(--line);border-right:3.5px solid #142a46;border-radius:12px;padding:10px;margin-bottom:10px}
+[data-theme="dark"] .mk-prof-chart{border-right-color:#c8a14b}
 /* MAKIN v149: 60fps Scroll Containment (excluded from export/print) */
 body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-card-v31,body:not(.printing-cert) .st-mgmt-card,body:not(.printing-cert) .sup-teacher-card{content-visibility:auto;contain-intrinsic-size:auto 88px}
 #hdExportStage *{content-visibility:visible!important}
@@ -3159,7 +3205,7 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-refresh"/></svg></span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v149</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v150</span>
         </button>
       </div>
     </div>
@@ -13774,12 +13820,15 @@ function openStudentProfile(studentId) {
         </div>` : ""}
       </div>`;
     })()}
+    <div id="studentProfileChartHost"></div>
     ${sabrCertsHtml}
     <div class="panel-block" style="margin-bottom:0;">
       <div class="panel-label" style="margin-bottom:4px;">آخر الجلسات المسجّلة</div>
       ${recentLogs || '<div style="font-size:12px; color:var(--ink-500); padding:6px;">لا توجد جلسات مسجّلة بعد.</div>'}
     </div>
   `;
+  _profChartActiveIdx = -1;
+  renderStudentProfileChart();
   openModal("studentProfileModal");
 }
 
@@ -22057,6 +22106,434 @@ function renderMonthlyReport() {
   requestAnimationFrame(() => applyReportPreviewFit("monthly"));
 }
 
+
+// ==================== MAKIN v150: INTERACTIVE OFFLINE SVG ANALYTICS CHARTS ====================
+let _statsChartMetric = "mem"; // "mem" | "rev" | "att"
+let _statsChartGran = "auto";  // "auto" | "monthly" | "sessions"
+let _statsChartActiveIdx = -1;
+let _profChartMetric = "mem";  // "mem" | "rev" | "att"
+let _profChartActiveIdx = -1;
+
+function _shortHijriAxisLbl(fullLbl) {
+  const s = String(fullLbl || "").trim();
+  if (!s) return "—";
+  const parts = s.split(/\s+/);
+  if (parts.length >= 3 && /^\d{4}$/.test(parts[parts.length - 1])) {
+    return parts.slice(0, -1).join(" ").slice(0, 10);
+  }
+  return parts[0].slice(0, 9);
+}
+
+function _shortDateAxisLbl(s) {
+  if (!s) return "—";
+  const hj = String(s.hijriDate || "").trim();
+  const m = hj.match(/^(\d{1,2})\s+([^\s]+)/);
+  if (m) return `${m[1]} ${m[2].slice(0, 5)}`;
+  const d = String(s.date || "");
+  return d.length >= 10 ? `${d.slice(8, 10)}/${d.slice(5, 7)}` : (s.dayName || "—").slice(0, 6);
+}
+
+function collectHalaqaChartSeries(h, filterVal, granPref) {
+  const activeSessions = (h.sessions || [])
+    .filter(s => !s.noClass && isSessionHasRealActivity(s))
+    .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+
+  const monthMap = new Map();
+  activeSessions.forEach(s => {
+    const mLbl = getSessionReportMonth(s) || s.hijriMonth || "غير محدد";
+    if (!monthMap.has(mLbl)) monthMap.set(mLbl, { month: mLbl, firstDate: s.date || "", sessions: [] });
+    monthMap.get(mLbl).sessions.push(s);
+  });
+  Object.keys(h.monthBaselines || {}).forEach(mLbl => {
+    if (!monthMap.has(mLbl)) monthMap.set(mLbl, { month: mLbl, firstDate: "0000-00-00", sessions: [] });
+  });
+  const allMonths = Array.from(monthMap.values())
+    .sort((a, b) => (a.firstDate || "").localeCompare(b.firstDate || ""));
+
+  let mode = granPref;
+  if (mode === "auto") {
+    mode = (filterVal === "ALL" || filterVal === "POINTS_CYCLE") && allMonths.length >= 2 ? "monthly" : "sessions";
+  }
+  if (mode === "monthly" && allMonths.length < 2) mode = "sessions";
+
+  const pts = [];
+  if (mode === "monthly") {
+    const recentMonths = allMonths.slice(-6);
+    recentMonths.forEach(mo => {
+      const md = computeMonthlyData(mo.month);
+      let pres = 0, totalAtt = 0;
+      md.rows.forEach(r => {
+        pres += r.presentDays;
+        totalAtt += r.presentDays + r.totalAbsences;
+      });
+      const attPct = totalAtt > 0 ? Math.round((pres / totalAtt) * 100) : 0;
+      const memTotal = Math.round((md.totals.memPages + md.totals.rashidiPages) * 10) / 10;
+      const revTotal = Math.round(md.totals.revPages * 10) / 10;
+      pts.push({
+        axisLbl: _shortHijriAxisLbl(mo.month),
+        title: `شهر ${mo.month} هـ`,
+        sub: `${md.totals.sessionsCount} جلسة • ${md.totals.sabrCount} سبر`,
+        mem: memTotal,
+        rev: revTotal,
+        att: attPct
+      });
+    });
+  } else {
+    const isPointsCycle = filterVal === "POINTS_CYCLE";
+    const filtSess = activeSessions.filter(s =>
+      isPointsCycle
+        ? isSessionInActivePointsCycle(s, h)
+        : (filterVal === "ALL" || getSessionReportMonth(s) === filterVal)
+    ).slice(-10);
+
+    filtSess.forEach(s => {
+      let mem = 0, rev = 0, pres = 0, totalAtt = 0;
+      (h.students || []).forEach(st => {
+        const r = s.records?.[st.id];
+        if (!r) return;
+        const att = String(r.attendance || "");
+        if (att === "حاضر" || att === "متأخر" || att === "حضر ولم يُسمّع") { pres++; totalAtt++; }
+        else if (att.includes("غياب")) { totalAtt++; }
+        const isAbs = att.includes("غياب") || att === "لم يُسمّع" || att === "حضر ولم يُسمّع";
+        if (st.track === "rashidi") {
+          if (!isAbs && r.recEval && r.recEval !== "إعادة") mem += Number(r.rashidiPages) || 0;
+        } else if (s.type === "daily") {
+          mem += getRecordExactMemPagesRaw(s, st, r);
+          rev += getRecordExactRevPagesRaw(s, st, r, h);
+        } else if (!isAbs) {
+          rev += getRecordExactRevPagesRaw(s, st, r, h);
+        }
+      });
+      const attPct = totalAtt > 0 ? Math.round((pres / totalAtt) * 100) : 0;
+      pts.push({
+        axisLbl: _shortDateAxisLbl(s),
+        title: `${s.dayName || ""} ${s.hijriDate || s.date || ""}`.trim(),
+        sub: `${s.type === "saturday" ? "يوم مراجعة" : "يوم تسميع"} • حضور ${pres}/${totalAtt || h.students.length}`,
+        mem: Math.round(mem * 10) / 10,
+        rev: Math.round(rev * 10) / 10,
+        att: attPct
+      });
+    });
+  }
+
+  const isPointsCycle = filterVal === "POINTS_CYCLE";
+  const distSess = activeSessions.filter(s =>
+    isPointsCycle
+      ? isSessionInActivePointsCycle(s, h)
+      : (filterVal === "ALL" || getSessionReportMonth(s) === filterVal)
+  );
+  const dist = { ex: 0, vg: 0, gd: 0, rp: 0, total: 0 };
+  const addEv = (ev) => {
+    const e = String(ev || "").trim();
+    if (e === "ممتاز") { dist.ex++; dist.total++; }
+    else if (e === "جيد جداً") { dist.vg++; dist.total++; }
+    else if (e === "جيد") { dist.gd++; dist.total++; }
+    else if (e === "إعادة") { dist.rp++; dist.total++; }
+  };
+  distSess.forEach(s => {
+    (h.students || []).forEach(st => {
+      const r = s.records?.[st.id];
+      if (!r || String(r.attendance || "").includes("غياب")) return;
+      if (s.type === "daily" || st.track === "rashidi") {
+        addEv(r.recEval);
+      } else {
+        addEv(r.minEval);
+        addEv(r.majEval);
+      }
+    });
+  });
+
+  return { mode, canMonthly: allMonths.length >= 2, points: pts, dist };
+}
+
+function collectStudentChartSeries(h, st) {
+  const activeSessions = (h.sessions || [])
+    .filter(s => !s.noClass && s.records && s.records[st.id] && isSessionHasRealActivity(s))
+    .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+
+  const monthMap = new Map();
+  activeSessions.forEach(s => {
+    const mLbl = getSessionReportMonth(s) || s.hijriMonth || "غير محدد";
+    if (!monthMap.has(mLbl)) monthMap.set(mLbl, { month: mLbl, firstDate: s.date || "", sessions: [] });
+    monthMap.get(mLbl).sessions.push(s);
+  });
+  const months = Array.from(monthMap.values()).sort((a, b) => (a.firstDate || "").localeCompare(b.firstDate || ""));
+  const pts = [];
+
+  if (months.length >= 2) {
+    months.slice(-6).forEach(mo => {
+      const md = computeMonthlyData(mo.month);
+      const row = md.rows.find(x => x.student.id === st.id);
+      if (!row) return;
+      const totD = row.presentDays + row.totalAbsences;
+      const attPct = totD > 0 ? Math.round((row.presentDays / totD) * 100) : 0;
+      const memV = st.track === "rashidi" ? row.rashidiPages : row.memPages;
+      pts.push({
+        axisLbl: _shortHijriAxisLbl(mo.month),
+        title: `شهر ${mo.month} هـ`,
+        sub: `حضور ${row.presentDays} • غياب ${row.totalAbsences}`,
+        mem: Math.round(memV * 10) / 10,
+        rev: Math.round(row.revPages * 10) / 10,
+        att: attPct
+      });
+    });
+    return { mode: "monthly", points: pts };
+  }
+
+  activeSessions.slice(-8).forEach(s => {
+    const r = s.records[st.id];
+    const att = String(r.attendance || "");
+    const isAbs = att.includes("غياب") || att === "لم يُسمّع" || att === "حضر ولم يُسمّع";
+    const attVal = (att === "حاضر" || att === "حضر ولم يُسمّع") ? 100 : (att === "متأخر" ? 75 : 0);
+    let mem = 0, rev = 0;
+    if (st.track === "rashidi") {
+      if (!isAbs && r.recEval && r.recEval !== "إعادة") mem = Number(r.rashidiPages) || 0;
+    } else if (s.type === "daily") {
+      mem = getRecordExactMemPagesRaw(s, st, r);
+      rev = getRecordExactRevPagesRaw(s, st, r, h);
+    } else if (!isAbs) {
+      rev = getRecordExactRevPagesRaw(s, st, r, h);
+    }
+    const evLbl = isAbs ? (att || "غياب") : (s.type === "daily" ? (r.recEval || "—") : (r.majEval || r.minEval || "—"));
+    pts.push({
+      axisLbl: _shortDateAxisLbl(s),
+      title: `${s.dayName || ""} ${s.hijriDate || ""}`.trim(),
+      sub: `التقييم: ${evLbl}`,
+      mem: Math.round(mem * 10) / 10,
+      rev: Math.round(rev * 10) / 10,
+      att: attVal
+    });
+  });
+  return { mode: "sessions", points: pts };
+}
+
+function buildInteractiveSvgChartHtml(points, metric, activeIdx, onSelectFnName, uidPrefix) {
+  if (!points || !points.length) {
+    return `<div style="text-align:center; padding:18px 8px; font-size:12px; color:var(--ink-500);">تظهر الرسوم البيانية تلقائياً بمجرد تسجيل الجلسات.</div>`;
+  }
+  const palette = {
+    mem: { stroke: "#16794c", fill: "#16794c", unit: "صفحة", name: "الحفظ" },
+    rev: { stroke: "#caa642", fill: "#caa642", unit: "صفحة", name: "المراجعة" },
+    att: { stroke: "#15629a", fill: "#15629a", unit: "%", name: "الالتزام" }
+  };
+  const pal = palette[metric] || palette.mem;
+  const W = 540, H = 182;
+  const padL = 36, padR = 16, padT = 22, padB = 30;
+  const plotW = W - padL - padR;
+  const plotH = H - padT - padB;
+
+  const vals = points.map(p => Number(p[metric]) || 0);
+  const rawMax = Math.max(...vals, metric === "att" ? 100 : 1);
+  const maxVal = metric === "att" ? 100 : (rawMax <= 2 ? Math.max(2, Math.ceil(rawMax * 2) / 2) : Math.ceil(rawMax * 1.18));
+  const yFor = (v) => padT + plotH - (Math.max(0, Math.min(maxVal, v)) / (maxVal || 1)) * plotH;
+
+  const n = points.length;
+  const stepX = n > 1 ? plotW / n : plotW;
+  const xFor = (i) => padL + (i + 0.5) * stepX;
+
+  const gridLevels = metric === "att" ? [0, 50, 100] : [0, maxVal / 2, maxVal];
+  const gridSvg = gridLevels.map(gv => {
+    const y = yFor(gv).toFixed(1);
+    const lbl = metric === "att" ? `${Math.round(gv)}%` : formatNum(Math.round(gv * 10) / 10);
+    return `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" class="mk-svg-grid"/>
+            <text x="${padL - 5}" y="${(Number(y) + 3.5).toFixed(1)}" text-anchor="end" class="mk-svg-axis-txt">${lbl}</text>`;
+  }).join("");
+
+  const gradId = `mkGrad_${uidPrefix}_${metric}`;
+  const isBarMode = metric === "rev" || n <= 2;
+
+  let seriesSvg = "";
+  if (isBarMode) {
+    const barW = Math.max(18, Math.min(44, stepX * 0.52));
+    seriesSvg = points.map((p, i) => {
+      const v = vals[i];
+      const cx = xFor(i);
+      const yTop = yFor(v);
+      const bh = Math.max(2, (padT + plotH) - yTop);
+      const isAct = i === activeIdx;
+      const op = activeIdx >= 0 ? (isAct ? 1 : 0.55) : 0.88;
+      const valTxt = metric === "att" ? `${Math.round(v)}%` : formatNum(v);
+      return `
+        <g class="mk-svg-hit" onclick="${onSelectFnName}(${i})">
+          <rect x="${(cx - stepX / 2).toFixed(1)}" y="${padT}" width="${stepX.toFixed(1)}" height="${plotH + padB}" fill="transparent"/>
+          <rect class="mk-svg-bar" x="${(cx - barW / 2).toFixed(1)}" y="${yTop.toFixed(1)}" width="${barW.toFixed(1)}" height="${bh.toFixed(1)}" rx="6" fill="url(#${gradId})" opacity="${op}" ${isAct ? `stroke="${pal.stroke}" stroke-width="2"` : ""}/>
+          ${(isAct || n <= 7) ? `<text x="${cx.toFixed(1)}" y="${Math.max(12, yTop - 6).toFixed(1)}" text-anchor="middle" class="mk-svg-val-txt">${valTxt}</text>` : ""}
+          <text x="${cx.toFixed(1)}" y="${H - 8}" text-anchor="middle" class="mk-svg-axis-txt" ${isAct ? `style="fill:${pal.stroke};font-weight:800;"` : ""}>${escapeHtml(p.axisLbl)}</text>
+        </g>`;
+    }).join("");
+  } else {
+    const coords = points.map((p, i) => ({ x: xFor(i), y: yFor(vals[i]), v: vals[i], p }));
+    const lineD = coords.map((c, i) => `${i === 0 ? "M" : "L"}${c.x.toFixed(1)},${c.y.toFixed(1)}`).join(" ");
+    const baseY = (padT + plotH).toFixed(1);
+    const areaD = `${lineD} L${coords[coords.length - 1].x.toFixed(1)},${baseY} L${coords[0].x.toFixed(1)},${baseY} Z`;
+    const dotsSvg = coords.map((c, i) => {
+      const isAct = i === activeIdx;
+      const valTxt = metric === "att" ? `${Math.round(c.v)}%` : formatNum(c.v);
+      return `
+        <g class="mk-svg-hit" onclick="${onSelectFnName}(${i})">
+          <rect x="${(c.x - stepX / 2).toFixed(1)}" y="${padT}" width="${stepX.toFixed(1)}" height="${plotH + padB}" fill="transparent"/>
+          ${isAct ? `<line x1="${c.x.toFixed(1)}" y1="${padT}" x2="${c.x.toFixed(1)}" y2="${baseY}" stroke="${pal.stroke}" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.55"/>` : ""}
+          <circle class="mk-svg-dot" cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="${isAct ? 6.5 : 4.2}" fill="${isAct ? pal.stroke : 'var(--white)'}" stroke="${pal.stroke}" stroke-width="${isAct ? 3 : 2.4}"/>
+          ${(isAct || n <= 6) ? `<text x="${c.x.toFixed(1)}" y="${Math.max(12, c.y - 9).toFixed(1)}" text-anchor="middle" class="mk-svg-val-txt">${valTxt}</text>` : ""}
+          <text x="${c.x.toFixed(1)}" y="${H - 8}" text-anchor="middle" class="mk-svg-axis-txt" ${isAct ? `style="fill:${pal.stroke};font-weight:800;"` : ""}>${escapeHtml(c.p.axisLbl)}</text>
+        </g>`;
+    }).join("");
+    seriesSvg = `
+      <path d="${areaD}" fill="url(#${gradId})"/>
+      <path d="${lineD}" fill="none" stroke="${pal.stroke}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+      ${dotsSvg}`;
+  }
+
+  return `<div class="mk-svg-stage">
+    <svg viewBox="0 0 ${W} ${H}" direction="ltr" role="img" aria-label="رسم بياني لتطور ${pal.name}">
+      <defs>
+        <linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="${pal.fill}" stop-opacity="${isBarMode ? '0.92' : '0.32'}"/>
+          <stop offset="100%" stop-color="${pal.fill}" stop-opacity="${isBarMode ? '0.42' : '0.02'}"/>
+        </linearGradient>
+      </defs>
+      ${gridSvg}
+      ${seriesSvg}
+    </svg>
+  </div>`;
+}
+
+function setStatsChartMetric(metric) {
+  _statsChartMetric = metric;
+  renderStatsChartsCard();
+}
+
+function setStatsChartGran(gran) {
+  _statsChartGran = gran;
+  _statsChartActiveIdx = -1;
+  renderStatsChartsCard();
+}
+
+function selectStatsChartPoint(idx) {
+  _statsChartActiveIdx = idx;
+  renderStatsChartsCard();
+}
+
+function renderStatsChartsCard() {
+  const host = document.getElementById("statsChartsHost");
+  const h = getActiveHalaqa();
+  if (!host || !h) return;
+  const filterVal = document.getElementById("statsMonthFilter")?.value || "ALL";
+  const data = collectHalaqaChartSeries(h, filterVal, _statsChartGran);
+  const pts = data.points;
+  if (!pts.length) { host.innerHTML = ""; return; }
+
+  const activeIdx = (_statsChartActiveIdx >= 0 && _statsChartActiveIdx < pts.length) ? _statsChartActiveIdx : (pts.length - 1);
+  const cur = pts[activeIdx];
+  const prev = activeIdx > 0 ? pts[activeIdx - 1] : null;
+  const curVal = Number(cur[_statsChartMetric]) || 0;
+  const delta = prev ? Math.round((curVal - (Number(prev[_statsChartMetric]) || 0)) * 10) / 10 : null;
+  const unit = _statsChartMetric === "att" ? "%" : " صفحة";
+  const deltaBadge = delta !== null
+    ? `<span class="badge ${delta > 0 ? 'b-green' : (delta < 0 ? 'b-red' : 'b-slate')}" style="font-size:10.5px;">${delta > 0 ? '▲ +' : (delta < 0 ? '▼ ' : '• ')}${formatNum(delta)}${unit}</span>`
+    : "";
+
+  const d = data.dist;
+  const pct = (c) => d.total > 0 ? Math.round((c / d.total) * 100) : 0;
+  const distHtml = d.total > 0 ? `
+    <div class="mk-grade-dist">
+      <div class="mk-gd-hdr">
+        <span>توزيع التقييمات في الفترة</span>
+        <span style="color:var(--ink-500);">${d.total} تقييم</span>
+      </div>
+      <div class="mk-gd-track">
+        ${d.ex ? `<div class="mk-gd-seg ex" style="width:${(d.ex/d.total)*100}%;"></div>` : ""}
+        ${d.vg ? `<div class="mk-gd-seg vg" style="width:${(d.vg/d.total)*100}%;"></div>` : ""}
+        ${d.gd ? `<div class="mk-gd-seg gd" style="width:${(d.gd/d.total)*100}%;"></div>` : ""}
+        ${d.rp ? `<div class="mk-gd-seg rp" style="width:${(d.rp/d.total)*100}%;"></div>` : ""}
+      </div>
+      <div class="mk-gd-legend">
+        <div class="mk-gd-pill"><span class="mk-gd-dot ex"></span>ممتاز ${pct(d.ex)}%</div>
+        <div class="mk-gd-pill"><span class="mk-gd-dot vg"></span>جيد جداً ${pct(d.vg)}%</div>
+        <div class="mk-gd-pill"><span class="mk-gd-dot gd"></span>جيد ${pct(d.gd)}%</div>
+        <div class="mk-gd-pill"><span class="mk-gd-dot rp"></span>إعادة ${pct(d.rp)}%</div>
+      </div>
+    </div>` : "";
+
+  host.innerHTML = `
+    <div class="mk-chart-card">
+      <div class="mk-chart-hdr">
+        <span class="mk-chart-title">${mkIcon("trending")} منحنى تطوّر الحلقة</span>
+        <div class="mk-chart-seg">
+          <button type="button" class="${_statsChartMetric==='mem'?'on-mem':''}" onclick="setStatsChartMetric('mem')">الحفظ</button>
+          <button type="button" class="${_statsChartMetric==='rev'?'on-rev':''}" onclick="setStatsChartMetric('rev')">المراجعة</button>
+          <button type="button" class="${_statsChartMetric==='att'?'on-att':''}" onclick="setStatsChartMetric('att')">الالتزام</button>
+        </div>
+      </div>
+      ${data.canMonthly ? `
+        <div class="mk-chart-subbar">
+          <span class="mk-cr-meta">اضغط على أي نقطة لمعاينة تفاصيلها</span>
+          <div class="mk-chart-seg">
+            <button type="button" class="${data.mode==='monthly'?'on-mode':''}" onclick="setStatsChartGran('monthly')">بالأشهر</button>
+            <button type="button" class="${data.mode==='sessions'?'on-mode':''}" onclick="setStatsChartGran('sessions')">بالجلسات</button>
+          </div>
+        </div>` : `<div class="mk-cr-meta" style="margin-bottom:6px;">تطور الأداء عبر آخر ${pts.length} جلسات (اضغط على أي نقطة للتفاصيل)</div>`}
+      <div class="mk-chart-readout ${_statsChartMetric==='rev'?'is-rev':(_statsChartMetric==='att'?'is-att':'')}">
+        <div>
+          <div class="mk-cr-label"><span>${escapeHtml(cur.title)}</span>${deltaBadge}</div>
+          <div class="mk-cr-meta">${escapeHtml(cur.sub)} • حفظ ${formatNum(cur.mem)} ص • مراجعة ${formatNum(cur.rev)} ص • حضور ${cur.att}%</div>
+        </div>
+        <div class="mk-cr-val">${formatNum(curVal)}${unit}</div>
+      </div>
+      ${buildInteractiveSvgChartHtml(pts, _statsChartMetric, activeIdx, "selectStatsChartPoint", "hal")}
+      ${distHtml}
+    </div>`;
+}
+
+function setProfileChartMetric(metric) {
+  _profChartMetric = metric;
+  renderStudentProfileChart();
+}
+
+function selectProfileChartPoint(idx) {
+  _profChartActiveIdx = idx;
+  renderStudentProfileChart();
+}
+
+function renderStudentProfileChart() {
+  const host = document.getElementById("studentProfileChartHost");
+  const h = getActiveHalaqa();
+  if (!host || !h || !_activeProfileStudentId) return;
+  const st = h.students.find(x => x.id === _activeProfileStudentId);
+  if (!st) return;
+
+  const isRashidi = st.track === "rashidi";
+  if (isRashidi && _profChartMetric === "rev") _profChartMetric = "mem";
+  const data = collectStudentChartSeries(h, st);
+  const pts = data.points;
+  if (pts.length < 2) { host.innerHTML = ""; return; }
+
+  const activeIdx = (_profChartActiveIdx >= 0 && _profChartActiveIdx < pts.length) ? _profChartActiveIdx : (pts.length - 1);
+  const cur = pts[activeIdx];
+  const curVal = Number(cur[_profChartMetric]) || 0;
+  const unit = _profChartMetric === "att" ? "%" : " صفحة";
+
+  host.innerHTML = `
+    <div class="mk-prof-chart">
+      <div class="mk-chart-hdr" style="margin-bottom:7px;">
+        <span class="mk-chart-title" style="font-size:13px;">${mkIcon("trending")} منحنى تطور ${data.mode === 'monthly' ? 'الأشهر' : 'الجلسات'}</span>
+        <div class="mk-chart-seg">
+          <button type="button" class="${_profChartMetric==='mem'?'on-mem':''}" onclick="setProfileChartMetric('mem')">${isRashidi ? 'الرشيدي' : 'الحفظ'}</button>
+          ${!isRashidi ? `<button type="button" class="${_profChartMetric==='rev'?'on-rev':''}" onclick="setProfileChartMetric('rev')">المراجعة</button>` : ''}
+          <button type="button" class="${_profChartMetric==='att'?'on-att':''}" onclick="setProfileChartMetric('att')">الالتزام</button>
+        </div>
+      </div>
+      <div class="mk-chart-readout ${_profChartMetric==='rev'?'is-rev':(_profChartMetric==='att'?'is-att':'')}" style="padding:5px 8px; margin-bottom:7px;">
+        <div>
+          <div class="mk-cr-label" style="font-size:11.5px;">${escapeHtml(cur.title)}</div>
+          <div class="mk-cr-meta">${escapeHtml(cur.sub)}</div>
+        </div>
+        <div class="mk-cr-val" style="font-size:12.5px;">${formatNum(curVal)}${unit}</div>
+      </div>
+      ${buildInteractiveSvgChartHtml(pts, _profChartMetric, activeIdx, "selectProfileChartPoint", "prof")}
+    </div>`;
+}
+
 function renderStats() {
   const h = getActiveHalaqa();
   const ptsOn = isPointsEnabled(h);
@@ -22124,6 +22601,7 @@ function renderStats() {
     ${cycleBannerHtml}
     ${repeatAbsAlert}
     ${renderMonthlyPlanStatsBanner(h, filterVal)}
+    <div id="statsChartsHost"></div>
     <div id="statsProgressCmpHost"></div>
     <div class="kpi-grid">
       <div class="kpi-box"><div class="kpi-val">${totals.sessionsCount}</div><div class="kpi-lbl">الجلسات</div></div>
@@ -22163,6 +22641,8 @@ function renderStats() {
       ${card("⏰ الأكثر تأخراً", [...rows].filter(x=>x.lateDays>0).sort((a,b)=>b.lateDays-a.lateDays), r=>`${r.lateDays} مرة`, "لا توجد حالات تأخر 🎉")}
     </div>
   `;
+  _statsChartActiveIdx = -1;
+  renderStatsChartsCard();
   renderStatsComparisonCard();
 }
 
@@ -31389,7 +31869,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v149";
+const TIBYAN_APP_VERSION = "v150";
 function mkIcon(name, cls = "") {
   return `<svg class="mk-ico${cls ? " " + cls : ""}" aria-hidden="true"><use href="#ico-${name}"/></svg>`;
 }
@@ -34395,5 +34875,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v149 -->
+<!-- Makin App v150 -->
 </html>
