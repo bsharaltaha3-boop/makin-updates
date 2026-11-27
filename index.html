@@ -14946,210 +14946,165 @@ table.t-daily td.td-sard,
 }
 
 
-/* ==================== MAKIN v144: INSTANT FOUNDER BROADCAST ENGINE & URGENT MODAL ==================== */
-.global-ann-banner.is-urgent {
-  background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%) !important;
-  border-bottom: 2.5px solid #fbbf24 !important;
-}
-.global-ann-banner .gab-tap {
-  flex: 1;
-  min-width: 0;
-  cursor: pointer;
-  line-height: 1.45;
-}
-#urgentAnnModal {
-  z-index: 270 !important;
-  background: rgba(10, 22, 38, 0.74) !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 16px !important;
-}
-.uann-box {
+/* ==================== MAKIN v144: TRIM-TO-PASSED CTA & URGENT FOUNDER BROADCAST MODAL ==================== */
+.pp-trim-passed-btn {
   width: 100%;
-  max-width: 430px;
-  background: var(--white);
-  border-radius: 22px;
-  overflow: hidden;
-  border: 2px solid #c8a14b;
-  box-shadow: 0 24px 60px rgba(7, 18, 32, 0.5);
-  animation: esSlideUp 0.18s cubic-bezier(0.2, 0.9, 0.25, 1);
-}
-.uann-box.is-urgent {
-  border-color: #ef4444;
-}
-.uann-hdr {
-  background: linear-gradient(145deg, #102540 0%, #1a3b61 100%);
+  margin-top: 7px;
+  border: 1.5px solid rgba(22, 121, 76, 0.45);
+  background: linear-gradient(135deg, #16794c 0%, #15803d 100%);
   color: #ffffff;
-  padding: 14px 16px;
-  border-bottom: 3px solid #c8a14b;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-.uann-box.is-urgent .uann-hdr {
-  background: linear-gradient(145deg, #7f1d1d 0%, #b91c1c 100%);
-  border-bottom-color: #fbbf24;
-}
-.uann-hdr-l {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  min-width: 0;
-  flex: 1;
-}
-.uann-ico {
-  width: 36px;
-  height: 36px;
-  border-radius: 11px;
-  background: rgba(255, 255, 255, 0.16);
+  border-radius: 9px;
+  padding: 8px 10px;
+  font-size: 11.8px;
+  font-weight: 800;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 19px;
-  flex-shrink: 0;
+  gap: 5px;
+  box-shadow: 0 3px 10px rgba(22, 121, 76, 0.22);
+  transition: transform 0.08s ease;
 }
-.uann-hdr h3 {
+.pp-trim-passed-btn:active { transform: scale(0.98); }
+
+.owner-urgent-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 360;
+  background: rgba(10, 22, 38, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  direction: rtl;
+}
+.owner-urgent-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--white);
+  border: 2px solid #c8a14b;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.45);
+  animation: esSlideUp 0.2s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+.owner-urgent-hdr {
+  background: linear-gradient(145deg, #102540 0%, #1d3c61 100%);
+  color: #ffffff;
+  padding: 13px 16px;
+  border-bottom: 3px solid #c8a14b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 15px;
   font-weight: 800;
-  color: #ffffff;
-  line-height: 1.3;
 }
-.uann-hdr small {
-  display: block;
-  font-size: 11px;
-  color: #f6dc93;
-  font-weight: 700;
-  margin-top: 2px;
-}
-.uann-body {
-  padding: 16px 16px 13px;
-}
-.uann-msg {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-right: 4px solid #142a46;
-  border-radius: 12px;
-  padding: 12px 13px;
-  font-size: 13.8px;
+.owner-urgent-body {
+  padding: 16px;
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--ink-900);
   line-height: 1.75;
   white-space: pre-line;
-  word-break: break-word;
-  margin-bottom: 10px;
 }
-.uann-box.is-urgent .uann-msg {
-  border-right-color: #dc2626;
+.owner-urgent-foot {
+  padding: 11px 16px 14px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
 }
-.uann-meta {
+.owner-urgent-foot .btn {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  border-radius: 11px;
+}
+
+
+/* ==================== MAKIN v145: STREAMLINED STUDENT EVAL SHEET STUDIO (ZERO DUPLICATES, CRISP ALIGNMENT) ==================== */
+.es-rec-act-3 {
+  display: grid;
+  grid-template-columns: 0.92fr 0.92fr 1.16fr;
+  gap: 5px;
+}
+.es-rec-act-3 .lms-btn {
+  width: 100%;
+  padding: 6px 4px !important;
+  font-size: 11.5px !important;
+  font-weight: 800;
+  text-align: center;
+  justify-content: center;
+  border-radius: 9px !important;
+  white-space: nowrap;
+}
+.es-rec-edit-hint {
+  font-size: 11px;
+  opacity: 0.65;
+  margin-right: 4px;
+}
+.es-hw-row.v145-clean {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 2px 0;
+}
+.es-hw-tap-pill {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px 6px;
+  margin: -3px -5px;
+  border-radius: 8px;
+  transition: background 0.12s ease;
+}
+.es-hw-tap-pill:active { background: rgba(20, 42, 70, 0.08); }
+[data-theme="dark"] .es-hw-tap-pill:active { background: rgba(255, 255, 255, 0.08); }
+.es-hw-tap-txt {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}
+.es-hw-edit-ico {
+  font-size: 11px;
+  opacity: 0.72;
+  flex-shrink: 0;
+}
+.es-sabr-hero-box {
+  background: linear-gradient(135deg, var(--green-bg) 0%, var(--brand-tint) 100%);
+  border: 1.5px solid rgba(22, 121, 76, 0.34);
+  border-right: 4px solid var(--green);
+  border-radius: 12px;
+  padding: 9px 10px;
+  margin-bottom: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  font-size: 11px;
-  font-weight: 700;
+}
+.es-sabr-hero-info {
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+}
+.es-sabr-hero-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--green);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.es-sabr-hero-sub {
+  font-size: 10.8px;
   color: var(--ink-500);
-}
-.uann-foot {
-  padding: 11px 16px 15px;
-  background: var(--bg);
-  border-top: 1px solid var(--line);
-}
-.uann-ack-btn {
-  width: 100%;
-  border: none;
-  border-radius: 12px;
-  padding: 11px 14px;
-  font-size: 14px;
-  font-weight: 800;
-  color: #ffffff;
-  background: linear-gradient(135deg, #142a46 0%, #16794c 100%);
-  cursor: pointer;
-  box-shadow: 0 5px 16px rgba(20, 42, 70, 0.24);
-}
-.uann-box.is-urgent .uann-ack-btn {
-  background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%);
-  box-shadow: 0 5px 16px rgba(185, 28, 28, 0.28);
-}
-.uann-ack-btn:active { transform: scale(0.985); }
-
-/* Founder Broadcast Studio Controls */
-.own-bc-seg-3 {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
-  margin-bottom: 10px;
-}
-.own-bc-pill {
-  border: 1.5px solid var(--line-strong);
-  background: var(--bg);
-  color: var(--ink-700);
-  border-radius: 10px;
-  padding: 8px 4px;
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.14s ease;
-}
-.own-bc-pill.on {
-  background: #142a46;
-  border-color: #c8a14b;
-  color: #f6dc93;
-  box-shadow: 0 3px 9px rgba(20, 42, 70, 0.2);
-}
-.own-bc-prio-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 7px;
-  margin-bottom: 11px;
-}
-.own-bc-prio-card {
-  border: 1.5px solid var(--line-strong);
-  background: var(--bg);
-  color: var(--ink-900);
-  border-radius: 11px;
-  padding: 9px 9px;
-  text-align: right;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  transition: all 0.14s ease;
-}
-.own-bc-prio-card b { font-size: 12.2px; font-weight: 800; color: var(--brand-slate); }
-.own-bc-prio-card span { font-size: 10.5px; color: var(--ink-500); font-weight: 600; line-height: 1.38; }
-.own-bc-prio-card.on {
-  background: #142a46;
-  border-color: #c8a14b;
-  color: #ffffff;
-}
-.own-bc-prio-card.on b { color: #f6dc93; }
-.own-bc-prio-card.on span { color: #dce9f7; }
-.own-bc-prio-card.on-urgent {
-  background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%);
-  border-color: #fbbf24;
-  color: #ffffff;
-}
-.own-bc-prio-card.on-urgent b { color: #fde68a; }
-.own-bc-prio-card.on-urgent span { color: #fee2e2; }
-.own-bc-status-box {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-right: 4px solid var(--green);
-  border-radius: 11px;
-  padding: 9px 11px;
-  margin-bottom: 11px;
-  font-size: 12px;
-  line-height: 1.55;
-}
-.own-bc-status-box.is-off {
-  border-right-color: var(--ink-500);
-  opacity: 0.85;
-}
-.own-bc-status-box.is-urgent {
-  border-right-color: #dc2626;
+  font-weight: 700;
+  margin-top: 2px;
 }
 
 /* Native Print fallback */
@@ -15187,31 +15142,6 @@ table.t-daily td.td-sard,
 
 <!-- Global Founder Announcement Banner -->
 <div id="globalAnnouncementBar" class="global-ann-banner no-print" style="display:none;"></div>
-
-<!-- Urgent / Full Founder Announcement Modal (v144) -->
-<div id="urgentAnnModal" class="modal-backdrop no-print" onclick="if(event.target===this && !this.dataset.locked) dismissUrgentAnnModal();">
-  <div id="urgentAnnBox" class="uann-box">
-    <div class="uann-hdr">
-      <div class="uann-hdr-l">
-        <span class="uann-ico" id="uannIco">📢</span>
-        <div style="min-width:0; flex:1;">
-          <h3 id="uannTitle">تنبيه من إدارة صروح مكين</h3>
-          <small id="uannSub">رسالة رسمية من الإدارة</small>
-        </div>
-      </div>
-    </div>
-    <div class="uann-body">
-      <div class="uann-msg" id="uannBody"></div>
-      <div class="uann-meta">
-        <span id="uannAudienceLbl">🌍 لجميع المستخدمين</span>
-        <span id="uannTimeLbl"></span>
-      </div>
-    </div>
-    <div class="uann-foot">
-      <button type="button" class="uann-ack-btn" id="uannAckBtn" onclick="dismissUrgentAnnModal()">✓ تم الاطلاع</button>
-    </div>
-  </div>
-</div>
 
 <!-- Owner Quick Return Bar (when Founder is previewing Teacher/Supervisor views) -->
 <div id="ownerQuickReturnBar" class="owner-quick-bar no-print" style="display:none;">
@@ -15703,7 +15633,7 @@ table.t-daily td.td-sard,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v144</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v145</span>
         </button>
       </div>
     </div>
@@ -18377,10 +18307,8 @@ function getRecordFailedRepeatPages(r, sessionType = "") {
 }
 
 function buildRepeatPagesReportBadgeHtml(r, sessionType = "") {
-  const items = getRecordFailedRepeatPages(r, sessionType);
-  if (!items.length) return { hasBadge: false, html: "", plain: "" };
-  const plain = `إعادة: ${items.map(x => x.text).join("، ")}`;
-  return { hasBadge: true, html: `<span class="rep-repeat-pg-badge">🔁 ${escapeHtml(plain)}</span>`, plain };
+  // v144: Disabled — any failed page sets overall grade directly to "إعادة" unless teacher trims assignment to passed pages only.
+  return { hasBadge: false, html: "", plain: "" };
 }
 
 function renderLockedRepeatPagesBox(r, sessionType = "") {
@@ -19387,9 +19315,10 @@ function recomputeAutoDailyHomework(st, r, h) {
   // Step 2: Evaluating Sard of a completed Juz -> Pass moves to Sabr, Repeat keeps Sard!
   const sardObj = (r.recIsSard && r.sardJuz) ? getJuzByName(r.sardJuz) : null;
   if (sardObj) {
+    r.manualHw = false;
     if (r.recEval === "إعادة") {
       r.hwSardJuz = r.sardJuz;
-      r.hwSabrJuz = ""; r.hwSardJuz = "";
+      r.hwSabrJuz = "";
       r.hwSurahId = ""; r.hwEndSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = [];
     } else if (r.recEval) {
       r.hwSardJuz = "";
@@ -19443,6 +19372,7 @@ function recomputeAutoDailyHomework(st, r, h) {
     return completedJuz;
   }
 
+  r.manualHw = false;
   r.hwSabrJuz = ""; r.hwSardJuz = "";
   const last = segs[segs.length - 1];
   const nxt = computeNextHomework(last.surahId, last.from, last.to, "", dir, pace);
@@ -19678,6 +19608,7 @@ function getSegments(r, kind) {
       }
     });
   } else if (kind === "min") {
+    if (r.minIsPages || (Array.isArray(r.minSardJuzIds) && r.minSardJuzIds.length)) return [];
     const extras = Array.isArray(r.minExtras) ? r.minExtras : [];
     if (r.minSurahId && SURAH_MAP[Number(r.minSurahId)]) {
       if (!extras.length && r.minEndSurahId && Number(r.minEndSurahId) !== Number(r.minSurahId)) {
@@ -19737,6 +19668,15 @@ function calcRecordRecPages(r) {
 }
 
 function calcRecordMinPages(r) {
+  if (!r) return 0;
+  if (Array.isArray(r.minSardJuzIds) && r.minSardJuzIds.length) {
+    return formatSardJuzInfo(r.minSardJuzIds).totalPages;
+  }
+  if (r.minIsPages) {
+    const p1 = parseArabicNum(r.minPageFrom, 0), p2 = parseArabicNum(r.minPageTo, p1);
+    if (p1 >= 1 && p2 >= 1) return Math.max(1, Math.abs(p2 - p1) + 1);
+    return parseArabicNum(r.minPages, 0);
+  }
   const segs = getSegments(r, "min");
   if (segs.length) return calcSegmentsPages(segs);
   return calcSmartPagesFromInputs(r?.minSurahId, r?.minFrom, r?.minTo, r?.minEndSurahId, r?.minSurah || r?.minText);
@@ -21638,13 +21578,18 @@ function loadState(uidOverride = null, opts = {}) {
               if (!r) return;
               if (r.recFrom) { const n = parseArabicNum(r.recFrom, 0); if (n && String(r.recFrom) !== String(n)) { r.recFrom = n; repaired = true; } }
               if (r.recTo) { const n = parseArabicNum(r.recTo, 0); if (n && String(r.recTo) !== String(n)) { r.recTo = n; repaired = true; } }
-              if (r.minFrom) { const n = parseArabicNum(r.minFrom, 0); if (n && String(r.minFrom) !== String(n)) { r.minFrom = n; repaired = true; } }
-              if (r.minTo) { const n = parseArabicNum(r.minTo, 0); if (n && String(r.minTo) !== String(n)) { r.minTo = n; repaired = true; } }
-              if (!r.minSurahId && (r.minSurah || r.minText)) {
-                const matched = findSurahByName(r.minSurah || r.minText);
-                if (matched && !(r.minSurah || r.minText).includes("+")) {
-                  r.minSurahId = String(matched.id);
-                  repaired = true;
+              const _minIsSpecial = Boolean(r.minIsPages || (Array.isArray(r.minSardJuzIds) && r.minSardJuzIds.length));
+              if (_minIsSpecial) {
+                if (r.minSurahId) { r.minSurahId = ""; r.minEndSurahId = ""; repaired = true; }
+              } else {
+                if (r.minFrom) { const n = parseArabicNum(r.minFrom, 0); if (n && String(r.minFrom) !== String(n)) { r.minFrom = n; repaired = true; } }
+                if (r.minTo) { const n = parseArabicNum(r.minTo, 0); if (n && String(r.minTo) !== String(n)) { r.minTo = n; repaired = true; } }
+                if (!r.minSurahId && (r.minSurah || r.minText)) {
+                  const matched = findSurahByName(r.minSurah || r.minText);
+                  if (matched && !(r.minSurah || r.minText).includes("+")) {
+                    r.minSurahId = String(matched.id);
+                    repaired = true;
+                  }
                 }
               }
               if (!Array.isArray(r.recExtras)) r.recExtras = [];
@@ -22045,7 +21990,6 @@ document.addEventListener("visibilitychange", () => {
     if (typeof isCloudSyncDirty === "function" && isCloudSyncDirty() && navigator.onLine && typeof syncCentralCloudNow === "function") {
       syncCentralCloudNow(false);
     }
-    if (typeof stopAnnouncementLiveListener === "function") stopAnnouncementLiveListener();
   } else if (typeof onAppReturnToForegroundPoll === "function") {
     onAppReturnToForegroundPoll();
   }
@@ -22960,28 +22904,125 @@ function computePerPageMemPoints(r) {
   return Math.round(weightedBase * factor);
 }
 
-// v143: Fair Weighted Overall Grade across evaluated pages (ممتاز=4, جيد جداً=3, جيد=2, إعادة=0)
-// Strict rules:
-// - If majority of evaluated pages failed (failed > passed, e.g. 3/4, 2/3, 2/2) => ALWAYS "إعادة"!
-// - If any page failed => cannot be "ممتاز" (capped at "جيد جداً" when avg >= 2.75, "جيد" when avg >= 1.5, else "إعادة").
+// v144 STRICT RULE: If ANY evaluated page gets "إعادة", the overall grade is "إعادة"
+// until the student masters it — OR the teacher taps "اعتماد المتقَن فقط" to trim the assignment to passed pages only!
 function computePerPageOverallGrade(pages) {
   if (!Array.isArray(pages) || !pages.length) return { overallEv: "", passed: [], failed: [], gradedCount: 0 };
   const graded = pages.filter(p => isPerPageItemGraded(p) && p.eval);
   if (!graded.length) return { overallEv: "", passed: [], failed: [], gradedCount: 0 };
   const passed = graded.filter(p => p.eval !== "إعادة");
   const failed = graded.filter(p => p.eval === "إعادة");
-  if (failed.length > passed.length) {
+  if (failed.length > 0) {
     return { overallEv: "إعادة", passed, failed, gradedCount: graded.length };
   }
-  const gradeVal = ev => ev === "ممتاز" ? 4 : (ev === "جيد جداً" ? 3 : (ev === "جيد" ? 2 : 0));
+  const gradeVal = ev => ev === "ممتاز" ? 4 : (ev === "جيد جداً" ? 3 : 2);
   const avg = graded.reduce((sum, p) => sum + gradeVal(p.eval), 0) / graded.length;
-  let overallEv;
-  if (failed.length > 0) {
-    overallEv = avg >= 2.75 ? "جيد جداً" : (avg >= 1.5 ? "جيد" : "إعادة");
-  } else {
-    overallEv = avg >= 3.5 ? "ممتاز" : (avg >= 2.5 ? "جيد جداً" : "جيد");
-  }
+  const overallEv = avg >= 3.5 ? "ممتاز" : (avg >= 2.5 ? "جيد جداً" : "جيد");
   return { overallEv, passed, failed, gradedCount: graded.length };
+}
+
+// v144: 1-Tap Trim Assignment to Passed Pages Only (drops failed pages, awards earned grade, advances homework cleanly!)
+function trimAssignmentToPassedPagesOnly(studentId, kind) {
+  captureUndoSnapshot(studentId);
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s) return;
+  const st = h.students.find(x => x.id === studentId);
+  if (!st) return;
+  const r = getStudentRecord(s, studentId);
+  const pages = getSyncedPageEvals(r, st, kind, h);
+  if (!pages || pages.length < 2) return;
+  const passed = pages.filter(p => isPerPageItemGraded(p) && p.eval && p.eval !== "إعادة");
+  if (!passed.length) { showToast("لا توجد صفحات ناجحة لاعتمادها بعد"); return; }
+
+  // Build clean merged segments from ONLY the passed pages
+  const rawSegs = [];
+  passed.forEach(p => {
+    if (p.surahId && SURAH_MAP[Number(p.surahId)]) {
+      rawSegs.push({ surahId: String(p.surahId), from: parseArabicNum(p.from, 1), to: parseArabicNum(p.to, SURAH_MAP[Number(p.surahId)].a) });
+    }
+    if (Array.isArray(p.extraSegs)) {
+      p.extraSegs.forEach(es => {
+        if (es && es.surahId && SURAH_MAP[Number(es.surahId)]) {
+          rawSegs.push({ surahId: String(es.surahId), from: parseArabicNum(es.from, 1), to: parseArabicNum(es.to, SURAH_MAP[Number(es.surahId)].a) });
+        }
+      });
+    }
+  });
+  if (!rawSegs.length) return;
+
+  // Merge adjacent same-surah segments cleanly
+  const merged = [];
+  rawSegs.forEach(sg => {
+    const prev = merged[merged.length - 1];
+    if (prev && prev.surahId === sg.surahId && sg.from <= prev.to + 1 && sg.to >= prev.from) {
+      prev.from = Math.min(prev.from, sg.from);
+      prev.to = Math.max(prev.to, sg.to);
+    } else {
+      merged.push({ ...sg });
+    }
+  });
+
+  const passedOv = computePerPageOverallGrade(passed).overallEv || passed[0].eval || "ممتاز";
+  const totE = passed.reduce((a, p) => a + (Number(p.errors) || 0), 0);
+  const totA = passed.reduce((a, p) => a + (Number(p.alerts) || 0), 0);
+  const newPgCount = calcSegmentsPages(merged);
+
+  if (kind === "rec") {
+    r.recSurahId = merged[0].surahId;
+    r.recFrom = merged[0].from;
+    r.recTo = merged[0].to;
+    r.recEndSurahId = "";
+    r.recExtras = merged.slice(1).map(x => ({ ...x }));
+    r.recPages = newPgCount;
+    r.recTotalPages = newPgCount;
+    r.recErrors = totE;
+    r.recAlerts = totA;
+    r.recEval = passedOv;
+    r.recOverallOverride = "";
+    r.recRepeatHwOnly = false;
+    r.manualRec = true;
+    if (r.dRevEval === "إعادة" && !r.dRevAuto && !r.manualDRev && !(Number(r.dRevPages) > 0)) {
+      r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevIsPages = false;
+    }
+    if (passed.length >= 2) {
+      r.recPageEvals = passed.map(p => ({ ...p }));
+    } else {
+      r.recPageEvals = null;
+      r.recEvalMode = "single";
+    }
+    const completedJuz = recomputeAutoDailyHomework(st, r, h);
+    r.notes = applyTajweedToNote(buildConciseRecNote(passedOv, { completedJuz }), r);
+  } else if (kind === "min") {
+    r.minIsPages = false; r.minSardJuzIds = []; r.minSkipped = false;
+    r.minSurahId = merged[0].surahId;
+    r.minFrom = merged[0].from;
+    r.minTo = merged[0].to;
+    r.minEndSurahId = "";
+    r.minExtras = merged.slice(1).map(x => ({ ...x }));
+    r.minPages = newPgCount;
+    r.minErrors = totE;
+    r.minAlerts = totA;
+    r.minEval = passedOv;
+    r.minOverallOverride = "";
+    r.manualMin = true;
+    syncMinorSummaryStrings(r);
+    if (passed.length >= 2) {
+      r.minPageEvals = passed.map(p => ({ ...p }));
+    } else {
+      r.minPageEvals = null;
+      r.minEvalMode = "single";
+    }
+    r.notes = applyTajweedToNote(buildSaturdayAutoNote(st, r, null, null, false), r);
+  }
+
+  _activePageTabMap[`${studentId}_${kind}`] = 0;
+  r.points = computeRecordPoints(s, r, st);
+  saveState();
+  if (openCardId === studentId && document.getElementById("studentEvalSheet")?.classList.contains("show")) {
+    syncStudentEvalSheet();
+  }
+  patchSingleStudentCard(studentId);
+  showToast(`✂️ تم اعتماد المتقَن فقط (${formatNum(newPgCount)} ص • ${passedOv}) وتحديث الواجب تلقائياً ✓`, { undo: true });
 }
 
 function formatFailedPagesShort(failed) {
@@ -23145,11 +23186,11 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
     const repeatHtml = failed.length ? `
       <div class="pp-repeat-banner">
         <div>⚠️ <b>صفحات الإعادة (${failed.length}/${pages.length}):</b> ${failed.map(p => `<b>${escapeHtml(formatFailedPageSurahPage(p))}</b>`).join("، ")} ${passedCnt > 0 ? `• ✅ أتقن ${passedCnt}` : ""}</div>
-        ${kind === "rec" && passedCnt > 0 ? `
-          <div class="pp-repeat-hw-row">
-            <button type="button" class="pp-rhw-btn ${!r.recRepeatHwOnly ? "on" : ""}" onclick="setRecRepeatHwMode('${studentId}', false)">📘 بالملاحظات والمراجعة + جديد</button>
-            <button type="button" class="pp-rhw-btn ${r.recRepeatHwOnly ? "on" : ""}" onclick="setRecRepeatHwMode('${studentId}', true)">📌 الواجب القادم: الإعادة فقط</button>
-          </div>` : ""}
+        <div style="font-size:10.5px; color:var(--ink-700); margin-top:3px; font-weight:700;">الإجمالي «إعادة» حتى يُتقنها، أو يمكنك تقليص واجب اليوم للصفحات المتقَنة فقط:</div>
+        ${passedCnt > 0 ? `
+          <button type="button" class="pp-trim-passed-btn" onclick="trimAssignmentToPassedPagesOnly('${studentId}','${kind}')">
+            ✂️ اعتماد المتقَن فقط (${passedCnt} ص) ومتابعة الواجب عادي
+          </button>` : ""}
       </div>` : "";
 
     const ov = computePerPageOverallGrade(pages);
@@ -23202,7 +23243,7 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
         <div class="pp-ov-row1" style="margin-bottom:${isOvEditable ? '6px' : '0'};">
           <div class="pp-ov-info">
             <div>📊 التقييم الإجمالي${savedOv && isOvEditable ? " (معدّل يدوياً)" : " (تلقائي)"}: <span class="badge ${ovCls}">${effectiveOv || savedKindEval || "بانتظار التقييم"}</span></div>
-            <small>مقيّم: ${gradedPages.length}/${pages.length} • أخطاء: ${totE} • تنبيه: ${totA}${failed.length ? " • الإعادة بالملاحظات المقفلة" : ""}</small>
+            <small>مقيّم: ${gradedPages.length}/${pages.length} • أخطاء: ${totE} • تنبيه: ${totA}${failed.length ? " • يوجد صفحة إعادة" : ""}</small>
           </div>
           ${savedKindEval ? `<button type="button" class="lms-btn" style="padding:4px 8px; color:var(--red); border-color:rgba(185,34,34,0.28); background:var(--red-bg); flex-shrink:0;" onclick="clearPerPageEvaluation('${studentId}','${kind}')" title="إلغاء التقييم بالكامل">✕</button>` : ""}
         </div>
@@ -24866,27 +24907,42 @@ function clearSurahPickerSelection() {
   const k = spState.kind;
   if (spState.mode === "sabr") {
     if (k === "hw") {
-      r.hwSabrJuz = "";
+      r.hwSabrJuz = ""; r.hwSardJuz = "";
       if (s.type === "saturday") { r.manualSatHw = false; syncSatManualHwToNextDaily(h, s, st, r); }
+      else { r.manualHw = false; if (r.recEval) recomputeAutoDailyHomework(st, r, h); syncDailyManualHwToNextDaily(h, s, st, r); }
       saveState(); closeModal("surahPickerModal"); renderSessionPreservingScroll();
-      showToast(s.type === "saturday" ? "تمت استعادة واجب التسميع التلقائي ↺" : "تم مسح واجب السبر");
+      showToast("تمت استعادة الواجب التلقائي ↺");
       return;
     }
     if (k === "nextMaj") {
-      r.nextMajSabrJuz = "";
+      r.nextMajSabrJuz = ""; r.manualNextMaj = false;
+      r.nextMajStartSurahId = ""; r.nextMajStartAyah = ""; r.nextMajEndSurahId = ""; r.nextMajEndAyah = "";
+      r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = "";
+      if (s.type === "saturday" && r.majEval) applyNextMajorReview(st, r, isMajorPassEval(r.majEval));
+      else syncUpcomingSaturdayMajorForStudent(h, s, st.id);
       saveState(); closeModal("surahPickerModal"); renderSessionPreservingScroll();
-      showToast("تم مسح واجب سبر الكبرى");
+      showToast("تمت استعادة واجب الكبرى التلقائي ↺");
       return;
     }
     closeModal("surahPickerModal");
     onSabrJuzChange(spState.studentId, "");
     return;
   }
-  if (k === "rec") { r.recSurahId = ""; r.recFrom = ""; r.recTo = ""; r.recExtras = []; r.recPages = 0; r.recEndSurahId = ""; r.recIsSabr = false; r.manualRec = true; }
-  else if (k === "hw") { r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwEndSurahId = ""; r.hwSabrJuz = ""; if (s.type === "saturday") { r.manualSatHw = false; syncSatManualHwToNextDaily(h, s, st, r); } }
-  else if (k === "min") { r.minSurahId = ""; r.minFrom = ""; r.minTo = ""; r.minExtras = []; r.minSurah = ""; r.minText = ""; r.minPages = 0; r.minIsPages = false; r.minSardJuzIds = []; r.manualMin = true; }
+  if (k === "rec") { r.recSurahId = ""; r.recFrom = ""; r.recTo = ""; r.recExtras = []; r.recPages = 0; r.recEndSurahId = ""; r.recIsSabr = false; r.recIsSard = false; r.sardJuz = ""; r.manualRec = true; }
+  else if (k === "hw") {
+    r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwExtras = []; r.hwEndSurahId = ""; r.hwSabrJuz = ""; r.hwSardJuz = "";
+    if (s.type === "saturday") { r.manualSatHw = false; syncSatManualHwToNextDaily(h, s, st, r); }
+    else { r.manualHw = false; syncDailyManualHwToNextDaily(h, s, st, r); }
+  }
+  else if (k === "min") { r.minSurahId = ""; r.minFrom = ""; r.minTo = ""; r.minExtras = []; r.minSurah = ""; r.minText = ""; r.minPages = 0; r.minIsPages = false; r.minSardJuzIds = []; r.minPageEvals = null; r.manualMin = true; }
   else if (k === "maj") { r.majExtras = []; r.majFrom = ""; r.majTo = ""; r.majPages = 0; r.majStartSurahId = ""; r.majEndSurahId = ""; r.majIsPages = false; r.majSardJuzIds = []; r.majSardLabel = ""; r.manualMaj = true; }
-  else if (k === "nextMaj") { r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = false; r.nextMajStartSurahId = ""; r.nextMajEndSurahId = ""; r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajTitle = ""; }
+  else if (k === "nextMaj") {
+    r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = ""; r.manualNextMaj = false;
+    r.nextMajStartSurahId = ""; r.nextMajStartAyah = ""; r.nextMajEndSurahId = ""; r.nextMajEndAyah = "";
+    r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajFrom = ""; r.nextMajTo = ""; r.nextMajTitle = "";
+    if (s.type === "saturday" && r.majEval) applyNextMajorReview(st, r, isMajorPassEval(r.majEval));
+    else syncUpcomingSaturdayMajorForStudent(h, s, st.id);
+  }
   else if (k === "dRev") { clearDailyRev(spState.studentId); closeModal("surahPickerModal"); return; }
   if (r.recEval || r.minEval || r.majEval) r.points = computeRecordPoints(s, r, st);
   openCardId = spState.studentId;
@@ -24923,12 +24979,15 @@ function applySurahPicker(quickEval = null) {
     closeModal("surahPickerModal");
     if (k === "hw") {
       r.hwSabrJuz = spState.sabrJuzName;
+      r.hwSardJuz = "";
       r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwEndSurahId = ""; r.hwExtras = [];
       if (s.type === "saturday") {
         r.manualSatHw = true;
         syncSatManualHwToNextDaily(h, s, st, r);
       } else {
+        r.manualHw = true;
         r.notes = applyTajweedToNote(`الواجب القادم: سبر ${formatJuzClean(spState.sabrJuzName)}.`, r);
+        syncDailyManualHwToNextDaily(h, s, st, r);
       }
       openCardId = st.id;
       saveState(); renderSessionPreservingScroll();
@@ -24947,9 +25006,10 @@ function applySurahPicker(quickEval = null) {
         r.nextMajFrom = formatSurahAyahPoint(s1, jObj.startAyah, false);
         r.nextMajTo = formatSurahAyahPoint(s2, jObj.endAyah, true);
       }
+      syncUpcomingSaturdayMajorForStudent(h, s, st.id);
       openCardId = st.id; openAdvCardId = st.id;
       saveState(); renderSessionPreservingScroll();
-      showToast(`🎓 تم تعيين واجب السبت القادم: سبر ${spState.sabrJuzName}`);
+      showToast(`🎓 تم تعيين واجب الكبرى القادم: سبر ${formatJuzClean(spState.sabrJuzName)}`);
       return;
     }
     const chosenEnts = (Array.isArray(spState.sabrEntries) && spState.sabrEntries.length)
@@ -25030,11 +25090,12 @@ function applySurahPicker(quickEval = null) {
       r.points = computeRecordPoints(s, r, st);
       syncUpcomingSaturdayMajorForStudent(h, s, st.id);
     } else if (k === "min") {
+      r.minSkipped = false; r.minPageEvals = null; r.minSourceLabel = "";
       r.minSurahId = ""; r.minEndSurahId = ""; r.minExtras = []; r.minSardJuzIds = [];
       r.minIsPages = true; r.minPageFrom = p1; r.minPageTo = p2;
       r.minPageFromSurahId = s1 ? String(s1.id) : ""; r.minPageToSurahId = s2 ? String(s2.id) : "";
-      r.minSurah = surahHeaderLbl; r.minFrom = `ص ${p1}`; r.minTo = `ص ${p2}`;
-      r.minText = toastLbl;
+      r.minSurah = surahHeaderLbl; r.minFrom = fromCol; r.minTo = toCol;
+      r.minText = formatPagesReviewDisplay(fromCol, toCol, p1, p2, s1?.id, s2?.id);
       r.minPages = pCount; r.manualMin = true;
     } else if (k === "maj") {
       r.majSkipped = false; r.sabrJuz = ""; r.sabrScore = ""; r.sabrEval = "";
@@ -25082,6 +25143,7 @@ function applySurahPicker(quickEval = null) {
       r.points = computeRecordPoints(s, r, st);
       syncUpcomingSaturdayMajorForStudent(h, s, st.id);
     } else if (k === "min") {
+      r.minSkipped = false; r.minPageEvals = null; r.minSourceLabel = "";
       r.minSurahId = ""; r.minEndSurahId = ""; r.minExtras = []; r.minIsPages = false;
       r.minSardJuzIds = [...info.ids];
       r.minSurah = "سرد"; r.minFrom = info.ids.length === 1 ? "جزء" : `${info.ids.length} أجزاء`; r.minTo = info.shortNames;
@@ -25132,12 +25194,16 @@ function applySurahPicker(quickEval = null) {
     reconcileRecEvalAfterRangeChange(h, s, st, r, _recSnap, Boolean(quickEval));
   } else if (k === "hw") {
     r.hwSabrJuz = "";
+    r.hwSardJuz = "";
     r.hwSurahId = first.surahId; r.hwFrom = first.from; r.hwTo = first.to;
     r.hwEndSurahId = "";
     r.hwExtras = rest;
     if (s.type === "saturday") {
       r.manualSatHw = true;
       syncSatManualHwToNextDaily(h, s, st, r);
+    } else {
+      r.manualHw = true;
+      syncDailyManualHwToNextDaily(h, s, st, r);
     }
   } else if (k === "min") {
     r.minIsPages = false; r.minSardJuzIds = [];
@@ -28268,6 +28334,13 @@ function computeStudentMinorFromPrevDaily(h, cur, stId) {
 
 function applyStudentMinorAuto(rec, res) {
   if (!res || !res.merged.length) return false;
+  rec.minSkipped = false;
+  rec.minIsPages = false;
+  rec.minPageFrom = ""; rec.minPageTo = "";
+  rec.minPageFromSurahId = ""; rec.minPageToSurahId = "";
+  rec.minSardJuzIds = [];
+  rec.minPageEvals = null;
+  rec.manualMin = false;
   rec.minSurahId = res.merged[0].surahId;
   rec.minFrom = res.merged[0].from;
   rec.minTo = res.merged[0].to;
@@ -28280,14 +28353,15 @@ function applyStudentMinorAuto(rec, res) {
 }
 
 function refreshStudentSatMinor(studentId) {
-  const _rsM = getCurrentSession(); if (_rsM) { const _rrM = getStudentRecord(_rsM, studentId); if (_rrM) _rrM.minSkipped = false; }
   const h = getActiveHalaqa(), cur = getCurrentSession();
   if (!cur || cur.type !== "saturday") return;
   const rec = getStudentRecord(cur, studentId);
+  rec.minSkipped = false;
   const res = computeStudentMinorFromPrevDaily(h, cur, studentId);
   if (res) {
     applyStudentMinorAuto(rec, res);
-    saveState(); renderSessionView();
+    openCardId = studentId;
+    saveState(); renderSessionPreservingScroll();
     showToast(`تم تحديث الصغرى من: ${res.srcLabel} ✓`);
   } else {
     showToast("لا يوجد تسميع مُقيّم في يومي التسميع السابقين لهذا الطالب");
@@ -30059,9 +30133,9 @@ function syncStudentEvalSheet() {
   const curEvalBadgeTxt = isAbsHdr ? r.attendance : (isNoRecHdr ? "لم يُسمّع" : ((s.type === "daily" || isRashidi) ? (r.recEval || "") : (r.majEval || r.minEval || "")));
   const stChipCls = isAbsHdr || curEvalBadgeTxt === "إعادة" ? "bad" : (curEvalBadgeTxt ? "ok" : "warn");
   const statusChipHtml = `<span class="es-status-chip ${stChipCls}">${escapeHtml(curEvalBadgeTxt || "بانتظار")}</span>`;
-  const ptsPill = (isPointsEnabled(h) && !isAbsHdr)
-    ? `<button type="button" class="es-pts-btn ${evalBonusOpen ? "open" : ""} ${r.ptsForgotSheet ? "is-forgot" : ""}" id="esHeaderPtsBadge" onclick="toggleEvalBonusDrawer('${st.id}')" title="اضغط لتعديل السلوك والنقاط">${r.ptsForgotSheet ? "📄 0" : `⭐ ${r.points || 0}`} ▾</button>`
-    : (isPointsEnabled(h) ? `<span class="es-pts-pill" id="esHeaderPtsBadge">⭐ ${r.points || 0}</span>` : "");
+  const ptsPill = (isPointsEnabled(h) && isAbsHdr)
+    ? `<span class="es-pts-pill" id="esHeaderPtsBadge">⭐ ${r.points || 0}</span>`
+    : "";
   const _curGoalM = getSessionReportMonth(s);
   const _stGoalObj = typeof getStudentMonthlyGoalQuick === "function" ? getStudentMonthlyGoalQuick(st, h, _curGoalM) : null;
   const goalPill = (_stGoalObj && _stGoalObj.target > 0)
@@ -30323,7 +30397,6 @@ function renderCardBody(s, st, r, idx) {
             <span>💬 ملاحظات وتنبيهات الحفظ</span>
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','notes')">إخفاء</button>
           </div>
-          ${renderLockedRepeatPagesBox(r, "daily")}
           ${renderLockedTajweedNoteBox(r)}
           <div class="field" style="margin-bottom:0;">
             <textarea rows="2" placeholder="اكتب ملاحظة للتقرير وولي الأمر..." oninput="updateRecNoteFreeText('${st.id}',this.value)">${escapeHtml(stripTajweedSuffix(r.notes || ''))}</textarea>
@@ -30332,43 +30405,53 @@ function renderCardBody(s, st, r, idx) {
         </div>`;
     }
 
-    bodyCore = `
-      <div class="es-card">
-        ${r.sabrJuz ? `<div class="sabr-active-strip">
-          <span>🎓 سبر كامل: ${escapeHtml(formatJuzClean(r.sabrJuz))} (${formatNum(getJuzByName(r.sabrJuz)?.pages || 20)} ص)${r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null ? ` • ${r.sabrScore}%` : ''}</span>
+    const _isPureRecSabr = Boolean(r.recIsSabr && r.sabrJuz);
+    const _isPureRecSard = Boolean(r.recIsSard && r.sardJuz);
+    const _recHeaderBlock = _isPureRecSabr
+      ? `<div class="es-sabr-hero-box">
+          <div class="es-sabr-hero-info" onclick="openSurahPicker('${st.id}','rec')" title="اضغط لتغيير الجزء أو اختيار سورة">
+            <div class="es-sabr-hero-title">🎓 سبر ${escapeHtml(formatJuzCompactLabel(r.sabrJuz))} كاملاً${r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null ? ` • ${r.sabrScore}%` : ''}</div>
+            <div class="es-sabr-hero-sub">اضغط للتغيير • لا يُحتسب ضمن صفحات الحفظ</div>
+          </div>
+          <div style="display:flex; gap:4px; flex-shrink:0;">
+            ${getDailySabrEval(r) !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="padding:3px 8px; font-size:11px;" onclick="openSabrHifzCertificate('${st.id}')">🎓 شهادة</button>` : ''}
+            <button type="button" class="lms-btn" style="color:var(--red); padding:3px 7px;" onclick="onSabrJuzChange('${st.id}','')" title="إلغاء السبر">✕</button>
+          </div>
+        </div>`
+      : `${r.sabrJuz ? `<div class="sabr-active-strip">
+          <span>🎓 سبر إضافي: ${escapeHtml(formatJuzClean(r.sabrJuz))}${r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null ? ` • ${r.sabrScore}%` : ''}</span>
           <div style="display:flex; gap:4px;">
             ${getDailySabrEval(r) !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="padding:2px 8px; font-size:11px;" onclick="openSabrHifzCertificate('${st.id}')">🎓 شهادة</button>` : ''}
-            <button type="button" class="btn btn-outline btn-sm" style="padding:2px 7px; font-size:11px;" onclick="onSabrJuzChange('${st.id}','')">إلغاء</button>
+            <button type="button" class="lms-btn" style="color:var(--red); padding:2px 7px;" onclick="onSabrJuzChange('${st.id}','')" title="إلغاء السبر">✕</button>
           </div>
         </div>` : ''}
         <div class="es-rec-box">
-          <div class="es-rec-top" onclick="openSurahPicker('${st.id}','rec')" title="اضغط لتغيير السورة والآيات أو السبر">
-            <div class="es-rec-title">${r.recIsSard && r.sardJuz ? `📚 سرد ${escapeHtml(formatJuzCompactLabel(r.sardJuz))} كاملاً` : (r.recIsSabr && r.sabrJuz ? `🎓 سبر ${escapeHtml(formatJuzCompactLabel(r.sabrJuz))} كاملاً` : `📖 ${escapeHtml(recSummary)}`)}</div>
-            <span class="es-rec-pg-badge">${r.recIsSard && r.sardJuz ? `${formatNum(getJuzByName(r.sardJuz)?.pages || 20)} ص` : (r.recIsSabr && r.sabrJuz ? `${formatNum(r.dRevPages || getJuzByName(r.sabrJuz)?.pages || 20)} ص` : `${formatNum(r.recPages || 0)} ص`)}</span>
+          <div class="es-rec-top" style="margin-bottom:${_isPureRecSard ? '0' : '7px'} !important;" onclick="openSurahPicker('${st.id}','rec')" title="اضغط لتعديل السورة والآيات">
+            <div class="es-rec-title">${_isPureRecSard ? `📚 سرد ${escapeHtml(formatJuzCompactLabel(r.sardJuz))} كاملاً` : `📖 ${escapeHtml(recSummary)}`}</div>
+            <span class="es-rec-pg-badge">${_isPureRecSard ? `${formatNum(getJuzByName(r.sardJuz)?.pages || 20)} ص` : `${formatNum(r.recPages || 0)} ص`} <span class="es-rec-edit-hint">✏️</span></span>
           </div>
-          ${!(r.recIsSabr && r.sabrJuz) && !(r.recIsSard && r.sardJuz) ? `
-            <div class="es-rec-controls-v133">
-              <div class="es-rec-act-top">
-                <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','rec')">✏️ تعديل السورة والآيات</button>
-                <button type="button" class="lms-btn" onclick="finishRecSurahQuick('${st.id}')">🏁 لنهاية السورة</button>
-              </div>
-              <div class="es-rec-act-steps">
-                <button type="button" class="lms-btn minus-half-v133" onclick="shrinkRecTodayQuick('${st.id}', 0.5)" title="إنقاص نصف صفحة">−½ ص</button>
-                <button type="button" class="lms-btn ltr-num" onclick="nudgeRecEndAyah('${st.id}', -1)" title="إنقاص آية واحدة">−1 آية</button>
-                <button type="button" class="lms-btn ltr-num" onclick="nudgeRecEndAyah('${st.id}', 1)" title="زيادة آية واحدة">+1 آية</button>
-                <button type="button" class="lms-btn plus-half-v133" onclick="extendRecTodayQuick('${st.id}', 0.5)" title="زيادة نصف صفحة">+½ ص</button>
-              </div>
-            </div>` : `
-            <button type="button" class="lms-btn accent" style="width:100%;" onclick="openSurahPicker('${st.id}','rec')">✏️ تغيير ${r.recIsSard ? "السرد" : "السبر"} أو اختيار سورة</button>`}
-        </div>
+          ${!_isPureRecSard ? `
+            <div class="es-rec-act-3">
+              <button type="button" class="lms-btn minus-half-v133" onclick="shrinkRecTodayQuick('${st.id}', 0.5)" title="إنقاص نصف صفحة">−½ ص</button>
+              <button type="button" class="lms-btn plus-half-v133" onclick="extendRecTodayQuick('${st.id}', 0.5)" title="زيادة نصف صفحة">+½ ص</button>
+              <button type="button" class="lms-btn" onclick="finishRecSurahQuick('${st.id}')" title="إكمال لآخر السورة">🏁 لآخر السورة</button>
+            </div>` : ''}
+        </div>`;
+
+    bodyCore = `
+      <div class="es-card">
+        ${_recHeaderBlock}
         ${r.sabrJuz ? renderSabrScoreBox(st.id, r, false) : ''}
-        ${!(r.recIsSabr && r.sabrJuz) ? renderErrorCounterBar(st.id, "rec", r.recErrors, r.recAlerts) : ''}
+        ${!_isPureRecSabr ? renderErrorCounterBar(st.id, "rec", r.recErrors, r.recAlerts) : ''}
         ${!shouldUsePerPageMode(r, st, "rec", h) ? `<div class="es-eval-4" id="esEvalRow_rec">${makeSmartEvalBtns(r.recEval, "setRecEval", r.recErrors, r.recAlerts)}</div>` : ''}
         ${renderTajweedTagsBar(st.id, r)}
         <div class="es-hw-block">
-          <div class="es-hw-row">
-            <span class="lms-tap-area" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" onclick="openSurahPicker('${st.id}','hw')" title="اضغط لتغيير الواجب">📝 <b>الواجب:</b> ${escapeHtml(hwPreview)}</span>
-            <button type="button" class="lms-btn accent" style="padding:2px 8px; font-size:11px;" onclick="openSurahPicker('${st.id}','hw')">✏️ تعديل</button>
+          <div class="es-hw-row v145-clean">
+            <div class="es-hw-tap-pill" onclick="openSurahPicker('${st.id}','hw')" title="اضغط لتعديل الواجب القادم">
+              <span class="es-hw-tap-txt">📝 <b>الواجب:</b> ${escapeHtml(hwPreview)}${r.manualHw ? ' <span class="badge b-blue" style="font-size:9px; padding:1px 5px;">يدوي</span>' : ''}</span>
+              <span class="es-hw-edit-ico">✏️</span>
+            </div>
+            ${r.manualHw ? `<button type="button" class="lms-btn" style="padding:3px 7px; font-size:10.5px; flex-shrink:0;" onclick="resetDailyHwToAuto('${st.id}')" title="العودة للواجب التلقائي">↺ تلقائي</button>` : ''}
           </div>
           <div class="es-pace-row">
             <span>مقدار الحفظ اليومي:</span>
@@ -30386,7 +30469,7 @@ function renderCardBody(s, st, r, idx) {
         const hasRevClearable = Boolean(r.dRevSabrJuz || r.dRevFrom || r.dRevSurahId || dRevExtras.length || Number(r.dRevPages) > 0 || dRevVisEv);
         const dRevStatusPill = dRevVisEv
           ? `<span class="badge ${dRevVisEv === 'ممتاز' ? 'b-green' : (dRevVisEv === 'إعادة' ? 'b-red' : 'b-blue')}" style="font-size:10.5px;">${escapeHtml(dRevVisEv)}</span>`
-          : `<span class="badge b-muted" style="font-size:10px;">بانتظار التقييم</span>`;
+          : `<span class="badge b-muted" style="font-size:10px;">بانتظار</span>`;
         return `<div class="es-card" style="padding:9px 10px !important; border-right:3.5px solid var(--brand-ochre);">
           <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:7px;">
             <div class="lms-tap-area" style="flex:1; min-width:0;" onclick="openSurahPicker('${st.id}','dRev')" title="اضغط لتعديل مقرر المراجعة">
@@ -30417,12 +30500,14 @@ function renderCardBody(s, st, r, idx) {
             const upMajTxt = (r.manualNextMaj && (r.nextMajSabrJuz || r.nextMajSardLabel || r.nextMajFrom))
               ? (r.nextMajSabrJuz ? `🎓 سبر ${formatJuzClean(r.nextMajSabrJuz)}` : (r.nextMajSardLabel ? `📚 ${r.nextMajSardLabel}` : (r.nextMajIsPages ? formatPagesReviewDisplay(r.nextMajFrom, r.nextMajTo, r.nextMajStartPage, r.nextMajEndPage, r.nextMajStartSurahId, r.nextMajEndSurahId) : formatMajStripDisplay(r.nextMajFrom, r.nextMajTo))))
               : (upMaj?.text || "لا يوجد مقرر بعد");
-            return `<div class="es-hw-row" style="margin-top:7px; padding-top:7px; border-top:1px dashed var(--line);">
-              <span class="lms-tap-area" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" onclick="openSurahPicker('${st.id}','nextMaj')" title="اضغط لتعديل واجب الكبرى القادم يدوياً">📘 <b>واجب الكبرى (${escapeHtml(dNextCtx.nextDayName)}):</b> ${escapeHtml(upMajTxt)}${r.manualNextMaj ? ' <span class="badge b-blue" style="font-size:9px; padding:1px 5px;">يدوي</span>' : ''}</span>
-              <div style="display:flex; gap:4px; flex-shrink:0;">
-                ${r.manualNextMaj ? `<button type="button" class="lms-btn" style="padding:2px 7px; font-size:10.5px;" onclick="resetDailyNextMajToAuto('${st.id}')" title="العودة للتلقائي">↺ تلقائي</button>` : ''}
-                <button type="button" class="lms-btn accent" style="padding:2px 8px; font-size:11px;" onclick="openSurahPicker('${st.id}','nextMaj')">✏️ تعديل</button>
+            const isSameAsToday = Boolean(!r.manualNextMaj && dRevVisLbl && upMajTxt === dRevVisLbl);
+            const dispNextLbl = isSameAsToday ? "نفس المقرر حتى الإنجاز" : upMajTxt;
+            return `<div class="es-hw-row v145-clean" style="margin-top:7px; padding-top:7px; border-top:1px dashed var(--line);">
+              <div class="es-hw-tap-pill" onclick="openSurahPicker('${st.id}','nextMaj')" title="اضغط لتعديل واجب الكبرى القادم">
+                <span class="es-hw-tap-txt">📘 <b>واجب الكبرى (${escapeHtml(dNextCtx.nextDayName)}):</b> ${escapeHtml(dispNextLbl)}${r.manualNextMaj ? ' <span class="badge b-blue" style="font-size:9px; padding:1px 5px;">يدوي</span>' : ''}</span>
+                <span class="es-hw-edit-ico">✏️</span>
               </div>
+              ${r.manualNextMaj ? `<button type="button" class="lms-btn" style="padding:3px 7px; font-size:10.5px; flex-shrink:0;" onclick="resetDailyNextMajToAuto('${st.id}')" title="العودة للتلقائي">↺ تلقائي</button>` : ''}
             </div>`;
           })()}
         </div>`;
@@ -30462,13 +30547,20 @@ function renderCardBody(s, st, r, idx) {
     const sabrJuzId = getStudentMonthlySabrJuzId(st, h, curMonth);
     const sabrProg = sabrJuzId ? getStudentMonthlySabrProgress(st, h, curMonth, sabrJuzId) : null;
     const revPace = Number(st.revPace || (sabrJuzId ? 5 : (h.defaultRevPace || 2)));
-    const nextMajPreview = r.nextMajSabrJuz ? `🎓 سبر ${formatJuzClean(r.nextMajSabrJuz)}` : (r.nextMajSardLabel ? `📚 ${r.nextMajSardLabel}` : (r.nextMajIsPages && r.nextMajFrom ? `📄 ${r.nextMajFrom === r.nextMajTo ? r.nextMajFrom : r.nextMajFrom + ' ← ' + r.nextMajTo}` : (r.nextMajFrom ? formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) : "يُضبط تلقائياً بعد تقييم الكبرى")));
+    const nextMajPreview = r.nextMajSabrJuz ? `🎓 سبر ${formatJuzClean(r.nextMajSabrJuz)}` : (r.nextMajSardLabel ? `📚 ${r.nextMajSardLabel}` : (r.nextMajIsPages && r.nextMajFrom ? `📄 ${formatPagesReviewDisplay(r.nextMajFrom, r.nextMajTo, r.nextMajStartPage, r.nextMajEndPage, r.nextMajStartSurahId, r.nextMajEndSurahId)}` : (r.nextMajFrom ? formatMajStripDisplay(r.nextMajFrom, r.nextMajTo) : "يُضبط تلقائياً بعد تقييم الكبرى")));
 
-    if (!r.minSurahId && (r.minSurah || r.minText)) {
+    const _minIsSpecialSheet = Boolean(r.minIsPages || (Array.isArray(r.minSardJuzIds) && r.minSardJuzIds.length));
+    if (_minIsSpecialSheet) {
+      r.minSurahId = ""; r.minEndSurahId = "";
+    } else if (!r.minSurahId && (r.minSurah || r.minText)) {
       const mS = findSurahByName(r.minSurah || r.minText);
       if (mS && !(r.minSurah || r.minText).includes("+")) r.minSurahId = String(mS.id);
     }
-    const minSummary = formatSegmentsInline(getSegments(r, "min")) || r.minText || "لا يوجد مقطع للصغرى";
+    const minSummary = (Array.isArray(r.minSardJuzIds) && r.minSardJuzIds.length)
+      ? `📚 ${r.minText || formatSardJuzInfo(r.minSardJuzIds).label}`
+      : (r.minIsPages
+        ? `📄 ${formatPagesReviewDisplay(r.minFrom, r.minTo, r.minPageFrom, r.minPageTo, r.minPageFromSurahId, r.minPageToSurahId)}`
+        : (formatSegmentsInline(getSegments(r, "min")) || r.minText || "لا يوجد مقطع للصغرى"));
     const memStartSurah = getSurahAtPage(bounds.startPage);
 
     const cycStart = sabrProg ? sabrProg.juz.startPage : bounds.startPage;
@@ -30502,7 +30594,7 @@ function renderCardBody(s, st, r, idx) {
     const satNextCtx = getNextClassDayContext(s, h);
     const satNextIsDailySheet = satNextCtx.nextType === "daily";
     const satNextDailyHw = satNextIsDailySheet ? computeUpcomingDailyHomeworkCols(h, s, st, r, satNextCtx, false) : null;
-    const hasNextDot = Boolean(r.nextMajFrom || r.nextMajSabrJuz || r.manualSatHw);
+    const hasNextDot = Boolean(r.nextMajFrom || r.nextMajSabrJuz || r.nextMajSardLabel || r.manualSatHw || r.manualNextMaj);
     const hasSabrDot = Boolean(r.sabrJuz || sabrJuzId);
     const hasNotesDot = Boolean(String(r.notes || "").trim());
 
@@ -30516,21 +30608,24 @@ function renderCardBody(s, st, r, idx) {
           </div>
           ${satNextIsDailySheet ? `
           <div class="adv-row-card" style="margin-bottom:7px; border-right:3.5px solid #142a46;">
-            <div class="arc-l">
-              <div class="arc-t">📖 واجب تسميع ${escapeHtml(satNextCtx.nextDayName)} ${r.manualSatHw ? '<span class="badge b-blue" style="font-size:9.5px; padding:1px 6px;">يدوي ✏️</span>' : '<span class="badge b-muted" style="font-size:9.5px; padding:1px 6px;">تلقائي</span>'}</div>
+            <div class="arc-l lms-tap-area" onclick="openSurahPicker('${st.id}','hw')" title="اضغط لتعديل واجب التسميع القادم">
+              <div class="arc-t">📖 واجب تسميع ${escapeHtml(satNextCtx.nextDayName)} ${r.manualSatHw ? '<span class="badge b-blue" style="font-size:9.5px; padding:1px 6px;">يدوي</span>' : '<span class="badge b-muted" style="font-size:9.5px; padding:1px 6px;">تلقائي</span>'}</div>
               <div class="arc-v">${escapeHtml(satNextDailyHw?.plainText || "غير محدد بعد")}</div>
             </div>
             <div style="display:flex; gap:4px; flex-shrink:0;">
               ${r.manualSatHw ? `<button type="button" class="lms-btn" onclick="resetSatDailyHwToAuto('${st.id}')" title="العودة للواجب التلقائي">↺ تلقائي</button>` : ''}
-              <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','hw')">✏️ تعديل</button>
+              <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','hw')" title="تعديل">✏️</button>
             </div>
           </div>` : ''}
           <div class="adv-row-card" style="margin-bottom:0; border-right:3.5px solid var(--brand-ochre);">
-            <div class="arc-l">
-              <div class="arc-t">📘 واجب الكبرى للسبت القادم</div>
+            <div class="arc-l lms-tap-area" onclick="openSurahPicker('${st.id}','nextMaj')" title="اضغط لتعديل واجب الكبرى القادم">
+              <div class="arc-t">📘 واجب الكبرى القادم ${r.manualNextMaj ? '<span class="badge b-blue" style="font-size:9.5px; padding:1px 6px;">يدوي</span>' : '<span class="badge b-muted" style="font-size:9.5px; padding:1px 6px;">تلقائي</span>'}</div>
               <div class="arc-v">${escapeHtml(nextMajPreview)}</div>
             </div>
-            <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','nextMaj')">✏️ تعديل</button>
+            <div style="display:flex; gap:4px; flex-shrink:0;">
+              ${r.manualNextMaj ? `<button type="button" class="lms-btn" onclick="resetSatNextMajToAuto('${st.id}')" title="العودة للواجب التلقائي">↺ تلقائي</button>` : ''}
+              <button type="button" class="lms-btn accent" onclick="openSurahPicker('${st.id}','nextMaj')" title="تعديل">✏️</button>
+            </div>
           </div>
         </div>`;
     } else if (evalSheetTool === "sabr") {
@@ -30576,7 +30671,6 @@ function renderCardBody(s, st, r, idx) {
             <span>💬 ملاحظات المراجعة</span>
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','notes')">إخفاء</button>
           </div>
-          ${renderLockedRepeatPagesBox(r, "saturday")}
           ${renderLockedTajweedNoteBox(r)}
           <div class="field" style="margin-bottom:0;">
             <textarea rows="2" placeholder="اكتب ملاحظة..." oninput="updateRecNoteFreeText('${st.id}',this.value)">${escapeHtml(stripTajweedSuffix(r.notes || ''))}</textarea>
@@ -30615,13 +30709,7 @@ function renderCardBody(s, st, r, idx) {
       </div>
 
       <div class="es-card">
-        ${sabrInlineChip || (r.sabrJuz ? `<div class="sabr-active-strip">
-          <span>🎓 سبر كامل: ${escapeHtml(formatJuzClean(r.sabrJuz))}${r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null ? ` • ${r.sabrScore}%` : ''} (لا يُحتسب صفحات)</span>
-          <div style="display:flex; gap:4px;">
-            ${r.majEval !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="padding:2px 8px; font-size:11px;" onclick="openSabrHifzCertificate('${st.id}')">🎓 شهادة</button>` : ''}
-            <button type="button" class="btn btn-outline btn-sm" style="padding:2px 7px; font-size:11px;" onclick="onSabrJuzChange('${st.id}','')">إلغاء</button>
-          </div>
-        </div>` : '')}
+        ${sabrInlineChip}
         ${r.majSkipped ? `
           <div class="live-mushaf-strip rev-gold" style="opacity:0.86;">
             <div class="lms-info lms-tap-area" style="flex:1; min-width:0;" onclick="openSurahPicker('${st.id}','maj')">
@@ -30632,19 +30720,32 @@ function renderCardBody(s, st, r, idx) {
               <button type="button" class="lms-btn accent" onclick="restoreSatMaj('${st.id}')">↺ استعادة</button>
             </div>
           </div>
+        ` : (r.sabrJuz ? `
+          <div class="es-sabr-hero-box">
+            <div class="es-sabr-hero-info" onclick="openSurahPicker('${st.id}','maj')" title="اضغط لتغيير السبر أو الكبرى">
+              <div class="es-sabr-hero-title">🎓 سبر ${escapeHtml(formatJuzClean(r.sabrJuz))}${r.sabrScore !== "" && r.sabrScore !== undefined && r.sabrScore !== null ? ` • ${r.sabrScore}%` : ''}</div>
+              <div class="es-sabr-hero-sub">اضغط للتغيير • لا يُحتسب ضمن صفحات المراجعة</div>
+            </div>
+            <div style="display:flex; gap:4px; flex-shrink:0;">
+              ${r.majEval !== "إعادة" ? `<button type="button" class="btn btn-success btn-sm" style="padding:3px 8px; font-size:11px;" onclick="openSabrHifzCertificate('${st.id}')">🎓 شهادة</button>` : ''}
+              <button type="button" class="lms-btn" style="color:var(--red); padding:3px 7px;" onclick="onSabrJuzChange('${st.id}','')" title="إلغاء السبر">✕</button>
+            </div>
+          </div>
+          ${renderSabrScoreBox(st.id, r, true)}
+          <div class="es-eval-4" id="esEvalRow_maj" style="margin-bottom:6px;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors, r.majAlerts)}</div>
         ` : `
-        <div class="live-mushaf-strip rev-gold">
-          <div class="lms-info lms-tap-area" style="flex:1; min-width:0;" onclick="openSurahPicker('${st.id}','maj')" title="اضغط لتعديل الكبرى أو السرد أو السبر">
-            <div class="lms-main">📘 الكبرى: ${escapeHtml(_majDispText)}</div>
-            <div class="lms-sub">${_satMajSubText}</div>
+          <div class="live-mushaf-strip rev-gold">
+            <div class="lms-info lms-tap-area" style="flex:1; min-width:0;" onclick="openSurahPicker('${st.id}','maj')" title="اضغط لتعديل الكبرى أو السرد أو السبر">
+              <div class="lms-main">📘 الكبرى: ${escapeHtml(_majDispText)}</div>
+              <div class="lms-sub">${_satMajSubText}</div>
+            </div>
+            <div class="lms-btns">
+              ${_hasSatMajVal ? `<button type="button" class="lms-btn" style="color:var(--red);" onclick="clearSatMaj('${st.id}')" title="ما سمّع الكبرى اليوم (حذف من التقرير)">✕</button>` : ''}
+            </div>
           </div>
-          <div class="lms-btns">
-            ${_hasSatMajVal ? `<button type="button" class="lms-btn" style="color:var(--red);" onclick="clearSatMaj('${st.id}')" title="ما سمّع الكبرى اليوم (حذف من التقرير)">✕</button>` : ''}
-          </div>
-        </div>
-        ${r.sabrJuz ? renderSabrScoreBox(st.id, r, true) : renderErrorCounterBar(st.id, "maj", r.majErrors, r.majAlerts)}
-        ${(r.sabrJuz || !shouldUsePerPageMode(r, st, "maj", h)) ? `<div class="es-eval-4" id="esEvalRow_maj" style="margin-bottom:6px;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors, r.majAlerts)}</div>` : ''}
-        ` }
+          ${renderErrorCounterBar(st.id, "maj", r.majErrors, r.majAlerts)}
+          <div class="es-eval-4" id="esEvalRow_maj" style="margin-bottom:6px;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors, r.majAlerts)}</div>
+        `)}
         ${renderTajweedTagsBar(st.id, r)}
       </div>
 
@@ -30995,16 +31096,14 @@ function setStudentPace(studentId, pace) {
   const s = getCurrentSession();
   if (s) {
     const r = getStudentRecord(s, studentId);
-    if (s.type === "daily" && r.recEval && r.recEval !== "إعادة") {
-      const segs = getSegments(r, "rec");
-      const last = segs[segs.length - 1];
-      if (last) {
-        const nxt = computeNextHomework(last.surahId, last.from, last.to, "", st.direction || h.defaultDir, pace);
-        if (nxt) Object.assign(r, nxt);
-      }
+    if (s.type === "daily" && r.recEval && r.recEval !== "إعادة" && !r.manualHw && !r.recIsSabr && !r.recIsSard) {
+      recomputeAutoDailyHomework(st, r, h);
+      syncDailyManualHwToNextDaily(h, s, st, r);
     }
   }
-  saveState(); renderSessionView();
+  openCardId = studentId;
+  saveState(); renderSessionPreservingScroll();
+  showToast(`مقدار الحفظ اليومي: ${pace === 0.5 ? "نصف صفحة" : (pace === 1 ? "صفحة واحدة" : pace + " صفحات")} ✓`);
 }
 
 function getStudentActiveMajorCycle(st, h, s) {
@@ -31326,7 +31425,7 @@ function setAttendance(studentId, status) {
     r.ptsEarly = (status === "حاضر");
     r.points = computeRecordPoints(s, r, st);
   }
-  saveState(); renderSessionView();
+  saveState(); renderSessionPreservingScroll();
 }
 
 function onRecSurahChange(studentId, surahId) {
@@ -31903,7 +32002,7 @@ function onMinRangeChange(studentId, field, val) {
   const h = getActiveHalaqa(), s = getCurrentSession(), st = h.students.find(x => x.id === studentId), r = getStudentRecord(s, studentId);
   r[field] = parseArabicNum(val, "");
   r.manualMin = true;
-  if (!r.minSurahId && (r.minSurah || r.minText)) {
+  if (!r.minIsPages && !(Array.isArray(r.minSardJuzIds) && r.minSardJuzIds.length) && !r.minSurahId && (r.minSurah || r.minText)) {
     const mS = findSurahByName(r.minSurah || r.minText);
     if (mS) r.minSurahId = String(mS.id);
   }
@@ -32635,6 +32734,70 @@ function applySmartMajorPlanToSatRecord(rec, plan) {
   return false;
 }
 
+function syncDailyManualHwToNextDaily(h, s, st, r) {
+  if (!h || !s || s.type !== "daily" || !st || !r || st.track === "rashidi") return;
+  const nextDaily = (h.sessions || [])
+    .filter(x => x && x.type === "daily" && !x.noClass && x.date && x.date > s.date)
+    .sort((a, b) => (a.date || "").localeCompare(b.date || ""))[0];
+  if (!nextDaily) return;
+  const exRec = getStudentRecord(nextDaily, st.id);
+  const exAbs = Boolean(exRec.attendance && String(exRec.attendance || "").includes("غياب"));
+  if (exRec.recEval || exAbs || exRec.manualRec) return;
+
+  if (r.hwSardJuz) {
+    exRec.recSurahId = ""; exRec.recFrom = ""; exRec.recTo = ""; exRec.recEndSurahId = ""; exRec.recExtras = []; exRec.recPages = 0;
+    exRec.recIsSabr = false; exRec.recIsSard = true; exRec.sardJuz = r.hwSardJuz;
+    return;
+  }
+  if (r.hwSabrJuz) {
+    exRec.recSurahId = ""; exRec.recFrom = ""; exRec.recTo = ""; exRec.recEndSurahId = ""; exRec.recExtras = []; exRec.recPages = 0;
+    exRec.recIsSard = false; exRec.sardJuz = ""; exRec.recIsSabr = true; exRec.sabrJuz = r.hwSabrJuz;
+    return;
+  }
+  const segs = getSegments(r, "hw");
+  if (segs.length) {
+    exRec.recIsSabr = false; exRec.recIsSard = false; exRec.sardJuz = "";
+    exRec.recSurahId = segs[0].surahId; exRec.recFrom = segs[0].from; exRec.recTo = segs[0].to;
+    exRec.recEndSurahId = ""; exRec.twoSurahs = false;
+    exRec.recExtras = segs.slice(1).map(x => ({ ...x }));
+    exRec.recPages = calcSegmentsPages(segs);
+  }
+}
+
+function resetDailyHwToAuto(studentId) {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  const st = h?.students.find(x => x.id === studentId);
+  if (!h || !s || s.type !== "daily" || !st) return;
+  const r = getStudentRecord(s, studentId);
+  r.manualHw = false;
+  r.hwSabrJuz = ""; r.hwSardJuz = "";
+  r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwEndSurahId = ""; r.hwExtras = [];
+  if (r.recEval) recomputeAutoDailyHomework(st, r, h);
+  syncDailyManualHwToNextDaily(h, s, st, r);
+  openCardId = studentId;
+  saveState(); renderSessionPreservingScroll();
+  showToast("تمت استعادة الواجب التلقائي ↺");
+}
+
+function resetSatNextMajToAuto(studentId) {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  const st = h?.students.find(x => x.id === studentId);
+  if (!h || !s || !st) return;
+  const r = getStudentRecord(s, studentId);
+  r.manualNextMaj = false;
+  r.nextMajSabrJuz = ""; r.nextMajIsPages = false; r.nextMajSardJuzIds = []; r.nextMajSardLabel = "";
+  r.nextMajStartSurahId = ""; r.nextMajStartAyah = ""; r.nextMajEndSurahId = ""; r.nextMajEndAyah = "";
+  r.nextMajStartPage = ""; r.nextMajEndPage = ""; r.nextMajTitle = ""; r.nextMajFrom = ""; r.nextMajTo = "";
+  if (s.type === "saturday" && r.majEval) {
+    applyNextMajorReview(st, r, isMajorPassEval(r.majEval));
+  } else {
+    syncUpcomingSaturdayMajorForStudent(h, s, studentId);
+  }
+  openCardId = studentId;
+  saveState(); renderSessionPreservingScroll();
+  showToast("تمت استعادة واجب الكبرى التلقائي ↺");
+}
+
 function syncSatManualHwToNextDaily(h, s, st, r) {
   if (!h || !s || s.type !== "saturday" || !st || !r || st.track === "rashidi") return;
   const nextCtx = getNextClassDayContext(s, h);
@@ -32645,21 +32808,14 @@ function syncSatManualHwToNextDaily(h, s, st, r) {
 
   if (r.manualSatHw) {
     if (r.hwSabrJuz) {
-      const jObj = getJuzByName(r.hwSabrJuz);
       exRec.recSurahId = ""; exRec.recFrom = ""; exRec.recTo = ""; exRec.recExtras = []; exRec.recPages = 0;
+      exRec.recIsSard = false; exRec.sardJuz = "";
       exRec.recIsSabr = true; exRec.sabrJuz = r.hwSabrJuz; exRec.manualRec = false;
-      if (jObj) {
-        exRec.dRevSurahId = ""; exRec.dRevExtras = [];
-        exRec.dRevFrom = SURAH_MAP[jObj.startSurah]?.n || "";
-        exRec.dRevTo = SURAH_MAP[jObj.endSurah]?.n || "";
-        exRec.dRevEval = `سبر جزء ${jObj.shortName}`;
-        exRec.dRevPages = jObj.pages;
-      }
       return;
     }
     const segs = getSegments(r, "hw");
     if (segs.length) {
-      exRec.recIsSabr = false; exRec.sabrJuz = "";
+      exRec.recIsSabr = false; exRec.sabrJuz = ""; exRec.recIsSard = false; exRec.sardJuz = "";
       exRec.recSurahId = segs[0].surahId; exRec.recFrom = segs[0].from; exRec.recTo = segs[0].to;
       exRec.recEndSurahId = ""; exRec.twoSurahs = false;
       exRec.recExtras = segs.slice(1).map(x => ({ ...x }));
@@ -32667,9 +32823,8 @@ function syncSatManualHwToNextDaily(h, s, st, r) {
       exRec.manualRec = false;
     }
   } else {
-    // Reverted to automatic: clear manualRec on upcoming unevaluated daily session so it refreshes from Wednesday
     exRec.manualRec = false;
-    exRec.recIsSabr = false;
+    exRec.recIsSabr = false; exRec.recIsSard = false; exRec.sardJuz = "";
     exRec.recSurahId = ""; exRec.recFrom = ""; exRec.recTo = ""; exRec.recExtras = []; exRec.recPages = 0;
   }
 }
@@ -32680,7 +32835,7 @@ function resetSatDailyHwToAuto(studentId) {
   if (!h || !s || s.type !== "saturday" || !st) return;
   const r = getStudentRecord(s, studentId);
   r.manualSatHw = false;
-  r.hwSabrJuz = "";
+  r.hwSabrJuz = ""; r.hwSardJuz = "";
   r.hwSurahId = ""; r.hwFrom = ""; r.hwTo = ""; r.hwEndSurahId = ""; r.hwExtras = [];
   syncSatManualHwToNextDaily(h, s, st, r);
   openCardId = studentId;
@@ -33548,7 +33703,9 @@ function renderDailyReport() {
           ? { surah: "", from: "", to: "", lines: 1 }
           : (isRashidiRow
             ? { surah: "الرشيدي", from: escapeHtml(r.rashidiFrom ? `ص ${r.rashidiFrom}` : ""), to: escapeHtml(r.rashidiTo ? `ص ${r.rashidiTo}` : ""), lines: 1 }
-            : (minSegs.length ? formatSegmentsColumns(minSegs, true) : { surah: escapeHtml(r.minSurah || r.minText || ""), from: escapeHtml(r.minFrom || ""), to: escapeHtml(r.minTo || ""), lines: 1 }));
+            : (r.minIsPages
+              ? (() => { const _mp = formatPagesReviewDisplay(r.minFrom, r.minTo, r.minPageFrom, r.minPageTo, r.minPageFromSurahId, r.minPageToSurahId); return { surah: "", from: "", to: "", lines: 1, merged3: true, mergedHtml: escapeHtml(_mp), mergedText: _mp }; })()
+              : (minSegs.length ? formatSegmentsColumns(minSegs, true) : { surah: escapeHtml(r.minSurah || r.minText || ""), from: escapeHtml(r.minFrom || ""), to: escapeHtml(r.minTo || ""), lines: 1 })));
         const minHtml = formatUnifiedRangeCell(minCols, true);
         const mnL = stripHtmlSimple(minHtml).length;
         if (mnL > maxMinLen) maxMinLen = mnL;
@@ -36958,7 +37115,9 @@ async function exportDailyExcelStyled() {
           ? { surah: "", from: "", to: "", lines: 1 }
           : (isRashidiRow
             ? { surah: "الرشيدي", from: r.rashidiFrom ? `ص ${r.rashidiFrom}` : "", to: r.rashidiTo ? `ص ${r.rashidiTo}` : "", lines: 1 }
-            : (minSegs.length ? formatSegmentsColumns(minSegs, false) : { surah: r.minSurah || r.minText || "", from: r.minFrom || "", to: r.minTo || "", lines: 1 }));
+            : (r.minIsPages
+              ? (() => { const _mp = formatPagesReviewDisplay(r.minFrom, r.minTo, r.minPageFrom, r.minPageTo, r.minPageFromSurahId, r.minPageToSurahId); return { surah: "", from: "", to: "", lines: 1, merged3: true, mergedHtml: _mp, mergedText: _mp }; })()
+              : (minSegs.length ? formatSegmentsColumns(minSegs, false) : { surah: r.minSurah || r.minText || "", from: r.minFrom || "", to: r.minTo || "", lines: 1 })));
         const minTxt = formatUnifiedRangeCell(minCols, false);
 
         const majCols = (isRashidiRow || r.majSkipped)
@@ -43521,7 +43680,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v144";
+const TIBYAN_APP_VERSION = "v145";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -43918,12 +44077,15 @@ async function hydrateSignedInFirebaseUser(fbUser) {
       }
 
       // If Founder opens app on a newer build than Firebase config/latestVersion, silently keep server version aligned
-      const _effInitVer = (profile.isOwner && parseAppVersionNum(TIBYAN_APP_VERSION) > parseAppVersionNum(latestVer))
-        ? (fbDbSet("config/latestVersion", TIBYAN_APP_VERSION).catch(() => {}), TIBYAN_APP_VERSION)
-        : latestVer;
-      // v144: Process founder announcement IMMEDIATELY on startup (shows popup + sound + urgent modal if unseen!)
-      processIncomingAnnouncement(ann, _effInitVer);
-      // Seed notification baseline from already-hydrated data and start instant foreground announcement listener + light poller!
+      if (profile.isOwner && parseAppVersionNum(TIBYAN_APP_VERSION) > parseAppVersionNum(latestVer)) {
+        fbDbSet("config/latestVersion", TIBYAN_APP_VERSION).catch(() => {});
+        renderGlobalAnnouncement(ann, TIBYAN_APP_VERSION);
+      } else {
+        renderGlobalAnnouncement(ann, latestVer);
+      }
+      // v144: Immediately fire unseen founder announcement on startup (sound + heads-up + urgent modal if enabled!)
+      if (ann && ann.active) deliverFounderAnnouncementIfNew(ann);
+      // Seed notification baseline from already-hydrated data and start poller + instant real-time announcement listener!
       seedNotifPollBaselineFromLocal(profile);
       startLiveNotificationListeners(true);
 
@@ -43959,134 +44121,65 @@ function parseAppVersionNum(verStr) {
 }
 
 let _cachedRemoteLatestVer = null;
-let _cachedRemoteAnnouncement = null;
-let _lastSelfPublishedAnnKey = "";
-let _activeUrgentAnnKey = "";
-let _activeUrgentAnnPreview = false;
-
-function getAnnouncementUniqueKey(ann) {
-  if (!ann) return "";
-  return String(ann.id || ann.updatedAt || `${ann.title || ""}_${String(ann.body || "").slice(0, 30)}`).trim();
-}
-
-function getAnnouncementAudienceLabel(aud) {
-  if (aud === "teachers") return "📖 للمعلمين فقط";
-  if (aud === "supervisors") return "🏛️ للمشرفين فقط";
-  return "🌍 لجميع المستخدمين";
-}
-
-function doesAnnouncementMatchUser(ann, u) {
+function isAnnouncementForCurrentUser(ann) {
   if (!ann || !ann.active || !String(ann.body || "").trim()) return false;
-  const aud = ann.audience || "all";
-  if (aud === "all") return true;
-  if (!u) return false;
-  if (u.role === "owner" || u.isOwner) {
-    if (aud === "teachers") return _ownerWorkspace === "teacher";
-    if (aud === "supervisors") return _ownerWorkspace === "supervisor";
-    return true;
-  }
-  if (aud === "teachers") return u.role === "teacher";
-  if (aud === "supervisors") return u.role === "supervisor";
+  const target = ann.target || "all";
+  if (target === "all") return true;
+  const u = getCurrentAccountUser();
+  if (!u) return true;
+  if (u.role === "owner" || u.isOwner) return true;
+  if (target === "supervisors") return u.role === "supervisor";
+  if (target === "teachers") return u.role === "teacher";
   return true;
 }
 
-function formatAnnTimeArabic(iso) {
-  if (!iso) return "";
-  try {
-    const d = new Date(iso);
-    if (isNaN(d.getTime())) return "";
-    return d.toLocaleString("ar-SY", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
-  } catch {
-    return "";
-  }
+function showOwnerUrgentModal(ann) {
+  if (!ann || !ann.active || !ann.urgent || !ann.body) return;
+  const annKey = ann.id || ann.updatedAt || ann.body.slice(0, 24);
+  if (localStorage.getItem("tibyan_urgent_ack_v1") === annKey) return;
+  const existing = document.getElementById("ownerUrgentModalBox");
+  if (existing) existing.remove();
+  const wrap = document.createElement("div");
+  wrap.id = "ownerUrgentModalBox";
+  wrap.className = "owner-urgent-modal no-print";
+  wrap.innerHTML = `<div class="owner-urgent-card">
+    <div class="owner-urgent-hdr"><span>🚨</span><span>${escapeHtml(ann.title || "تنبيه هام من الإدارة")}</span></div>
+    <div class="owner-urgent-body">${escapeHtml(ann.body)}</div>
+    <div class="owner-urgent-foot">
+      <button type="button" class="btn btn-primary" onclick="ackOwnerUrgentModal('${escapeHtml(annKey)}')">✓ تم الاطلاع</button>
+    </div>
+  </div>`;
+  document.body.appendChild(wrap);
 }
 
-function openUrgentAnnModal(ann, isPreview = false) {
-  if (!ann || !String(ann.body || "").trim()) return;
-  const modal = document.getElementById("urgentAnnModal");
-  const box = document.getElementById("urgentAnnBox");
-  if (!modal || !box) return;
-  const isUrgent = ann.priority === "urgent";
-  _activeUrgentAnnKey = isPreview ? "" : getAnnouncementUniqueKey(ann);
-  _activeUrgentAnnPreview = Boolean(isPreview);
-  modal.dataset.locked = isUrgent ? "1" : "";
-  box.classList.toggle("is-urgent", isUrgent);
-  const icoEl = document.getElementById("uannIco");
-  const ttlEl = document.getElementById("uannTitle");
-  const subEl = document.getElementById("uannSub");
-  const bodyEl = document.getElementById("uannBody");
-  const audEl = document.getElementById("uannAudienceLbl");
-  const tmEl = document.getElementById("uannTimeLbl");
-  const btnEl = document.getElementById("uannAckBtn");
-  if (icoEl) icoEl.textContent = isUrgent ? "🚨" : "📢";
-  if (ttlEl) ttlEl.textContent = ann.title || (isUrgent ? "تنبيه هام من الإدارة" : "تنبيه من الإدارة");
-  if (subEl) subEl.textContent = isPreview
-    ? "👁️ معاينة كما ستظهر للمستخدمين"
-    : (isUrgent ? "تنبيه عاجل من إدارة صروح مكين" : "إشعار رسمي من إدارة صروح مكين");
-  if (bodyEl) bodyEl.textContent = ann.body || "";
-  if (audEl) audEl.textContent = getAnnouncementAudienceLabel(ann.audience || "all");
-  if (tmEl) tmEl.textContent = formatAnnTimeArabic(ann.updatedAt);
-  if (btnEl) btnEl.textContent = isPreview ? "إغلاق المعاينة ✓" : "✓ تم الاطلاع";
-  modal.classList.add("show");
+function ackOwnerUrgentModal(annKey) {
+  if (annKey) {
+    localStorage.setItem("tibyan_urgent_ack_v1", annKey);
+    localStorage.setItem("tibyan_ann_dismissed_v1", annKey);
+  }
+  const el = document.getElementById("ownerUrgentModalBox");
+  if (el) el.remove();
+  const bar = document.getElementById("globalAnnouncementBar");
+  if (bar && !bar.dataset.hasVer) bar.style.display = "none";
 }
 
-function dismissUrgentAnnModal() {
-  const modal = document.getElementById("urgentAnnModal");
-  if (modal) {
-    modal.classList.remove("show");
-    modal.dataset.locked = "";
-  }
-  if (_activeUrgentAnnKey && !_activeUrgentAnnPreview) {
-    try {
-      localStorage.setItem("tibyan_ann_dismissed_v1", _activeUrgentAnnKey);
-      tibyanNotifPrefs.seen[`ann_${_activeUrgentAnnKey}`] = Date.now();
-      saveNotifPrefs();
-    } catch {}
-    const bar = document.getElementById("globalAnnouncementBar");
-    if (bar && !_cachedRemoteLatestVer) bar.style.display = "none";
-    renderGlobalAnnouncement(_cachedRemoteAnnouncement, null);
-  }
-  _activeUrgentAnnKey = "";
-  _activeUrgentAnnPreview = false;
-}
-
-function processIncomingAnnouncement(ann, latestVer = null, opts = {}) {
-  if (!opts.isPreview) _cachedRemoteAnnouncement = ann || null;
-  renderGlobalAnnouncement(ann, latestVer);
-  const u = getCurrentAccountUser();
-  if (!opts.isPreview && !doesAnnouncementMatchUser(ann, u)) return;
-  if (!ann || !ann.active || !String(ann.body || "").trim()) return;
-
-  const annKey = getAnnouncementUniqueKey(ann);
+function deliverFounderAnnouncementIfNew(ann) {
+  if (!isAnnouncementForCurrentUser(ann)) return;
+  const annKey = ann.id || ann.updatedAt || ann.body.slice(0, 24);
   if (!annKey) return;
-  const seenKey = `ann_${annKey}`;
-
-  // Don't blast the founder on the same device right after publishing (they can tap Preview anytime)
-  if (!opts.isPreview && _lastSelfPublishedAnnKey && _lastSelfPublishedAnnKey === annKey) {
-    tibyanNotifPrefs.seen[seenKey] = Date.now();
-    saveNotifPrefs();
-    return;
+  const dedupKey = `ann_${annKey}`;
+  if (!tibyanNotifPrefs.seen[dedupKey]) {
+    fireTibyanNotification(
+      dedupKey,
+      `${ann.urgent ? "🚨" : "📢"} ${ann.title || "تنبيه من الإدارة"}`,
+      ann.body,
+      ann.urgent ? "🚨" : "📢",
+      ann.urgent ? () => showOwnerUrgentModal(ann) : null,
+      true
+    );
   }
-
-  const alreadySeen = Boolean(tibyanNotifPrefs.seen[seenKey]);
-  const alreadyDismissed = localStorage.getItem("tibyan_ann_dismissed_v1") === annKey;
-  if (!opts.isPreview && (alreadySeen || alreadyDismissed)) return;
-
-  const isUrgent = ann.priority === "urgent";
-  const ico = isUrgent ? "🚨" : "📢";
-  const fullTitle = `${ico} ${ann.title || (isUrgent ? "تنبيه هام من الإدارة" : "تنبيه من الإدارة")}`;
-
-  fireTibyanNotification(
-    opts.isPreview ? "" : seenKey,
-    fullTitle,
-    ann.body,
-    ico,
-    () => openUrgentAnnModal(ann, Boolean(opts.isPreview)),
-    Boolean(opts.isPreview || isUrgent)
-  );
-
-  if (isUrgent || opts.forceModal) {
-    openUrgentAnnModal(ann, Boolean(opts.isPreview));
+  if (ann.urgent) {
+    showOwnerUrgentModal(ann);
   }
 }
 
@@ -44098,17 +44191,13 @@ function renderGlobalAnnouncement(ann, latestVer) {
   const dismissedKey = "tibyan_ann_dismissed_v1";
   const dismissedVerKey = "tibyan_ver_dismissed_v1";
   const parts = [];
-  let shownAnnKey = "";
+  let shownAnnTs = "";
   let shownVer = "";
-  let isUrgentAnn = false;
 
-  const u = getCurrentAccountUser();
-  const annKey = getAnnouncementUniqueKey(ann);
-  if (ann && ann.active && ann.body && doesAnnouncementMatchUser(ann, u) && localStorage.getItem(dismissedKey) !== annKey) {
-    isUrgentAnn = ann.priority === "urgent";
-    const ico = isUrgentAnn ? "🚨" : "📢";
-    parts.push(`<span class="gab-tap" onclick="openUrgentAnnModal(_cachedRemoteAnnouncement, false)" title="اضغط لقراءة التنبيه كاملاً">${ico} <b>${escapeHtml(ann.title || 'تنبيه من الإدارة')}:</b> ${escapeHtml(ann.body)}</span>`);
-    shownAnnKey = annKey;
+  const annKey = ann ? (ann.id || ann.updatedAt || "") : "";
+  if (isAnnouncementForCurrentUser(ann) && localStorage.getItem(dismissedKey) !== annKey) {
+    parts.push(`${ann.urgent ? "🚨" : "📢"} <b>${escapeHtml(ann.title || "تنبيه من الإدارة")}:</b> ${escapeHtml(ann.body)}`);
+    shownAnnTs = annKey;
   }
 
   const curNum = parseAppVersionNum(TIBYAN_APP_VERSION);
@@ -44120,19 +44209,15 @@ function renderGlobalAnnouncement(ann, latestVer) {
     shownVer = String(effLatestVer);
   }
 
-  bar.classList.toggle("is-urgent", isUrgentAnn);
+  bar.dataset.hasVer = shownVer ? "1" : "";
   if (!parts.length) { bar.style.display = "none"; return; }
-  bar.innerHTML = `<div style="flex:1; min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:6px;">${parts.join(" &nbsp;|&nbsp; ")}</div>
-    <button type="button" class="global-ann-close" onclick="dismissGlobalAnnouncement('${escapeHtml(shownAnnKey)}','${escapeHtml(shownVer)}')">×</button>`;
+  bar.innerHTML = `<div style="flex:1;">${parts.join(" &nbsp;|&nbsp; ")}</div>
+    <button type="button" class="global-ann-close" onclick="dismissGlobalAnnouncement('${escapeHtml(shownAnnTs)}','${escapeHtml(shownVer)}')">×</button>`;
   bar.style.display = "flex";
 }
 
-function dismissGlobalAnnouncement(annKey, verStr = "") {
-  if (annKey) {
-    localStorage.setItem("tibyan_ann_dismissed_v1", annKey);
-    tibyanNotifPrefs.seen[`ann_${annKey}`] = Date.now();
-    saveNotifPrefs();
-  }
+function dismissGlobalAnnouncement(ts, verStr = "") {
+  if (ts) localStorage.setItem("tibyan_ann_dismissed_v1", ts);
   if (verStr) localStorage.setItem("tibyan_ver_dismissed_v1", verStr);
   const bar = document.getElementById("globalAnnouncementBar");
   if (bar) bar.style.display = "none";
@@ -45126,88 +45211,40 @@ async function ownerSaveMasterKey() {
   showToast("🔐 تم تحديث كلمة سر التفعيل العامة على السيرفر ✓");
 }
 
-let _ownAnnDraftAud = "";
-let _ownAnnDraftPrio = "";
-
-function selectOwnerAnnAudience(aud) {
-  _ownAnnDraftAud = aud || "all";
-  const hidden = document.getElementById("ownAnnAudience");
-  if (hidden) hidden.value = _ownAnnDraftAud;
-  document.querySelectorAll(".own-bc-pill[data-aud]").forEach(btn => {
-    btn.classList.toggle("on", btn.dataset.aud === _ownAnnDraftAud);
-  });
-}
-
-function selectOwnerAnnPriority(prio) {
-  _ownAnnDraftPrio = prio === "urgent" ? "urgent" : "normal";
-  const hidden = document.getElementById("ownAnnPriority");
-  if (hidden) hidden.value = _ownAnnDraftPrio;
-  const nBtn = document.getElementById("ownPrioNormalBtn");
-  const uBtn = document.getElementById("ownPrioUrgentBtn");
-  if (nBtn) nBtn.className = `own-bc-prio-card ${_ownAnnDraftPrio === "normal" ? "on" : ""}`;
-  if (uBtn) uBtn.className = `own-bc-prio-card ${_ownAnnDraftPrio === "urgent" ? "on-urgent" : ""}`;
-}
-
 function renderOwnerBroadcastTab() {
   const wrap = document.getElementById("owner-view-broadcast");
   if (!wrap) return;
-  const ann = _ownerDataCache.announcement || { title: "", body: "", active: false, audience: "all", priority: "normal" };
-  const curAud = _ownAnnDraftAud || ann.audience || "all";
-  const curPrio = _ownAnnDraftPrio || ann.priority || "normal";
-  const timeTxt = formatAnnTimeArabic(ann.updatedAt);
-
-  const statusHtml = ann.body ? `
-    <div class="own-bc-status-box ${!ann.active ? 'is-off' : (ann.priority === 'urgent' ? 'is-urgent' : '')}">
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:4px;">
-        <b>${ann.active ? (ann.priority === "urgent" ? "🚨 تنبيه عاجل نشط الآن" : "📢 تنبيه نشط الآن") : "🔕 آخر تنبيه (مخفي)"}</b>
-        <span class="badge ${ann.active ? (ann.priority === "urgent" ? "b-red" : "b-green") : "b-muted"}">${escapeHtml(getAnnouncementAudienceLabel(ann.audience || "all"))}</span>
-      </div>
-      <div style="font-weight:700; color:var(--ink-900);">${escapeHtml(ann.title || "تنبيه من الإدارة")}: ${escapeHtml(ann.body)}</div>
-      ${timeTxt ? `<div style="font-size:10.5px; color:var(--ink-500); margin-top:3px;">🕒 آخر نشر: ${escapeHtml(timeTxt)} • يصل فورياً للمتصلين وفور الفتح للجميع</div>` : ""}
-    </div>` : "";
+  const ann = _ownerDataCache.announcement || { title: "", body: "", active: false, target: "all", urgent: false };
+  const curTarget = ann.target || "all";
 
   wrap.innerHTML = `
     <div class="card">
-      <div class="card-title">
-        <span>📢 إرسال إشعار فوري من المؤسس</span>
-        <span class="badge b-green" style="font-size:10.5px;">⚡ وصول لحظي</span>
+      <div class="card-title">📢 إرسال إشعار فوري من صفحة المؤسس</div>
+      <div class="field" style="margin-bottom:8px;">
+        <label>الجمهور المستهدف</label>
+        <select id="ownAnnTarget">
+          <option value="all" ${curTarget === "all" ? "selected" : ""}>🌍 الجميع (المعلمون والمشرفون)</option>
+          <option value="teachers" ${curTarget === "teachers" ? "selected" : ""}>📖 المعلمون فقط</option>
+          <option value="supervisors" ${curTarget === "supervisors" ? "selected" : ""}>🏛️ المشرفون فقط</option>
+        </select>
       </div>
-      ${statusHtml}
-      <input type="hidden" id="ownAnnAudience" value="${escapeHtml(curAud)}">
-      <input type="hidden" id="ownAnnPriority" value="${escapeHtml(curPrio)}">
-
-      <div style="font-size:11.5px; font-weight:800; color:var(--ink-700); margin-bottom:5px;">1) المستهدفون بالإشعار:</div>
-      <div class="own-bc-seg-3">
-        <button type="button" class="own-bc-pill ${curAud === 'all' ? 'on' : ''}" data-aud="all" onclick="selectOwnerAnnAudience('all')">🌍 الجميع</button>
-        <button type="button" class="own-bc-pill ${curAud === 'teachers' ? 'on' : ''}" data-aud="teachers" onclick="selectOwnerAnnAudience('teachers')">📖 المعلمون</button>
-        <button type="button" class="own-bc-pill ${curAud === 'supervisors' ? 'on' : ''}" data-aud="supervisors" onclick="selectOwnerAnnAudience('supervisors')">🏛️ المشرفون</button>
-      </div>
-
-      <div style="font-size:11.5px; font-weight:800; color:var(--ink-700); margin-bottom:5px;">2) مستوى الإشعار وطريقة الظهور:</div>
-      <div class="own-bc-prio-2">
-        <button type="button" id="ownPrioNormalBtn" class="own-bc-prio-card ${curPrio === 'normal' ? 'on' : ''}" onclick="selectOwnerAnnPriority('normal')">
-          <b>📢 تنبيه عادي</b>
-          <span>إشعار منبثق + صوت + شريط علوي + حفظ بالجرس</span>
-        </button>
-        <button type="button" id="ownPrioUrgentBtn" class="own-bc-prio-card ${curPrio === 'urgent' ? 'on-urgent' : ''}" onclick="selectOwnerAnnPriority('urgent')">
-          <b>🚨 تنبيه هام وعاجل</b>
-          <span>نافذة واضحة وسط الشاشة مع زر «تم الاطلاع ✓» + صوت</span>
-        </button>
-      </div>
-
       <div class="field" style="margin-bottom:8px;">
         <label>عنوان التنبيه</label>
-        <input type="text" id="ownAnnTitle" value="${escapeHtml(ann.title || '')}" placeholder="مثال: تحديث جديد / تنبيه هام للمعلمين">
+        <input type="text" id="ownAnnTitle" value="${escapeHtml(ann.title || '')}" placeholder="مثال: تحديث جديد / تنبيه هام">
       </div>
-      <div class="field" style="margin-bottom:10px;">
-        <label>نص التنبيه (يصل فوراً وبشكل مؤكد عند فتح التطبيق)</label>
+      <div class="field" style="margin-bottom:8px;">
+        <label>نص الإشعار (يصل لحظياً لكل فاتح للتطبيق وفور الدخول لمن كان مغلقاً)</label>
         <textarea id="ownAnnBody" rows="3" placeholder="اكتب رسالتك هنا...">${escapeHtml(ann.body || '')}</textarea>
       </div>
+      <label class="check-inline" style="margin-bottom:10px; padding:7px 9px; background:var(--bg); border:1px solid var(--line); border-radius:10px; width:100%;">
+        <input type="checkbox" id="ownAnnUrgent" ${ann.urgent ? "checked" : ""}>
+        <span>🚨 تنبيه هام (يفتح نافذة وسط الشاشة مع زر «تم الاطلاع»)</span>
+      </label>
       <div style="display:flex; gap:7px; flex-wrap:wrap;">
-        <button type="button" class="btn btn-primary" id="btnOwnerPublishAnn" style="flex:1.4;" onclick="ownerPublishAnnouncement(true)">🚀 إرسال الإشعار الآن</button>
-        <button type="button" class="btn btn-soft" onclick="ownerPreviewAnnouncement()">👁️ معاينة</button>
-        ${ann.active ? `<button type="button" class="btn btn-danger" onclick="ownerPublishAnnouncement(false)">إخفاء</button>` : ''}
+        <button type="button" class="btn btn-primary" style="flex:1;" onclick="ownerPublishAnnouncement(true)">🚀 إرسال الإشعار فوراً</button>
+        ${ann.active ? `<button type="button" class="btn btn-danger" onclick="ownerPublishAnnouncement(false)">إخفاء الإشعار</button>` : ''}
       </div>
+      ${ann.active && ann.updatedAt ? `<div style="font-size:11px; color:var(--green); font-weight:700; margin-top:8px;">✅ نشط الآن على السحابة (${new Date(ann.updatedAt).toLocaleString("ar-EG")})</div>` : ""}
     </div>
 
     <div class="card">
@@ -45221,62 +45258,30 @@ function renderOwnerBroadcastTab() {
   `;
 }
 
-function ownerPreviewAnnouncement() {
-  const title = (document.getElementById("ownAnnTitle")?.value || "").trim() || "تنبيه من إدارة صروح مكين";
-  const body = (document.getElementById("ownAnnBody")?.value || "").trim();
-  if (!body) { showToast("اكتب نص التنبيه أولاً للمعاينة"); return; }
-  const audience = document.getElementById("ownAnnAudience")?.value || _ownAnnDraftAud || "all";
-  const priority = document.getElementById("ownAnnPriority")?.value || _ownAnnDraftPrio || "normal";
-  const sample = { id: "preview_" + Date.now(), title, body, active: true, audience, priority, updatedAt: new Date().toISOString() };
-  processIncomingAnnouncement(sample, null, { isPreview: true, forceModal: priority === "urgent" });
-}
-
 async function ownerPublishAnnouncement(active) {
+  if (!navigator.onLine) { showToast("⚠️ لا يوجد اتصال بالإنترنت حالياً"); return; }
   const title = (document.getElementById("ownAnnTitle")?.value || "").trim() || "تنبيه من إدارة صروح مكين";
   const body = (document.getElementById("ownAnnBody")?.value || "").trim();
-  const audience = document.getElementById("ownAnnAudience")?.value || _ownAnnDraftAud || "all";
-  const priority = document.getElementById("ownAnnPriority")?.value || _ownAnnDraftPrio || "normal";
-  if (active && !body) { showToast("اكتب نص التنبيه أولاً"); return; }
-  if (!navigator.onLine) { showToast("⚠️ لا يوجد اتصال بالإنترنت لإرسال الإشعار"); return; }
-
-  const btn = document.getElementById("btnOwnerPublishAnn");
-  if (btn) { btn.disabled = true; btn.textContent = "⏳ جاري الإرسال..."; }
-
-  const newId = "ann_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 6);
-  const obj = {
-    id: newId,
-    title,
-    body,
-    active: Boolean(active),
-    audience,
-    priority,
-    updatedAt: new Date().toISOString()
-  };
-
-  if (active) _lastSelfPublishedAnnKey = newId;
-  const ok = await fbDbSet("config/announcement", obj);
-  if (btn) { btn.disabled = false; btn.textContent = "🚀 إرسال الإشعار الآن"; }
-
-  if (!ok) {
-    _lastSelfPublishedAnnKey = "";
-    showToast("⚠️ تعذّر إرسال الإشعار للسحابة — تحقق من الإنترنت وصلاحيات Firebase");
-    return;
+  const target = document.getElementById("ownAnnTarget")?.value || "all";
+  const urgent = Boolean(document.getElementById("ownAnnUrgent")?.checked);
+  if (active && !body) { showToast("اكتب نص الإشعار أولاً"); return; }
+  const nowIso = new Date().toISOString();
+  const obj = { id: "ann_" + Date.now(), title, body, target, urgent, active, updatedAt: nowIso };
+  try {
+    await fbDbSet("config/announcement", obj);
+    _ownerDataCache.announcement = obj;
+    renderOwnerBroadcastTab();
+    renderGlobalAnnouncement(obj, null);
+    showToast(active ? "🚀 تم إرسال الإشعار الفوري عبر السحابة بنجاح ✓" : "تم إخفاء الإشعار العام ✓");
+  } catch (e) {
+    console.error("ownerPublishAnnouncement error:", e);
+    showToast("❌ فشل إرسال الإشعار — تحقق من الإنترنت وصلاحية السحابة");
   }
-
-  _ownerDataCache.announcement = obj;
-  _cachedRemoteAnnouncement = obj;
-  _ownAnnDraftAud = audience;
-  _ownAnnDraftPrio = priority;
-  renderGlobalAnnouncement(obj, null);
-  renderOwnerBroadcastTab();
-  const audTxt = audience === "teachers" ? "للمعلمين" : (audience === "supervisors" ? "للمشرفين" : "للجميع");
-  showToast(active ? `${priority === "urgent" ? "🚨" : "📢"} تم إرسال الإشعار بنجاح (${audTxt}) — يصل فورياً ✓` : "تم إخفاء التنبيه العام ✓");
 }
 
 async function ownerSaveLatestVersion() {
   const v = (document.getElementById("ownLatestVerInp")?.value || "").trim() || TIBYAN_APP_VERSION;
-  const ok = await fbDbSet("config/latestVersion", v);
-  if (!ok) { showToast("⚠️ تعذّر حفظ الإصدار على السحابة"); return; }
+  await fbDbSet("config/latestVersion", v);
   _ownerDataCache.latestVersion = v;
   showToast(`✓ تم ضبط أحدث إصدار على السيرفر: ${v}`);
 }
@@ -45738,71 +45743,16 @@ async function fireTibyanNotification(dedupKey, title, body, iconEmoji = "🔔",
 let _notifPollTimer = null;
 let _notifPollState = { uid: "", initAnn: true, initMsgs: true, initLinks: true, prevUploadMap: {}, lastPollAt: 0 };
 
-let _annLiveListenerEntry = null;
-let _lastAnnAttachAt = 0;
-
-function stopAnnouncementLiveListener() {
-  if (_annLiveListenerEntry) {
-    try { _annLiveListenerEntry.ref.off(_annLiveListenerEntry.ev, _annLiveListenerEntry.cb); } catch {}
-    _activeFbListeners = _activeFbListeners.filter(x => x !== _annLiveListenerEntry);
-    _annLiveListenerEntry = null;
-  }
-  if (_fbDb && _fbDbActiveOps === 0 && _activeFbListeners.length === 0) {
-    clearTimeout(_fbDbIdleTimer);
-    _fbDbIdleTimer = setTimeout(() => {
-      if (_fbDb && _fbDbActiveOps === 0 && _activeFbListeners.length === 0) {
-        try { _fbDb.goOffline(); _fbDbIsOnline = false; } catch {}
-      }
-    }, 2500);
-  }
-}
-
-function startAnnouncementLiveListener() {
-  if (!_fbDb || !_fbAuth?.currentUser || !navigator.onLine) return;
-  if (document.visibilityState === "hidden") return;
-  if (_annLiveListenerEntry) return;
-  _lastAnnAttachAt = Date.now();
-  clearTimeout(_fbDbIdleTimer);
-  if (!_fbDbIsOnline) {
-    try { _fbDb.goOnline(); _fbDbIsOnline = true; } catch {}
-  }
-  const ref = _fbDb.ref("config/announcement");
-  const cb = snap => {
-    try {
-      const ann = snap && snap.exists() ? snap.val() : null;
-      processIncomingAnnouncement(ann, null);
-    } catch (e) {
-      console.warn("Live ann cb err:", e);
-    }
-  };
-  ref.on("value", cb, () => {});
-  _annLiveListenerEntry = { ref, ev: "value", cb };
-  _activeFbListeners.push(_annLiveListenerEntry);
-}
-
 function stopLiveNotificationListeners() {
   if (_notifPollTimer) { clearInterval(_notifPollTimer); _notifPollTimer = null; }
-  _annLiveListenerEntry = null;
   _activeFbListeners.forEach(({ ref, ev, cb }) => {
     try { ref.off(ev, cb); } catch {}
   });
   _activeFbListeners = [];
-  if (_fbDb && _fbDbActiveOps === 0) {
-    clearTimeout(_fbDbIdleTimer);
-    _fbDbIdleTimer = setTimeout(() => {
-      if (_fbDb && _fbDbActiveOps === 0 && _activeFbListeners.length === 0) {
-        try { _fbDb.goOffline(); _fbDbIsOnline = false; } catch {}
-      }
-    }, 2500);
-  }
 }
 
 function attachFbListener(path, ev, cb) {
   if (!_fbDb) return;
-  clearTimeout(_fbDbIdleTimer);
-  if (!_fbDbIsOnline) {
-    try { _fbDb.goOnline(); _fbDbIsOnline = true; } catch {}
-  }
   const ref = _fbDb.ref(path);
   ref.on(ev, cb, () => {});
   _activeFbListeners.push({ ref, ev, cb });
@@ -45817,10 +45767,13 @@ async function pollLiveNotificationsOnce(forceInitial = false) {
   }
   _notifPollState.lastPollAt = Date.now();
   try {
-    // 1) Global Founder Announcement Check (fires immediately for any unseen broadcast!)
+    // 1) Global Founder Announcement Check (also synced in real-time via attachFbListener)
     const ann = await fbDbGet("config/announcement");
+    renderGlobalAnnouncement(ann, null);
     _notifPollState.initAnn = false;
-    processIncomingAnnouncement(ann, null);
+    if (ann && ann.active && ann.body) {
+      deliverFounderAnnouncementIfNew(ann);
+    }
 
     // 2) Teacher Notifications (Supervisor Messages + Join Approval)
     if (isUserTeacherCapable(u) && u.supervisorId) {
@@ -45955,12 +45908,8 @@ function seedNotifPollBaselineFromLocal(u) {
 
 function onAppReturnToForegroundPoll() {
   if (!navigator.onLine || !_fbAuth?.currentUser) return;
-  // v144: Re-attach lightweight foreground announcement listener immediately so broadcasts arrive in <1s!
-  if (Date.now() - _lastAnnAttachAt >= 5000) {
-    startAnnouncementLiveListener();
-  }
   const elapsed = Date.now() - (_notifPollState.lastPollAt || 0);
-  if (elapsed >= 180000) { // 3 minutes cooldown for heavy links/messages poll
+  if (elapsed >= 210000) { // 3.5 minutes cooldown on foreground return
     pollLiveNotificationsOnce(false);
   }
 }
@@ -45970,9 +45919,16 @@ function startLiveNotificationListeners(skipImmediate = false) {
   if (!_fbDb || !_fbAuth?.currentUser) return;
   const u = getCurrentAccountUser();
   if (!u) return;
-  // v144: Real-time foreground-only listener on tiny config/announcement (~150B, detached on background -> 0 idle sockets!)
-  startAnnouncementLiveListener();
-  // v122 Ultra-Low-Bandwidth Poller for supervisor links & messages
+  // v144: Instant Real-Time Listener ONLY on tiny config/announcement (~150 bytes -> sub-second delivery, 0 quota overhead!)
+  attachFbListener("config/announcement", "value", snap => {
+    try {
+      const ann = snap?.val?.() || null;
+      renderGlobalAnnouncement(ann, null);
+      if (ann && ann.active && ann.body) {
+        deliverFounderAnnouncementIfNew(ann);
+      }
+    } catch {}
+  });
   if (!skipImmediate) {
     pollLiveNotificationsOnce(true);
   }
@@ -46501,7 +46457,7 @@ const CLOUD_SAFE_ZERO_FIELDS = new Set([
 ]);
 const CLOUD_SAFE_FALSE_FIELDS = new Set([
   "twoSurahs", "minTwoSurahs", "rabt", "recIsSabr", "dRevIsPages", "minIsPages", "majIsPages",
-  "ptsForgotSheet", "recRepeatHwOnly", "manualSatHw", "nextMajIsPages", "manualNextMaj", "dRevAuto", "manualDRev"
+  "ptsForgotSheet", "recRepeatHwOnly", "manualHw", "manualSatHw", "nextMajIsPages", "manualNextMaj", "dRevAuto", "manualDRev"
 ]);
 const CLOUD_KEEP_EXPLICIT_BOOLS = new Set(["ptsAdab", "ptsParticip", "ptsEarly"]);
 
@@ -46711,12 +46667,6 @@ function installAutoOnlineCloudSync() {
 
   window.addEventListener("offline", () => {
     updateCentralCloudIndicatorUI("offline");
-    if (typeof stopAnnouncementLiveListener === "function") stopAnnouncementLiveListener();
-  });
-  window.addEventListener("online", () => {
-    if (document.visibilityState === "visible" && typeof startAnnouncementLiveListener === "function") {
-      startAnnouncementLiveListener();
-    }
   });
 
   document.addEventListener("visibilitychange", () => {
@@ -46730,5 +46680,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v144 -->
+<!-- Makin App v145 -->
 </html>
