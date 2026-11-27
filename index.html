@@ -15633,7 +15633,7 @@ table.t-daily td.td-sard,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v146</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v147</span>
         </button>
       </div>
     </div>
@@ -23454,6 +23454,10 @@ function spIsReviewKind(kind) {
   return kind === "dRev" || kind === "min" || kind === "maj" || kind === "nextMaj";
 }
 
+function spCanUsePages(kind) {
+  return kind === "rec" || kind === "hw" || spIsReviewKind(kind);
+}
+
 function spCanUseSabr(kind) {
   return kind === "rec" || kind === "hw" || kind === "maj" || kind === "dRev" || kind === "nextMaj";
 }
@@ -23782,15 +23786,16 @@ function openSurahPicker(studentId, kind, forceMode = "") {
     pageFromSurahId = r.nextMajStartSurahId || "";
     pageToSurahId = r.nextMajEndSurahId || "";
   }
-  if (spIsReviewKind(kind) && (!pageFromSurahId || !pageToSurahId) && existing.length) {
+  if (spCanUsePages(kind) && (!pageFromSurahId || !pageToSurahId) && existing.length) {
     const firstS = SURAH_MAP[Number(existing[0].surahId)];
     if (firstS) {
-      if (!r.dRevIsPages && !r.minIsPages && !r.majIsPages && !r.nextMajIsPages) {
+      const isRevPagesFlag = (kind === "dRev" && r.dRevIsPages) || (kind === "min" && r.minIsPages) || (kind === "maj" && r.majIsPages) || (kind === "nextMaj" && r.nextMajIsPages);
+      if (!isRevPagesFlag) {
         pageFrom = getPageForSurahAyah(firstS.id, existing[0].from || 1);
       }
       if (!pageFromSurahId) pageFromSurahId = String(firstS.id);
       const lastS = SURAH_MAP[Number(existing[existing.length - 1].surahId)] || firstS;
-      if (!r.dRevIsPages && !r.minIsPages && !r.majIsPages && !r.nextMajIsPages) {
+      if (!isRevPagesFlag) {
         pageTo = getPageForSurahAyah(lastS.id, existing[existing.length - 1].to || lastS.a);
       }
       if (!pageToSurahId) pageToSurahId = String(lastS.id);
@@ -23895,14 +23900,26 @@ function spPickTopTab(tab) {
     return;
   }
   if (tab === "page") {
-    if (!spIsReviewKind(spState.kind)) return;
+    if (!spCanUsePages(spState.kind)) return;
     spState.mode = "surah";
     spSetReviewUnit("page");
     return;
   }
+  const wasPageUnit = spState.mode === "surah" && spState.reviewUnit === "page";
   spState.mode = "surah";
   spState.reviewUnit = "ayah";
   spState.ayahRangeMode = "range";
+  if (wasPageUnit && spCanUsePages(spState.kind)) {
+    const convSegs = convertSpPageSelectionToSegments(getSpSurahPageSummary());
+    if (convSegs.length) {
+      spState.segs = convSegs;
+      spState.rangeFromSurahId = String(convSegs[0].surahId);
+      spState.rangeFromAyah = convSegs[0].from;
+      const lastSeg = convSegs[convSegs.length - 1];
+      spState.rangeToSurahId = String(lastSeg.surahId);
+      spState.rangeToAyah = lastSeg.to;
+    }
+  }
   renderSurahPickerUI();
 }
 
@@ -23914,9 +23931,24 @@ function spSetMode(mode) {
 }
 
 function spSetReviewUnit(unit) {
-  if (!spIsReviewKind(spState.kind)) return;
+  if (!spCanUsePages(spState.kind)) return;
+  const prevUnit = spState.reviewUnit;
   spState.reviewUnit = unit === "page" ? "page" : "ayah";
   if (spState.reviewUnit === "page") {
+    if (prevUnit === "ayah" && Array.isArray(spState.segs) && spState.segs.length) {
+      const seg1 = spState.segs[0];
+      const seg2 = spState.segs[spState.segs.length - 1] || seg1;
+      const s1 = SURAH_MAP[Number(seg1?.surahId)];
+      const s2 = SURAH_MAP[Number(seg2?.surahId)] || s1;
+      if (s1) {
+        spState.pageFromSurahId = String(s1.id);
+        spState.pageFrom = getPageForSurahAyah(s1.id, seg1.from || 1);
+      }
+      if (s2) {
+        spState.pageToSurahId = String(s2.id);
+        spState.pageTo = getPageForSurahAyah(s2.id, seg2.to || s2.a);
+      }
+    }
     if (!spState.pageFromSurahId || !SURAH_MAP[Number(spState.pageFromSurahId)]) {
       const seg = spState.segs[0];
       const info = SURAH_MAP[Number(seg?.surahId)] || getPageStartInfo(spState.pageFrom || 2)?.surah;
@@ -23962,9 +23994,10 @@ function renderSpDirBtn() {
 
 function renderSurahPickerUI() {
   const isRev = spIsReviewKind(spState.kind);
+  const canPages = spCanUsePages(spState.kind);
   const canSabr = spCanUseSabr(spState.kind);
   const isStartOnly = spState.kind === "studentStart";
-  const isPageUnit = isRev && spState.mode === "surah" && spState.reviewUnit === "page";
+  const isPageUnit = canPages && spState.mode === "surah" && spState.reviewUnit === "page";
   const isAyahMode = spState.mode === "surah" && !isPageUnit;
 
   const modeTabs = document.getElementById("spModeTabs");
@@ -23985,13 +24018,13 @@ function renderSurahPickerUI() {
   const drawer = document.getElementById("spBrowserDrawer");
   const qeWrap = document.getElementById("spQuickEvalWrap");
 
-  const visibleTabCount = 1 + (isRev ? 2 : 0) + (canSabr ? 1 : 0);
+  const visibleTabCount = 1 + (canPages ? 1 : 0) + (isRev ? 1 : 0) + (canSabr ? 1 : 0);
   if (modeTabs) {
     modeTabs.style.display = (!isStartOnly && visibleTabCount >= 2) ? "grid" : "none";
     modeTabs.classList.toggle("cols-3", visibleTabCount === 3);
     modeTabs.classList.toggle("cols-4", visibleTabCount === 4);
   }
-  if (tabPages) tabPages.style.display = isRev ? "flex" : "none";
+  if (tabPages) tabPages.style.display = canPages ? "flex" : "none";
   if (tabSard) tabSard.style.display = isRev ? "flex" : "none";
   if (tabSabr) tabSabr.style.display = canSabr ? "flex" : "none";
   if (tabSurahLbl) tabSurahLbl.textContent = "بالآيات";
@@ -24186,6 +24219,40 @@ function getSpSurahPageSummary() {
       ? (isFullSame ? `${s1.n} (ص ${p1}–${p2})` : `${s1.n} (ص ${p1} ← ص ${p2})`)
       : `${fromCol} ← ${toCol}`);
   return { p1, p2, rel1, rel2, sp1, sp2, pCount, s1, s2, sameS, isRel: false, fromCol, toCol, headerLbl, fullLabel };
+}
+
+// v147: Convert Surah/Page selection into exact Madinah Mushaf Surah/Ayah segments (for Recitation & Homework)
+function convertSpPageSelectionToSegments(sum) {
+  if (!sum || !sum.s1) return [];
+  const s1 = sum.s1;
+  const s2 = sum.s2 || s1;
+  const sp1 = sum.sp1 || getSurahPageSpan(s1.id);
+  const sp2 = sum.sp2 || getSurahPageSpan(s2.id);
+  const p1 = sum.p1;
+  const p2 = sum.p2;
+
+  if (s1.id === s2.id) {
+    const loP = Math.min(p1, p2);
+    const hiP = Math.max(p1, p2);
+    if (loP <= sp1.start && hiP >= sp1.end) {
+      return [{ surahId: String(s1.id), from: 1, to: s1.a }];
+    }
+    const pSt = getPageStartInfo(loP);
+    const pEn = getPageEndInfo(hiP);
+    let fA = (loP <= sp1.start) ? 1 : ((pSt?.surah?.id === s1.id) ? pSt.ayah : 1);
+    let tA = (hiP >= sp1.end) ? s1.a : ((pEn?.surah?.id === s1.id) ? pEn.ayah : s1.a);
+    fA = Math.max(1, Math.min(s1.a, Math.round(fA || 1)));
+    tA = Math.max(fA, Math.min(s1.a, Math.round(tA || s1.a)));
+    return [{ surahId: String(s1.id), from: fA, to: tA }];
+  }
+
+  const pSt1 = getPageStartInfo(p1);
+  const pEn2 = getPageEndInfo(p2);
+  let f1 = (p1 <= sp1.start) ? 1 : ((pSt1?.surah?.id === s1.id) ? pSt1.ayah : 1);
+  let t2 = (p2 >= sp2.end) ? s2.a : ((pEn2?.surah?.id === s2.id) ? pEn2.ayah : s2.a);
+  f1 = Math.max(1, Math.min(s1.a, Math.round(f1 || 1)));
+  t2 = Math.max(1, Math.min(s2.a, Math.round(t2 || s2.a)));
+  return expandContiguousRangeToSegments(s1.id, f1, s2.id, t2);
 }
 
 function syncSpPageInputsOnly() {
@@ -24444,11 +24511,19 @@ function renderSpPagesBox() {
     </div>
 
     <div class="sp-quick-span-row">
-      <button type="button" class="hl" onclick="spSelectFullStartSurah()">السورة</button>
-      <button type="button" onclick="spApplyPageSpanPreset(2)">+2 ص</button>
-      <button type="button" onclick="spApplyPageSpanPreset(5)">+5 ربع</button>
-      <button type="button" onclick="spApplyPageSpanPreset(10)">+10 نصف</button>
-      <button type="button" onclick="spApplyPageSpanPreset(20)">+20 جزء</button>
+      ${spIsReviewKind(spState.kind) ? `
+        <button type="button" class="hl" onclick="spSelectFullStartSurah()">السورة</button>
+        <button type="button" onclick="spApplyPageSpanPreset(2)">+2 ص</button>
+        <button type="button" onclick="spApplyPageSpanPreset(5)">+5 ربع</button>
+        <button type="button" onclick="spApplyPageSpanPreset(10)">+10 نصف</button>
+        <button type="button" onclick="spApplyPageSpanPreset(20)">+20 جزء</button>
+      ` : `
+        <button type="button" class="hl" onclick="spSelectFullStartSurah()">السورة</button>
+        <button type="button" onclick="spApplyPageSpanPreset(1)">1 ص</button>
+        <button type="button" onclick="spApplyPageSpanPreset(2)">2 ص</button>
+        <button type="button" onclick="spApplyPageSpanPreset(3)">3 ص</button>
+        <button type="button" onclick="spApplyPageSpanPreset(5)">5 ص</button>
+      `}
     </div>`;
   if (typeof enhanceAllVisibleSelects === "function") enhanceAllVisibleSelects(box);
   syncSpPageInputsOnly();
@@ -24924,8 +24999,15 @@ function renderSpAyahBox() {
 function renderSpPreview() {
   const el = document.getElementById("spPreviewStrip");
   if (!el) return;
-  if (spState.mode === "surah" && spIsReviewKind(spState.kind) && spState.reviewUnit === "page") {
+  if (spState.mode === "surah" && spCanUsePages(spState.kind) && spState.reviewUnit === "page") {
     const sum = getSpSurahPageSummary();
+    if (!spIsReviewKind(spState.kind)) {
+      const convSegs = convertSpPageSelectionToSegments(sum);
+      const segTxt = formatSegmentsInline(convSegs) || sum.fullLabel;
+      const segPg = calcSegmentsPages(convSegs) || sum.pCount;
+      el.innerHTML = `<span>📄 <b>${escapeHtml(segTxt)}</b></span><span class="badge b-green">${formatNum(segPg)} صفحة</span>`;
+      return;
+    }
     el.innerHTML = `<span>📄 <b>${escapeHtml(sum.fullLabel)}</b></span><span class="badge b-blue">${sum.pCount} صفحة</span>`;
     return;
   }
@@ -25138,7 +25220,17 @@ function applySurahPicker(quickEval = null) {
     return;
   }
 
-  // MODE C: FROM SURAH (PAGE) TO SURAH (PAGE) — (من سورة إلى سورة بالصفحات)
+  // MODE C-REC/HW (v147): Pages picker for Recitation & Homework -> converts accurately to Mushaf Surah/Ayah segments!
+  if (spState.mode === "surah" && (k === "rec" || k === "hw") && spState.reviewUnit === "page") {
+    const sum = getSpSurahPageSummary();
+    const convSegs = convertSpPageSelectionToSegments(sum);
+    if (convSegs.length) {
+      spState.segs = convSegs;
+    }
+    // Fall through cleanly to MODE A below so rec/hw, per-page grading, homework sync & quickEval all run identically!
+  }
+
+  // MODE C: FROM SURAH (PAGE) TO SURAH (PAGE) — (من سورة إلى سورة بالصفحات للمراجعة)
   if (spState.mode === "surah" && spIsReviewKind(k) && spState.reviewUnit === "page") {
     const sum = getSpSurahPageSummary();
     const p1 = sum.p1, p2 = sum.p2, pCount = sum.pCount;
@@ -43748,7 +43840,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v146";
+const TIBYAN_APP_VERSION = "v147";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -46748,5 +46840,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v146 -->
+<!-- Makin App v147 -->
 </html>
