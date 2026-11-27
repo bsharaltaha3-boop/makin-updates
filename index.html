@@ -15633,7 +15633,7 @@ table.t-daily td.td-sard,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v145</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v146</span>
         </button>
       </div>
     </div>
@@ -22523,6 +22523,48 @@ function buildRecitationPageSlots(r, st, kind, h) {
     return slots;
   }
 
+  // v146: Support Per-Page Mode for Minor Review when set via Pages Mode (r.minIsPages), preserving exact direction (asc/desc)
+  if (kind === "min" && r.minIsPages) {
+    const p1 = parseArabicNum(r.minPageFrom, 0);
+    const p2 = parseArabicNum(r.minPageTo, p1);
+    if (p1 >= 1 && p2 >= 1) {
+      const totalCnt = Math.abs(p2 - p1) + 1;
+      if (totalCnt >= 2 && totalCnt <= 50) {
+        const step = p2 >= p1 ? 1 : -1;
+        for (let i = 0; i < totalCnt; i++) {
+          const mp = Math.max(1, Math.min(604, p1 + i * step));
+          const pSt = getPageStartInfo(mp);
+          const pEn = getPageEndInfo(mp);
+          const s1 = pSt?.surah || getSurahAtPage(mp);
+          const s2 = pEn?.surah || s1;
+          if (!s1) continue;
+          if (!s2 || s1.id === s2.id) {
+            pushPage(mp, s1.id, pSt?.ayah || 1, pEn?.ayah || s1.a);
+          } else {
+            const lo = Math.min(s1.id, s2.id);
+            const hi = Math.max(s1.id, s2.id);
+            for (let sid = lo; sid <= hi; sid++) {
+              const sObj = SURAH_MAP[sid];
+              if (!sObj) continue;
+              const fA = sid === s1.id ? (pSt?.ayah || 1) : 1;
+              const tA = sid === s2.id ? (pEn?.ayah || sObj.a) : sObj.a;
+              pushPage(mp, sid, fA, tA);
+            }
+          }
+          const created = slots.find(x => x.mushafPage === mp);
+          if (created) {
+            created.pages = Math.max(1, Number(created.pages) || 1);
+            if (s2 && s1.id !== s2.id) {
+              created.label = `${s1.n} – ${s2.n}`;
+            }
+          }
+        }
+        return slots.length >= 2 ? slots.slice(0, 50) : [];
+      }
+    }
+    return [];
+  }
+
   const segs = getSegments(r, kind);
   if (!segs.length) return [];
 
@@ -22719,7 +22761,9 @@ function shouldUsePerPageMode(r, st, kind, h) {
   if (r[mKey] === "multi") return true;
   const realTotalPg = kind === "maj"
     ? (parseArabicNum(r.majPages, 0) || slots.length)
-    : calcSegmentsPages(getSegments(r, kind));
+    : (kind === "min" && r.minIsPages
+      ? (calcRecordMinPages(r) || slots.length)
+      : calcSegmentsPages(getSegments(r, kind)));
   const meaningfulSlots = slots.filter(p => (Number(p.pages) || 0) >= 0.2).length;
   return realTotalPg >= 1.35 && meaningfulSlots >= 2;
 }
@@ -22993,19 +23037,43 @@ function trimAssignmentToPassedPagesOnly(studentId, kind) {
     const completedJuz = recomputeAutoDailyHomework(st, r, h);
     r.notes = applyTajweedToNote(buildConciseRecNote(passedOv, { completedJuz }), r);
   } else if (kind === "min") {
-    r.minIsPages = false; r.minSardJuzIds = []; r.minSkipped = false;
-    r.minSurahId = merged[0].surahId;
-    r.minFrom = merged[0].from;
-    r.minTo = merged[0].to;
-    r.minEndSurahId = "";
-    r.minExtras = merged.slice(1).map(x => ({ ...x }));
-    r.minPages = newPgCount;
+    const wasMinPages = Boolean(r.minIsPages);
+    const isContiguousPages = wasMinPages && passed.every((p, idx) => idx === 0 || Math.abs(p.mushafPage - passed[idx - 1].mushafPage) === 1);
+    r.minSardJuzIds = []; r.minSkipped = false;
+    if (isContiguousPages) {
+      const p1 = passed[0].mushafPage;
+      const p2 = passed[passed.length - 1].mushafPage;
+      const s1 = getPageStartInfo(p1)?.surah || SURAH_MAP[Number(passed[0].surahId)];
+      const s2 = getPageEndInfo(p2)?.surah || SURAH_MAP[Number(passed[passed.length - 1].surahId)] || s1;
+      const sameS = Boolean(s1 && s2 && s1.id === s2.id);
+      const isSingle = p1 === p2;
+      const sp1 = s1 ? getSurahPageSpan(s1.id) : { count: 2 };
+      const fromCol = (sameS && isSingle && sp1.count <= 1 && s1) ? s1.n : (s1 ? `${s1.n} ص ${p1}` : `ص ${p1}`);
+      const toCol = (sameS && isSingle) ? "" : (sameS ? `ص ${p2}` : (s2 ? `${s2.n} ص ${p2}` : `ص ${p2}`));
+      r.minIsPages = true;
+      r.minSurahId = ""; r.minEndSurahId = ""; r.minExtras = [];
+      r.minPageFrom = p1; r.minPageTo = p2;
+      r.minPageFromSurahId = s1 ? String(s1.id) : "";
+      r.minPageToSurahId = s2 ? String(s2.id) : "";
+      r.minSurah = sameS ? (s1?.n || "") : (s1 && s2 ? `${s1.n} ← ${s2.n}` : "صفحات");
+      r.minFrom = fromCol; r.minTo = toCol;
+      r.minText = formatPagesReviewDisplay(fromCol, toCol, p1, p2, s1?.id, s2?.id);
+      r.minPages = passed.length;
+    } else {
+      r.minIsPages = false;
+      r.minSurahId = merged[0].surahId;
+      r.minFrom = merged[0].from;
+      r.minTo = merged[0].to;
+      r.minEndSurahId = "";
+      r.minExtras = merged.slice(1).map(x => ({ ...x }));
+      r.minPages = newPgCount;
+      syncMinorSummaryStrings(r);
+    }
     r.minErrors = totE;
     r.minAlerts = totA;
     r.minEval = passedOv;
     r.minOverallOverride = "";
     r.manualMin = true;
-    syncMinorSummaryStrings(r);
     if (passed.length >= 2) {
       r.minPageEvals = passed.map(p => ({ ...p }));
     } else {
@@ -23022,7 +23090,7 @@ function trimAssignmentToPassedPagesOnly(studentId, kind) {
     syncStudentEvalSheet();
   }
   patchSingleStudentCard(studentId);
-  showToast(`✂️ تم اعتماد المتقَن فقط (${formatNum(newPgCount)} ص • ${passedOv}) وتحديث الواجب تلقائياً ✓`, { undo: true });
+  showToast(`✂️ تم اعتماد المتقَن فقط (${formatNum(kind === "min" ? r.minPages : newPgCount)} ص • ${passedOv})${kind === "rec" ? " وتحديث الواجب تلقائياً" : ""} ✓`, { undo: true });
 }
 
 function formatFailedPagesShort(failed) {
@@ -25090,7 +25158,7 @@ function applySurahPicker(quickEval = null) {
       r.points = computeRecordPoints(s, r, st);
       syncUpcomingSaturdayMajorForStudent(h, s, st.id);
     } else if (k === "min") {
-      r.minSkipped = false; r.minPageEvals = null; r.minSourceLabel = "";
+      r.minSkipped = false; r.minPageEvals = null; r.minEvalMode = ""; r.minOverallOverride = ""; r.minSourceLabel = "";
       r.minSurahId = ""; r.minEndSurahId = ""; r.minExtras = []; r.minSardJuzIds = [];
       r.minIsPages = true; r.minPageFrom = p1; r.minPageTo = p2;
       r.minPageFromSurahId = s1 ? String(s1.id) : ""; r.minPageToSurahId = s2 ? String(s2.id) : "";
@@ -25143,7 +25211,7 @@ function applySurahPicker(quickEval = null) {
       r.points = computeRecordPoints(s, r, st);
       syncUpcomingSaturdayMajorForStudent(h, s, st.id);
     } else if (k === "min") {
-      r.minSkipped = false; r.minPageEvals = null; r.minSourceLabel = "";
+      r.minSkipped = false; r.minPageEvals = null; r.minEvalMode = ""; r.minOverallOverride = ""; r.minSourceLabel = "";
       r.minSurahId = ""; r.minEndSurahId = ""; r.minExtras = []; r.minIsPages = false;
       r.minSardJuzIds = [...info.ids];
       r.minSurah = "سرد"; r.minFrom = info.ids.length === 1 ? "جزء" : `${info.ids.length} أجزاء`; r.minTo = info.shortNames;
@@ -25206,7 +25274,7 @@ function applySurahPicker(quickEval = null) {
       syncDailyManualHwToNextDaily(h, s, st, r);
     }
   } else if (k === "min") {
-    r.minIsPages = false; r.minSardJuzIds = [];
+    r.minIsPages = false; r.minSardJuzIds = []; r.minPageEvals = null; r.minEvalMode = ""; r.minOverallOverride = "";
     r.minSurahId = first.surahId; r.minFrom = first.from; r.minTo = first.to;
     r.minSkipped = false; r.minEndSurahId = ""; r.minTwoSurahs = false;
     r.minExtras = rest;
@@ -43680,7 +43748,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v145";
+const TIBYAN_APP_VERSION = "v146";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -46680,5 +46748,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v145 -->
+<!-- Makin App v146 -->
 </html>
