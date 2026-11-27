@@ -14899,6 +14899,52 @@ table.t-daily td.td-sard,
   white-space: nowrap;
 }
 
+
+/* ==================== MAKIN v143: LOCKED REPEAT-PAGES NOTE BADGE (DISTINCT CRIMSON-ROSE COLOR) ==================== */
+.rep-repeat-pg-badge {
+  display: inline-block;
+  background: #fff1f2;
+  color: #9f1239;
+  border: 1px solid #f43f5e;
+  border-right: 3px solid #be123c;
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-left: 4px;
+  margin-bottom: 2px;
+  vertical-align: middle;
+}
+#hdExportStage .rep-repeat-pg-badge {
+  font-size: 11.2px !important;
+  padding: 1.5px 7px !important;
+  border-width: 1px !important;
+  border-right-width: 3.5px !important;
+  line-height: 1.24 !important;
+}
+.es-repeat-locked-box {
+  background: #fff1f2;
+  border: 1px solid rgba(225, 29, 72, 0.32);
+  border-right: 3.5px solid #be123c;
+  border-radius: 9px;
+  padding: 6px 9px;
+  margin-bottom: 7px;
+  font-size: 11.5px;
+  color: #9f1239;
+  font-weight: 700;
+  line-height: 1.45;
+  user-select: none;
+}
+[data-theme="dark"] .es-repeat-locked-box {
+  background: #36121c;
+  border-color: rgba(251, 113, 133, 0.42);
+  color: #fecdd3;
+}
+.es-note-preview.has-rep-lock {
+  border-right-color: #be123c;
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -15425,7 +15471,7 @@ table.t-daily td.td-sard,
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v142</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v143</span>
         </button>
       </div>
     </div>
@@ -18065,6 +18111,58 @@ function buildTajweedReportBadgeHtml(r) {
   if (!tags.length) return { html: "", plain: "" };
   const plain = `ضعف في (${tags.join("، ")})`;
   return { html: `<span class="rep-tajweed-badge">🎙️ ${escapeHtml(plain)}</span>`, plain };
+}
+
+// ==================== MAKIN v143: LOCKED REPEAT-PAGES NOTE BADGE ENGINE ====================
+function formatFailedPageSurahPage(p) {
+  if (!p) return "";
+  const sName = String(p.surahName || SURAH_MAP[Number(p.surahId)]?.n || "").trim();
+  const mp = parseArabicNum(p.mushafPage, 0);
+  if (sName && mp) return `${sName} ص ${mp}`;
+  if (mp) return `ص ${mp}`;
+  return String(p.label || "").trim();
+}
+
+function getRecordFailedRepeatPages(r, sessionType = "") {
+  if (!r) return [];
+  const lists = sessionType === "saturday"
+    ? [r.minPageEvals, r.majPageEvals]
+    : (sessionType === "daily" ? [r.recPageEvals] : [r.recPageEvals, r.minPageEvals, r.majPageEvals]);
+  const seen = new Set();
+  const out = [];
+  lists.forEach(arr => {
+    if (!Array.isArray(arr) || arr.length < 2) return;
+    arr.forEach(p => {
+      if (!isPerPageItemGraded(p) || p.eval !== "إعادة") return;
+      const key = `${p.mushafPage}_${p.surahId || ""}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      const txt = formatFailedPageSurahPage(p);
+      if (txt) out.push({ mushafPage: p.mushafPage, surahName: p.surahName || SURAH_MAP[Number(p.surahId)]?.n || "", text: txt });
+    });
+  });
+  return out;
+}
+
+function buildRepeatPagesReportBadgeHtml(r, sessionType = "") {
+  const items = getRecordFailedRepeatPages(r, sessionType);
+  if (!items.length) return { hasBadge: false, html: "", plain: "" };
+  const plain = `إعادة: ${items.map(x => x.text).join("، ")}`;
+  return { hasBadge: true, html: `<span class="rep-repeat-pg-badge">🔁 ${escapeHtml(plain)}</span>`, plain };
+}
+
+function renderLockedRepeatPagesBox(r, sessionType = "") {
+  const badge = buildRepeatPagesReportBadgeHtml(r, sessionType);
+  if (!badge.hasBadge) return "";
+  return `<div class="es-repeat-locked-box">🔒 <b>صفحات الإعادة (مقفلة بلون مميّز ولا تُعدّل من هنا):</b> ${escapeHtml(badge.plain)}</div>`;
+}
+
+function stripLegacyRepeatPagesNoteSuffix(note) {
+  return String(note || "")
+    .replace(/\s*[—–\-]\s*إعادة:\s*[^.\n]+(?:\.)?/g, "")
+    .replace(/^إعادة:\s*[^.\n]+(?:\.)?\s*/g, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
 }
 
 function computeStudentMonthlyTopTajweedText(h, studentId, monthFilter) {
@@ -22629,21 +22727,32 @@ function computePerPageMemPoints(r) {
   return Math.round(weightedBase * factor);
 }
 
-// v131: Pure Arithmetic Average across ONLY evaluated pages (ممتاز=4, جيد جداً=3, جيد=2, إعادة=1)
+// v143: Fair Weighted Overall Grade across evaluated pages (ممتاز=4, جيد جداً=3, جيد=2, إعادة=0)
+// Strict rules:
+// - If majority of evaluated pages failed (failed > passed, e.g. 3/4, 2/3, 2/2) => ALWAYS "إعادة"!
+// - If any page failed => cannot be "ممتاز" (capped at "جيد جداً" when avg >= 2.75, "جيد" when avg >= 1.5, else "إعادة").
 function computePerPageOverallGrade(pages) {
   if (!Array.isArray(pages) || !pages.length) return { overallEv: "", passed: [], failed: [], gradedCount: 0 };
   const graded = pages.filter(p => isPerPageItemGraded(p) && p.eval);
   if (!graded.length) return { overallEv: "", passed: [], failed: [], gradedCount: 0 };
   const passed = graded.filter(p => p.eval !== "إعادة");
   const failed = graded.filter(p => p.eval === "إعادة");
-  const gradeVal = ev => ev === "ممتاز" ? 4 : (ev === "جيد جداً" ? 3 : (ev === "جيد" ? 2 : 1));
+  if (failed.length > passed.length) {
+    return { overallEv: "إعادة", passed, failed, gradedCount: graded.length };
+  }
+  const gradeVal = ev => ev === "ممتاز" ? 4 : (ev === "جيد جداً" ? 3 : (ev === "جيد" ? 2 : 0));
   const avg = graded.reduce((sum, p) => sum + gradeVal(p.eval), 0) / graded.length;
-  const overallEv = avg >= 3.5 ? "ممتاز" : (avg >= 2.5 ? "جيد جداً" : (avg >= 1.5 ? "جيد" : "إعادة"));
+  let overallEv;
+  if (failed.length > 0) {
+    overallEv = avg >= 2.75 ? "جيد جداً" : (avg >= 1.5 ? "جيد" : "إعادة");
+  } else {
+    overallEv = avg >= 3.5 ? "ممتاز" : (avg >= 2.5 ? "جيد جداً" : "جيد");
+  }
   return { overallEv, passed, failed, gradedCount: graded.length };
 }
 
 function formatFailedPagesShort(failed) {
-  return (failed || []).map(p => p.label || `ص ${p.mushafPage}`).join(" و");
+  return (failed || []).map(p => formatFailedPageSurahPage(p)).filter(Boolean).join("، ");
 }
 
 function applyPerPageAutoEval(studentId, kind, overrideOverallEv = null, triggerAdvance = false) {
@@ -22719,7 +22828,7 @@ function applyPerPageAutoEval(studentId, kind, overrideOverallEv = null, trigger
           r.dRevPages = 0;
         }
       }
-      r.notes = applyTajweedToNote(buildConciseRecNote(overallEv, { repeatPagesTxt: repeatShort }), r);
+      r.notes = applyTajweedToNote(buildConciseRecNote(overallEv), r);
     } else {
       if (r.dRevEval === "إعادة" && !r.dRevAuto && !r.manualDRev && !(Number(r.dRevPages) > 0)) {
         r.dRevFrom = ""; r.dRevTo = ""; r.dRevEval = ""; r.dRevIsPages = false;
@@ -22732,14 +22841,14 @@ function applyPerPageAutoEval(studentId, kind, overrideOverallEv = null, trigger
     r.minErrors = totalErrs; r.minAlerts = totalAlrts; r.minEval = overallEv;
     if (!(Number(r.minPages) > 0)) r.minPages = calcRecordMinPages(r) || pages.length;
     const baseSat = buildSaturdayAutoNote(st, r, null, null, false);
-    r.notes = applyTajweedToNote((failed.length && overallEv !== "إعادة") ? `${baseSat} — إعادة: ${repeatShort}.` : baseSat, r);
+    r.notes = applyTajweedToNote(baseSat, r);
     if (isStudentFullyDone(s, st, r)) removeStudentFromQueue(s, studentId);
   } else if (kind === "maj") {
     r.majErrors = totalErrs; r.majAlerts = totalAlrts; r.majEval = overallEv;
     if (!(Number(r.majPages) > 0)) r.majPages = pages.length;
     applyNextMajorReview(st, r, isMajorPassEval(overallEv));
     const baseSat = buildSaturdayAutoNote(st, r, null, null, false);
-    r.notes = applyTajweedToNote((failed.length && overallEv !== "إعادة") ? `${baseSat} — إعادة: ${repeatShort}.` : baseSat, r);
+    r.notes = applyTajweedToNote(baseSat, r);
     if (isStudentFullyDone(s, st, r)) removeStudentFromQueue(s, studentId);
   }
 
@@ -22802,7 +22911,7 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
 
     const repeatHtml = failed.length ? `
       <div class="pp-repeat-banner">
-        <div>⚠️ <b>صفحات الإعادة (${failed.length}/${pages.length}):</b> ${failed.map(p => `<b>ص ${p.mushafPage}</b> (${escapeHtml(p.label)})`).join(" ، ")} ${passedCnt > 0 ? `• ✅ أتقن ${passedCnt}` : ""}</div>
+        <div>⚠️ <b>صفحات الإعادة (${failed.length}/${pages.length}):</b> ${failed.map(p => `<b>${escapeHtml(formatFailedPageSurahPage(p))}</b>`).join("، ")} ${passedCnt > 0 ? `• ✅ أتقن ${passedCnt}` : ""}</div>
         ${kind === "rec" && passedCnt > 0 ? `
           <div class="pp-repeat-hw-row">
             <button type="button" class="pp-rhw-btn ${!r.recRepeatHwOnly ? "on" : ""}" onclick="setRecRepeatHwMode('${studentId}', false)">📘 بالملاحظات والمراجعة + جديد</button>
@@ -22860,7 +22969,7 @@ function renderErrorCounterBar(studentId, kind, errs, alerts = 0) {
         <div class="pp-ov-row1" style="margin-bottom:${isOvEditable ? '6px' : '0'};">
           <div class="pp-ov-info">
             <div>📊 التقييم الإجمالي${savedOv && isOvEditable ? " (معدّل يدوياً)" : " (تلقائي)"}: <span class="badge ${ovCls}">${effectiveOv || savedKindEval || "بانتظار التقييم"}</span></div>
-            <small>مقيّم: ${gradedPages.length}/${pages.length} • أخطاء: ${totE} • تنبيه: ${totA}${failed.length && effectiveOv !== "إعادة" ? " • الإعادة بالملاحظات" : ""}</small>
+            <small>مقيّم: ${gradedPages.length}/${pages.length} • أخطاء: ${totE} • تنبيه: ${totA}${failed.length ? " • الإعادة بالملاحظات المقفلة" : ""}</small>
           </div>
           ${savedKindEval ? `<button type="button" class="lms-btn" style="padding:4px 8px; color:var(--red); border-color:rgba(185,34,34,0.28); background:var(--red-bg); flex-shrink:0;" onclick="clearPerPageEvaluation('${studentId}','${kind}')" title="إلغاء التقييم بالكامل">✕</button>` : ""}
         </div>
@@ -26056,7 +26165,15 @@ function buildStudentDailyCardHtml(st, s, h) {
       </div>
       ${tilesHtml}
       ${lessonsHtml}
-      ${r.notes ? `<div class="sdc-note">💬 <b>ملاحظة ${gt.supervisorTitle}:</b> ${escapeHtml(stripMushafPageTokens(r.notes))}</div>` : ""}
+      ${(() => {
+        const _sdcRep = buildRepeatPagesReportBadgeHtml(r, s?.type || "");
+        const _sdcTj = buildTajweedReportBadgeHtml(r);
+        const _sdcFree = _sdcRep.hasBadge
+          ? stripLegacyRepeatPagesNoteSuffix(stripTajweedSuffix(stripMushafPageTokens(r.notes || "")))
+          : stripTajweedSuffix(stripMushafPageTokens(r.notes || ""));
+        if (!_sdcRep.hasBadge && !_sdcTj.html && !_sdcFree) return "";
+        return `<div class="sdc-note">💬 <b>ملاحظة ${gt.supervisorTitle}:</b> ${_sdcRep.hasBadge ? `${_sdcRep.html} ` : ""}${_sdcTj.html ? `${_sdcTj.html} ` : ""}${escapeHtml(_sdcFree)}</div>`;
+      })()}
       <div class="sdc-foot">
         <span>${gt.supervisorTitle}: ${escapeHtml(bm.sheikh)}</span>
         ${ptsOn ? `<span>⭐ نقاط اليوم: ${r.points || 0}</span>` : `<span>حلقة ${escapeHtml(bm.name)}</span>`}
@@ -29973,6 +30090,7 @@ function renderCardBody(s, st, r, idx) {
             <span>💬 ملاحظات وتنبيهات الحفظ</span>
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','notes')">إخفاء</button>
           </div>
+          ${renderLockedRepeatPagesBox(r, "daily")}
           ${renderLockedTajweedNoteBox(r)}
           <div class="field" style="margin-bottom:0;">
             <textarea rows="2" placeholder="اكتب ملاحظة للتقرير وولي الأمر..." oninput="updateRecNoteFreeText('${st.id}',this.value)">${escapeHtml(stripTajweedSuffix(r.notes || ''))}</textarea>
@@ -30077,10 +30195,16 @@ function renderCardBody(s, st, r, idx) {
         </div>`;
       })()}
 
-      ${(String(r.notes || "").trim() && evalSheetTool !== "notes") ? `<div class="es-note-preview" onclick="toggleEvalSheetTool('${st.id}','notes')" title="اضغط لتعديل الملاحظة">
-        <span class="es-note-preview-txt">💬 ${escapeHtml(stripMushafPageTokens(r.notes))}</span>
-        <span style="font-size:10.5px; font-weight:800; opacity:0.75; white-space:nowrap;">تعديل ✏️</span>
-      </div>` : ''}
+      ${(() => {
+        if (evalSheetTool === "notes") return "";
+        const _repLock = buildRepeatPagesReportBadgeHtml(r, "daily");
+        const _freeN = stripLegacyRepeatPagesNoteSuffix(stripMushafPageTokens(r.notes || ""));
+        if (!_repLock.hasBadge && !_freeN) return "";
+        return `<div class="es-note-preview ${_repLock.hasBadge ? 'has-rep-lock' : ''}" onclick="toggleEvalSheetTool('${st.id}','notes')" title="اضغط لتعديل الملاحظة">
+          <span class="es-note-preview-txt">${_repLock.hasBadge ? `${_repLock.html} ` : ''}${_freeN ? `💬 ${escapeHtml(_freeN)}` : ''}</span>
+          <span style="font-size:10.5px; font-weight:800; opacity:0.75; white-space:nowrap;">تعديل ✏️</span>
+        </div>`;
+      })()}
       <div class="es-tools-3">
         <button type="button" class="es-tool-btn ${evalSheetTool==='sard'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','sard')">
           ${hasSardDot ? '<span class="es-tool-dot"></span>' : ''}
@@ -30219,6 +30343,7 @@ function renderCardBody(s, st, r, idx) {
             <span>💬 ملاحظات المراجعة</span>
             <button type="button" class="lms-btn" onclick="toggleEvalSheetTool('${st.id}','notes')">إخفاء</button>
           </div>
+          ${renderLockedRepeatPagesBox(r, "saturday")}
           ${renderLockedTajweedNoteBox(r)}
           <div class="field" style="margin-bottom:0;">
             <textarea rows="2" placeholder="اكتب ملاحظة..." oninput="updateRecNoteFreeText('${st.id}',this.value)">${escapeHtml(stripTajweedSuffix(r.notes || ''))}</textarea>
@@ -30290,10 +30415,16 @@ function renderCardBody(s, st, r, idx) {
         ${renderTajweedTagsBar(st.id, r)}
       </div>
 
-      ${(String(r.notes || "").trim() && evalSheetTool !== "notes") ? `<div class="es-note-preview" onclick="toggleEvalSheetTool('${st.id}','notes')" title="اضغط لتعديل الملاحظة">
-        <span class="es-note-preview-txt">💬 ${escapeHtml(stripMushafPageTokens(r.notes))}</span>
-        <span style="font-size:10.5px; font-weight:800; opacity:0.75; white-space:nowrap;">تعديل ✏️</span>
-      </div>` : ''}
+      ${(() => {
+        if (evalSheetTool === "notes") return "";
+        const _repLock = buildRepeatPagesReportBadgeHtml(r, "saturday");
+        const _freeN = stripLegacyRepeatPagesNoteSuffix(stripMushafPageTokens(r.notes || ""));
+        if (!_repLock.hasBadge && !_freeN) return "";
+        return `<div class="es-note-preview ${_repLock.hasBadge ? 'has-rep-lock' : ''}" onclick="toggleEvalSheetTool('${st.id}','notes')" title="اضغط لتعديل الملاحظة">
+          <span class="es-note-preview-txt">${_repLock.hasBadge ? `${_repLock.html} ` : ''}${_freeN ? `💬 ${escapeHtml(_freeN)}` : ''}</span>
+          <span style="font-size:10.5px; font-weight:800; opacity:0.75; white-space:nowrap;">تعديل ✏️</span>
+        </div>`;
+      })()}
       <div class="es-tools-4">
         <button type="button" class="es-tool-btn ${evalSheetTool==='sard'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','sard')">
           ${_hasSatSardDot ? '<span class="es-tool-dot"></span>' : ''}
@@ -33060,11 +33191,16 @@ function renderDailyReport() {
         const baseRestNote = sabrNoteInfo.hasBadge
           ? stripRedundantSabrNoteText(rawCleanNote)
           : (!r.hwSabrJuz ? stripStaleHwSabrPrepText(rawCleanNote) : rawCleanNote);
+        const repPgBadge = (!isRashidiRow && !isAbs && !isNoRec)
+          ? buildRepeatPagesReportBadgeHtml(r, "daily")
+          : { hasBadge: false, html: "", plain: "" };
         const tjBadge = (!isRashidiRow && !isAbs && !isNoRec)
           ? buildTajweedReportBadgeHtml(r)
           : { html: "", plain: "" };
-        const cleanFreeRest = stripTajweedSuffix(baseRestNote);
-        const fullNotePlainLen = ((sabrNoteInfo.hasBadge ? sabrNoteInfo.plain + " " : "") + (tjBadge.plain ? tjBadge.plain + " " : "") + cleanFreeRest).trim().length;
+        const cleanFreeRest = repPgBadge.hasBadge
+          ? stripLegacyRepeatPagesNoteSuffix(stripTajweedSuffix(baseRestNote))
+          : stripTajweedSuffix(baseRestNote);
+        const fullNotePlainLen = ((sabrNoteInfo.hasBadge ? sabrNoteInfo.plain + " " : "") + (repPgBadge.hasBadge ? repPgBadge.plain + " " : "") + (tjBadge.plain ? tjBadge.plain + " " : "") + cleanFreeRest).trim().length;
         if (fullNotePlainLen > maxDailyNoteLen) maxDailyNoteLen = fullNotePlainLen;
 
         const noteCellCls = sabrNoteInfo.hasBadge ? (sabrNoteInfo.isRep ? "td-note-sabr-rep" : "td-note-sabr") : "";
@@ -33076,6 +33212,7 @@ function renderDailyReport() {
         const notePartsHtml = [];
         if (sabrNoteInfo.hasBadge) notePartsHtml.push(sabrNoteInfo.html);
         if (pendingJuzBadge.hasBadge) notePartsHtml.push(pendingJuzBadge.html);
+        if (repPgBadge.hasBadge) notePartsHtml.push(repPgBadge.html);
         if (tjBadge.html) notePartsHtml.push(tjBadge.html);
         if (cleanFreeRest) notePartsHtml.push(`<span>${escapeHtml(cleanFreeRest)}</span>`);
         const noteCellHtml = notePartsHtml.join(" ");
@@ -33209,10 +33346,12 @@ function renderDailyReport() {
         const majRaw = (isRashidiRow || r.majSkipped) ? "" : (isAbs ? _gtRep.absent : (isNoRec ? "لم يُسمّع" : (isSatSabrPending ? "" : (r.sabrJuz ? getCompactSabrCellText(r.sabrJuz, scTag, r.majEval === "إعادة") : (r.majEval || "")))));
         const majSt = getEvalCellStyle(majRaw, !isRashidiRow && isAbs);
         const satPendBadge = !isRashidiRow ? buildPendingJuzNoteBadge(st, true) : { hasBadge: false, html: "", plain: "" };
+        const satRepPgBadge = (!isRashidiRow && !isAbs && !isNoRec) ? buildRepeatPagesReportBadgeHtml(r, "saturday") : { hasBadge: false, html: "", plain: "" };
         const satTjBadge = (!isRashidiRow && !isAbs && !isNoRec) ? buildTajweedReportBadgeHtml(r) : { html: "", plain: "" };
-        const satFreeNote = stripTajweedSuffix(stripMushafPageTokens(r.notes || "")).trim();
-        const noteTxt = [satPendBadge.plain, satTjBadge.plain, satFreeNote].filter(Boolean).join(" — ");
-        const noteHtml = [satPendBadge.html, satTjBadge.html, satFreeNote ? `<span>${escapeHtml(satFreeNote)}</span>` : ""].filter(Boolean).join(" ");
+        const _satRawFree = stripTajweedSuffix(stripMushafPageTokens(r.notes || "")).trim();
+        const satFreeNote = satRepPgBadge.hasBadge ? stripLegacyRepeatPagesNoteSuffix(_satRawFree) : _satRawFree;
+        const noteTxt = [satPendBadge.plain, satRepPgBadge.plain, satTjBadge.plain, satFreeNote].filter(Boolean).join(" — ");
+        const noteHtml = [satPendBadge.html, satRepPgBadge.html, satTjBadge.html, satFreeNote ? `<span>${escapeHtml(satFreeNote)}</span>` : ""].filter(Boolean).join(" ");
         if (noteTxt.length > maxSatNoteLen) maxSatNoteLen = noteTxt.length;
         const ptsDisp = getDailyReportPointsDisplay(s, r, st, isAbs, isNoRec);
 
@@ -36483,7 +36622,9 @@ async function exportDailyExcelStyled() {
           ? applyTajweedToNote(baseXlRest, r)
           : baseXlRest;
         const xlPendJuz = !isRashidiRow ? buildPendingJuzNoteBadge(st, false) : { hasBadge: false, plain: "" };
-        const cleanNote = [xlSabrNote.hasBadge ? xlSabrNote.plain : "", xlPendJuz.hasBadge ? xlPendJuz.plain : "", restXlNote].filter(Boolean).join(" — ");
+        const xlRepPg = (!isRashidiRow && !isAbs && !isNoRecXl) ? buildRepeatPagesReportBadgeHtml(r, "daily") : { hasBadge: false, plain: "" };
+        const cleanRestXl = xlRepPg.hasBadge ? stripLegacyRepeatPagesNoteSuffix(restXlNote) : restXlNote;
+        const cleanNote = [xlSabrNote.hasBadge ? xlSabrNote.plain : "", xlPendJuz.hasBadge ? xlPendJuz.plain : "", xlRepPg.hasBadge ? xlRepPg.plain : "", cleanRestXl].filter(Boolean).join(" — ");
         const ptsDisp = getDailyReportPointsDisplay(s, r, st, isAbs, isNoRecXl);
 
         const rIdx = 8 + idx;
@@ -36610,8 +36751,10 @@ async function exportDailyExcelStyled() {
           ? Boolean(hwCols.isSabr)
           : Boolean(r.nextMajSabrJuz || (r.sabrJuz && (r.majEval === "إعادة" || isAbs)));
         const xlSatPendJuz = !isRashidiRow ? buildPendingJuzNoteBadge(st, false) : { hasBadge: false, plain: "" };
+        const xlSatRepPg = (!isRashidiRow && !isAbs && !isNoRecXl) ? buildRepeatPagesReportBadgeHtml(r, "saturday") : { hasBadge: false, plain: "" };
         const _satRawXl = stripMushafPageTokens(r.notes || "");
-        const cleanNote = [xlSatPendJuz.hasBadge ? xlSatPendJuz.plain : "", _satRawXl].filter(Boolean).join(" — ");
+        const _satCleanXl = xlSatRepPg.hasBadge ? stripLegacyRepeatPagesNoteSuffix(_satRawXl) : _satRawXl;
+        const cleanNote = [xlSatPendJuz.hasBadge ? xlSatPendJuz.plain : "", xlSatRepPg.hasBadge ? xlSatRepPg.plain : "", _satCleanXl].filter(Boolean).join(" — ");
         const ptsDisp = getDailyReportPointsDisplay(s, r, st, isAbs, isNoRecXl);
 
         const rIdx = 8 + idx;
@@ -43145,7 +43288,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v142";
+const TIBYAN_APP_VERSION = "v143";
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -46047,5 +46190,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v142 -->
+<!-- Makin App v143 -->
 </html>
