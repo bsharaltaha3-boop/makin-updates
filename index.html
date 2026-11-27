@@ -2670,55 +2670,86 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
 #hdExportStage *{content-visibility:visible!important}
 @media print{*{content-visibility:visible!important}}
 
-/* MAKIN v155: Smart Monthly Baseline & Fast Student Onboarding Studio */
-.mb-kpi-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-bottom:9px}
+/* MAKIN v157: Smart Mid-Month Onboarding & Per-Student Fast Entry Studio */
+.mb-kpi-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-bottom:8px}
 .mb-kpi-tile{background:var(--white);border:1px solid var(--line);border-top:3px solid #142a46;border-radius:10px;padding:6px 4px;text-align:center}
 .mb-kpi-tile.g{border-top-color:var(--green)}
 .mb-kpi-tile.o{border-top-color:#c8a14b}
 .mb-kpi-tile.b{border-top-color:var(--blue)}
-.mb-kpi-tile b{display:block;font-size:14px;font-weight:800;color:var(--ink-900);line-height:1.15}
+.mb-kpi-tile b{display:block;font-size:13.5px;font-weight:800;color:var(--ink-900);line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mb-kpi-tile span{display:block;font-size:10px;font-weight:700;color:var(--ink-500);margin-top:2px;white-space:nowrap}
+.mb-month-row{display:grid;grid-template-columns:1.68fr 0.82fr;gap:7px;align-items:end}
+.mb-month-row .field label{font-size:11px;margin-bottom:3px}
+.mb-month-row .field select,.mb-month-row .field input{height:36px;padding:0 8px;font-size:12.5px;font-weight:800;border-radius:9px}
+.mb-month-row .field input{text-align:center;direction:ltr}
+.mb-tools-drawer{margin-top:8px;border-top:1px dashed var(--line);padding-top:7px}
+.mb-tools-drawer>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11.5px;font-weight:800;color:var(--brand-slate);user-select:none}
+.mb-tools-drawer>summary::-webkit-details-marker{display:none}
+.mb-tools-drawer[open]>summary{margin-bottom:7px}
 .mb-preset-chips{display:flex;gap:5px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none}
 .mb-preset-chips::-webkit-scrollbar{display:none}
 .mb-pchip{border:1px solid var(--line-strong);background:var(--bg);color:var(--brand-slate);border-radius:99px;padding:4.5px 10px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;flex-shrink:0}
 .mb-pchip:active{background:#142a46;color:#f6dc93;border-color:#142a46}
-.mb-period-info{background:var(--brand-tint);border:1px solid var(--line);border-right:3.5px solid #15629a;border-radius:9px;padding:6px 9px;font-size:11.2px;font-weight:700;color:var(--ink-700);line-height:1.5;margin-top:6px}
-.mb-bulk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}
-.mb-bulk-btn{border:1px solid var(--line-strong);background:var(--bg);color:var(--brand-slate);border-radius:10px;padding:7.5px 6px;font-size:11.5px;font-weight:800;cursor:pointer;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:transform 0.08s ease,background 0.14s ease}
+.mb-period-info{background:var(--brand-tint);border:1px solid var(--line);border-right:3.5px solid #15629a;border-radius:9px;padding:6px 9px;font-size:11px;font-weight:700;color:var(--ink-700);line-height:1.5;margin-top:6px}
+.mb-bulk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:7px}
+.mb-bulk-btn{border:1px solid var(--line-strong);background:var(--bg);color:var(--brand-slate);border-radius:10px;padding:7px 5px;font-size:11.2px;font-weight:800;cursor:pointer;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:transform 0.08s ease,background 0.14s ease}
 .mb-bulk-btn:active{transform:scale(0.97);background:#142a46;color:#ffffff}
 .mb-bulk-btn.g{background:var(--green-bg);color:var(--green);border-color:rgba(22,121,76,0.28)}
 .mb-bulk-btn.o{background:#fef7e0;color:#8a5e10;border-color:#e6c66b}
 .mb-bulk-btn.r{background:var(--red-bg);color:var(--red);border-color:rgba(185,34,34,0.28)}
 [data-theme="dark"] .mb-bulk-btn.o{background:#2b2412;color:#f4d274;border-color:#6b5317}
-.mb-filter-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:3px;margin-top:7px}
-.mb-fbtn{border:none;background:transparent;color:var(--ink-700);border-radius:7px;padding:5.5px 3px;font-size:11.2px;font-weight:800;cursor:pointer;white-space:nowrap}
+.mb-filter-row{display:flex;align-items:center;gap:5px;margin-top:7px}
+.mb-filter-3{flex:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:3px}
+.mb-fbtn{border:none;background:transparent;color:var(--ink-700);border-radius:7px;padding:5.5px 3px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}
 .mb-fbtn.on{background:#142a46;color:#ffffff}
 [data-theme="dark"] .mb-fbtn.on{background:#c8a14b;color:#0f233c}
-.base-st-card.v155{background:var(--white);border:1px solid var(--line);border-right:4px solid var(--line-strong);border-radius:13px;padding:9px 10px;margin-bottom:9px;box-shadow:0 1px 6px rgba(16,42,73,0.04)}
-.base-st-card.v155.is-filled{border-right-color:var(--green)}
-.mb-st-head{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
-.mb-st-name{font-size:13.5px;font-weight:800;color:var(--ink-900);min-width:0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mb-st-badges{display:inline-flex;align-items:center;gap:4px;flex-shrink:0}
-.mb-clr-st-btn{border:1px solid rgba(185,34,34,0.24);background:var(--red-bg);color:var(--red);border-radius:7px;padding:2px 7px;font-size:10.5px;font-weight:800;cursor:pointer}
-.mb-sec-box{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:7px 8px;margin-bottom:7px}
+.mb-expand-all-btn{border:1px solid var(--line-strong);background:var(--bg);color:var(--brand-slate);border-radius:9px;padding:6px 8px;font-size:10.8px;font-weight:800;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.base-st-card.v157{background:var(--white);border:1px solid var(--line);border-right:4px solid var(--line-strong);border-radius:13px;margin-bottom:7px;overflow:hidden;box-shadow:0 1px 5px rgba(16,42,73,0.04);transition:border-color 0.14s ease,box-shadow 0.14s ease}
+.base-st-card.v157.is-filled{border-right-color:var(--green)}
+.base-st-card.v157.is-open{border-color:#142a46;border-right-color:#c8a14b;box-shadow:0 5px 16px rgba(16,42,73,0.12)}
+[data-theme="dark"] .base-st-card.v157.is-open{border-color:#c8a14b}
+.mb-st-head{width:100%;border:none;background:transparent;padding:9px 10px;display:flex;align-items:center;justify-content:space-between;gap:7px;cursor:pointer;text-align:right;color:var(--ink-900)}
+.base-st-card.v157.is-open .mb-st-head{background:linear-gradient(135deg,#142a46 0%,#1f3e66 100%);color:#ffffff}
+.mb-st-head-l{min-width:0;flex:1}
+.mb-st-name{display:block;font-size:13.5px;font-weight:800;color:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.25}
+.mb-st-mini-sum{display:block;font-size:11px;font-weight:700;color:var(--ink-500);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.base-st-card.v157.is-open .mb-st-mini-sum{color:#cde0f2}
+.mb-st-head-r{display:inline-flex;align-items:center;gap:5px;flex-shrink:0}
+.mb-st-chev{font-size:12px;font-weight:800;opacity:0.75}
+.mb-st-body{padding:9px 10px 10px;background:var(--bg);border-top:1px solid var(--line)}
+.mb-sec-box{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:8px 9px;margin-bottom:7px}
 .mb-sec-box:last-child{margin-bottom:0}
 .mb-sec-box.mem{border-right:3.5px solid #15629a}
 .mb-sec-box.rev{border-right:3.5px solid #c8a14b}
-.mb-sec-box.att{border-right:3.5px solid #16794c}
-.mb-sec-ttl{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11px;font-weight:800;color:var(--brand-slate);margin-bottom:6px}
-.mb-mini-act{border:1px solid var(--line-strong);background:var(--white);color:var(--blue);border-radius:7px;padding:2.5px 7px;font-size:10.2px;font-weight:800;cursor:pointer;white-space:nowrap}
+.mb-sec-box.opt{border-right:3.5px solid #16794c;padding:7px 9px}
+.mb-sec-ttl{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11.2px;font-weight:800;color:var(--brand-slate);margin-bottom:6px}
+.mb-mini-act{border:1px solid var(--line-strong);background:var(--bg);color:var(--blue);border-radius:7px;padding:2.5px 7px;font-size:10.2px;font-weight:800;cursor:pointer;white-space:nowrap}
 .mb-surah-pair{display:grid;grid-template-columns:1.8fr 0.72fr;gap:5px;align-items:end;margin-bottom:5px}
 .mb-surah-pair .field label{font-size:10.5px;margin-bottom:2px;color:var(--ink-500)}
 .mb-surah-pair .field select,.mb-surah-pair .field input{padding:6px 7px;font-size:12.5px;border-radius:8px}
 .mb-surah-pair .field input{text-align:center;font-weight:800;direction:ltr}
-.mb-auto-pg-row{display:flex;align-items:center;justify-content:space-between;gap:7px;background:var(--white);border:1px solid var(--line);border-radius:9px;padding:5px 8px;margin-top:4px}
+.mb-auto-pg-row{display:flex;align-items:center;justify-content:space-between;gap:7px;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:5px 8px;margin-top:4px}
 .mb-auto-pg-lbl{font-size:11.2px;font-weight:800;color:var(--ink-700);flex:1;min-width:0}
-.mb-auto-pg-lbl small{display:block;font-size:10px;color:var(--green);font-weight:700}
-.mb-auto-pg-inp{width:76px!important;height:31px;text-align:center;font-weight:800;font-size:14px;border:1.5px solid #15629a!important;border-radius:8px!important;background:var(--bg)!important;color:var(--ink-900);direction:ltr;padding:0 4px!important}
-.mb-sabr-row{display:grid;grid-template-columns:1.7fr 0.75fr;gap:6px;margin-top:6px}
-.mb-sync-bar{display:flex;align-items:center;gap:7px;background:var(--brand-tint);border:1px solid var(--line);border-radius:10px;padding:7px 9px;font-size:11.2px;font-weight:800;color:var(--brand-slate);cursor:pointer;width:100%;margin-bottom:7px}
+.mb-auto-pg-lbl small{display:block;font-size:10px;color:var(--green);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mb-auto-pg-inp{width:76px!important;height:31px;text-align:center;font-weight:800;font-size:14px;border:1.5px solid #15629a!important;border-radius:8px!important;background:var(--white)!important;color:var(--ink-900);direction:ltr;padding:0 4px!important}
+.mb-qadd-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3.5px;margin-top:4px}
+.mb-qadd-btn{border:1px solid var(--line-strong);background:var(--bg);color:var(--brand-slate);border-radius:7px;padding:3.5px 2px;font-size:10.5px;font-weight:800;cursor:pointer;text-align:center;direction:ltr}
+.mb-qadd-btn:active{background:#142a46;color:#f6dc93;border-color:#142a46}
+.mb-opt-details>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11.2px;font-weight:800;color:var(--brand-slate);user-select:none}
+.mb-opt-details>summary::-webkit-details-marker{display:none}
+.mb-opt-details[open]>summary{margin-bottom:7px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.mb-sabr-row{display:grid;grid-template-columns:1.7fr 0.75fr;gap:6px;margin-bottom:7px}
+.mb-st-period-box{background:var(--bg);border:1px dashed var(--line-strong);border-radius:9px;padding:7px 8px;margin-bottom:7px}
+.mb-st-period-acts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin-top:6px}
+.mb-st-period-acts.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.mb-st-period-acts button{border:1px solid var(--line-strong);background:var(--white);color:var(--brand-slate);border-radius:8px;padding:5px 3px;font-size:10.8px;font-weight:800;cursor:pointer;white-space:nowrap}
+.mb-st-period-acts button.g{background:var(--green-bg);color:var(--green);border-color:rgba(22,121,76,0.28)}
+.mb-st-foot{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:8px}
+.mb-clr-st-btn{border:1px solid rgba(185,34,34,0.24);background:var(--red-bg);color:var(--red);border-radius:9px;padding:7px 11px;font-size:11.5px;font-weight:800;cursor:pointer;flex-shrink:0}
+.mb-next-st-btn{flex:1;border:none;background:linear-gradient(135deg,#142a46 0%,#1e426c 100%);color:#ffffff;border-radius:10px;padding:8px 12px;font-size:12px;font-weight:800;cursor:pointer;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mb-next-st-btn:active{transform:scale(0.98)}
+.mb-sync-bar{display:flex;align-items:center;gap:7px;background:var(--brand-tint);border:1px solid var(--line);border-radius:10px;padding:7px 9px;font-size:11px;font-weight:800;color:var(--brand-slate);cursor:pointer;width:100%;margin-bottom:7px;line-height:1.4}
 .mb-sync-bar input{width:17px;height:17px;accent-color:#16794c;flex-shrink:0}
-
 </style>
 </head>
 <body>
@@ -3217,6 +3248,10 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
           <span class="drawer-item-l"><span class="drawer-ico-box gold"><svg class="mk-ico" aria-hidden="true"><use href="#ico-sliders"/></svg></span><span>إعدادات الحلقة</span></span>
           <span class="badge b-blue" id="drawerHalaqaRulesBadge" style="font-size:10px;">تخصيص</span>
         </button>
+        <button type="button" class="drawer-item" onclick="closeRightDrawer(); openMonthlyBaselineModal();">
+          <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-edit"/></svg></span><span>رصيد الأيام الماضية (منتصف الشهر)</span></span>
+          <span class="badge b-slate" id="drawerBaselineBadge" style="font-size:10px;">إدخال سريع</span>
+        </button>
       </div>
 
       <div class="drawer-group-lbl">الحساب والتواصل</div>
@@ -3284,7 +3319,7 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-refresh"/></svg></span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v156</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v157</span>
         </button>
       </div>
     </div>
@@ -4122,7 +4157,7 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
   </div>
 </div>
 
-<!-- ===== MODAL: MONTHLY BASELINE & SMART STUDENT ONBOARDING STUDIO (v155) ===== -->
+<!-- ===== MODAL: MONTHLY BASELINE & FAST MID-MONTH ONBOARDING STUDIO (v157) ===== -->
 <div class="modal-backdrop exec-modal-backdrop" id="monthBaselineModal" style="z-index:154;" onclick="if(event.target===this) closeModal('monthBaselineModal')">
   <div class="exec-modal-box" style="max-width:620px;">
     <div class="exec-modal-hdr">
@@ -4130,7 +4165,7 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
       <div class="exec-modal-hdr-row">
         <div style="min-width:0; flex:1;">
           <h3 id="mbModalTitle">📝 رصيد الأيام الماضية</h3>
-          <div class="exec-modal-sub" id="mbModalSub">اختر الفترة والسور — والتطبيق يحسب الصفحات وأيام الدوام تلقائياً</div>
+          <div class="exec-modal-sub" id="mbModalSub">أدخل لكل طالب حفظه ومراجعته ونقاطه ليُدمج تلقائياً في التقرير الشهري</div>
         </div>
         <button type="button" class="exec-modal-close" onclick="closeModal('monthBaselineModal')" aria-label="إغلاق">×</button>
       </div>
@@ -4139,50 +4174,56 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
     <div class="exec-modal-body">
       <div id="mbLiveKpiBar" class="mb-kpi-4"></div>
 
-      <div class="exec-card" style="margin-bottom:9px;">
-        <div class="exec-card-ttl" style="margin-bottom:7px;">
-          <span>🗓️ الشهر والفترة الزمنية (حساب تلقائي)</span>
-          <a href="#" onclick="event.preventDefault(); closeModal('monthBaselineModal'); openNewSessionModal(true);" style="font-size:11px; color:var(--blue); font-weight:800; text-decoration:none;">+ يوم بتاريخ</a>
-        </div>
-        <div class="exec-grid-2" style="margin-bottom:7px;">
+      <div class="exec-card" style="margin-bottom:8px; padding:9px 10px;">
+        <div class="mb-month-row">
           <div class="field">
-            <label>الشهر الهجري</label>
+            <label>الشهر الهجري (للتقرير الشهري)</label>
             <select id="mbMonthSelect" onchange="onMbMonthSelectChange(this.value)"></select>
           </div>
           <div class="field">
-            <label>أيام الدوام الماضية</label>
+            <label>أيام دوام مضت</label>
             <input type="text" inputmode="numeric" id="mbExtraDays" placeholder="مثال: 6" oninput="onMbExtraDaysInput(this.value)">
           </div>
         </div>
 
-        <div class="mb-preset-chips">
-          <button type="button" class="mb-pchip" onclick="applyMbDatePreset('month_to_today')">📅 من أول الشهر لليوم</button>
-          <button type="button" class="mb-pchip" onclick="applyMbDatePreset('first_week')">📆 أول أسبوع</button>
-          <button type="button" class="mb-pchip" onclick="applyMbDatePreset('first_two_weeks')">📆 أول أسبوعين</button>
-          <button type="button" class="mb-pchip" onclick="applyMbDatePreset('full_month')">🗓️ الشهر كاملاً</button>
-        </div>
-
-        <div class="exec-grid-2" style="margin-bottom:0;">
-          <div class="field">
-            <label>من تاريخ (اختياري)</label>
-            <input type="date" id="mbFromDate" style="direction:ltr; text-align:center;" onchange="onMbDateRangeChange()">
+        <details class="mb-tools-drawer" id="mbGlobalToolsDrawer">
+          <summary>
+            <span>🗓️ أدوات عامة للحلقة (تحديد فترة الشهر وتعبئة جماعية)</span>
+            <span style="font-size:11px; color:var(--ink-500);">اختياري ▾</span>
+          </summary>
+          <div class="mb-preset-chips">
+            <button type="button" class="mb-pchip" onclick="applyMbDatePreset('month_to_today')">📅 من أول الشهر لليوم</button>
+            <button type="button" class="mb-pchip" onclick="applyMbDatePreset('first_week')">📆 أول أسبوع</button>
+            <button type="button" class="mb-pchip" onclick="applyMbDatePreset('first_two_weeks')">📆 أول أسبوعين</button>
+            <button type="button" class="mb-pchip" onclick="applyMbDatePreset('full_month')">🗓️ الشهر كاملاً</button>
           </div>
-          <div class="field">
-            <label>إلى تاريخ (اختياري)</label>
-            <input type="date" id="mbToDate" style="direction:ltr; text-align:center;" onchange="onMbDateRangeChange()">
+          <div class="exec-grid-2" style="margin-bottom:0;">
+            <div class="field">
+              <label>من تاريخ</label>
+              <input type="date" id="mbFromDate" style="direction:ltr; text-align:center;" onchange="onMbDateRangeChange()">
+            </div>
+            <div class="field">
+              <label>إلى تاريخ</label>
+              <input type="date" id="mbToDate" style="direction:ltr; text-align:center;" onchange="onMbDateRangeChange()">
+            </div>
           </div>
-        </div>
-        <div id="mbPeriodCalcHint"></div>
-
-        <div id="mbBulkActionsWrap"></div>
+          <div id="mbPeriodCalcHint"></div>
+          <div id="mbBulkActionsWrap"></div>
+          <div style="margin-top:7px; text-align:left;">
+            <a href="#" onclick="event.preventDefault(); closeModal('monthBaselineModal'); openNewSessionModal(true);" style="font-size:11.5px; color:var(--blue); font-weight:800; text-decoration:none;">📅 أو تسجيل يوم دوام كامل بتاريخ محدد ←</a>
+          </div>
+        </details>
       </div>
 
-      <div class="exec-card" style="margin-bottom:9px; padding:9px 10px;">
+      <div class="exec-card" style="margin-bottom:8px; padding:8px 10px;">
         <div class="search-input-wrap" style="width:100%;">
           <input type="text" id="mbStudentSearch" placeholder="🔍 ابحث باسم الطالب..." oninput="onMbSearchInput(this.value)" style="padding:7px 10px 7px 32px; font-size:12.5px;">
           <button type="button" id="mbStudentSearchClear" class="search-clear-btn" style="display:none;" onclick="clearMbStudentSearch()" aria-label="مسح البحث">×</button>
         </div>
-        <div id="mbFilterBar" class="mb-filter-3"></div>
+        <div class="mb-filter-row">
+          <div id="mbFilterBar" class="mb-filter-3" style="margin-top:0;"></div>
+          <button type="button" id="mbExpandAllBtn" class="mb-expand-all-btn" onclick="toggleMbExpandAll()">توسيع الكل</button>
+        </div>
       </div>
 
       <div id="mbStudentsList"></div>
@@ -4191,7 +4232,7 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
     <div class="exec-modal-footer" style="flex-direction:column; align-items:stretch; gap:0; padding-top:8px;">
       <label class="mb-sync-bar">
         <input type="checkbox" id="mbSyncStudentProfilesCheck" checked>
-        <span>🔄 تحديث نقطة انطلاق الطالب تلقائياً ليكمل بعد «إلى» + حفظ الأجزاء المسبورة بملفه</span>
+        <span>🔄 إكمال الحفظ تلقائياً بعد «إلى» + دمج النقاط السابقة بدورة النقاط والأجزاء المسبورة</span>
       </label>
       <div style="display:flex; gap:6px; width:100%; align-items:center;">
         <button type="button" class="btn btn-danger btn-sm" onclick="clearCurrentMonthBaseline()">🗑️ مسح الشهر</button>
@@ -13673,6 +13714,15 @@ function updateDrawerQuickStates() {
   if (mpb && typeof getMonthlyPlanDrawerBadgeText === "function") {
     mpb.textContent = getMonthlyPlanDrawerBadgeText();
   }
+  const bsb = document.getElementById("drawerBaselineBadge");
+  if (bsb) {
+    const hCur = getActiveHalaqa();
+    const curM = getExactHijriInfo(todayISO()).monthLabel;
+    const bSt = hCur?.monthlyBaselines?.[curM]?.students || {};
+    const bCnt = Object.values(bSt).filter(sb => _isMbStudentFilled(sb)).length;
+    bsb.textContent = bCnt > 0 ? `${bCnt} مُدخَل` : "إدخال سريع";
+    bsb.className = "badge " + (bCnt > 0 ? "b-green" : "b-slate");
+  }
   const hrb = document.getElementById("drawerHalaqaRulesBadge");
   if (hrb) {
     const _hR = getActiveHalaqa();
@@ -22058,7 +22108,8 @@ function computeMonthlyData(monthFilter) {
     let memPages = st.track === "rashidi" ? 0 : base.memPages;
     let revPages = base.revPages;
     let rashidiPages = st.track === "rashidi" ? (base.rashidiPages || base.memPages || 0) : (base.rashidiPages || 0);
-    let totalPoints = base.points + (!isPointsCycle && monthFilter === "ALL" ? getStudentPastPoints(h, st.id) : 0);
+    const _extraPastAll = (!isPointsCycle && monthFilter === "ALL") ? Math.max(0, getStudentPastPoints(h, st.id) - base.points) : 0;
+    let totalPoints = base.points + _extraPastAll;
     let presentDays = base.presentDays || 0, lateDays = 0, excusedDays = base.excusedDays || 0, absentDays = base.absentDays || 0;
     const sabrList = [...base.sabrList];
 
@@ -22133,9 +22184,11 @@ function computeMonthlyData(monthFilter) {
   return { rows, totals };
 }
 
-// ==================== MONTHLY BASELINE & SMART STUDENT ONBOARDING STUDIO (v155) ====================
+// ==================== MONTHLY BASELINE & FAST MID-MONTH ONBOARDING STUDIO (v157) ====================
 let _mbMonthLabel = "";
 let _mbFilter = "all"; // "all" | "empty" | "filled"
+let _mbOpenStudentId = null;
+let _mbExpandAll = false;
 let _mbDraft = { extraDays: 0, fromDate: "", toDate: "", students: {} };
 
 function _parseBaselineSurahText(txt) {
@@ -22160,6 +22213,15 @@ function _isMbStudentFilled(b) {
   );
 }
 
+function _hasMbStudentOptData(b) {
+  if (!b) return false;
+  return Boolean(
+    b.sabrJuz || b.fromDate || b.toDate ||
+    parseArabicNum(b.presentDays, 0) > 0 || parseArabicNum(b.excusedDays, 0) > 0 ||
+    parseArabicNum(b.absentDays, 0) > 0 || (b.note && String(b.note).trim())
+  );
+}
+
 function _ensureMbStudentObj(stId) {
   if (!_mbDraft.students[stId]) {
     _mbDraft.students[stId] = {
@@ -22167,7 +22229,8 @@ function _ensureMbStudentObj(stId) {
       rashidiFrom: "", rashidiTo: "", rashidiPages: 0,
       memPages: 0, revPages: 0, points: 0,
       presentDays: 0, excusedDays: 0, absentDays: 0,
-      sabrJuz: "", sabrScore: "", note: ""
+      sabrJuz: "", sabrScore: "", note: "",
+      fromDate: "", toDate: ""
     };
   }
   return _mbDraft.students[stId];
@@ -22257,13 +22320,15 @@ function _loadMbMonthIntoDraft(h, monthLbl) {
   const titleEl = document.getElementById("mbModalTitle");
   if (titleEl) titleEl.textContent = "📝 رصيد الأيام الماضية";
   const subEl = document.getElementById("mbModalSub");
-  if (subEl) subEl.textContent = `شهر ${_mbMonthLabel} هـ • إدخال سريع وحساب تلقائي`;
+  if (subEl) subEl.textContent = `شهر ${_mbMonthLabel} هـ • يُدمج تلقائياً في التقرير الشهري`;
   const daysEl = document.getElementById("mbExtraDays");
   if (daysEl) daysEl.value = _mbDraft.extraDays || "";
   const fEl = document.getElementById("mbFromDate");
   const tEl = document.getElementById("mbToDate");
   if (fEl) fEl.value = _mbDraft.fromDate || "";
   if (tEl) tEl.value = _mbDraft.toDate || "";
+  const firstUnfilled = (h.students || []).find(st => !_isMbStudentFilled(_mbDraft.students[st.id]));
+  _mbOpenStudentId = firstUnfilled ? firstUnfilled.id : (h.students?.[0]?.id || null);
   renderMbPeriodAndBulkUI();
 }
 
@@ -22303,13 +22368,16 @@ function renderMbLiveSummaryUI() {
   if (!h) return;
   const kpiEl = document.getElementById("mbLiveKpiBar");
   const fBar = document.getElementById("mbFilterBar");
-  let filledCnt = 0, memSum = 0, revSum = 0, sabrCnt = 0;
+  const expBtn = document.getElementById("mbExpandAllBtn");
+  const ptsOn = isPointsEnabled(h);
+  let filledCnt = 0, memSum = 0, revSum = 0, ptsSum = 0, sabrCnt = 0;
   (h.students || []).forEach(st => {
     const b = _mbDraft.students[st.id];
     if (_isMbStudentFilled(b)) filledCnt++;
     if (b) {
       memSum += st.track === "rashidi" ? parseArabicNum(b.rashidiPages || b.memPages, 0) : parseArabicNum(b.memPages, 0);
       revSum += parseArabicNum(b.revPages, 0);
+      ptsSum += parseArabicNum(b.points, 0);
       if (b.sabrJuz) sabrCnt++;
     }
   });
@@ -22317,16 +22385,68 @@ function renderMbLiveSummaryUI() {
   const emptyCnt = Math.max(0, totalSt - filledCnt);
   if (kpiEl) {
     kpiEl.innerHTML = `
-      <div class="mb-kpi-tile g"><b>${filledCnt} / ${totalSt}</b><span>طالب مُدخَل</span></div>
+      <div class="mb-kpi-tile g"><b>${filledCnt}/${totalSt}</b><span>مُدخَل</span></div>
       <div class="mb-kpi-tile b"><b>${formatNum(Math.round(memSum * 100) / 100)} ص</b><span>الحفظ</span></div>
       <div class="mb-kpi-tile o"><b>${formatNum(Math.round(revSum * 100) / 100)} ص</b><span>المراجعة</span></div>
-      <div class="mb-kpi-tile"><b>${sabrCnt}</b><span>أجزاء سبر</span></div>`;
+      <div class="mb-kpi-tile"><b>${ptsOn ? `${Math.round(ptsSum)} ⭐` : `${sabrCnt} سبر`}</b><span>${ptsOn ? "النقاط" : "الأجزاء"}</span></div>`;
   }
   if (fBar) {
     fBar.innerHTML = `
       <button type="button" class="mb-fbtn ${_mbFilter === 'all' ? 'on' : ''}" onclick="setMbFilter('all')">الكل (${totalSt})</button>
-      <button type="button" class="mb-fbtn ${_mbFilter === 'empty' ? 'on' : ''}" onclick="setMbFilter('empty')">لم يُدخَل (${emptyCnt})</button>
-      <button type="button" class="mb-fbtn ${_mbFilter === 'filled' ? 'on' : ''}" onclick="setMbFilter('filled')">مُدخَل ✓ (${filledCnt})</button>`;
+      <button type="button" class="mb-fbtn ${_mbFilter === 'empty' ? 'on' : ''}" onclick="setMbFilter('empty')">باقي (${emptyCnt})</button>
+      <button type="button" class="mb-fbtn ${_mbFilter === 'filled' ? 'on' : ''}" onclick="setMbFilter('filled')">مُدخَل (${filledCnt})</button>`;
+  }
+  if (expBtn) expBtn.textContent = _mbExpandAll ? "طيّ الكل" : "توسيع الكل";
+}
+
+function toggleMbExpandAll() {
+  _mbExpandAll = !_mbExpandAll;
+  renderMbLiveSummaryUI();
+  renderMonthlyBaselineList();
+}
+
+function toggleMbStudentCard(stId) {
+  if (_mbExpandAll) {
+    _mbExpandAll = false;
+    _mbOpenStudentId = stId;
+  } else {
+    _mbOpenStudentId = (_mbOpenStudentId === stId) ? null : stId;
+  }
+  renderMbLiveSummaryUI();
+  renderMonthlyBaselineList();
+  if (_mbOpenStudentId) {
+    requestAnimationFrame(() => {
+      document.getElementById(`mbCard_${_mbOpenStudentId}`)?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+  }
+}
+
+function mbGoNextStudent(curStId) {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const nq = normalizeSearchArabic(document.getElementById("mbStudentSearch")?.value || "");
+  const list = h.students.filter(st => {
+    if (nq && !matchesArabicQuery(normalizeSearchArabic(st.name), nq)) return false;
+    const fl = _isMbStudentFilled(_mbDraft.students[st.id]);
+    if (_mbFilter === "filled" && !fl) return false;
+    if (_mbFilter === "empty" && fl && st.id !== curStId) return false;
+    return true;
+  });
+  const curIdx = list.findIndex(st => st.id === curStId);
+  const nextSt = (curIdx >= 0 && curIdx + 1 < list.length) ? list[curIdx + 1] : list.find(st => st.id !== curStId && !_isMbStudentFilled(_mbDraft.students[st.id]));
+  _mbExpandAll = false;
+  if (nextSt) {
+    _mbOpenStudentId = nextSt.id;
+    renderMbLiveSummaryUI();
+    renderMonthlyBaselineList();
+    requestAnimationFrame(() => {
+      document.getElementById(`mbCard_${nextSt.id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  } else {
+    _mbOpenStudentId = null;
+    renderMbLiveSummaryUI();
+    renderMonthlyBaselineList();
+    showToast("✓ انتهيت من إدخال الطلاب — اضغط «حفظ ودمج بالتقرير» بالأسفل");
   }
 }
 
@@ -22408,7 +22528,7 @@ function mbBulkFillAttendance() {
   if (!h) return;
   const days = Math.max(0, Math.round(parseArabicNum(document.getElementById("mbExtraDays")?.value || _mbDraft.extraDays, 0)));
   if (!days) {
-    showToast("حدّد «أيام الدوام الماضية» أو اختر فترة من تاريخ ← إلى تاريخ أولاً");
+    showToast("اكتب «أيام دوام مضت» أو اختر فترة من تاريخ ← إلى تاريخ أولاً");
     return;
   }
   _mbDraft.extraDays = days;
@@ -22420,7 +22540,7 @@ function mbBulkFillAttendance() {
   });
   renderMbLiveSummaryUI();
   renderMonthlyBaselineList();
-  showToast(`تم تعبئة الحضور لـ ${h.students.length} طالب (${days} أيام) — وعدّل الغياب فقط ✓`);
+  showToast(`تم تعبئة الحضور لـ ${h.students.length} طالب (${days} أيام) ✓`);
 }
 
 function mbBulkEstimateReview() {
@@ -22439,7 +22559,7 @@ function mbBulkEstimateReview() {
   });
   renderMbLiveSummaryUI();
   renderMonthlyBaselineList();
-  showToast(`تم تقدير صفحات المراجعة لـ ${updated} طالب (على أساس ${revSessions} جلسات مراجعة) ✓`);
+  showToast(`تم تقدير صفحات المراجعة لـ ${updated} طالب ✓`);
 }
 
 function mbBulkEstimatePoints() {
@@ -22473,7 +22593,104 @@ async function mbBulkZeroAllPoints() {
   });
   renderMbLiveSummaryUI();
   renderMonthlyBaselineList();
-  showToast("🔄 تم تصفير خانة النقاط السابقة في القائمة فقط (اضغط حفظ للاعتماد) ✓");
+  showToast("🔄 تم تصفير خانة النقاط السابقة في القائمة فقط ✓");
+}
+
+// Per-student custom date range & quick fill (لكل طالب بطالبه!)
+function onMbStudentDateChange(stId, which, val) {
+  const h = getActiveHalaqa();
+  const b = _ensureMbStudentObj(stId);
+  if (which === "from") b.fromDate = val || "";
+  else b.toDate = val || "";
+  const stats = _countClassDaysInRange(h, b.fromDate, b.toDate);
+  if (stats) {
+    const days = stats.unrecorded > 0 ? stats.unrecorded : stats.total;
+    const exc = Math.max(0, Math.round(parseArabicNum(b.excusedDays, 0)));
+    const abs = Math.max(0, Math.round(parseArabicNum(b.absentDays, 0)));
+    b.presentDays = Math.max(0, days - exc - abs);
+  }
+  renderMbLiveSummaryUI();
+  renderMonthlyBaselineList();
+}
+
+function mbFillOneStudentFromPeriod(stId, kind) {
+  const h = getActiveHalaqa();
+  const st = h?.students.find(x => x.id === stId);
+  if (!h || !st) return;
+  const b = _ensureMbStudentObj(stId);
+  const stStats = _countClassDaysInRange(h, b.fromDate, b.toDate);
+  const globStats = _countClassDaysInRange(h, _mbDraft.fromDate, _mbDraft.toDate);
+  const stats = stStats || globStats;
+  const baseDays = stStats
+    ? (stStats.unrecorded > 0 ? stStats.unrecorded : stStats.total)
+    : Math.max(0, Math.round(parseArabicNum(document.getElementById("mbExtraDays")?.value || _mbDraft.extraDays, 0)));
+
+  if (kind === "att") {
+    if (!baseDays) { showToast("حدّد تاريخاً لهذا الطالب أو «أيام دوام مضت» أولاً"); return; }
+    const exc = Math.max(0, Math.round(parseArabicNum(b.excusedDays, 0)));
+    const abs = Math.max(0, Math.round(parseArabicNum(b.absentDays, 0)));
+    b.presentDays = Math.max(0, baseDays - exc - abs);
+    showToast(`✓ حضور ${st.name}: ${b.presentDays} أيام`);
+  } else if (kind === "rev") {
+    const revSess = stats ? Math.max(1, stats.rev) : Math.max(1, Math.round(baseDays / 3));
+    const pace = Math.max(1, Number(st.revPace || h.defaultRevPace || 2));
+    b.revPages = Math.round(revSess * pace * 100) / 100;
+    showToast(`📘 مراجعة ${st.name}: ${b.revPages} ص`);
+  } else if (kind === "pts") {
+    const mPg = st.track === "rashidi" ? parseArabicNum(b.rashidiPages || b.memPages, 0) : parseArabicNum(b.memPages, 0);
+    const rPg = parseArabicNum(b.revPages, 0);
+    const pres = Math.max(0, Math.round(parseArabicNum(b.presentDays, 0)));
+    const sabrBonus = b.sabrJuz ? 20 : 0;
+    b.points = Math.round((mPg * 4) + (rPg * 2) + (pres * 2) + sabrBonus);
+    showToast(`⭐ نقاط ${st.name}: ${b.points}`);
+  }
+  renderMbLiveSummaryUI();
+  renderMonthlyBaselineList();
+}
+
+function mbQuickStepField(stId, field, delta) {
+  const b = _ensureMbStudentObj(stId);
+  const cur = parseArabicNum(b[field], 0);
+  const nextVal = Math.max(0, Math.round((cur + delta) * 100) / 100);
+  b[field] = nextVal;
+  const el = document.getElementById(`mbInp_${field}_${stId}`);
+  if (el) el.value = nextVal || "";
+  _patchMbStudentHeaderSummary(stId);
+  renderMbLiveSummaryUI();
+}
+
+function _buildMbMiniSummaryText(st, b, ptsOn) {
+  if (!_isMbStudentFilled(b)) return "اضغط لإدخال الحفظ والمراجعة والنقاط";
+  const parts = [];
+  const isRashidi = st.track === "rashidi";
+  const mPg = isRashidi ? parseArabicNum(b.rashidiPages || b.memPages, 0) : parseArabicNum(b.memPages, 0);
+  if (b.fromMem || b.toMem) {
+    const rng = (b.fromMem && b.toMem && b.fromMem !== b.toMem) ? `${b.fromMem} ← ${b.toMem}` : (b.fromMem || b.toMem);
+    parts.push(`📖 ${rng}${mPg > 0 ? ` (${formatNum(mPg)} ص)` : ""}`);
+  } else if (mPg > 0) {
+    parts.push(`📖 ${formatNum(mPg)} ص`);
+  }
+  if (parseArabicNum(b.revPages, 0) > 0) parts.push(`📘 مراجعة ${formatNum(b.revPages)} ص`);
+  if (ptsOn && parseArabicNum(b.points, 0) > 0) parts.push(`⭐ ${Math.round(parseArabicNum(b.points, 0))}`);
+  if (b.sabrJuz) parts.push(`🎓 ${formatJuzClean(b.sabrJuz)}`);
+  return parts.join(" • ") || "بيانات محفوظة";
+}
+
+function _patchMbStudentHeaderSummary(stId) {
+  const h = getActiveHalaqa();
+  const st = h?.students.find(x => x.id === stId);
+  if (!st) return;
+  const b = _mbDraft.students[stId] || {};
+  const filled = _isMbStudentFilled(b);
+  const sumEl = document.getElementById(`mbMiniSum_${stId}`);
+  if (sumEl) sumEl.textContent = _buildMbMiniSummaryText(st, b, isPointsEnabled(h));
+  const cardEl = document.getElementById(`mbCard_${stId}`);
+  if (cardEl) cardEl.classList.toggle("is-filled", filled);
+  const bdgEl = document.getElementById(`mbBadge_${stId}`);
+  if (bdgEl) {
+    bdgEl.className = `badge ${filled ? 'b-green' : 'b-muted'}`;
+    bdgEl.textContent = filled ? "✓ مُدخَل" : "لم يُدخَل";
+  }
 }
 
 function onMbMonthSelectChange(monthLbl) {
@@ -22500,11 +22717,14 @@ function openMonthlyBaselineModal(forcedMonth = "") {
   }
 
   _mbFilter = "all";
+  _mbExpandAll = false;
   _loadMbMonthIntoDraft(h, targetM);
   const sInp = document.getElementById("mbStudentSearch");
   if (sInp) sInp.value = "";
   const clr = document.getElementById("mbStudentSearchClear");
   if (clr) clr.style.display = "none";
+  const gDet = document.getElementById("mbGlobalToolsDrawer");
+  if (gDet) gDet.open = false;
   renderMbLiveSummaryUI();
   renderMonthlyBaselineList();
   openModal("monthBaselineModal");
@@ -22535,6 +22755,7 @@ function _recalcMbStudentPages(stId, updateDom = true) {
       if (inp) inp.value = b.rashidiPages || "";
       const tag = document.getElementById(`mbCalcHint_${stId}`);
       if (tag) tag.textContent = b.rashidiPages > 0 ? `✓ حُسبت تلقائياً (${b.rashidiPages} ص)` : "أدخل من ص ← إلى ص";
+      _patchMbStudentHeaderSummary(stId);
     }
     renderMbLiveSummaryUI();
     return;
@@ -22558,12 +22779,14 @@ function _recalcMbStudentPages(stId, updateDom = true) {
         const inp = document.getElementById(`mbMemPg_${stId}`);
         if (inp) inp.value = b.memPages || "";
         const tag = document.getElementById(`mbCalcHint_${stId}`);
-        if (tag) tag.textContent = `✓ محسوب بدقة المصحف (${b.fromMem} ← ${b.toMem})`;
+        if (tag) tag.textContent = `✓ بالمصحف (${b.fromMem} ← ${b.toMem})`;
+        _patchMbStudentHeaderSummary(stId);
       }
     }
   } else {
     b.fromMem = "";
     if (!b.toSurahId) b.toMem = "";
+    if (updateDom) _patchMbStudentHeaderSummary(stId);
   }
   renderMbLiveSummaryUI();
 }
@@ -22640,6 +22863,7 @@ function mbClearOneStudent(stId) {
 }
 
 function updateMbDraftField(stId, field, val) {
+  const h = getActiveHalaqa();
   const b = _ensureMbStudentObj(stId);
   const numFields = ["memPages", "rashidiPages", "revPages", "points", "presentDays", "excusedDays", "absentDays", "rashidiFrom", "rashidiTo"];
   if (field === "sabrScore") {
@@ -22653,13 +22877,18 @@ function updateMbDraftField(stId, field, val) {
     return;
   }
   if (field === "rashidiPages") b.memPages = b.rashidiPages;
-  if ((field === "excusedDays" || field === "absentDays") && _mbDraft.extraDays > 0) {
-    const exc = Math.max(0, Math.round(parseArabicNum(b.excusedDays, 0)));
-    const abs = Math.max(0, Math.round(parseArabicNum(b.absentDays, 0)));
-    b.presentDays = Math.max(0, _mbDraft.extraDays - exc - abs);
-    const pInp = document.getElementById(`mbPres_${stId}`);
-    if (pInp) pInp.value = b.presentDays || "";
+  if (field === "excusedDays" || field === "absentDays") {
+    const stStats = _countClassDaysInRange(h, b.fromDate, b.toDate);
+    const refDays = stStats ? (stStats.unrecorded > 0 ? stStats.unrecorded : stStats.total) : _mbDraft.extraDays;
+    if (refDays > 0) {
+      const exc = Math.max(0, Math.round(parseArabicNum(b.excusedDays, 0)));
+      const abs = Math.max(0, Math.round(parseArabicNum(b.absentDays, 0)));
+      b.presentDays = Math.max(0, refDays - exc - abs);
+      const pInp = document.getElementById(`mbPres_${stId}`);
+      if (pInp) pInp.value = b.presentDays || "";
+    }
   }
+  _patchMbStudentHeaderSummary(stId);
   renderMbLiveSummaryUI();
 }
 
@@ -22673,7 +22902,7 @@ function renderMonthlyBaselineList() {
     .filter(x => {
       if (nq && !matchesArabicQuery(normalizeSearchArabic(x.st.name), nq)) return false;
       if (_mbFilter === "filled" && !x.filled) return false;
-      if (_mbFilter === "empty" && x.filled) return false;
+      if (_mbFilter === "empty" && x.filled && x.st.id !== _mbOpenStudentId) return false;
       return true;
     });
 
@@ -22683,21 +22912,45 @@ function renderMonthlyBaselineList() {
   }
 
   const ptsOn = isPointsEnabled(h);
-  listEl.innerHTML = filtered.map(({ st, idx, filled }) => {
+  listEl.innerHTML = filtered.map(({ st, idx, filled }, fIdx) => {
     const b = _mbDraft.students[st.id] || {};
+    const isOpen = _mbExpandAll || _mbOpenStudentId === st.id;
+    const miniSum = _buildMbMiniSummaryText(st, b, ptsOn);
+    const nextItem = filtered[fIdx + 1];
+
+    if (!isOpen) {
+      return `<div class="base-st-card v157 ${filled ? 'is-filled' : ''}" id="mbCard_${st.id}">
+        <button type="button" class="mb-st-head" onclick="toggleMbStudentCard('${st.id}')">
+          <div class="mb-st-head-l">
+            <span class="mb-st-name">${idx + 1}. ${escapeHtml(st.name)}</span>
+            <span class="mb-st-mini-sum" id="mbMiniSum_${st.id}">${escapeHtml(miniSum)}</span>
+          </div>
+          <div class="mb-st-head-r">
+            <span class="badge ${filled ? 'b-green' : 'b-muted'}" id="mbBadge_${st.id}" style="font-size:10px;">${filled ? '✓ مُدخَل' : 'لم يُدخَل'}</span>
+            <span class="mb-st-chev">▾</span>
+          </div>
+        </button>
+      </div>`;
+    }
+
     const dir = st.direction || h.defaultDir || "desc";
     const isRashidi = st.track === "rashidi";
     const s1 = b.fromSurahId ? SURAH_MAP[Number(b.fromSurahId)] : null;
     const s2 = b.toSurahId ? SURAH_MAP[Number(b.toSurahId)] : null;
     const calcHint = isRashidi
       ? (b.rashidiPages > 0 ? `✓ حُسبت تلقائياً (${b.rashidiPages} ص)` : "أدخل من ص ← إلى ص")
-      : (s1 && s2 ? `✓ محسوب بدقة المصحف (${b.fromMem || ""} ← ${b.toMem || ""})` : "اختر «من» و«إلى» ليحسب الصفحات تلقائياً");
+      : (s1 && s2 ? `✓ بالمصحف (${b.fromMem || ""} ← ${b.toMem || ""})` : "اختر «من» و«إلى» ليحسب الصفحات تلقائياً");
+
+    const stPeriodStats = _countClassDaysInRange(h, b.fromDate, b.toDate);
+    const stPeriodHint = stPeriodStats
+      ? `<div style="font-size:10.5px; font-weight:700; color:var(--blue); margin-top:4px;">📊 دوام هذا الطالب: <b>${stPeriodStats.total}</b> يوم (${stPeriodStats.daily} تسميع + ${stPeriodStats.rev} مراجعة)</div>`
+      : "";
 
     const memSecHtml = isRashidi ? `
       <div class="mb-sec-box mem">
         <div class="mb-sec-ttl">
           <span>🔤 القاعدة الرشيدية (حساب تلقائي)</span>
-          <button type="button" class="mb-mini-act" onclick="mbQuickFillFromStudentStart('${st.id}')">📌 من نقطة البداية</button>
+          <button type="button" class="mb-mini-act" onclick="mbQuickFillFromStudentStart('${st.id}')">📌 بدايته</button>
         </div>
         <div class="exec-grid-2" style="margin-bottom:5px;">
           <div class="field"><label style="font-size:10.5px;">من صفحة</label><input type="text" inputmode="numeric" style="text-align:center; padding:6px;" value="${b.rashidiFrom || ''}" placeholder="1" oninput="updateMbDraftField('${st.id}','rashidiFrom',this.value)"></div>
@@ -22710,7 +22963,7 @@ function renderMonthlyBaselineList() {
       </div>` : `
       <div class="mb-sec-box mem">
         <div class="mb-sec-ttl">
-          <span>📖 الحفظ (حساب تلقائي بالمصحف)</span>
+          <span>📖 الحفظ في هذا الشهر (يحسب الصفحات تلقائياً)</span>
           <div style="display:flex; gap:4px;">
             <button type="button" class="mb-mini-act" onclick="mbQuickFillFromStudentStart('${st.id}')">📌 بدايته</button>
             <button type="button" class="mb-mini-act" onclick="mbQuickFullSurah('${st.id}')">⚡ سورة كاملة</button>
@@ -22718,7 +22971,7 @@ function renderMonthlyBaselineList() {
         </div>
         <div class="mb-surah-pair">
           <div class="field">
-            <label>من سورة</label>
+            <label>من سورة (بداية الشهر)</label>
             <select onchange="onMbSurahSelectChange('${st.id}','from',this.value)">${surahOptionsHtml(b.fromSurahId || '', '-- اختر سورة البداية --', dir)}</select>
           </div>
           <div class="field">
@@ -22728,7 +22981,7 @@ function renderMonthlyBaselineList() {
         </div>
         <div class="mb-surah-pair">
           <div class="field">
-            <label>إلى سورة</label>
+            <label>إلى سورة (أين وصل الآن)</label>
             <select onchange="onMbSurahSelectChange('${st.id}','to',this.value)">${surahOptionsHtml(b.toSurahId || '', '-- اختر سورة النهاية --', dir)}</select>
           </div>
           <div class="field">
@@ -22742,39 +22995,93 @@ function renderMonthlyBaselineList() {
         </div>
       </div>`;
 
-    return `<div class="base-st-card v155 ${filled ? 'is-filled' : ''}">
-      <div class="mb-st-head">
-        <span class="mb-st-name">${idx + 1}. ${escapeHtml(st.name)}</span>
-        <div class="mb-st-badges">
-          <span class="badge ${filled ? 'b-green' : 'b-muted'}" style="font-size:10px;">${filled ? '✓ مُدخَل' : (isRashidi ? 'رشيدي' : (dir === 'asc' ? 'البقرة←' : 'الناس←'))}</span>
-          ${filled ? `<button type="button" class="mb-clr-st-btn" onclick="mbClearOneStudent('${st.id}')">مسح</button>` : ''}
-        </div>
-      </div>
+    const optHasData = _hasMbStudentOptData(b);
 
-      ${memSecHtml}
-
-      <div class="mb-sec-box rev">
-        <div class="mb-sec-ttl"><span>📘 المراجعة والسبر ${ptsOn ? 'والنقاط' : ''}</span></div>
-        <div class="exec-grid-2" style="${ptsOn ? '' : 'grid-template-columns:1fr;'}">
-          ${!isRashidi ? `<div class="field"><label style="font-size:10.5px;">صفحات المراجعة</label><input type="text" inputmode="decimal" style="padding:6px 8px; text-align:center; font-weight:800;" value="${b.revPages || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','revPages',this.value)"></div>` : ''}
-          ${ptsOn ? `<div class="field"><label style="font-size:10.5px;">النقاط السابقة</label><input type="text" inputmode="numeric" style="padding:6px 8px; text-align:center; font-weight:800;" value="${b.points || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','points',this.value)"></div>` : ''}
+    return `<div class="base-st-card v157 is-open ${filled ? 'is-filled' : ''}" id="mbCard_${st.id}">
+      <button type="button" class="mb-st-head" onclick="toggleMbStudentCard('${st.id}')">
+        <div class="mb-st-head-l">
+          <span class="mb-st-name">${idx + 1}. ${escapeHtml(st.name)}</span>
+          <span class="mb-st-mini-sum" id="mbMiniSum_${st.id}">${escapeHtml(miniSum)}</span>
         </div>
-        ${!isRashidi ? `
-        <div class="mb-sabr-row">
-          <div class="field"><label style="font-size:10.5px;">سبر جزء سابق</label><select style="padding:6px 7px; font-size:12px;" onchange="updateMbDraftField('${st.id}','sabrJuz',this.value)">${juzOptionsHtml(b.sabrJuz || '')}</select></div>
-          <div class="field"><label style="font-size:10.5px;">العلامة %</label><input type="text" inputmode="numeric" style="padding:6px 7px; font-size:12.5px; text-align:center; font-weight:800; direction:ltr;" value="${b.sabrScore !== undefined && b.sabrScore !== '' ? b.sabrScore : ''}" placeholder="98" oninput="updateMbDraftField('${st.id}','sabrScore',this.value)"></div>
-        </div>` : ''}
-      </div>
-
-      <div class="mb-sec-box att">
-        <div class="mb-sec-ttl"><span>📅 الحضور والغياب وملاحظة سابقة</span><span style="font-size:10px; color:var(--ink-500);">الغياب يُخصم تلقائياً من الحضور</span></div>
-        <div class="form-grid" style="grid-template-columns:repeat(3, 1fr); gap:6px; margin-bottom:6px;">
-          <div class="field"><label style="font-size:10.5px;">أيام حضور</label><input type="text" inputmode="numeric" id="mbPres_${st.id}" style="padding:5px 7px; font-size:12.5px; text-align:center; font-weight:800;" value="${b.presentDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','presentDays',this.value)"></div>
-          <div class="field"><label style="font-size:10.5px;">غياب مبرر</label><input type="text" inputmode="numeric" style="padding:5px 7px; font-size:12.5px; text-align:center; font-weight:800;" value="${b.excusedDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','excusedDays',this.value)"></div>
-          <div class="field"><label style="font-size:10.5px;">غياب غير مبرر</label><input type="text" inputmode="numeric" style="padding:5px 7px; font-size:12.5px; text-align:center; font-weight:800;" value="${b.absentDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','absentDays',this.value)"></div>
+        <div class="mb-st-head-r">
+          <span class="badge ${filled ? 'b-green' : 'b-muted'}" id="mbBadge_${st.id}" style="font-size:10px;">${filled ? '✓ مُدخَل' : 'جاري الإدخال'}</span>
+          <span class="mb-st-chev">▴</span>
         </div>
-        <div class="field" style="margin-bottom:0;">
-          <input type="text" style="padding:5.5px 8px; font-size:11.8px;" value="${escapeHtml(b.note || '')}" placeholder="ملاحظة سابقة اختيارية (تظهر بالتقرير الشهري)..." oninput="updateMbDraftField('${st.id}','note',this.value)">
+      </button>
+
+      <div class="mb-st-body">
+        ${memSecHtml}
+
+        <div class="mb-sec-box rev">
+          <div class="mb-sec-ttl"><span>📘 المراجعة ${ptsOn ? 'والنقاط' : ''} في هذا الشهر</span></div>
+          <div class="exec-grid-2" style="${(!isRashidi && ptsOn) ? '' : 'grid-template-columns:1fr;'}">
+            ${!isRashidi ? `
+              <div class="field">
+                <label style="font-size:10.5px;">صفحات المراجعة</label>
+                <input type="text" inputmode="decimal" id="mbInp_revPages_${st.id}" style="padding:6px 8px; text-align:center; font-weight:800; font-size:14px;" value="${b.revPages || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','revPages',this.value)">
+                <div class="mb-qadd-row">
+                  <button type="button" class="mb-qadd-btn" onclick="mbQuickStepField('${st.id}','revPages',1)">+1</button>
+                  <button type="button" class="mb-qadd-btn" onclick="mbQuickStepField('${st.id}','revPages',2)">+2</button>
+                  <button type="button" class="mb-qadd-btn" onclick="mbQuickStepField('${st.id}','revPages',5)">+5</button>
+                  <button type="button" class="mb-qadd-btn" onclick="mbQuickStepField('${st.id}','revPages',10)">+10</button>
+                </div>
+              </div>` : ''}
+            ${ptsOn ? `
+              <div class="field">
+                <label style="font-size:10.5px;">النقاط السابقة</label>
+                <input type="text" inputmode="numeric" id="mbInp_points_${st.id}" style="padding:6px 8px; text-align:center; font-weight:800; font-size:14px;" value="${b.points || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','points',this.value)">
+                <div class="mb-qadd-row">
+                  <button type="button" class="mb-qadd-btn" onclick="mbQuickStepField('${st.id}','points',10)">+10</button>
+                  <button type="button" class="mb-qadd-btn" onclick="mbQuickStepField('${st.id}','points',20)">+20</button>
+                  <button type="button" class="mb-qadd-btn" onclick="mbQuickStepField('${st.id}','points',50)">+50</button>
+                  <button type="button" class="mb-qadd-btn" onclick="mbQuickStepField('${st.id}','points',100)">+100</button>
+                </div>
+              </div>` : ''}
+          </div>
+        </div>
+
+        <div class="mb-sec-box opt">
+          <details class="mb-opt-details" ${optHasData ? 'open' : ''}>
+            <summary>
+              <span>⚙️ تفاصيل إضافية لهذا الطالب (سبر • حضور/غياب • فترة خاصة)</span>
+              <span style="font-size:10.5px; color:var(--ink-500);">${optHasData ? 'مُعبّأ ▾' : 'اختياري ▾'}</span>
+            </summary>
+
+            ${!isRashidi ? `
+            <div class="mb-sabr-row">
+              <div class="field"><label style="font-size:10.5px;">سبر جزء سابق</label><select style="padding:6px 7px; font-size:12px;" onchange="updateMbDraftField('${st.id}','sabrJuz',this.value)">${juzOptionsHtml(b.sabrJuz || '')}</select></div>
+              <div class="field"><label style="font-size:10.5px;">العلامة %</label><input type="text" inputmode="numeric" style="padding:6px 7px; font-size:12.5px; text-align:center; font-weight:800; direction:ltr;" value="${b.sabrScore !== undefined && b.sabrScore !== '' ? b.sabrScore : ''}" placeholder="98" oninput="updateMbDraftField('${st.id}','sabrScore',this.value)"></div>
+            </div>` : ''}
+
+            <div class="mb-st-period-box">
+              <div style="font-size:10.8px; font-weight:800; color:var(--brand-slate); margin-bottom:5px;">📅 فترة خاصة لهذا الطالب (لحساب حضوره ومراجعته لحاله)</div>
+              <div class="exec-grid-2" style="gap:5px;">
+                <div class="field"><label style="font-size:10px;">من تاريخ</label><input type="date" style="padding:4px 5px; font-size:11.5px; direction:ltr; text-align:center;" value="${b.fromDate || ''}" onchange="onMbStudentDateChange('${st.id}','from',this.value)"></div>
+                <div class="field"><label style="font-size:10px;">إلى تاريخ</label><input type="date" style="padding:4px 5px; font-size:11.5px; direction:ltr; text-align:center;" value="${b.toDate || ''}" onchange="onMbStudentDateChange('${st.id}','to',this.value)"></div>
+              </div>
+              ${stPeriodHint}
+              <div class="mb-st-period-acts ${ptsOn ? '' : 'cols-2'}">
+                <button type="button" class="g" onclick="mbFillOneStudentFromPeriod('${st.id}','att')">✓ حضوره</button>
+                ${!isRashidi ? `<button type="button" onclick="mbFillOneStudentFromPeriod('${st.id}','rev')">📘 مراجعته</button>` : ''}
+                ${ptsOn ? `<button type="button" onclick="mbFillOneStudentFromPeriod('${st.id}','pts')">⭐ نقاطه</button>` : ''}
+              </div>
+            </div>
+
+            <div class="form-grid" style="grid-template-columns:repeat(3, 1fr); gap:6px; margin-bottom:6px;">
+              <div class="field"><label style="font-size:10.5px;">أيام حضور</label><input type="text" inputmode="numeric" id="mbPres_${st.id}" style="padding:5px 7px; font-size:12.5px; text-align:center; font-weight:800;" value="${b.presentDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','presentDays',this.value)"></div>
+              <div class="field"><label style="font-size:10.5px;">غياب مبرر</label><input type="text" inputmode="numeric" style="padding:5px 7px; font-size:12.5px; text-align:center; font-weight:800;" value="${b.excusedDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','excusedDays',this.value)"></div>
+              <div class="field"><label style="font-size:10.5px;">غياب غير مبرر</label><input type="text" inputmode="numeric" style="padding:5px 7px; font-size:12.5px; text-align:center; font-weight:800;" value="${b.absentDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','absentDays',this.value)"></div>
+            </div>
+
+            <div class="field" style="margin-bottom:0;">
+              <input type="text" style="padding:5.5px 8px; font-size:11.8px;" value="${escapeHtml(b.note || '')}" placeholder="ملاحظة سابقة اختيارية (تظهر بالتقرير الشهري)..." oninput="updateMbDraftField('${st.id}','note',this.value)">
+            </div>
+          </details>
+        </div>
+
+        <div class="mb-st-foot">
+          ${filled ? `<button type="button" class="mb-clr-st-btn" onclick="mbClearOneStudent('${st.id}')">🗑️ مسح</button>` : ''}
+          <button type="button" class="mb-next-st-btn" onclick="mbGoNextStudent('${st.id}')">${nextItem ? `التالي: ${escapeHtml(nextItem.st.name)} ←` : '✓ تم هذا الطالب'}</button>
         </div>
       </div>
     </div>`;
@@ -22792,12 +23099,20 @@ function saveMonthlyBaseline() {
 
   const doSync = Boolean(document.getElementById("mbSyncStudentProfilesCheck")?.checked);
   let syncedProfiles = 0;
+  const pc = isPointsEnabled(h) ? ensurePointsConfig(h) : null;
   if (doSync) {
     const monthRecordedDaily = (h.sessions || []).filter(s => s && !s.noClass && s.type === "daily" && isSessionHasRealActivity(s) && getSessionReportMonth(s) === _mbMonthLabel);
     h.students.forEach(st => {
       const b = _mbDraft.students[st.id];
       if (!b) return;
       let changed = false;
+      // 1) Sync past points into active Points Cycle so Stats/Leaderboard immediately include them!
+      const bPts = Math.max(0, Math.round(parseArabicNum(b.points, 0)));
+      if (pc && bPts > 0) {
+        pc.pastPoints[st.id] = bPts;
+        changed = true;
+      }
+      // 2) Add Sabr Juz into student's memorized Juz list
       if (b.sabrJuz && st.track !== "rashidi") {
         const jObj = getJuzByName(b.sabrJuz);
         if (jObj) {
@@ -22809,6 +23124,7 @@ function saveMonthlyBaseline() {
           }
         }
       }
+      // 3) Advance student starting point to continue right after "إلى" (if not yet evaluated in this month)
       const hasDailyInMonth = monthRecordedDaily.some(s => {
         const r = s.records?.[st.id];
         return r && r.recEval && r.recEval !== "إعادة";
@@ -22831,9 +23147,15 @@ function saveMonthlyBaseline() {
       }
       if (changed) syncedProfiles++;
     });
+    // Refresh current open daily session for un-evaluated students so they start right after "إلى"!
+    const curS = getCurrentSession();
+    if (curS && !curS.noClass && curS.type === "daily") {
+      prefillDailyRecitation(false, false);
+    }
   }
 
   saveState();
+  updateDrawerQuickStates();
   closeModal("monthBaselineModal");
   renderMonthlyReport();
   renderStats();
@@ -22850,6 +23172,7 @@ async function clearCurrentMonthBaseline() {
   if (!h || !_mbMonthLabel || !(await makinConfirm(`مسح الرصيد السابق المُدخل لشهر ${_mbMonthLabel}؟`, { title: "🗑️ مسح الرصيد السابق", danger: true, okText: "مسح" }))) return;
   if (h.monthlyBaselines) delete h.monthlyBaselines[_mbMonthLabel];
   saveState();
+  updateDrawerQuickStates();
   closeModal("monthBaselineModal");
   renderMonthlyReport();
   renderStats();
@@ -33030,7 +33353,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v156";
+const TIBYAN_APP_VERSION = "v157";
 function mkIcon(name, cls = "") {
   return `<svg class="mk-ico${cls ? " " + cls : ""}" aria-hidden="true"><use href="#ico-${name}"/></svg>`;
 }
@@ -36084,5 +36407,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v156 -->
+<!-- Makin App v157 -->
 </html>
