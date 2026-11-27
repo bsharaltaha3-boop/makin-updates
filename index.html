@@ -2096,11 +2096,13 @@ table.t-daily{table-layout:fixed}
 .ssb-primary-acts{display:inline-flex;align-items:center;gap:5px;flex-shrink:0}
 .ssb-primary-acts .btn{padding:5px 9px;font-size:11.5px;border-radius:9px;height:30px}
 .ssb-tools-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:100%}
-.ssb-tool-btn{border:1px solid var(--line-strong);background:var(--bg);color:var(--brand-slate);border-radius:9px;padding:6.5px 4px;font-size:11.5px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis;transition:transform 0.08s ease,background 0.14s ease}
+.ssb-tools-4{display:grid;grid-template-columns:1fr 0.92fr 0.8fr 1.28fr;gap:5px;width:100%}
+.ssb-tool-btn{border:1px solid var(--line-strong);background:var(--bg);color:var(--brand-slate);border-radius:9px;padding:6.5px 3px;font-size:11.2px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:3.5px;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis;transition:transform 0.08s ease,background 0.14s ease}
 .ssb-tool-btn:active{transform:scale(0.96);background:var(--brand-tint)}
 .ssb-tool-btn.is-done{background:var(--green-bg);border-color:rgba(22,121,76,0.35);color:var(--green)}
-@media (max-width: 370px){
-.ssb-tool-btn{font-size:10.8px;padding:6px 2px;gap:3px}
+.ssb-tool-btn.is-zeroed{background:var(--red-bg);border-color:rgba(185,34,34,0.38);color:var(--red)}
+@media (max-width: 380px){
+.ssb-tool-btn{font-size:10.4px;padding:6px 2px;gap:2.5px}
 .ssb-chip{font-size:11px;padding:3px 6px}
 }
 .rep-status-line{display:flex;flex-direction:column;align-items:stretch;gap:6px}
@@ -2667,6 +2669,56 @@ html,body{background:#fff!important;padding:0!important;margin:0!important;color
 body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-card-v31,body:not(.printing-cert) .st-mgmt-card,body:not(.printing-cert) .sup-teacher-card{content-visibility:auto;contain-intrinsic-size:auto 88px}
 #hdExportStage *{content-visibility:visible!important}
 @media print{*{content-visibility:visible!important}}
+
+/* MAKIN v155: Smart Monthly Baseline & Fast Student Onboarding Studio */
+.mb-kpi-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-bottom:9px}
+.mb-kpi-tile{background:var(--white);border:1px solid var(--line);border-top:3px solid #142a46;border-radius:10px;padding:6px 4px;text-align:center}
+.mb-kpi-tile.g{border-top-color:var(--green)}
+.mb-kpi-tile.o{border-top-color:#c8a14b}
+.mb-kpi-tile.b{border-top-color:var(--blue)}
+.mb-kpi-tile b{display:block;font-size:14px;font-weight:800;color:var(--ink-900);line-height:1.15}
+.mb-kpi-tile span{display:block;font-size:10px;font-weight:700;color:var(--ink-500);margin-top:2px;white-space:nowrap}
+.mb-preset-chips{display:flex;gap:5px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none}
+.mb-preset-chips::-webkit-scrollbar{display:none}
+.mb-pchip{border:1px solid var(--line-strong);background:var(--bg);color:var(--brand-slate);border-radius:99px;padding:4.5px 10px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.mb-pchip:active{background:#142a46;color:#f6dc93;border-color:#142a46}
+.mb-period-info{background:var(--brand-tint);border:1px solid var(--line);border-right:3.5px solid #15629a;border-radius:9px;padding:6px 9px;font-size:11.2px;font-weight:700;color:var(--ink-700);line-height:1.5;margin-top:6px}
+.mb-bulk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}
+.mb-bulk-btn{border:1px solid var(--line-strong);background:var(--bg);color:var(--brand-slate);border-radius:10px;padding:7.5px 6px;font-size:11.5px;font-weight:800;cursor:pointer;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:transform 0.08s ease,background 0.14s ease}
+.mb-bulk-btn:active{transform:scale(0.97);background:#142a46;color:#ffffff}
+.mb-bulk-btn.g{background:var(--green-bg);color:var(--green);border-color:rgba(22,121,76,0.28)}
+.mb-bulk-btn.o{background:#fef7e0;color:#8a5e10;border-color:#e6c66b}
+.mb-bulk-btn.r{background:var(--red-bg);color:var(--red);border-color:rgba(185,34,34,0.28)}
+[data-theme="dark"] .mb-bulk-btn.o{background:#2b2412;color:#f4d274;border-color:#6b5317}
+.mb-filter-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:3px;margin-top:7px}
+.mb-fbtn{border:none;background:transparent;color:var(--ink-700);border-radius:7px;padding:5.5px 3px;font-size:11.2px;font-weight:800;cursor:pointer;white-space:nowrap}
+.mb-fbtn.on{background:#142a46;color:#ffffff}
+[data-theme="dark"] .mb-fbtn.on{background:#c8a14b;color:#0f233c}
+.base-st-card.v155{background:var(--white);border:1px solid var(--line);border-right:4px solid var(--line-strong);border-radius:13px;padding:9px 10px;margin-bottom:9px;box-shadow:0 1px 6px rgba(16,42,73,0.04)}
+.base-st-card.v155.is-filled{border-right-color:var(--green)}
+.mb-st-head{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.mb-st-name{font-size:13.5px;font-weight:800;color:var(--ink-900);min-width:0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mb-st-badges{display:inline-flex;align-items:center;gap:4px;flex-shrink:0}
+.mb-clr-st-btn{border:1px solid rgba(185,34,34,0.24);background:var(--red-bg);color:var(--red);border-radius:7px;padding:2px 7px;font-size:10.5px;font-weight:800;cursor:pointer}
+.mb-sec-box{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:7px 8px;margin-bottom:7px}
+.mb-sec-box:last-child{margin-bottom:0}
+.mb-sec-box.mem{border-right:3.5px solid #15629a}
+.mb-sec-box.rev{border-right:3.5px solid #c8a14b}
+.mb-sec-box.att{border-right:3.5px solid #16794c}
+.mb-sec-ttl{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11px;font-weight:800;color:var(--brand-slate);margin-bottom:6px}
+.mb-mini-act{border:1px solid var(--line-strong);background:var(--white);color:var(--blue);border-radius:7px;padding:2.5px 7px;font-size:10.2px;font-weight:800;cursor:pointer;white-space:nowrap}
+.mb-surah-pair{display:grid;grid-template-columns:1.8fr 0.72fr;gap:5px;align-items:end;margin-bottom:5px}
+.mb-surah-pair .field label{font-size:10.5px;margin-bottom:2px;color:var(--ink-500)}
+.mb-surah-pair .field select,.mb-surah-pair .field input{padding:6px 7px;font-size:12.5px;border-radius:8px}
+.mb-surah-pair .field input{text-align:center;font-weight:800;direction:ltr}
+.mb-auto-pg-row{display:flex;align-items:center;justify-content:space-between;gap:7px;background:var(--white);border:1px solid var(--line);border-radius:9px;padding:5px 8px;margin-top:4px}
+.mb-auto-pg-lbl{font-size:11.2px;font-weight:800;color:var(--ink-700);flex:1;min-width:0}
+.mb-auto-pg-lbl small{display:block;font-size:10px;color:var(--green);font-weight:700}
+.mb-auto-pg-inp{width:76px!important;height:31px;text-align:center;font-weight:800;font-size:14px;border:1.5px solid #15629a!important;border-radius:8px!important;background:var(--bg)!important;color:var(--ink-900);direction:ltr;padding:0 4px!important}
+.mb-sabr-row{display:grid;grid-template-columns:1.7fr 0.75fr;gap:6px;margin-top:6px}
+.mb-sync-bar{display:flex;align-items:center;gap:7px;background:var(--brand-tint);border:1px solid var(--line);border-radius:10px;padding:7px 9px;font-size:11.2px;font-weight:800;color:var(--brand-slate);cursor:pointer;width:100%;margin-bottom:7px}
+.mb-sync-bar input{width:17px;height:17px;accent-color:#16794c;flex-shrink:0}
+
 </style>
 </head>
 <body>
@@ -3232,7 +3284,7 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-refresh"/></svg></span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v154</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v156</span>
         </button>
       </div>
     </div>
@@ -4070,48 +4122,81 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
   </div>
 </div>
 
-<!-- ===== MODAL: MONTHLY BASELINE (PRIOR DAYS OF THE MONTH — v154 EXECUTIVE SINGLE-SCROLL) ===== -->
+<!-- ===== MODAL: MONTHLY BASELINE & SMART STUDENT ONBOARDING STUDIO (v155) ===== -->
 <div class="modal-backdrop exec-modal-backdrop" id="monthBaselineModal" style="z-index:154;" onclick="if(event.target===this) closeModal('monthBaselineModal')">
-  <div class="exec-modal-box" style="max-width:600px;">
+  <div class="exec-modal-box" style="max-width:620px;">
     <div class="exec-modal-hdr">
       <div class="es-handle"></div>
       <div class="exec-modal-hdr-row">
         <div style="min-width:0; flex:1;">
-          <h3 id="mbModalTitle">📝 رصيد الأيام الماضية من الشهر</h3>
-          <div class="exec-modal-sub">إدخال كل إنجاز سابق للطالب (حفظ، مراجعة، نقاط، سبر، حضور وغياب)</div>
+          <h3 id="mbModalTitle">📝 رصيد الأيام الماضية</h3>
+          <div class="exec-modal-sub" id="mbModalSub">اختر الفترة والسور — والتطبيق يحسب الصفحات وأيام الدوام تلقائياً</div>
         </div>
         <button type="button" class="exec-modal-close" onclick="closeModal('monthBaselineModal')" aria-label="إغلاق">×</button>
       </div>
     </div>
 
     <div class="exec-modal-body">
-      <p style="font-size:12px; color:var(--ink-700); background:var(--white); border:1px solid var(--line); padding:8px 10px; border-radius:10px; border-right:3.5px solid #142a46; margin-bottom:10px; line-height:1.55;">
-        أدخل هنا إنجاز الأيام التي مضت من الشهر الهجري؛ وسيُضاف <b>تلقائياً</b> إلى الجلسات المسجّلة بالتطبيق في التقرير الشهري والإحصائيات والكشف الفردي. (أو اضغط <a href="#" onclick="event.preventDefault(); closeModal('monthBaselineModal'); openNewSessionModal(true);" style="color:var(--blue); font-weight:800;">تعبئة يوم بالتاريخ</a>).
-      </p>
-      <div class="exec-card" style="margin-bottom:10px;">
-        <div class="exec-grid-2" style="margin-bottom:8px;">
+      <div id="mbLiveKpiBar" class="mb-kpi-4"></div>
+
+      <div class="exec-card" style="margin-bottom:9px;">
+        <div class="exec-card-ttl" style="margin-bottom:7px;">
+          <span>🗓️ الشهر والفترة الزمنية (حساب تلقائي)</span>
+          <a href="#" onclick="event.preventDefault(); closeModal('monthBaselineModal'); openNewSessionModal(true);" style="font-size:11px; color:var(--blue); font-weight:800; text-decoration:none;">+ يوم بتاريخ</a>
+        </div>
+        <div class="exec-grid-2" style="margin-bottom:7px;">
           <div class="field">
             <label>الشهر الهجري</label>
             <select id="mbMonthSelect" onchange="onMbMonthSelectChange(this.value)"></select>
           </div>
           <div class="field">
-            <label>أيام الدوام الماضية بالشهر</label>
-            <input type="text" inputmode="numeric" id="mbExtraDays" placeholder="مثال: 4">
+            <label>أيام الدوام الماضية</label>
+            <input type="text" inputmode="numeric" id="mbExtraDays" placeholder="مثال: 6" oninput="onMbExtraDaysInput(this.value)">
           </div>
         </div>
-        <div class="field" style="margin-bottom:0;">
-          <label>بحث عن طالب</label>
-          <input type="text" id="mbStudentSearch" placeholder="🔍 اكتب اسم الطالب..." oninput="renderMonthlyBaselineList()">
+
+        <div class="mb-preset-chips">
+          <button type="button" class="mb-pchip" onclick="applyMbDatePreset('month_to_today')">📅 من أول الشهر لليوم</button>
+          <button type="button" class="mb-pchip" onclick="applyMbDatePreset('first_week')">📆 أول أسبوع</button>
+          <button type="button" class="mb-pchip" onclick="applyMbDatePreset('first_two_weeks')">📆 أول أسبوعين</button>
+          <button type="button" class="mb-pchip" onclick="applyMbDatePreset('full_month')">🗓️ الشهر كاملاً</button>
         </div>
+
+        <div class="exec-grid-2" style="margin-bottom:0;">
+          <div class="field">
+            <label>من تاريخ (اختياري)</label>
+            <input type="date" id="mbFromDate" style="direction:ltr; text-align:center;" onchange="onMbDateRangeChange()">
+          </div>
+          <div class="field">
+            <label>إلى تاريخ (اختياري)</label>
+            <input type="date" id="mbToDate" style="direction:ltr; text-align:center;" onchange="onMbDateRangeChange()">
+          </div>
+        </div>
+        <div id="mbPeriodCalcHint"></div>
+
+        <div id="mbBulkActionsWrap"></div>
       </div>
+
+      <div class="exec-card" style="margin-bottom:9px; padding:9px 10px;">
+        <div class="search-input-wrap" style="width:100%;">
+          <input type="text" id="mbStudentSearch" placeholder="🔍 ابحث باسم الطالب..." oninput="onMbSearchInput(this.value)" style="padding:7px 10px 7px 32px; font-size:12.5px;">
+          <button type="button" id="mbStudentSearchClear" class="search-clear-btn" style="display:none;" onclick="clearMbStudentSearch()" aria-label="مسح البحث">×</button>
+        </div>
+        <div id="mbFilterBar" class="mb-filter-3"></div>
+      </div>
+
       <div id="mbStudentsList"></div>
     </div>
 
-    <div class="exec-modal-footer" style="flex-wrap:wrap; gap:6px;">
-      <button type="button" class="btn btn-danger btn-sm" onclick="clearCurrentMonthBaseline()">🗑️ مسح الشهر</button>
-      <div style="display:flex; gap:6px; flex:1; justify-content:flex-end;">
+    <div class="exec-modal-footer" style="flex-direction:column; align-items:stretch; gap:0; padding-top:8px;">
+      <label class="mb-sync-bar">
+        <input type="checkbox" id="mbSyncStudentProfilesCheck" checked>
+        <span>🔄 تحديث نقطة انطلاق الطالب تلقائياً ليكمل بعد «إلى» + حفظ الأجزاء المسبورة بملفه</span>
+      </label>
+      <div style="display:flex; gap:6px; width:100%; align-items:center;">
+        <button type="button" class="btn btn-danger btn-sm" onclick="clearCurrentMonthBaseline()">🗑️ مسح الشهر</button>
         <button type="button" class="btn btn-outline btn-sm" onclick="closeModal('monthBaselineModal')">إلغاء</button>
-        <button type="button" class="btn btn-primary btn-sm" style="flex:1;" onclick="saveMonthlyBaseline()">✓ حفظ ودمج بالتقرير</button>
+        <button type="button" class="btn btn-primary btn-sm" style="flex:1; padding:9px 10px;" onclick="saveMonthlyBaseline()">✓ حفظ ودمج بالتقرير</button>
       </div>
     </div>
   </div>
@@ -5755,6 +5840,7 @@ function ensureRecordBonuses(r) {
 
 function formatPointsBreakdownText(s, r, st) {
   if (!s || !r || (r.attendance && String(r.attendance || "").includes("غياب"))) return "غائب: 0 نقطة";
+  if (s.pointsZeroed && !(Number(r.points) > 0)) return "🔄 نقاط هذا اليوم مُصفّرة للجميع (0 نقطة) — يمكنك إلغاء التصفير من شريط الجلسة";
   if (r.ptsForgotSheet) return "📄 نسي إحضار ورقة النقاط — 0 نقطة (لا تُحتسب أي نقاط اليوم)";
   const isPres = isCountedPresent(r.attendance);
   if (!isPres && !r.recEval && !r.minEval && !r.majEval) return "لم يُقيّم بعد";
@@ -6149,6 +6235,7 @@ function buildConciseRecNote(ev, opts = {}) {
 
 function computeRecordPoints(s, r, st) {
   if (!s || !r) return 0;
+  if (s.pointsZeroed) return 0;
   if (r.ptsForgotSheet) return 0;
   if (r.attendance && String(r.attendance || "").includes("غياب")) return 0;
   const isRashidi = st?.track === "rashidi";
@@ -15431,6 +15518,7 @@ async function resetCurrentSessionEvaluations() {
   s.records = {};
   s.queue = [];
   s.finalized = false;
+  s.pointsZeroed = false;
   openCardId = null;
   closeModal("studentEvalSheet");
   if (s.type === "saturday") prefillSaturdayReviews(false, true);
@@ -15439,6 +15527,52 @@ async function resetCurrentSessionEvaluations() {
   renderSessionView();
   if (document.getElementById("view-reports")?.classList.contains("active")) renderDailyReport();
   showToast("✓ تم مسح تقييم جميع الطلاب وإعادة تعبئة الجلسة من جديد", { undo: true });
+}
+
+
+async function toggleZeroCurrentSessionPoints() {
+  const h = getActiveHalaqa(), s = getCurrentSession();
+  if (!h || !s) return;
+  if (!isPointsEnabled(h)) {
+    showToast("برنامج النقاط غير مفعّل حالياً في هذه الحلقة");
+    return;
+  }
+  const dayLbl = `${s.dayName || ""} (${s.hijriDate || s.date || ""})`;
+  if (!s.pointsZeroed) {
+    const ok = await makinConfirm(
+      `هل تريد تصفير نقاط جميع الطلاب في جلسة ${dayLbl} فقط لتصبح 0 للجميع؟\n\n• لن تتأثر نقاط الأيام الماضية ولا دورة النقاط ولا تقييمات الحفظ والمراجعة.\n• يمكنك إلغاء التصفير وإعادة احتساب نقاط اليوم في أي وقت.`,
+      { title: "🔄 تصفير نقاط اليوم للجميع", danger: true, okText: "تصفير نقاط اليوم" }
+    );
+    if (!ok) return;
+    captureSessionUndoSnapshot("تصفير نقاط اليوم للجميع");
+    s.pointsZeroed = true;
+    (h.students || []).forEach(st => {
+      const r = getStudentRecord(s, st.id);
+      r.points = 0;
+    });
+    saveState();
+    renderSessionPreservingScroll();
+    if (document.getElementById("view-reports")?.classList.contains("active")) renderDailyReport();
+    if (document.getElementById("view-stats")?.classList.contains("active")) renderStats();
+    showToast("🔄 تم تصفير نقاط جميع الطلاب لهذا اليوم فقط (0 للجميع) ✓", { undo: true });
+  } else {
+    const ok = await makinConfirm(
+      `نقاط جلسة ${dayLbl} مُصفّرة حالياً (0 للجميع).\n\nهل تريد إلغاء التصفير وإعادة احتساب نقاط جميع طلاب اليوم تلقائياً حسب تقييماتهم؟`,
+      { title: "⭐ إعادة احتساب نقاط اليوم", okText: "إعادة الاحتساب" }
+    );
+    if (!ok) return;
+    captureSessionUndoSnapshot("إعادة احتساب نقاط اليوم");
+    s.pointsZeroed = false;
+    (h.students || []).forEach(st => {
+      const r = getStudentRecord(s, st.id);
+      r.points = computeRecordPoints(s, r, st);
+    });
+    saveState();
+    renderSessionPreservingScroll();
+    if (document.getElementById("view-reports")?.classList.contains("active")) renderDailyReport();
+    if (document.getElementById("view-stats")?.classList.contains("active")) renderStats();
+    showToast("⭐ تم إلغاء التصفير وإعادة احتساب نقاط اليوم بنجاح ✓", { undo: true });
+  }
 }
 
 function deleteCurrentSession() {
@@ -16744,6 +16878,11 @@ function openDayOptionsModal() {
         <span>📚 دروس ونشاطات الجلسة (استهداء • حديث • نشاطات)</span>
         <span>${getSessionLessonsList(s).length ? '✓' : '+'}</span>
       </button>
+      ${isPointsEnabled(getActiveHalaqa()) ? `
+      <button type="button" class="day-opt-btn" style="color:${s.pointsZeroed ? 'var(--green)' : 'var(--red)'}; border-color:${s.pointsZeroed ? 'rgba(22,121,76,0.32)' : 'rgba(185,34,34,0.28)'}; background:${s.pointsZeroed ? 'var(--green-bg)' : 'var(--red-bg)'};" onclick="closeModal('dayOptionsModal'); toggleZeroCurrentSessionPoints();">
+        <span>${s.pointsZeroed ? '⭐ إلغاء التصفير وإعادة احتساب نقاط هذا اليوم' : '🔄 تصفير نقاط جميع الطلاب لهذا اليوم فقط (0)'}</span>
+        <span>${s.pointsZeroed ? '↺' : '0'}</span>
+      </button>` : ''}
       <button type="button" class="day-opt-btn" style="color:var(--orange); border-color:rgba(184,86,16,0.3); background:var(--orange-bg);" onclick="closeModal('dayOptionsModal'); resetCurrentSessionEvaluations();">
         <span>🔄 إزالة تقييم جميع الطلاب (البدء من جديد)</span>
         <span>↺</span>
@@ -17247,7 +17386,10 @@ function buildSingleStudentCardHtml(h, s, item, _prePrevCandidates, _preRelevant
 
 
 function buildSessionStatusBarHtml(s, doneCnt, totalSt, absCnt, pendingCnt, donePct) {
+  const h = getActiveHalaqa();
   const hasDL = getSessionLessonsList(s).length > 0;
+  const ptsOn = isPointsEnabled(h);
+  const isZeroed = Boolean(s.pointsZeroed);
   const primaryActs = pendingCnt > 0
     ? `<button type="button" class="btn btn-primary btn-sm" onclick="openNextPendingStudent()" title="فتح المتبقي التالي">${mkIcon("skip-next")} التالي</button>
        <button type="button" class="btn btn-warn btn-sm" onclick="openAutoAbsentModal()">غياب (${pendingCnt})</button>`
@@ -17261,10 +17403,11 @@ function buildSessionStatusBarHtml(s, doneCnt, totalSt, absCnt, pendingCnt, done
       </div>
       <div class="ssb-primary-acts">${primaryActs}</div>
     </div>
-    <div class="ssb-tools-3">
+    <div class="${ptsOn ? 'ssb-tools-4' : 'ssb-tools-3'}">
       <button type="button" class="ssb-tool-btn" onclick="${prefillCall}" title="تحديث وتعبئة الواجبات تلقائياً">${mkIcon("refresh")} الواجبات</button>
       <button type="button" class="ssb-tool-btn ${hasDL ? 'is-done' : ''}" onclick="openSessionLessonsModal()" title="تسجيل دروس استهداء والحديث والنشاطات">${mkIcon("book-open")} الدروس${hasDL ? ' ✓' : ''}</button>
       <button type="button" class="ssb-tool-btn" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">${mkIcon("zap")} تفقد</button>
+      ${ptsOn ? `<button type="button" class="ssb-tool-btn ${isZeroed ? 'is-zeroed' : ''}" onclick="toggleZeroCurrentSessionPoints()" title="${isZeroed ? 'نقاط اليوم مُصفّرة — اضغط لإعادة الاحتساب' : 'تصفير نقاط جميع الطلاب لهذا اليوم فقط'}">${mkIcon("star")} ${isZeroed ? 'نقاط: 0 ↺' : 'تصفير النقاط'}</button>` : ''}
     </div>
     <div class="ssb-prog-line"><div class="ssb-prog-fill" style="width:${donePct}%;"></div></div>`;
 }
@@ -18160,11 +18303,12 @@ function renderCardBody(s, st, r, idx) {
   const bonusActiveWords = [adabOn ? "أدب" : "", partOn ? "مشاركة" : "", earlyOn ? "مبكر" : ""].filter(Boolean).join(" • ") || "بدون إضافي";
 
   const forgotSheetOn = Boolean(r.ptsForgotSheet);
+  const dayPtsZeroed = Boolean(s.pointsZeroed && !(Number(r.points) > 0));
   const bonusSectionHtml = (!isAbsCard && isPointsEnabled(h)) ? `
-      <button type="button" class="es-pts-bar-v114 ${evalBonusOpen ? 'is-open' : ''} ${forgotSheetOn ? 'is-forgot' : ''}" onclick="toggleEvalBonusDrawer('${st.id}')">
+      <button type="button" class="es-pts-bar-v114 ${evalBonusOpen ? 'is-open' : ''} ${(forgotSheetOn || dayPtsZeroed) ? 'is-forgot' : ''}" onclick="toggleEvalBonusDrawer('${st.id}')">
         <span class="es-pts-bar-l">
-          <span class="es-pts-bar-val">${forgotSheetOn ? '📄 0 نقطة' : `⭐ ${r.points || 0} نقطة`}</span>
-          <span class="es-pts-bar-sub">${forgotSheetOn ? 'نسي إحضار ورقة النقاط' : escapeHtml(bonusActiveWords)}</span>
+          <span class="es-pts-bar-val">${forgotSheetOn ? '📄 0 نقطة' : (dayPtsZeroed ? '🔄 0 نقطة' : `⭐ ${r.points || 0} نقطة`)}</span>
+          <span class="es-pts-bar-sub">${forgotSheetOn ? 'نسي إحضار ورقة النقاط' : (dayPtsZeroed ? 'نقاط هذا اليوم مُصفّرة للجميع' : escapeHtml(bonusActiveWords))}</span>
         </span>
         <span class="es-pts-bar-r">${evalBonusOpen ? 'إخفاء ▴' : 'النقاط والسلوك ▾'}</span>
       </button>
@@ -21860,7 +22004,7 @@ function getMonthBaselineObj(h, monthLabel) {
 }
 
 function getStudentBaselineTotals(h, monthFilter, stId) {
-  const res = { fromMem: "", toMem: "", memPages: 0, revPages: 0, points: 0, presentDays: 0, excusedDays: 0, absentDays: 0, sabrList: [] };
+  const res = { fromMem: "", toMem: "", memPages: 0, rashidiPages: 0, revPages: 0, points: 0, presentDays: 0, excusedDays: 0, absentDays: 0, sabrList: [], note: "" };
   if (!h || !h.monthlyBaselines) return res;
   const keys = monthFilter === "ALL" ? Object.keys(h.monthlyBaselines) : [monthFilter];
   keys.forEach(mk => {
@@ -21869,13 +22013,21 @@ function getStudentBaselineTotals(h, monthFilter, stId) {
     if (!res.fromMem && sb.fromMem) res.fromMem = sb.fromMem.trim();
     if (sb.toMem) res.toMem = sb.toMem.trim();
     res.memPages += parseArabicNum(sb.memPages, 0);
+    res.rashidiPages += parseArabicNum(sb.rashidiPages, 0);
     res.revPages += parseArabicNum(sb.revPages, 0);
     res.points += parseArabicNum(sb.points, 0);
     res.presentDays += Math.max(0, Math.round(parseArabicNum(sb.presentDays, 0)));
     res.excusedDays += Math.max(0, Math.round(parseArabicNum(sb.excusedDays, 0)));
     res.absentDays += Math.max(0, Math.round(parseArabicNum(sb.absentDays, 0)));
     const cleanBaseSabr = formatJuzClean(sb.sabrJuz);
-    if (cleanBaseSabr && !res.sabrList.includes(cleanBaseSabr)) res.sabrList.push(cleanBaseSabr);
+    if (cleanBaseSabr) {
+      const hasSc = sb.sabrScore !== "" && sb.sabrScore !== undefined && sb.sabrScore !== null && !isNaN(Number(sb.sabrScore));
+      const scLbl = hasSc ? `${cleanBaseSabr} (${Math.round(Number(sb.sabrScore))}%)` : cleanBaseSabr;
+      if (!res.sabrList.some(x => x.startsWith(cleanBaseSabr))) res.sabrList.push(scLbl);
+    }
+    if (sb.note && String(sb.note).trim()) {
+      res.note = res.note ? `${res.note} • ${String(sb.note).trim()}` : String(sb.note).trim();
+    }
   });
   return res;
 }
@@ -21899,13 +22051,13 @@ function computeMonthlyData(monthFilter) {
 
   const rows = h.students.map(st => {
     const base = isPointsCycle
-      ? { fromMem: "", toMem: "", memPages: 0, revPages: 0, points: getStudentPastPoints(h, st.id), presentDays: 0, excusedDays: 0, absentDays: 0, sabrList: [] }
+      ? { fromMem: "", toMem: "", memPages: 0, rashidiPages: 0, revPages: 0, points: getStudentPastPoints(h, st.id), presentDays: 0, excusedDays: 0, absentDays: 0, sabrList: [], note: "" }
       : getStudentBaselineTotals(h, monthFilter, st.id);
     let firstMem = base.fromMem || null;
     let lastMem = base.toMem || null;
-    let memPages = base.memPages;
+    let memPages = st.track === "rashidi" ? 0 : base.memPages;
     let revPages = base.revPages;
-    let rashidiPages = 0;
+    let rashidiPages = st.track === "rashidi" ? (base.rashidiPages || base.memPages || 0) : (base.rashidiPages || 0);
     let totalPoints = base.points + (!isPointsCycle && monthFilter === "ALL" ? getStudentPastPoints(h, st.id) : 0);
     let presentDays = base.presentDays || 0, lateDays = 0, excusedDays = base.excusedDays || 0, absentDays = base.absentDays || 0;
     const sabrList = [...base.sabrList];
@@ -21963,7 +22115,7 @@ function computeMonthlyData(monthFilter) {
       sabrList, sabrCount: sabrList.length, totalPoints,
       presentDays, lateDays, excusedDays, absentDays, totalAbsences: excusedDays + absentDays,
       autoTajweedNote: (!isPointsCycle && st.track !== "rashidi") ? computeStudentMonthlyTopTajweedText(h, st.id, monthFilter) : "",
-      customNote: replaceLegacyJuzOrdinalsInText(h.monthlyNotes?.[noteKey] ?? ""), noteKey
+      customNote: replaceLegacyJuzOrdinalsInText(h.monthlyNotes?.[noteKey] ?? base.note ?? ""), noteKey
     };
   });
 
@@ -21981,38 +22133,354 @@ function computeMonthlyData(monthFilter) {
   return { rows, totals };
 }
 
-// ==================== MONTHLY BASELINE MODAL (MID-MONTH JOINERS) ====================
+// ==================== MONTHLY BASELINE & SMART STUDENT ONBOARDING STUDIO (v155) ====================
 let _mbMonthLabel = "";
-let _mbDraft = { extraDays: 0, students: {} };
+let _mbFilter = "all"; // "all" | "empty" | "filled"
+let _mbDraft = { extraDays: 0, fromDate: "", toDate: "", students: {} };
+
+function _parseBaselineSurahText(txt) {
+  const s = String(txt || "").trim();
+  if (!s) return { surahId: "", ayah: "" };
+  const sObj = findSurahByName(s);
+  if (!sObj) return { surahId: "", ayah: "" };
+  const nums = toAsciiDigits(s).match(/\d+/g);
+  const aVal = nums && nums.length ? Math.max(1, Math.min(sObj.a, Number(nums[nums.length - 1]))) : "";
+  return { surahId: String(sObj.id), ayah: aVal };
+}
+
+function _isMbStudentFilled(b) {
+  if (!b) return false;
+  return Boolean(
+    b.fromMem || b.toMem || b.fromSurahId || b.toSurahId ||
+    parseArabicNum(b.memPages, 0) > 0 || parseArabicNum(b.rashidiPages, 0) > 0 ||
+    parseArabicNum(b.revPages, 0) > 0 || parseArabicNum(b.points, 0) > 0 ||
+    b.sabrJuz || parseArabicNum(b.presentDays, 0) > 0 ||
+    parseArabicNum(b.excusedDays, 0) > 0 || parseArabicNum(b.absentDays, 0) > 0 ||
+    (b.note && String(b.note).trim())
+  );
+}
+
+function _ensureMbStudentObj(stId) {
+  if (!_mbDraft.students[stId]) {
+    _mbDraft.students[stId] = {
+      fromMem: "", toMem: "", fromSurahId: "", fromAyah: "", toSurahId: "", toAyah: "",
+      rashidiFrom: "", rashidiTo: "", rashidiPages: 0,
+      memPages: 0, revPages: 0, points: 0,
+      presentDays: 0, excusedDays: 0, absentDays: 0,
+      sabrJuz: "", sabrScore: "", note: ""
+    };
+  }
+  return _mbDraft.students[stId];
+}
 
 function _getAvailableBaselineMonths(h) {
   const todayHj = getExactHijriInfo(todayISO());
-  const set = new Set([todayHj.monthLabel]);
-  (h?.sessions || []).forEach(s => {
-    const m = getSessionReportMonth(s);
-    if (m) set.add(m);
-  });
-  Object.keys(h?.monthlyBaselines || {}).forEach(m => { if (m && m !== "ALL") set.add(m); });
-  return Array.from(set);
+  const list = [];
+  const addM = lbl => { if (lbl && lbl !== "ALL" && !list.includes(lbl)) list.push(lbl); };
+  addM(todayHj.monthLabel);
+  for (let delta = -1; delta >= -3; delta--) {
+    let m = todayHj.month + delta, y = todayHj.year;
+    while (m < 1) { m += 12; y--; }
+    addM(`${HIJRI_MONTHS[m]} ${y}`);
+  }
+  let nm = todayHj.month + 1, ny = todayHj.year;
+  if (nm > 12) { nm = 1; ny++; }
+  addM(`${HIJRI_MONTHS[nm]} ${ny}`);
+  (h?.sessions || []).forEach(s => addM(getSessionReportMonth(s)));
+  Object.keys(h?.monthlyBaselines || {}).forEach(m => addM(m));
+  return list;
+}
+
+function _findHijriMonthIsoBounds(monthLbl) {
+  const baseDate = new Date(todayISO() + "T12:00:00");
+  let firstIso = "", lastIso = "";
+  for (let off = -135; off <= 45; off++) {
+    const d = new Date(baseDate.getTime());
+    d.setDate(d.getDate() + off);
+    const iso = dateToISO(d);
+    if (getExactHijriInfo(iso).monthLabel === monthLbl) {
+      if (!firstIso) firstIso = iso;
+      lastIso = iso;
+    } else if (firstIso) {
+      break;
+    }
+  }
+  return { firstIso, lastIso };
+}
+
+function _countClassDaysInRange(h, fromIso, toIso) {
+  if (!h || !fromIso || !toIso || fromIso > toIso) return null;
+  const classDows = getHalaqaClassDays(h);
+  const revDows = getHalaqaReviewDays(h);
+  const recordedSet = new Set((h.sessions || []).filter(s => s && !s.noClass && isSessionHasRealActivity(s) && s.date).map(s => s.date));
+  let total = 0, daily = 0, rev = 0, alreadyRecorded = 0;
+  const d = new Date(fromIso + "T12:00:00");
+  const endD = new Date(toIso + "T12:00:00");
+  let guard = 0;
+  while (d <= endD && guard < 120) {
+    guard++;
+    const dow = d.getDay();
+    const iso = dateToISO(d);
+    if (classDows.includes(dow)) {
+      total++;
+      if (revDows.includes(dow)) rev++;
+      else daily++;
+      if (recordedSet.has(iso)) alreadyRecorded++;
+    }
+    d.setDate(d.getDate() + 1);
+  }
+  return { total, daily, rev, alreadyRecorded, unrecorded: Math.max(0, total - alreadyRecorded) };
 }
 
 function _loadMbMonthIntoDraft(h, monthLbl) {
   _mbMonthLabel = monthLbl;
   const existing = getMonthBaselineObj(h, _mbMonthLabel);
+  const cloned = JSON.parse(JSON.stringify(existing.students || {}));
+  Object.keys(cloned).forEach(stId => {
+    const b = cloned[stId];
+    if (!b) return;
+    if (!b.fromSurahId && b.fromMem) {
+      const p1 = _parseBaselineSurahText(b.fromMem);
+      if (p1.surahId) { b.fromSurahId = p1.surahId; b.fromAyah = p1.ayah || 1; }
+    }
+    if (!b.toSurahId && b.toMem) {
+      const p2 = _parseBaselineSurahText(b.toMem);
+      if (p2.surahId) { b.toSurahId = p2.surahId; b.toAyah = p2.ayah || SURAH_MAP[Number(p2.surahId)]?.a || 1; }
+    }
+  });
   _mbDraft = {
     extraDays: parseArabicNum(existing.extraDays, 0),
-    students: JSON.parse(JSON.stringify(existing.students || {}))
+    fromDate: existing.fromDate || "",
+    toDate: existing.toDate || "",
+    students: cloned
   };
   const titleEl = document.getElementById("mbModalTitle");
-  if (titleEl) titleEl.textContent = `📝 رصيد الأيام الماضية — ${_mbMonthLabel} هـ`;
+  if (titleEl) titleEl.textContent = "📝 رصيد الأيام الماضية";
+  const subEl = document.getElementById("mbModalSub");
+  if (subEl) subEl.textContent = `شهر ${_mbMonthLabel} هـ • إدخال سريع وحساب تلقائي`;
   const daysEl = document.getElementById("mbExtraDays");
   if (daysEl) daysEl.value = _mbDraft.extraDays || "";
+  const fEl = document.getElementById("mbFromDate");
+  const tEl = document.getElementById("mbToDate");
+  if (fEl) fEl.value = _mbDraft.fromDate || "";
+  if (tEl) tEl.value = _mbDraft.toDate || "";
+  renderMbPeriodAndBulkUI();
+}
+
+function renderMbPeriodAndBulkUI() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const hintEl = document.getElementById("mbPeriodCalcHint");
+  const bulkEl = document.getElementById("mbBulkActionsWrap");
+  const stats = _countClassDaysInRange(h, _mbDraft.fromDate, _mbDraft.toDate);
+  if (hintEl) {
+    if (stats) {
+      const hj1 = getExactHijriInfo(_mbDraft.fromDate).formatted;
+      const hj2 = getExactHijriInfo(_mbDraft.toDate).formatted;
+      const recNote = stats.alreadyRecorded > 0
+        ? `<br>⚠️ منها <b>${stats.alreadyRecorded}</b> جلسة مسجّلة بالتطبيق — والمتبقي <b>${stats.unrecorded}</b> يوم غير مسجّل.`
+        : "";
+      hintEl.innerHTML = `<div class="mb-period-info">
+        📊 الفترة (${hj1} ← ${hj2}): <b>${stats.total}</b> يوم دوام (<b>${stats.daily}</b> تسميع + <b>${stats.rev}</b> مراجعة)${recNote}
+      </div>`;
+    } else {
+      hintEl.innerHTML = "";
+    }
+  }
+  if (bulkEl) {
+    const ptsOn = isPointsEnabled(h);
+    bulkEl.innerHTML = `<div class="mb-bulk-grid">
+      <button type="button" class="mb-bulk-btn g" onclick="mbBulkFillAttendance()">✅ حضور للكل</button>
+      <button type="button" class="mb-bulk-btn" onclick="mbBulkEstimateReview()">📘 مراجعة للكل</button>
+      ${ptsOn ? `<button type="button" class="mb-bulk-btn o" onclick="mbBulkEstimatePoints()">⭐ تقدير نقاط للكل</button>` : ""}
+      ${ptsOn ? `<button type="button" class="mb-bulk-btn r" onclick="mbBulkZeroAllPoints()">🔄 تصفير نقاط القائمة</button>` : ""}
+    </div>`;
+  }
+}
+
+function renderMbLiveSummaryUI() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const kpiEl = document.getElementById("mbLiveKpiBar");
+  const fBar = document.getElementById("mbFilterBar");
+  let filledCnt = 0, memSum = 0, revSum = 0, sabrCnt = 0;
+  (h.students || []).forEach(st => {
+    const b = _mbDraft.students[st.id];
+    if (_isMbStudentFilled(b)) filledCnt++;
+    if (b) {
+      memSum += st.track === "rashidi" ? parseArabicNum(b.rashidiPages || b.memPages, 0) : parseArabicNum(b.memPages, 0);
+      revSum += parseArabicNum(b.revPages, 0);
+      if (b.sabrJuz) sabrCnt++;
+    }
+  });
+  const totalSt = (h.students || []).length;
+  const emptyCnt = Math.max(0, totalSt - filledCnt);
+  if (kpiEl) {
+    kpiEl.innerHTML = `
+      <div class="mb-kpi-tile g"><b>${filledCnt} / ${totalSt}</b><span>طالب مُدخَل</span></div>
+      <div class="mb-kpi-tile b"><b>${formatNum(Math.round(memSum * 100) / 100)} ص</b><span>الحفظ</span></div>
+      <div class="mb-kpi-tile o"><b>${formatNum(Math.round(revSum * 100) / 100)} ص</b><span>المراجعة</span></div>
+      <div class="mb-kpi-tile"><b>${sabrCnt}</b><span>أجزاء سبر</span></div>`;
+  }
+  if (fBar) {
+    fBar.innerHTML = `
+      <button type="button" class="mb-fbtn ${_mbFilter === 'all' ? 'on' : ''}" onclick="setMbFilter('all')">الكل (${totalSt})</button>
+      <button type="button" class="mb-fbtn ${_mbFilter === 'empty' ? 'on' : ''}" onclick="setMbFilter('empty')">لم يُدخَل (${emptyCnt})</button>
+      <button type="button" class="mb-fbtn ${_mbFilter === 'filled' ? 'on' : ''}" onclick="setMbFilter('filled')">مُدخَل ✓ (${filledCnt})</button>`;
+  }
+}
+
+function setMbFilter(mode) {
+  _mbFilter = mode || "all";
+  renderMbLiveSummaryUI();
+  renderMonthlyBaselineList();
+}
+
+function onMbSearchInput(val) {
+  const clr = document.getElementById("mbStudentSearchClear");
+  if (clr) clr.style.display = String(val || "").trim() ? "inline-flex" : "none";
+  renderMonthlyBaselineList();
+}
+
+function clearMbStudentSearch() {
+  const inp = document.getElementById("mbStudentSearch");
+  if (inp) inp.value = "";
+  const clr = document.getElementById("mbStudentSearchClear");
+  if (clr) clr.style.display = "none";
+  renderMonthlyBaselineList();
+}
+
+function onMbExtraDaysInput(val) {
+  _mbDraft.extraDays = Math.max(0, Math.round(parseArabicNum(val, 0)));
+}
+
+function onMbDateRangeChange() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const f = document.getElementById("mbFromDate")?.value || "";
+  const t = document.getElementById("mbToDate")?.value || "";
+  _mbDraft.fromDate = f;
+  _mbDraft.toDate = t;
+  const stats = _countClassDaysInRange(h, f, t);
+  if (stats) {
+    const autoDays = stats.unrecorded > 0 ? stats.unrecorded : stats.total;
+    _mbDraft.extraDays = autoDays;
+    const daysEl = document.getElementById("mbExtraDays");
+    if (daysEl) daysEl.value = autoDays || "";
+  }
+  renderMbPeriodAndBulkUI();
+}
+
+function applyMbDatePreset(preset) {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const { firstIso, lastIso } = _findHijriMonthIsoBounds(_mbMonthLabel);
+  if (!firstIso) {
+    showToast("اختر التاريخين يدوياً لهذا الشهر");
+    return;
+  }
+  const today = todayISO();
+  let f = firstIso, t = lastIso;
+  if (preset === "month_to_today") {
+    const yest = new Date(today + "T12:00:00");
+    yest.setDate(yest.getDate() - 1);
+    const yestIso = dateToISO(yest);
+    t = yestIso < firstIso ? firstIso : (yestIso > lastIso ? lastIso : yestIso);
+  } else if (preset === "first_week") {
+    const d = new Date(firstIso + "T12:00:00");
+    d.setDate(d.getDate() + 6);
+    t = dateToISO(d) > lastIso ? lastIso : dateToISO(d);
+  } else if (preset === "first_two_weeks") {
+    const d = new Date(firstIso + "T12:00:00");
+    d.setDate(d.getDate() + 13);
+    t = dateToISO(d) > lastIso ? lastIso : dateToISO(d);
+  }
+  const fEl = document.getElementById("mbFromDate");
+  const tEl = document.getElementById("mbToDate");
+  if (fEl) fEl.value = f;
+  if (tEl) tEl.value = t;
+  onMbDateRangeChange();
+  showToast(`تم حساب أيام الدوام تلقائياً (${_mbDraft.extraDays} يوم) ✓`);
+}
+
+function mbBulkFillAttendance() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const days = Math.max(0, Math.round(parseArabicNum(document.getElementById("mbExtraDays")?.value || _mbDraft.extraDays, 0)));
+  if (!days) {
+    showToast("حدّد «أيام الدوام الماضية» أو اختر فترة من تاريخ ← إلى تاريخ أولاً");
+    return;
+  }
+  _mbDraft.extraDays = days;
+  h.students.forEach(st => {
+    const b = _ensureMbStudentObj(st.id);
+    const exc = Math.max(0, Math.round(parseArabicNum(b.excusedDays, 0)));
+    const abs = Math.max(0, Math.round(parseArabicNum(b.absentDays, 0)));
+    b.presentDays = Math.max(0, days - exc - abs);
+  });
+  renderMbLiveSummaryUI();
+  renderMonthlyBaselineList();
+  showToast(`تم تعبئة الحضور لـ ${h.students.length} طالب (${days} أيام) — وعدّل الغياب فقط ✓`);
+}
+
+function mbBulkEstimateReview() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const stats = _countClassDaysInRange(h, _mbDraft.fromDate, _mbDraft.toDate);
+  const days = Math.max(0, Math.round(parseArabicNum(document.getElementById("mbExtraDays")?.value || _mbDraft.extraDays, 0)));
+  const revSessions = stats ? Math.max(1, stats.rev) : Math.max(1, Math.round(days / 3));
+  let updated = 0;
+  h.students.forEach(st => {
+    if (st.track === "rashidi") return;
+    const b = _ensureMbStudentObj(st.id);
+    const pace = Math.max(1, Number(st.revPace || h.defaultRevPace || 2));
+    b.revPages = Math.round(revSessions * pace * 100) / 100;
+    updated++;
+  });
+  renderMbLiveSummaryUI();
+  renderMonthlyBaselineList();
+  showToast(`تم تقدير صفحات المراجعة لـ ${updated} طالب (على أساس ${revSessions} جلسات مراجعة) ✓`);
+}
+
+function mbBulkEstimatePoints() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  let updated = 0;
+  h.students.forEach(st => {
+    const b = _ensureMbStudentObj(st.id);
+    const mPg = st.track === "rashidi" ? parseArabicNum(b.rashidiPages || b.memPages, 0) : parseArabicNum(b.memPages, 0);
+    const rPg = parseArabicNum(b.revPages, 0);
+    const pres = Math.max(0, Math.round(parseArabicNum(b.presentDays, 0)));
+    const sabrBonus = b.sabrJuz ? 20 : 0;
+    const est = Math.round((mPg * 4) + (rPg * 2) + (pres * 2) + sabrBonus);
+    if (est > 0) { b.points = est; updated++; }
+  });
+  renderMbLiveSummaryUI();
+  renderMonthlyBaselineList();
+  showToast(updated ? `تم تقدير النقاط تلقائياً لـ ${updated} طالب (قابلة للتعديل) ✓` : "أدخل الحفظ أو الحضور أولاً لتقدير النقاط");
+}
+
+async function mbBulkZeroAllPoints() {
+  const h = getActiveHalaqa();
+  if (!h) return;
+  const ok = await makinConfirm(
+    "هل تريد تصفير خانة «النقاط السابقة» لجميع الطلاب في هذه القائمة فقط؟\n\n(لن تتأثر نقاط الجلسات المسجّلة ولا دورة النقاط الحالية).",
+    { title: "🔄 تصفير نقاط القائمة", danger: true, okText: "تصفير" }
+  );
+  if (!ok) return;
+  Object.keys(_mbDraft.students || {}).forEach(stId => {
+    if (_mbDraft.students[stId]) _mbDraft.students[stId].points = 0;
+  });
+  renderMbLiveSummaryUI();
+  renderMonthlyBaselineList();
+  showToast("🔄 تم تصفير خانة النقاط السابقة في القائمة فقط (اضغط حفظ للاعتماد) ✓");
 }
 
 function onMbMonthSelectChange(monthLbl) {
   const h = getActiveHalaqa();
   if (!h || !monthLbl) return;
   _loadMbMonthIntoDraft(h, monthLbl);
+  renderMbLiveSummaryUI();
   renderMonthlyBaselineList();
 }
 
@@ -22031,23 +22499,168 @@ function openMonthlyBaselineModal(forcedMonth = "") {
     mSel.value = targetM;
   }
 
+  _mbFilter = "all";
   _loadMbMonthIntoDraft(h, targetM);
   const sInp = document.getElementById("mbStudentSearch");
   if (sInp) sInp.value = "";
+  const clr = document.getElementById("mbStudentSearchClear");
+  if (clr) clr.style.display = "none";
+  renderMbLiveSummaryUI();
   renderMonthlyBaselineList();
   openModal("monthBaselineModal");
   const bodyEl = document.querySelector("#monthBaselineModal .exec-modal-body");
   if (bodyEl) bodyEl.scrollTop = 0;
 }
 
-function updateMbDraftField(stId, field, val) {
-  if (!_mbDraft.students[stId]) {
-    _mbDraft.students[stId] = { fromMem: "", toMem: "", memPages: 0, revPages: 0, points: 0, presentDays: 0, excusedDays: 0, absentDays: 0, sabrJuz: "" };
+function _recalcMbStudentPages(stId, updateDom = true) {
+  const h = getActiveHalaqa();
+  const st = h?.students.find(x => x.id === stId);
+  const b = _ensureMbStudentObj(stId);
+  if (!st) return;
+
+  if (st.track === "rashidi") {
+    const rf = Math.max(0, Math.round(parseArabicNum(b.rashidiFrom, 0)));
+    const rt = Math.max(0, Math.round(parseArabicNum(b.rashidiTo, 0)));
+    b.fromMem = rf ? `الرشيدي ص ${rf}` : "";
+    b.toMem = rt ? `الرشيدي ص ${rt}` : (rf ? `الرشيدي ص ${rf}` : "");
+    if (rf > 0 && rt >= rf) {
+      b.rashidiPages = Math.max(1, rt - rf + 1);
+      b.memPages = b.rashidiPages;
+    } else if (rf > 0 && !rt) {
+      b.rashidiPages = 1;
+      b.memPages = 1;
+    }
+    if (updateDom) {
+      const inp = document.getElementById(`mbMemPg_${stId}`);
+      if (inp) inp.value = b.rashidiPages || "";
+      const tag = document.getElementById(`mbCalcHint_${stId}`);
+      if (tag) tag.textContent = b.rashidiPages > 0 ? `✓ حُسبت تلقائياً (${b.rashidiPages} ص)` : "أدخل من ص ← إلى ص";
+    }
+    renderMbLiveSummaryUI();
+    return;
   }
-  const numFields = ["memPages", "revPages", "points", "presentDays", "excusedDays", "absentDays"];
-  _mbDraft.students[stId][field] = numFields.includes(field)
-    ? parseArabicNum(val, 0)
-    : val;
+
+  const s1 = b.fromSurahId ? SURAH_MAP[Number(b.fromSurahId)] : null;
+  const s2 = b.toSurahId ? SURAH_MAP[Number(b.toSurahId)] : s1;
+  if (s1) {
+    const f1 = Math.max(1, Math.min(s1.a, parseArabicNum(b.fromAyah, 1)));
+    b.fromAyah = f1;
+    b.fromMem = `${s1.n} - ${f1}`;
+    if (s2) {
+      let t2 = Math.max(1, Math.min(s2.a, parseArabicNum(b.toAyah, s2.a)));
+      if (s2.id === s1.id && t2 < f1) t2 = f1;
+      b.toSurahId = String(s2.id);
+      b.toAyah = t2;
+      b.toMem = `${s2.n} - ${t2}`;
+      const raw = calcRawRangePages(s1.id, f1, t2, s2.id);
+      b.memPages = snapCleanPages(raw);
+      if (updateDom) {
+        const inp = document.getElementById(`mbMemPg_${stId}`);
+        if (inp) inp.value = b.memPages || "";
+        const tag = document.getElementById(`mbCalcHint_${stId}`);
+        if (tag) tag.textContent = `✓ محسوب بدقة المصحف (${b.fromMem} ← ${b.toMem})`;
+      }
+    }
+  } else {
+    b.fromMem = "";
+    if (!b.toSurahId) b.toMem = "";
+  }
+  renderMbLiveSummaryUI();
+}
+
+function onMbSurahSelectChange(stId, which, surahIdVal) {
+  const b = _ensureMbStudentObj(stId);
+  const sObj = surahIdVal ? SURAH_MAP[Number(surahIdVal)] : null;
+  if (which === "from") {
+    b.fromSurahId = sObj ? String(sObj.id) : "";
+    b.fromAyah = sObj ? 1 : "";
+    if (sObj && !b.toSurahId) {
+      b.toSurahId = String(sObj.id);
+      b.toAyah = sObj.a;
+    }
+  } else {
+    b.toSurahId = sObj ? String(sObj.id) : "";
+    b.toAyah = sObj ? sObj.a : "";
+  }
+  _recalcMbStudentPages(stId, false);
+  renderMonthlyBaselineList();
+}
+
+function onMbAyahInput(stId, which, val) {
+  const b = _ensureMbStudentObj(stId);
+  if (which === "from") b.fromAyah = parseArabicNum(val, "");
+  else b.toAyah = parseArabicNum(val, "");
+  _recalcMbStudentPages(stId, true);
+}
+
+function mbQuickFullSurah(stId) {
+  const h = getActiveHalaqa();
+  const st = h?.students.find(x => x.id === stId);
+  const b = _ensureMbStudentObj(stId);
+  const sid = b.fromSurahId || st?.startSurahId || (st?.direction === "asc" ? "2" : "114");
+  const sObj = SURAH_MAP[Number(sid)];
+  if (!sObj) return;
+  b.fromSurahId = String(sObj.id);
+  b.fromAyah = 1;
+  b.toSurahId = String(sObj.id);
+  b.toAyah = sObj.a;
+  _recalcMbStudentPages(stId, false);
+  renderMonthlyBaselineList();
+}
+
+function mbQuickFillFromStudentStart(stId) {
+  const h = getActiveHalaqa();
+  const st = h?.students.find(x => x.id === stId);
+  if (!st) return;
+  const b = _ensureMbStudentObj(stId);
+  if (st.track === "rashidi") {
+    b.rashidiFrom = Math.max(1, Number(st.rashidiStartPage) || 1);
+    if (!b.rashidiTo) b.rashidiTo = b.rashidiFrom;
+    _recalcMbStudentPages(stId, false);
+    renderMonthlyBaselineList();
+    return;
+  }
+  const sid = String(st.startSurahId || (st.direction === "asc" ? 2 : 114));
+  const sObj = SURAH_MAP[Number(sid)];
+  if (!sObj) return;
+  b.fromSurahId = String(sObj.id);
+  b.fromAyah = Math.max(1, Math.min(sObj.a, Number(st.startAyah) || 1));
+  if (!b.toSurahId) {
+    b.toSurahId = String(sObj.id);
+    b.toAyah = sObj.a;
+  }
+  _recalcMbStudentPages(stId, false);
+  renderMonthlyBaselineList();
+}
+
+function mbClearOneStudent(stId) {
+  delete _mbDraft.students[stId];
+  renderMbLiveSummaryUI();
+  renderMonthlyBaselineList();
+}
+
+function updateMbDraftField(stId, field, val) {
+  const b = _ensureMbStudentObj(stId);
+  const numFields = ["memPages", "rashidiPages", "revPages", "points", "presentDays", "excusedDays", "absentDays", "rashidiFrom", "rashidiTo"];
+  if (field === "sabrScore") {
+    const cleaned = toAsciiDigits(val).replace(/[^0-9.]/g, "");
+    b.sabrScore = cleaned === "" ? "" : Math.max(0, Math.min(100, Math.round(Number(cleaned))));
+  } else {
+    b[field] = numFields.includes(field) ? parseArabicNum(val, 0) : val;
+  }
+  if (field === "rashidiFrom" || field === "rashidiTo") {
+    _recalcMbStudentPages(stId, true);
+    return;
+  }
+  if (field === "rashidiPages") b.memPages = b.rashidiPages;
+  if ((field === "excusedDays" || field === "absentDays") && _mbDraft.extraDays > 0) {
+    const exc = Math.max(0, Math.round(parseArabicNum(b.excusedDays, 0)));
+    const abs = Math.max(0, Math.round(parseArabicNum(b.absentDays, 0)));
+    b.presentDays = Math.max(0, _mbDraft.extraDays - exc - abs);
+    const pInp = document.getElementById(`mbPres_${stId}`);
+    if (pInp) pInp.value = b.presentDays || "";
+  }
+  renderMbLiveSummaryUI();
 }
 
 function renderMonthlyBaselineList() {
@@ -22055,35 +22668,114 @@ function renderMonthlyBaselineList() {
   const listEl = document.getElementById("mbStudentsList");
   if (!h || !listEl) return;
   const nq = normalizeSearchArabic(document.getElementById("mbStudentSearch")?.value || "");
-  const filtered = h.students.map((st, idx) => ({ st, idx })).filter(x => !nq || matchesArabicQuery(normalizeSearchArabic(x.st.name), nq));
+  const filtered = h.students
+    .map((st, idx) => ({ st, idx, filled: _isMbStudentFilled(_mbDraft.students[st.id]) }))
+    .filter(x => {
+      if (nq && !matchesArabicQuery(normalizeSearchArabic(x.st.name), nq)) return false;
+      if (_mbFilter === "filled" && !x.filled) return false;
+      if (_mbFilter === "empty" && x.filled) return false;
+      return true;
+    });
 
   if (!filtered.length) {
-    listEl.innerHTML = `<div class="empty-state" style="padding:16px;"><p>لا يوجد طلاب مطابقون</p></div>`;
+    listEl.innerHTML = `<div class="empty-state" style="padding:18px;"><p>لا يوجد طلاب في هذا العرض</p></div>`;
     return;
   }
 
   const ptsOn = isPointsEnabled(h);
-  listEl.innerHTML = filtered.map(({ st, idx }) => {
+  listEl.innerHTML = filtered.map(({ st, idx, filled }) => {
     const b = _mbDraft.students[st.id] || {};
-    return `<div class="base-st-card">
-      <div class="base-st-hdr">
-        <span>${idx + 1}. ${escapeHtml(st.name)}</span>
-        <span style="font-size:10.5px; color:var(--ink-500); font-weight:600;">يُدمج تلقائياً بالشهر</span>
+    const dir = st.direction || h.defaultDir || "desc";
+    const isRashidi = st.track === "rashidi";
+    const s1 = b.fromSurahId ? SURAH_MAP[Number(b.fromSurahId)] : null;
+    const s2 = b.toSurahId ? SURAH_MAP[Number(b.toSurahId)] : null;
+    const calcHint = isRashidi
+      ? (b.rashidiPages > 0 ? `✓ حُسبت تلقائياً (${b.rashidiPages} ص)` : "أدخل من ص ← إلى ص")
+      : (s1 && s2 ? `✓ محسوب بدقة المصحف (${b.fromMem || ""} ← ${b.toMem || ""})` : "اختر «من» و«إلى» ليحسب الصفحات تلقائياً");
+
+    const memSecHtml = isRashidi ? `
+      <div class="mb-sec-box mem">
+        <div class="mb-sec-ttl">
+          <span>🔤 القاعدة الرشيدية (حساب تلقائي)</span>
+          <button type="button" class="mb-mini-act" onclick="mbQuickFillFromStudentStart('${st.id}')">📌 من نقطة البداية</button>
+        </div>
+        <div class="exec-grid-2" style="margin-bottom:5px;">
+          <div class="field"><label style="font-size:10.5px;">من صفحة</label><input type="text" inputmode="numeric" style="text-align:center; padding:6px;" value="${b.rashidiFrom || ''}" placeholder="1" oninput="updateMbDraftField('${st.id}','rashidiFrom',this.value)"></div>
+          <div class="field"><label style="font-size:10.5px;">إلى صفحة</label><input type="text" inputmode="numeric" style="text-align:center; padding:6px;" value="${b.rashidiTo || ''}" placeholder="8" oninput="updateMbDraftField('${st.id}','rashidiTo',this.value)"></div>
+        </div>
+        <div class="mb-auto-pg-row">
+          <div class="mb-auto-pg-lbl">صفحات الرشيدي<small id="mbCalcHint_${st.id}">${escapeHtml(calcHint)}</small></div>
+          <input type="text" inputmode="decimal" id="mbMemPg_${st.id}" class="mb-auto-pg-inp" value="${b.rashidiPages || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','rashidiPages',this.value)">
+        </div>
+      </div>` : `
+      <div class="mb-sec-box mem">
+        <div class="mb-sec-ttl">
+          <span>📖 الحفظ (حساب تلقائي بالمصحف)</span>
+          <div style="display:flex; gap:4px;">
+            <button type="button" class="mb-mini-act" onclick="mbQuickFillFromStudentStart('${st.id}')">📌 بدايته</button>
+            <button type="button" class="mb-mini-act" onclick="mbQuickFullSurah('${st.id}')">⚡ سورة كاملة</button>
+          </div>
+        </div>
+        <div class="mb-surah-pair">
+          <div class="field">
+            <label>من سورة</label>
+            <select onchange="onMbSurahSelectChange('${st.id}','from',this.value)">${surahOptionsHtml(b.fromSurahId || '', '-- اختر سورة البداية --', dir)}</select>
+          </div>
+          <div class="field">
+            <label>من آية${s1 ? ` (1–${s1.a})` : ''}</label>
+            <input type="text" inputmode="numeric" value="${b.fromAyah || ''}" placeholder="1" oninput="onMbAyahInput('${st.id}','from',this.value)">
+          </div>
+        </div>
+        <div class="mb-surah-pair">
+          <div class="field">
+            <label>إلى سورة</label>
+            <select onchange="onMbSurahSelectChange('${st.id}','to',this.value)">${surahOptionsHtml(b.toSurahId || '', '-- اختر سورة النهاية --', dir)}</select>
+          </div>
+          <div class="field">
+            <label>إلى آية${s2 ? ` (1–${s2.a})` : ''}</label>
+            <input type="text" inputmode="numeric" value="${b.toAyah || ''}" placeholder="${s2 ? s2.a : ''}" oninput="onMbAyahInput('${st.id}','to',this.value)">
+          </div>
+        </div>
+        <div class="mb-auto-pg-row">
+          <div class="mb-auto-pg-lbl">صفحات الحفظ<small id="mbCalcHint_${st.id}">${escapeHtml(calcHint)}</small></div>
+          <input type="text" inputmode="decimal" id="mbMemPg_${st.id}" class="mb-auto-pg-inp" value="${b.memPages || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','memPages',this.value)">
+        </div>
+      </div>`;
+
+    return `<div class="base-st-card v155 ${filled ? 'is-filled' : ''}">
+      <div class="mb-st-head">
+        <span class="mb-st-name">${idx + 1}. ${escapeHtml(st.name)}</span>
+        <div class="mb-st-badges">
+          <span class="badge ${filled ? 'b-green' : 'b-muted'}" style="font-size:10px;">${filled ? '✓ مُدخَل' : (isRashidi ? 'رشيدي' : (dir === 'asc' ? 'البقرة←' : 'الناس←'))}</span>
+          ${filled ? `<button type="button" class="mb-clr-st-btn" onclick="mbClearOneStudent('${st.id}')">مسح</button>` : ''}
+        </div>
       </div>
-      <div class="base-grid-4" style="${ptsOn ? '' : 'grid-template-columns:repeat(3, 1fr);'}">
-        <div class="field"><label>بداية حفظ الشهر</label><input type="text" value="${escapeHtml(b.fromMem || '')}" placeholder="مثال: الرحمن - 1" oninput="updateMbDraftField('${st.id}','fromMem',this.value)"></div>
-        <div class="field"><label>صفحات الحفظ</label><input type="text" inputmode="decimal" value="${b.memPages || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','memPages',this.value)"></div>
-        <div class="field"><label>صفحات المراجعة</label><input type="text" inputmode="decimal" value="${b.revPages || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','revPages',this.value)"></div>
-        ${ptsOn ? `<div class="field"><label>النقاط السابقة</label><input type="text" inputmode="numeric" value="${b.points || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','points',this.value)"></div>` : ''}
+
+      ${memSecHtml}
+
+      <div class="mb-sec-box rev">
+        <div class="mb-sec-ttl"><span>📘 المراجعة والسبر ${ptsOn ? 'والنقاط' : ''}</span></div>
+        <div class="exec-grid-2" style="${ptsOn ? '' : 'grid-template-columns:1fr;'}">
+          ${!isRashidi ? `<div class="field"><label style="font-size:10.5px;">صفحات المراجعة</label><input type="text" inputmode="decimal" style="padding:6px 8px; text-align:center; font-weight:800;" value="${b.revPages || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','revPages',this.value)"></div>` : ''}
+          ${ptsOn ? `<div class="field"><label style="font-size:10.5px;">النقاط السابقة</label><input type="text" inputmode="numeric" style="padding:6px 8px; text-align:center; font-weight:800;" value="${b.points || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','points',this.value)"></div>` : ''}
+        </div>
+        ${!isRashidi ? `
+        <div class="mb-sabr-row">
+          <div class="field"><label style="font-size:10.5px;">سبر جزء سابق</label><select style="padding:6px 7px; font-size:12px;" onchange="updateMbDraftField('${st.id}','sabrJuz',this.value)">${juzOptionsHtml(b.sabrJuz || '')}</select></div>
+          <div class="field"><label style="font-size:10.5px;">العلامة %</label><input type="text" inputmode="numeric" style="padding:6px 7px; font-size:12.5px; text-align:center; font-weight:800; direction:ltr;" value="${b.sabrScore !== undefined && b.sabrScore !== '' ? b.sabrScore : ''}" placeholder="98" oninput="updateMbDraftField('${st.id}','sabrScore',this.value)"></div>
+        </div>` : ''}
       </div>
-      <div class="form-grid" style="margin-top:6px; grid-template-columns:1fr 1fr; gap:6px;">
-        <div class="field"><label style="font-size:11px;">نهاية حفظ سابق (اختياري)</label><input type="text" style="padding:5px 7px; font-size:12px;" value="${escapeHtml(b.toMem || '')}" placeholder="إن لم يُسمّع بعد" oninput="updateMbDraftField('${st.id}','toMem',this.value)"></div>
-        <div class="field"><label style="font-size:11px;">سبر جزء سابق</label><select style="padding:5px 7px; font-size:12px;" onchange="updateMbDraftField('${st.id}','sabrJuz',this.value)">${juzOptionsHtml(b.sabrJuz || '')}</select></div>
-      </div>
-      <div class="form-grid" style="margin-top:6px; grid-template-columns:repeat(3, 1fr); gap:6px;">
-        <div class="field"><label style="font-size:10.5px;">أيام حضور سابقة</label><input type="text" inputmode="numeric" style="padding:5px 7px; font-size:12px; text-align:center;" value="${b.presentDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','presentDays',this.value)"></div>
-        <div class="field"><label style="font-size:10.5px;">غياب مبرر سابق</label><input type="text" inputmode="numeric" style="padding:5px 7px; font-size:12px; text-align:center;" value="${b.excusedDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','excusedDays',this.value)"></div>
-        <div class="field"><label style="font-size:10.5px;">غياب غير مبرر</label><input type="text" inputmode="numeric" style="padding:5px 7px; font-size:12px; text-align:center;" value="${b.absentDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','absentDays',this.value)"></div>
+
+      <div class="mb-sec-box att">
+        <div class="mb-sec-ttl"><span>📅 الحضور والغياب وملاحظة سابقة</span><span style="font-size:10px; color:var(--ink-500);">الغياب يُخصم تلقائياً من الحضور</span></div>
+        <div class="form-grid" style="grid-template-columns:repeat(3, 1fr); gap:6px; margin-bottom:6px;">
+          <div class="field"><label style="font-size:10.5px;">أيام حضور</label><input type="text" inputmode="numeric" id="mbPres_${st.id}" style="padding:5px 7px; font-size:12.5px; text-align:center; font-weight:800;" value="${b.presentDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','presentDays',this.value)"></div>
+          <div class="field"><label style="font-size:10.5px;">غياب مبرر</label><input type="text" inputmode="numeric" style="padding:5px 7px; font-size:12.5px; text-align:center; font-weight:800;" value="${b.excusedDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','excusedDays',this.value)"></div>
+          <div class="field"><label style="font-size:10.5px;">غياب غير مبرر</label><input type="text" inputmode="numeric" style="padding:5px 7px; font-size:12.5px; text-align:center; font-weight:800;" value="${b.absentDays || ''}" placeholder="0" oninput="updateMbDraftField('${st.id}','absentDays',this.value)"></div>
+        </div>
+        <div class="field" style="margin-bottom:0;">
+          <input type="text" style="padding:5.5px 8px; font-size:11.8px;" value="${escapeHtml(b.note || '')}" placeholder="ملاحظة سابقة اختيارية (تظهر بالتقرير الشهري)..." oninput="updateMbDraftField('${st.id}','note',this.value)">
+        </div>
       </div>
     </div>`;
   }).join("");
@@ -22093,14 +22785,64 @@ function saveMonthlyBaseline() {
   const h = getActiveHalaqa();
   if (!h || !_mbMonthLabel) return;
   if (!h.monthlyBaselines) h.monthlyBaselines = {};
-  _mbDraft.extraDays = parseArabicNum(document.getElementById("mbExtraDays")?.value, 0);
-  h.monthlyBaselines[_mbMonthLabel] = _mbDraft;
+  _mbDraft.extraDays = Math.max(0, Math.round(parseArabicNum(document.getElementById("mbExtraDays")?.value, 0)));
+  _mbDraft.fromDate = document.getElementById("mbFromDate")?.value || "";
+  _mbDraft.toDate = document.getElementById("mbToDate")?.value || "";
+  h.monthlyBaselines[_mbMonthLabel] = JSON.parse(JSON.stringify(_mbDraft));
+
+  const doSync = Boolean(document.getElementById("mbSyncStudentProfilesCheck")?.checked);
+  let syncedProfiles = 0;
+  if (doSync) {
+    const monthRecordedDaily = (h.sessions || []).filter(s => s && !s.noClass && s.type === "daily" && isSessionHasRealActivity(s) && getSessionReportMonth(s) === _mbMonthLabel);
+    h.students.forEach(st => {
+      const b = _mbDraft.students[st.id];
+      if (!b) return;
+      let changed = false;
+      if (b.sabrJuz && st.track !== "rashidi") {
+        const jObj = getJuzByName(b.sabrJuz);
+        if (jObj) {
+          if (!Array.isArray(st.extraMemJuzIds)) st.extraMemJuzIds = [];
+          if (!st.extraMemJuzIds.includes(jObj.id)) {
+            st.extraMemJuzIds.push(jObj.id);
+            st.extraMemJuzIds.sort((a, c) => a - c);
+            changed = true;
+          }
+        }
+      }
+      const hasDailyInMonth = monthRecordedDaily.some(s => {
+        const r = s.records?.[st.id];
+        return r && r.recEval && r.recEval !== "إعادة";
+      });
+      if (!hasDailyInMonth) {
+        if (st.track === "rashidi" && parseArabicNum(b.rashidiTo, 0) > 0) {
+          st.rashidiStartPage = Math.min(85, Math.round(parseArabicNum(b.rashidiTo, 1)) + 1);
+          changed = true;
+        } else if (st.track !== "rashidi" && b.toSurahId && SURAH_MAP[Number(b.toSurahId)]) {
+          const s2 = SURAH_MAP[Number(b.toSurahId)];
+          const t2 = Math.max(1, Math.min(s2.a, parseArabicNum(b.toAyah, s2.a)));
+          const dir = st.direction || h.defaultDir || "desc";
+          const nextHw = computeNextHomework(s2.id, t2, t2, null, dir, Number(st.pace) || 0.5);
+          if (nextHw?.hwSurahId) {
+            st.startSurahId = String(nextHw.hwSurahId);
+            st.startAyah = Math.max(1, parseArabicNum(nextHw.hwFrom, 1));
+            changed = true;
+          }
+        }
+      }
+      if (changed) syncedProfiles++;
+    });
+  }
+
   saveState();
   closeModal("monthBaselineModal");
   renderMonthlyReport();
   renderStats();
   renderMonthEndAlert();
-  showToast(`تم حفظ رصيد الأيام الماضية ودمجه في تقرير شهر ${_mbMonthLabel} ✓`);
+  renderStudentsTab();
+  renderSessionPreservingScroll(true);
+  showToast(syncedProfiles > 0
+    ? `تم حفظ الرصيد ودمجه بالتقرير وتحديث مسار ${syncedProfiles} طالب ✓`
+    : `تم حفظ رصيد الأيام الماضية ودمجه في تقرير شهر ${_mbMonthLabel} ✓`);
 }
 
 async function clearCurrentMonthBaseline() {
@@ -23603,9 +24345,9 @@ let _irMonthFilter = "";
 function computeStudentStatsForSessions(st, sessions, h, extraBase = null) {
   let firstMem = extraBase?.fromMem || null;
   let lastMem = extraBase?.toMem || null;
-  let memPages = extraBase?.memPages || 0;
+  let memPages = st.track === "rashidi" ? 0 : (extraBase?.memPages || 0);
   let revPages = extraBase?.revPages || 0;
-  let rashidiPages = 0;
+  let rashidiPages = st.track === "rashidi" ? ((extraBase?.rashidiPages || extraBase?.memPages) || 0) : (extraBase?.rashidiPages || 0);
   let totalPoints = extraBase?.points || 0;
   let presentDays = extraBase?.presentDays || 0, lateDays = 0, excusedDays = extraBase?.excusedDays || 0, absentDays = extraBase?.absentDays || 0;
   const sabrList = [...(extraBase?.sabrList || [])];
@@ -28585,7 +29327,12 @@ function computeHalaqaSummaryForSupervisor(hData, monthLabel, supCustomProgs = [
     if (!bObj?.students) return;
     Object.entries(bObj.students).forEach(([stId, b]) => {
       if (!b) return;
-      memPages += parseArabicNum(b.memPages, 0);
+      const stObj = students.find(x => x.id === stId);
+      if (stObj?.track === "rashidi") {
+        rashidiPages += parseArabicNum(b.rashidiPages || b.memPages, 0);
+      } else {
+        memPages += parseArabicNum(b.memPages, 0);
+      }
       revPages += parseArabicNum(b.revPages, 0);
       totalPoints += parseArabicNum(b.points, 0);
       const bp = Math.max(0, Math.round(parseArabicNum(b.presentDays, 0)));
@@ -32283,7 +33030,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v154";
+const TIBYAN_APP_VERSION = "v156";
 function mkIcon(name, cls = "") {
   return `<svg class="mk-ico${cls ? " " + cls : ""}" aria-hidden="true"><use href="#ico-${name}"/></svg>`;
 }
@@ -35337,5 +36084,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v154 -->
+<!-- Makin App v156 -->
 </html>
