@@ -2590,6 +2590,33 @@ html,body{background:#fff!important;padding:0!important;margin:0!important;color
 .official-daily-hdr,.official-daily-wrap,.official-daily-hdr-v20,.official-monthly-wrap,table.t-daily,table.t-monthly{min-width:0!important;width:100%!important}
 *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
 }
+/* MAKIN v152: Distinct Calm Color Coding Inside Student Eval Sheet Only (Reports Untouched) */
+.es-sec-pill{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:99px;margin-bottom:6px;line-height:1.35}
+/* Daily: New Recitation (Executive Navy Blue) */
+.es-card.es-sec-rec{background:#f7faff!important;border:1.5px solid rgba(21,98,154,0.24)!important;border-right:4.5px solid #15629a!important}
+.es-card.es-sec-rec .es-sec-pill{background:#e3f0fb;color:#104a78;border:1px solid rgba(21,98,154,0.25)}
+.es-card.es-sec-rec .es-rec-box{background:#ffffff!important;border-color:rgba(21,98,154,0.22)!important;border-right-color:#15629a!important}
+.es-card.es-sec-rec .es-rec-pg-badge{background:#15629a!important;border-color:#15629a!important;color:#ffffff!important}
+[data-theme="dark"] .es-card.es-sec-rec{background:#132030!important;border-color:rgba(96,165,250,0.28)!important;border-right-color:#60a5fa!important}
+[data-theme="dark"] .es-card.es-sec-rec .es-sec-pill{background:rgba(96,165,250,0.16);color:#93c5fd;border-color:rgba(96,165,250,0.3)}
+[data-theme="dark"] .es-card.es-sec-rec .es-rec-box{background:#18293d!important;border-color:rgba(96,165,250,0.25)!important;border-right-color:#60a5fa!important}
+[data-theme="dark"] .es-card.es-sec-rec .es-rec-pg-badge{background:#60a5fa!important;border-color:#60a5fa!important;color:#0b192c!important}
+
+/* Daily Review & Saturday Major Review (Warm Amber / Gold) */
+.es-card.es-sec-drev,.es-card.es-sec-maj{background:#fdfaf2!important;border:1.5px solid rgba(184,134,11,0.28)!important;border-right:4.5px solid #c29123!important}
+.es-card.es-sec-drev .es-sec-pill,.es-card.es-sec-maj .es-sec-pill{background:#f8ecc9;color:#7a5308;border:1px solid rgba(184,134,11,0.3)}
+.es-card.es-sec-drev .es-drev-strip,.es-card.es-sec-maj .live-mushaf-strip.rev-gold{background:#ffffff!important;border-color:rgba(184,134,11,0.25)!important;border-right:3.5px solid #c29123!important}
+[data-theme="dark"] .es-card.es-sec-drev,[data-theme="dark"] .es-card.es-sec-maj{background:#221e13!important;border-color:rgba(212,169,72,0.3)!important;border-right-color:#d4a948!important}
+[data-theme="dark"] .es-card.es-sec-drev .es-sec-pill,[data-theme="dark"] .es-card.es-sec-maj .es-sec-pill{background:rgba(212,169,72,0.18);color:#f4d98d;border-color:rgba(212,169,72,0.34)}
+[data-theme="dark"] .es-card.es-sec-drev .es-drev-strip,[data-theme="dark"] .es-card.es-sec-maj .live-mushaf-strip.rev-gold{background:#2b2516!important;border-color:rgba(212,169,72,0.28)!important;border-right-color:#d4a948!important}
+
+/* Saturday Minor Review (Calm Emerald Green) */
+.es-card.es-sec-min{background:#f3fbf6!important;border:1.5px solid rgba(22,121,76,0.26)!important;border-right:4.5px solid #16794c!important}
+.es-card.es-sec-min .es-sec-pill{background:#ddf3e6;color:#0f5c39;border:1px solid rgba(22,121,76,0.28)}
+.es-card.es-sec-min .live-mushaf-strip{background:#ffffff!important;border-color:rgba(22,121,76,0.24)!important;border-right:3.5px solid #16794c!important}
+[data-theme="dark"] .es-card.es-sec-min{background:#11241c!important;border-color:rgba(52,211,153,0.28)!important;border-right-color:#34d399!important}
+[data-theme="dark"] .es-card.es-sec-min .es-sec-pill{background:rgba(52,211,153,0.16);color:#6ee7b7;border-color:rgba(52,211,153,0.3)}
+[data-theme="dark"] .es-card.es-sec-min .live-mushaf-strip{background:#162e24!important;border-color:rgba(52,211,153,0.25)!important;border-right-color:#34d399!important}
 /* MAKIN v150: Interactive SVG Analytics Charts (Stats & Student Profile — 100% Offline) */
 .mk-chart-card{background:var(--white);border:1px solid var(--line);border-top:3.5px solid #142a46;border-radius:15px;padding:12px;margin-bottom:11px;box-shadow:var(--shadow);overflow:hidden}
 [data-theme="dark"] .mk-chart-card{border-top-color:#c8a14b}
@@ -3205,7 +3232,7 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-refresh"/></svg></span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v151</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v152</span>
         </button>
       </div>
     </div>
@@ -18197,7 +18224,8 @@ function renderCardBody(s, st, r, idx) {
         </div>`;
 
     bodyCore = `
-      <div class="es-card">
+      <div class="es-card es-sec-rec">
+        <div class="es-sec-pill">📖 التسميع الجديد</div>
         ${_recHeaderBlock}
         ${r.sabrJuz ? renderSabrScoreBox(st.id, r, false) : ''}
         ${!_isPureRecSabr ? renderErrorCounterBar(st.id, "rec", r.recErrors, r.recAlerts) : ''}
@@ -18228,13 +18256,14 @@ function renderCardBody(s, st, r, idx) {
         const dRevStatusPill = dRevVisEv
           ? `<span class="badge ${dRevVisEv === 'ممتاز' ? 'b-green' : (dRevVisEv === 'إعادة' ? 'b-red' : 'b-blue')}" style="font-size:10.5px;">${escapeHtml(dRevVisEv)}</span>`
           : `<span class="badge b-muted" style="font-size:10px;">بانتظار</span>`;
-        return `<div class="es-card" style="padding:9px 10px !important; border-right:3.5px solid var(--brand-ochre);">
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:7px;">
-            <div class="lms-tap-area" style="flex:1; min-width:0;" onclick="openSurahPicker('${st.id}','dRev')" title="اضغط لتعديل مقرر المراجعة">
-              <div style="font-size:12.5px; font-weight:800; color:var(--ink-900); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">📘 المراجعة: ${escapeHtml(dRevVisLbl || "لا يوجد مقطع مراجعة")}</div>
-              <div style="font-size:10.5px; color:var(--ink-500); font-weight:600;">${dRevVisLbl ? `${r.dRevSabrJuz ? 'سبر (لا يُحتسب صفحات)' : `${formatNum(dRevVisPg)} ص`} • ${dRevVisEv ? (isMajorPassEval(dRevVisEv) ? 'مُنجزة ← مقرر جديد للقادم' : 'تُرحّل تلقائياً للقادم') : 'اضغط للتعديل • فارغة بالتقرير حتى التقييم'}` : 'اضغط هنا لتحديد مقطع مراجعة أو سرد'}</div>
+        return `<div class="es-card es-sec-drev" style="padding:9px 10px !important;">
+          <div class="es-sec-pill">📘 المراجعة</div>
+          <div class="live-mushaf-strip es-drev-strip" style="margin-bottom:7px;">
+            <div class="lms-info lms-tap-area" style="flex:1; min-width:0;" onclick="openSurahPicker('${st.id}','dRev')" title="اضغط لتعديل مقرر المراجعة">
+              <div class="lms-main" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(dRevVisLbl || "لا يوجد مقطع مراجعة")}</div>
+              <div class="lms-sub">${dRevVisLbl ? `${r.dRevSabrJuz ? 'سبر (لا يُحتسب صفحات)' : `${formatNum(dRevVisPg)} ص`} • ${dRevVisEv ? (isMajorPassEval(dRevVisEv) ? 'مُنجزة ← مقرر جديد للقادم' : 'تُرحّل تلقائياً للقادم') : 'اضغط للتعديل • فارغة بالتقرير حتى التقييم'}` : 'اضغط هنا لتحديد مقطع مراجعة أو سرد'}</div>
             </div>
-            <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
+            <div class="lms-btns">
               ${dRevStatusPill}
               ${hasRevClearable ? `<button type="button" class="lms-btn" style="padding:3px 7px; font-size:11px; color:var(--red);" onclick="clearDailyRev('${st.id}')" title="مسح مراجعة اليوم">✕</button>` : ''}
             </div>
@@ -18451,10 +18480,11 @@ function renderCardBody(s, st, r, idx) {
     const _hasSatMajVal = Boolean(r.majFrom || r.majSardLabel || r.sabrJuz || r.majEval);
 
     bodyCore = `
-      <div class="es-card">
+      <div class="es-card es-sec-min">
+        <div class="es-sec-pill">📗 المراجعة الصغرى</div>
         <div class="live-mushaf-strip">
           <div class="lms-info lms-tap-area" style="flex:1; min-width:0;" onclick="openSurahPicker('${st.id}','min')" title="اضغط لتعديل مقطع الصغرى">
-            <div class="lms-main">📗 الصغرى: ${escapeHtml(minSummary)}</div>
+            <div class="lms-main">${escapeHtml(minSummary)}</div>
             <div class="lms-sub">${formatNum(calcRecordMinPages(r) || r.minPages || 0)} ص ${r.minSourceLabel ? `• ${escapeHtml(r.minSourceLabel)}` : '• اضغط على الشريط للتعديل'}</div>
           </div>
           <div class="lms-btns">
@@ -18466,7 +18496,8 @@ function renderCardBody(s, st, r, idx) {
         ${!shouldUsePerPageMode(r, st, "min", h) ? `<div class="es-eval-4" id="esEvalRow_min" style="margin-bottom:0;">${makeSmartEvalBtns(r.minEval, "setSatMinEval", r.minErrors, r.minAlerts)}</div>` : ''}
       </div>
 
-      <div class="es-card">
+      <div class="es-card es-sec-maj">
+        <div class="es-sec-pill">📘 المراجعة الكبرى</div>
         ${sabrInlineChip}
         ${r.majSkipped ? `
           <div class="live-mushaf-strip rev-gold" style="opacity:0.86;">
@@ -31994,7 +32025,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v151";
+const TIBYAN_APP_VERSION = "v152";
 function mkIcon(name, cls = "") {
   return `<svg class="mk-ico${cls ? " " + cls : ""}" aria-hidden="true"><use href="#ico-${name}"/></svg>`;
 }
@@ -35048,5 +35079,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v151 -->
+<!-- Makin App v152 -->
 </html>
