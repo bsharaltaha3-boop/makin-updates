@@ -1,0 +1,61 @@
+name: Auto Generate version.json
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - "index.html"
+
+permissions:
+  contents: write
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate version.json from index.html
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, re
+
+          raw = open("index.html", "rb").read()
+          text = raw.decode("utf-8")
+          m = re.search(r'const\s+TIBYAN_APP_VERSION\s*=\s*"v(\d+)"\s*;', text)
+          if not m:
+              raise SystemExit("TIBYAN_APP_VERSION not found in index.html")
+
+          ver_code = int(m.group(1))
+          ver_name = f"v{ver_code}"
+          sha256 = hashlib.sha256(raw).hexdigest()
+
+          notes = f"تحديث {ver_name} لتطبيق صروح مكين"
+          if os.path.exists("version.json"):
+              try:
+                  old = json.load(open("version.json", encoding="utf-8"))
+                  if old.get("versionCode") == ver_code and old.get("notes"):
+                      notes = old["notes"]
+              except Exception:
+                  pass
+
+          data = {
+              "versionCode": ver_code,
+              "versionName": ver_name,
+              "file": "index.html",
+              "sha256": sha256,
+              "notes": notes
+          }
+          with open("version.json", "w", encoding="utf-8", newline="\n") as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+              f.write("\n")
+          print(f"Updated version.json -> {ver_name} ({sha256[:12]}...)")
+          PY
+
+      - name: Commit updated version.json
+        run: |
+          git config user.name "Makin Release Bot"
+          git config user.email "actions@github.com"
+          git add version.json
+          git diff --cached --quiet || git commit -m "chore: auto-update version.json"
+          git push
