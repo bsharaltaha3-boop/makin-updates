@@ -15107,6 +15107,84 @@ table.t-daily td.td-sard,
   margin-top: 2px;
 }
 
+
+/* ==================== MAKIN v148: UNIFIED SVG ICON SYSTEM & REFINED MICRO-INTERACTIONS ==================== */
+.mk-ico {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.15em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.mk-ico.lg { width: 1.25em; height: 1.25em; }
+.mk-ico.sm { width: 0.92em; height: 0.92em; }
+
+/* Crisp icon alignment across navigation, headers, drawers & studio buttons */
+.menu-burger-btn .mk-ico { width: 19px; height: 19px; stroke-width: 2.25; }
+.hdr-bell-btn .mk-ico,
+.hdr-btn .mk-ico,
+.hdr-owner-btn .mk-ico { width: 16px; height: 16px; stroke-width: 2.1; }
+.nav-tab .mk-ico { width: 16px; height: 16px; opacity: 0.85; }
+.nav-tab.active .mk-ico { opacity: 1; stroke-width: 2.3; }
+.mobile-nav-btn .ico .mk-ico { width: 20px; height: 20px; stroke-width: 2; transition: transform 0.16s ease, stroke-width 0.14s ease; }
+.mobile-nav-btn.active .ico .mk-ico { stroke-width: 2.35; transform: scale(1.06); }
+
+.drawer-qtile .dqt-ico { color: var(--brand-slate); }
+.drawer-qtile .dqt-ico.gold { color: #9c7417; }
+[data-theme="dark"] .drawer-qtile .dqt-ico { color: #dbeafe; }
+[data-theme="dark"] .drawer-qtile .dqt-ico.gold { color: #f4d98d; }
+.drawer-qtile .dqt-ico .mk-ico { width: 17px; height: 17px; }
+
+.drawer-ico-box { color: var(--brand-slate); }
+.drawer-ico-box.gold { color: #9c7417; }
+.drawer-ico-box.danger { background: var(--red-bg); color: var(--red); }
+[data-theme="dark"] .drawer-ico-box { color: #cbd5e1; }
+[data-theme="dark"] .drawer-ico-box.gold { color: #f4d98d; }
+[data-theme="dark"] .drawer-ico-box.danger { color: #f87171; }
+.drawer-ico-box .mk-ico { width: 16px; height: 16px; }
+
+.ssb-tool-btn .mk-ico { width: 14px; height: 14px; opacity: 0.9; }
+.ssb-chip .mk-ico { width: 13px; height: 13px; }
+.es-ico-btn .mk-ico { width: 15px; height: 15px; }
+.es-tool-btn .et-ico { display: inline-flex; align-items: center; justify-content: center; height: 20px; }
+.es-tool-btn .et-ico .mk-ico { width: 18px; height: 18px; }
+.sp-mode-tab .sp-mt-ico { display: inline-flex; align-items: center; justify-content: center; }
+.sp-mode-tab .sp-mt-ico .mk-ico { width: 15px; height: 15px; }
+.rep-exp-tile .ret-ico .mk-ico { width: 16px; height: 16px; }
+.rep-exp-tile.t-pdf .ret-ico { color: #142a46; }
+.rep-exp-tile.t-png .ret-ico { color: #15629a; }
+.rep-exp-tile.t-xls .ret-ico { color: #16794c; }
+.rep-exp-tile.t-txt .ret-ico { color: #9a6e17; }
+[data-theme="dark"] .rep-exp-tile.t-pdf .ret-ico { color: #93c5fd; }
+[data-theme="dark"] .rep-exp-tile.t-png .ret-ico { color: #60a5fa; }
+[data-theme="dark"] .rep-exp-tile.t-xls .ret-ico { color: #34d399; }
+[data-theme="dark"] .rep-exp-tile.t-txt .ret-ico { color: #f4d98d; }
+.rep-primary-btn .mk-ico,
+.rep-foot-pill-btn .mk-ico,
+.subtab-btn .mk-ico { width: 15px; height: 15px; }
+.stats-cat-btn .sc-ico { display: inline-flex; align-items: center; justify-content: center; height: 19px; }
+.stats-cat-btn .sc-ico .mk-ico { width: 17px; height: 17px; }
+
+/* Replace emoji pseudo-element on mobile cloud button with real SVG icon */
+@media (max-width: 520px) {
+  #btnCloudQuick::after { content: none !important; display: none !important; }
+  #btnCloudQuick .mk-cloud-svg { display: inline-block !important; }
+}
+.mk-cloud-svg { width: 15px; height: 15px; }
+
+/* Smooth micro-interactions for tactile executive polish */
+.es-tool-btn, .drawer-qtile, .rep-exp-tile, .stats-cat-btn, .mobile-nav-btn, .ssb-tool-btn {
+  transition: transform 0.12s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.es-tool-btn:active, .drawer-qtile:active, .rep-exp-tile:active, .stats-cat-btn:active {
+  transform: scale(0.95);
+}
+
 /* Native Print fallback */
 @media print {
   @page { size: A4 landscape; margin: 5mm; }
@@ -15122,6 +15200,57 @@ table.t-daily td.td-sard,
 </style>
 </head>
 <body>
+<!-- ===== MAKIN v148 UNIFIED OFFLINE SVG ICON SPRITE ===== -->
+<svg id="makinIconSprite" xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true">
+  <symbol id="ico-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="ico-bell" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
+  <symbol id="ico-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+  <symbol id="ico-cloud-up" viewBox="0 0 24 24"><path d="M4 14.9A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.24"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></symbol>
+  <symbol id="ico-crown" viewBox="0 0 24 24"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></symbol>
+  <symbol id="ico-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></symbol>
+  <symbol id="ico-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="ico-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+  <symbol id="ico-clipboard" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6M9 16h4"/></symbol>
+  <symbol id="ico-archive" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9"/><path d="M10 13h4"/></symbol>
+  <symbol id="ico-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="ico-file-text" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></symbol>
+  <symbol id="ico-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+  <symbol id="ico-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+  <symbol id="ico-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.6.85 1 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+  <symbol id="ico-sliders" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></symbol>
+  <symbol id="ico-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="ico-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="ico-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="ico-trending" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
+  <symbol id="ico-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="ico-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="ico-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+  <symbol id="ico-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
+  <symbol id="ico-scroll" viewBox="0 0 24 24"><path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/></symbol>
+  <symbol id="ico-activity" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/><circle cx="12" cy="12" r="4"/></symbol>
+  <symbol id="ico-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol>
+  <symbol id="ico-bar-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+  <symbol id="ico-book-open" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="ico-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+  <symbol id="ico-grad" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+  <symbol id="ico-edit" viewBox="0 0 24 24"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></symbol>
+  <symbol id="ico-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></symbol>
+  <symbol id="ico-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></symbol>
+  <symbol id="ico-table" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></symbol>
+  <symbol id="ico-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="ico-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="ico-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+  <symbol id="ico-hash" viewBox="0 0 24 24"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></symbol>
+  <symbol id="ico-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+  <symbol id="ico-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="ico-building" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4h6v4"/><path d="M9 11h.01M15 11h.01"/></symbol>
+  <symbol id="ico-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></symbol>
+  <symbol id="ico-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+  <symbol id="ico-skip-next" viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></symbol>
+  <symbol id="ico-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="ico-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="ico-file-pdf" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15h6"/><path d="M12 12v6"/></symbol>
+</svg>
 
 <!-- Floating WhatsApp/Instagram-Style Notification Banner (v55) -->
 <div id="liveNotifBanner" class="live-notif-banner no-print" onclick="handleLiveNotifClick()">
@@ -15508,7 +15637,7 @@ table.t-daily td.td-sard,
   <header class="app-header">
     <div class="header-inner">
       <div class="brand">
-        <button type="button" class="menu-burger-btn" onclick="openRightDrawer()" title="القائمة والإعدادات">☰</button>
+        <button type="button" class="menu-burger-btn" onclick="openRightDrawer()" title="القائمة والإعدادات" aria-label="القائمة"><svg class="mk-ico" aria-hidden="true"><use href="#ico-menu"/></svg></button>
         <button type="button" class="hdr-back-btn" id="btnAppHeaderBack" onclick="goBackMainView()" title="رجوع خطوة للخلف" aria-label="رجوع"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
         <div class="brand-logo-pill" onclick="openSettingsModal()" style="cursor:pointer;"><img id="hdrLogoImg" alt="تبيان"></div>
         <div style="min-width:0; cursor:pointer;" onclick="openSettingsModal()">
@@ -15517,12 +15646,12 @@ table.t-daily td.td-sard,
         </div>
       </div>
       <div class="header-actions">
-        <button type="button" class="hdr-owner-btn" id="btnOwnerReturnHdr" onclick="switchOwnerWorkspace('owner')" style="display:none;" title="العودة للوحة المؤسس">👑 <span class="txt">المؤسس</span></button>
+        <button type="button" class="hdr-owner-btn" id="btnOwnerReturnHdr" onclick="switchOwnerWorkspace('owner')" style="display:none;" title="العودة للوحة المؤسس"><svg class="mk-ico" aria-hidden="true"><use href="#ico-crown"/></svg> <span class="txt">المؤسس</span></button>
         <button type="button" class="hdr-bell-btn" id="btnTeacherMsgBell" onclick="openTeacherMessagesModal()" style="display:none;" title="رسائل وتنبيهات المشرف">
-          <span>🔔</span><span class="hdr-bell-badge" id="hdrUnreadMsgBadge" style="display:none;">0</span>
+          <span><svg class="mk-ico" aria-hidden="true"><use href="#ico-bell"/></svg></span><span class="hdr-bell-badge" id="hdrUnreadMsgBadge" style="display:none;">0</span>
         </button>
         <button class="hdr-btn" id="btnCloudQuick" onclick="quickCloudSync()" style="display:none;" title="حالة المزامنة السحابية — اضغط للحفظ الفوري">
-          <span class="sync-dot" id="cloudSyncDot"></span><span id="cloudSyncLbl" style="font-size:11.5px;">☁️</span>
+          <span class="sync-dot" id="cloudSyncDot"></span><svg class="mk-ico mk-cloud-svg" aria-hidden="true"><use href="#ico-cloud"/></svg><span id="cloudSyncLbl" style="font-size:11.5px;">سحابة</span>
         </button>
       </div>
     </div>
@@ -15543,19 +15672,19 @@ table.t-daily td.td-sard,
     <div class="drawer-scroll-body">
       <div class="drawer-quick-4">
         <button type="button" class="drawer-qtile" onclick="drawerNav('stats')">
-          <span class="dqt-ico gold">🏆</span>
+          <span class="dqt-ico gold"><svg class="mk-ico" aria-hidden="true"><use href="#ico-trophy"/></svg></span>
           <span class="dqt-lbl" id="drawerStatsLbl">الإحصائيات</span>
         </button>
         <button type="button" class="drawer-qtile" onclick="closeRightDrawer(); openQuickIndivReport();">
-          <span class="dqt-ico">📋</span>
+          <span class="dqt-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-clipboard"/></svg></span>
           <span class="dqt-lbl">كشف فردي</span>
         </button>
         <button type="button" class="drawer-qtile" onclick="closeRightDrawer(); openQuickCertificatePicker();">
-          <span class="dqt-ico gold">🏅</span>
+          <span class="dqt-ico gold"><svg class="mk-ico" aria-hidden="true"><use href="#ico-award"/></svg></span>
           <span class="dqt-lbl">شهادة</span>
         </button>
         <button type="button" class="drawer-qtile" onclick="closeRightDrawer(); openSettingsModal();">
-          <span class="dqt-ico">⚙️</span>
+          <span class="dqt-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-settings"/></svg></span>
           <span class="dqt-lbl">الإعدادات</span>
         </button>
       </div>
@@ -15563,7 +15692,7 @@ table.t-daily td.td-sard,
       <div class="drawer-group-lbl">نظام الحلقة</div>
       <div class="drawer-card-group">
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openHalaqaSettingsModal();">
-          <span class="drawer-item-l"><span class="drawer-ico-box gold">🎛️</span><span>إعدادات الحلقة</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box gold"><svg class="mk-ico" aria-hidden="true"><use href="#ico-sliders"/></svg></span><span>إعدادات الحلقة</span></span>
           <span class="badge b-blue" id="drawerHalaqaRulesBadge" style="font-size:10px;">تخصيص</span>
         </button>
       </div>
@@ -15571,27 +15700,27 @@ table.t-daily td.td-sard,
       <div class="drawer-group-lbl">الحساب والتواصل</div>
       <div class="drawer-card-group">
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openTeacherAccountModal();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">🔐</span><span>حسابي والربط</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-lock"/></svg></span><span>حسابي والربط</span></span>
           <span class="badge b-slate" id="drawerAccountStatusBadge" style="font-size:10.5px;">محلي</span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openTeacherMessagesModal();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">📩</span><span>رسائل المشرف</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-mail"/></svg></span><span>رسائل المشرف</span></span>
           <span class="badge b-slate" id="drawerSupMsgBadge" style="font-size:10.5px;">0</span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openMonthlyPlanModal();">
-          <span class="drawer-item-l"><span class="drawer-ico-box gold">🎯</span><span>الخطة الشهرية والأهداف</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box gold"><svg class="mk-ico" aria-hidden="true"><use href="#ico-target"/></svg></span><span>الخطة الشهرية والأهداف</span></span>
           <span class="badge b-green" id="drawerMonthlyPlanBadge" style="font-size:10px;">جديد</span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openQuickCompareCard();">
-          <span class="drawer-item-l"><span class="drawer-ico-box gold">📈</span><span>بطاقة المقارنة (أسبوعي / شهري)</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box gold"><svg class="mk-ico" aria-hidden="true"><use href="#ico-trending"/></svg></span><span>بطاقة المقارنة (أسبوعي / شهري)</span></span>
           <span class="drawer-chev">‹</span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openClassDayWaModal();">
-          <span class="drawer-item-l"><span class="drawer-ico-box gold">💬</span><span>تذكير الطلاب (واتساب)</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box gold"><svg class="mk-ico" aria-hidden="true"><use href="#ico-message"/></svg></span><span>تذكير الطلاب (واتساب)</span></span>
           <span class="drawer-chev">‹</span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openParentAlertsModal();">
-          <span class="drawer-item-l"><span class="drawer-ico-box" style="background:var(--red-bg);">🚨</span><span>رسائل تنبيه للأهل</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box danger"><svg class="mk-ico" aria-hidden="true"><use href="#ico-alert"/></svg></span><span>رسائل تنبيه للأهل</span></span>
           <span class="badge b-muted" id="drawerParentAlertsBadge" style="font-size:10.5px;">0</span>
         </button>
       </div>
@@ -15599,19 +15728,19 @@ table.t-daily td.td-sard,
       <div class="drawer-group-lbl">البرامج المصاحبة</div>
       <div class="drawer-card-group">
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('points');">
-          <span class="drawer-item-l"><span class="drawer-ico-box gold">⭐</span><span>برنامج النقاط والتحفيز</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box gold"><svg class="mk-ico" aria-hidden="true"><use href="#ico-star"/></svg></span><span>برنامج النقاط والتحفيز</span></span>
           <span class="badge b-green" id="drawerPointsBadge" style="font-size:10px;">مفعّل</span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('istihda');">
-          <span class="drawer-item-l"><span class="drawer-ico-box">🌿</span><span>برنامج استهداء</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-leaf"/></svg></span><span>برنامج استهداء</span></span>
           <span class="badge b-slate" id="drawerProgIstihdaBadge">0</span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('hadith');">
-          <span class="drawer-item-l"><span class="drawer-ico-box">📜</span><span>برنامج الحديث</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-scroll"/></svg></span><span>برنامج الحديث</span></span>
           <span class="badge b-slate" id="drawerProgHadithBadge">0</span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openProgramsModal('activities');">
-          <span class="drawer-item-l"><span class="drawer-ico-box">⚽</span><span>برنامج النشاطات</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-activity"/></svg></span><span>برنامج النشاطات</span></span>
           <span class="badge b-slate" id="drawerProgActBadge">0</span>
         </button>
         <div id="drawerSupCustomProgsWrap"></div>
@@ -15620,20 +15749,20 @@ table.t-daily td.td-sard,
       <div class="drawer-group-lbl">التفضيلات والمظهر</div>
       <div class="drawer-card-group">
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); openNotifCenterModal();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">🔔</span><span>مركز الإشعارات والمنبّه</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-bell"/></svg></span><span>مركز الإشعارات والمنبّه</span></span>
           <span class="badge b-slate" id="drawerNotifBadge">مفعّلة ✓</span>
         </button>
         <button type="button" class="drawer-item" onclick="toggleTapSoundPref(); updateDrawerQuickStates();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">🔊</span><span>صوت النقرة الخفيفة</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-volume"/></svg></span><span>صوت النقرة الخفيفة</span></span>
           <span class="m-switch on" id="drawerTapSoundSwitch" aria-hidden="true"></span>
         </button>
         <button type="button" class="drawer-item" onclick="toggleTheme(); updateDrawerQuickStates();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">🌙</span><span>الوضع الليلي</span></span>
+          <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-moon"/></svg></span><span>الوضع الليلي</span></span>
           <span class="m-switch" id="drawerThemeSwitch" aria-hidden="true"></span>
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
-          <span class="drawer-item-l"><span class="drawer-ico-box">🔄</span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v147</span>
+          <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-refresh"/></svg></span><span>فحص التحديثات</span></span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v148</span>
         </button>
       </div>
     </div>
@@ -15641,11 +15770,11 @@ table.t-daily td.td-sard,
 
   <nav class="desktop-nav">
     <div class="desktop-nav-inner">
-      <button class="nav-tab active" data-tab="session" onclick="switchTab('session')">📋 الجلسة</button>
-      <button class="nav-tab" data-tab="archive" onclick="switchTab('archive')">🗂️ الأرشيف</button>
-      <button class="nav-tab" data-tab="students" onclick="switchTab('students')">👥 الطلاب</button>
-      <button class="nav-tab" data-tab="reports" onclick="switchTab('reports')">📄 التقارير</button>
-      <button class="nav-tab" data-tab="stats" onclick="switchTab('stats')">🏆 الإحصائيات</button>
+      <button class="nav-tab active" data-tab="session" onclick="switchTab('session')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-clipboard"/></svg> الجلسة</button>
+      <button class="nav-tab" data-tab="archive" onclick="switchTab('archive')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-archive"/></svg> الأرشيف</button>
+      <button class="nav-tab" data-tab="students" onclick="switchTab('students')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-users"/></svg> الطلاب</button>
+      <button class="nav-tab" data-tab="reports" onclick="switchTab('reports')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-file-text"/></svg> التقارير</button>
+      <button class="nav-tab" data-tab="stats" onclick="switchTab('stats')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-trophy"/></svg> الإحصائيات</button>
     </div>
   </nav>
 
@@ -15707,8 +15836,8 @@ table.t-daily td.td-sard,
     <!-- TAB 4: REPORTS (v119 CLEAN EXECUTIVE STUDIO) -->
     <section id="view-reports" class="view">
       <div class="rep-subtab-pill no-print">
-        <button class="subtab-btn active" id="subtabDailyBtn" onclick="switchReportSubtab('daily')">📄 التقرير اليومي</button>
-        <button class="subtab-btn" id="subtabMonthlyBtn" onclick="switchReportSubtab('monthly')">📊 التقرير الشهري</button>
+        <button class="subtab-btn active" id="subtabDailyBtn" onclick="switchReportSubtab('daily')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-file-text"/></svg> التقرير اليومي</button>
+        <button class="subtab-btn" id="subtabMonthlyBtn" onclick="switchReportSubtab('monthly')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-bar-chart"/></svg> التقرير الشهري</button>
       </div>
 
       <!-- Daily Report Panel -->
@@ -15725,19 +15854,19 @@ table.t-daily td.td-sard,
           <div id="reportPendingWarning" class="rep-status-line"></div>
 
           <div class="rep-primary-2" id="dailySupUploadWrap">
-            <button type="button" class="rep-primary-btn is-wa" onclick="shareDailyReportImageToWhatsApp()">📲 إرسال واتساب</button>
-            <button type="button" class="rep-primary-btn is-sup" id="btnDailySupUpload" onclick="uploadTeacherReportsToSupervisor('daily')">☁️ رفع للمشرف</button>
+            <button type="button" class="rep-primary-btn is-wa" onclick="shareDailyReportImageToWhatsApp()"><svg class="mk-ico" aria-hidden="true"><use href="#ico-share"/></svg> إرسال واتساب</button>
+            <button type="button" class="rep-primary-btn is-sup" id="btnDailySupUpload" onclick="uploadTeacherReportsToSupervisor('daily')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-cloud-up"/></svg> رفع للمشرف</button>
           </div>
 
           <div class="rep-export-strip-4">
-            <button type="button" class="rep-exp-tile t-pdf" onclick="exportHighResPDF('dailyReportPaper', getDailyFileName())"><span class="ret-ico">📑</span><span class="ret-lbl">PDF</span></button>
-            <button type="button" class="rep-exp-tile t-png" onclick="exportHighResPNG('dailyReportPaper', getDailyFileName())"><span class="ret-ico">📸</span><span class="ret-lbl">صورة</span></button>
-            <button type="button" class="rep-exp-tile t-xls" onclick="exportDailyExcelStyled()"><span class="ret-ico">📊</span><span class="ret-lbl">Excel</span></button>
-            <button type="button" class="rep-exp-tile t-txt" onclick="copyDailyWhatsApp()"><span class="ret-ico">📝</span><span class="ret-lbl">نص</span></button>
+            <button type="button" class="rep-exp-tile t-pdf" onclick="exportHighResPDF('dailyReportPaper', getDailyFileName())"><span class="ret-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-file-pdf"/></svg></span><span class="ret-lbl">PDF</span></button>
+            <button type="button" class="rep-exp-tile t-png" onclick="exportHighResPNG('dailyReportPaper', getDailyFileName())"><span class="ret-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-image"/></svg></span><span class="ret-lbl">صورة</span></button>
+            <button type="button" class="rep-exp-tile t-xls" onclick="exportDailyExcelStyled()"><span class="ret-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-table"/></svg></span><span class="ret-lbl">Excel</span></button>
+            <button type="button" class="rep-exp-tile t-txt" onclick="copyDailyWhatsApp()"><span class="ret-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-copy"/></svg></span><span class="ret-lbl">نص</span></button>
           </div>
 
           <div class="rep-card-foot">
-            <button type="button" id="btnDailyReportLessons" class="rep-foot-pill-btn" onclick="openSessionLessonsModal()">📚 دروس اليوم</button>
+            <button type="button" id="btnDailyReportLessons" class="rep-foot-pill-btn" onclick="openSessionLessonsModal()"><svg class="mk-ico" aria-hidden="true"><use href="#ico-book-open"/></svg> دروس اليوم</button>
             <div id="dailyUnsyncStatus" class="rep-foot-meta"></div>
           </div>
         </div>
@@ -15763,15 +15892,15 @@ table.t-daily td.td-sard,
           </div>
 
           <div class="rep-primary-2" id="monthlySupUploadWrap">
-            <button type="button" class="rep-primary-btn is-wa" onclick="shareMonthlyReportImageToWhatsApp()">📲 إرسال واتساب</button>
-            <button type="button" class="rep-primary-btn is-sup" id="btnMonthlySupUpload" onclick="uploadTeacherReportsToSupervisor('monthly')">☁️ رفع للمشرف</button>
+            <button type="button" class="rep-primary-btn is-wa" onclick="shareMonthlyReportImageToWhatsApp()"><svg class="mk-ico" aria-hidden="true"><use href="#ico-share"/></svg> إرسال واتساب</button>
+            <button type="button" class="rep-primary-btn is-sup" id="btnMonthlySupUpload" onclick="uploadTeacherReportsToSupervisor('monthly')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-cloud-up"/></svg> رفع للمشرف</button>
           </div>
 
           <div class="rep-export-strip-4">
-            <button type="button" class="rep-exp-tile t-pdf" onclick="exportHighResPDF('monthlyReportPaper', getMonthlyFileName())"><span class="ret-ico">📑</span><span class="ret-lbl">PDF</span></button>
-            <button type="button" class="rep-exp-tile t-png" onclick="exportHighResPNG('monthlyReportPaper', getMonthlyFileName())"><span class="ret-ico">📸</span><span class="ret-lbl">صورة</span></button>
-            <button type="button" class="rep-exp-tile t-xls" onclick="exportMonthlyExcelStyled()"><span class="ret-ico">📊</span><span class="ret-lbl">Excel</span></button>
-            <button type="button" class="rep-exp-tile t-txt" onclick="copyMonthlyWhatsApp()"><span class="ret-ico">📝</span><span class="ret-lbl">نص</span></button>
+            <button type="button" class="rep-exp-tile t-pdf" onclick="exportHighResPDF('monthlyReportPaper', getMonthlyFileName())"><span class="ret-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-file-pdf"/></svg></span><span class="ret-lbl">PDF</span></button>
+            <button type="button" class="rep-exp-tile t-png" onclick="exportHighResPNG('monthlyReportPaper', getMonthlyFileName())"><span class="ret-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-image"/></svg></span><span class="ret-lbl">صورة</span></button>
+            <button type="button" class="rep-exp-tile t-xls" onclick="exportMonthlyExcelStyled()"><span class="ret-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-table"/></svg></span><span class="ret-lbl">Excel</span></button>
+            <button type="button" class="rep-exp-tile t-txt" onclick="copyMonthlyWhatsApp()"><span class="ret-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-copy"/></svg></span><span class="ret-lbl">نص</span></button>
           </div>
 
           <details class="rep-month-extra-drawer" id="monthlyToolsDrawer">
@@ -15822,11 +15951,11 @@ table.t-daily td.td-sard,
         </div>
         <div style="font-size:11px; font-weight:800; color:var(--ink-500); margin-top:8px;">📸 تصدير صور HD وملفات PDF (الكل + لوحة الأوائل بتصميم مستقل لكل فئة):</div>
         <div class="stats-cat-dock-5" id="btnCopyPointsLeaderboard">
-          <button type="button" class="stats-cat-btn cat-all" onclick="openStatsExportModal('all','podium')"><span class="sc-ico">👑</span><span class="sc-lbl">الشامل</span></button>
-          <button type="button" class="stats-cat-btn cat-points" id="statsQuickPtsBtn" onclick="openStatsExportModal('points','podium')"><span class="sc-ico">⭐</span><span class="sc-lbl">النقاط</span></button>
-          <button type="button" class="stats-cat-btn cat-mem" onclick="openStatsExportModal('mem','podium')"><span class="sc-ico">📖</span><span class="sc-lbl">الحفظ</span></button>
-          <button type="button" class="stats-cat-btn cat-rev" onclick="openStatsExportModal('rev','podium')"><span class="sc-ico">🔄</span><span class="sc-lbl">المراجعة</span></button>
-          <button type="button" class="stats-cat-btn cat-att" onclick="openStatsExportModal('att','podium')"><span class="sc-ico">✅</span><span class="sc-lbl">الحضور</span></button>
+          <button type="button" class="stats-cat-btn cat-all" onclick="openStatsExportModal('all','podium')"><span class="sc-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-crown"/></svg></span><span class="sc-lbl">الشامل</span></button>
+          <button type="button" class="stats-cat-btn cat-points" id="statsQuickPtsBtn" onclick="openStatsExportModal('points','podium')"><span class="sc-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-star"/></svg></span><span class="sc-lbl">النقاط</span></button>
+          <button type="button" class="stats-cat-btn cat-mem" onclick="openStatsExportModal('mem','podium')"><span class="sc-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-book-open"/></svg></span><span class="sc-lbl">الحفظ</span></button>
+          <button type="button" class="stats-cat-btn cat-rev" onclick="openStatsExportModal('rev','podium')"><span class="sc-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-refresh"/></svg></span><span class="sc-lbl">المراجعة</span></button>
+          <button type="button" class="stats-cat-btn cat-att" onclick="openStatsExportModal('att','podium')"><span class="sc-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-check-circle"/></svg></span><span class="sc-lbl">الحضور</span></button>
         </div>
       </div>
       <div id="statsContent"></div>
@@ -15835,10 +15964,10 @@ table.t-daily td.td-sard,
 
   <nav class="mobile-nav">
     <div class="mobile-nav-grid">
-      <button class="mobile-nav-btn active" data-tab="session" onclick="switchTab('session')"><span class="ico">📋</span><span>الجلسة</span></button>
-      <button class="mobile-nav-btn" data-tab="reports" onclick="switchTab('reports')"><span class="ico">📄</span><span>التقارير</span></button>
-      <button class="mobile-nav-btn" data-tab="students" onclick="switchTab('students')"><span class="ico">👥</span><span>الطلاب</span></button>
-      <button class="mobile-nav-btn" data-tab="archive" onclick="switchTab('archive')"><span class="ico">🗂️</span><span>الأرشيف</span></button>
+      <button class="mobile-nav-btn active" data-tab="session" onclick="switchTab('session')"><span class="ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-clipboard"/></svg></span><span>الجلسة</span></button>
+      <button class="mobile-nav-btn" data-tab="reports" onclick="switchTab('reports')"><span class="ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-file-text"/></svg></span><span>التقارير</span></button>
+      <button class="mobile-nav-btn" data-tab="students" onclick="switchTab('students')"><span class="ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-users"/></svg></span><span>الطلاب</span></button>
+      <button class="mobile-nav-btn" data-tab="archive" onclick="switchTab('archive')"><span class="ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-archive"/></svg></span><span>الأرشيف</span></button>
     </div>
   </nav>
 </div>
@@ -15857,22 +15986,22 @@ table.t-daily td.td-sard,
         </div>
       </div>
       <div class="header-actions">
-        <button type="button" class="hdr-owner-btn" id="btnOwnerReturnSupHdr" onclick="switchOwnerWorkspace('owner')" style="display:none;" title="العودة للوحة المؤسس">👑 <span class="txt">المؤسس</span></button>
-        <button type="button" class="hdr-btn" id="supNotifBtn" onclick="openNotifCenterModal()" title="مركز الإشعارات والصوت">🔔</button>
-        <button type="button" class="hdr-btn" onclick="refreshSupervisorData(true)" title="تحديث بيانات المعلمين">🔄 <span class="txt">تحديث</span></button>
-        <button type="button" class="hdr-btn" onclick="toggleTheme()" title="الوضع الليلي">🌙</button>
-        <button type="button" class="hdr-btn" onclick="logoutCurrentAccount()" title="تسجيل الخروج">🚪 <span class="txt">خروج</span></button>
+        <button type="button" class="hdr-owner-btn" id="btnOwnerReturnSupHdr" onclick="switchOwnerWorkspace('owner')" style="display:none;" title="العودة للوحة المؤسس"><svg class="mk-ico" aria-hidden="true"><use href="#ico-crown"/></svg> <span class="txt">المؤسس</span></button>
+        <button type="button" class="hdr-btn" id="supNotifBtn" onclick="openNotifCenterModal()" title="مركز الإشعارات والصوت"><svg class="mk-ico" aria-hidden="true"><use href="#ico-bell"/></svg></button>
+        <button type="button" class="hdr-btn" onclick="refreshSupervisorData(true)" title="تحديث بيانات المعلمين"><svg class="mk-ico" aria-hidden="true"><use href="#ico-refresh"/></svg> <span class="txt">تحديث</span></button>
+        <button type="button" class="hdr-btn" onclick="toggleTheme()" title="الوضع الليلي"><svg class="mk-ico" aria-hidden="true"><use href="#ico-moon"/></svg></button>
+        <button type="button" class="hdr-btn" onclick="logoutCurrentAccount()" title="تسجيل الخروج"><svg class="mk-ico" aria-hidden="true"><use href="#ico-logout"/></svg> <span class="txt">خروج</span></button>
       </div>
     </div>
   </header>
 
   <nav class="desktop-nav">
     <div class="desktop-nav-inner">
-      <button class="nav-tab active" data-suptab="overview" onclick="switchSupTab('overview')">👥 المعلمون والحلقات</button>
-      <button class="nav-tab" data-suptab="branchReport" onclick="switchSupTab('branchReport')">📊 التقرير العام للصرح</button>
-      <button class="nav-tab" data-suptab="messages" onclick="switchSupTab('messages')">💬 الرسائل والتنبيهات</button>
-      <button class="nav-tab" data-suptab="programs" onclick="switchSupTab('programs')">📚 برامج الصرح</button>
-      <button class="nav-tab" data-suptab="profile" onclick="switchSupTab('profile')">⚙️ الملف والكود</button>
+      <button class="nav-tab active" data-suptab="overview" onclick="switchSupTab('overview')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-users"/></svg> المعلمون والحلقات</button>
+      <button class="nav-tab" data-suptab="branchReport" onclick="switchSupTab('branchReport')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-bar-chart"/></svg> التقرير العام للصرح</button>
+      <button class="nav-tab" data-suptab="messages" onclick="switchSupTab('messages')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-message"/></svg> الرسائل والتنبيهات</button>
+      <button class="nav-tab" data-suptab="programs" onclick="switchSupTab('programs')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-book-open"/></svg> برامج الصرح</button>
+      <button class="nav-tab" data-suptab="profile" onclick="switchSupTab('profile')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-settings"/></svg> الملف والكود</button>
     </div>
   </nav>
 
@@ -15886,11 +16015,11 @@ table.t-daily td.td-sard,
 
   <nav class="mobile-nav">
     <div class="sup-mobile-nav-grid">
-      <button class="mobile-nav-btn active" data-suptab="overview" onclick="switchSupTab('overview')"><span class="ico">👥</span><span>المعلمون</span></button>
-      <button class="mobile-nav-btn" data-suptab="branchReport" onclick="switchSupTab('branchReport')"><span class="ico">📊</span><span>التقرير العام</span></button>
-      <button class="mobile-nav-btn" data-suptab="messages" onclick="switchSupTab('messages')"><span class="ico">💬</span><span>الرسائل</span></button>
-      <button class="mobile-nav-btn" data-suptab="programs" onclick="switchSupTab('programs')"><span class="ico">📚</span><span>البرامج</span></button>
-      <button class="mobile-nav-btn" data-suptab="profile" onclick="switchSupTab('profile')"><span class="ico">⚙️</span><span>الكود</span></button>
+      <button class="mobile-nav-btn active" data-suptab="overview" onclick="switchSupTab('overview')"><span class="ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-users"/></svg></span><span>المعلمون</span></button>
+      <button class="mobile-nav-btn" data-suptab="branchReport" onclick="switchSupTab('branchReport')"><span class="ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-bar-chart"/></svg></span><span>التقرير العام</span></button>
+      <button class="mobile-nav-btn" data-suptab="messages" onclick="switchSupTab('messages')"><span class="ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-message"/></svg></span><span>الرسائل</span></button>
+      <button class="mobile-nav-btn" data-suptab="programs" onclick="switchSupTab('programs')"><span class="ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-book-open"/></svg></span><span>البرامج</span></button>
+      <button class="mobile-nav-btn" data-suptab="profile" onclick="switchSupTab('profile')"><span class="ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-settings"/></svg></span><span>الكود</span></button>
     </div>
   </nav>
 </div>
@@ -15909,28 +16038,28 @@ table.t-daily td.td-sard,
         </div>
       </div>
       <div class="header-actions">
-        <button type="button" class="hdr-btn" id="ownerNotifBtn" onclick="openNotifCenterModal()" title="مركز الإشعارات والصوت">🔔</button>
-        <button type="button" class="hdr-btn" onclick="refreshOwnerData(true)" title="تحديث">🔄 <span class="txt">تحديث</span></button>
-        <button type="button" class="hdr-btn" onclick="toggleTheme()" title="الوضع الليلي">🌙</button>
-        <button type="button" class="hdr-btn" onclick="logoutCurrentAccount()" title="خروج">🚪 <span class="txt">خروج</span></button>
+        <button type="button" class="hdr-btn" id="ownerNotifBtn" onclick="openNotifCenterModal()" title="مركز الإشعارات والصوت"><svg class="mk-ico" aria-hidden="true"><use href="#ico-bell"/></svg></button>
+        <button type="button" class="hdr-btn" onclick="refreshOwnerData(true)" title="تحديث"><svg class="mk-ico" aria-hidden="true"><use href="#ico-refresh"/></svg> <span class="txt">تحديث</span></button>
+        <button type="button" class="hdr-btn" onclick="toggleTheme()" title="الوضع الليلي"><svg class="mk-ico" aria-hidden="true"><use href="#ico-moon"/></svg></button>
+        <button type="button" class="hdr-btn" onclick="logoutCurrentAccount()" title="خروج"><svg class="mk-ico" aria-hidden="true"><use href="#ico-logout"/></svg> <span class="txt">خروج</span></button>
       </div>
     </div>
   </header>
 
   <nav class="desktop-nav">
     <div class="desktop-nav-inner">
-      <button class="nav-tab active" data-owntab="dashboard" onclick="switchOwnerTab('dashboard')">🏛️ الصروح والمشرفون</button>
-      <button class="nav-tab" data-owntab="invites" onclick="switchOwnerTab('invites')">🗝️ أكواد التفعيل</button>
-      <button class="nav-tab" data-owntab="broadcast" onclick="switchOwnerTab('broadcast')">📢 التنبيهات والتحديثات</button>
+      <button class="nav-tab active" data-owntab="dashboard" onclick="switchOwnerTab('dashboard')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-building"/></svg> الصروح والمشرفون</button>
+      <button class="nav-tab" data-owntab="invites" onclick="switchOwnerTab('invites')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-key"/></svg> أكواد التفعيل</button>
+      <button class="nav-tab" data-owntab="broadcast" onclick="switchOwnerTab('broadcast')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-megaphone"/></svg> التنبيهات والتحديثات</button>
     </div>
   </nav>
 
   <main class="container">
     <div class="card" style="padding:9px 11px; margin-bottom:10px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:7px; border-right:4px solid #d4af37;">
-      <span style="font-size:12.5px; font-weight:800; color:var(--brand-slate);">⚡ تبديل سريع بين واجهاتك:</span>
+      <span style="font-size:12.5px; font-weight:800; color:var(--brand-slate);"><svg class="mk-ico" aria-hidden="true"><use href="#ico-zap"/></svg> تبديل سريع بين واجهاتك:</span>
       <div style="display:flex; gap:6px; flex-wrap:wrap;">
-        <button type="button" class="btn btn-primary btn-sm" onclick="switchOwnerWorkspace('teacher')">📖 فتح واجهة المعلم (حلقتي)</button>
-        <button type="button" class="btn btn-soft btn-sm" onclick="switchOwnerWorkspace('supervisor')">🛡️ فتح واجهة المشرف</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="switchOwnerWorkspace('teacher')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-book-open"/></svg> واجهة المعلم (حلقتي)</button>
+        <button type="button" class="btn btn-soft btn-sm" onclick="switchOwnerWorkspace('supervisor')"><svg class="mk-ico" aria-hidden="true"><use href="#ico-users"/></svg> واجهة المشرف</button>
       </div>
     </div>
     <section id="owner-view-dashboard" class="view active"></section>
@@ -15940,9 +16069,9 @@ table.t-daily td.td-sard,
 
   <nav class="mobile-nav">
     <div class="mobile-nav-grid" style="grid-template-columns:repeat(3, 1fr);">
-      <button class="mobile-nav-btn active" data-owntab="dashboard" onclick="switchOwnerTab('dashboard')"><span class="ico">🏛️</span><span>الصروح</span></button>
-      <button class="mobile-nav-btn" data-owntab="invites" onclick="switchOwnerTab('invites')"><span class="ico">🗝️</span><span>الأكواد</span></button>
-      <button class="mobile-nav-btn" data-owntab="broadcast" onclick="switchOwnerTab('broadcast')"><span class="ico">📢</span><span>التنبيهات</span></button>
+      <button class="mobile-nav-btn active" data-owntab="dashboard" onclick="switchOwnerTab('dashboard')"><span class="ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-building"/></svg></span><span>الصروح</span></button>
+      <button class="mobile-nav-btn" data-owntab="invites" onclick="switchOwnerTab('invites')"><span class="ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-key"/></svg></span><span>الأكواد</span></button>
+      <button class="mobile-nav-btn" data-owntab="broadcast" onclick="switchOwnerTab('broadcast')"><span class="ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-megaphone"/></svg></span><span>التنبيهات</span></button>
     </div>
   </nav>
 </div>
@@ -17195,10 +17324,10 @@ table.t-daily td.td-sard,
     <div class="sp-sheet-body">
       <!-- v132: ONE Single Clean Top Bar (ZERO Stacked Sub-Tabs!) -->
       <div id="spModeTabs" class="sp-mode-tabs">
-        <button type="button" class="sp-mode-tab on" id="spTabSurah" onclick="spPickTopTab('ayah')"><span class="sp-mt-ico">🔢</span><span class="sp-mt-lbl" id="spTabSurahLbl">بالآيات</span></button>
-        <button type="button" class="sp-mode-tab" id="spTabPages" style="display:none;" onclick="spPickTopTab('page')"><span class="sp-mt-ico">📄</span><span class="sp-mt-lbl">بالصفحات</span></button>
-        <button type="button" class="sp-mode-tab" id="spTabSard" style="display:none;" onclick="spPickTopTab('sard')"><span class="sp-mt-ico">📚</span><span class="sp-mt-lbl">سرد جزء</span></button>
-        <button type="button" class="sp-mode-tab" id="spTabSabr" onclick="spPickTopTab('sabr')"><span class="sp-mt-ico">🎓</span><span class="sp-mt-lbl" id="spTabSabrLbl">سبر جزء</span></button>
+        <button type="button" class="sp-mode-tab on" id="spTabSurah" onclick="spPickTopTab('ayah')"><span class="sp-mt-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-hash"/></svg></span><span class="sp-mt-lbl" id="spTabSurahLbl">بالآيات</span></button>
+        <button type="button" class="sp-mode-tab" id="spTabPages" style="display:none;" onclick="spPickTopTab('page')"><span class="sp-mt-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-file"/></svg></span><span class="sp-mt-lbl">بالصفحات</span></button>
+        <button type="button" class="sp-mode-tab" id="spTabSard" style="display:none;" onclick="spPickTopTab('sard')"><span class="sp-mt-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-layers"/></svg></span><span class="sp-mt-lbl">سرد جزء</span></button>
+        <button type="button" class="sp-mode-tab" id="spTabSabr" onclick="spPickTopTab('sabr')"><span class="sp-mt-ico"><svg class="mk-ico" aria-hidden="true"><use href="#ico-grad"/></svg></span><span class="sp-mt-lbl" id="spTabSabrLbl">سبر جزء</span></button>
       </div>
 
       <!-- Panel A: Unified Direct Picker (بالآيات: من سورة ← إلى سورة، أو بالصفحات) -->
@@ -29494,22 +29623,22 @@ function buildSingleStudentCardHtml(h, s, item, _prePrevCandidates, _preRelevant
 function buildSessionStatusBarHtml(s, doneCnt, totalSt, absCnt, pendingCnt, donePct) {
   const hasDL = getSessionLessonsList(s).length > 0;
   const primaryActs = pendingCnt > 0
-    ? `<button type="button" class="btn btn-primary btn-sm" onclick="openNextPendingStudent()" title="فتح المتبقي التالي">⏭️ التالي</button>
+    ? `<button type="button" class="btn btn-primary btn-sm" onclick="openNextPendingStudent()" title="فتح المتبقي التالي">${mkIcon("skip-next")} التالي</button>
        <button type="button" class="btn btn-warn btn-sm" onclick="openAutoAbsentModal()">غياب (${pendingCnt})</button>`
-    : `<span class="ssb-complete-tag">✨ اكتملت الجلسة</span>`;
+    : `<span class="ssb-complete-tag">${mkIcon("check-circle")} اكتملت الجلسة</span>`;
   const prefillCall = s.type === "saturday" ? "prefillSaturdayReviews(true, true)" : "prefillDailyRecitation(true, true)";
   return `
     <div class="ssb-row-top">
       <div class="ssb-info">
-        <span class="ssb-chip ok">✅ <b>${doneCnt}/${totalSt}</b></span>
+        <span class="ssb-chip ok">${mkIcon("check-circle")} <b>${doneCnt}/${totalSt}</b></span>
         <span class="ssb-chip">غياب <b>${absCnt}</b></span>
       </div>
       <div class="ssb-primary-acts">${primaryActs}</div>
     </div>
     <div class="ssb-tools-3">
-      <button type="button" class="ssb-tool-btn" onclick="${prefillCall}" title="تحديث وتعبئة الواجبات تلقائياً">🔄 الواجبات</button>
-      <button type="button" class="ssb-tool-btn ${hasDL ? 'is-done' : ''}" onclick="openSessionLessonsModal()" title="تسجيل دروس استهداء والحديث والنشاطات">📚 الدروس${hasDL ? ' ✓' : ''}</button>
-      <button type="button" class="ssb-tool-btn" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">⚡ تفقد</button>
+      <button type="button" class="ssb-tool-btn" onclick="${prefillCall}" title="تحديث وتعبئة الواجبات تلقائياً">${mkIcon("refresh")} الواجبات</button>
+      <button type="button" class="ssb-tool-btn ${hasDL ? 'is-done' : ''}" onclick="openSessionLessonsModal()" title="تسجيل دروس استهداء والحديث والنشاطات">${mkIcon("book-open")} الدروس${hasDL ? ' ✓' : ''}</button>
+      <button type="button" class="ssb-tool-btn" onclick="openQuickAttendanceModal()" title="التفقد السريع للحضور والغياب">${mkIcon("zap")} تفقد</button>
     </div>
     <div class="ssb-prog-line"><div class="ssb-prog-fill" style="width:${donePct}%;"></div></div>`;
 }
@@ -30322,10 +30451,10 @@ function syncStudentEvalSheet() {
         ${goalPill}
       </div>
       <div class="es-hdr-actions">
-        ${st.phone && String(st.phone).replace(/[^0-9]/g, "").length >= 7 ? `<button type="button" class="es-ico-btn es-ico-wa" onclick="openStudentWaHub('${st.id}')" title="إرسال مباشر لواتساب الطالب">💬</button>` : ''}
+        ${st.phone && String(st.phone).replace(/[^0-9]/g, "").length >= 7 ? `<button type="button" class="es-ico-btn es-ico-wa" onclick="openStudentWaHub('${st.id}')" title="إرسال مباشر لواتساب الطالب">${mkIcon("message")}</button>` : ''}
         ${Array.isArray(s.queue) && s.queue.includes(st.id) && !isStudentFullyDone(s, st, r) ? `<button type="button" class="es-ico-btn es-ico-q" onclick="toggleStudentQueue('${st.id}', true)" title="تأجيل دوره لآخر الطابور">✋↩️</button>` : ''}
-        <button type="button" class="es-ico-btn" onclick="openStudentProfile('${st.id}')" title="ملف الطالب وكشفه">📊</button>
-        <button type="button" class="es-ico-btn" onclick="openEditStudentModal('${st.id}')" title="تعديل خطة الحفظ والمراجعة">✏️</button>
+        <button type="button" class="es-ico-btn" onclick="openStudentProfile('${st.id}')" title="ملف الطالب وكشفه">${mkIcon("bar-chart")}</button>
+        <button type="button" class="es-ico-btn" onclick="openEditStudentModal('${st.id}')" title="تعديل خطة الحفظ والمراجعة">${mkIcon("edit")}</button>
       </div>
     </div>
   `;
@@ -30686,15 +30815,15 @@ function renderCardBody(s, st, r, idx) {
       <div class="es-tools-3">
         <button type="button" class="es-tool-btn ${evalSheetTool==='sard'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','sard')">
           ${hasSardDot ? '<span class="es-tool-dot"></span>' : ''}
-          <span class="et-ico">📚</span><span class="et-lbl">سرد</span>
+          <span class="et-ico">${mkIcon("layers")}</span><span class="et-lbl">سرد</span>
         </button>
         <button type="button" class="es-tool-btn ${evalSheetTool==='sabr'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','sabr')">
           ${hasSabrDot ? '<span class="es-tool-dot"></span>' : ''}
-          <span class="et-ico">🎓</span><span class="et-lbl">سبر</span>
+          <span class="et-ico">${mkIcon("grad")}</span><span class="et-lbl">سبر</span>
         </button>
         <button type="button" class="es-tool-btn ${evalSheetTool==='notes'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','notes')">
           ${hasNotesDot ? '<span class="es-tool-dot"></span>' : ''}
-          <span class="et-ico">💬</span><span class="et-lbl">ملاحظة</span>
+          <span class="et-ico">${mkIcon("message")}</span><span class="et-lbl">ملاحظة</span>
         </button>
       </div>
       ${toolPanelHtml}
@@ -30922,19 +31051,19 @@ function renderCardBody(s, st, r, idx) {
       <div class="es-tools-4">
         <button type="button" class="es-tool-btn ${evalSheetTool==='sard'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','sard')">
           ${_hasSatSardDot ? '<span class="es-tool-dot"></span>' : ''}
-          <span class="et-ico">📚</span><span class="et-lbl">سرد</span>
+          <span class="et-ico">${mkIcon("layers")}</span><span class="et-lbl">سرد</span>
         </button>
         <button type="button" class="es-tool-btn ${evalSheetTool==='sabr'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','sabr')">
           ${hasSabrDot ? '<span class="es-tool-dot"></span>' : ''}
-          <span class="et-ico">🎓</span><span class="et-lbl">سبر</span>
+          <span class="et-ico">${mkIcon("grad")}</span><span class="et-lbl">سبر</span>
         </button>
         <button type="button" class="es-tool-btn ${evalSheetTool==='hw'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','hw')">
           ${hasNextDot ? '<span class="es-tool-dot"></span>' : ''}
-          <span class="et-ico">📝</span><span class="et-lbl">واجب</span>
+          <span class="et-ico">${mkIcon("file-text")}</span><span class="et-lbl">واجب</span>
         </button>
         <button type="button" class="es-tool-btn ${evalSheetTool==='notes'?'on':''}" onclick="toggleEvalSheetTool('${st.id}','notes')">
           ${hasNotesDot ? '<span class="es-tool-dot"></span>' : ''}
-          <span class="et-ico">💬</span><span class="et-lbl">ملاحظة</span>
+          <span class="et-ico">${mkIcon("message")}</span><span class="et-lbl">ملاحظة</span>
         </button>
       </div>
       ${satToolPanel}
@@ -33645,7 +33774,7 @@ function renderDailyReport() {
   if (repLessonsBtn) {
     const _hasL = getSessionLessonsList(s).length > 0;
     repLessonsBtn.classList.toggle("has-data", _hasL);
-    repLessonsBtn.textContent = _hasL ? "📚 دروس اليوم ✓" : "📚 دروس اليوم";
+    repLessonsBtn.innerHTML = _hasL ? `${mkIcon("book-open")} دروس اليوم ✓` : `${mkIcon("book-open")} دروس اليوم`;
   }
 
   const title = s.type === "saturday"
@@ -39827,11 +39956,11 @@ function updateUnsyncedIndicators() {
     if (btn) {
       btn.classList.toggle("is-synced", st.linked && !st.dirty);
       if (!st.linked) {
-        btn.innerHTML = `☁️ رفع للمشرف`;
+        btn.innerHTML = `${mkIcon("cloud-up")} رفع للمشرف`;
       } else if (st.dirty) {
-        btn.innerHTML = `<span class="rep-sync-dot dirty"></span> ☁️ رفع للمشرف`;
+        btn.innerHTML = `<span class="rep-sync-dot dirty"></span> ${mkIcon("cloud-up")} رفع للمشرف`;
       } else {
-        btn.innerHTML = `<span class="rep-sync-dot clean"></span> ✓ مرفوع للمشرف`;
+        btn.innerHTML = `<span class="rep-sync-dot clean"></span> ${mkIcon("check-circle")} مرفوع للمشرف`;
       }
     }
     if (el) {
@@ -43840,7 +43969,10 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v147";
+const TIBYAN_APP_VERSION = "v148";
+function mkIcon(name, cls = "") {
+  return `<svg class="mk-ico${cls ? " " + cls : ""}" aria-hidden="true"><use href="#ico-${name}"/></svg>`;
+}
 const TIBYAN_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDQTL0XGp_6y-GjaVucY5Bsp_dtIXH2OrM",
   authDomain: "tibtibyan-platform.firebaseapp.com",
@@ -46337,10 +46469,13 @@ let _lastTapSoundAt = 0;
 let _tapSoundListenerAttached = false;
 
 function playSoftTapClick(isPrimary = false) {
-  if (tibyanNotifPrefs.tapSound === false) return;
   const nowMs = Date.now();
   if (nowMs - _lastTapSoundAt < 45) return;
   _lastTapSoundAt = nowMs;
+  if (isPrimary && typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
+    try { navigator.vibrate(8); } catch {}
+  }
+  if (tibyanNotifPrefs.tapSound === false) return;
   try {
     const ctx = getUnlockedAudioContext();
     if (!ctx) return;
@@ -46376,7 +46511,7 @@ function installSoftTapSoundListener() {
     if (tibyanNotifPrefs.tapSound === false) return;
     const target = e.target && e.target.closest ? e.target.closest(TAP_SELECTOR) : null;
     if (!target || target.disabled) return;
-    const isPrimary = target.classList?.contains("btn-primary") || target.classList?.contains("btn-success") || target.classList?.contains("pill") || target.classList?.contains("ob-btn-launch");
+    const isPrimary = target.classList?.contains("btn-primary") || target.classList?.contains("btn-success") || target.classList?.contains("es-eval-btn") || target.classList?.contains("pp-pe-btn") || target.classList?.contains("pill") || target.classList?.contains("ob-btn-launch");
     playSoftTapClick(Boolean(isPrimary));
   };
   document.addEventListener("pointerdown", onPointerDown, { capture: true, passive: true });
@@ -46840,5 +46975,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v147 -->
+<!-- Makin App v148 -->
 </html>
