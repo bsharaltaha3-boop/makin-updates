@@ -3347,7 +3347,7 @@ body:not(.printing-cert) .st-card:not(.open),body:not(.printing-cert) .archive-c
         </button>
         <button type="button" class="drawer-item" onclick="closeRightDrawer(); triggerAppUpdateCheck();">
           <span class="drawer-item-l"><span class="drawer-ico-box"><svg class="mk-ico" aria-hidden="true"><use href="#ico-refresh"/></svg></span><span>فحص التحديثات</span></span>
-          <span class="badge b-blue" id="drawerAppVerBadge">v159</span>
+          <span class="badge b-blue" id="drawerAppVerBadge">v160</span>
         </button>
       </div>
     </div>
@@ -20180,7 +20180,8 @@ function renderCardBody(s, st, r, idx) {
           </div>
         </div>
         ${renderErrorCounterBar(st.id, "min", r.minErrors, r.minAlerts)}
-        ${!shouldUsePerPageMode(r, st, "min", h) ? `<div class="es-eval-4" id="esEvalRow_min" style="margin-bottom:0;">${makeSmartEvalBtns(r.minEval, "setSatMinEval", r.minErrors, r.minAlerts)}</div>` : ''}
+        ${!shouldUsePerPageMode(r, st, "min", h) ? `<div class="es-eval-4" id="esEvalRow_min" style="margin-bottom:6px;">${makeSmartEvalBtns(r.minEval, "setSatMinEval", r.minErrors, r.minAlerts)}</div>` : ''}
+        ${renderTajweedTagsBar(st.id, r)}
       </div>
 
       <div class="es-card es-sec-maj">
@@ -20220,9 +20221,8 @@ function renderCardBody(s, st, r, idx) {
             </div>
           </div>
           ${renderErrorCounterBar(st.id, "maj", r.majErrors, r.majAlerts)}
-          <div class="es-eval-4" id="esEvalRow_maj" style="margin-bottom:6px;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors, r.majAlerts)}</div>
+          <div class="es-eval-4" id="esEvalRow_maj" style="margin-bottom:0;">${makeSmartEvalBtns(r.majEval, "setSatMajEval", r.majErrors, r.majAlerts)}</div>
         `)}
-        ${renderTajweedTagsBar(st.id, r)}
       </div>
 
       ${(() => {
@@ -34765,7 +34765,7 @@ async function exportSupBranchExcelStyled() {
 // ==============================================================================
 // TIBYAN v51: CENTRAL FIREBASE AUTH + REALTIME DATABASE + FOUNDER CONTROL SUITE
 // ==============================================================================
-const TIBYAN_APP_VERSION = "v159";
+const TIBYAN_APP_VERSION = "v160";
 function mkIcon(name, cls = "") {
   return `<svg class="mk-ico${cls ? " " + cls : ""}" aria-hidden="true"><use href="#ico-${name}"/></svg>`;
 }
@@ -37819,5 +37819,5 @@ window.addEventListener("DOMContentLoaded", initApp);
 </script>
 </body>
 
-<!-- Makin App v159 -->
+<!-- Makin App v160 -->
 </html>
